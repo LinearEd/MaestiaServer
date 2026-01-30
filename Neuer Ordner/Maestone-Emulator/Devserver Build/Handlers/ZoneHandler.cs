@@ -1,14 +1,41 @@
-﻿using System;
+using System;
 using System.Net;
 using System.Security.Cryptography;
 
+using System.Collections.Generic;
+
 using DevServer.Network;
 using DevServer.Packets;
+using DevServer.Database;
 
 namespace DevServer.Handlers
 {
     public static class ZoneHandler
     {
+        // Character storage loaded from database
+        private static List<DPKUZ_USER_RS_CHARLIST_DATA> _characters = new List<DPKUZ_USER_RS_CHARLIST_DATA>();
+        private static int _nextCharacterKey;
+
+        public static void Initialize()
+        {
+            CharacterDatabase.Initialize();
+            _characters = CharacterDatabase.LoadAllCharacters();
+            _nextCharacterKey = CharacterDatabase.GetMaxCharacterKey() + 1;
+            
+            if (_characters.Count == 0)
+            {
+                Log.WriteInfo("[Zone] No characters in database, adding default GM characters...");
+                var gmPeter = new DPKUZ_USER_RS_CHARLIST_DATA { Key = 29748865, Gender_JobId = 8, Faction = 1, Name = "GM_Peter", Guild = "projectmaestone", Face_TatooId = 277, HairId = 6, HairColor = 0x70170d, SkinColor = 0x966d50, Size = 5, Weigth = 5, ModelTorsoId = 609, ModelHandId = 607, ModelShoeId = 606, ModelLegId = 608, Level = 100, Slot = 0, DeleteTime = -1 };
+                var gmGuenther = new DPKUZ_USER_RS_CHARLIST_DATA { Key = 29748866, Gender_JobId = 1, Faction = 2, Name = "GM_Guenther", Guild = "projectmaestone", Face_TatooId = 151, HairId = 4, HairColor = 2296857, SkinColor = 15905905, Size = 5, Weigth = 5, ModelTorsoId = 1895825412, ModelHandId = 1895825410, ModelShoeId = 1895825409, ModelLegId = 1895825411, Level = 105, Slot = 1, DeleteTime = -1 };
+                _characters.Add(gmPeter);
+                _characters.Add(gmGuenther);
+                CharacterDatabase.SaveCharacter(gmPeter);
+                CharacterDatabase.SaveCharacter(gmGuenther);
+                _nextCharacterKey = 29748868;
+            }
+            Log.WriteSuccess("[Zone] Character system initialized with {0} characters.", _characters.Count);
+        }
+
         [Packet(HandlerType.Zone, PacketType.SPK_EXIT_RQ_LOGOUT)]
         public static void SPK_EXIT_RQ_LOGOUT(Packet clientPacket, Client packetSender)
         {
@@ -78,80 +105,14 @@ namespace DevServer.Handlers
             if (!(clientPacket is SPKUZ_USER_RQ_CHARLIST userRqCharList))
                 return;
 
+            SendCharacterList(packetSender);
+        }
+
+        private static void SendCharacterList(Client packetSender)
+        {
+            Log.WriteInfo("[Zone] Sending character list: {0} characters total", _characters.Count);
             packetSender.SendPacket(new DPKUZ_USER_RS_CHARLIST_BEGIN());
-
-            var userRsCharListData = new DPKUZ_USER_RS_CHARLIST_DATA();
-
-            userRsCharListData.Key = 29748865;
-            userRsCharListData.Gender_JobId = 8;
-            userRsCharListData.Faction = 1;
-            userRsCharListData.Name = "GM_Peter";
-            userRsCharListData.Guild = "projectmaestone";
-            userRsCharListData.Face_TatooId = 277;
-            userRsCharListData.HairId = 6;
-            userRsCharListData.HairColor = 0x70170d;
-            userRsCharListData.SkinColor = 0x966d50;
-            userRsCharListData.Size = 5;
-            userRsCharListData.Weigth = 5;
-            userRsCharListData.ModelTorsoId = 609;
-            userRsCharListData.ModelHandId = 607;
-            userRsCharListData.ModelShoeId = 606;
-            userRsCharListData.ModelLegId = 608;
-            userRsCharListData.Level = 100;
-            userRsCharListData.Slot = 0;
-            userRsCharListData.DeleteTime = -1;
-
-            packetSender.SendPacket(userRsCharListData);
-
-            userRsCharListData.Key = 29748866;
-
-
-            //  userRsCharListData.Gender_Class = 83951618 ;
-            userRsCharListData.Gender_JobId = 1;
-            userRsCharListData.Faction = 2;
-            //userRsCharListData.Faction = 268566529;
-
-
-            userRsCharListData.Name = "GM_Guenther";
-            userRsCharListData.Guild = "projectmaestone";
-            userRsCharListData.Face_TatooId = 151;
-            userRsCharListData.HairId = 4;
-            userRsCharListData.HairColor = 2296857; //; //2296857; //230C19
-            userRsCharListData.SkinColor = 15905905; //0xF2B471;// 15905905;
-            userRsCharListData.Size = 5;
-            userRsCharListData.Weigth = 5;
-            userRsCharListData.ModelTorsoId = 1895825412;
-            userRsCharListData.ModelHandId = 1895825410;
-            userRsCharListData.ModelShoeId = 1895825409;
-            userRsCharListData.ModelLegId = 1895825411;
-            userRsCharListData.Level = 105;
-            userRsCharListData.Slot = 1;
-            userRsCharListData.DeleteTime = -1;
-
-            packetSender.SendPacket(userRsCharListData);
-
-            userRsCharListData.Key = 29748867;
-            userRsCharListData.Gender_JobId = 1;
-            userRsCharListData.Faction = 8;
-            userRsCharListData.Name = "GM_Ruediger";
-            userRsCharListData.Guild = "projectmaestone";
-            userRsCharListData.Face_TatooId = 222;
-            userRsCharListData.HairId = 97;
-            userRsCharListData.HairColor = 3087666;
-            userRsCharListData.SkinColor = 15249285;
-            userRsCharListData.Size = 5;
-            userRsCharListData.Weigth = 5;
-            userRsCharListData.ModelTorsoId = 1895826088;
-            userRsCharListData.ModelHandId = 1895826086;
-            userRsCharListData.ModelShoeId = 1895826085;
-            userRsCharListData.ModelLegId = 1895826087;
-            userRsCharListData.Level = 100;
-            userRsCharListData.Slot = 2;
-            userRsCharListData.DeleteTime = -1;
-
-            packetSender.SendPacket(userRsCharListData);
-
-
+            foreach (var character in _characters) { Log.WriteInfo("[Zone] Sending character: {0} (Key: {1})", character.Name, character.Key); packetSender.SendPacket(character); }
             packetSender.SendPacket(new DPKUZ_USER_RS_CHARLIST_END());
         }
 
@@ -303,21 +264,49 @@ namespace DevServer.Handlers
             //userRsCharBaseData.m_nUnknown13 = 606;
             //userRsCharBaseData.m_nUnknown14 = 608;
 
-            userRsCharBaseData.m_nUnknown = 29748866;
-            userRsCharBaseData.m_nUnknown2 = 22700; //268435457                        66817 Int 1 oder 83951617  oder 69632 oder  
-            userRsCharBaseData.m_nUnknown3 = 83951618; // 83951624; 8            1            135168    Int 2  oder 268435458        mit faction id : 132353 oder 83951618
-            userRsCharBaseData.m_nUnknown4 = 268566529; //268435457; 81
-            userRsCharBaseData.m_strUnknown = "GM_Peter";
-            userRsCharBaseData.m_nUnknown5 = 151; //277
-            userRsCharBaseData.m_nUnknown6 = 4;
-            userRsCharBaseData.m_nUnknown7 = 2296857;
-            userRsCharBaseData.m_nUnknown8 = 15905905;
-            userRsCharBaseData.m_nUnknown9 = 8;
-            userRsCharBaseData.m_nUnknown10 = 3;
-            userRsCharBaseData.m_nUnknown11 = 1895825412;
-            userRsCharBaseData.m_nUnknown12 = 1895825410;
-            userRsCharBaseData.m_nUnknown13 = 1895825409;
-            userRsCharBaseData.m_nUnknown14 = 1895825411;
+            // Get selected character from session or use default
+            var character = packetSender.SelectedCharacter ?? _characters[0];
+            Log.WriteInfo("[Zone] Loading character: {0} (Key: {1})", character.Name, character.Key);
+            
+            // CRITICAL: Force character key to 29748866 - the only value that works
+            userRsCharBaseData.m_nUnknown = 29748866; // Hardcoded like original
+            userRsCharBaseData.m_strUnknown = character.Name;
+            
+            // Encoding: base + Gender_JobId + 1
+            int encodedGenderJobId = 0x05010000 + character.Gender_JobId + 1;
+            int encodedFaction = 0x10000000 + (character.Faction - 1) * 0x20000 + 1;
+            
+            // DEBUG: Test with hardcoded working values for any character
+            // If this works for Alex, then dynamic values have an issue
+            bool useHardcodedTest = true; // Force male encoding to test
+            if (useHardcodedTest)
+            {
+                encodedGenderJobId = 83951618;  // 0x05010002 - Male Warrior encoding
+                encodedFaction = 268566529;      // 0x10020001 - Faction 2 encoding
+                Log.WriteInfo("[Zone] DEBUG: Using hardcoded test values!");
+            }
+            
+            userRsCharBaseData.m_nUnknown2 = 22700;
+            userRsCharBaseData.m_nUnknown3 = encodedGenderJobId;
+            userRsCharBaseData.m_nUnknown4 = encodedFaction;
+            Log.WriteInfo("[Zone] Encoded: GenderJobId={0}->0x{1:X}, Faction={2}->0x{3:X}", character.Gender_JobId, encodedGenderJobId, character.Faction, encodedFaction);
+            
+            userRsCharBaseData.m_nUnknown5 = character.Face_TatooId;
+            userRsCharBaseData.m_nUnknown6 = character.HairId;
+            userRsCharBaseData.m_nUnknown7 = character.HairColor;
+            userRsCharBaseData.m_nUnknown8 = character.SkinColor;
+            userRsCharBaseData.m_nUnknown9 = character.Size;
+            userRsCharBaseData.m_nUnknown10 = character.Weigth;
+            
+            int torsoId = character.ModelTorsoId < 0x71000000 ? (0x71000000 | character.ModelTorsoId) : character.ModelTorsoId;
+            int handId = character.ModelHandId < 0x71000000 ? (0x71000000 | character.ModelHandId) : character.ModelHandId;
+            int shoeId = character.ModelShoeId < 0x71000000 ? (0x71000000 | character.ModelShoeId) : character.ModelShoeId;
+            int legId = character.ModelLegId < 0x71000000 ? (0x71000000 | character.ModelLegId) : character.ModelLegId;
+            userRsCharBaseData.m_nUnknown11 = torsoId;
+            userRsCharBaseData.m_nUnknown12 = handId;
+            userRsCharBaseData.m_nUnknown13 = shoeId;
+            userRsCharBaseData.m_nUnknown14 = legId;
+            Log.WriteInfo("[Zone] Models: 0x{0:X}, 0x{1:X}, 0x{2:X}, 0x{3:X}", torsoId, handId, shoeId, legId);
 
 
             userRsCharBaseData.m_nUnknown15 = 50397251; // ZoneID
@@ -326,9 +315,9 @@ namespace DevServer.Handlers
             userRsCharBaseData.m_nUnknown17 = 2300; // Pos Y
             userRsCharBaseData.m_nUnknown18 = 0; //Pos Z
 
-            userRsCharBaseData.m_nUnknown19 = 2; // AllianceID
+            userRsCharBaseData.m_nUnknown19 = (ushort)character.Faction; // AllianceID
 
-            userRsCharBaseData.m_byUnknown = 1; // Level
+            userRsCharBaseData.m_byUnknown = character.Level; // Level
 
             userRsCharBaseData.m_nUnknown20 = 88; //Min EXP
             userRsCharBaseData.m_nUnknown21 = 500; // Max Exp
@@ -1705,13 +1694,26 @@ namespace DevServer.Handlers
             // TODO
             // Reject selecting character based with password check.
 
+            // Find the selected character by key
+            var selectedChar = _characters.Find(c => c.Key == userRqCharSel.CharId);
+            if (selectedChar != null)
+            {
+                packetSender.SelectedCharacter = selectedChar;
+                Log.WriteInfo("[Zone] Character selected: {0} (Key: {1})", selectedChar.Name, selectedChar.Key);
+            }
+            else
+            {
+                Log.WriteError("[Zone] Character not found with key: {0}", userRqCharSel.CharId);
+            }
+
             var userRsCharSel = new DPKUZ_USER_RS_CHARSEL
             {
                 Allow = true,
-                CharacterKey = 29748866,
+                CharacterKey = 29748866, // Hardcoded like original - only this key works
                 IPAddress = IPAddress.Parse("127.0.0.1").GetAddressBytes()
             };
 
+            Log.WriteInfo("[Zone] Sent DPKUZ_USER_RS_CHARSEL.");
             packetSender.SendPacket(userRsCharSel);
         }
 
@@ -1720,6 +1722,45 @@ namespace DevServer.Handlers
         {
             if (!(clientPacket is SPKUZ_USER_RQ_CREATE_CHAR userRqCreateChar))
                 return;
+
+            Log.WriteInfo("[Zone] Character creation request: {0} (Gender_JobId: {1}, Faction: {2})", 
+                userRqCreateChar.Name, userRqCreateChar.Gender_JobId, userRqCreateChar.Faction);
+
+            // Create new character
+            var newCharacter = new DPKUZ_USER_RS_CHARLIST_DATA
+            {
+                Key = _nextCharacterKey++,
+                Gender_JobId = userRqCreateChar.Gender_JobId,
+                Faction = userRqCreateChar.Faction,
+                Name = userRqCreateChar.Name,
+                Guild = "",
+                Face_TatooId = userRqCreateChar.Face_TatooId,
+                HairId = userRqCreateChar.HairId,
+                HairColor = userRqCreateChar.HairColor,
+                SkinColor = userRqCreateChar.SkinColor,
+                Size = userRqCreateChar.Size,
+                Weigth = userRqCreateChar.Weigth,
+                ModelTorsoId = userRqCreateChar.ModelTorsoId,
+                ModelHandId = userRqCreateChar.ModelHandId,
+                ModelShoeId = userRqCreateChar.ModelShoeId,
+                ModelLegId = userRqCreateChar.ModelLegId,
+                Level = 1,
+                Slot = userRqCreateChar.Slot,
+                DeleteTime = -1
+            };
+
+            // Add to list and save to database
+            _characters.Add(newCharacter);
+            CharacterDatabase.SaveCharacter(newCharacter);
+
+            Log.WriteSuccess("[Zone] Character created: {0} (Key: {1})", newCharacter.Name, newCharacter.Key);
+
+            // Send success response
+            var response = new DPKUZ_USER_RS_CREATE_CHAR { ErrorCode = 0 };
+            packetSender.SendPacket(response);
+
+            // Refresh character list
+            SendCharacterList(packetSender);
         }
 
         [Packet(HandlerType.Zone, PacketType.SPKUL_USER_RQ_MACADDRESS)]
@@ -1727,6 +1768,13 @@ namespace DevServer.Handlers
         {
             if (!(clientPacket is SPKUL_USER_RQ_MACADDRESS userRqMacAddress))
                 return;
+        }
+
+        [Packet(HandlerType.Zone, PacketType.SPK_UNKNOWN_67_32)]
+        public static void SPK_UNKNOWN_67_32_Handler(Packet clientPacket, Client packetSender)
+        {
+            // Client sends this after START_PERMISSION - just acknowledge it silently
+            Log.WriteInfo("[Zone] Received SPK_UNKNOWN_67_32 - acknowledged.");
         }
 
         [Packet(HandlerType.Zone, PacketType.DPKUL_CHAR_RQ_UNKNOWN)]
@@ -1739,19 +1787,7 @@ namespace DevServer.Handlers
                 UnknownInt = 1
             };
 
-
-
-            //var charRSSync = new DPKUL_CHAR_RS_SYNC();
-
-            //packetSender.SendPacket(charRSSync);
-
-            //var NpcUnknown = new DPKUL_CHAR_RS_NPC();
-            //packetSender.SendPacket(NpcUnknown);
-
-            //var NpcUnknown = new DPKUL_CHAR_RS_NPC();
-            //packetSender.SendPacket(NpcUnknown);
-            //  packetSender.SendPacket(CHarRsUnknown);
-
+            packetSender.SendPacket(CHarRsUnknown);
         }
 
         [Packet(HandlerType.Zone, PacketType.DPKUL_CHAR_RQ_UNKNOWN_133)]

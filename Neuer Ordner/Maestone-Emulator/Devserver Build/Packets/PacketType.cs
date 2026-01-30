@@ -41,6 +41,7 @@
         SPKUZ_USER_RQ_JOIN = 51 | 1 << 8,
         DPKUZ_USER_RS_JOIN = 51 | 2 << 8,
         SPKUZ_USER_RQ_UNKNOWN = 51 | 3 << 8,
+        DPKUZ_USER_RS_UNKNOWN = 51 | 4 << 8,
         SPKUZ_USER_RQ_CHARLIST = 51 | 11 << 8,
         DPKUZ_USER_RS_CHARLIST_BEGIN = 51 | 12 << 8,
         DPKUZ_USER_RS_CHARLIST_DATA = 51 | 13 << 8,
@@ -58,6 +59,7 @@
         DPKUZ_USER_RS_START_PERMISSION = 51 | 35 << 8,
         DPKUZ_USER_PENALTY = 51 | 36 << 8,
         SPKUZ_USER_RQ_CREATE_CHAR = 51 | 41 << 8,
+        DPKUZ_USER_RS_CREATE_CHAR = 51 | 42 << 8,
         DPKUL_USER_RS_RSA = 51 | 47 << 8,
         DPKUZ_USER_RS_WAIT_DELETE_CHAR = 51 | 52 << 8,
         DPKUL_USER_RQ_MACADDRESS = 51 | 251 << 8,
@@ -66,6 +68,7 @@
         // 52 - Char
         DPKUL_CHAR_RS_UNKNOWN = 52 | 235 <<8,
         DPKUL_CHAR_RS_SYNC = 52 | 4 << 8,
+        DPKUL_CHAR_RQ_UNKNOWN_182 = 52 | 182 << 8,
 
        
 
@@ -84,6 +87,10 @@
 
 
         //53  Automove? Target ? 
+
+        // 67 - Unknown critical packet
+        SPK_UNKNOWN_67_32 = 67 | 32 << 8,
+        DPK_UNKNOWN_67_33 = 67 | 33 << 8,
 
         // 54 - Item
         DPKUZ_ITEM_RS_ITEMLIST_START = 54 | 1 << 8,

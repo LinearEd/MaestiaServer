@@ -74,6 +74,9 @@ namespace DevServer
 
             login.Initialize();
             zone.Initialize();
+            
+            // Initialize character database
+            ZoneHandler.Initialize();
 
             Log.WriteSuccess("Servers successfully started.");
 

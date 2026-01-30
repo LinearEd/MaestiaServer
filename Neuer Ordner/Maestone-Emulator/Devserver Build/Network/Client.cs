@@ -13,6 +13,8 @@ namespace DevServer.Network
         public readonly byte[] PublicKey;
         public readonly byte[] PrivateKey;
 
+        public DPKUZ_USER_RS_CHARLIST_DATA SelectedCharacter { get; set; }
+
         private readonly Socket _clientSocket;
         private readonly Server _serverListener;
         private readonly NetworkStream _clientStream;
