@@ -272,13 +272,20 @@ namespace DevServer.Handlers
             userRsCharBaseData.m_nUnknown = 29748866; // Hardcoded like original
             userRsCharBaseData.m_strUnknown = character.Name;
             
-            // Encoding: base + Gender_JobId + 1
-            int encodedGenderJobId = 0x05010000 + character.Gender_JobId + 1;
-            int encodedFaction = 0x10000000 + (character.Faction - 1) * 0x20000 + 1;
+            // Encoding: Males add +1, females don't (they share class encoding)
+            // GJ 1,2 (Warrior) -> 0x05010002
+            // GJ 3,4 (Mage) -> 0x05010004
+            // GJ 5,6 (Ranger) -> 0x05010006
+            // GJ 7,8 (Cleric) -> 0x05010008
+            int classIndex = (character.Gender_JobId + 1) / 2; // 1,2->1, 3,4->2, 5,6->3, 7,8->4
+            int encodedGenderJobId = 0x05010000 + (classIndex * 2);
             
-            // DEBUG: Test with hardcoded working values for any character
-            // If this works for Alex, then dynamic values have an issue
-            bool useHardcodedTest = true; // Force male encoding to test
+            // CRITICAL: Faction 1 encoding (0x10000001) seems to crash!
+            // Force Faction 2 encoding for testing
+            int encodedFaction = 268566529; // 0x10020001 - Faction 2, always works
+            
+            // DEBUG: Temporarily disabled - using correct formula now
+            bool useHardcodedTest = false;
             if (useHardcodedTest)
             {
                 encodedGenderJobId = 83951618;  // 0x05010002 - Male Warrior encoding
