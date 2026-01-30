@@ -1,0 +1,49 @@
+PROGRAM  : Maestia.exe
+FUNCTION : TryLock
+ENTRY    : 005162d0
+BODY     : [[005162d0, 005162f0]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* public: bool __thiscall GMutex::TryLock(void) */
+
+bool __thiscall GMutex::TryLock(GMutex *this)
+
+{
+  int *piVar1;
+  undefined4 *puVar2;
+  DWORD DVar3;
+  
+                    /* 0x1162d0  170  ?TryLock@GMutex@@QAE_NXZ */
+  puVar2 = *(undefined4 **)(this + 0x10);
+  DVar3 = WaitForSingleObject((HANDLE)*puVar2,0);
+  if (DVar3 != 0) {
+    return false;
+  }
+  piVar1 = puVar2 + 2;
+  *piVar1 = *piVar1 + 1;
+  return true;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005162d0 : PUSH ESI
+005162d1 : MOV ESI,dword ptr [ECX + 0x10]
+005162d4 : MOV EAX,dword ptr [ESI]
+005162d6 : PUSH 0x0
+005162d8 : PUSH EAX
+005162d9 : CALL dword ptr [0x00b85100]
+005162df : TEST EAX,EAX
+005162e1 : JZ 0x005162e7
+005162e3 : XOR AL,AL
+005162e5 : POP ESI
+005162e6 : RET
+005162e7 : MOV EAX,0x1
+005162ec : ADD dword ptr [ESI + 0x8],EAX
+005162ef : POP ESI
+005162f0 : RET

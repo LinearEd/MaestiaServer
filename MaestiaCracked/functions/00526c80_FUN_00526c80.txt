@@ -1,0 +1,67 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00526c80
+ENTRY    : 00526c80
+BODY     : [[00526c80, 00526cc2]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00526c80(int param_1)
+
+{
+  int *piVar1;
+  char *in_ECX;
+  
+  if (param_1 == 0) {
+    piVar1 = (int *)0x0;
+  }
+  else {
+    piVar1 = *(int **)(param_1 + 0x80);
+    if (piVar1 == (int *)0x0) {
+      piVar1 = (int *)FUN_00520df0();
+    }
+  }
+  if ((*in_ECX != '\a') || (*(int **)(in_ECX + 4) != piVar1)) {
+    FUN_00526400();
+    *in_ECX = '\a';
+    *(int **)(in_ECX + 4) = piVar1;
+    if (piVar1 != (int *)0x0) {
+      *piVar1 = *piVar1 + 1;
+    }
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00526c80 : PUSH ESI
+00526c81 : PUSH EDI
+00526c82 : MOV EDI,ECX
+00526c84 : MOV ECX,dword ptr [ESP + 0xc]
+00526c88 : TEST ECX,ECX
+00526c8a : JZ 0x00526c9f
+00526c8c : MOV ESI,dword ptr [ECX + 0x80]
+00526c92 : TEST ESI,ESI
+00526c94 : JNZ 0x00526ca1
+00526c96 : CALL 0x00520df0
+00526c9b : MOV ESI,EAX
+00526c9d : JMP 0x00526ca1
+00526c9f : XOR ESI,ESI
+00526ca1 : CMP byte ptr [EDI],0x7
+00526ca4 : JNZ 0x00526cab
+00526ca6 : CMP dword ptr [EDI + 0x4],ESI
+00526ca9 : JZ 0x00526cbe
+00526cab : MOV ECX,EDI
+00526cad : CALL 0x00526400
+00526cb2 : MOV byte ptr [EDI],0x7
+00526cb5 : MOV dword ptr [EDI + 0x4],ESI
+00526cb8 : TEST ESI,ESI
+00526cba : JZ 0x00526cbe
+00526cbc : INC dword ptr [ESI]
+00526cbe : POP EDI
+00526cbf : POP ESI
+00526cc0 : RET 0x4

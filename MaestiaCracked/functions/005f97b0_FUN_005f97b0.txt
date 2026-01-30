@@ -1,0 +1,74 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005f97b0
+ENTRY    : 005f97b0
+BODY     : [[005f97b0, 005f982f]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+float10 FUN_005f97b0(uint param_1,uint param_2,uint param_3)
+
+{
+  float *pfVar1;
+  float *pfVar2;
+  int iVar3;
+  int iVar4;
+  int in_ECX;
+  
+  iVar3 = *(int *)(in_ECX + 0x110);
+  pfVar1 = (float *)(*(int *)(iVar3 + ((param_3 & 0xbfffffff) >> 10) * 4) + (param_3 & 0x3ff) * 8);
+  iVar4 = *(int *)(iVar3 + ((param_2 & 0xbfffffff) >> 10) * 4);
+  pfVar2 = (float *)(iVar4 + (param_2 & 0x3ff) * 8);
+  iVar3 = *(int *)(iVar3 + ((param_1 & 0xbfffffff) >> 10) * 4);
+  return (float10)((*pfVar1 - *pfVar2) *
+                   (*(float *)(iVar4 + 4 + (param_2 & 0x3ff) * 8) -
+                   *(float *)(iVar3 + 4 + (param_1 & 0x3ff) * 8)) -
+                  (*pfVar2 - *(float *)(iVar3 + (param_1 & 0x3ff) * 8)) * (pfVar1[1] - pfVar2[1]));
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005f97b0 : MOV EAX,dword ptr [ESP + 0xc]
+005f97b4 : MOV ECX,dword ptr [ECX + 0x110]
+005f97ba : MOV EDX,dword ptr [ESP + 0x8]
+005f97be : PUSH ESI
+005f97bf : MOV ESI,dword ptr [ESP + 0x8]
+005f97c3 : AND EAX,0xbfffffff
+005f97c8 : PUSH EDI
+005f97c9 : MOV EDI,EAX
+005f97cb : SHR EDI,0xa
+005f97ce : MOV EDI,dword ptr [ECX + EDI*0x4]
+005f97d1 : AND EAX,0x3ff
+005f97d6 : LEA EDI,[EDI + EAX*0x8]
+005f97d9 : AND EDX,0xbfffffff
+005f97df : MOV EAX,EDX
+005f97e1 : SHR EAX,0xa
+005f97e4 : MOV EAX,dword ptr [ECX + EAX*0x4]
+005f97e7 : AND EDX,0x3ff
+005f97ed : FLD float ptr [EAX + EDX*0x8 + 0x4]
+005f97f1 : LEA EAX,[EAX + EDX*0x8]
+005f97f4 : AND ESI,0xbfffffff
+005f97fa : MOV EDX,ESI
+005f97fc : SHR EDX,0xa
+005f97ff : MOV ECX,dword ptr [ECX + EDX*0x4]
+005f9802 : AND ESI,0x3ff
+005f9808 : FSUB float ptr [ECX + ESI*0x8 + 0x4]
+005f980c : LEA ECX,[ECX + ESI*0x8]
+005f980f : FLD float ptr [EDI]
+005f9811 : FSUB float ptr [EAX]
+005f9813 : FMULP
+005f9815 : FLD float ptr [EDI + 0x4]
+005f9818 : POP EDI
+005f9819 : FSUB float ptr [EAX + 0x4]
+005f981c : POP ESI
+005f981d : FLD float ptr [EAX]
+005f981f : FSUB float ptr [ECX]
+005f9821 : FMULP
+005f9823 : FSUBP
+005f9825 : FSTP float ptr [ESP + 0xc]
+005f9829 : FLD float ptr [ESP + 0xc]
+005f982d : RET 0xc

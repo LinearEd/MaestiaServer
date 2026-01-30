@@ -1,0 +1,103 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00523e20
+ENTRY    : 00523e20
+BODY     : [[00523e20, 00523ea0]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+int FUN_00523e20(void)
+
+{
+  GRefCountImpl *this;
+  int iVar1;
+  int *in_ECX;
+  
+  if (*in_ECX == 1) {
+    InterlockedExchangeAdd((LONG *)(in_ECX[1] + 4),1);
+    return in_ECX[1];
+  }
+  if (*in_ECX == 4) {
+    return 0;
+  }
+  this = (GRefCountImpl *)in_ECX[1];
+  GEvent::Wait((GEvent *)(this + 0x20),0xffffffff);
+  if (*(int *)(this + 0x10) != 0) {
+    InterlockedExchangeAdd((LONG *)(*(int *)(this + 0x10) + 4),1);
+  }
+  iVar1 = *(int *)(this + 0x10);
+  if (iVar1 != 0) {
+    *in_ECX = 1;
+    in_ECX[1] = iVar1;
+    InterlockedExchangeAdd((LONG *)(iVar1 + 4),1);
+    GRefCountImpl::Release(this);
+    return iVar1;
+  }
+  *in_ECX = 4;
+  return 0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00523e20 : PUSH ESI
+00523e21 : MOV ESI,ECX
+00523e23 : MOV EAX,dword ptr [ESI]
+00523e25 : CMP EAX,0x1
+00523e28 : JNZ 0x00523e3d
+00523e2a : PUSH EAX
+00523e2b : MOV EAX,dword ptr [ESI + 0x4]
+00523e2e : ADD EAX,0x4
+00523e31 : PUSH EAX
+00523e32 : CALL dword ptr [0x00b851cc]
+00523e38 : MOV EAX,dword ptr [ESI + 0x4]
+00523e3b : POP ESI
+00523e3c : RET
+00523e3d : CMP EAX,0x4
+00523e40 : JNZ 0x00523e46
+00523e42 : XOR EAX,EAX
+00523e44 : POP ESI
+00523e45 : RET
+00523e46 : PUSH EBP
+00523e47 : PUSH EDI
+00523e48 : MOV EDI,dword ptr [ESI + 0x4]
+00523e4b : PUSH -0x1
+00523e4d : LEA ECX,[EDI + 0x20]
+00523e50 : CALL 0x00517760
+00523e55 : MOV ECX,dword ptr [EDI + 0x10]
+00523e58 : MOV EBP,dword ptr [0x00b851cc]
+00523e5e : TEST ECX,ECX
+00523e60 : JZ 0x00523e6d
+00523e62 : MOV EAX,dword ptr [EDI + 0x10]
+00523e65 : PUSH 0x1
+00523e67 : ADD EAX,0x4
+00523e6a : PUSH EAX
+00523e6b : CALL EBP
+00523e6d : PUSH EBX
+00523e6e : MOV EBX,dword ptr [EDI + 0x10]
+00523e71 : TEST EBX,EBX
+00523e73 : JZ 0x00523e94
+00523e75 : PUSH 0x1
+00523e77 : LEA EDX,[EBX + 0x4]
+00523e7a : PUSH EDX
+00523e7b : MOV dword ptr [ESI],0x1
+00523e81 : MOV dword ptr [ESI + 0x4],EBX
+00523e84 : CALL EBP
+00523e86 : MOV ECX,EDI
+00523e88 : CALL 0x004ff7e0
+00523e8d : MOV EAX,EBX
+00523e8f : POP EBX
+00523e90 : POP EDI
+00523e91 : POP EBP
+00523e92 : POP ESI
+00523e93 : RET
+00523e94 : POP EBX
+00523e95 : POP EDI
+00523e96 : POP EBP
+00523e97 : MOV dword ptr [ESI],0x4
+00523e9d : XOR EAX,EAX
+00523e9f : POP ESI
+00523ea0 : RET

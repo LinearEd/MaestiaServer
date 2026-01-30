@@ -1,0 +1,87 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00854770
+ENTRY    : 00854770
+BODY     : [[00854770, 00854802]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00854770(void)
+
+{
+  code *pcVar1;
+  float fVar2;
+  DWORD DVar3;
+  uint uVar4;
+  int *in_ECX;
+  
+  if ((float)in_ECX[0x7a2] != (float)in_ECX[0x692]) {
+    DVar3 = timeGetTime();
+    uVar4 = DVar3 - in_ECX[0x7a5];
+    if (0xfa < uVar4) {
+      pcVar1 = *(code **)(*in_ECX + 0x2a4);
+      in_ECX[0x692] = in_ECX[0x7a2];
+      (*pcVar1)(in_ECX[0x7a2]);
+      return;
+    }
+    fVar2 = (float)(int)uVar4;
+    if ((int)uVar4 < 0) {
+      fVar2 = fVar2 + 4.2949673e+09;
+    }
+    (**(code **)(*in_ECX + 0x2a4))(fVar2 * 0.004 * (float)in_ECX[0x7a3] + (float)in_ECX[0x7a4]);
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00854770 : PUSH EBP
+00854771 : MOV EBP,ESP
+00854773 : PUSH ECX
+00854774 : PUSH ESI
+00854775 : MOV ESI,ECX
+00854777 : MOVSS XMM0,dword ptr [ESI + 0x1e88]
+0085477f : UCOMISS XMM0,dword ptr [ESI + 0x1a48]
+00854786 : LAHF
+00854787 : TEST AH,0x44
+0085478a : JNP 0x008547fe
+0085478c : CALL dword ptr [0x00b85598]
+00854792 : SUB EAX,dword ptr [ESI + 0x1e94]
+00854798 : CMP EAX,0xfa
+0085479d : JBE 0x008547cc
+0085479f : MOVSS XMM0,dword ptr [ESI + 0x1e88]
+008547a7 : MOV EAX,dword ptr [ESI]
+008547a9 : MOV EDX,dword ptr [EAX + 0x2a4]
+008547af : MOVSS dword ptr [EBP + -0x4],XMM0
+008547b4 : FLD float ptr [EBP + -0x4]
+008547b7 : PUSH ECX
+008547b8 : MOV ECX,ESI
+008547ba : FSTP float ptr [ESP]
+008547bd : MOVSS dword ptr [ESI + 0x1a48],XMM0
+008547c5 : CALL EDX
+008547c7 : POP ESI
+008547c8 : MOV ESP,EBP
+008547ca : POP EBP
+008547cb : RET
+008547cc : MOV EDX,dword ptr [ESI]
+008547ce : MOV dword ptr [EBP + -0x4],EAX
+008547d1 : FILD dword ptr [EBP + -0x4]
+008547d4 : TEST EAX,EAX
+008547d6 : JGE 0x008547de
+008547d8 : FADD float ptr [0x00cdf0e0]
+008547de : FMUL float ptr [0x00cdf240]
+008547e4 : MOV EAX,dword ptr [EDX + 0x2a4]
+008547ea : PUSH ECX
+008547eb : MOV ECX,ESI
+008547ed : FMUL float ptr [ESI + 0x1e8c]
+008547f3 : FADD float ptr [ESI + 0x1e90]
+008547f9 : FSTP float ptr [ESP]
+008547fc : CALL EAX
+008547fe : POP ESI
+008547ff : MOV ESP,EBP
+00854801 : POP EBP
+00854802 : RET

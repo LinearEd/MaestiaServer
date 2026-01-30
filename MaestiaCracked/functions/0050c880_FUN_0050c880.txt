@@ -1,0 +1,81 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0050c880
+ENTRY    : 0050c880
+BODY     : [[0050c880, 0050c8db]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+bool FUN_0050c880(GRefCountNTSImpl *param_1)
+
+{
+  int *piVar1;
+  int in_ECX;
+  GRefCountNTSImpl *this;
+  
+  piVar1 = *(int **)(in_ECX + 0xad8);
+  this = (GRefCountNTSImpl *)0x0;
+  if (piVar1 != (int *)0x0) {
+    if (piVar1[1] == 0) {
+      *piVar1 = *piVar1 + -1;
+      if (*piVar1 == 0) {
+        FUN_00515cf0(piVar1);
+      }
+      *(undefined4 *)(in_ECX + 0xad8) = 0;
+    }
+    else {
+      this = (GRefCountNTSImpl *)piVar1[1];
+      if (this != (GRefCountNTSImpl *)0x0) {
+        *(int *)(this + 4) = *(int *)(this + 4) + 1;
+        *(int *)(this + 4) = *(int *)(this + 4) + 1;
+        GRefCountNTSImpl::Release(this);
+      }
+    }
+  }
+  if (this != (GRefCountNTSImpl *)0x0) {
+    GRefCountNTSImpl::Release(this);
+  }
+  return this == param_1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0050c880 : PUSH EBX
+0050c881 : PUSH ESI
+0050c882 : PUSH EDI
+0050c883 : MOV EDI,ECX
+0050c885 : MOV EAX,dword ptr [EDI + 0xad8]
+0050c88b : XOR ESI,ESI
+0050c88d : TEST EAX,EAX
+0050c88f : JZ 0x0050c8af
+0050c891 : CMP dword ptr [EAX + 0x4],ESI
+0050c894 : JZ 0x0050c8c9
+0050c896 : MOV ESI,dword ptr [EAX + 0x4]
+0050c899 : TEST ESI,ESI
+0050c89b : JZ 0x0050c8af
+0050c89d : MOV EAX,0x1
+0050c8a2 : ADD dword ptr [ESI + 0x4],EAX
+0050c8a5 : ADD dword ptr [ESI + 0x4],EAX
+0050c8a8 : MOV ECX,ESI
+0050c8aa : CALL 0x004ff7c0
+0050c8af : CMP ESI,dword ptr [ESP + 0x10]
+0050c8b3 : SETZ BL
+0050c8b6 : TEST ESI,ESI
+0050c8b8 : JZ 0x0050c8c1
+0050c8ba : MOV ECX,ESI
+0050c8bc : CALL 0x004ff7c0
+0050c8c1 : POP EDI
+0050c8c2 : POP ESI
+0050c8c3 : MOV AL,BL
+0050c8c5 : POP EBX
+0050c8c6 : RET 0x4
+0050c8c9 : ADD dword ptr [EAX],-0x1
+0050c8cc : JNZ 0x0050c8d4
+0050c8ce : PUSH EAX
+0050c8cf : CALL 0x00515cf0
+0050c8d4 : MOV dword ptr [EDI + 0xad8],ESI
+0050c8da : JMP 0x0050c8af

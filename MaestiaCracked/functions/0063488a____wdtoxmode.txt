@@ -1,0 +1,134 @@
+PROGRAM  : Maestia.exe
+FUNCTION : ___wdtoxmode
+ENTRY    : 0063488a
+BODY     : [[0063488a, 0063494c]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    ___wdtoxmode
+   
+   Library: Visual Studio 2008 Release */
+
+uint ___wdtoxmode(byte param_1,wchar_t *param_2)
+
+{
+  wchar_t wVar1;
+  wchar_t *pwVar2;
+  int iVar3;
+  uint uVar4;
+  
+  pwVar2 = param_2;
+  if (param_2[1] == L':') {
+    pwVar2 = param_2 + 2;
+  }
+  wVar1 = *pwVar2;
+  if ((((wVar1 == L'\\') || (wVar1 == L'/')) && (pwVar2[1] == L'\0')) ||
+     (((param_1 & 0x10) != 0 || (uVar4 = 0x8000, wVar1 == L'\0')))) {
+    uVar4 = 0x4040;
+  }
+  uVar4 = uVar4 | ~((uint)param_1 << 7) & 0x80 | 0x100;
+  pwVar2 = _wcsrchr(param_2,L'.');
+  if (pwVar2 != (wchar_t *)0x0) {
+    iVar3 = __wcsicmp(pwVar2,L".exe");
+    if (iVar3 != 0) {
+      iVar3 = __wcsicmp(pwVar2,L".cmd");
+      if (iVar3 != 0) {
+        iVar3 = __wcsicmp(pwVar2,L".bat");
+        if (iVar3 != 0) {
+          iVar3 = __wcsicmp(pwVar2,L".com");
+          if (iVar3 != 0) goto LAB_00634935;
+        }
+      }
+    }
+    uVar4 = uVar4 | 0x40;
+  }
+LAB_00634935:
+  return (uVar4 & 0x1c0) >> 6 | uVar4 | uVar4 >> 3 & 0x38;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0063488a : MOV EDI,EDI
+0063488c : PUSH EBP
+0063488d : MOV EBP,ESP
+0063488f : MOVZX EAX,byte ptr [EBP + 0x8]
+00634893 : PUSH ESI
+00634894 : MOV ESI,dword ptr [EBP + 0xc]
+00634897 : CMP word ptr [ESI + 0x2],0x3a
+0063489c : PUSH EDI
+0063489d : MOV ECX,ESI
+0063489f : JNZ 0x006348a4
+006348a1 : LEA ECX,[ESI + 0x4]
+006348a4 : MOVZX EDX,word ptr [ECX]
+006348a7 : CMP DX,0x5c
+006348ab : JZ 0x006348b3
+006348ad : CMP DX,0x2f
+006348b1 : JNZ 0x006348ba
+006348b3 : CMP word ptr [ECX + 0x2],0x0
+006348b8 : JZ 0x006348c8
+006348ba : TEST AL,0x10
+006348bc : JNZ 0x006348c8
+006348be : MOV EDI,0x8000
+006348c3 : TEST DX,DX
+006348c6 : JNZ 0x006348cd
+006348c8 : MOV EDI,0x4040
+006348cd : SHL EAX,0x7
+006348d0 : NOT EAX
+006348d2 : AND EAX,0x80
+006348d7 : OR EAX,0x100
+006348dc : PUSH 0x2e
+006348de : PUSH ESI
+006348df : OR EDI,EAX
+006348e1 : CALL 0x0063712e
+006348e6 : MOV ESI,EAX
+006348e8 : POP ECX
+006348e9 : POP ECX
+006348ea : TEST ESI,ESI
+006348ec : JZ 0x00634935
+006348ee : PUSH 0xb96180
+006348f3 : PUSH ESI
+006348f4 : CALL 0x00637f87
+006348f9 : POP ECX
+006348fa : POP ECX
+006348fb : TEST EAX,EAX
+006348fd : JZ 0x00634932
+006348ff : PUSH 0xb96174
+00634904 : PUSH ESI
+00634905 : CALL 0x00637f87
+0063490a : POP ECX
+0063490b : POP ECX
+0063490c : TEST EAX,EAX
+0063490e : JZ 0x00634932
+00634910 : PUSH 0xb96168
+00634915 : PUSH ESI
+00634916 : CALL 0x00637f87
+0063491b : POP ECX
+0063491c : POP ECX
+0063491d : TEST EAX,EAX
+0063491f : JZ 0x00634932
+00634921 : PUSH 0xb9615c
+00634926 : PUSH ESI
+00634927 : CALL 0x00637f87
+0063492c : POP ECX
+0063492d : POP ECX
+0063492e : TEST EAX,EAX
+00634930 : JNZ 0x00634935
+00634932 : OR EDI,0x40
+00634935 : MOV EAX,EDI
+00634937 : SHR EAX,0x3
+0063493a : AND EAX,0x38
+0063493d : OR EDI,EAX
+0063493f : MOV EAX,EDI
+00634941 : SHR EAX,0x6
+00634944 : AND EAX,0x7
+00634947 : OR EAX,EDI
+00634949 : POP EDI
+0063494a : POP ESI
+0063494b : POP EBP
+0063494c : RET

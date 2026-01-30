@@ -1,0 +1,57 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00793060
+ENTRY    : 00793060
+BODY     : [[00793060, 007930bf]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00793060(void)
+
+{
+  int in_ECX;
+  float *in_EDX;
+  
+  if ((((*(float *)(in_ECX + 0xa8) != *in_EDX) || (*(float *)(in_ECX + 0xac) != in_EDX[1])) ||
+      (*(float *)(in_ECX + 0xb0) != in_EDX[2])) || (*(int *)(in_ECX + 0x58) == 0)) {
+    *(float **)(in_ECX + 0x58) = in_EDX;
+    *(undefined1 *)(in_ECX + 0x98) = 1;
+    *(float *)(in_ECX + 0xa8) = *in_EDX;
+    *(float *)(in_ECX + 0xac) = in_EDX[1];
+    *(float *)(in_ECX + 0xb0) = in_EDX[2];
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00793060 : MOVSS XMM0,dword ptr [ECX + 0xa8]
+00793068 : UCOMISS XMM0,dword ptr [EDX]
+0079306b : LAHF
+0079306c : TEST AH,0x44
+0079306f : JP 0x0079309b
+00793071 : MOVSS XMM0,dword ptr [ECX + 0xac]
+00793079 : UCOMISS XMM0,dword ptr [EDX + 0x4]
+0079307d : LAHF
+0079307e : TEST AH,0x44
+00793081 : JP 0x0079309b
+00793083 : MOVSS XMM0,dword ptr [ECX + 0xb0]
+0079308b : UCOMISS XMM0,dword ptr [EDX + 0x8]
+0079308f : LAHF
+00793090 : TEST AH,0x44
+00793093 : JP 0x0079309b
+00793095 : CMP dword ptr [ECX + 0x58],0x0
+00793099 : JNZ 0x007930bf
+0079309b : MOV dword ptr [ECX + 0x58],EDX
+0079309e : MOV byte ptr [ECX + 0x98],0x1
+007930a5 : FLD float ptr [EDX]
+007930a7 : FSTP float ptr [ECX + 0xa8]
+007930ad : FLD float ptr [EDX + 0x4]
+007930b0 : FSTP float ptr [ECX + 0xac]
+007930b6 : FLD float ptr [EDX + 0x8]
+007930b9 : FSTP float ptr [ECX + 0xb0]
+007930bf : RET

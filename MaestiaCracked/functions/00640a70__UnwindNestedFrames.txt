@@ -1,0 +1,62 @@
+PROGRAM  : Maestia.exe
+FUNCTION : _UnwindNestedFrames
+ENTRY    : 00640a70
+BODY     : [[00640a70, 00640ac3]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    void __stdcall _UnwindNestedFrames(struct EHRegistrationNode *,struct EHExceptionRecord *)
+   
+   Library: Visual Studio 2008 Release */
+
+void _UnwindNestedFrames(EHRegistrationNode *param_1,EHExceptionRecord *param_2)
+
+{
+  void *pvVar1;
+  
+  pvVar1 = ExceptionList;
+  RtlUnwind(param_1,(PVOID)0x640a9b,(PEXCEPTION_RECORD)param_2,(PVOID)0x0);
+  *(uint *)(param_2 + 4) = *(uint *)(param_2 + 4) & 0xfffffffd;
+  *(void **)pvVar1 = ExceptionList;
+  ExceptionList = pvVar1;
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00640a70 : MOV EDI,EDI
+00640a72 : PUSH EBP
+00640a73 : MOV EBP,ESP
+00640a75 : PUSH ECX
+00640a76 : PUSH ECX
+00640a77 : PUSH EBX
+00640a78 : PUSH ESI
+00640a79 : PUSH EDI
+00640a7a : MOV ESI,dword ptr FS:[0x0]
+00640a81 : MOV dword ptr [EBP + -0x4],ESI
+00640a84 : MOV dword ptr [EBP + -0x8],0x640a9b
+00640a8b : PUSH 0x0
+00640a8d : PUSH dword ptr [EBP + 0xc]
+00640a90 : PUSH dword ptr [EBP + -0x8]
+00640a93 : PUSH dword ptr [EBP + 0x8]
+00640a96 : CALL 0x006d4876
+00640a9b : MOV EAX,dword ptr [EBP + 0xc]
+00640a9e : MOV EAX,dword ptr [EAX + 0x4]
+00640aa1 : AND EAX,0xfffffffd
+00640aa4 : MOV ECX,dword ptr [EBP + 0xc]
+00640aa7 : MOV dword ptr [ECX + 0x4],EAX
+00640aaa : MOV EDI,dword ptr FS:[0x0]
+00640ab1 : MOV EBX,dword ptr [EBP + -0x4]
+00640ab4 : MOV dword ptr [EBX],EDI
+00640ab6 : MOV dword ptr FS:[0x0],EBX
+00640abd : POP EDI
+00640abe : POP ESI
+00640abf : POP EBX
+00640ac0 : LEAVE
+00640ac1 : RET 0x8

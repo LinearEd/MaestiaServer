@@ -1,0 +1,120 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00981000
+ENTRY    : 00981000
+BODY     : [[00981000, 009810e1]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00981000(int param_1,ushort param_2,ushort param_3,short param_4)
+
+{
+  int *piVar1;
+  int iVar2;
+  DWORD DVar3;
+  int iVar4;
+  uint uVar5;
+  float fVar6;
+  
+  uVar5 = (uint)param_2;
+  fVar6 = (float)(param_3 + uVar5);
+  if ((0.0 < fVar6) &&
+     ((iVar2 = FUN_00703c00(0x300), iVar2 == 0 || ((*(uint *)(iVar2 + 0x40) & 0x100) != 0)))) {
+    if ((param_4 == 1) || (param_4 == 2)) {
+      iVar4 = 0;
+      iVar2 = 0;
+      if (param_2 != 0) {
+        iVar4 = (int)(((float)uVar5 / fVar6) * 100.0);
+      }
+      if (param_3 != 0) {
+        iVar2 = (int)(((float)uVar5 / fVar6) * 100.0);
+      }
+      if ((*DAT_00da9894 != 0) && (piVar1 = *(int **)(*DAT_00da9894 + 0x114), piVar1 != (int *)0x0))
+      {
+        (**(code **)(*piVar1 + 4))(piVar1,"SetIrimaRate","%b,%d,%d,%d",1,iVar4,iVar2,param_4);
+      }
+    }
+    DVar3 = GetTickCount();
+    *(DWORD *)(param_1 + 0x14c) = DVar3;
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00981000 : PUSH EBP
+00981001 : MOV EBP,ESP
+00981003 : MOVZX EAX,word ptr [EBP + 0x10]
+00981007 : XORPS XMM1,XMM1
+0098100a : PUSH EBX
+0098100b : MOV BX,word ptr [EBP + 0xc]
+0098100f : PUSH ESI
+00981010 : MOVZX ESI,BX
+00981013 : ADD EAX,ESI
+00981015 : CVTSI2SS XMM0,EAX
+00981019 : COMISS XMM1,XMM0
+0098101c : MOVSS dword ptr [EBP + 0xc],XMM0
+00981021 : JNC 0x009810dc
+00981027 : MOV ECX,dword ptr [EBP + 0x8]
+0098102a : PUSH EDI
+0098102b : MOV DI,word ptr [ECX + 0x6e]
+0098102f : PUSH 0x300
+00981034 : CALL 0x00703c00
+00981039 : ADD ESP,0x4
+0098103c : TEST EAX,EAX
+0098103e : JZ 0x0098104d
+00981040 : TEST dword ptr [EAX + 0x40],0x100
+00981047 : JZ 0x009810db
+0098104d : MOV DI,word ptr [EBP + 0x14]
+00981051 : CMP DI,0x1
+00981055 : JZ 0x0098105d
+00981057 : CMP DI,0x2
+0098105b : JNZ 0x009810cc
+0098105d : MOVSS XMM0,dword ptr [0x00cdf230]
+00981065 : XOR EAX,EAX
+00981067 : XOR EDX,EDX
+00981069 : XOR ECX,ECX
+0098106b : CMP AX,BX
+0098106e : JNC 0x00981081
+00981070 : CVTSI2SS XMM1,ESI
+00981074 : DIVSS XMM1,dword ptr [EBP + 0xc]
+00981079 : MULSS XMM1,XMM0
+0098107d : CVTTSS2SI EDX,XMM1
+00981081 : XOR EAX,EAX
+00981083 : CMP AX,word ptr [EBP + 0x10]
+00981087 : JNC 0x0098109a
+00981089 : CVTSI2SS XMM1,ESI
+0098108d : DIVSS XMM1,dword ptr [EBP + 0xc]
+00981092 : MULSS XMM1,XMM0
+00981096 : CVTTSS2SI ECX,XMM1
+0098109a : MOV EAX,[0x00da9894]
+0098109f : MOV EAX,dword ptr [EAX]
+009810a1 : TEST EAX,EAX
+009810a3 : JZ 0x009810cc
+009810a5 : MOV EAX,dword ptr [EAX + 0x114]
+009810ab : TEST EAX,EAX
+009810ad : JZ 0x009810cc
+009810af : MOV ESI,dword ptr [EAX]
+009810b1 : MOVZX EDI,DI
+009810b4 : PUSH EDI
+009810b5 : PUSH ECX
+009810b6 : MOV ECX,dword ptr [ESI + 0x4]
+009810b9 : PUSH EDX
+009810ba : PUSH 0x1
+009810bc : PUSH 0xc80a3c
+009810c1 : PUSH 0xc80a48
+009810c6 : PUSH EAX
+009810c7 : CALL ECX
+009810c9 : ADD ESP,0x1c
+009810cc : CALL dword ptr [0x00b850d8]
+009810d2 : MOV EDX,dword ptr [EBP + 0x8]
+009810d5 : MOV dword ptr [EDX + 0x14c],EAX
+009810db : POP EDI
+009810dc : POP ESI
+009810dd : POP EBX
+009810de : POP EBP
+009810df : RET 0x10

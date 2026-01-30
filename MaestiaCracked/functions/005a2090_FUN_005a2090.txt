@@ -1,0 +1,60 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005a2090
+ENTRY    : 005a2090
+BODY     : [[005a2090, 005a20e4]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_005a2090(void)
+
+{
+  HMODULE hModule;
+  LPCRITICAL_SECTION in_ECX;
+  
+  if (DAT_00d73324 == '\0') {
+    hModule = LoadLibraryA("kernel32.dll");
+    DAT_00d73320 = GetProcAddress(hModule,"InitializeCriticalSectionAndSpinCount");
+    DAT_00d73324 = '\x01';
+  }
+  if (DAT_00d73320 == (FARPROC)0x0) {
+    InitializeCriticalSection(in_ECX);
+    return;
+  }
+  (*DAT_00d73320)();
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005a2090 : CMP byte ptr [0x00d73324],0x0
+005a2097 : PUSH ESI
+005a2098 : MOV ESI,ECX
+005a209a : JNZ 0x005a20c1
+005a209c : PUSH 0xb8f16c
+005a20a1 : CALL dword ptr [0x00b85250]
+005a20a7 : PUSH 0xb8f144
+005a20ac : PUSH EAX
+005a20ad : CALL dword ptr [0x00b85160]
+005a20b3 : MOV [0x00d73320],EAX
+005a20b8 : MOV byte ptr [0x00d73324],0x1
+005a20bf : JMP 0x005a20c6
+005a20c1 : MOV EAX,[0x00d73320]
+005a20c6 : TEST EAX,EAX
+005a20c8 : JZ 0x005a20d8
+005a20ca : MOV ECX,dword ptr [ESP + 0x8]
+005a20ce : PUSH ECX
+005a20cf : PUSH ESI
+005a20d0 : CALL EAX
+005a20d2 : MOV EAX,ESI
+005a20d4 : POP ESI
+005a20d5 : RET 0x4
+005a20d8 : PUSH ESI
+005a20d9 : CALL dword ptr [0x00b85114]
+005a20df : MOV EAX,ESI
+005a20e1 : POP ESI
+005a20e2 : RET 0x4

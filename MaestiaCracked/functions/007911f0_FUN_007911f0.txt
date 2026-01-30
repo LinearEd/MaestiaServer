@@ -1,0 +1,138 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_007911f0
+ENTRY    : 007911f0
+BODY     : [[007911f0, 007912c5]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined4 FUN_007911f0(int *param_1)
+
+{
+  float fVar1;
+  int iVar2;
+  int *in_ECX;
+  int iVar3;
+  
+  if (in_ECX[5] == 0) {
+    return 0;
+  }
+  if (param_1 == (int *)0x0) {
+    FUN_008018d0(L"rpParent Is NULL !!!!!!!!!!!!!");
+    return 0;
+  }
+  if ((int *)in_ECX[4] != (int *)0x0) {
+    if ((int *)in_ECX[4] != param_1) {
+      FUN_008018d0(L"[AvaFxOneEffect::Attach] Attach a parent node has already !!");
+    }
+    if (in_ECX[5] != 0) {
+      (**(code **)(*in_ECX + 0x18))();
+    }
+  }
+  iVar3 = 0;
+  do {
+    iVar2 = (**(code **)(*param_1 + 0x3c))(in_ECX[5] + 0xc);
+    if (iVar2 == 0) break;
+    FUN_00790450();
+    iVar3 = iVar3 + 1;
+  } while (iVar3 < 1000);
+  in_ECX[4] = (int)param_1;
+  (**(code **)(*param_1 + 0x24))(in_ECX[5]);
+  if (in_ECX[4] != 0) {
+    fVar1 = *(float *)(in_ECX[4] + 0xac);
+    if (fVar1 != 1.0) {
+      FUN_007998c0(fVar1);
+    }
+  }
+  *(undefined1 *)(in_ECX + 1) = 1;
+  return 1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+007911f0 : PUSH EBP
+007911f1 : MOV EBP,ESP
+007911f3 : PUSH EDI
+007911f4 : MOV EDI,ECX
+007911f6 : CMP dword ptr [EDI + 0x14],0x0
+007911fa : JNZ 0x00791203
+007911fc : XOR AL,AL
+007911fe : POP EDI
+007911ff : POP EBP
+00791200 : RET 0x4
+00791203 : PUSH EBX
+00791204 : MOV EBX,dword ptr [EBP + 0x8]
+00791207 : PUSH ESI
+00791208 : TEST EBX,EBX
+0079120a : JNZ 0x00791228
+0079120c : MOV ESI,dword ptr [0x00da98e8]
+00791212 : PUSH 0xc13cac
+00791217 : CALL 0x008018d0
+0079121c : ADD ESP,0x4
+0079121f : POP ESI
+00791220 : POP EBX
+00791221 : XOR AL,AL
+00791223 : POP EDI
+00791224 : POP EBP
+00791225 : RET 0x4
+00791228 : MOV EAX,dword ptr [EDI + 0x10]
+0079122b : TEST EAX,EAX
+0079122d : JZ 0x00791255
+0079122f : CMP EAX,EBX
+00791231 : JZ 0x00791246
+00791233 : MOV ESI,dword ptr [0x00da98e8]
+00791239 : PUSH 0xc13cf0
+0079123e : CALL 0x008018d0
+00791243 : ADD ESP,0x4
+00791246 : CMP dword ptr [EDI + 0x14],0x0
+0079124a : JZ 0x00791255
+0079124c : MOV EAX,dword ptr [EDI]
+0079124e : MOV EDX,dword ptr [EAX + 0x18]
+00791251 : MOV ECX,EDI
+00791253 : CALL EDX
+00791255 : XOR ESI,ESI
+00791257 : MOV EAX,dword ptr [EDI + 0x14]
+0079125a : MOV EDX,dword ptr [EBX]
+0079125c : ADD EAX,0xc
+0079125f : PUSH EAX
+00791260 : MOV EAX,dword ptr [EDX + 0x3c]
+00791263 : MOV ECX,EBX
+00791265 : CALL EAX
+00791267 : TEST EAX,EAX
+00791269 : JZ 0x00791279
+0079126b : CALL 0x00790450
+00791270 : INC ESI
+00791271 : CMP ESI,0x3e8
+00791277 : JL 0x00791257
+00791279 : MOV EAX,dword ptr [EDI + 0x14]
+0079127c : MOV dword ptr [EDI + 0x10],EBX
+0079127f : MOV EDX,dword ptr [EBX]
+00791281 : MOV EDX,dword ptr [EDX + 0x24]
+00791284 : PUSH EAX
+00791285 : MOV ECX,EBX
+00791287 : CALL EDX
+00791289 : MOV EAX,dword ptr [EDI + 0x10]
+0079128c : TEST EAX,EAX
+0079128e : JZ 0x007912b9
+00791290 : MOVSS XMM0,dword ptr [EAX + 0xac]
+00791298 : UCOMISS XMM0,dword ptr [0x00c10fc4]
+0079129f : LAHF
+007912a0 : MOVSS dword ptr [EBP + 0x8],XMM0
+007912a5 : TEST AH,0x44
+007912a8 : JNP 0x007912b9
+007912aa : FLD float ptr [EBP + 0x8]
+007912ad : MOV ESI,dword ptr [EDI + 0x14]
+007912b0 : PUSH ECX
+007912b1 : FSTP float ptr [ESP]
+007912b4 : CALL 0x007998c0
+007912b9 : POP ESI
+007912ba : POP EBX
+007912bb : MOV byte ptr [EDI + 0x4],0x1
+007912bf : MOV AL,0x1
+007912c1 : POP EDI
+007912c2 : POP EBP
+007912c3 : RET 0x4

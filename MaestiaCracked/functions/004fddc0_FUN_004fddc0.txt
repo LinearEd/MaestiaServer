@@ -1,0 +1,81 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_004fddc0
+ENTRY    : 004fddc0
+BODY     : [[004fddc0, 004fde1e]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+int FUN_004fddc0(void)
+
+{
+  int iVar1;
+  uint uVar2;
+  int iVar3;
+  int in_ECX;
+  int iVar4;
+  int in_EDX;
+  
+  uVar2 = *(uint *)(in_EDX + 8);
+  if ((uVar2 != 0) && (*(float *)(*(int *)(in_EDX + 4) + 4) <= *(float *)(in_ECX + 4))) {
+    iVar4 = uVar2 * 0x20 + *(int *)(in_EDX + 4);
+    uVar2 = uVar2 >> 1;
+    iVar1 = *(int *)(in_EDX + 4);
+    while (uVar2 != 0) {
+      iVar3 = uVar2 * 0x20 + iVar1;
+      if (*(float *)(in_ECX + 4) < *(float *)(uVar2 * 0x20 + 4 + iVar1)) {
+        iVar4 = iVar3;
+        iVar3 = iVar1;
+      }
+      iVar1 = iVar3;
+      uVar2 = (iVar4 - iVar3 >> 5) - (iVar4 - iVar3 >> 0x1f) >> 1;
+    }
+    return iVar1;
+  }
+  return uVar2 * 0x20 + *(int *)(in_EDX + 4);
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+004fddc0 : MOV EAX,dword ptr [EDX + 0x8]
+004fddc3 : TEST EAX,EAX
+004fddc5 : JZ 0x004fde18
+004fddc7 : MOVSS XMM0,dword ptr [ECX + 0x4]
+004fddcc : MOV ECX,dword ptr [EDX + 0x4]
+004fddcf : MOVSS XMM1,dword ptr [ECX + 0x4]
+004fddd4 : COMISS XMM1,XMM0
+004fddd7 : JA 0x004fde18
+004fddd9 : MOV ECX,EAX
+004fdddb : PUSH ESI
+004fdddc : MOV ESI,dword ptr [EDX + 0x4]
+004fdddf : SHL ECX,0x5
+004fdde2 : SHR EAX,0x1
+004fdde4 : ADD ECX,ESI
+004fdde6 : TEST EAX,EAX
+004fdde8 : JBE 0x004fde14
+004fddea : LEA EBX,[EBX]
+004fddf0 : SHL EAX,0x5
+004fddf3 : MOVSS XMM1,dword ptr [EAX + ESI*0x1 + 0x4]
+004fddf9 : ADD EAX,ESI
+004fddfb : COMISS XMM1,XMM0
+004fddfe : JBE 0x004fde04
+004fde00 : MOV ECX,EAX
+004fde02 : JMP 0x004fde06
+004fde04 : MOV ESI,EAX
+004fde06 : MOV EAX,ECX
+004fde08 : SUB EAX,ESI
+004fde0a : SAR EAX,0x5
+004fde0d : CDQ
+004fde0e : SUB EAX,EDX
+004fde10 : SAR EAX,0x1
+004fde12 : JNZ 0x004fddf0
+004fde14 : MOV EAX,ESI
+004fde16 : POP ESI
+004fde17 : RET
+004fde18 : SHL EAX,0x5
+004fde1b : ADD EAX,dword ptr [EDX + 0x4]
+004fde1e : RET

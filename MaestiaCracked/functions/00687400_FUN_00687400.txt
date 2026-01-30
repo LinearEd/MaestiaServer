@@ -1,0 +1,62 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00687400
+ENTRY    : 00687400
+BODY     : [[00687400, 00687439]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00687400(int param_1,int param_2,int param_3)
+
+{
+  int *piVar1;
+  uint uVar2;
+  
+  if (param_1 != 0) {
+    piVar1 = *(int **)(param_1 + 4);
+    uVar2 = 0;
+    if (0 < *(short *)(param_1 + 2)) {
+      do {
+        *piVar1 = *piVar1 + param_2;
+        piVar1[1] = piVar1[1] + param_3;
+        uVar2 = uVar2 + 1;
+        piVar1 = piVar1 + 2;
+      } while ((int)(uVar2 & 0xffff) < (int)*(short *)(param_1 + 2));
+    }
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00687400 : MOV EDX,dword ptr [ESP + 0x4]
+00687404 : TEST EDX,EDX
+00687406 : JZ 0x00687439
+00687408 : MOV EAX,dword ptr [EDX + 0x4]
+0068740b : PUSH ESI
+0068740c : XOR ESI,ESI
+0068740e : XOR ECX,ECX
+00687410 : CMP SI,word ptr [EDX + 0x2]
+00687414 : JGE 0x00687438
+00687416 : MOV ESI,dword ptr [ESP + 0x10]
+0068741a : PUSH EBX
+0068741b : PUSH EBP
+0068741c : PUSH EDI
+0068741d : MOV EDI,dword ptr [ESP + 0x18]
+00687421 : ADD dword ptr [EAX],EDI
+00687423 : ADD dword ptr [EAX + 0x4],ESI
+00687426 : MOVSX EBP,word ptr [EDX + 0x2]
+0068742a : INC ECX
+0068742b : MOVZX EBX,CX
+0068742e : ADD EAX,0x8
+00687431 : CMP EBX,EBP
+00687433 : JL 0x00687421
+00687435 : POP EDI
+00687436 : POP EBP
+00687437 : POP EBX
+00687438 : POP ESI
+00687439 : RET

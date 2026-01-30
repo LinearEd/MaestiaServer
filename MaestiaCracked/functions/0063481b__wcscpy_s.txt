@@ -1,0 +1,114 @@
+PROGRAM  : Maestia.exe
+FUNCTION : _wcscpy_s
+ENTRY    : 0063481b
+BODY     : [[0063481b, 00634889]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    _wcscpy_s
+   
+   Library: Visual Studio 2008 Release */
+
+errno_t __cdecl _wcscpy_s(wchar_t *_Dst,rsize_t _SizeInWords,wchar_t *_Src)
+
+{
+  wchar_t wVar1;
+  int *piVar2;
+  wchar_t *pwVar3;
+  errno_t eVar4;
+  
+  if ((_Dst != (wchar_t *)0x0) && (_SizeInWords != 0)) {
+    pwVar3 = _Dst;
+    if (_Src != (wchar_t *)0x0) {
+      do {
+        wVar1 = *_Src;
+        *pwVar3 = wVar1;
+        _Src = _Src + 1;
+        if (wVar1 == L'\0') break;
+        _SizeInWords = _SizeInWords - 1;
+        pwVar3 = pwVar3 + 1;
+      } while (_SizeInWords != 0);
+      if (_SizeInWords != 0) {
+        return 0;
+      }
+      *_Dst = L'\0';
+      piVar2 = __errno();
+      eVar4 = 0x22;
+      *piVar2 = 0x22;
+      goto LAB_0063483d;
+    }
+    *_Dst = L'\0';
+  }
+  piVar2 = __errno();
+  eVar4 = 0x16;
+  *piVar2 = 0x16;
+LAB_0063483d:
+  __invalid_parameter(0,0,0,0,0);
+  return eVar4;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0063481b : MOV EDI,EDI
+0063481d : PUSH EBP
+0063481e : MOV EBP,ESP
+00634820 : MOV EDX,dword ptr [EBP + 0x8]
+00634823 : PUSH EBX
+00634824 : PUSH ESI
+00634825 : PUSH EDI
+00634826 : XOR EDI,EDI
+00634828 : CMP EDX,EDI
+0063482a : JZ 0x00634833
+0063482c : MOV EBX,dword ptr [EBP + 0xc]
+0063482f : CMP EBX,EDI
+00634831 : JA 0x00634851
+00634833 : CALL 0x0063ab82
+00634838 : PUSH 0x16
+0063483a : POP ESI
+0063483b : MOV dword ptr [EAX],ESI
+0063483d : PUSH EDI
+0063483e : PUSH EDI
+0063483f : PUSH EDI
+00634840 : PUSH EDI
+00634841 : PUSH EDI
+00634842 : CALL 0x006372b8
+00634847 : ADD ESP,0x14
+0063484a : MOV EAX,ESI
+0063484c : POP EDI
+0063484d : POP ESI
+0063484e : POP EBX
+0063484f : POP EBP
+00634850 : RET
+00634851 : MOV ESI,dword ptr [EBP + 0x10]
+00634854 : CMP ESI,EDI
+00634856 : JNZ 0x0063485f
+00634858 : XOR EAX,EAX
+0063485a : MOV word ptr [EDX],AX
+0063485d : JMP 0x00634833
+0063485f : MOV ECX,EDX
+00634861 : MOVZX EAX,word ptr [ESI]
+00634864 : MOV word ptr [ECX],AX
+00634867 : INC ECX
+00634868 : INC ECX
+00634869 : INC ESI
+0063486a : INC ESI
+0063486b : CMP AX,DI
+0063486e : JZ 0x00634873
+00634870 : DEC EBX
+00634871 : JNZ 0x00634861
+00634873 : XOR EAX,EAX
+00634875 : CMP EBX,EDI
+00634877 : JNZ 0x0063484c
+00634879 : MOV word ptr [EDX],AX
+0063487c : CALL 0x0063ab82
+00634881 : PUSH 0x22
+00634883 : POP ECX
+00634884 : MOV dword ptr [EAX],ECX
+00634886 : MOV ESI,ECX
+00634888 : JMP 0x0063483d

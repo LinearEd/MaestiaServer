@@ -1,0 +1,82 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00585200
+ENTRY    : 00585200
+BODY     : [[00585200, 0058525f]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00585200(void)
+
+{
+  LONG LVar1;
+  int in_ECX;
+  uint uVar2;
+  uint uVar3;
+  
+  uVar3 = *(uint *)(in_ECX + 0x38);
+  uVar2 = 0;
+  if (uVar3 != 0) {
+    do {
+      if (*(int *)(*(int *)(in_ECX + 0x34) + uVar2 * 4) != 0) {
+        FUN_00526bd0();
+      }
+      FUN_00515cf0(*(undefined4 *)(*(int *)(in_ECX + 0x34) + uVar2 * 4));
+      uVar2 = uVar2 + 1;
+    } while (uVar2 < uVar3);
+  }
+  FUN_00515cf0(*(undefined4 *)(in_ECX + 0x34));
+  uVar3 = *(uint *)(in_ECX + 0x40) & 0xfffffffc;
+  LVar1 = InterlockedExchangeAdd((LONG *)(uVar3 + 4),-1);
+  if (LVar1 == 1) {
+    FUN_00515cf0(uVar3);
+  }
+  FUN_00551950();
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00585200 : PUSH EBX
+00585201 : PUSH ESI
+00585202 : PUSH EDI
+00585203 : MOV EDI,ECX
+00585205 : MOV EBX,dword ptr [EDI + 0x38]
+00585208 : XOR ESI,ESI
+0058520a : TEST EBX,EBX
+0058520c : JBE 0x00585230
+0058520e : MOV EDI,EDI
+00585210 : MOV EAX,dword ptr [EDI + 0x34]
+00585213 : MOV ECX,dword ptr [EAX + ESI*0x4]
+00585216 : TEST ECX,ECX
+00585218 : JZ 0x0058521f
+0058521a : CALL 0x00526bd0
+0058521f : MOV ECX,dword ptr [EDI + 0x34]
+00585222 : MOV EDX,dword ptr [ECX + ESI*0x4]
+00585225 : PUSH EDX
+00585226 : CALL 0x00515cf0
+0058522b : INC ESI
+0058522c : CMP ESI,EBX
+0058522e : JC 0x00585210
+00585230 : MOV EAX,dword ptr [EDI + 0x34]
+00585233 : PUSH EAX
+00585234 : CALL 0x00515cf0
+00585239 : MOV ESI,dword ptr [EDI + 0x40]
+0058523c : AND ESI,0xfffffffc
+0058523f : PUSH -0x1
+00585241 : LEA ECX,[ESI + 0x4]
+00585244 : PUSH ECX
+00585245 : CALL dword ptr [0x00b851cc]
+0058524b : SUB EAX,0x1
+0058524e : JNZ 0x00585256
+00585250 : PUSH ESI
+00585251 : CALL 0x00515cf0
+00585256 : MOV ECX,EDI
+00585258 : POP EDI
+00585259 : POP ESI
+0058525a : POP EBX
+0058525b : JMP 0x00551950

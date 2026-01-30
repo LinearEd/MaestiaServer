@@ -1,0 +1,154 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_006f2ca0
+ENTRY    : 006f2ca0
+BODY     : [[006f2ca0, 006f2db0]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined4 FUN_006f2ca0(undefined4 *param_1)
+
+{
+  uint uVar1;
+  undefined4 *puVar2;
+  uint uVar3;
+  int iVar4;
+  int in_ECX;
+  undefined4 local_8;
+  
+  puVar2 = param_1;
+  uVar1 = *(uint *)(in_ECX + 0xfe0);
+  uVar3 = 4;
+  if ((1 < uVar1) && ((uVar3 = *(ushort *)(in_ECX + 0xfec) & 0x1fff, uVar3 < 4 || (0x1000 < uVar3)))
+     ) {
+    FUN_006ee470(L"[ERROR][AvClientSocket::DoRecv] nReadSize = %d\n",uVar3);
+    *puVar2 = 0xe6;
+    return 0;
+  }
+  if (uVar3 <= uVar1) {
+    FUN_006ee470(L"[ERROR][AvClientSocket::DoRecv] nReadSize = %d\n",uVar3 - uVar1);
+    *puVar2 = 0xe7;
+    return 0;
+  }
+  *(undefined4 *)(in_ECX + 0xfa4) = 0;
+  *(undefined4 *)(in_ECX + 0xf94) = 0;
+  *(undefined4 *)(in_ECX + 0xf98) = 0;
+  *(undefined4 *)(in_ECX + 0xf9c) = 0;
+  *(undefined4 *)(in_ECX + 4000) = 0;
+  *(undefined4 *)(in_ECX + 0xfa8) = 0x760917;
+  *(uint *)(in_ECX + 0xfb4) = uVar1 + 0xfec + in_ECX;
+  *(uint *)(in_ECX + 0xfb0) = uVar3 - uVar1;
+  local_8 = 0;
+  param_1 = (undefined4 *)0x0;
+  iVar4 = WSARecv(*(undefined4 *)(in_ECX + 0xee0),in_ECX + 0xfb0,1,&local_8,&param_1,
+                  (undefined4 *)(in_ECX + 0xf94),0);
+  if (iVar4 != 0) {
+    iVar4 = WSAGetLastError();
+    if (iVar4 != 0x3e5) {
+      if (iVar4 == 0x2746) {
+        *puVar2 = 0xe5;
+      }
+      FUN_006ee470(L"[ERROR][AvClientSocket::DoRecv] WSARecv Error (CODE:%lX)\n",iVar4);
+      return 0;
+    }
+  }
+  return 1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006f2ca0 : PUSH EBP
+006f2ca1 : MOV EBP,ESP
+006f2ca3 : PUSH ECX
+006f2ca4 : MOV EDX,dword ptr [ECX + 0xfe0]
+006f2caa : PUSH EBX
+006f2cab : MOV EBX,dword ptr [EBP + 0x8]
+006f2cae : MOV EAX,0x4
+006f2cb3 : CMP EDX,0x2
+006f2cb6 : JC 0x006f2cd8
+006f2cb8 : MOVZX EAX,word ptr [ECX + 0xfec]
+006f2cbf : AND EAX,0x1fff
+006f2cc4 : CMP EAX,0x4
+006f2cc7 : JC 0x006f2d94
+006f2ccd : CMP EAX,0x1000
+006f2cd2 : JA 0x006f2d94
+006f2cd8 : CMP EAX,EDX
+006f2cda : JA 0x006f2cfb
+006f2cdc : SUB EAX,EDX
+006f2cde : PUSH EAX
+006f2cdf : PUSH 0xbf6e50
+006f2ce4 : CALL 0x006ee470
+006f2ce9 : ADD ESP,0x8
+006f2cec : MOV dword ptr [EBX],0xe7
+006f2cf2 : XOR EAX,EAX
+006f2cf4 : POP EBX
+006f2cf5 : MOV ESP,EBP
+006f2cf7 : POP EBP
+006f2cf8 : RET 0x4
+006f2cfb : PUSH ESI
+006f2cfc : PUSH EDI
+006f2cfd : SUB EAX,EDX
+006f2cff : LEA EDI,[EDX + ECX*0x1 + 0xfec]
+006f2d06 : XOR EDX,EDX
+006f2d08 : PUSH EDX
+006f2d09 : MOV ESI,EAX
+006f2d0b : LEA EAX,[ECX + 0xf94]
+006f2d11 : PUSH EAX
+006f2d12 : MOV dword ptr [EAX + 0x10],EDX
+006f2d15 : MOV dword ptr [EAX],EDX
+006f2d17 : MOV dword ptr [EAX + 0x4],EDX
+006f2d1a : MOV dword ptr [EAX + 0x8],EDX
+006f2d1d : MOV dword ptr [EAX + 0xc],EDX
+006f2d20 : MOV dword ptr [EAX + 0x14],0x760917
+006f2d27 : MOV dword ptr [EAX + 0x20],EDI
+006f2d2a : MOV dword ptr [EAX + 0x1c],ESI
+006f2d2d : LEA EAX,[EBP + 0x8]
+006f2d30 : PUSH EAX
+006f2d31 : MOV dword ptr [EBP + -0x4],EDX
+006f2d34 : MOV dword ptr [EBP + 0x8],EDX
+006f2d37 : LEA EDX,[EBP + -0x4]
+006f2d3a : PUSH EDX
+006f2d3b : PUSH 0x1
+006f2d3d : LEA EAX,[ECX + 0xfb0]
+006f2d43 : MOV ECX,dword ptr [ECX + 0xee0]
+006f2d49 : PUSH EAX
+006f2d4a : PUSH ECX
+006f2d4b : CALL dword ptr [0x00b855b0]
+006f2d51 : POP EDI
+006f2d52 : POP ESI
+006f2d53 : TEST EAX,EAX
+006f2d55 : JZ 0x006f2d88
+006f2d57 : CALL dword ptr [0x00b855c8]
+006f2d5d : CMP EAX,0x3e5
+006f2d62 : JZ 0x006f2d88
+006f2d64 : CMP EAX,0x2746
+006f2d69 : JNZ 0x006f2d71
+006f2d6b : MOV dword ptr [EBX],0xe5
+006f2d71 : PUSH EAX
+006f2d72 : PUSH 0xbf6eb0
+006f2d77 : CALL 0x006ee470
+006f2d7c : ADD ESP,0x8
+006f2d7f : XOR EAX,EAX
+006f2d81 : POP EBX
+006f2d82 : MOV ESP,EBP
+006f2d84 : POP EBP
+006f2d85 : RET 0x4
+006f2d88 : MOV EAX,0x1
+006f2d8d : POP EBX
+006f2d8e : MOV ESP,EBP
+006f2d90 : POP EBP
+006f2d91 : RET 0x4
+006f2d94 : PUSH EAX
+006f2d95 : PUSH 0xbf6df0
+006f2d9a : CALL 0x006ee470
+006f2d9f : ADD ESP,0x8
+006f2da2 : MOV dword ptr [EBX],0xe6
+006f2da8 : XOR EAX,EAX
+006f2daa : POP EBX
+006f2dab : MOV ESP,EBP
+006f2dad : POP EBP
+006f2dae : RET 0x4

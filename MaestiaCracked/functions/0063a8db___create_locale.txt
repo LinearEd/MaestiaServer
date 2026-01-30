@@ -1,0 +1,166 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __create_locale
+ENTRY    : 0063a8db
+BODY     : [[0063a8db, 0063a9cf]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __create_locale
+   
+   Library: Visual Studio 2008 Release */
+
+_locale_t __cdecl __create_locale(int _Category,char *_Locale)
+
+{
+  _locale_t _Memory;
+  int *piVar1;
+  pthreadlocinfo ptVar2;
+  pthreadmbcinfo ptVar3;
+  int iVar4;
+  
+  if (((uint)_Category < 6) && (_Locale != (char *)0x0)) {
+    _Memory = __calloc_crt(8,1);
+    if (_Memory != (_locale_t)0x0) {
+      ptVar2 = __calloc_crt(0xd8,1);
+      _Memory->locinfo = ptVar2;
+      if (ptVar2 == (pthreadlocinfo)0x0) {
+        _free(_Memory);
+      }
+      else {
+        ptVar3 = __calloc_crt(0x220,1);
+        _Memory->mbcinfo = ptVar3;
+        if (ptVar3 != (pthreadmbcinfo)0x0) {
+          __copytlocinfo_nolock();
+          iVar4 = __setlocale_nolock(_Category);
+          if (iVar4 == 0) {
+            ___removelocaleref(_Memory->locinfo);
+            ___freetlocinfo(_Memory->locinfo);
+            _free(_Memory);
+          }
+          else {
+            iVar4 = __setmbcp_nolock(_Memory->locinfo->lc_codepage,_Memory->mbcinfo);
+            if (iVar4 == 0) {
+              _Memory->mbcinfo->refcount = 1;
+              _Memory->mbcinfo->refcount = 1;
+              return _Memory;
+            }
+            _free(_Memory->mbcinfo);
+            ___removelocaleref(_Memory->locinfo);
+            ___freetlocinfo(_Memory->locinfo);
+            _free(_Memory);
+          }
+          return (_locale_t)0x0;
+        }
+        _free(_Memory->locinfo);
+        _free(_Memory);
+      }
+    }
+    piVar1 = __errno();
+    *piVar1 = 0xc;
+  }
+  return (_locale_t)0x0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0063a8db : MOV EDI,EDI
+0063a8dd : PUSH EBP
+0063a8de : MOV EBP,ESP
+0063a8e0 : CMP dword ptr [EBP + 0x8],0x5
+0063a8e4 : PUSH ESI
+0063a8e5 : PUSH EDI
+0063a8e6 : JA 0x0063a90c
+0063a8e8 : CMP dword ptr [EBP + 0xc],0x0
+0063a8ec : JZ 0x0063a90c
+0063a8ee : XOR EDI,EDI
+0063a8f0 : INC EDI
+0063a8f1 : PUSH EDI
+0063a8f2 : PUSH 0x8
+0063a8f4 : CALL 0x006425a4
+0063a8f9 : MOV ESI,EAX
+0063a8fb : POP ECX
+0063a8fc : POP ECX
+0063a8fd : TEST ESI,ESI
+0063a8ff : JNZ 0x0063a912
+0063a901 : CALL 0x0063ab82
+0063a906 : MOV dword ptr [EAX],0xc
+0063a90c : XOR EAX,EAX
+0063a90e : POP EDI
+0063a90f : POP ESI
+0063a910 : POP EBP
+0063a911 : RET
+0063a912 : PUSH EDI
+0063a913 : PUSH 0xd8
+0063a918 : CALL 0x006425a4
+0063a91d : POP ECX
+0063a91e : POP ECX
+0063a91f : MOV dword ptr [ESI],EAX
+0063a921 : TEST EAX,EAX
+0063a923 : JNZ 0x0063a92e
+0063a925 : PUSH ESI
+0063a926 : CALL 0x0063610d
+0063a92b : POP ECX
+0063a92c : JMP 0x0063a901
+0063a92e : PUSH EDI
+0063a92f : PUSH 0x220
+0063a934 : CALL 0x006425a4
+0063a939 : POP ECX
+0063a93a : POP ECX
+0063a93b : MOV dword ptr [ESI + 0x4],EAX
+0063a93e : TEST EAX,EAX
+0063a940 : JNZ 0x0063a952
+0063a942 : PUSH dword ptr [ESI]
+0063a944 : CALL 0x0063610d
+0063a949 : PUSH ESI
+0063a94a : CALL 0x0063610d
+0063a94f : POP ECX
+0063a950 : JMP 0x0063a92b
+0063a952 : MOV EAX,dword ptr [ESI]
+0063a954 : MOV ECX,0xd67d60
+0063a959 : CALL 0x00639c4b
+0063a95e : PUSH dword ptr [EBP + 0x8]
+0063a961 : MOV ECX,dword ptr [EBP + 0xc]
+0063a964 : MOV EDX,dword ptr [ESI]
+0063a966 : CALL 0x0063a6c0
+0063a96b : POP ECX
+0063a96c : TEST EAX,EAX
+0063a96e : JNZ 0x0063a989
+0063a970 : PUSH dword ptr [ESI]
+0063a972 : CALL 0x00639bb2
+0063a977 : PUSH dword ptr [ESI]
+0063a979 : CALL 0x006399da
+0063a97e : PUSH ESI
+0063a97f : CALL 0x0063610d
+0063a984 : ADD ESP,0xc
+0063a987 : JMP 0x0063a9bb
+0063a989 : PUSH dword ptr [ESI + 0x4]
+0063a98c : MOV EAX,dword ptr [ESI]
+0063a98e : PUSH dword ptr [EAX + 0x4]
+0063a991 : CALL 0x0065117b
+0063a996 : POP ECX
+0063a997 : POP ECX
+0063a998 : TEST EAX,EAX
+0063a99a : JZ 0x0063a9bf
+0063a99c : PUSH dword ptr [ESI + 0x4]
+0063a99f : CALL 0x0063610d
+0063a9a4 : PUSH dword ptr [ESI]
+0063a9a6 : CALL 0x00639bb2
+0063a9ab : PUSH dword ptr [ESI]
+0063a9ad : CALL 0x006399da
+0063a9b2 : PUSH ESI
+0063a9b3 : CALL 0x0063610d
+0063a9b8 : ADD ESP,0x10
+0063a9bb : XOR ESI,ESI
+0063a9bd : JMP 0x0063a9c9
+0063a9bf : MOV EAX,dword ptr [ESI + 0x4]
+0063a9c2 : MOV dword ptr [EAX],EDI
+0063a9c4 : MOV EAX,dword ptr [ESI + 0x4]
+0063a9c7 : MOV dword ptr [EAX],EDI
+0063a9c9 : MOV EAX,ESI
+0063a9cb : JMP 0x0063a90e

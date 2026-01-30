@@ -1,0 +1,151 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_007cda60
+ENTRY    : 007cda60
+BODY     : [[007cda60, 007cdb63]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_007cda60(float param_1)
+
+{
+  code *pcVar1;
+  undefined4 *puVar2;
+  undefined4 *puVar3;
+  uint uVar4;
+  int iVar5;
+  int *in_ECX;
+  void *local_10;
+  undefined1 *puStack_c;
+  undefined4 local_8;
+  
+  local_8 = 0xffffffff;
+  puStack_c = &LAB_00b2882f;
+  local_10 = ExceptionList;
+  uVar4 = DAT_00d66fa0 ^ (uint)&stack0xfffffffc;
+  ExceptionList = &local_10;
+  if (in_ECX[2] != 0) {
+    EnterCriticalSection((LPCRITICAL_SECTION)(in_ECX[2] + 4));
+  }
+  local_8 = 0;
+  pcVar1 = *(code **)(*in_ECX + 0x44);
+  in_ECX[0x2c] = (int)param_1;
+  in_ECX[0x2b] = (int)((float)in_ECX[0x2d] * param_1);
+  iVar5 = (*pcVar1)(uVar4);
+  if (iVar5 != 0) {
+    iVar5 = (**(code **)(*in_ECX + 0x1c))();
+    if ((3 < iVar5) && (iVar5 = (**(code **)(*in_ECX + 0x1c))(), iVar5 < 8)) {
+      (**(code **)(*in_ECX + 0x138))();
+    }
+    puVar2 = (undefined4 *)in_ECX[0xe];
+    for (puVar3 = (undefined4 *)*puVar2; puVar3 != puVar2; puVar3 = (undefined4 *)*puVar3) {
+      if (puVar3[9] == 0) {
+        FUN_008018d0(L"[AvaNode::SetFxNodeScale] pChildNode is NULL");
+      }
+      else {
+        FUN_007cda60(param_1);
+      }
+    }
+  }
+  local_8 = 0xffffffff;
+  if (in_ECX[2] != 0) {
+    LeaveCriticalSection((LPCRITICAL_SECTION)(in_ECX[2] + 4));
+  }
+  ExceptionList = local_10;
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+007cda60 : PUSH EBP
+007cda61 : MOV EBP,ESP
+007cda63 : PUSH -0x1
+007cda65 : PUSH 0xb2882f
+007cda6a : MOV EAX,FS:[0x0]
+007cda70 : PUSH EAX
+007cda71 : SUB ESP,0x8
+007cda74 : PUSH EBX
+007cda75 : PUSH ESI
+007cda76 : PUSH EDI
+007cda77 : MOV EAX,[0x00d66fa0]
+007cda7c : XOR EAX,EBP
+007cda7e : PUSH EAX
+007cda7f : LEA EAX,[EBP + -0xc]
+007cda82 : MOV FS:[0x0],EAX
+007cda88 : MOV EDI,ECX
+007cda8a : MOV EAX,dword ptr [EDI + 0x8]
+007cda8d : MOV dword ptr [EBP + -0x14],EDI
+007cda90 : TEST EAX,EAX
+007cda92 : JZ 0x007cda9e
+007cda94 : ADD EAX,0x4
+007cda97 : PUSH EAX
+007cda98 : CALL dword ptr [0x00b85118]
+007cda9e : MOV dword ptr [EBP + -0x4],0x0
+007cdaa5 : MOVSS XMM0,dword ptr [EBP + 0x8]
+007cdaaa : MOV EAX,dword ptr [EDI]
+007cdaac : MOVSS XMM1,dword ptr [EDI + 0xb4]
+007cdab4 : MOV EDX,dword ptr [EAX + 0x44]
+007cdab7 : MULSS XMM1,XMM0
+007cdabb : MOV ECX,EDI
+007cdabd : MOVSS dword ptr [EDI + 0xb0],XMM0
+007cdac5 : MOVSS dword ptr [EDI + 0xac],XMM1
+007cdacd : CALL EDX
+007cdacf : TEST EAX,EAX
+007cdad1 : JZ 0x007cdb38
+007cdad3 : MOV EAX,dword ptr [EDI]
+007cdad5 : MOV EDX,dword ptr [EAX + 0x1c]
+007cdad8 : MOV ECX,EDI
+007cdada : CALL EDX
+007cdadc : CMP EAX,0x4
+007cdadf : JL 0x007cdafb
+007cdae1 : MOV EAX,dword ptr [EDI]
+007cdae3 : MOV EDX,dword ptr [EAX + 0x1c]
+007cdae6 : MOV ECX,EDI
+007cdae8 : CALL EDX
+007cdaea : CMP EAX,0x7
+007cdaed : JG 0x007cdafb
+007cdaef : MOV EAX,dword ptr [EDI]
+007cdaf1 : MOV EDX,dword ptr [EAX + 0x138]
+007cdaf7 : MOV ECX,EDI
+007cdaf9 : CALL EDX
+007cdafb : MOV ESI,dword ptr [EDI + 0x38]
+007cdafe : MOV EBX,dword ptr [ESI]
+007cdb00 : MOV dword ptr [EBP + -0x10],ESI
+007cdb03 : CMP EBX,ESI
+007cdb05 : JZ 0x007cdb38
+007cdb07 : MOV ECX,dword ptr [EBX + 0x24]
+007cdb0a : TEST ECX,ECX
+007cdb0c : JNZ 0x007cdb26
+007cdb0e : MOV ESI,dword ptr [0x00da98e8]
+007cdb14 : PUSH 0xc1f0b8
+007cdb19 : CALL 0x008018d0
+007cdb1e : MOV ESI,dword ptr [EBP + -0x10]
+007cdb21 : ADD ESP,0x4
+007cdb24 : JMP 0x007cdb32
+007cdb26 : FLD float ptr [EBP + 0x8]
+007cdb29 : PUSH ECX
+007cdb2a : FSTP float ptr [ESP]
+007cdb2d : CALL 0x007cda60
+007cdb32 : MOV EBX,dword ptr [EBX]
+007cdb34 : CMP EBX,ESI
+007cdb36 : JNZ 0x007cdb07
+007cdb38 : MOV dword ptr [EBP + -0x4],0xffffffff
+007cdb3f : MOV EDI,dword ptr [EDI + 0x8]
+007cdb42 : TEST EDI,EDI
+007cdb44 : JZ 0x007cdb50
+007cdb46 : ADD EDI,0x4
+007cdb49 : PUSH EDI
+007cdb4a : CALL dword ptr [0x00b8511c]
+007cdb50 : MOV ECX,dword ptr [EBP + -0xc]
+007cdb53 : MOV dword ptr FS:[0x0],ECX
+007cdb5a : POP ECX
+007cdb5b : POP EDI
+007cdb5c : POP ESI
+007cdb5d : POP EBX
+007cdb5e : MOV ESP,EBP
+007cdb60 : POP EBP
+007cdb61 : RET 0x4

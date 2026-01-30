@@ -1,0 +1,71 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_006863c0
+ENTRY    : 006863c0
+BODY     : [[006863c0, 0068640e]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_006863c0(int param_1)
+
+{
+  short *psVar1;
+  short sVar2;
+  short sVar3;
+  uint uVar4;
+  
+  if (param_1 != 0) {
+    sVar2 = *(short *)(param_1 + 0x16);
+    sVar3 = *(short *)(param_1 + 0x38);
+    *(short *)(param_1 + 0x16) = *(short *)(param_1 + 0x3a) + sVar2;
+    *(short *)(param_1 + 0x14) = *(short *)(param_1 + 0x14) + *(short *)(param_1 + 0x38);
+    *(int *)(param_1 + 0x30) = *(int *)(param_1 + 0x30) + *(int *)(param_1 + 0x54);
+    uVar4 = 0;
+    if ((int)sVar3 != 0) {
+      do {
+        psVar1 = (short *)(*(int *)(param_1 + 0x44) + uVar4 * 2);
+        *psVar1 = *psVar1 + sVar2;
+        uVar4 = uVar4 + 1;
+      } while (uVar4 < (uint)(int)sVar3);
+    }
+    FUN_006863a0();
+    return;
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006863c0 : MOV EAX,dword ptr [ESP + 0x4]
+006863c4 : TEST EAX,EAX
+006863c6 : JZ 0x0068640e
+006863c8 : MOVZX ECX,word ptr [EAX + 0x16]
+006863cc : MOV DX,word ptr [EAX + 0x3a]
+006863d0 : ADD DX,CX
+006863d3 : PUSH ESI
+006863d4 : MOVSX ESI,word ptr [EAX + 0x38]
+006863d8 : PUSH EDI
+006863d9 : MOVSX EDI,CX
+006863dc : MOV word ptr [EAX + 0x16],DX
+006863e0 : MOV CX,word ptr [EAX + 0x38]
+006863e4 : ADD word ptr [EAX + 0x14],CX
+006863e8 : MOV EDX,dword ptr [EAX + 0x54]
+006863eb : ADD dword ptr [EAX + 0x30],EDX
+006863ee : XOR ECX,ECX
+006863f0 : TEST ESI,ESI
+006863f2 : JBE 0x00686403
+006863f4 : MOV EDX,dword ptr [EAX + 0x44]
+006863f7 : ADD word ptr [EDX + ECX*0x2],DI
+006863fb : LEA EDX,[EDX + ECX*0x2]
+006863fe : INC ECX
+006863ff : CMP ECX,ESI
+00686401 : JC 0x006863f4
+00686403 : POP EDI
+00686404 : POP ESI
+00686405 : MOV dword ptr [ESP + 0x4],EAX
+00686409 : JMP 0x006863a0
+0068640e : RET

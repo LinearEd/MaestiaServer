@@ -1,0 +1,104 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00515180
+ENTRY    : 00515180
+BODY     : [[00515180, 005151ff]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined4 FUN_00515180(uint param_1)
+
+{
+  LPCRITICAL_SECTION lpCriticalSection;
+  undefined4 *puVar1;
+  int iVar2;
+  uint uVar3;
+  int iVar4;
+  undefined4 uVar5;
+  int in_ECX;
+  
+  lpCriticalSection = (LPCRITICAL_SECTION)(in_ECX + 0x14);
+  EnterCriticalSection(lpCriticalSection);
+  uVar3 = param_1;
+  iVar2 = *(int *)(in_ECX + 0x10);
+  if (iVar2 != 0) {
+    iVar4 = FUN_00515000(&param_1,*(uint *)(iVar2 + 4) & param_1);
+    if ((-1 < iVar4) &&
+       (puVar1 = (undefined4 *)(iVar2 + 0x10 + iVar4 * 0xc), puVar1 != (undefined4 *)0x0)) {
+      GRefCountImpl::AddRef((GRefCountImpl *)*puVar1);
+      uVar5 = *puVar1;
+      LeaveCriticalSection(lpCriticalSection);
+      return uVar5;
+    }
+  }
+  LeaveCriticalSection(lpCriticalSection);
+  if (*(int *)(in_ECX + 0xc) != 0) {
+    uVar5 = (**(code **)(*(int *)(*(int *)(in_ECX + 0xc) + 8) + 0xc))(uVar3);
+    return uVar5;
+  }
+  return 0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00515180 : PUSH EBX
+00515181 : PUSH EBP
+00515182 : PUSH ESI
+00515183 : PUSH EDI
+00515184 : MOV EDI,ECX
+00515186 : LEA EBX,[EDI + 0x14]
+00515189 : PUSH EBX
+0051518a : CALL dword ptr [0x00b85118]
+00515190 : MOV ESI,dword ptr [EDI + 0x10]
+00515193 : MOV EBP,dword ptr [ESP + 0x14]
+00515197 : LEA ECX,[EDI + 0x10]
+0051519a : TEST ESI,ESI
+0051519c : JZ 0x005151d6
+0051519e : MOV EAX,dword ptr [ESI + 0x4]
+005151a1 : AND EAX,EBP
+005151a3 : PUSH EAX
+005151a4 : LEA EDX,[ESP + 0x18]
+005151a8 : PUSH EDX
+005151a9 : CALL 0x00515000
+005151ae : TEST EAX,EAX
+005151b0 : JL 0x005151d6
+005151b2 : LEA EAX,[EAX + EAX*0x2]
+005151b5 : LEA ESI,[ESI + EAX*0x4 + 0x10]
+005151b9 : TEST ESI,ESI
+005151bb : JZ 0x005151d6
+005151bd : MOV ECX,dword ptr [ESI]
+005151bf : CALL 0x00523dd0
+005151c4 : MOV ESI,dword ptr [ESI]
+005151c6 : PUSH EBX
+005151c7 : CALL dword ptr [0x00b8511c]
+005151cd : POP EDI
+005151ce : MOV EAX,ESI
+005151d0 : POP ESI
+005151d1 : POP EBP
+005151d2 : POP EBX
+005151d3 : RET 0x4
+005151d6 : PUSH EBX
+005151d7 : CALL dword ptr [0x00b8511c]
+005151dd : MOV EDI,dword ptr [EDI + 0xc]
+005151e0 : TEST EDI,EDI
+005151e2 : JZ 0x005151f7
+005151e4 : MOV EDX,dword ptr [EDI + 0x8]
+005151e7 : MOV EAX,dword ptr [EDX + 0xc]
+005151ea : LEA ECX,[EDI + 0x8]
+005151ed : PUSH EBP
+005151ee : CALL EAX
+005151f0 : POP EDI
+005151f1 : POP ESI
+005151f2 : POP EBP
+005151f3 : POP EBX
+005151f4 : RET 0x4
+005151f7 : POP EDI
+005151f8 : POP ESI
+005151f9 : POP EBP
+005151fa : XOR EAX,EAX
+005151fc : POP EBX
+005151fd : RET 0x4

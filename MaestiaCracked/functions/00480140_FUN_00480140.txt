@@ -1,0 +1,148 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00480140
+ENTRY    : 00480140
+BODY     : [[00480140, 004801fe]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00480140(int *param_1,int *param_2,undefined1 *param_3)
+
+{
+  byte *pbVar1;
+  undefined1 *puVar2;
+  undefined1 *puVar3;
+  int iVar4;
+  int local_10;
+  int local_c;
+  int local_8;
+  
+  iVar4 = *param_1 >> 1;
+  local_c = *param_2 >> 1;
+  if (iVar4 < 1) {
+    iVar4 = 1;
+  }
+  if (local_c < 1) {
+    local_c = 1;
+  }
+  if (iVar4 * 2 != *param_1) {
+LAB_004801f1:
+    *param_1 = iVar4;
+    *param_2 = local_c;
+    return;
+  }
+  if (local_c * 2 == *param_2) {
+    local_10 = 0;
+    puVar2 = param_3;
+    if (local_c < 1) goto LAB_004801f1;
+    do {
+      pbVar1 = param_3 + local_10 * 2 * *param_1;
+      puVar3 = puVar2;
+      local_8 = iVar4;
+      if (0 < iVar4) {
+        do {
+          *puVar3 = (char)((int)((uint)pbVar1[*param_1 + 1] + (uint)pbVar1[1] +
+                                 (uint)pbVar1[*param_1] + (uint)*pbVar1) >> 2);
+          pbVar1 = pbVar1 + 2;
+          local_8 = local_8 + -1;
+          puVar3 = puVar3 + 1;
+        } while (local_8 != 0);
+      }
+      local_10 = local_10 + 1;
+      puVar2 = puVar2 + iVar4;
+    } while (local_10 < local_c);
+  }
+  *param_1 = iVar4;
+  *param_2 = local_c;
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00480140 : PUSH EBP
+00480141 : MOV EBP,ESP
+00480143 : SUB ESP,0x10
+00480146 : MOV ECX,dword ptr [EBP + 0x8]
+00480149 : MOV EDX,dword ptr [EBP + 0xc]
+0048014c : MOV EAX,dword ptr [ECX]
+0048014e : PUSH EBX
+0048014f : MOV EBX,dword ptr [EDX]
+00480151 : PUSH ESI
+00480152 : PUSH EDI
+00480153 : MOV EDI,EAX
+00480155 : MOV EDX,EBX
+00480157 : SAR EDI,0x1
+00480159 : SAR EDX,0x1
+0048015b : CMP EDI,0x1
+0048015e : MOV dword ptr [EBP + -0x8],EDX
+00480161 : JGE 0x00480168
+00480163 : MOV EDI,0x1
+00480168 : CMP EDX,0x1
+0048016b : JGE 0x00480175
+0048016d : MOV EDX,0x1
+00480172 : MOV dword ptr [EBP + -0x8],EDX
+00480175 : LEA ESI,[EDI + EDI*0x1]
+00480178 : CMP ESI,EAX
+0048017a : JNZ 0x004801f1
+0048017c : LEA EAX,[EDX + EDX*0x1]
+0048017f : CMP EAX,EBX
+00480181 : JNZ 0x004801e3
+00480183 : XOR EBX,EBX
+00480185 : MOV dword ptr [EBP + -0xc],EBX
+00480188 : TEST EDX,EDX
+0048018a : JLE 0x004801f1
+0048018c : MOV ESI,dword ptr [EBP + 0x10]
+0048018f : MOV dword ptr [EBP + -0x10],ESI
+00480192 : LEA EAX,[EBX + EBX*0x1]
+00480195 : IMUL EAX,dword ptr [ECX]
+00480198 : ADD EAX,dword ptr [EBP + 0x10]
+0048019b : TEST EDI,EDI
+0048019d : JLE 0x004801d3
+0048019f : MOV dword ptr [EBP + -0x4],EDI
+004801a2 : MOV ECX,dword ptr [ECX]
+004801a4 : MOVZX EDX,byte ptr [ECX + EAX*0x1 + 0x1]
+004801a9 : MOVZX EBX,byte ptr [EAX + 0x1]
+004801ad : ADD ECX,EAX
+004801af : MOVZX ECX,byte ptr [ECX]
+004801b2 : ADD EDX,EBX
+004801b4 : ADD EDX,ECX
+004801b6 : MOVZX ECX,byte ptr [EAX]
+004801b9 : ADD EDX,ECX
+004801bb : MOV ECX,dword ptr [EBP + 0x8]
+004801be : SAR EDX,0x2
+004801c1 : MOV byte ptr [ESI],DL
+004801c3 : INC ESI
+004801c4 : ADD EAX,0x2
+004801c7 : SUB dword ptr [EBP + -0x4],0x1
+004801cb : JNZ 0x004801a2
+004801cd : MOV EDX,dword ptr [EBP + -0x8]
+004801d0 : MOV EBX,dword ptr [EBP + -0xc]
+004801d3 : MOV ESI,dword ptr [EBP + -0x10]
+004801d6 : INC EBX
+004801d7 : ADD ESI,EDI
+004801d9 : CMP EBX,EDX
+004801db : MOV dword ptr [EBP + -0xc],EBX
+004801de : MOV dword ptr [EBP + -0x10],ESI
+004801e1 : JL 0x00480192
+004801e3 : MOV EAX,dword ptr [EBP + 0xc]
+004801e6 : MOV dword ptr [ECX],EDI
+004801e8 : POP EDI
+004801e9 : POP ESI
+004801ea : MOV dword ptr [EAX],EDX
+004801ec : POP EBX
+004801ed : MOV ESP,EBP
+004801ef : POP EBP
+004801f0 : RET
+004801f1 : MOV dword ptr [ECX],EDI
+004801f3 : MOV ECX,dword ptr [EBP + 0xc]
+004801f6 : POP EDI
+004801f7 : POP ESI
+004801f8 : MOV dword ptr [ECX],EDX
+004801fa : POP EBX
+004801fb : MOV ESP,EBP
+004801fd : POP EBP
+004801fe : RET

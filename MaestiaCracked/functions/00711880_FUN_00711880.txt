@@ -1,0 +1,101 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00711880
+ENTRY    : 00711880
+BODY     : [[00711880, 007118eb]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+size_t FUN_00711880(void *param_1)
+
+{
+  uint uVar1;
+  int iVar2;
+  uint in_ECX;
+  int *unaff_ESI;
+  uint _Size;
+  
+  uVar1 = unaff_ESI[1];
+  _Size = uVar1;
+  if (in_ECX < uVar1) {
+    _Size = in_ECX;
+  }
+  if (_Size == 0) {
+    return 0;
+  }
+  unaff_ESI[1] = uVar1 - _Size;
+  if (*(int *)(unaff_ESI[7] + 0x18) == 1) {
+    iVar2 = FUN_0070e2b0(_Size);
+  }
+  else {
+    if (*(int *)(unaff_ESI[7] + 0x18) != 2) goto LAB_007118d2;
+    if (*unaff_ESI == 0) {
+      iVar2 = 0;
+    }
+    else {
+      iVar2 = FUN_00712d10(_Size);
+    }
+  }
+  unaff_ESI[0xc] = iVar2;
+LAB_007118d2:
+  _memcpy(param_1,(void *)*unaff_ESI,_Size);
+  *unaff_ESI = *unaff_ESI + _Size;
+  unaff_ESI[2] = unaff_ESI[2] + _Size;
+  return _Size;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00711880 : PUSH EBP
+00711881 : MOV EBP,ESP
+00711883 : MOV EAX,dword ptr [ESI + 0x4]
+00711886 : PUSH EDI
+00711887 : MOV EDI,EAX
+00711889 : CMP EDI,ECX
+0071188b : CMOVA EDI,ECX
+0071188e : TEST EDI,EDI
+00711890 : JNZ 0x00711897
+00711892 : XOR EAX,EAX
+00711894 : POP EDI
+00711895 : POP EBP
+00711896 : RET
+00711897 : SUB EAX,EDI
+00711899 : MOV dword ptr [ESI + 0x4],EAX
+0071189c : MOV EAX,dword ptr [ESI + 0x1c]
+0071189f : MOV EAX,dword ptr [EAX + 0x18]
+007118a2 : CMP EAX,0x1
+007118a5 : JNZ 0x007118b4
+007118a7 : MOV EAX,dword ptr [ESI]
+007118a9 : MOV ECX,dword ptr [ESI + 0x30]
+007118ac : PUSH EDI
+007118ad : CALL 0x0070e2b0
+007118b2 : JMP 0x007118cc
+007118b4 : CMP EAX,0x2
+007118b7 : JNZ 0x007118d2
+007118b9 : MOV ECX,dword ptr [ESI]
+007118bb : MOV EAX,dword ptr [ESI + 0x30]
+007118be : TEST ECX,ECX
+007118c0 : JNZ 0x007118c6
+007118c2 : XOR EAX,EAX
+007118c4 : JMP 0x007118cf
+007118c6 : PUSH EDI
+007118c7 : CALL 0x00712d10
+007118cc : ADD ESP,0x4
+007118cf : MOV dword ptr [ESI + 0x30],EAX
+007118d2 : MOV ECX,dword ptr [ESI]
+007118d4 : MOV EDX,dword ptr [EBP + 0x8]
+007118d7 : PUSH EDI
+007118d8 : PUSH ECX
+007118d9 : PUSH EDX
+007118da : CALL 0x0063ae40
+007118df : ADD dword ptr [ESI],EDI
+007118e1 : ADD ESP,0xc
+007118e4 : ADD dword ptr [ESI + 0x8],EDI
+007118e7 : MOV EAX,EDI
+007118e9 : POP EDI
+007118ea : POP EBP
+007118eb : RET

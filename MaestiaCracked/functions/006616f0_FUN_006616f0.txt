@@ -1,0 +1,145 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_006616f0
+ENTRY    : 006616f0
+BODY     : [[006616f0, 006617c7]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined4 FUN_006616f0(int param_1,LPCWSTR param_2,int *param_3)
+
+{
+  int *piVar1;
+  LPCRITICAL_SECTION lpCriticalSection;
+  uint uVar2;
+  undefined4 uVar3;
+  int iVar4;
+  int iVar5;
+  int iVar6;
+  int iVar7;
+  void *local_c;
+  undefined1 *puStack_8;
+  undefined4 local_4;
+  
+  local_4 = 0xffffffff;
+  puStack_8 = &LAB_00b0c568;
+  local_c = ExceptionList;
+  uVar2 = DAT_00d66fa0 ^ (uint)&stack0xffffffe4;
+  ExceptionList = &local_c;
+  iVar7 = 0;
+  if (param_3 == (int *)0x0) {
+    uVar3 = 0x80004003;
+  }
+  else {
+    lpCriticalSection = *(LPCRITICAL_SECTION *)(param_1 + 0x2c);
+    EnterCriticalSection(lpCriticalSection);
+    local_4 = 0;
+    iVar4 = (**(code **)(*(int *)(param_1 + -0xc) + 0x18))(uVar2);
+    if (0 < iVar4) {
+      do {
+        iVar5 = (**(code **)(*(int *)(param_1 + -0xc) + 0x1c))(iVar7);
+        if (iVar5 == 0) break;
+        iVar6 = lstrcmpW(*(LPCWSTR *)(iVar5 + 0x14),param_2);
+        if (iVar6 == 0) {
+          piVar1 = (int *)(iVar5 + 0xc);
+          *param_3 = (int)piVar1;
+          (**(code **)(*piVar1 + 4))(piVar1);
+          LeaveCriticalSection(lpCriticalSection);
+          ExceptionList = local_c;
+          return 0;
+        }
+        iVar7 = iVar7 + 1;
+      } while (iVar7 < iVar4);
+    }
+    *param_3 = 0;
+    LeaveCriticalSection(lpCriticalSection);
+    uVar3 = 0x80040216;
+  }
+  ExceptionList = local_c;
+  return uVar3;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006616f0 : PUSH -0x1
+006616f2 : PUSH 0xb0c568
+006616f7 : MOV EAX,FS:[0x0]
+006616fd : PUSH EAX
+006616fe : PUSH EBX
+006616ff : PUSH EBP
+00661700 : PUSH ESI
+00661701 : PUSH EDI
+00661702 : MOV EAX,[0x00d66fa0]
+00661707 : XOR EAX,ESP
+00661709 : PUSH EAX
+0066170a : LEA EAX,[ESP + 0x14]
+0066170e : MOV FS:[0x0],EAX
+00661714 : XOR EBX,EBX
+00661716 : CMP dword ptr [ESP + 0x2c],EBX
+0066171a : JNZ 0x00661723
+0066171c : MOV EAX,0x80004003
+00661721 : JMP 0x00661792
+00661723 : MOV ESI,dword ptr [ESP + 0x24]
+00661727 : MOV EAX,dword ptr [ESI + 0x2c]
+0066172a : PUSH EAX
+0066172b : MOV dword ptr [ESP + 0x28],EAX
+0066172f : CALL dword ptr [0x00b85118]
+00661735 : MOV EAX,dword ptr [ESI + -0xc]
+00661738 : MOV EDX,dword ptr [EAX + 0x18]
+0066173b : LEA EDI,[ESI + -0xc]
+0066173e : MOV ECX,EDI
+00661740 : MOV dword ptr [ESP + 0x1c],EBX
+00661744 : CALL EDX
+00661746 : MOV EBP,EAX
+00661748 : TEST EBP,EBP
+0066174a : JLE 0x00661778
+0066174c : LEA ESP,[ESP]
+00661750 : MOV EAX,dword ptr [EDI]
+00661752 : MOV EDX,dword ptr [EAX + 0x1c]
+00661755 : PUSH EBX
+00661756 : MOV ECX,EDI
+00661758 : CALL EDX
+0066175a : MOV ESI,EAX
+0066175c : TEST ESI,ESI
+0066175e : JZ 0x00661778
+00661760 : MOV ECX,dword ptr [ESP + 0x28]
+00661764 : MOV EAX,dword ptr [ESI + 0x14]
+00661767 : PUSH ECX
+00661768 : PUSH EAX
+00661769 : CALL dword ptr [0x00b853a8]
+0066176f : TEST EAX,EAX
+00661771 : JZ 0x006617a8
+00661773 : INC EBX
+00661774 : CMP EBX,EBP
+00661776 : JL 0x00661750
+00661778 : MOV EDX,dword ptr [ESP + 0x24]
+0066177c : MOV ECX,dword ptr [ESP + 0x2c]
+00661780 : PUSH EDX
+00661781 : MOV dword ptr [ECX],0x0
+00661787 : CALL dword ptr [0x00b8511c]
+0066178d : MOV EAX,0x80040216
+00661792 : MOV ECX,dword ptr [ESP + 0x14]
+00661796 : MOV dword ptr FS:[0x0],ECX
+0066179d : POP ECX
+0066179e : POP EDI
+0066179f : POP ESI
+006617a0 : POP EBP
+006617a1 : POP EBX
+006617a2 : ADD ESP,0xc
+006617a5 : RET 0xc
+006617a8 : MOV EDX,dword ptr [ESP + 0x2c]
+006617ac : LEA EAX,[ESI + 0xc]
+006617af : MOV dword ptr [EDX],EAX
+006617b1 : MOV ECX,dword ptr [EAX]
+006617b3 : MOV EDX,dword ptr [ECX + 0x4]
+006617b6 : PUSH EAX
+006617b7 : CALL EDX
+006617b9 : MOV EAX,dword ptr [ESP + 0x24]
+006617bd : PUSH EAX
+006617be : CALL dword ptr [0x00b8511c]
+006617c4 : XOR EAX,EAX
+006617c6 : JMP 0x00661792

@@ -1,0 +1,85 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_004fa310
+ENTRY    : 004fa310
+BODY     : [[004fa310, 004fa3a3]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_004fa310(void)
+
+{
+  float *in_EAX;
+  int *unaff_ESI;
+  float fVar1;
+  float fVar2;
+  float *pfVar3;
+  float local_c;
+  int *piStack_8;
+  
+  pfVar3 = &local_c;
+  fVar2 = *in_EAX;
+  (**(code **)(*(int *)PTR_DAT_00d6df20 + 0xc))(&local_c,fVar2,in_EAX[1],in_EAX[2]);
+  fVar1 = 1.0 / local_c;
+  if (fVar2 < 0.0) {
+    fVar2 = fVar2 - local_c;
+  }
+  *piStack_8 = (int)(fVar2 * fVar1);
+  if (0.0 <= (float)pfVar3) {
+    *unaff_ESI = (int)(fVar1 * (float)pfVar3);
+    return;
+  }
+  *unaff_ESI = (int)(((float)pfVar3 - local_c) * fVar1);
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+004fa310 : FLD float ptr [EAX + 0x8]
+004fa313 : MOV ECX,dword ptr [0x00d6df20]
+004fa319 : MOV EDX,dword ptr [ECX]
+004fa31b : MOV EDX,dword ptr [EDX + 0xc]
+004fa31e : SUB ESP,0xc
+004fa321 : SUB ESP,0xc
+004fa324 : FSTP float ptr [ESP + 0x8]
+004fa328 : FLD float ptr [EAX + 0x4]
+004fa32b : FSTP float ptr [ESP + 0x4]
+004fa32f : FLD float ptr [EAX]
+004fa331 : LEA EAX,[ESP + 0xc]
+004fa335 : FSTP float ptr [ESP]
+004fa338 : PUSH EAX
+004fa339 : CALL EDX
+004fa33b : XORPS XMM3,XMM3
+004fa33e : MOVSS XMM1,dword ptr [ESP + 0x4]
+004fa344 : COMISS XMM3,XMM1
+004fa347 : MOVSS XMM0,dword ptr [0x00c10fc4]
+004fa34f : MOVSS XMM2,dword ptr [ESP + 0x10]
+004fa355 : DIVSS XMM0,XMM2
+004fa359 : JBE 0x004fa369
+004fa35b : SUBSS XMM1,XMM2
+004fa35f : MULSS XMM1,XMM0
+004fa363 : CVTTSS2SI EAX,XMM1
+004fa367 : JMP 0x004fa374
+004fa369 : MOVAPS XMM4,XMM0
+004fa36c : MULSS XMM4,XMM1
+004fa370 : CVTTSS2SI EAX,XMM4
+004fa374 : MOV ECX,dword ptr [ESP + 0x14]
+004fa378 : MOVSS XMM1,dword ptr [ESP]
+004fa37d : COMISS XMM3,XMM1
+004fa380 : MOV dword ptr [ECX],EAX
+004fa382 : JBE 0x004fa396
+004fa384 : SUBSS XMM1,XMM2
+004fa388 : MULSS XMM1,XMM0
+004fa38c : CVTTSS2SI EAX,XMM1
+004fa390 : MOV dword ptr [ESI],EAX
+004fa392 : ADD ESP,0xc
+004fa395 : RET
+004fa396 : MULSS XMM0,XMM1
+004fa39a : CVTTSS2SI EAX,XMM0
+004fa39e : MOV dword ptr [ESI],EAX
+004fa3a0 : ADD ESP,0xc
+004fa3a3 : RET

@@ -1,0 +1,192 @@
+PROGRAM  : Maestia.exe
+FUNCTION : Read
+ENTRY    : 005ea2f0
+BODY     : [[005ea2f0, 005ea3f2]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* public: virtual int __thiscall GBufferedFile::Read(unsigned char *,int) */
+
+int __thiscall GBufferedFile::Read(GBufferedFile *this,uchar *param_1,int param_2)
+
+{
+  GBufferedFile *pGVar1;
+  uint uVar2;
+  uint uVar3;
+  size_t sVar4;
+  void *_Src;
+  size_t _Size;
+  size_t _Size_00;
+  
+                    /* 0x1ea2f0  129  ?Read@GBufferedFile@@UAEHPAEH@Z */
+  if (*(int *)(this + 0x10) != 1) {
+    if (*(int *)(this + 0xc) == 0) {
+      uVar3 = (**(code **)(**(int **)(this + 8) + 0x28))(param_1,param_2);
+      if (0 < (int)uVar3) {
+        pGVar1 = this + 0x20;
+        uVar2 = *(uint *)pGVar1;
+        *(uint *)pGVar1 = *(uint *)pGVar1 + uVar3;
+        *(uint *)(this + 0x24) =
+             *(int *)(this + 0x24) + ((int)uVar3 >> 0x1f) + (uint)CARRY4(uVar2,uVar3);
+      }
+      return uVar3;
+    }
+    FlushBuffer(this);
+    *(undefined4 *)(this + 0x10) = 1;
+    *(undefined4 *)(this + 0x14) = 0;
+    *(undefined4 *)(this + 0x18) = 0;
+  }
+  _Size = *(int *)(this + 0x18) - *(int *)(this + 0x14);
+  _Src = (void *)(*(int *)(this + 0xc) + *(int *)(this + 0x14));
+  if (param_2 <= (int)_Size) {
+    _memcpy(param_1,_Src,param_2);
+    *(int *)(this + 0x14) = *(int *)(this + 0x14) + param_2;
+    return param_2;
+  }
+  _memcpy(param_1,_Src,_Size);
+  _Size_00 = param_2 - _Size;
+  *(undefined4 *)(this + 0x14) = *(undefined4 *)(this + 0x18);
+  if (0x1000 < (int)_Size_00) {
+    uVar3 = (**(code **)(**(int **)(this + 8) + 0x28))(param_1 + _Size,_Size_00);
+    if (0 < (int)uVar3) {
+      pGVar1 = this + 0x20;
+      uVar2 = *(uint *)pGVar1;
+      *(uint *)pGVar1 = *(uint *)pGVar1 + uVar3;
+      *(undefined4 *)(this + 0x18) = 0;
+      *(undefined4 *)(this + 0x14) = 0;
+      *(uint *)(this + 0x24) =
+           *(int *)(this + 0x24) + ((int)uVar3 >> 0x1f) + (uint)CARRY4(uVar2,uVar3);
+    }
+    return (-(uint)(uVar3 != 0xffffffff) & uVar3) + _Size;
+  }
+  LoadBuffer(this);
+  sVar4 = *(int *)(this + 0x18) - *(int *)(this + 0x14);
+  if ((int)sVar4 < (int)_Size_00) {
+    _Size_00 = sVar4;
+  }
+  _memcpy(param_1 + _Size,(void *)(*(int *)(this + 0xc) + *(int *)(this + 0x14)),_Size_00);
+  *(size_t *)(this + 0x14) = *(int *)(this + 0x14) + _Size_00;
+  return _Size + _Size_00;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005ea2f0 : PUSH EBX
+005ea2f1 : PUSH ESI
+005ea2f2 : MOV ESI,ECX
+005ea2f4 : MOV EBX,0x1
+005ea2f9 : PUSH EDI
+005ea2fa : CMP dword ptr [ESI + 0x10],EBX
+005ea2fd : JZ 0x005ea314
+005ea2ff : XOR EDI,EDI
+005ea301 : CMP dword ptr [ESI + 0xc],EDI
+005ea304 : JZ 0x005ea343
+005ea306 : CALL 0x005e9d20
+005ea30b : MOV dword ptr [ESI + 0x10],EBX
+005ea30e : MOV dword ptr [ESI + 0x14],EDI
+005ea311 : MOV dword ptr [ESI + 0x18],EDI
+005ea314 : MOV EAX,dword ptr [ESI + 0x14]
+005ea317 : MOV EBX,dword ptr [ESI + 0x18]
+005ea31a : MOV ECX,dword ptr [ESI + 0xc]
+005ea31d : MOV EDI,dword ptr [ESP + 0x14]
+005ea321 : SUB EBX,EAX
+005ea323 : ADD ECX,EAX
+005ea325 : CMP EBX,EDI
+005ea327 : JL 0x005ea36c
+005ea329 : MOV EDX,dword ptr [ESP + 0x10]
+005ea32d : PUSH EDI
+005ea32e : PUSH ECX
+005ea32f : PUSH EDX
+005ea330 : CALL 0x0063ae40
+005ea335 : ADD ESP,0xc
+005ea338 : ADD dword ptr [ESI + 0x14],EDI
+005ea33b : MOV EAX,EDI
+005ea33d : POP EDI
+005ea33e : POP ESI
+005ea33f : POP EBX
+005ea340 : RET 0x8
+005ea343 : MOV EDX,dword ptr [ESP + 0x14]
+005ea347 : MOV ECX,dword ptr [ESI + 0x8]
+005ea34a : MOV EAX,dword ptr [ECX]
+005ea34c : MOV EAX,dword ptr [EAX + 0x28]
+005ea34f : PUSH EDX
+005ea350 : MOV EDX,dword ptr [ESP + 0x14]
+005ea354 : PUSH EDX
+005ea355 : CALL EAX
+005ea357 : MOV ECX,EAX
+005ea359 : CMP ECX,EDI
+005ea35b : JLE 0x005ea364
+005ea35d : CDQ
+005ea35e : ADD dword ptr [ESI + 0x20],EAX
+005ea361 : ADC dword ptr [ESI + 0x24],EDX
+005ea364 : POP EDI
+005ea365 : POP ESI
+005ea366 : MOV EAX,ECX
+005ea368 : POP EBX
+005ea369 : RET 0x8
+005ea36c : PUSH EBP
+005ea36d : MOV EBP,dword ptr [ESP + 0x14]
+005ea371 : PUSH EBX
+005ea372 : PUSH ECX
+005ea373 : PUSH EBP
+005ea374 : CALL 0x0063ae40
+005ea379 : MOV EDX,dword ptr [ESI + 0x18]
+005ea37c : SUB EDI,EBX
+005ea37e : ADD ESP,0xc
+005ea381 : ADD EBP,EBX
+005ea383 : CMP EDI,0x1000
+005ea389 : MOV dword ptr [ESI + 0x14],EDX
+005ea38c : JLE 0x005ea3c1
+005ea38e : MOV ECX,dword ptr [ESI + 0x8]
+005ea391 : MOV EAX,dword ptr [ECX]
+005ea393 : MOV EDX,dword ptr [EAX + 0x28]
+005ea396 : PUSH EDI
+005ea397 : PUSH EBP
+005ea398 : CALL EDX
+005ea39a : MOV ECX,EAX
+005ea39c : XOR EDI,EDI
+005ea39e : CMP ECX,EDI
+005ea3a0 : JLE 0x005ea3af
+005ea3a2 : CDQ
+005ea3a3 : ADD dword ptr [ESI + 0x20],EAX
+005ea3a6 : MOV dword ptr [ESI + 0x18],EDI
+005ea3a9 : MOV dword ptr [ESI + 0x14],EDI
+005ea3ac : ADC dword ptr [ESI + 0x24],EDX
+005ea3af : MOV EAX,ECX
+005ea3b1 : INC EAX
+005ea3b2 : NEG EAX
+005ea3b4 : POP EBP
+005ea3b5 : SBB EAX,EAX
+005ea3b7 : POP EDI
+005ea3b8 : AND EAX,ECX
+005ea3ba : POP ESI
+005ea3bb : ADD EAX,EBX
+005ea3bd : POP EBX
+005ea3be : RET 0x8
+005ea3c1 : MOV ECX,ESI
+005ea3c3 : CALL 0x005e9d90
+005ea3c8 : MOV ECX,dword ptr [ESI + 0x14]
+005ea3cb : MOV EAX,dword ptr [ESI + 0x18]
+005ea3ce : SUB EAX,ECX
+005ea3d0 : CMP EAX,EDI
+005ea3d2 : JGE 0x005ea3d6
+005ea3d4 : MOV EDI,EAX
+005ea3d6 : MOV EAX,dword ptr [ESI + 0xc]
+005ea3d9 : PUSH EDI
+005ea3da : ADD EAX,ECX
+005ea3dc : PUSH EAX
+005ea3dd : PUSH EBP
+005ea3de : CALL 0x0063ae40
+005ea3e3 : ADD dword ptr [ESI + 0x14],EDI
+005ea3e6 : ADD ESP,0xc
+005ea3e9 : POP EBP
+005ea3ea : LEA EAX,[EBX + EDI*0x1]
+005ea3ed : POP EDI
+005ea3ee : POP ESI
+005ea3ef : POP EBX
+005ea3f0 : RET 0x8

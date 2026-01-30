@@ -1,0 +1,72 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00685ca0
+ENTRY    : 00685ca0
+BODY     : [[00685ca0, 00685cf3]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00685ca0(uint *param_1)
+
+{
+  uint in_EAX;
+  uint uVar1;
+  uint in_ECX;
+  uint uVar2;
+  uint uVar3;
+  
+  uVar2 = (in_ECX & 0xffff) * (in_EAX >> 0x10);
+  uVar1 = (in_ECX >> 0x10) * (in_EAX & 0xffff) + uVar2;
+  uVar3 = (in_ECX & 0xffff) * (in_EAX & 0xffff) + uVar1 * 0x10000;
+  *param_1 = uVar3;
+  param_1[1] = (uint)(uVar3 < uVar1 * 0x10000) +
+               (uint)(uVar1 < uVar2) * 0x10000 + (in_ECX >> 0x10) * (in_EAX >> 0x10) +
+               (uVar1 >> 0x10);
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00685ca0 : PUSH EBX
+00685ca1 : PUSH EBP
+00685ca2 : PUSH ESI
+00685ca3 : MOV ESI,ECX
+00685ca5 : MOVZX EDX,SI
+00685ca8 : PUSH EDI
+00685ca9 : MOVZX EDI,AX
+00685cac : SHR EAX,0x10
+00685caf : MOV EBX,EAX
+00685cb1 : SHR ESI,0x10
+00685cb4 : MOV EAX,ESI
+00685cb6 : IMUL EAX,EDI
+00685cb9 : MOV ECX,EDX
+00685cbb : IMUL ECX,EBX
+00685cbe : ADD EAX,ECX
+00685cc0 : CMP EAX,ECX
+00685cc2 : SBB ECX,ECX
+00685cc4 : IMUL ESI,EBX
+00685cc7 : IMUL EDX,EDI
+00685cca : MOV EBP,dword ptr [ESP + 0x14]
+00685cce : NEG ECX
+00685cd0 : SHL ECX,0x10
+00685cd3 : ADD ECX,ESI
+00685cd5 : MOV ESI,EAX
+00685cd7 : SHL EAX,0x10
+00685cda : ADD EDX,EAX
+00685cdc : SHR ESI,0x10
+00685cdf : ADD ECX,ESI
+00685ce1 : CMP EDX,EAX
+00685ce3 : SBB EAX,EAX
+00685ce5 : POP EDI
+00685ce6 : NEG EAX
+00685ce8 : ADD EAX,ECX
+00685cea : POP ESI
+00685ceb : MOV dword ptr [EBP],EDX
+00685cee : MOV dword ptr [EBP + 0x4],EAX
+00685cf1 : POP EBP
+00685cf2 : POP EBX
+00685cf3 : RET

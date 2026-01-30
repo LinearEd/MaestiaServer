@@ -1,0 +1,93 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00517030
+ENTRY    : 00517030
+BODY     : [[00517030, 00517096]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00517030(int param_1)
+
+{
+  int iVar1;
+  HandlerArray *Addend;
+  int iVar2;
+  undefined4 *in_ECX;
+  HandlerArray *this;
+  
+  in_ECX[2] = in_ECX[2] + -1;
+  iVar1 = in_ECX[2];
+  Addend = *(HandlerArray **)(param_1 + 8);
+  this = (HandlerArray *)0x0;
+  if (Addend != (HandlerArray *)0x0) {
+    InterlockedExchangeAdd((LONG *)Addend,1);
+    this = Addend;
+  }
+  if (*(char *)(in_ECX + 1) == '\0') {
+    iVar2 = ReleaseSemaphore((HANDLE)*in_ECX,1,(LPLONG)0x0);
+  }
+  else {
+    iVar2 = ReleaseMutex((HANDLE)*in_ECX);
+  }
+  if ((iVar2 != 0) && (iVar1 == 0)) {
+    if (this == (HandlerArray *)0x0) {
+      return;
+    }
+    GWaitable::HandlerArray::CallWaitHandlers(this);
+  }
+  if (this != (HandlerArray *)0x0) {
+    GWaitable::HandlerArray::Release(this);
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00517030 : MOV EAX,dword ptr [ESP + 0x4]
+00517034 : PUSH EBX
+00517035 : PUSH EBP
+00517036 : PUSH ESI
+00517037 : MOV ESI,ECX
+00517039 : DEC dword ptr [ESI + 0x8]
+0051703c : MOV EBP,dword ptr [ESI + 0x8]
+0051703f : PUSH EDI
+00517040 : MOV EDI,dword ptr [EAX + 0x8]
+00517043 : XOR EBX,EBX
+00517045 : TEST EDI,EDI
+00517047 : JZ 0x00517054
+00517049 : PUSH 0x1
+0051704b : PUSH EDI
+0051704c : CALL dword ptr [0x00b851cc]
+00517052 : MOV EBX,EDI
+00517054 : CMP byte ptr [ESI + 0x4],0x0
+00517058 : JZ 0x00517065
+0051705a : MOV ECX,dword ptr [ESI]
+0051705c : PUSH ECX
+0051705d : CALL dword ptr [0x00b8523c]
+00517063 : JMP 0x00517072
+00517065 : MOV EDX,dword ptr [ESI]
+00517067 : PUSH 0x0
+00517069 : PUSH 0x1
+0051706b : PUSH EDX
+0051706c : CALL dword ptr [0x00b853c8]
+00517072 : TEST EAX,EAX
+00517074 : JZ 0x00517085
+00517076 : TEST EBP,EBP
+00517078 : JNZ 0x00517085
+0051707a : TEST EBX,EBX
+0051707c : JZ 0x00517090
+0051707e : MOV ECX,EBX
+00517080 : CALL 0x00517e90
+00517085 : TEST EBX,EBX
+00517087 : JZ 0x00517090
+00517089 : MOV ECX,EBX
+0051708b : CALL 0x00517e60
+00517090 : POP EDI
+00517091 : POP ESI
+00517092 : POP EBP
+00517093 : POP EBX
+00517094 : RET 0x4

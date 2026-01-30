@@ -1,0 +1,257 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005608a0
+ENTRY    : 005608a0
+BODY     : [[005608a0, 00560a21]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_005608a0(undefined4 param_1,undefined4 *param_2,uint param_3)
+
+{
+  uint *puVar1;
+  int iVar2;
+  uint *puVar3;
+  int *piVar4;
+  GRefCountImpl *pGVar5;
+  uint uVar6;
+  int *in_ECX;
+  uint uVar7;
+  int iVar8;
+  
+  piVar4 = (int *)*in_ECX;
+  if (piVar4 == (int *)0x0) {
+    iVar8 = 8;
+  }
+  else {
+    if ((uint)(*piVar4 * 5) <= piVar4[1] * 4 + 4U) goto LAB_005608e4;
+    iVar8 = piVar4[1] * 2 + 2;
+  }
+  FUN_005604e0(param_1,iVar8);
+LAB_005608e4:
+  piVar4 = (int *)*in_ECX;
+  param_3 = param_3 & piVar4[1];
+  *piVar4 = *piVar4 + 1;
+  iVar8 = *in_ECX;
+  puVar1 = (uint *)(iVar8 + 8 + param_3 * 0xc);
+  if (*puVar1 == 0xfffffffe) {
+    pGVar5 = (GRefCountImpl *)*param_2;
+    if (pGVar5 != (GRefCountImpl *)0x0) {
+      GRefCountImpl::AddRef(pGVar5);
+    }
+    *puVar1 = 0xffffffff;
+    if (pGVar5 != (GRefCountImpl *)0x0) {
+      GRefCountImpl::AddRef(pGVar5);
+    }
+    puVar1[2] = (uint)pGVar5;
+    if (pGVar5 != (GRefCountImpl *)0x0) {
+      GRefCountImpl::Release(pGVar5);
+      puVar1[1] = param_3;
+      return;
+    }
+  }
+  else {
+    uVar7 = param_3;
+    do {
+      uVar7 = uVar7 + 1 & *(uint *)(iVar8 + 4);
+    } while (*(int *)(iVar8 + 8 + uVar7 * 0xc) != -2);
+    uVar6 = puVar1[1];
+    iVar2 = iVar8 + 8 + uVar7 * 0xc;
+    if (uVar6 == param_3) {
+      if (iVar2 != 0) {
+        FUN_00513520(puVar1);
+      }
+      pGVar5 = (GRefCountImpl *)*param_2;
+      if ((pGVar5 != (GRefCountImpl *)0x0) &&
+         (GRefCountImpl::AddRef(pGVar5), pGVar5 != (GRefCountImpl *)0x0)) {
+        GRefCountImpl::AddRef(pGVar5);
+      }
+      if ((GRefCountImpl *)puVar1[2] != (GRefCountImpl *)0x0) {
+        GRefCountImpl::Release((GRefCountImpl *)puVar1[2]);
+      }
+      puVar1[2] = (uint)pGVar5;
+      if (pGVar5 != (GRefCountImpl *)0x0) {
+        GRefCountImpl::Release(pGVar5);
+      }
+      *puVar1 = uVar7;
+      puVar1[1] = param_3;
+      return;
+    }
+    puVar3 = (uint *)(iVar8 + 8 + uVar6 * 0xc);
+    for (uVar6 = *(uint *)(iVar8 + 8 + uVar6 * 0xc); uVar6 != param_3;
+        uVar6 = *(uint *)(iVar8 + 8 + uVar6 * 0xc)) {
+      uVar6 = *puVar3;
+      puVar3 = (uint *)(iVar8 + 8 + uVar6 * 0xc);
+    }
+    if (iVar2 != 0) {
+      FUN_00513520(puVar1);
+    }
+    *puVar3 = uVar7;
+    pGVar5 = (GRefCountImpl *)*param_2;
+    if ((pGVar5 != (GRefCountImpl *)0x0) &&
+       (GRefCountImpl::AddRef(pGVar5), pGVar5 != (GRefCountImpl *)0x0)) {
+      GRefCountImpl::AddRef(pGVar5);
+    }
+    if ((GRefCountImpl *)puVar1[2] != (GRefCountImpl *)0x0) {
+      GRefCountImpl::Release((GRefCountImpl *)puVar1[2]);
+    }
+    puVar1[2] = (uint)pGVar5;
+    if (pGVar5 != (GRefCountImpl *)0x0) {
+      GRefCountImpl::Release(pGVar5);
+    }
+    *puVar1 = 0xffffffff;
+  }
+  puVar1[1] = param_3;
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005608a0 : PUSH ECX
+005608a1 : PUSH EBX
+005608a2 : PUSH EBP
+005608a3 : PUSH ESI
+005608a4 : MOV ESI,ECX
+005608a6 : MOV EAX,dword ptr [ESI]
+005608a8 : MOV dword ptr [ESP + 0xc],0x0
+005608b0 : TEST EAX,EAX
+005608b2 : JNZ 0x005608bd
+005608b4 : MOV EAX,dword ptr [ESP + 0x14]
+005608b8 : PUSH 0x8
+005608ba : PUSH EAX
+005608bb : JMP 0x005608df
+005608bd : MOV ECX,dword ptr [EAX + 0x4]
+005608c0 : LEA EDX,[ECX*0x4 + 0x4]
+005608c7 : MOV ECX,dword ptr [EAX]
+005608c9 : LEA ECX,[ECX + ECX*0x4]
+005608cc : CMP ECX,EDX
+005608ce : JBE 0x005608e4
+005608d0 : MOV EDX,dword ptr [EAX + 0x4]
+005608d3 : MOV ECX,dword ptr [ESP + 0x14]
+005608d7 : LEA EAX,[EDX + EDX*0x1 + 0x2]
+005608db : PUSH EAX
+005608dc : PUSH ECX
+005608dd : MOV ECX,ESI
+005608df : CALL 0x005604e0
+005608e4 : MOV EAX,dword ptr [ESI]
+005608e6 : MOV EBP,dword ptr [ESP + 0x1c]
+005608ea : AND EBP,dword ptr [EAX + 0x4]
+005608ed : INC dword ptr [EAX]
+005608ef : MOV EAX,dword ptr [ESI]
+005608f1 : LEA EDX,[EBP + EBP*0x2]
+005608f5 : LEA EBX,[EAX + EDX*0x4 + 0x8]
+005608f9 : MOV EDX,0xfffffffe
+005608fe : CMP dword ptr [EBX],EDX
+00560900 : JNZ 0x00560940
+00560902 : MOV EAX,dword ptr [ESP + 0x18]
+00560906 : MOV ESI,dword ptr [EAX]
+00560908 : TEST ESI,ESI
+0056090a : JZ 0x00560913
+0056090c : MOV ECX,ESI
+0056090e : CALL 0x00523dd0
+00560913 : MOV dword ptr [EBX],0xffffffff
+00560919 : TEST ESI,ESI
+0056091b : JZ 0x00560924
+0056091d : MOV ECX,ESI
+0056091f : CALL 0x00523dd0
+00560924 : MOV dword ptr [EBX + 0x8],ESI
+00560927 : TEST ESI,ESI
+00560929 : JZ 0x00560a18
+0056092f : MOV ECX,ESI
+00560931 : CALL 0x004ff7e0
+00560936 : POP ESI
+00560937 : MOV dword ptr [EBX + 0x4],EBP
+0056093a : POP EBP
+0056093b : POP EBX
+0056093c : POP ECX
+0056093d : RET 0xc
+00560940 : MOV ECX,dword ptr [EAX + 0x4]
+00560943 : MOV ESI,EBP
+00560945 : PUSH EDI
+00560946 : INC ESI
+00560947 : AND ESI,ECX
+00560949 : LEA EDI,[ESI + ESI*0x2]
+0056094c : CMP dword ptr [EAX + EDI*0x4 + 0x8],EDX
+00560950 : JNZ 0x00560946
+00560952 : MOV EDX,dword ptr [EBX + 0x4]
+00560955 : LEA ECX,[ESI + ESI*0x2]
+00560958 : LEA ECX,[EAX + ECX*0x4 + 0x8]
+0056095c : CMP EDX,EBP
+0056095e : JNZ 0x005609ad
+00560960 : TEST ECX,ECX
+00560962 : JZ 0x0056096a
+00560964 : PUSH EBX
+00560965 : CALL 0x00513520
+0056096a : MOV EDX,dword ptr [ESP + 0x1c]
+0056096e : MOV EDI,dword ptr [EDX]
+00560970 : TEST EDI,EDI
+00560972 : JZ 0x00560986
+00560974 : MOV ECX,EDI
+00560976 : CALL 0x00523dd0
+0056097b : TEST EDI,EDI
+0056097d : JZ 0x00560986
+0056097f : MOV ECX,EDI
+00560981 : CALL 0x00523dd0
+00560986 : MOV ECX,dword ptr [EBX + 0x8]
+00560989 : TEST ECX,ECX
+0056098b : JZ 0x00560992
+0056098d : CALL 0x004ff7e0
+00560992 : MOV dword ptr [EBX + 0x8],EDI
+00560995 : TEST EDI,EDI
+00560997 : JZ 0x005609a0
+00560999 : MOV ECX,EDI
+0056099b : CALL 0x004ff7e0
+005609a0 : POP EDI
+005609a1 : MOV dword ptr [EBX],ESI
+005609a3 : POP ESI
+005609a4 : MOV dword ptr [EBX + 0x4],EBP
+005609a7 : POP EBP
+005609a8 : POP EBX
+005609a9 : POP ECX
+005609aa : RET 0xc
+005609ad : LEA EDX,[EDX + EDX*0x2]
+005609b0 : CMP dword ptr [EAX + EDX*0x4 + 0x8],EBP
+005609b4 : LEA EDI,[EAX + EDX*0x4 + 0x8]
+005609b8 : JZ 0x005609cf
+005609ba : LEA EBX,[EBX]
+005609c0 : MOV EDI,dword ptr [EDI]
+005609c2 : LEA EDX,[EDI + EDI*0x2]
+005609c5 : CMP dword ptr [EAX + EDX*0x4 + 0x8],EBP
+005609c9 : LEA EDI,[EAX + EDX*0x4 + 0x8]
+005609cd : JNZ 0x005609c0
+005609cf : TEST ECX,ECX
+005609d1 : JZ 0x005609d9
+005609d3 : PUSH EBX
+005609d4 : CALL 0x00513520
+005609d9 : MOV EAX,dword ptr [ESP + 0x1c]
+005609dd : MOV dword ptr [EDI],ESI
+005609df : MOV ESI,dword ptr [EAX]
+005609e1 : TEST ESI,ESI
+005609e3 : JZ 0x005609f7
+005609e5 : MOV ECX,ESI
+005609e7 : CALL 0x00523dd0
+005609ec : TEST ESI,ESI
+005609ee : JZ 0x005609f7
+005609f0 : MOV ECX,ESI
+005609f2 : CALL 0x00523dd0
+005609f7 : MOV ECX,dword ptr [EBX + 0x8]
+005609fa : TEST ECX,ECX
+005609fc : JZ 0x00560a03
+005609fe : CALL 0x004ff7e0
+00560a03 : MOV dword ptr [EBX + 0x8],ESI
+00560a06 : TEST ESI,ESI
+00560a08 : JZ 0x00560a11
+00560a0a : MOV ECX,ESI
+00560a0c : CALL 0x004ff7e0
+00560a11 : MOV dword ptr [EBX],0xffffffff
+00560a17 : POP EDI
+00560a18 : POP ESI
+00560a19 : MOV dword ptr [EBX + 0x4],EBP
+00560a1c : POP EBP
+00560a1d : POP EBX
+00560a1e : POP ECX
+00560a1f : RET 0xc

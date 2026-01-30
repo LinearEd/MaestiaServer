@@ -1,0 +1,72 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00561b00
+ENTRY    : 00561b00
+BODY     : [[00561b00, 00561b58]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+bool FUN_00561b00(uint param_1)
+
+{
+  uint uVar1;
+  byte bVar2;
+  int in_ECX;
+  GMutex *this;
+  
+  this = (GMutex *)(*(int *)(in_ECX + 0x78) + 8);
+  GMutex::Lock(this);
+  bVar2 = (byte)*(undefined4 *)(in_ECX + 0x74);
+  while (((bVar2 & 0xf) < 3 && ((param_1 & *(uint *)(in_ECX + 0x74)) == 0))) {
+    GWaitCondition::Wait
+              ((GWaitCondition *)(*(int *)(in_ECX + 0x78) + 0x1c),
+               (GMutex *)(*(int *)(in_ECX + 0x78) + 8),0xffffffff);
+    bVar2 = (byte)*(undefined4 *)(in_ECX + 0x74);
+  }
+  uVar1 = *(uint *)(in_ECX + 0x74);
+  GMutex::Unlock(this);
+  return (param_1 & uVar1) != 0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00561b00 : PUSH EBX
+00561b01 : PUSH ESI
+00561b02 : MOV ESI,ECX
+00561b04 : PUSH EDI
+00561b05 : MOV EDI,dword ptr [ESI + 0x78]
+00561b08 : ADD EDI,0x8
+00561b0b : MOV ECX,EDI
+00561b0d : CALL 0x005162b0
+00561b12 : MOV EAX,dword ptr [ESI + 0x74]
+00561b15 : MOV EBX,dword ptr [ESP + 0x10]
+00561b19 : AND EAX,0xf
+00561b1c : CMP AL,0x3
+00561b1e : JGE 0x00561b42
+00561b20 : MOV ECX,dword ptr [ESI + 0x74]
+00561b23 : TEST EBX,ECX
+00561b25 : JNZ 0x00561b42
+00561b27 : MOV EAX,dword ptr [ESI + 0x78]
+00561b2a : PUSH -0x1
+00561b2c : LEA EDX,[EAX + 0x8]
+00561b2f : PUSH EDX
+00561b30 : LEA ECX,[EAX + 0x1c]
+00561b33 : CALL 0x00516820
+00561b38 : MOV EAX,dword ptr [ESI + 0x74]
+00561b3b : AND EAX,0xf
+00561b3e : CMP AL,0x3
+00561b40 : JL 0x00561b20
+00561b42 : MOV ECX,dword ptr [ESI + 0x74]
+00561b45 : TEST EBX,ECX
+00561b47 : MOV ECX,EDI
+00561b49 : SETNZ BL
+00561b4c : CALL 0x005170a0
+00561b51 : POP EDI
+00561b52 : POP ESI
+00561b53 : MOV AL,BL
+00561b55 : POP EBX
+00561b56 : RET 0x4

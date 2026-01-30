@@ -1,0 +1,133 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_007035b0
+ENTRY    : 007035b0
+BODY     : [[007035b0, 0070368d]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined4 FUN_007035b0(int param_1,ushort param_2,uint param_3)
+
+{
+  int iVar1;
+  float fVar2;
+  float fVar3;
+  short unaff_DI;
+  undefined4 local_14;
+  undefined1 auStack_10 [4];
+  int local_c;
+  undefined1 local_8 [4];
+  
+  if (4 < param_3) {
+    FUN_006ee470(L"[ERROR] GetRechargeHalidomCharge invalid item quality (%d, %d)\n",param_3,param_1
+                );
+    return 0;
+  }
+  if ((DAT_0172502c != 0) && (*(int *)(DAT_0172502c + 0x28) != 0)) {
+    do {
+      local_c = 0;
+      FUN_00404160(auStack_10,local_8,&local_c);
+    } while (*(short *)(local_c + 0x18) != unaff_DI);
+    iVar1 = *(int *)(local_c + 0x1c + param_3 * 4);
+    fVar2 = (float)iVar1;
+    if (iVar1 < 0) {
+      fVar2 = fVar2 + 4.2949673e+09;
+    }
+    fVar3 = (float)param_1;
+    if (param_1 < 0) {
+      fVar3 = fVar3 + 4.2949673e+09;
+    }
+    local_14 = (undefined4)(longlong)ROUND(((fVar2 * 100.0) / fVar3) * (float)param_2);
+    return local_14;
+  }
+  FUN_006ee470(L"[ERROR] GetRechargeHalidomCharge invalid item level (%d, %d)\n",unaff_DI,param_1);
+  return 0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+007035b0 : PUSH EBP
+007035b1 : MOV EBP,ESP
+007035b3 : MOV EAX,dword ptr [EBP + 0x10]
+007035b6 : SUB ESP,0x10
+007035b9 : CMP EAX,0x5
+007035bc : JC 0x007035d6
+007035be : MOV ECX,dword ptr [EBP + 0x8]
+007035c1 : PUSH ECX
+007035c2 : PUSH EAX
+007035c3 : PUSH 0xbf9f20
+007035c8 : CALL 0x006ee470
+007035cd : ADD ESP,0xc
+007035d0 : XOR EAX,EAX
+007035d2 : MOV ESP,EBP
+007035d4 : POP EBP
+007035d5 : RET
+007035d6 : PUSH ESI
+007035d7 : MOV ESI,dword ptr [0x0172502c]
+007035dd : TEST ESI,ESI
+007035df : JZ 0x00703619
+007035e1 : MOV EAX,dword ptr [ESI + 0x28]
+007035e4 : NEG EAX
+007035e6 : SBB EAX,EAX
+007035e8 : MOV dword ptr [EBP + -0xc],EAX
+007035eb : JZ 0x00703619
+007035ed : LEA ECX,[ECX]
+007035f0 : LEA EDX,[EBP + -0x8]
+007035f3 : PUSH EDX
+007035f4 : LEA EAX,[EBP + -0x4]
+007035f7 : PUSH EAX
+007035f8 : LEA ECX,[EBP + -0xc]
+007035fb : PUSH ECX
+007035fc : MOV EAX,ESI
+007035fe : MOV dword ptr [EBP + -0x8],0x0
+00703605 : CALL 0x00404160
+0070360a : MOV EAX,dword ptr [EBP + -0x8]
+0070360d : CMP word ptr [EAX + 0x18],DI
+00703611 : JZ 0x00703635
+00703613 : CMP dword ptr [EBP + -0xc],0x0
+00703617 : JNZ 0x007035f0
+00703619 : MOV EAX,dword ptr [EBP + 0x8]
+0070361c : MOVZX ECX,DI
+0070361f : PUSH EAX
+00703620 : PUSH ECX
+00703621 : PUSH 0xbf9fa0
+00703626 : CALL 0x006ee470
+0070362b : ADD ESP,0xc
+0070362e : XOR EAX,EAX
+00703630 : POP ESI
+00703631 : MOV ESP,EBP
+00703633 : POP EBP
+00703634 : RET
+00703635 : MOV EDX,dword ptr [EBP + 0x10]
+00703638 : MOV EAX,dword ptr [EAX + EDX*0x4 + 0x1c]
+0070363c : MOV dword ptr [EBP + 0x10],EAX
+0070363f : FILD dword ptr [EBP + 0x10]
+00703642 : TEST EAX,EAX
+00703644 : JGE 0x0070364c
+00703646 : FADD float ptr [0x00cdf0e0]
+0070364c : MOV ECX,dword ptr [EBP + 0x8]
+0070364f : FMUL float ptr [0x00cdf230]
+00703655 : FILD dword ptr [EBP + 0x8]
+00703658 : TEST ECX,ECX
+0070365a : JGE 0x00703662
+0070365c : FADD float ptr [0x00cdf0e0]
+00703662 : FDIVP
+00703664 : MOVZX EDX,word ptr [EBP + 0xc]
+00703668 : MOV dword ptr [EBP + 0x10],EDX
+0070366b : POP ESI
+0070366c : FIMUL dword ptr [EBP + 0x10]
+0070366f : FNSTCW word ptr [EBP + 0x12]
+00703672 : MOVZX EAX,word ptr [EBP + 0x12]
+00703676 : OR EAX,0xc00
+0070367b : MOV dword ptr [EBP + -0xc],EAX
+0070367e : FLDCW word ptr [EBP + -0xc]
+00703681 : FISTP qword ptr [EBP + -0x10]
+00703684 : MOV EAX,dword ptr [EBP + -0x10]
+00703687 : FLDCW word ptr [EBP + 0x12]
+0070368a : MOV ESP,EBP
+0070368c : POP EBP
+0070368d : RET

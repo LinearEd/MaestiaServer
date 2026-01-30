@@ -1,0 +1,90 @@
+PROGRAM  : Maestia.exe
+FUNCTION : _fread_s
+ENTRY    : 00638ae5
+BODY     : [[00638ae5, 00638b70]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* WARNING: Function: __SEH_prolog4 replaced with injection: SEH_prolog4 */
+/* WARNING: Function: __SEH_epilog4 replaced with injection: EH_epilog3 */
+/* Library Function - Single Match
+    _fread_s
+   
+   Library: Visual Studio 2008 Release */
+
+size_t __cdecl _fread_s(void *_DstBuf,size_t _DstSize,size_t _ElementSize,size_t _Count,FILE *_File)
+
+{
+  int *piVar1;
+  size_t sVar2;
+  
+  if ((_ElementSize != 0) && (_Count != 0)) {
+    if (_File != (FILE *)0x0) {
+      __lock_file(_File);
+      sVar2 = __fread_nolock_s(_DstBuf,_DstSize,_ElementSize,_Count,_File);
+      FUN_00638b71();
+      return sVar2;
+    }
+    if (_DstSize != 0xffffffff) {
+      _memset(_DstBuf,0,_DstSize);
+    }
+    piVar1 = __errno();
+    *piVar1 = 0x16;
+    __invalid_parameter(0,0,0,0,0);
+  }
+  return 0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00638ae5 : PUSH 0xc
+00638ae7 : PUSH 0xcecc58
+00638aec : CALL 0x0064c228
+00638af1 : XOR ESI,ESI
+00638af3 : MOV dword ptr [EBP + -0x1c],ESI
+00638af6 : CMP dword ptr [EBP + 0x10],ESI
+00638af9 : JZ 0x00638b32
+00638afb : CMP dword ptr [EBP + 0x14],ESI
+00638afe : JZ 0x00638b32
+00638b00 : CMP dword ptr [EBP + 0x18],ESI
+00638b03 : JNZ 0x00638b3a
+00638b05 : CMP dword ptr [EBP + 0xc],-0x1
+00638b09 : JZ 0x00638b1a
+00638b0b : PUSH dword ptr [EBP + 0xc]
+00638b0e : PUSH ESI
+00638b0f : PUSH dword ptr [EBP + 0x8]
+00638b12 : CALL 0x0063b700
+00638b17 : ADD ESP,0xc
+00638b1a : CALL 0x0063ab82
+00638b1f : MOV dword ptr [EAX],0x16
+00638b25 : PUSH ESI
+00638b26 : PUSH ESI
+00638b27 : PUSH ESI
+00638b28 : PUSH ESI
+00638b29 : PUSH ESI
+00638b2a : CALL 0x006372b8
+00638b2f : ADD ESP,0x14
+00638b32 : XOR EAX,EAX
+00638b34 : CALL 0x0064c26d
+00638b39 : RET
+00638b3a : PUSH dword ptr [EBP + 0x18]
+00638b3d : CALL 0x0063d990
+00638b42 : POP ECX
+00638b43 : MOV dword ptr [EBP + -0x4],ESI
+00638b46 : PUSH dword ptr [EBP + 0x18]
+00638b49 : PUSH dword ptr [EBP + 0x14]
+00638b4c : PUSH dword ptr [EBP + 0x10]
+00638b4f : PUSH dword ptr [EBP + 0xc]
+00638b52 : PUSH dword ptr [EBP + 0x8]
+00638b55 : CALL 0x006388be
+00638b5a : ADD ESP,0x14
+00638b5d : MOV dword ptr [EBP + -0x1c],EAX
+00638b60 : MOV dword ptr [EBP + -0x4],0xfffffffe
+00638b67 : CALL 0x00638b71
+00638b6c : MOV EAX,dword ptr [EBP + -0x1c]
+00638b6f : JMP 0x00638b34

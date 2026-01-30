@@ -1,0 +1,60 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0080cf70
+ENTRY    : 0080cf70
+BODY     : [[0080cf70, 0080cfcc]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_0080cf70(void)
+
+{
+  float fVar1;
+  int in_EAX;
+  short in_CX;
+  float fVar2;
+  
+  if (in_CX != 0) {
+    *(undefined1 *)(in_EAX + 0xcd) = 0;
+  }
+  if (*(int *)(DAT_00da93ec + 0x74) != 0) {
+    fVar2 = (float)(int)in_CX * 0.015 + *(float *)(in_EAX + 0xd0);
+    fVar1 = 23.0;
+    if ((23.0 <= fVar2) || (fVar1 = 0.1, fVar2 < 0.1)) {
+      fVar2 = fVar1;
+    }
+    *(float *)(in_EAX + 0xd0) = fVar2;
+    FUN_007f2070();
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0080cf70 : TEST CX,CX
+0080cf73 : JZ 0x0080cf7c
+0080cf75 : MOV byte ptr [EAX + 0xcd],0x0
+0080cf7c : MOV EDX,dword ptr [0x00da93ec]
+0080cf82 : PUSH ESI
+0080cf83 : MOV ESI,dword ptr [EDX + 0x74]
+0080cf86 : TEST ESI,ESI
+0080cf88 : JZ 0x0080cfcb
+0080cf8a : MOVSS XMM1,dword ptr [0x00cdf250]
+0080cf92 : MOVSX ECX,CX
+0080cf95 : CVTSI2SS XMM0,ECX
+0080cf99 : MULSS XMM0,dword ptr [0x00cdf36c]
+0080cfa1 : ADDSS XMM0,dword ptr [EAX + 0xd0]
+0080cfa9 : COMISS XMM0,XMM1
+0080cfac : JNC 0x0080cfbb
+0080cfae : MOVSS XMM1,dword ptr [0x00cdf0f0]
+0080cfb6 : COMISS XMM1,XMM0
+0080cfb9 : JBE 0x0080cfbe
+0080cfbb : MOVAPS XMM0,XMM1
+0080cfbe : MOVSS dword ptr [EAX + 0xd0],XMM0
+0080cfc6 : CALL 0x007f2070
+0080cfcb : POP ESI
+0080cfcc : RET

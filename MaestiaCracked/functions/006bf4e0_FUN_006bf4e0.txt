@@ -1,0 +1,156 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_006bf4e0
+ENTRY    : 006bf4e0
+BODY     : [[006bf4e0, 006bf5a4]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+uint FUN_006bf4e0(void)
+
+{
+  byte *pbVar1;
+  byte bVar2;
+  int in_EAX;
+  int iVar3;
+  byte bVar4;
+  uint uVar5;
+  byte *pbVar6;
+  int iVar7;
+  uint uVar8;
+  
+  uVar5 = *(uint *)(in_EAX + 0x18);
+  uVar8 = *(uint *)(in_EAX + 0x34);
+  if (((*(char *)(in_EAX + 0x20) != '\0') || (*(int *)(in_EAX + 0x1c) <= (int)uVar5)) ||
+     (*(uint *)(in_EAX + 0x3c) <= *(uint *)(in_EAX + 0x38))) {
+    if (*(uint *)(in_EAX + 0x3c) <= *(uint *)(in_EAX + 0x38)) {
+      uVar8 = uVar8 + 1;
+      *(uint *)(in_EAX + 0x34) = uVar8;
+      if (uVar8 < *(uint *)(in_EAX + 0x28)) {
+        iVar3 = (1 << ((byte)uVar8 & 0x1f)) + -0x100;
+      }
+      else {
+        iVar3 = *(int *)(in_EAX + 0x30) + 1;
+      }
+      *(int *)(in_EAX + 0x3c) = iVar3;
+    }
+    if (*(char *)(in_EAX + 0x20) != '\0') {
+      uVar8 = 9;
+      *(undefined4 *)(in_EAX + 0x34) = 9;
+      *(undefined4 *)(in_EAX + 0x3c) = 0x100;
+      *(undefined1 *)(in_EAX + 0x20) = 0;
+    }
+    iVar3 = FUN_006bf490();
+    if (iVar3 < 0) {
+      return 0xffffffff;
+    }
+    uVar5 = 0;
+  }
+  pbVar1 = (byte *)(((int)uVar5 >> 3) + 8 + in_EAX);
+  *(uint *)(in_EAX + 0x18) = uVar5 + uVar8;
+  iVar3 = -(uVar5 & 7);
+  iVar7 = iVar3 + 8;
+  uVar8 = uVar8 - iVar7;
+  uVar5 = (uint)(*pbVar1 >> (sbyte)(uVar5 & 7));
+  pbVar6 = pbVar1 + 1;
+  if (7 < uVar8) {
+    bVar2 = *pbVar6;
+    bVar4 = (byte)iVar7;
+    pbVar6 = pbVar1 + 2;
+    iVar7 = iVar3 + 0x10;
+    uVar5 = uVar5 | (uint)bVar2 << (bVar4 & 0x1f);
+    uVar8 = uVar8 - 8;
+  }
+  if (uVar8 != 0) {
+    uVar5 = uVar5 | ((1 << ((byte)uVar8 & 0x1f)) - 1U & (uint)*pbVar6) << ((byte)iVar7 & 0x1f);
+  }
+  return uVar5;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006bf4e0 : PUSH EBX
+006bf4e1 : PUSH ESI
+006bf4e2 : MOV ESI,EAX
+006bf4e4 : MOV BL,byte ptr [ESI + 0x20]
+006bf4e7 : MOV EDX,dword ptr [ESI + 0x18]
+006bf4ea : PUSH EDI
+006bf4eb : MOV EDI,dword ptr [ESI + 0x34]
+006bf4ee : TEST BL,BL
+006bf4f0 : JNZ 0x006bf4ff
+006bf4f2 : CMP EDX,dword ptr [ESI + 0x1c]
+006bf4f5 : JGE 0x006bf4ff
+006bf4f7 : MOV EAX,dword ptr [ESI + 0x38]
+006bf4fa : CMP EAX,dword ptr [ESI + 0x3c]
+006bf4fd : JC 0x006bf550
+006bf4ff : MOV ECX,dword ptr [ESI + 0x38]
+006bf502 : CMP ECX,dword ptr [ESI + 0x3c]
+006bf505 : JC 0x006bf527
+006bf507 : INC EDI
+006bf508 : MOV dword ptr [ESI + 0x34],EDI
+006bf50b : CMP EDI,dword ptr [ESI + 0x28]
+006bf50e : JNC 0x006bf520
+006bf510 : MOV EAX,0x1
+006bf515 : MOV ECX,EDI
+006bf517 : SHL EAX,CL
+006bf519 : SUB EAX,0x100
+006bf51e : JMP 0x006bf524
+006bf520 : MOV EAX,dword ptr [ESI + 0x30]
+006bf523 : INC EAX
+006bf524 : MOV dword ptr [ESI + 0x3c],EAX
+006bf527 : TEST BL,BL
+006bf529 : JZ 0x006bf53e
+006bf52b : MOV EDI,0x9
+006bf530 : MOV dword ptr [ESI + 0x34],EDI
+006bf533 : MOV dword ptr [ESI + 0x3c],0x100
+006bf53a : MOV byte ptr [ESI + 0x20],0x0
+006bf53e : CALL 0x006bf490
+006bf543 : TEST EAX,EAX
+006bf545 : JGE 0x006bf54e
+006bf547 : POP EDI
+006bf548 : POP ESI
+006bf549 : OR EAX,0xffffffff
+006bf54c : POP EBX
+006bf54d : RET
+006bf54e : XOR EDX,EDX
+006bf550 : LEA EAX,[EDX + EDI*0x1]
+006bf553 : MOV ECX,EDX
+006bf555 : SAR ECX,0x3
+006bf558 : LEA EBX,[ECX + ESI*0x1 + 0x8]
+006bf55c : MOV dword ptr [ESI + 0x18],EAX
+006bf55f : MOVZX EAX,byte ptr [EBX]
+006bf562 : AND EDX,0x7
+006bf565 : MOV ESI,0x8
+006bf56a : SUB ESI,EDX
+006bf56c : MOV CL,DL
+006bf56e : SUB EDI,ESI
+006bf570 : SHR EAX,CL
+006bf572 : INC EBX
+006bf573 : CMP EDI,0x8
+006bf576 : JC 0x006bf588
+006bf578 : MOVZX EDX,byte ptr [EBX]
+006bf57b : MOV ECX,ESI
+006bf57d : SHL EDX,CL
+006bf57f : INC EBX
+006bf580 : ADD ESI,0x8
+006bf583 : OR EAX,EDX
+006bf585 : SUB EDI,0x8
+006bf588 : TEST EDI,EDI
+006bf58a : JBE 0x006bf5a1
+006bf58c : MOV ECX,EDI
+006bf58e : MOV EDX,0x1
+006bf593 : SHL EDX,CL
+006bf595 : MOVZX ECX,byte ptr [EBX]
+006bf598 : DEC EDX
+006bf599 : AND EDX,ECX
+006bf59b : MOV ECX,ESI
+006bf59d : SHL EDX,CL
+006bf59f : OR EAX,EDX
+006bf5a1 : POP EDI
+006bf5a2 : POP ESI
+006bf5a3 : POP EBX
+006bf5a4 : RET

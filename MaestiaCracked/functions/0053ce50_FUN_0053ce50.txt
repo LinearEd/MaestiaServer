@@ -1,0 +1,73 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0053ce50
+ENTRY    : 0053ce50
+BODY     : [[0053ce50, 0053ce98]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_0053ce50(void)
+
+{
+  uint *puVar1;
+  uint uVar2;
+  int in_ECX;
+  
+  uVar2 = *(uint *)(in_ECX + 0x18);
+  if ((-1 < (int)uVar2) && (uVar2 < (uint)(*(int **)(in_ECX + 0x14))[1])) {
+    puVar1 = (uint *)(**(int **)(in_ECX + 0x14) + uVar2 * 0xc);
+    uVar2 = *puVar1;
+    if (*(uint *)(in_ECX + 0x20) < uVar2) {
+      *(uint *)(in_ECX + 0x20) = uVar2;
+    }
+    else {
+      *(uint *)(in_ECX + 0x20) = puVar1[1] + *(uint *)(in_ECX + 0x20);
+      if (*(int *)(in_ECX + 0x18) < *(int *)(*(int *)(in_ECX + 0x14) + 4)) {
+        *(int *)(in_ECX + 0x18) = *(int *)(in_ECX + 0x18) + 1;
+        return;
+      }
+    }
+    return;
+  }
+  *(undefined4 *)(in_ECX + 0x20) = *(undefined4 *)(*(int *)(in_ECX + 0x1c) + 4);
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0053ce50 : MOV EAX,dword ptr [ECX + 0x18]
+0053ce53 : TEST EAX,EAX
+0053ce55 : JL 0x0053ce8f
+0053ce57 : MOV EDX,dword ptr [ECX + 0x14]
+0053ce5a : CMP EAX,dword ptr [EDX + 0x4]
+0053ce5d : JNC 0x0053ce8f
+0053ce5f : MOV EDX,dword ptr [EDX]
+0053ce61 : LEA EAX,[EAX + EAX*0x2]
+0053ce64 : LEA EAX,[EDX + EAX*0x4]
+0053ce67 : MOV EDX,dword ptr [ECX + 0x20]
+0053ce6a : PUSH ESI
+0053ce6b : MOV ESI,dword ptr [EAX]
+0053ce6d : CMP EDX,ESI
+0053ce6f : JNC 0x0053ce76
+0053ce71 : MOV dword ptr [ECX + 0x20],ESI
+0053ce74 : POP ESI
+0053ce75 : RET
+0053ce76 : MOV EAX,dword ptr [EAX + 0x4]
+0053ce79 : ADD EAX,EDX
+0053ce7b : MOV dword ptr [ECX + 0x20],EAX
+0053ce7e : MOV EAX,dword ptr [ECX + 0x18]
+0053ce81 : MOV EDX,dword ptr [ECX + 0x14]
+0053ce84 : CMP EAX,dword ptr [EDX + 0x4]
+0053ce87 : JGE 0x0053ce74
+0053ce89 : INC EAX
+0053ce8a : MOV dword ptr [ECX + 0x18],EAX
+0053ce8d : POP ESI
+0053ce8e : RET
+0053ce8f : MOV EAX,dword ptr [ECX + 0x1c]
+0053ce92 : MOV EDX,dword ptr [EAX + 0x4]
+0053ce95 : MOV dword ptr [ECX + 0x20],EDX
+0053ce98 : RET

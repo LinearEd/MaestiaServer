@@ -1,0 +1,140 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00608020
+ENTRY    : 00608020
+BODY     : [[00608020, 0060811d]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+uint FUN_00608020(uint param_1,uint param_2,uint param_3)
+
+{
+  undefined4 *puVar1;
+  int iVar2;
+  uint uVar3;
+  uint *in_ECX;
+  uint uVar4;
+  undefined4 local_c;
+  undefined4 local_8;
+  uint local_4;
+  
+  iVar2 = *(int *)(in_ECX[3] + (param_1 >> 8) * 4);
+  uVar3 = *(uint *)(iVar2 + 8 + (param_1 & 0xff) * 0xc);
+  puVar1 = (undefined4 *)(iVar2 + (param_1 & 0xff) * 0xc);
+  if ((int)uVar3 < 0) {
+    uVar4 = *(uint *)(*(int *)(in_ECX[3] + (param_2 >> 8) * 4) + 8 + (param_2 & 0xff) * 0xc);
+    if ((int)uVar4 < 0) {
+      uVar4 = *(uint *)(*(int *)(in_ECX[3] + (param_3 >> 8) * 4) + 8 + (param_3 & 0xff) * 0xc);
+    }
+    uVar4 = uVar4 & 0xffffff;
+    if ((uVar3 & 0xffffff) != uVar4) {
+      if ((uVar3 & 0x8000000) == 0) {
+        puVar1[2] = uVar3 & 0xff000000 | uVar4 | 0x18000000;
+      }
+      else {
+        local_8 = puVar1[1];
+        local_c = *puVar1;
+        local_4 = uVar3;
+        param_1 = FUN_00606bd0(uVar4,local_c,local_8);
+        if ((int)param_1 < 0) {
+          local_4 = uVar3 & 0xff000000 | uVar4 | 0x10000000;
+          uVar3 = *in_ECX;
+          FUN_00607a80(&local_c);
+          return uVar3;
+        }
+      }
+    }
+  }
+  return param_1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00608020 : MOV EAX,dword ptr [ESP + 0x4]
+00608024 : SUB ESP,0xc
+00608027 : PUSH EBX
+00608028 : MOV EBX,ECX
+0060802a : PUSH EBP
+0060802b : PUSH ESI
+0060802c : MOV ESI,dword ptr [EBX + 0xc]
+0060802f : MOV EDX,EAX
+00608031 : MOV ECX,EAX
+00608033 : SHR EDX,0x8
+00608036 : MOV EDX,dword ptr [ESI + EDX*0x4]
+00608039 : AND ECX,0xff
+0060803f : LEA ECX,[ECX + ECX*0x2]
+00608042 : MOV ESI,dword ptr [EDX + ECX*0x4 + 0x8]
+00608046 : LEA EBP,[EDX + ECX*0x4]
+00608049 : TEST ESI,ESI
+0060804b : JNS 0x00608115
+00608051 : MOV ECX,dword ptr [ESP + 0x20]
+00608055 : MOV EDX,dword ptr [EBX + 0xc]
+00608058 : PUSH EDI
+00608059 : MOV EDI,ECX
+0060805b : SHR EDI,0x8
+0060805e : MOV EDI,dword ptr [EDX + EDI*0x4]
+00608061 : AND ECX,0xff
+00608067 : LEA ECX,[ECX + ECX*0x2]
+0060806a : MOV EDI,dword ptr [EDI + ECX*0x4 + 0x8]
+0060806e : TEST EDI,EDI
+00608070 : JNS 0x0060808b
+00608072 : MOV ECX,dword ptr [ESP + 0x28]
+00608076 : MOV EDI,ECX
+00608078 : SHR EDI,0x8
+0060807b : MOV EDX,dword ptr [EDX + EDI*0x4]
+0060807e : AND ECX,0xff
+00608084 : LEA ECX,[ECX + ECX*0x2]
+00608087 : MOV EDI,dword ptr [EDX + ECX*0x4 + 0x8]
+0060808b : MOV ECX,ESI
+0060808d : AND EDI,0xffffff
+00608093 : AND ECX,0xffffff
+00608099 : CMP ECX,EDI
+0060809b : JZ 0x00608114
+0060809d : TEST ESI,0x8000000
+006080a3 : JZ 0x00608103
+006080a5 : MOV EAX,dword ptr [EBP + 0x4]
+006080a8 : MOV EDX,dword ptr [EBP]
+006080ab : SUB ESP,0x8
+006080ae : MOV dword ptr [ESP + 0x1c],EAX
+006080b2 : FLD float ptr [ESP + 0x1c]
+006080b6 : FSTP float ptr [ESP + 0x4]
+006080ba : MOV dword ptr [ESP + 0x18],EDX
+006080be : FLD float ptr [ESP + 0x18]
+006080c2 : MOV ECX,ESI
+006080c4 : FSTP float ptr [ESP]
+006080c7 : MOV dword ptr [ESP + 0x20],ECX
+006080cb : PUSH EDI
+006080cc : MOV ECX,EBX
+006080ce : CALL 0x00606bd0
+006080d3 : TEST EAX,EAX
+006080d5 : JGE 0x00608114
+006080d7 : AND ESI,0xff000000
+006080dd : OR ESI,EDI
+006080df : OR ESI,0x10000000
+006080e5 : LEA EDX,[ESP + 0x10]
+006080e9 : MOV dword ptr [ESP + 0x18],ESI
+006080ed : MOV ESI,dword ptr [EBX]
+006080ef : PUSH EDX
+006080f0 : MOV ECX,EBX
+006080f2 : CALL 0x00607a80
+006080f7 : POP EDI
+006080f8 : MOV EAX,ESI
+006080fa : POP ESI
+006080fb : POP EBP
+006080fc : POP EBX
+006080fd : ADD ESP,0xc
+00608100 : RET 0xc
+00608103 : AND ESI,0xff000000
+00608109 : OR ESI,EDI
+0060810b : OR ESI,0x18000000
+00608111 : MOV dword ptr [EBP + 0x8],ESI
+00608114 : POP EDI
+00608115 : POP ESI
+00608116 : POP EBP
+00608117 : POP EBX
+00608118 : ADD ESP,0xc
+0060811b : RET 0xc

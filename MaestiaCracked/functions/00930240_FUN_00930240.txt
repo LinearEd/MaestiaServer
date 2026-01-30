@@ -1,0 +1,160 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00930240
+ENTRY    : 00930240
+BODY     : [[00930240, 00930359]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00930240(int param_1,char param_2)
+
+{
+  ushort uVar1;
+  int iVar2;
+  uint in_EAX;
+  int *piVar3;
+  int iVar4;
+  int local_c;
+  uint local_8;
+  
+  iVar2 = DAT_01724884;
+  if (*(char *)(param_1 + 8) != '\0') {
+    if ((int)in_EAX < 0x1e) {
+      if (((int)in_EAX < 10) && (param_2 == '\0')) {
+        iVar4 = 0;
+        if (*(int *)(*DAT_00da9894 + 300) != 0) {
+          iVar4 = *(int *)(*(int *)(*DAT_00da9894 + 300) + 0xc);
+        }
+        if (((*(int *)(iVar4 + 0x48) != 0) &&
+            (uVar1 = *(ushort *)(*(int *)(iVar4 + 0x48) + 0x50), uVar1 != 0)) && (uVar1 < 4)) {
+          in_EAX = in_EAX + (uint)uVar1 * 10;
+        }
+      }
+      uVar1 = (ushort)((ulonglong)(in_EAX & 0xffff) / 10);
+      local_8 = in_EAX & 0xffff;
+      FUN_00413b60(&local_8);
+      if ((local_c != *(int *)(iVar2 + 8)) && (*(int *)(local_c + 0x10) != 0)) {
+        if ((uVar1 == *(ushort *)(param_1 + 0x5c)) && (param_2 == '\0')) {
+          FUN_0092e690();
+          return;
+        }
+        if ((uVar1 == 1) || (uVar1 < 4)) {
+          FUN_0092cd00();
+        }
+      }
+    }
+    else if (((in_EAX - 0x1e < 2) &&
+             (iVar2 = *(int *)(*(int *)(param_1 + 0x68 + (in_EAX - 0x1e) * 4) + 8), iVar2 != 0)) &&
+            (piVar3 = (int *)FUN_009e81c0(iVar2), piVar3 != (int *)0x0)) {
+      (**(code **)(*piVar3 + 0xb4))();
+      return;
+    }
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00930240 : PUSH EBP
+00930241 : MOV EBP,ESP
+00930243 : SUB ESP,0xc
+00930246 : PUSH EDI
+00930247 : MOV EDI,EAX
+00930249 : MOV EAX,dword ptr [EBP + 0x8]
+0093024c : CMP byte ptr [EAX + 0x8],0x0
+00930250 : JZ 0x00930353
+00930256 : CMP EDI,0x1e
+00930259 : JL 0x00930297
+0093025b : ADD EDI,-0x1e
+0093025e : CMP EDI,0x2
+00930261 : JNC 0x00930353
+00930267 : MOV EAX,dword ptr [EAX + EDI*0x4 + 0x68]
+0093026b : MOV EAX,dword ptr [EAX + 0x8]
+0093026e : TEST EAX,EAX
+00930270 : JZ 0x00930353
+00930276 : PUSH EAX
+00930277 : CALL 0x009e81c0
+0093027c : TEST EAX,EAX
+0093027e : JZ 0x00930353
+00930284 : MOV EDX,dword ptr [EAX]
+00930286 : MOV ECX,EAX
+00930288 : MOV EAX,dword ptr [EDX + 0xb4]
+0093028e : CALL EAX
+00930290 : POP EDI
+00930291 : MOV ESP,EBP
+00930293 : POP EBP
+00930294 : RET 0x8
+00930297 : CMP EDI,0xa
+0093029a : JGE 0x009302d6
+0093029c : CMP byte ptr [EBP + 0xc],0x0
+009302a0 : JNZ 0x009302d6
+009302a2 : MOV ECX,dword ptr [0x00da9894]
+009302a8 : MOV EAX,dword ptr [ECX]
+009302aa : MOV EAX,dword ptr [EAX + 0x12c]
+009302b0 : TEST EAX,EAX
+009302b2 : JZ 0x009302b7
+009302b4 : MOV EAX,dword ptr [EAX + 0xc]
+009302b7 : MOV EAX,dword ptr [EAX + 0x48]
+009302ba : TEST EAX,EAX
+009302bc : JZ 0x009302d6
+009302be : MOVZX EAX,word ptr [EAX + 0x50]
+009302c2 : TEST AX,AX
+009302c5 : JBE 0x009302d6
+009302c7 : CMP AX,0x4
+009302cb : JNC 0x009302d6
+009302cd : MOVZX EAX,AX
+009302d0 : LEA EDX,[EAX + EAX*0x4]
+009302d3 : LEA EDI,[EDI + EDX*0x2]
+009302d6 : MOVZX EAX,DI
+009302d9 : CDQ
+009302da : MOV ECX,0xa
+009302df : IDIV ECX
+009302e1 : PUSH EBX
+009302e2 : PUSH ESI
+009302e3 : MOV ESI,dword ptr [0x01724884]
+009302e9 : LEA ECX,[EBP + -0x4]
+009302ec : PUSH ECX
+009302ed : LEA ECX,[ESI + 0x4]
+009302f0 : MOVZX EBX,AX
+009302f3 : MOVZX EAX,DI
+009302f6 : MOVZX EDX,DX
+009302f9 : MOV dword ptr [EBP + -0x4],EAX
+009302fc : LEA EAX,[EBP + -0x8]
+009302ff : MOV dword ptr [EBP + -0xc],EDX
+00930302 : CALL 0x00413b60
+00930307 : MOV EAX,dword ptr [EBP + -0x8]
+0093030a : CMP EAX,dword ptr [ESI + 0x8]
+0093030d : JZ 0x00930351
+0093030f : CMP dword ptr [EAX + 0x10],0x0
+00930313 : JZ 0x00930351
+00930315 : MOV EAX,dword ptr [EBP + 0x8]
+00930318 : CMP BX,word ptr [EAX + 0x5c]
+0093031c : JNZ 0x00930339
+0093031e : CMP byte ptr [EBP + 0xc],0x0
+00930322 : JNZ 0x00930339
+00930324 : MOVZX EDI,word ptr [EBP + -0xc]
+00930328 : MOV ESI,dword ptr [EAX + 0x48]
+0093032b : CALL 0x0092e690
+00930330 : POP ESI
+00930331 : POP EBX
+00930332 : POP EDI
+00930333 : MOV ESP,EBP
+00930335 : POP EBP
+00930336 : RET 0x8
+00930339 : CMP BX,0x1
+0093033d : JZ 0x00930345
+0093033f : CMP BX,0x4
+00930343 : JNC 0x00930351
+00930345 : MOVZX EDX,BX
+00930348 : MOV ESI,dword ptr [EAX + EDX*0x4 + 0x48]
+0093034c : CALL 0x0092cd00
+00930351 : POP ESI
+00930352 : POP EBX
+00930353 : POP EDI
+00930354 : MOV ESP,EBP
+00930356 : POP EBP
+00930357 : RET 0x8

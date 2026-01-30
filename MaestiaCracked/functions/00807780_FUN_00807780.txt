@@ -1,0 +1,156 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00807780
+ENTRY    : 00807780
+BODY     : [[00807780, 00807895]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00807780(void)
+
+{
+  char cVar1;
+  char *in_ECX;
+  int in_EDX;
+  float fVar2;
+  float in_XMM1_Da;
+  
+  if (in_XMM1_Da == -1.0) {
+    *in_ECX = -1;
+    in_ECX[1] = -1;
+    in_ECX[2] = -1;
+    in_ECX[3] = -1;
+    return;
+  }
+  if (in_XMM1_Da <= 0.0) {
+    if (*(int *)(in_EDX + 0x118) < 1) {
+      cVar1 = -1;
+    }
+    else {
+      cVar1 = (char)*(int *)(in_EDX + 0x118) + -1;
+    }
+    *in_ECX = cVar1;
+    if (*(int *)(in_EDX + 0x120) < 1) {
+      cVar1 = -1;
+    }
+    else {
+      cVar1 = (char)*(int *)(in_EDX + 0x120) + -1;
+    }
+    in_ECX[1] = cVar1;
+    if (*(int *)(in_EDX + 0x128) < 1) {
+      cVar1 = -1;
+    }
+    else {
+      cVar1 = (char)*(int *)(in_EDX + 0x128) + -1;
+    }
+    in_ECX[3] = cVar1;
+    if (0 < *(int *)(in_EDX + 0x130)) {
+      in_ECX[2] = (char)*(int *)(in_EDX + 0x130) + -1;
+      return;
+    }
+    in_ECX[2] = -1;
+    return;
+  }
+  if (1.0 <= in_XMM1_Da) {
+    *in_ECX = (0 < *(int *)(in_EDX + 0x118)) + -1;
+    in_ECX[1] = (0 < *(int *)(in_EDX + 0x120)) + -1;
+    in_ECX[3] = (0 < *(int *)(in_EDX + 0x128)) + -1;
+    in_ECX[2] = (0 < *(int *)(in_EDX + 0x130)) + -1;
+    return;
+  }
+  fVar2 = 1.0 - in_XMM1_Da;
+  *in_ECX = (char)(int)((float)*(int *)(in_EDX + 0x118) * fVar2);
+  in_ECX[1] = (char)(int)((float)*(int *)(in_EDX + 0x120) * fVar2);
+  in_ECX[3] = (char)(int)((float)*(int *)(in_EDX + 0x128) * fVar2);
+  in_ECX[2] = (char)(int)((float)*(int *)(in_EDX + 0x130) * fVar2);
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00807780 : UCOMISS XMM1,dword ptr [0x00cdf0d0]
+00807787 : LAHF
+00807788 : TEST AH,0x44
+0080778b : JP 0x0080779d
+0080778d : MOV byte ptr [ECX],0xff
+00807790 : MOV byte ptr [ECX + 0x1],0xff
+00807794 : MOV byte ptr [ECX + 0x2],0xff
+00807798 : MOV byte ptr [ECX + 0x3],0xff
+0080779c : RET
+0080779d : XORPS XMM0,XMM0
+008077a0 : COMISS XMM0,XMM1
+008077a3 : JC 0x008077fd
+008077a5 : PUSH ESI
+008077a6 : MOV ESI,dword ptr [EDX + 0x118]
+008077ac : TEST ESI,ESI
+008077ae : JLE 0x008077b5
+008077b0 : LEA EAX,[ESI + -0x1]
+008077b3 : JMP 0x008077b8
+008077b5 : OR EAX,0xffffffff
+008077b8 : MOV byte ptr [ECX],AL
+008077ba : MOV ESI,dword ptr [EDX + 0x120]
+008077c0 : TEST ESI,ESI
+008077c2 : JLE 0x008077c9
+008077c4 : LEA EAX,[ESI + -0x1]
+008077c7 : JMP 0x008077cc
+008077c9 : OR EAX,0xffffffff
+008077cc : MOV byte ptr [ECX + 0x1],AL
+008077cf : MOV ESI,dword ptr [EDX + 0x128]
+008077d5 : TEST ESI,ESI
+008077d7 : JLE 0x008077de
+008077d9 : LEA EAX,[ESI + -0x1]
+008077dc : JMP 0x008077e1
+008077de : OR EAX,0xffffffff
+008077e1 : MOV byte ptr [ECX + 0x3],AL
+008077e4 : MOV EDX,dword ptr [EDX + 0x130]
+008077ea : POP ESI
+008077eb : TEST EDX,EDX
+008077ed : JLE 0x008077f6
+008077ef : LEA EAX,[EDX + -0x1]
+008077f2 : MOV byte ptr [ECX + 0x2],AL
+008077f5 : RET
+008077f6 : OR EAX,0xffffffff
+008077f9 : MOV byte ptr [ECX + 0x2],AL
+008077fc : RET
+008077fd : MOVSS XMM0,dword ptr [0x00c10fc4]
+00807805 : COMISS XMM1,XMM0
+00807808 : JC 0x00807846
+0080780a : CMP dword ptr [EDX + 0x118],0x0
+00807811 : SETG AL
+00807814 : DEC AL
+00807816 : MOV byte ptr [ECX],AL
+00807818 : CMP dword ptr [EDX + 0x120],0x0
+0080781f : SETG AL
+00807822 : DEC AL
+00807824 : MOV byte ptr [ECX + 0x1],AL
+00807827 : CMP dword ptr [EDX + 0x128],0x0
+0080782e : SETG AL
+00807831 : DEC AL
+00807833 : MOV byte ptr [ECX + 0x3],AL
+00807836 : CMP dword ptr [EDX + 0x130],0x0
+0080783d : SETG DL
+00807840 : DEC DL
+00807842 : MOV byte ptr [ECX + 0x2],DL
+00807845 : RET
+00807846 : SUBSS XMM0,XMM1
+0080784a : CVTSI2SS XMM1,dword ptr [EDX + 0x118]
+00807852 : MULSS XMM1,XMM0
+00807856 : CVTTSS2SI EAX,XMM1
+0080785a : MOV byte ptr [ECX],AL
+0080785c : CVTSI2SS XMM1,dword ptr [EDX + 0x120]
+00807864 : MULSS XMM1,XMM0
+00807868 : CVTTSS2SI EAX,XMM1
+0080786c : MOV byte ptr [ECX + 0x1],AL
+0080786f : CVTSI2SS XMM1,dword ptr [EDX + 0x128]
+00807877 : MULSS XMM1,XMM0
+0080787b : CVTTSS2SI EAX,XMM1
+0080787f : MOV byte ptr [ECX + 0x3],AL
+00807882 : CVTSI2SS XMM1,dword ptr [EDX + 0x130]
+0080788a : MULSS XMM1,XMM0
+0080788e : CVTTSS2SI EDX,XMM1
+00807892 : MOV byte ptr [ECX + 0x2],DL
+00807895 : RET

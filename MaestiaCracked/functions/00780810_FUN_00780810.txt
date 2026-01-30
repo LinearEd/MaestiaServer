@@ -1,0 +1,103 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00780810
+ENTRY    : 00780810
+BODY     : [[00780810, 007808aa]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+undefined4 FUN_00780810(int param_1)
+
+{
+  int *piVar1;
+  int in_ECX;
+  uint uVar2;
+  
+  piVar1 = *(int **)(*(int *)(*(int *)(in_ECX + 0x14) + 0x14) + 0x1c);
+  if (piVar1 == (int *)0x0) {
+    return 0;
+  }
+  uVar2 = (uint)*(byte *)(param_1 + 0xf);
+  if ((uVar2 != 0xffffffff) && (uVar2 != *(uint *)(in_ECX + 0x20))) {
+    _DAT_00da9aec = (**(code **)(*piVar1 + 0x108))(piVar1);
+    if (_DAT_00da9aec < 0) {
+      FUN_008018d0(L"AvaGpuRenderCell::SetEffectShader rpEffect->EndPass() Failed (%d)",
+                   _DAT_00da9aec);
+    }
+    _DAT_00da9aec = (**(code **)(*piVar1 + 0x100))(piVar1,uVar2);
+    if (_DAT_00da9aec < 0) {
+      FUN_008018d0(L"AvaGpuRenderCell::SetEffectShader rpEffect->BeginPass() Failed (%d)",
+                   _DAT_00da9aec);
+    }
+    *(uint *)(in_ECX + 0x20) = uVar2;
+    *(undefined4 *)(in_ECX + 0x24) = 0;
+  }
+  return 1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00780810 : PUSH EBP
+00780811 : MOV EBP,ESP
+00780813 : PUSH EBX
+00780814 : MOV EBX,ECX
+00780816 : MOV EAX,dword ptr [EBX + 0x14]
+00780819 : MOV ECX,dword ptr [EAX + 0x14]
+0078081c : PUSH EDI
+0078081d : MOV EDI,dword ptr [ECX + 0x1c]
+00780820 : TEST EDI,EDI
+00780822 : JNZ 0x0078082c
+00780824 : POP EDI
+00780825 : XOR AL,AL
+00780827 : POP EBX
+00780828 : POP EBP
+00780829 : RET 0x4
+0078082c : MOV EDX,dword ptr [EBP + 0x8]
+0078082f : PUSH ESI
+00780830 : MOVZX ESI,byte ptr [EDX + 0xf]
+00780834 : MOV dword ptr [EBP + 0x8],ESI
+00780837 : CMP ESI,-0x1
+0078083a : JZ 0x007808a2
+0078083c : CMP ESI,dword ptr [EBX + 0x20]
+0078083f : JZ 0x007808a2
+00780841 : MOV EAX,dword ptr [EDI]
+00780843 : MOV ECX,dword ptr [EAX + 0x108]
+00780849 : PUSH EDI
+0078084a : CALL ECX
+0078084c : MOV [0x00da9aec],EAX
+00780851 : TEST EAX,EAX
+00780853 : JGE 0x0078086c
+00780855 : MOV ESI,dword ptr [0x00da98e8]
+0078085b : PUSH EAX
+0078085c : PUSH 0xc10b28
+00780861 : CALL 0x008018d0
+00780866 : MOV ESI,dword ptr [EBP + 0x8]
+00780869 : ADD ESP,0x8
+0078086c : MOV EDX,dword ptr [EDI]
+0078086e : MOV EAX,dword ptr [EDX + 0x100]
+00780874 : PUSH ESI
+00780875 : PUSH EDI
+00780876 : CALL EAX
+00780878 : MOV [0x00da9aec],EAX
+0078087d : TEST EAX,EAX
+0078087f : JGE 0x00780898
+00780881 : MOV ESI,dword ptr [0x00da98e8]
+00780887 : PUSH EAX
+00780888 : PUSH 0xc10bd0
+0078088d : CALL 0x008018d0
+00780892 : MOV ESI,dword ptr [EBP + 0x8]
+00780895 : ADD ESP,0x8
+00780898 : MOV dword ptr [EBX + 0x20],ESI
+0078089b : MOV dword ptr [EBX + 0x24],0x0
+007808a2 : POP ESI
+007808a3 : POP EDI
+007808a4 : MOV AL,0x1
+007808a6 : POP EBX
+007808a7 : POP EBP
+007808a8 : RET 0x4

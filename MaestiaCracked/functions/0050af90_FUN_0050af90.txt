@@ -1,0 +1,88 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0050af90
+ENTRY    : 0050af90
+BODY     : [[0050af90, 0050b010]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+uint FUN_0050af90(float *param_1,byte param_2)
+
+{
+  uint uVar1;
+  float *pfVar2;
+  int *in_ECX;
+  
+  uVar1 = (uint)in_ECX[0x23] >> 0xb;
+  if ((uVar1 & 1) != 0) {
+LAB_0050afa0:
+    return uVar1 & 0xffffff00;
+  }
+  if ((param_2 & 2) != 0) {
+    uVar1 = (**(code **)(*in_ECX + 8))();
+    if ((char)uVar1 == '\0') goto LAB_0050afa0;
+  }
+  pfVar2 = (float *)FUN_0054ad50();
+  if ((((*param_1 <= pfVar2[2]) && (*pfVar2 < *param_1 != (*pfVar2 == *param_1))) &&
+      (param_1[1] <= pfVar2[3])) && (pfVar2[1] < param_1[1] != (pfVar2[1] == param_1[1]))) {
+    return 1;
+  }
+  return 0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0050af90 : PUSH ESI
+0050af91 : MOV ESI,ECX
+0050af93 : MOV EAX,dword ptr [ESI + 0x8c]
+0050af99 : SHR EAX,0xb
+0050af9c : TEST AL,0x1
+0050af9e : JZ 0x0050afa6
+0050afa0 : XOR AL,AL
+0050afa2 : POP ESI
+0050afa3 : RET 0x8
+0050afa6 : TEST byte ptr [ESP + 0xc],0x2
+0050afab : JZ 0x0050afb8
+0050afad : MOV EDX,dword ptr [ESI]
+0050afaf : MOV EAX,dword ptr [EDX + 0x8]
+0050afb2 : CALL EAX
+0050afb4 : TEST AL,AL
+0050afb6 : JZ 0x0050afa0
+0050afb8 : MOV ECX,dword ptr [ESI + 0xa0]
+0050afbe : CALL 0x0054ad50
+0050afc3 : MOV EDX,dword ptr [ESP + 0x8]
+0050afc7 : FLD float ptr [EDX]
+0050afc9 : MOV ECX,EAX
+0050afcb : FLD float ptr [ECX + 0x8]
+0050afce : FCOMPP
+0050afd0 : FNSTSW AX
+0050afd2 : TEST AH,0x1
+0050afd5 : JNZ 0x0050b00b
+0050afd7 : FLD float ptr [EDX]
+0050afd9 : FLD float ptr [ECX]
+0050afdb : FCOMPP
+0050afdd : FNSTSW AX
+0050afdf : TEST AH,0x41
+0050afe2 : JP 0x0050b00b
+0050afe4 : FLD float ptr [EDX + 0x4]
+0050afe7 : FLD float ptr [ECX + 0xc]
+0050afea : FCOMPP
+0050afec : FNSTSW AX
+0050afee : TEST AH,0x1
+0050aff1 : JNZ 0x0050b00b
+0050aff3 : FLD float ptr [EDX + 0x4]
+0050aff6 : FLD float ptr [ECX + 0x4]
+0050aff9 : FCOMPP
+0050affb : FNSTSW AX
+0050affd : TEST AH,0x41
+0050b000 : JP 0x0050b00b
+0050b002 : MOV EAX,0x1
+0050b007 : POP ESI
+0050b008 : RET 0x8
+0050b00b : XOR EAX,EAX
+0050b00d : POP ESI
+0050b00e : RET 0x8

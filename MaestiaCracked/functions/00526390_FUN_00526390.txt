@@ -1,0 +1,82 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00526390
+ENTRY    : 00526390
+BODY     : [[00526390, 005263f5]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00526390(void)
+
+{
+  char cVar1;
+  uint uVar2;
+  char *in_ECX;
+  undefined4 *puVar3;
+  
+  cVar1 = *in_ECX;
+  if (cVar1 == '\b') {
+    FUN_005685a0();
+    return;
+  }
+  if ((cVar1 != '\x06') || (puVar3 = *(undefined4 **)(in_ECX + 4), puVar3 == (undefined4 *)0x0)) {
+    if (cVar1 != '\t') {
+      return;
+    }
+    puVar3 = *(undefined4 **)(in_ECX + 4);
+  }
+  uVar2 = puVar3[2];
+  if ((uVar2 & 0x70000000) == 0x10000000) {
+    if ((uVar2 & 0xfffffff) != 0) {
+      puVar3[2] = uVar2 & 0x8fffffff;
+      (**(code **)*puVar3)(2);
+      return;
+    }
+    puVar3[2] = uVar2 & 0xafffffff | 0x20000000;
+    (**(code **)*puVar3)(4);
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00526390 : MOV EAX,ECX
+00526392 : MOV DL,byte ptr [EAX]
+00526394 : CMP DL,0x8
+00526397 : JNZ 0x005263a1
+00526399 : LEA ECX,[EAX + 0x4]
+0052639c : JMP 0x005685a0
+005263a1 : CMP DL,0x6
+005263a4 : JNZ 0x005263ad
+005263a6 : MOV ECX,dword ptr [EAX + 0x4]
+005263a9 : TEST ECX,ECX
+005263ab : JNZ 0x005263b5
+005263ad : CMP DL,0x9
+005263b0 : JNZ 0x005263f5
+005263b2 : MOV ECX,dword ptr [EAX + 0x4]
+005263b5 : MOV EAX,dword ptr [ECX + 0x8]
+005263b8 : MOV EDX,EAX
+005263ba : AND EDX,0x70000000
+005263c0 : CMP EDX,0x10000000
+005263c6 : JNZ 0x005263f5
+005263c8 : TEST EAX,0xfffffff
+005263cd : JBE 0x005263e0
+005263cf : AND EAX,0x8fffffff
+005263d4 : MOV dword ptr [ECX + 0x8],EAX
+005263d7 : MOV EAX,dword ptr [ECX]
+005263d9 : MOV EDX,dword ptr [EAX]
+005263db : PUSH 0x2
+005263dd : CALL EDX
+005263df : RET
+005263e0 : AND EAX,0xafffffff
+005263e5 : OR EAX,0x20000000
+005263ea : MOV dword ptr [ECX + 0x8],EAX
+005263ed : MOV EAX,dword ptr [ECX]
+005263ef : MOV EDX,dword ptr [EAX]
+005263f1 : PUSH 0x4
+005263f3 : CALL EDX
+005263f5 : RET

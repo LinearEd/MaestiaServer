@@ -1,0 +1,84 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_004bd270
+ENTRY    : 004bd270
+BODY     : [[004bd270, 004bd2df]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+bool FUN_004bd270(byte *param_1,byte *param_2)
+
+{
+  uint uVar1;
+  int iVar2;
+  
+  uVar1 = 0x10;
+  do {
+    if (*(int *)param_1 != *(int *)param_2) {
+      iVar2 = (uint)*param_1 - (uint)*param_2;
+      if (((iVar2 == 0) && (iVar2 = (uint)param_1[1] - (uint)param_2[1], iVar2 == 0)) &&
+         (iVar2 = (uint)param_1[2] - (uint)param_2[2], iVar2 == 0)) {
+        iVar2 = (uint)param_1[3] - (uint)param_2[3];
+      }
+      return (iVar2 >> 0x1f | 1U) == 0;
+    }
+    uVar1 = uVar1 - 4;
+    param_2 = param_2 + 4;
+    param_1 = param_1 + 4;
+  } while (3 < uVar1);
+  return true;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+004bd270 : PUSH EBP
+004bd271 : MOV EBP,ESP
+004bd273 : MOV ECX,dword ptr [EBP + 0xc]
+004bd276 : MOV EDX,dword ptr [EBP + 0x8]
+004bd279 : MOV EAX,0x10
+004bd27e : PUSH ESI
+004bd27f : NOP
+004bd280 : MOV ESI,dword ptr [EDX]
+004bd282 : CMP ESI,dword ptr [ECX]
+004bd284 : JNZ 0x004bd2a2
+004bd286 : SUB EAX,0x4
+004bd289 : ADD ECX,0x4
+004bd28c : ADD EDX,0x4
+004bd28f : CMP EAX,0x4
+004bd292 : JNC 0x004bd280
+004bd294 : XOR EAX,EAX
+004bd296 : XOR EDX,EDX
+004bd298 : TEST EAX,EAX
+004bd29a : SETZ DL
+004bd29d : POP ESI
+004bd29e : MOV EAX,EDX
+004bd2a0 : POP EBP
+004bd2a1 : RET
+004bd2a2 : MOVZX EAX,byte ptr [EDX]
+004bd2a5 : MOVZX ESI,byte ptr [ECX]
+004bd2a8 : SUB EAX,ESI
+004bd2aa : JNZ 0x004bd2ce
+004bd2ac : MOVZX EAX,byte ptr [EDX + 0x1]
+004bd2b0 : MOVZX ESI,byte ptr [ECX + 0x1]
+004bd2b4 : SUB EAX,ESI
+004bd2b6 : JNZ 0x004bd2ce
+004bd2b8 : MOVZX EAX,byte ptr [EDX + 0x2]
+004bd2bc : MOVZX ESI,byte ptr [ECX + 0x2]
+004bd2c0 : SUB EAX,ESI
+004bd2c2 : JNZ 0x004bd2ce
+004bd2c4 : MOVZX EAX,byte ptr [EDX + 0x3]
+004bd2c8 : MOVZX ECX,byte ptr [ECX + 0x3]
+004bd2cc : SUB EAX,ECX
+004bd2ce : SAR EAX,0x1f
+004bd2d1 : OR EAX,0x1
+004bd2d4 : XOR EDX,EDX
+004bd2d6 : TEST EAX,EAX
+004bd2d8 : SETZ DL
+004bd2db : POP ESI
+004bd2dc : MOV EAX,EDX
+004bd2de : POP EBP
+004bd2df : RET

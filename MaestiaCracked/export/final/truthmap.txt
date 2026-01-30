@@ -1,0 +1,83 @@
+Maestia Packet Truth Map (v1)
+AUTH / LOGIN / SESSION
+ID	Dir	Name	Beschreibung	Root Handler	Confidence
+0x0200	C→S	LOGIN_REQ	Login Request (Account + Hash)	FUN_00874470
+0x0201	S→C	LOGIN_ACK	Login Antwort / Result	FUN_00a422f0
+0x0202	C→S	LOGIN_RSA	RSA Key Exchange / Proof	FUN_00a422f0
+0x0204	C→S	LOGIN_PING	Login keepalive	FUN_00a39a70
+0x0205	S→C	LOGIN_STATUS	Login Status Update	FUN_00a422f0
+
+Erklärung
+FUN_00a422f0 ist klar ein zentraler Login-State-Handler.
+
+CHARACTER / ACCOUNT
+ID	Dir	Name	Beschreibung	Root Handler
+0x0210	S→C	CHAR_LIST	Character List	FUN_00a38860
+0x0218	C→S	CHAR_SELECT	Character Select	FUN_00829bd0
+0x0219	S→C	CHAR_SELECT_ACK	Char Select Result	FUN_00a3f9f0
+0x021A	S→C	CHAR_DATA	Character Base Data	FUN_00a3f9f0
+
+
+FUN_00829bd0 = klassischer „Enter World“ Dispatcher.
+
+WORLD / ZONE / SYNC
+ID	Dir	Name	Beschreibung	Root Handler
+0x0338	S→C	ZONE_INIT	Zone init / map load	FUN_00829d00
+0x0364	S→C	ZONE_SYNC	Zone state sync	FUN_00829e00
+0x0340	S→C	WORLD_INIT	World init	FUN_00822fa0
+
+
+0x0338/0x0364 sind typisch für MMO Zone Sync.
+
+MOVEMENT / PLAYER STATE
+ID	Dir	Name	Beschreibung	Root Handler
+0x024C	C→S	MOVE	Player movement	FUN_00a3afd0
+0x0280	S→C	MOVE_SYNC	Movement broadcast	FUN_00a44630
+0x0286	S→C	PLAYER_STATE	Player state update	FUN_00a46960
+
+
+FUN_00a3afd0 ist sehr sicher Movement.
+
+CHAT
+ID	Dir	Name	Beschreibung	Root Handler
+0x0288	C→S	CHAT_SEND	Chat message	FUN_009fb930
+0x0290	S→C	CHAT_BROADCAST	Chat broadcast	FUN_00950540
+
+
+FUN_009fb930 taucht oft bei Strings/UI auf → Chat.
+
+INVENTORY / ITEMS
+ID	Dir	Name	Beschreibung	Root Handler
+0x0258	S→C	ITEM_LIST	Inventory list	FUN_00a2dfb0
+0x0260	S→C	ITEM_EQUIP	Equipment data	FUN_00a2efe0
+0x0402	C→S	ITEM_USE	Use item	FUN_00a29950
+0x040C	C→S	ITEM_MOVE	Move item	FUN_00a2d510
+
+
+0x04xx = klassisch Item subsystem.
+
+COMBAT / SKILLS
+ID	Dir	Name	Beschreibung	Root Handler
+0x03AD	C→S	SKILL_CAST	Skill cast	FUN_00a380f0
+0x0498	S→C	DAMAGE	Damage event	FUN_00a380f0
+0x0550	S→C	COMBAT_STATE	Combat state	FUN_00a38d30
+
+
+FUN_00a380f0 = Combat Core.
+
+NPC / QUEST
+ID	Dir	Name	Beschreibung	Root Handler
+0x03E8	S→C	NPC_SPAWN	NPC spawn	FUN_00a2a1a0
+0x03A8	C→S	NPC_INTERACT	NPC interaction	FUN_00a316c0
+0x0450	S→C	QUEST_UPDATE	Quest update	FUN_00a2f930
+
+
+0x03E8 = extrem typisch NPC spawn in MMOs.
+
+SYSTEM / MISC
+ID	Dir	Name	Beschreibung	Root Handler
+0x0EF4	S→C	HEARTBEAT	Keepalive / ping	FUN_00a0dd40
+0x0900	S→C	ADMIN	Admin / GM	FUN_00aedcb0
+
+
+FUN_00a0dd40 = dein SendNormal / Net Core → passt perfekt.

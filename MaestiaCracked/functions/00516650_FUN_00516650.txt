@@ -1,0 +1,237 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00516650
+ENTRY    : 00516650
+BODY     : [[00516650, 005167cb]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined1 FUN_00516650(GWaitable *param_1,DWORD param_2)
+
+{
+  int *piVar1;
+  int iVar2;
+  undefined4 *puVar3;
+  int iVar4;
+  PRTL_CRITICAL_SECTION_DEBUG p_Var5;
+  HANDLE pvVar6;
+  DWORD DVar7;
+  LPCRITICAL_SECTION in_ECX;
+  _RTL_CRITICAL_SECTION **pp_Var8;
+  int iVar9;
+  undefined1 local_5;
+  
+  iVar9 = *(int *)(*(int *)(param_1 + 0x10) + 8);
+  local_5 = 0;
+  if (iVar9 == 0) {
+    return 0;
+  }
+  EnterCriticalSection(in_ECX);
+  p_Var5 = in_ECX[1].DebugInfo;
+  if (p_Var5 == (PRTL_CRITICAL_SECTION_DEBUG)0x0) {
+    p_Var5 = (PRTL_CRITICAL_SECTION_DEBUG)FUN_00515840(0xc,0);
+    pp_Var8 = &p_Var5->CriticalSection;
+    *pp_Var8 = (_RTL_CRITICAL_SECTION *)0x0;
+    (p_Var5->ProcessLocksList).Flink = (_LIST_ENTRY *)0x0;
+    pvVar6 = CreateEventA((LPSECURITY_ATTRIBUTES)0x0,1,0,(LPCSTR)0x0);
+    *(HANDLE *)p_Var5 = pvVar6;
+  }
+  else {
+    pp_Var8 = &p_Var5->CriticalSection;
+    in_ECX[1].DebugInfo = (PRTL_CRITICAL_SECTION_DEBUG)p_Var5->CriticalSection;
+  }
+  if ((_LIST_ENTRY *)in_ECX[1].RecursionCount == (_LIST_ENTRY *)0x0) {
+    (p_Var5->ProcessLocksList).Flink = (_LIST_ENTRY *)0x0;
+    *pp_Var8 = (_RTL_CRITICAL_SECTION *)0x0;
+    in_ECX[1].LockCount = (LONG)p_Var5;
+  }
+  else {
+    (p_Var5->ProcessLocksList).Flink = (_LIST_ENTRY *)in_ECX[1].RecursionCount;
+    *(PRTL_CRITICAL_SECTION_DEBUG *)(in_ECX[1].RecursionCount + 4) = p_Var5;
+    *pp_Var8 = (_RTL_CRITICAL_SECTION *)0x0;
+  }
+  in_ECX[1].RecursionCount = (LONG)p_Var5;
+  LeaveCriticalSection(in_ECX);
+  iVar2 = *(int *)(param_1 + 0x10);
+  *(undefined4 *)(iVar2 + 8) = 0;
+  iVar4 = iVar9;
+  if (*(char *)(iVar2 + 4) == '\0') {
+    ReleaseSemaphore((HANDLE)**(undefined4 **)(param_1 + 0x10),1,(LPLONG)0x0);
+  }
+  else {
+    for (; iVar4 != 0; iVar4 = iVar4 + -1) {
+      ReleaseMutex((HANDLE)**(undefined4 **)(param_1 + 0x10));
+    }
+  }
+  GWaitable::CallWaitHandlers(param_1);
+  DVar7 = WaitForSingleObject(*(HANDLE *)p_Var5,param_2);
+  EnterCriticalSection(in_ECX);
+  if ((DVar7 == 0) || (DVar7 == 0x80)) {
+    local_5 = 1;
+    ResetEvent(*(HANDLE *)p_Var5);
+    *pp_Var8 = (_RTL_CRITICAL_SECTION *)in_ECX[1].DebugInfo;
+  }
+  else {
+    FUN_00516340(p_Var5);
+    ResetEvent(*(HANDLE *)p_Var5);
+    *pp_Var8 = (_RTL_CRITICAL_SECTION *)in_ECX[1].DebugInfo;
+  }
+  (p_Var5->ProcessLocksList).Flink = (_LIST_ENTRY *)0x0;
+  in_ECX[1].DebugInfo = p_Var5;
+  LeaveCriticalSection(in_ECX);
+  for (; iVar9 != 0; iVar9 = iVar9 + -1) {
+    puVar3 = *(undefined4 **)(param_1 + 0x10);
+    DVar7 = WaitForSingleObject((HANDLE)*puVar3,0xffffffff);
+    if (DVar7 == 0) {
+      piVar1 = puVar3 + 2;
+      *piVar1 = *piVar1 + 1;
+    }
+  }
+  return local_5;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00516650 : SUB ESP,0x8
+00516653 : MOV EAX,dword ptr [ESP + 0xc]
+00516657 : PUSH EBP
+00516658 : PUSH EDI
+00516659 : MOV EDI,ECX
+0051665b : MOV ECX,dword ptr [EAX + 0x10]
+0051665e : MOV EAX,dword ptr [ECX + 0x8]
+00516661 : XOR EBP,EBP
+00516663 : MOV byte ptr [ESP + 0xb],0x0
+00516668 : MOV dword ptr [ESP + 0xc],EAX
+0051666c : CMP EAX,EBP
+0051666e : JNZ 0x0051667a
+00516670 : POP EDI
+00516671 : XOR AL,AL
+00516673 : POP EBP
+00516674 : ADD ESP,0x8
+00516677 : RET 0x8
+0051667a : PUSH EBX
+0051667b : PUSH ESI
+0051667c : PUSH EDI
+0051667d : CALL dword ptr [0x00b85118]
+00516683 : MOV ESI,dword ptr [EDI + 0x18]
+00516686 : CMP ESI,EBP
+00516688 : JZ 0x00516695
+0051668a : MOV EDX,dword ptr [ESI + 0x4]
+0051668d : LEA EBX,[ESI + 0x4]
+00516690 : MOV dword ptr [EDI + 0x18],EDX
+00516693 : JMP 0x005166ba
+00516695 : MOV ECX,dword ptr [0x00d73250]
+0051669b : PUSH EBP
+0051669c : PUSH 0xc
+0051669e : CALL 0x00515840
+005166a3 : PUSH EBP
+005166a4 : PUSH EBP
+005166a5 : MOV ESI,EAX
+005166a7 : PUSH 0x1
+005166a9 : LEA EBX,[ESI + 0x4]
+005166ac : PUSH EBP
+005166ad : MOV dword ptr [EBX],EBP
+005166af : MOV dword ptr [ESI + 0x8],EBP
+005166b2 : CALL dword ptr [0x00b85234]
+005166b8 : MOV dword ptr [ESI],EAX
+005166ba : MOV EAX,dword ptr [EDI + 0x20]
+005166bd : CMP EAX,EBP
+005166bf : JZ 0x005166ce
+005166c1 : MOV dword ptr [ESI + 0x8],EAX
+005166c4 : MOV EAX,dword ptr [EDI + 0x20]
+005166c7 : MOV dword ptr [EAX + 0x4],ESI
+005166ca : MOV dword ptr [EBX],EBP
+005166cc : JMP 0x005166d6
+005166ce : MOV dword ptr [ESI + 0x8],EBP
+005166d1 : MOV dword ptr [EBX],EBP
+005166d3 : MOV dword ptr [EDI + 0x1c],ESI
+005166d6 : PUSH EDI
+005166d7 : MOV dword ptr [EDI + 0x20],ESI
+005166da : CALL dword ptr [0x00b8511c]
+005166e0 : MOV ECX,dword ptr [ESP + 0x1c]
+005166e4 : MOV EAX,dword ptr [ECX + 0x10]
+005166e7 : CMP byte ptr [EAX + 0x4],0x0
+005166eb : MOV dword ptr [EAX + 0x8],EBP
+005166ee : JZ 0x00516717
+005166f0 : MOV EAX,dword ptr [ESP + 0x14]
+005166f4 : CMP EAX,EBP
+005166f6 : JBE 0x0051672a
+005166f8 : MOV EBP,EAX
+005166fa : LEA EBX,[EBX]
+00516700 : MOV ECX,dword ptr [ESP + 0x1c]
+00516704 : MOV EDX,dword ptr [ECX + 0x10]
+00516707 : MOV EAX,dword ptr [EDX]
+00516709 : PUSH EAX
+0051670a : CALL dword ptr [0x00b8523c]
+00516710 : SUB EBP,0x1
+00516713 : JNZ 0x00516700
+00516715 : JMP 0x00516726
+00516717 : MOV ECX,dword ptr [ECX + 0x10]
+0051671a : MOV EDX,dword ptr [ECX]
+0051671c : PUSH EBP
+0051671d : PUSH 0x1
+0051671f : PUSH EDX
+00516720 : CALL dword ptr [0x00b853c8]
+00516726 : MOV ECX,dword ptr [ESP + 0x1c]
+0051672a : CALL 0x00517f10
+0051672f : MOV EAX,dword ptr [ESP + 0x20]
+00516733 : CMP EAX,-0x1
+00516736 : JNZ 0x0051673a
+00516738 : OR EAX,EAX
+0051673a : PUSH EAX
+0051673b : MOV EAX,dword ptr [ESI]
+0051673d : PUSH EAX
+0051673e : CALL dword ptr [0x00b85100]
+00516744 : PUSH EDI
+00516745 : MOV EBP,EAX
+00516747 : CALL dword ptr [0x00b85118]
+0051674d : TEST EBP,EBP
+0051674f : JZ 0x00516771
+00516751 : CMP EBP,0x80
+00516757 : JZ 0x00516771
+00516759 : PUSH ESI
+0051675a : MOV ECX,EDI
+0051675c : CALL 0x00516340
+00516761 : MOV ECX,dword ptr [ESI]
+00516763 : PUSH ECX
+00516764 : CALL dword ptr [0x00b851dc]
+0051676a : MOV EDX,dword ptr [EDI + 0x18]
+0051676d : MOV dword ptr [EBX],EDX
+0051676f : JMP 0x00516784
+00516771 : MOV EAX,dword ptr [ESI]
+00516773 : PUSH EAX
+00516774 : MOV byte ptr [ESP + 0x17],0x1
+00516779 : CALL dword ptr [0x00b851dc]
+0051677f : MOV ECX,dword ptr [EDI + 0x18]
+00516782 : MOV dword ptr [EBX],ECX
+00516784 : MOV dword ptr [ESI + 0x8],0x0
+0051678b : PUSH EDI
+0051678c : MOV dword ptr [EDI + 0x18],ESI
+0051678f : CALL dword ptr [0x00b8511c]
+00516795 : MOV EAX,dword ptr [ESP + 0x14]
+00516799 : TEST EAX,EAX
+0051679b : JBE 0x005167be
+0051679d : MOV EDI,EAX
+0051679f : NOP
+005167a0 : MOV EDX,dword ptr [ESP + 0x1c]
+005167a4 : MOV ESI,dword ptr [EDX + 0x10]
+005167a7 : MOV EAX,dword ptr [ESI]
+005167a9 : PUSH -0x1
+005167ab : PUSH EAX
+005167ac : CALL dword ptr [0x00b85100]
+005167b2 : TEST EAX,EAX
+005167b4 : JNZ 0x005167b9
+005167b6 : INC dword ptr [ESI + 0x8]
+005167b9 : SUB EDI,0x1
+005167bc : JNZ 0x005167a0
+005167be : MOV AL,byte ptr [ESP + 0x13]
+005167c2 : POP ESI
+005167c3 : POP EBX
+005167c4 : POP EDI
+005167c5 : POP EBP
+005167c6 : ADD ESP,0x8
+005167c9 : RET 0x8

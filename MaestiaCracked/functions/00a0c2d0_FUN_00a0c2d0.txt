@@ -1,0 +1,198 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00a0c2d0
+ENTRY    : 00a0c2d0
+BODY     : [[00a0c2d0, 00a0c463]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00a0c2d0(void)
+
+{
+  int *piVar1;
+  int iVar2;
+  SIZE_T SVar3;
+  DWORD DVar4;
+  FILE *_File;
+  undefined4 uVar5;
+  wchar_t *pwVar6;
+  int *in_ECX;
+  int in_EDX;
+  _MEMORY_BASIC_INFORMATION local_448;
+  int local_42c;
+  wchar_t *local_428;
+  int local_424;
+  wchar_t *local_420;
+  WCHAR local_41c [522];
+  uint local_8;
+  
+  local_8 = DAT_00d66fa0 ^ (uint)&stack0xfffffffc;
+  local_424 = in_ECX[1];
+  piVar1 = (int *)*in_ECX;
+  local_42c = in_EDX;
+  _memset(local_41c,0,0x410);
+  local_428 = L"Unknown";
+  SVar3 = VirtualQuery(*(LPCVOID *)(local_424 + 0xb8),&local_448,0x1c);
+  if ((SVar3 != 0) &&
+     (DVar4 = GetModuleFileNameW(local_448.AllocationBase,local_41c,0x104), DVar4 != 0)) {
+    local_428 = (wchar_t *)FUN_00a0b0e0();
+  }
+  local_420 = (wchar_t *)(in_EDX + 4);
+  pwVar6 = local_420;
+  if (7 < *(uint *)(in_EDX + 0x18)) {
+    pwVar6 = *(wchar_t **)local_420;
+  }
+  _File = __wfopen(pwVar6,L"w+t");
+  uVar5 = FUN_00a0a9d0(*piVar1,local_428,*(undefined4 *)(local_424 + 0xbc),piVar1[3]);
+  _fwprintf(_File,L"caused %s (0x%08x) \r\nin module %s at %04x:%08p.\r\n\r\n",uVar5);
+  FUN_00a0af70(_File);
+  if ((*piVar1 == -0x3ffffffb) && (1 < (uint)piVar1[4])) {
+    pwVar6 = L"Read from";
+    if (piVar1[5] != 0) {
+      pwVar6 = L"Write to";
+    }
+    _fwprintf(_File,L"%s location %08x caused an access violation.\r\n",pwVar6,piVar1[6]);
+  }
+  iVar2 = local_424;
+  FUN_00a0a870(_File);
+  FUN_00a0c220(_File);
+  FUN_00a0a6b0(_File,*(undefined4 *)(iVar2 + 0xc4));
+  pwVar6 = local_420;
+  if (7 < *(uint *)(local_42c + 0x18)) {
+    pwVar6 = *(wchar_t **)local_420;
+  }
+  _fwprintf(_File,L"\r\n===== [end of %s] =====\r\n",pwVar6);
+  _fclose(_File);
+  __security_check_cookie(local_8 ^ (uint)&stack0xfffffffc);
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00a0c2d0 : PUSH EBP
+00a0c2d1 : MOV EBP,ESP
+00a0c2d3 : SUB ESP,0x444
+00a0c2d9 : MOV EAX,[0x00d66fa0]
+00a0c2de : XOR EAX,EBP
+00a0c2e0 : MOV dword ptr [EBP + -0x4],EAX
+00a0c2e3 : PUSH EBX
+00a0c2e4 : PUSH ESI
+00a0c2e5 : PUSH EDI
+00a0c2e6 : MOV ESI,ECX
+00a0c2e8 : MOV EAX,dword ptr [ESI + 0x4]
+00a0c2eb : MOV EBX,dword ptr [ESI]
+00a0c2ed : PUSH 0x410
+00a0c2f2 : LEA ECX,[EBP + 0xfffffbe8]
+00a0c2f8 : MOV EDI,EDX
+00a0c2fa : PUSH 0x0
+00a0c2fc : PUSH ECX
+00a0c2fd : MOV dword ptr [EBP + 0xfffffbd8],EDI
+00a0c303 : MOV dword ptr [EBP + 0xfffffbe0],EAX
+00a0c309 : CALL 0x0063b700
+00a0c30e : MOV EAX,dword ptr [EBP + 0xfffffbe0]
+00a0c314 : MOV ECX,dword ptr [EAX + 0xb8]
+00a0c31a : ADD ESP,0xc
+00a0c31d : PUSH 0x1c
+00a0c31f : LEA EDX,[EBP + 0xfffffbbc]
+00a0c325 : PUSH EDX
+00a0c326 : PUSH ECX
+00a0c327 : MOV dword ptr [EBP + 0xfffffbdc],0xcab5f8
+00a0c331 : CALL dword ptr [0x00b8516c]
+00a0c337 : TEST EAX,EAX
+00a0c339 : JZ 0x00a0c369
+00a0c33b : MOV EAX,dword ptr [EBP + 0xfffffbc0]
+00a0c341 : PUSH 0x104
+00a0c346 : LEA EDX,[EBP + 0xfffffbe8]
+00a0c34c : PUSH EDX
+00a0c34d : PUSH EAX
+00a0c34e : CALL dword ptr [0x00b85144]
+00a0c354 : TEST EAX,EAX
+00a0c356 : JBE 0x00a0c369
+00a0c358 : LEA EAX,[EBP + 0xfffffbe8]
+00a0c35e : CALL 0x00a0b0e0
+00a0c363 : MOV dword ptr [EBP + 0xfffffbdc],EAX
+00a0c369 : CMP dword ptr [EDI + 0x18],0x8
+00a0c36d : LEA EAX,[EDI + 0x4]
+00a0c370 : MOV dword ptr [EBP + 0xfffffbe4],EAX
+00a0c376 : JC 0x00a0c37a
+00a0c378 : MOV EAX,dword ptr [EAX]
+00a0c37a : PUSH 0xcab608
+00a0c37f : PUSH EAX
+00a0c380 : CALL 0x00636404
+00a0c385 : MOV ECX,dword ptr [EBX + 0xc]
+00a0c388 : MOV EDX,dword ptr [EBP + 0xfffffbe0]
+00a0c38e : ADD ESP,0x8
+00a0c391 : PUSH ECX
+00a0c392 : MOV ECX,dword ptr [EBP + 0xfffffbdc]
+00a0c398 : MOV EDI,EAX
+00a0c39a : MOV EAX,dword ptr [EDX + 0xbc]
+00a0c3a0 : MOV EDX,dword ptr [EBX]
+00a0c3a2 : PUSH EAX
+00a0c3a3 : PUSH ECX
+00a0c3a4 : PUSH EDX
+00a0c3a5 : CALL 0x00a0a9d0
+00a0c3aa : PUSH EAX
+00a0c3ab : PUSH 0xcab610
+00a0c3b0 : PUSH EDI
+00a0c3b1 : CALL 0x006372ee
+00a0c3b6 : ADD ESP,0x1c
+00a0c3b9 : PUSH EDI
+00a0c3ba : CALL 0x00a0af70
+00a0c3bf : ADD ESP,0x4
+00a0c3c2 : CMP dword ptr [EBX],0xc0000005
+00a0c3c8 : JNZ 0x00a0c3f3
+00a0c3ca : CMP dword ptr [EBX + 0x10],0x2
+00a0c3ce : JC 0x00a0c3f3
+00a0c3d0 : CMP dword ptr [EBX + 0x14],0x0
+00a0c3d4 : MOV EAX,0xcab678
+00a0c3d9 : JZ 0x00a0c3e0
+00a0c3db : MOV EAX,0xcab68c
+00a0c3e0 : MOV ECX,dword ptr [EBX + 0x18]
+00a0c3e3 : PUSH ECX
+00a0c3e4 : PUSH EAX
+00a0c3e5 : PUSH 0xcab6a0
+00a0c3ea : PUSH EDI
+00a0c3eb : CALL 0x006372ee
+00a0c3f0 : ADD ESP,0x10
+00a0c3f3 : MOV EBX,dword ptr [EBP + 0xfffffbe0]
+00a0c3f9 : PUSH EDI
+00a0c3fa : MOV ECX,EBX
+00a0c3fc : CALL 0x00a0a870
+00a0c401 : ADD ESP,0x4
+00a0c404 : PUSH EDI
+00a0c405 : MOV EAX,ESI
+00a0c407 : CALL 0x00a0c220
+00a0c40c : MOV EDX,dword ptr [EBX + 0xc4]
+00a0c412 : ADD ESP,0x4
+00a0c415 : PUSH EDX
+00a0c416 : PUSH EDI
+00a0c417 : CALL 0x00a0a6b0
+00a0c41c : MOV EAX,dword ptr [EBP + 0xfffffbd8]
+00a0c422 : ADD ESP,0x8
+00a0c425 : CMP dword ptr [EAX + 0x18],0x8
+00a0c429 : JC 0x00a0c435
+00a0c42b : MOV ECX,dword ptr [EBP + 0xfffffbe4]
+00a0c431 : MOV EAX,dword ptr [ECX]
+00a0c433 : JMP 0x00a0c43b
+00a0c435 : MOV EAX,dword ptr [EBP + 0xfffffbe4]
+00a0c43b : PUSH EAX
+00a0c43c : PUSH 0xcab700
+00a0c441 : PUSH EDI
+00a0c442 : CALL 0x006372ee
+00a0c447 : ADD ESP,0xc
+00a0c44a : PUSH EDI
+00a0c44b : CALL 0x006366db
+00a0c450 : MOV ECX,dword ptr [EBP + -0x4]
+00a0c453 : ADD ESP,0x4
+00a0c456 : POP EDI
+00a0c457 : POP ESI
+00a0c458 : XOR ECX,EBP
+00a0c45a : POP EBX
+00a0c45b : CALL 0x00633e6b
+00a0c460 : MOV ESP,EBP
+00a0c462 : POP EBP
+00a0c463 : RET

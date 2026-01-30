@@ -1,0 +1,108 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00481a30
+ENTRY    : 00481a30
+BODY     : [[00481a30, 00481b1a]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00481a30(uint param_1)
+
+{
+  int in_ECX;
+  float local_14;
+  float local_10;
+  float local_c;
+  float local_8;
+  
+  if (*(char *)(in_ECX + 0x10) != '\0') {
+    local_8 = (float)(param_1 >> 0x18) * 0.003921569;
+    local_14 = (float)(param_1 >> 0x10 & 0xff) * 0.003921569;
+    local_10 = (float)(param_1 >> 8 & 0xff) * 0.003921569;
+    local_c = (float)(param_1 & 0xff) * 0.003921569;
+    if ((*(int *)(in_ECX + 0x210) == 3) || (*(int *)(in_ECX + 0x210) == 6)) {
+      local_14 = (local_14 - 1.0) * local_8 + 1.0;
+      local_10 = (local_10 - 1.0) * local_8 + 1.0;
+      local_c = (local_c - 1.0) * local_8 + 1.0;
+    }
+    (**(code **)(**(int **)(in_ECX + 0xf0) + 0x1b4))(*(int **)(in_ECX + 0xf0),0,&local_14,1);
+    return;
+  }
+  (**(code **)(**(int **)(in_ECX + 0xf0) + 0xe4))(*(int **)(in_ECX + 0xf0),0x3c,param_1);
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00481a30 : PUSH EBP
+00481a31 : MOV EBP,ESP
+00481a33 : MOV EAX,dword ptr [EBP + 0x8]
+00481a36 : SUB ESP,0x10
+00481a39 : CMP byte ptr [ECX + 0x10],0x0
+00481a3d : JZ 0x00481b01
+00481a43 : MOVSS XMM4,dword ptr [0x00cdf178]
+00481a4b : MOV EDX,EAX
+00481a4d : SHR EDX,0x18
+00481a50 : CVTSI2SS XMM3,EDX
+00481a54 : MOV EDX,EAX
+00481a56 : SHR EDX,0x10
+00481a59 : MOVZX EDX,DL
+00481a5c : CVTSI2SS XMM0,EDX
+00481a60 : MOV EDX,EAX
+00481a62 : SHR EDX,0x8
+00481a65 : MOVZX EAX,AL
+00481a68 : MOVZX EDX,DL
+00481a6b : CVTSI2SS XMM2,EAX
+00481a6f : MOV EAX,dword ptr [ECX + 0x210]
+00481a75 : CVTSI2SS XMM1,EDX
+00481a79 : MULSS XMM3,XMM4
+00481a7d : MULSS XMM0,XMM4
+00481a81 : MULSS XMM1,XMM4
+00481a85 : MULSS XMM2,XMM4
+00481a89 : MOVSS dword ptr [EBP + -0x10],XMM0
+00481a8e : MOVSS dword ptr [EBP + -0xc],XMM1
+00481a93 : MOVSS dword ptr [EBP + -0x8],XMM2
+00481a98 : MOVSS dword ptr [EBP + -0x4],XMM3
+00481a9d : CMP EAX,0x3
+00481aa0 : JZ 0x00481aa7
+00481aa2 : CMP EAX,0x6
+00481aa5 : JNZ 0x00481ae2
+00481aa7 : MOVSS XMM4,dword ptr [0x00c10fc4]
+00481aaf : SUBSS XMM0,XMM4
+00481ab3 : SUBSS XMM1,XMM4
+00481ab7 : SUBSS XMM2,XMM4
+00481abb : MULSS XMM0,XMM3
+00481abf : MULSS XMM1,XMM3
+00481ac3 : MULSS XMM2,XMM3
+00481ac7 : ADDSS XMM0,XMM4
+00481acb : ADDSS XMM1,XMM4
+00481acf : ADDSS XMM2,XMM4
+00481ad3 : MOVSS dword ptr [EBP + -0x10],XMM0
+00481ad8 : MOVSS dword ptr [EBP + -0xc],XMM1
+00481add : MOVSS dword ptr [EBP + -0x8],XMM2
+00481ae2 : MOV ECX,dword ptr [ECX + 0xf0]
+00481ae8 : MOV EDX,dword ptr [ECX]
+00481aea : PUSH 0x1
+00481aec : LEA EAX,[EBP + -0x10]
+00481aef : PUSH EAX
+00481af0 : PUSH 0x0
+00481af2 : PUSH ECX
+00481af3 : MOV ECX,dword ptr [EDX + 0x1b4]
+00481af9 : CALL ECX
+00481afb : MOV ESP,EBP
+00481afd : POP EBP
+00481afe : RET 0x4
+00481b01 : MOV ECX,dword ptr [ECX + 0xf0]
+00481b07 : MOV EDX,dword ptr [ECX]
+00481b09 : PUSH EAX
+00481b0a : PUSH 0x3c
+00481b0c : PUSH ECX
+00481b0d : MOV ECX,dword ptr [EDX + 0xe4]
+00481b13 : CALL ECX
+00481b15 : MOV ESP,EBP
+00481b17 : POP EBP
+00481b18 : RET 0x4

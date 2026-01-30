@@ -1,0 +1,141 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00585610
+ENTRY    : 00585610
+BODY     : [[00585610, 0058566c] [00585670, 005856d3]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00585610(int param_1,int param_2)
+
+{
+  int iVar1;
+  int in_ECX;
+  int iVar2;
+  int iVar3;
+  uint uVar4;
+  
+  if (*(int *)(in_ECX + 0x38) != 0) {
+    if (0 < param_2) {
+      iVar2 = param_1 * 4;
+      iVar3 = param_2;
+      do {
+        iVar1 = *(int *)(iVar2 + *(int *)(in_ECX + 0x34));
+        if (iVar1 != 0) {
+          FUN_00526bc0();
+          FUN_00515cf0(iVar1);
+        }
+        iVar2 = iVar2 + 4;
+        iVar3 = iVar3 + -1;
+      } while (iVar3 != 0);
+    }
+    param_1 = param_1 + param_2;
+    if (param_1 < *(int *)(in_ECX + 0x38)) {
+      iVar2 = (param_1 - param_2) * 4;
+      do {
+        *(undefined4 *)(iVar2 + *(int *)(in_ECX + 0x34)) =
+             *(undefined4 *)(*(int *)(in_ECX + 0x34) + param_1 * 4);
+        *(undefined4 *)(*(int *)(in_ECX + 0x34) + param_1 * 4) = 0;
+        param_1 = param_1 + 1;
+        iVar2 = iVar2 + 4;
+      } while (param_1 < *(int *)(in_ECX + 0x38));
+    }
+    uVar4 = *(int *)(in_ECX + 0x38) - param_2;
+    if (uVar4 < *(uint *)(in_ECX + 0x38)) {
+      if (uVar4 < *(uint *)(in_ECX + 0x3c) >> 1) {
+        FUN_005b5ef0(in_ECX + 0x34,uVar4);
+        *(uint *)(in_ECX + 0x38) = uVar4;
+        return;
+      }
+    }
+    else if (*(uint *)(in_ECX + 0x3c) <= uVar4) {
+      FUN_005b5ef0(in_ECX + 0x34,(uVar4 >> 2) + uVar4);
+    }
+    *(uint *)(in_ECX + 0x38) = uVar4;
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00585610 : PUSH ESI
+00585611 : MOV ESI,ECX
+00585613 : CMP dword ptr [ESI + 0x38],0x0
+00585617 : JZ 0x005856d0
+0058561d : MOV ECX,dword ptr [ESP + 0xc]
+00585621 : PUSH EDI
+00585622 : TEST ECX,ECX
+00585624 : JLE 0x00585657
+00585626 : PUSH EBX
+00585627 : MOV EBX,dword ptr [ESP + 0x10]
+0058562b : ADD EBX,EBX
+0058562d : PUSH EBP
+0058562e : ADD EBX,EBX
+00585630 : MOV EBP,ECX
+00585632 : MOV EAX,dword ptr [ESI + 0x34]
+00585635 : MOV EDI,dword ptr [EBX + EAX*0x1]
+00585638 : TEST EDI,EDI
+0058563a : JZ 0x0058564d
+0058563c : MOV ECX,EDI
+0058563e : CALL 0x00526bc0
+00585643 : PUSH EDI
+00585644 : CALL 0x00515cf0
+00585649 : MOV ECX,dword ptr [ESP + 0x18]
+0058564d : ADD EBX,0x4
+00585650 : SUB EBP,0x1
+00585653 : JNZ 0x00585632
+00585655 : POP EBP
+00585656 : POP EBX
+00585657 : MOV EDX,dword ptr [ESP + 0xc]
+0058565b : LEA EAX,[EDX + ECX*0x1]
+0058565e : CMP EAX,dword ptr [ESI + 0x38]
+00585661 : JGE 0x00585690
+00585663 : MOV EDX,EAX
+00585665 : SUB EDX,ECX
+00585667 : ADD EDX,EDX
+00585669 : ADD EDX,EDX
+0058566b : JMP 0x00585670
+00585670 : MOV ECX,dword ptr [ESI + 0x34]
+00585673 : MOV EDI,dword ptr [ECX + EAX*0x4]
+00585676 : MOV dword ptr [EDX + ECX*0x1],EDI
+00585679 : MOV ECX,dword ptr [ESI + 0x34]
+0058567c : MOV dword ptr [ECX + EAX*0x4],0x0
+00585683 : INC EAX
+00585684 : ADD EDX,0x4
+00585687 : CMP EAX,dword ptr [ESI + 0x38]
+0058568a : JL 0x00585670
+0058568c : MOV ECX,dword ptr [ESP + 0x10]
+00585690 : MOV EDI,dword ptr [ESI + 0x38]
+00585693 : SUB EDI,ECX
+00585695 : ADD ESI,0x34
+00585698 : CMP EDI,dword ptr [ESI + 0x4]
+0058569b : JNC 0x005856b7
+0058569d : MOV EDX,dword ptr [ESI + 0x8]
+005856a0 : SHR EDX,0x1
+005856a2 : CMP EDI,EDX
+005856a4 : JNC 0x005856cc
+005856a6 : PUSH EDI
+005856a7 : PUSH ESI
+005856a8 : MOV ECX,ESI
+005856aa : CALL 0x005b5ef0
+005856af : MOV dword ptr [ESI + 0x4],EDI
+005856b2 : POP EDI
+005856b3 : POP ESI
+005856b4 : RET 0x8
+005856b7 : CMP EDI,dword ptr [ESI + 0x8]
+005856ba : JC 0x005856cc
+005856bc : MOV EAX,EDI
+005856be : SHR EAX,0x2
+005856c1 : ADD EAX,EDI
+005856c3 : PUSH EAX
+005856c4 : PUSH ESI
+005856c5 : MOV ECX,ESI
+005856c7 : CALL 0x005b5ef0
+005856cc : MOV dword ptr [ESI + 0x4],EDI
+005856cf : POP EDI
+005856d0 : POP ESI
+005856d1 : RET 0x8

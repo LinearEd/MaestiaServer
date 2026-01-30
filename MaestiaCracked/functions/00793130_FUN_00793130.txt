@@ -1,0 +1,66 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00793130
+ENTRY    : 00793130
+BODY     : [[00793130, 007931a0]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00793130(void)
+
+{
+  int in_ECX;
+  float *in_EDX;
+  
+  if ((((*(float *)(in_ECX + 0x9c) != *in_EDX) || (*(float *)(in_ECX + 0xa0) != in_EDX[1])) ||
+      (*(float *)(in_ECX + 0xa4) != in_EDX[2])) || (*(int *)(in_ECX + 0x5c) == 0)) {
+    *(float **)(in_ECX + 0x5c) = in_EDX;
+    *(float *)(in_ECX + 0x60) = *in_EDX;
+    *(float *)(in_ECX + 100) = in_EDX[1];
+    *(float *)(in_ECX + 0x68) = in_EDX[2];
+    *(undefined1 *)(in_ECX + 0x98) = 1;
+    *(float *)(in_ECX + 0x9c) = *in_EDX;
+    *(float *)(in_ECX + 0xa0) = in_EDX[1];
+    *(float *)(in_ECX + 0xa4) = in_EDX[2];
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00793130 : MOVSS XMM0,dword ptr [ECX + 0x9c]
+00793138 : UCOMISS XMM0,dword ptr [EDX]
+0079313b : LAHF
+0079313c : TEST AH,0x44
+0079313f : JP 0x0079316b
+00793141 : MOVSS XMM0,dword ptr [ECX + 0xa0]
+00793149 : UCOMISS XMM0,dword ptr [EDX + 0x4]
+0079314d : LAHF
+0079314e : TEST AH,0x44
+00793151 : JP 0x0079316b
+00793153 : MOVSS XMM0,dword ptr [ECX + 0xa4]
+0079315b : UCOMISS XMM0,dword ptr [EDX + 0x8]
+0079315f : LAHF
+00793160 : TEST AH,0x44
+00793163 : JP 0x0079316b
+00793165 : CMP dword ptr [ECX + 0x5c],0x0
+00793169 : JNZ 0x007931a0
+0079316b : MOV dword ptr [ECX + 0x5c],EDX
+0079316e : FLD float ptr [EDX]
+00793170 : FSTP float ptr [ECX + 0x60]
+00793173 : FLD float ptr [EDX + 0x4]
+00793176 : FSTP float ptr [ECX + 0x64]
+00793179 : FLD float ptr [EDX + 0x8]
+0079317c : FSTP float ptr [ECX + 0x68]
+0079317f : MOV byte ptr [ECX + 0x98],0x1
+00793186 : FLD float ptr [EDX]
+00793188 : FSTP float ptr [ECX + 0x9c]
+0079318e : FLD float ptr [EDX + 0x4]
+00793191 : FSTP float ptr [ECX + 0xa0]
+00793197 : FLD float ptr [EDX + 0x8]
+0079319a : FSTP float ptr [ECX + 0xa4]
+007931a0 : RET

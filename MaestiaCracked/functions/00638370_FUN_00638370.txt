@@ -1,0 +1,153 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00638370
+ENTRY    : 00638370
+BODY     : [[00638370, 0063848c]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+float10 FUN_00638370(double param_1,undefined2 param_2)
+
+{
+  uint uVar1;
+  uint uVar2;
+  int iVar3;
+  ushort in_FPUControlWord;
+  float10 fVar4;
+  double dVar5;
+  ulonglong uVar6;
+  undefined4 uVar7;
+  undefined8 uVar8;
+  
+  if ((DAT_01728c20 != 0) && ((MXCSR & 0x1f80) == 0x1f80 && (in_FPUControlWord & 0x7f) == 0x7f)) {
+    uVar2 = (uint)((ulonglong)param_1 >> 0x20);
+    uVar1 = uVar2 >> 0x14;
+    uVar6 = (ulonglong)(0x433 - (uVar2 >> 0x14 & 0x7ff));
+    if ((uVar1 & 0x800) == 0) {
+      dVar5 = (double)(((ulonglong)param_1 >> uVar6) << uVar6);
+      if (uVar1 < 0x3ff) {
+        return (float10)(double)(-(ulonglong)(0.0 < param_1) & 0x3ff0000000000000);
+      }
+      if (uVar1 < 0x433) {
+        return (float10)(dVar5 + (double)(-(ulonglong)(dVar5 < param_1) & 0x3ff0000000000000));
+      }
+    }
+    else {
+      if (uVar1 < 0xbff) {
+        return (float10)-0.0;
+      }
+      if (uVar1 < 0xc33) {
+        return (float10)(double)(((ulonglong)param_1 >> uVar6) << uVar6);
+      }
+    }
+    if (NAN(param_1)) {
+      ___libm_error_support(&param_1,&param_1,&param_1,0x3ec);
+    }
+    return (float10)(double)CONCAT26(param_1._6_2_,param_1._0_6_);
+  }
+  uVar2 = __ctrlfp(DAT_00d67e48,0xffff);
+  if ((param_1._6_2_ & 0x7ff0) == 0x7ff0) {
+    iVar3 = __sptype();
+    if (0 < iVar3) {
+      if (iVar3 < 3) {
+        __ctrlfp(uVar2,0xffff);
+        return (float10)(double)CONCAT26(param_1._6_2_,param_1._0_6_);
+      }
+      if (iVar3 == 3) {
+        fVar4 = (float10)__handle_qnan1();
+        return fVar4;
+      }
+    }
+    dVar5 = (double)CONCAT26(param_1._6_2_,param_1._0_6_) + 1.0;
+    uVar8 = CONCAT26(param_1._6_2_,param_1._0_6_);
+    uVar7 = 8;
+  }
+  else {
+    fVar4 = (float10)__frnd((int)param_1._0_6_,(int)(CONCAT26(param_1._6_2_,param_1._0_6_) >> 0x20))
+    ;
+    dVar5 = (double)fVar4;
+    if (((double)CONCAT26(param_1._6_2_,param_1._0_6_) == dVar5) || ((uVar2 & 0x20) != 0)) {
+      __ctrlfp(uVar2,0xffff);
+      return (float10)dVar5;
+    }
+    uVar8 = CONCAT26(param_1._6_2_,param_1._0_6_);
+    uVar7 = 0x10;
+  }
+  fVar4 = (float10)__except1(uVar7,0xc,uVar8,dVar5,uVar2);
+  return fVar4;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00638370 : CMP dword ptr [0x01728c20],0x0
+00638377 : JZ 0x00652d4a
+0063837d : SUB ESP,0x8
+00638380 : STMXCSR dword ptr [ESP + 0x4]
+00638385 : MOV EAX,dword ptr [ESP + 0x4]
+00638389 : AND EAX,0x1f80
+0063838e : CMP EAX,0x1f80
+00638393 : JNZ 0x006383a4
+00638395 : FNSTCW word ptr [ESP]
+00638398 : MOV AX,word ptr [ESP]
+0063839c : AND AX,0x7f
+006383a0 : CMP AX,0x7f
+006383a4 : LEA ESP,[ESP + 0x8]
+006383a8 : JNZ 0x00652d4a
+006383ae : JMP 0x006383b0
+006383b0 : MOVQ XMM0,qword ptr [ESP + 0x4]
+006383b6 : MOVAPD XMM2,xmmword ptr [0x00b961e0]
+006383be : MOVAPD XMM1,XMM0
+006383c2 : MOVAPD XMM7,XMM0
+006383c6 : PSRLQ XMM0,0x34
+006383cb : MOVD EAX,XMM0
+006383cf : ANDPD XMM0,xmmword ptr [0x00b96200]
+006383d7 : PSUBD XMM2,XMM0
+006383db : PSRLQ XMM1,XMM2
+006383df : TEST EAX,0x800
+006383e4 : JZ 0x00638432
+006383e6 : CMP EAX,0xbff
+006383eb : JL 0x0063846a
+006383ed : PSLLQ XMM1,XMM2
+006383f1 : CMP EAX,0xc32
+006383f6 : JG 0x00638403
+006383f8 : MOVQ qword ptr [ESP + 0x4],XMM1
+006383fe : FLD double ptr [ESP + 0x4]
+00638402 : RET
+00638403 : UCOMISD XMM7,XMM7
+00638407 : JNP 0x0063842d
+00638409 : MOV EDX,0x3ec
+0063840e : SUB ESP,0x10
+00638411 : MOV dword ptr [ESP + 0xc],EDX
+00638415 : MOV EDX,ESP
+00638417 : ADD EDX,0x14
+0063841a : MOV dword ptr [ESP + 0x8],EDX
+0063841e : MOV dword ptr [ESP + 0x4],EDX
+00638422 : MOV dword ptr [ESP],EDX
+00638425 : CALL 0x00652a86
+0063842a : ADD ESP,0x10
+0063842d : FLD double ptr [ESP + 0x4]
+00638431 : RET
+00638432 : MOVQ XMM0,qword ptr [ESP + 0x4]
+00638438 : PSLLQ XMM1,XMM2
+0063843c : MOVAPD XMM3,XMM0
+00638440 : CMPNLEPD XMM0,XMM1
+00638445 : CMP EAX,0x3ff
+0063844a : JL 0x00638471
+0063844c : CMP EAX,0x432
+00638451 : JG 0x00638403
+00638453 : ANDPD XMM0,xmmword ptr [0x00b961d0]
+0063845b : ADDSD XMM1,XMM0
+0063845f : MOVQ qword ptr [ESP + 0x4],XMM1
+00638465 : FLD double ptr [ESP + 0x4]
+00638469 : RET
+0063846a : FLD double ptr [0x00b96210]
+00638470 : RET
+00638471 : CMPNLEPD XMM3,xmmword ptr [0x00b961f0]
+0063847a : ANDPD XMM3,xmmword ptr [0x00b961d0]
+00638482 : MOVQ qword ptr [ESP + 0x4],XMM3
+00638488 : FLD double ptr [ESP + 0x4]
+0063848c : RET

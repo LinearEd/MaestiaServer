@@ -1,0 +1,115 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00724230
+ENTRY    : 00724230
+BODY     : [[00724230, 007242f6]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+char FUN_00724230(undefined4 param_1)
+
+{
+  int iVar1;
+  int *in_ECX;
+  undefined4 local_10;
+  undefined4 local_c;
+  
+  if ((char)in_ECX[4] == '\0') {
+    return '\x01';
+  }
+  iVar1 = in_ECX[1];
+  if (iVar1 == 0) {
+    local_10 = 0;
+    local_c = 0;
+    iVar1 = FUN_004ca910(param_1,&local_10);
+    if (iVar1 == 4) {
+      (**(code **)(*in_ECX + 4))();
+      if (*(char *)((int)in_ECX + 0x13) != '\0') {
+        return -0x80;
+      }
+    }
+    else {
+      if (iVar1 == 1) {
+        return '\x01';
+      }
+      *(undefined4 *)in_ECX[0x24] = local_10;
+      *(undefined4 *)(in_ECX[0x24] + 4) = local_c;
+    }
+  }
+  else if ((iVar1 != 1) && (iVar1 != 2)) {
+    return (iVar1 != 4) * '\b' + '\b';
+  }
+  return '\x10';
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00724230 : PUSH EBP
+00724231 : MOV EBP,ESP
+00724233 : AND ESP,0xfffffff8
+00724236 : SUB ESP,0xc
+00724239 : PUSH ESI
+0072423a : MOV ESI,ECX
+0072423c : CMP byte ptr [ESI + 0x10],0x0
+00724240 : JNZ 0x0072424e
+00724242 : MOV EAX,0x1
+00724247 : POP ESI
+00724248 : MOV ESP,EBP
+0072424a : POP EBP
+0072424b : RET 0x4
+0072424e : MOV EAX,dword ptr [ESI + 0x4]
+00724251 : TEST EAX,EAX
+00724253 : JZ 0x0072427f
+00724255 : CMP EAX,0x1
+00724258 : JZ 0x007242eb
+0072425e : CMP EAX,0x2
+00724261 : JZ 0x007242eb
+00724267 : XOR ECX,ECX
+00724269 : CMP EAX,0x4
+0072426c : SETNZ CL
+0072426f : LEA ECX,[ECX*0x8 + 0x8]
+00724276 : MOV EAX,ECX
+00724278 : POP ESI
+00724279 : MOV ESP,EBP
+0072427b : POP EBP
+0072427c : RET 0x4
+0072427f : XORPS XMM0,XMM0
+00724282 : FLD float ptr [EBP + 0x8]
+00724285 : LEA EDX,[ESP + 0x8]
+00724289 : PUSH EDX
+0072428a : PUSH ECX
+0072428b : XOR EAX,EAX
+0072428d : FSTP float ptr [ESP]
+00724290 : MOVSS dword ptr [ESP + 0x10],XMM0
+00724296 : MOVSS dword ptr [ESP + 0x14],XMM0
+0072429c : CALL 0x004ca910
+007242a1 : CMP EAX,0x4
+007242a4 : JNZ 0x007242c1
+007242a6 : MOV EAX,dword ptr [ESI]
+007242a8 : MOV EDX,dword ptr [EAX + 0x4]
+007242ab : MOV ECX,ESI
+007242ad : CALL EDX
+007242af : CMP byte ptr [ESI + 0x13],0x0
+007242b3 : JZ 0x007242eb
+007242b5 : MOV EAX,0x80
+007242ba : POP ESI
+007242bb : MOV ESP,EBP
+007242bd : POP EBP
+007242be : RET 0x4
+007242c1 : CMP EAX,0x1
+007242c4 : JZ 0x00724242
+007242ca : MOV EAX,dword ptr [ESI + 0x90]
+007242d0 : MOVSS XMM0,dword ptr [ESP + 0x8]
+007242d6 : MOVSS dword ptr [EAX],XMM0
+007242da : MOV ECX,dword ptr [ESI + 0x90]
+007242e0 : MOVSS XMM0,dword ptr [ESP + 0xc]
+007242e6 : MOVSS dword ptr [ECX + 0x4],XMM0
+007242eb : MOV EAX,0x10
+007242f0 : POP ESI
+007242f1 : MOV ESP,EBP
+007242f3 : POP EBP
+007242f4 : RET 0x4

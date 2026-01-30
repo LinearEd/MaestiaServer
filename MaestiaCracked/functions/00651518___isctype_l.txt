@@ -1,0 +1,138 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __isctype_l
+ENTRY    : 00651518
+BODY     : [[00651518, 006515cf]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __isctype_l
+   
+   Library: Visual Studio 2008 Release */
+
+int __cdecl __isctype_l(int _C,int _Type,_locale_t _Locale)
+
+{
+  int iVar1;
+  BOOL BVar2;
+  CHAR CVar3;
+  localeinfo_struct local_1c;
+  int local_14;
+  char local_10;
+  CHAR local_c;
+  CHAR local_b;
+  undefined1 local_a;
+  ushort local_8 [2];
+  
+  _LocaleUpdate::_LocaleUpdate((_LocaleUpdate *)&local_1c,_Locale);
+  if (_C + 1U < 0x101) {
+    local_8[0] = *(ushort *)(local_1c.locinfo[1].lc_category[0].locale + _C * 2);
+  }
+  else {
+    iVar1 = __isleadbyte_l(_C >> 8 & 0xff,&local_1c);
+    CVar3 = (CHAR)_C;
+    if (iVar1 == 0) {
+      local_b = '\0';
+      iVar1 = 1;
+      local_c = CVar3;
+    }
+    else {
+      _C._0_1_ = (CHAR)((uint)_C >> 8);
+      local_c = (CHAR)_C;
+      local_a = 0;
+      iVar1 = 2;
+      local_b = CVar3;
+    }
+    BVar2 = ___crtGetStringTypeA
+                      (&local_1c,1,&local_c,iVar1,local_8,(local_1c.locinfo)->lc_codepage,
+                       (BOOL)(local_1c.locinfo)->lc_category[0].wlocale);
+    if (BVar2 == 0) {
+      if (local_10 != '\0') {
+        *(uint *)(local_14 + 0x70) = *(uint *)(local_14 + 0x70) & 0xfffffffd;
+      }
+      return 0;
+    }
+  }
+  if (local_10 != '\0') {
+    *(uint *)(local_14 + 0x70) = *(uint *)(local_14 + 0x70) & 0xfffffffd;
+  }
+  return (uint)local_8[0] & _Type;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00651518 : MOV EDI,EDI
+0065151a : PUSH EBP
+0065151b : MOV EBP,ESP
+0065151d : SUB ESP,0x18
+00651520 : PUSH EBX
+00651521 : PUSH dword ptr [EBP + 0x10]
+00651524 : LEA ECX,[EBP + -0x18]
+00651527 : CALL 0x00637880
+0065152c : MOV EBX,dword ptr [EBP + 0x8]
+0065152f : LEA EAX,[EBX + 0x1]
+00651532 : CMP EAX,0x100
+00651537 : JA 0x00651548
+00651539 : MOV EAX,dword ptr [EBP + -0x18]
+0065153c : MOV EAX,dword ptr [EAX + 0xc8]
+00651542 : MOVZX EAX,word ptr [EAX + EBX*0x2]
+00651546 : JMP 0x006515bd
+00651548 : MOV dword ptr [EBP + 0x8],EBX
+0065154b : SAR dword ptr [EBP + 0x8],0x8
+0065154f : LEA EAX,[EBP + -0x18]
+00651552 : PUSH EAX
+00651553 : MOV EAX,dword ptr [EBP + 0x8]
+00651556 : AND EAX,0xff
+0065155b : PUSH EAX
+0065155c : CALL 0x006390f8
+00651561 : POP ECX
+00651562 : POP ECX
+00651563 : TEST EAX,EAX
+00651565 : JZ 0x00651579
+00651567 : MOV AL,byte ptr [EBP + 0x8]
+0065156a : PUSH 0x2
+0065156c : MOV byte ptr [EBP + -0x8],AL
+0065156f : MOV byte ptr [EBP + -0x7],BL
+00651572 : MOV byte ptr [EBP + -0x6],0x0
+00651576 : POP ECX
+00651577 : JMP 0x00651583
+00651579 : XOR ECX,ECX
+0065157b : MOV byte ptr [EBP + -0x8],BL
+0065157e : MOV byte ptr [EBP + -0x7],0x0
+00651582 : INC ECX
+00651583 : MOV EAX,dword ptr [EBP + -0x18]
+00651586 : PUSH 0x1
+00651588 : PUSH dword ptr [EAX + 0x14]
+0065158b : PUSH dword ptr [EAX + 0x4]
+0065158e : LEA EAX,[EBP + -0x4]
+00651591 : PUSH EAX
+00651592 : PUSH ECX
+00651593 : LEA EAX,[EBP + -0x8]
+00651596 : PUSH EAX
+00651597 : LEA EAX,[EBP + -0x18]
+0065159a : PUSH 0x1
+0065159c : PUSH EAX
+0065159d : CALL 0x00655d21
+006515a2 : ADD ESP,0x20
+006515a5 : TEST EAX,EAX
+006515a7 : JNZ 0x006515b9
+006515a9 : CMP byte ptr [EBP + -0xc],AL
+006515ac : JZ 0x006515b5
+006515ae : MOV EAX,dword ptr [EBP + -0x10]
+006515b1 : AND dword ptr [EAX + 0x70],0xfffffffd
+006515b5 : XOR EAX,EAX
+006515b7 : JMP 0x006515cd
+006515b9 : MOVZX EAX,word ptr [EBP + -0x4]
+006515bd : AND EAX,dword ptr [EBP + 0xc]
+006515c0 : CMP byte ptr [EBP + -0xc],0x0
+006515c4 : JZ 0x006515cd
+006515c6 : MOV ECX,dword ptr [EBP + -0x10]
+006515c9 : AND dword ptr [ECX + 0x70],0xfffffffd
+006515cd : POP EBX
+006515ce : LEAVE
+006515cf : RET

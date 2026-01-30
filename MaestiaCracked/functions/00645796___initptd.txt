@@ -1,0 +1,113 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __initptd
+ENTRY    : 00645796
+BODY     : [[00645796, 00645864]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* WARNING: Function: __SEH_prolog4 replaced with injection: SEH_prolog4 */
+/* WARNING: Function: __SEH_epilog4 replaced with injection: EH_epilog3 */
+/* Library Function - Single Match
+    __initptd
+   
+   Library: Visual Studio 2008 Release */
+
+void __cdecl __initptd(_ptiddata _Ptd,pthreadlocinfo _Locale)
+
+{
+  HMODULE hModule;
+  FARPROC pFVar1;
+  
+  hModule = GetModuleHandleW(L"KERNEL32.DLL");
+  if (hModule == (HMODULE)0x0) {
+    hModule = (HMODULE)__crt_waiting_on_module_handle(L"KERNEL32.DLL");
+  }
+  _Ptd->_pxcptacttab = &DAT_00b9c0f8;
+  _Ptd->_holdrand = 1;
+  if (hModule != (HMODULE)0x0) {
+    pFVar1 = GetProcAddress(hModule,"EncodePointer");
+    *(FARPROC *)((_Ptd->_setloc_data)._cacheout + 0x1d) = pFVar1;
+    pFVar1 = GetProcAddress(hModule,"DecodePointer");
+    *(FARPROC *)((_Ptd->_setloc_data)._cacheout + 0x1f) = pFVar1;
+  }
+  _Ptd->_ownlocale = 1;
+  *(undefined1 *)((_Ptd->_setloc_data)._cachein + 8) = 0x43;
+  *(undefined1 *)((int)(_Ptd->_setloc_data)._cachein + 0x93) = 0x43;
+  _Ptd->ptmbcinfo = (pthreadmbcinfo)&DAT_00d67830;
+  __lock(0xd);
+  InterlockedIncrement(&_Ptd->ptmbcinfo->refcount);
+  FUN_0064586b();
+  __lock(0xc);
+  _Ptd->ptlocinfo = _Locale;
+  if (_Locale == (pthreadlocinfo)0x0) {
+    _Ptd->ptlocinfo = (pthreadlocinfo)PTR_DAT_00d67e38;
+  }
+  ___addlocaleref(_Ptd->ptlocinfo);
+  FUN_00645874();
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00645796 : PUSH 0xc
+00645798 : PUSH 0xcecfe8
+0064579d : CALL 0x0064c228
+006457a2 : MOV ESI,0xb9bf84
+006457a7 : PUSH ESI
+006457a8 : CALL dword ptr [0x00b8517c]
+006457ae : TEST EAX,EAX
+006457b0 : JNZ 0x006457b9
+006457b2 : PUSH ESI
+006457b3 : CALL 0x006356d3
+006457b8 : POP ECX
+006457b9 : MOV dword ptr [EBP + -0x1c],EAX
+006457bc : MOV ESI,dword ptr [EBP + 0x8]
+006457bf : MOV dword ptr [ESI + 0x5c],0xb9c0f8
+006457c6 : XOR EDI,EDI
+006457c8 : INC EDI
+006457c9 : MOV dword ptr [ESI + 0x14],EDI
+006457cc : TEST EAX,EAX
+006457ce : JZ 0x006457f4
+006457d0 : PUSH 0xb9bf74
+006457d5 : PUSH EAX
+006457d6 : MOV EBX,dword ptr [0x00b85160]
+006457dc : CALL EBX
+006457de : MOV dword ptr [ESI + 0x1f8],EAX
+006457e4 : PUSH 0xb9bfa0
+006457e9 : PUSH dword ptr [EBP + -0x1c]
+006457ec : CALL EBX
+006457ee : MOV dword ptr [ESI + 0x1fc],EAX
+006457f4 : MOV dword ptr [ESI + 0x70],EDI
+006457f7 : MOV byte ptr [ESI + 0xc8],0x43
+006457fe : MOV byte ptr [ESI + 0x14b],0x43
+00645805 : MOV dword ptr [ESI + 0x68],0xd67830
+0064580c : PUSH 0xd
+0064580e : CALL 0x0064c598
+00645813 : POP ECX
+00645814 : AND dword ptr [EBP + -0x4],0x0
+00645818 : PUSH dword ptr [ESI + 0x68]
+0064581b : CALL dword ptr [0x00b850dc]
+00645821 : MOV dword ptr [EBP + -0x4],0xfffffffe
+00645828 : CALL 0x0064586b
+0064582d : PUSH 0xc
+0064582f : CALL 0x0064c598
+00645834 : POP ECX
+00645835 : MOV dword ptr [EBP + -0x4],EDI
+00645838 : MOV EAX,dword ptr [EBP + 0xc]
+0064583b : MOV dword ptr [ESI + 0x6c],EAX
+0064583e : TEST EAX,EAX
+00645840 : JNZ 0x0064584a
+00645842 : MOV EAX,[0x00d67e38]
+00645847 : MOV dword ptr [ESI + 0x6c],EAX
+0064584a : PUSH dword ptr [ESI + 0x6c]
+0064584d : CALL 0x00639b23
+00645852 : POP ECX
+00645853 : MOV dword ptr [EBP + -0x4],0xfffffffe
+0064585a : CALL 0x00645874
+0064585f : CALL 0x0064c26d
+00645864 : RET

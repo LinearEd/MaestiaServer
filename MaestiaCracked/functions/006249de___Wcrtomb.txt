@@ -1,0 +1,117 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __Wcrtomb
+ENTRY    : 006249de
+BODY     : [[006249de, 00624a64]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __Wcrtomb
+   
+   Library: Visual Studio 2008 Release */
+
+int __cdecl __Wcrtomb(char *param_1,wchar_t param_2,mbstate_t *param_3,_Cvtvec *param_4)
+
+{
+  int iVar1;
+  uint CodePage;
+  _locale_t plVar2;
+  int *piVar3;
+  uint uVar4;
+  LPCSTR lpDefaultChar;
+  _Cvtvec **lpUsedDefaultChar;
+  
+  if (param_4 == (_Cvtvec *)0x0) {
+    iVar1 = ____lc_handle_func();
+    uVar4 = *(uint *)(iVar1 + 8);
+    CodePage = ____lc_codepage_func();
+  }
+  else {
+    uVar4 = param_4->_Page;
+    CodePage = param_4->_Mbcurmax;
+  }
+  if (uVar4 == 0) {
+    if ((ushort)param_2 < 0x100) {
+      *param_1 = (char)param_2;
+      return 1;
+    }
+  }
+  else {
+    param_4 = (_Cvtvec *)0x0;
+    plVar2 = __GetLocaleForCP(CodePage);
+    lpUsedDefaultChar = &param_4;
+    lpDefaultChar = (LPCSTR)0x0;
+    iVar1 = ____mb_cur_max_l_func(plVar2);
+    iVar1 = WideCharToMultiByte(CodePage,0,&param_2,1,param_1,iVar1,lpDefaultChar,
+                                (LPBOOL)lpUsedDefaultChar);
+    if ((iVar1 != 0) && (param_4 == (_Cvtvec *)0x0)) {
+      return iVar1;
+    }
+  }
+  piVar3 = __errno();
+  *piVar3 = 0x2a;
+  return -1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006249de : MOV EDI,EDI
+006249e0 : PUSH EBP
+006249e1 : MOV EBP,ESP
+006249e3 : MOV EAX,dword ptr [EBP + 0x14]
+006249e6 : PUSH ESI
+006249e7 : PUSH EDI
+006249e8 : TEST EAX,EAX
+006249ea : JNZ 0x006249fd
+006249ec : CALL 0x00642ac3
+006249f1 : MOV ESI,dword ptr [EAX + 0x8]
+006249f4 : CALL 0x00642a77
+006249f9 : MOV EDI,EAX
+006249fb : JMP 0x00624a02
+006249fd : MOV ESI,dword ptr [EAX]
+006249ff : MOV EDI,dword ptr [EAX + 0x4]
+00624a02 : TEST ESI,ESI
+00624a04 : JNZ 0x00624a1e
+00624a06 : MOV AX,word ptr [EBP + 0xc]
+00624a0a : MOV ECX,0xff
+00624a0f : CMP AX,CX
+00624a12 : JA 0x00624a53
+00624a14 : MOV ECX,dword ptr [EBP + 0x8]
+00624a17 : MOV byte ptr [ECX],AL
+00624a19 : XOR EAX,EAX
+00624a1b : INC EAX
+00624a1c : JMP 0x00624a61
+00624a1e : AND dword ptr [EBP + 0x14],0x0
+00624a22 : PUSH EDI
+00624a23 : CALL 0x006337ac
+00624a28 : POP ECX
+00624a29 : LEA ECX,[EBP + 0x14]
+00624a2c : PUSH ECX
+00624a2d : PUSH 0x0
+00624a2f : PUSH EAX
+00624a30 : CALL 0x00642a5b
+00624a35 : POP ECX
+00624a36 : PUSH EAX
+00624a37 : PUSH dword ptr [EBP + 0x8]
+00624a3a : LEA EAX,[EBP + 0xc]
+00624a3d : PUSH 0x1
+00624a3f : PUSH EAX
+00624a40 : PUSH 0x0
+00624a42 : PUSH EDI
+00624a43 : CALL dword ptr [0x00b85130]
+00624a49 : TEST EAX,EAX
+00624a4b : JZ 0x00624a53
+00624a4d : CMP dword ptr [EBP + 0x14],0x0
+00624a51 : JZ 0x00624a61
+00624a53 : CALL 0x0063ab82
+00624a58 : MOV dword ptr [EAX],0x2a
+00624a5e : OR EAX,0xffffffff
+00624a61 : POP EDI
+00624a62 : POP ESI
+00624a63 : POP EBP
+00624a64 : RET

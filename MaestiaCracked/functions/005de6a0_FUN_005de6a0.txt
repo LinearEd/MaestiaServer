@@ -1,0 +1,88 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005de6a0
+ENTRY    : 005de6a0
+BODY     : [[005de6a0, 005de714]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+int FUN_005de6a0(uint param_1,byte *param_2)
+
+{
+  byte bVar1;
+  int *in_ECX;
+  uint uVar2;
+  uint uVar3;
+  
+  bVar1 = *(byte *)((param_1 & 0xfff) + *(int *)(*(int *)(*in_ECX + 0xc) + (param_1 >> 0xc) * 4));
+  *param_2 = bVar1;
+  uVar2 = (uint)(byte)(&DAT_00b938d4)[bVar1 & 0xf];
+  uVar3 = uVar2;
+  if (uVar2 == 0) {
+    return 1;
+  }
+  do {
+    param_2 = param_2 + 1;
+    param_1 = param_1 + 1;
+    *param_2 = *(byte *)(*(int *)(*(int *)(*in_ECX + 0xc) + (param_1 >> 0xc) * 4) +
+                        (param_1 & 0xfff));
+    uVar3 = uVar3 - 1;
+  } while (uVar3 != 0);
+  return uVar2 + 1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005de6a0 : MOV EAX,dword ptr [ESP + 0x4]
+005de6a4 : PUSH ESI
+005de6a5 : MOV ESI,ECX
+005de6a7 : MOV EDX,dword ptr [ESI]
+005de6a9 : MOV EDX,dword ptr [EDX + 0xc]
+005de6ac : PUSH EDI
+005de6ad : MOV ECX,EAX
+005de6af : SHR ECX,0xc
+005de6b2 : MOV ECX,dword ptr [EDX + ECX*0x4]
+005de6b5 : MOV EDX,dword ptr [ESP + 0x10]
+005de6b9 : MOV EDI,EAX
+005de6bb : AND EDI,0xfff
+005de6c1 : MOV CL,byte ptr [EDI + ECX*0x1]
+005de6c4 : MOV byte ptr [EDX],CL
+005de6c6 : MOVZX ECX,CL
+005de6c9 : AND ECX,0xf
+005de6cc : MOVZX EDI,byte ptr [ECX + 0xb938d4]
+005de6d3 : INC EAX
+005de6d4 : INC EDX
+005de6d5 : MOV dword ptr [ESP + 0xc],EDI
+005de6d9 : TEST EDI,EDI
+005de6db : JBE 0x005de70d
+005de6dd : PUSH EBX
+005de6de : PUSH EBP
+005de6df : NOP
+005de6e0 : MOV EBX,dword ptr [ESI]
+005de6e2 : MOV EBX,dword ptr [EBX + 0xc]
+005de6e5 : MOV ECX,EAX
+005de6e7 : SHR ECX,0xc
+005de6ea : MOV ECX,dword ptr [EBX + ECX*0x4]
+005de6ed : MOV EBP,EAX
+005de6ef : AND EBP,0xfff
+005de6f5 : MOV CL,byte ptr [ECX + EBP*0x1]
+005de6f8 : MOV byte ptr [EDX],CL
+005de6fa : INC EDX
+005de6fb : INC EAX
+005de6fc : SUB EDI,0x1
+005de6ff : JNZ 0x005de6e0
+005de701 : MOV EAX,dword ptr [ESP + 0x14]
+005de705 : POP EBP
+005de706 : POP EBX
+005de707 : POP EDI
+005de708 : INC EAX
+005de709 : POP ESI
+005de70a : RET 0x8
+005de70d : LEA EAX,[EDI + 0x1]
+005de710 : POP EDI
+005de711 : POP ESI
+005de712 : RET 0x8

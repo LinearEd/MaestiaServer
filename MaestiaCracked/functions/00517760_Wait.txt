@@ -1,0 +1,93 @@
+PROGRAM  : Maestia.exe
+FUNCTION : Wait
+ENTRY    : 00517760
+BODY     : [[00517760, 005177d2]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* public: bool __thiscall GEvent::Wait(unsigned int) */
+
+bool __thiscall GEvent::Wait(GEvent *this,uint param_1)
+
+{
+  GMutex *this_00;
+  GEvent GVar1;
+  
+                    /* 0x117760  172  ?Wait@GEvent@@QAE_NI@Z */
+  this_00 = (GMutex *)(this + 0x14);
+  GMutex::Lock(this_00);
+  if (param_1 != 0) {
+    if (param_1 == 0xffffffff) {
+      if (this[0x10] == (GEvent)0x0) {
+        do {
+          GWaitCondition::Wait((GWaitCondition *)(this + 0x28),this_00,0xffffffff);
+        } while (this[0x10] == (GEvent)0x0);
+      }
+    }
+    else if (this[0x10] == (GEvent)0x0) {
+      GWaitCondition::Wait((GWaitCondition *)(this + 0x28),this_00,param_1);
+    }
+  }
+  GVar1 = this[0x10];
+  if (this[0x11] != (GEvent)0x0) {
+    this[0x11] = (GEvent)0x0;
+    this[0x10] = (GEvent)0x0;
+  }
+  GMutex::Unlock(this_00);
+  return (bool)GVar1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00517760 : PUSH EBX
+00517761 : PUSH ESI
+00517762 : MOV ESI,ECX
+00517764 : PUSH EDI
+00517765 : LEA EDI,[ESI + 0x14]
+00517768 : MOV ECX,EDI
+0051776a : CALL 0x005162b0
+0051776f : MOV EAX,dword ptr [ESP + 0x10]
+00517773 : TEST EAX,EAX
+00517775 : JZ 0x005177b2
+00517777 : CMP EAX,-0x1
+0051777a : JZ 0x0051778f
+0051777c : MOV CL,byte ptr [ESI + 0x10]
+0051777f : TEST CL,CL
+00517781 : JNZ 0x005177b2
+00517783 : PUSH EAX
+00517784 : PUSH EDI
+00517785 : LEA ECX,[ESI + 0x28]
+00517788 : CALL 0x00516820
+0051778d : JMP 0x005177b2
+0051778f : MOV DL,byte ptr [ESI + 0x10]
+00517792 : TEST DL,DL
+00517794 : JNZ 0x005177b2
+00517796 : PUSH EBP
+00517797 : LEA EBP,[ESI + 0x28]
+0051779a : LEA EBX,[EBX]
+005177a0 : PUSH -0x1
+005177a2 : PUSH EDI
+005177a3 : MOV ECX,EBP
+005177a5 : CALL 0x00516820
+005177aa : MOV AL,byte ptr [ESI + 0x10]
+005177ad : TEST AL,AL
+005177af : JZ 0x005177a0
+005177b1 : POP EBP
+005177b2 : MOV BL,byte ptr [ESI + 0x10]
+005177b5 : MOV CL,byte ptr [ESI + 0x11]
+005177b8 : TEST CL,CL
+005177ba : JZ 0x005177c4
+005177bc : MOV byte ptr [ESI + 0x11],0x0
+005177c0 : MOV byte ptr [ESI + 0x10],0x0
+005177c4 : MOV ECX,EDI
+005177c6 : CALL 0x005170a0
+005177cb : POP EDI
+005177cc : POP ESI
+005177cd : MOV AL,BL
+005177cf : POP EBX
+005177d0 : RET 0x4

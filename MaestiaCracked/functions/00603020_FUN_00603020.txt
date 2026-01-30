@@ -1,0 +1,71 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00603020
+ENTRY    : 00603020
+BODY     : [[00603020, 0060307f]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+int FUN_00603020(undefined4 param_1,undefined4 param_2,undefined4 param_3)
+
+{
+  uint *puVar1;
+  undefined4 *puVar2;
+  int in_ECX;
+  uint uVar3;
+  
+  puVar1 = (uint *)(in_ECX + 0x40);
+  uVar3 = *puVar1 >> 8;
+  if (*(uint *)(in_ECX + 0x44) <= uVar3) {
+    FUN_00602fb0(uVar3);
+  }
+  puVar2 = (undefined4 *)(*(int *)(*(int *)(in_ECX + 0x4c) + uVar3 * 4) + (*puVar1 & 0xff) * 0xc);
+  *puVar2 = param_1;
+  puVar2[1] = param_2;
+  puVar2[2] = param_3;
+  *puVar1 = *puVar1 + 1;
+  return *puVar1 - 1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00603020 : SUB ESP,0xc
+00603023 : FLD float ptr [ESP + 0x10]
+00603027 : PUSH EBX
+00603028 : MOV EBX,dword ptr [ESP + 0x1c]
+0060302c : FSTP float ptr [ESP + 0x4]
+00603030 : FLD float ptr [ESP + 0x18]
+00603034 : PUSH ESI
+00603035 : LEA ESI,[ECX + 0x40]
+00603038 : FSTP float ptr [ESP + 0xc]
+0060303c : PUSH EDI
+0060303d : MOV EDI,dword ptr [ESI]
+0060303f : SHR EDI,0x8
+00603042 : CMP EDI,dword ptr [ESI + 0x4]
+00603045 : JC 0x0060304f
+00603047 : PUSH EDI
+00603048 : MOV ECX,ESI
+0060304a : CALL 0x00602fb0
+0060304f : MOV EAX,dword ptr [ESI]
+00603051 : MOV ECX,dword ptr [ESI + 0xc]
+00603054 : AND EAX,0xff
+00603059 : LEA EDX,[EAX + EAX*0x2]
+0060305c : MOV EAX,dword ptr [ECX + EDI*0x4]
+0060305f : MOV ECX,dword ptr [ESP + 0xc]
+00603063 : LEA EAX,[EAX + EDX*0x4]
+00603066 : MOV EDX,dword ptr [ESP + 0x10]
+0060306a : MOV dword ptr [EAX],ECX
+0060306c : MOV dword ptr [EAX + 0x4],EDX
+0060306f : MOV dword ptr [EAX + 0x8],EBX
+00603072 : INC dword ptr [ESI]
+00603074 : MOV EAX,dword ptr [ESI]
+00603076 : POP EDI
+00603077 : POP ESI
+00603078 : DEC EAX
+00603079 : POP EBX
+0060307a : ADD ESP,0xc
+0060307d : RET 0xc

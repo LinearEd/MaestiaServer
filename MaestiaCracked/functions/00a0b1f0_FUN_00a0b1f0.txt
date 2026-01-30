@@ -1,0 +1,107 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00a0b1f0
+ENTRY    : 00a0b1f0
+BODY     : [[00a0b1f0, 00a0b296]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+undefined4 FUN_00a0b1f0(void)
+
+{
+  HMODULE hModule;
+  wchar_t *pwVar1;
+  
+  if (DAT_00da942e == '\x01') {
+    return 1;
+  }
+  hModule = LoadLibraryW(L"PSAPI.DLL");
+  if (hModule == (HMODULE)0x0) {
+    FUN_008018d0(L"Unable to load PSAPI.DLL!\n");
+    return 0;
+  }
+  _DAT_00da9840 = GetProcAddress(hModule,"EnumProcessModules");
+  if (_DAT_00da9840 == (FARPROC)0x0) {
+    pwVar1 = L"GetProcAddress failed on EnumProcessModules!\n";
+  }
+  else {
+    _DAT_00da9844 = GetProcAddress(hModule,"GetModuleBaseNameW");
+    if (_DAT_00da9844 == (FARPROC)0x0) {
+      pwVar1 = L"GetProcAddress failed on GetModuleBaseNameW!\n";
+    }
+    else {
+      _DAT_00da9848 = GetProcAddress(hModule,"GetModuleFileNameExW");
+      if (_DAT_00da9848 != (FARPROC)0x0) {
+        DAT_00da942e = 1;
+        return 1;
+      }
+      pwVar1 = L"GetProcAddress failed on GetModuleFileNameExW\n";
+      _DAT_00da9848 = (FARPROC)0x0;
+    }
+  }
+  FUN_008018d0(pwVar1);
+  return 0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00a0b1f0 : CMP byte ptr [0x00da942e],0x1
+00a0b1f7 : JNZ 0x00a0b1ff
+00a0b1f9 : MOV EAX,0x1
+00a0b1fe : RET
+00a0b1ff : PUSH ESI
+00a0b200 : PUSH 0xcac070
+00a0b205 : CALL dword ptr [0x00b85150]
+00a0b20b : MOV ESI,EAX
+00a0b20d : TEST ESI,ESI
+00a0b20f : JNZ 0x00a0b228
+00a0b211 : MOV ESI,dword ptr [0x00da98e8]
+00a0b217 : PUSH 0xcac084
+00a0b21c : CALL 0x008018d0
+00a0b221 : ADD ESP,0x4
+00a0b224 : XOR EAX,EAX
+00a0b226 : POP ESI
+00a0b227 : RET
+00a0b228 : PUSH EDI
+00a0b229 : MOV EDI,dword ptr [0x00b85160]
+00a0b22f : PUSH 0xcac0bc
+00a0b234 : PUSH ESI
+00a0b235 : CALL EDI
+00a0b237 : MOV [0x00da9840],EAX
+00a0b23c : TEST EAX,EAX
+00a0b23e : JNZ 0x00a0b247
+00a0b240 : PUSH 0xcac0d0
+00a0b245 : JMP 0x00a0b275
+00a0b247 : PUSH 0xcac12c
+00a0b24c : PUSH ESI
+00a0b24d : CALL EDI
+00a0b24f : MOV [0x00da9844],EAX
+00a0b254 : TEST EAX,EAX
+00a0b256 : JNZ 0x00a0b25f
+00a0b258 : PUSH 0xcac140
+00a0b25d : JMP 0x00a0b275
+00a0b25f : PUSH 0xcac19c
+00a0b264 : PUSH ESI
+00a0b265 : CALL EDI
+00a0b267 : MOV [0x00da9848],EAX
+00a0b26c : TEST EAX,EAX
+00a0b26e : JNZ 0x00a0b288
+00a0b270 : PUSH 0xcac1b8
+00a0b275 : MOV ESI,dword ptr [0x00da98e8]
+00a0b27b : CALL 0x008018d0
+00a0b280 : ADD ESP,0x4
+00a0b283 : POP EDI
+00a0b284 : XOR EAX,EAX
+00a0b286 : POP ESI
+00a0b287 : RET
+00a0b288 : POP EDI
+00a0b289 : MOV byte ptr [0x00da942e],0x1
+00a0b290 : MOV EAX,0x1
+00a0b295 : POP ESI
+00a0b296 : RET

@@ -1,0 +1,58 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00405b70
+ENTRY    : 00405b70
+BODY     : [[00405b70, 00405b7c] [00405b80, 00405ba6]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+int FUN_00405b70(ushort *param_1)
+
+{
+  ushort *in_ECX;
+  int in_EDX;
+  
+  while( true ) {
+    if (in_EDX == 0) {
+      return 0;
+    }
+    if (*param_1 != *in_ECX) break;
+    param_1 = param_1 + 1;
+    in_ECX = in_ECX + 1;
+    in_EDX = in_EDX + -1;
+  }
+  return (-(uint)(*param_1 < *in_ECX) & 0xfffffffe) + 1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00405b70 : PUSH EBP
+00405b71 : MOV EBP,ESP
+00405b73 : MOV EAX,dword ptr [EBP + 0x8]
+00405b76 : PUSH ESI
+00405b77 : TEST EDX,EDX
+00405b79 : JBE 0x00405b93
+00405b7b : JMP 0x00405b80
+00405b80 : MOV SI,word ptr [EAX]
+00405b83 : CMP SI,word ptr [ECX]
+00405b86 : JNZ 0x00405b98
+00405b88 : ADD EAX,0x2
+00405b8b : ADD ECX,0x2
+00405b8e : SUB EDX,0x1
+00405b91 : JNZ 0x00405b80
+00405b93 : XOR EAX,EAX
+00405b95 : POP ESI
+00405b96 : POP EBP
+00405b97 : RET
+00405b98 : MOVZX EAX,word ptr [EAX]
+00405b9b : CMP AX,word ptr [ECX]
+00405b9e : POP ESI
+00405b9f : SBB EAX,EAX
+00405ba1 : AND EAX,0xfffffffe
+00405ba4 : INC EAX
+00405ba5 : POP EBP
+00405ba6 : RET

@@ -1,0 +1,75 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_006b5300
+ENTRY    : 006b5300
+BODY     : [[006b5300, 006b535b]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_006b5300(int *param_1)
+
+{
+  ushort uVar1;
+  short sVar2;
+  uint uVar3;
+  int in_EDX;
+  int extraout_EDX;
+  
+  uVar1 = *(byte *)(in_EDX + 0x170) - 0xb7;
+  uVar3 = (uint)uVar1;
+  if (uVar3 < (*(int *)(in_EDX + 0x14) - *(int *)(in_EDX + 0x10)) + 1U) {
+    *(int *)(in_EDX + 0x168) = *(int *)(in_EDX + 0x168) + 1;
+    if (uVar1 != 0) {
+      do {
+        sVar2 = FUN_006b41e0();
+        *param_1 = (int)sVar2;
+        param_1 = param_1 + 1;
+        uVar3 = uVar3 - 1;
+        in_EDX = extraout_EDX;
+      } while (uVar3 != 0);
+    }
+    *(undefined1 *)(in_EDX + 0x178) = 0;
+    return;
+  }
+  *(undefined4 *)(in_EDX + 0xc) = 0x82;
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006b5300 : MOVZX AX,byte ptr [EDX + 0x170]
+006b5308 : MOV ECX,0xb7
+006b530d : SUB AX,CX
+006b5310 : MOV ECX,dword ptr [EDX + 0x14]
+006b5313 : SUB ECX,dword ptr [EDX + 0x10]
+006b5316 : MOVZX EAX,AX
+006b5319 : PUSH EDI
+006b531a : MOVZX EDI,AX
+006b531d : INC ECX
+006b531e : CMP EDI,ECX
+006b5320 : JC 0x006b532b
+006b5322 : MOV dword ptr [EDX + 0xc],0x82
+006b5329 : POP EDI
+006b532a : RET
+006b532b : INC dword ptr [EDX + 0x168]
+006b5331 : XOR ECX,ECX
+006b5333 : CMP CX,AX
+006b5336 : JNC 0x006b5353
+006b5338 : PUSH ESI
+006b5339 : MOV ESI,dword ptr [ESP + 0xc]
+006b533d : LEA ECX,[ECX]
+006b5340 : MOV EAX,EDX
+006b5342 : CALL 0x006b41e0
+006b5347 : CWDE
+006b5348 : MOV dword ptr [ESI],EAX
+006b534a : ADD ESI,0x4
+006b534d : SUB EDI,0x1
+006b5350 : JNZ 0x006b5340
+006b5352 : POP ESI
+006b5353 : MOV byte ptr [EDX + 0x178],0x0
+006b535a : POP EDI
+006b535b : RET

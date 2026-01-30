@@ -1,0 +1,84 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005c1650
+ENTRY    : 005c1650
+BODY     : [[005c1650, 005c16bc]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+int FUN_005c1650(int param_1)
+
+{
+  byte *pbVar1;
+  char cVar2;
+  int iVar3;
+  int iVar4;
+  
+  cVar2 = FUN_00526030(0x23);
+  if (cVar2 == '\0') {
+    iVar3 = FUN_00526050(&DAT_00b8fdec,0,0);
+    return iVar3;
+  }
+  if (*(int *)(param_1 + 8) == 0) {
+    iVar3 = 0;
+  }
+  else {
+    iVar3 = *(int *)(param_1 + 8) + -0x10;
+  }
+  iVar3 = *(int *)(iVar3 + 0x50);
+  iVar4 = iVar3 / 1000;
+  pbVar1 = *(byte **)(param_1 + 4);
+  if (4 < *pbVar1) {
+    iVar4 = FUN_00526400();
+  }
+  *pbVar1 = 3;
+  *(double *)(pbVar1 + 4) = (double)(iVar3 % 1000);
+  return iVar4;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005c1650 : SUB ESP,0x8
+005c1653 : PUSH ESI
+005c1654 : MOV ESI,dword ptr [ESP + 0x10]
+005c1658 : PUSH 0x23
+005c165a : MOV ECX,ESI
+005c165c : CALL 0x00526030
+005c1661 : TEST AL,AL
+005c1663 : JNZ 0x005c167a
+005c1665 : PUSH 0x0
+005c1667 : PUSH 0x0
+005c1669 : PUSH 0xb8fdec
+005c166e : MOV ECX,ESI
+005c1670 : CALL 0x00526050
+005c1675 : POP ESI
+005c1676 : ADD ESP,0x8
+005c1679 : RET
+005c167a : MOV EAX,dword ptr [ESI + 0x8]
+005c167d : TEST EAX,EAX
+005c167f : JZ 0x005c1686
+005c1681 : ADD EAX,-0x10
+005c1684 : JMP 0x005c1688
+005c1686 : XOR EAX,EAX
+005c1688 : MOV EAX,dword ptr [EAX + 0x50]
+005c168b : CDQ
+005c168c : MOV ECX,0x3e8
+005c1691 : IDIV ECX
+005c1693 : MOV ESI,dword ptr [ESI + 0x4]
+005c1696 : CMP byte ptr [ESI],0x5
+005c1699 : MOV dword ptr [ESP + 0x4],EDX
+005c169d : FILD dword ptr [ESP + 0x4]
+005c16a1 : FSTP double ptr [ESP + 0x4]
+005c16a5 : JC 0x005c16ae
+005c16a7 : MOV ECX,ESI
+005c16a9 : CALL 0x00526400
+005c16ae : FLD double ptr [ESP + 0x4]
+005c16b2 : MOV byte ptr [ESI],0x3
+005c16b5 : FSTP double ptr [ESI + 0x4]
+005c16b8 : POP ESI
+005c16b9 : ADD ESP,0x8
+005c16bc : RET

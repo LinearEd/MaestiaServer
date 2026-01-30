@@ -1,0 +1,83 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00940040
+ENTRY    : 00940040
+BODY     : [[00940040, 00940094]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined4 FUN_00940040(int param_1,int *param_2,int *param_3)
+
+{
+  int iVar1;
+  int iVar2;
+  int iVar3;
+  int *unaff_EDI;
+  
+  iVar2 = 0;
+  if (*(short *)((int)unaff_EDI + 0x72) != 0) {
+    do {
+      iVar3 = 0;
+      do {
+        iVar1 = (**(code **)(*unaff_EDI + 0x74))(iVar3,iVar2);
+        if ((iVar1 != 0) && (*(int *)(iVar1 + 0x10) == param_1)) {
+          *param_2 = iVar3;
+          *param_3 = iVar2;
+          return 1;
+        }
+        iVar3 = iVar3 + 1;
+      } while (iVar3 < 5);
+      iVar2 = iVar2 + 1;
+    } while (iVar2 < (int)(uint)*(ushort *)((int)unaff_EDI + 0x72));
+  }
+  return 0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00940040 : PUSH EBP
+00940041 : MOV EBP,ESP
+00940043 : PUSH EBX
+00940044 : XOR EAX,EAX
+00940046 : XOR EBX,EBX
+00940048 : PUSH ESI
+00940049 : CMP AX,word ptr [EDI + 0x72]
+0094004d : JNC 0x00940078
+0094004f : NOP
+00940050 : XOR ESI,ESI
+00940052 : MOV EDX,dword ptr [EDI]
+00940054 : MOV EAX,dword ptr [EDX + 0x74]
+00940057 : PUSH EBX
+00940058 : PUSH ESI
+00940059 : MOV ECX,EDI
+0094005b : CALL EAX
+0094005d : TEST EAX,EAX
+0094005f : JZ 0x00940069
+00940061 : MOV ECX,dword ptr [EBP + 0x8]
+00940064 : CMP dword ptr [EAX + 0x10],ECX
+00940067 : JZ 0x00940080
+00940069 : INC ESI
+0094006a : CMP ESI,0x5
+0094006d : JL 0x00940052
+0094006f : MOVZX EDX,word ptr [EDI + 0x72]
+00940073 : INC EBX
+00940074 : CMP EBX,EDX
+00940076 : JL 0x00940050
+00940078 : POP ESI
+00940079 : XOR EAX,EAX
+0094007b : POP EBX
+0094007c : POP EBP
+0094007d : RET 0xc
+00940080 : MOV EAX,dword ptr [EBP + 0xc]
+00940083 : MOV ECX,dword ptr [EBP + 0x10]
+00940086 : MOV dword ptr [EAX],ESI
+00940088 : POP ESI
+00940089 : MOV dword ptr [ECX],EBX
+0094008b : MOV EAX,0x1
+00940090 : POP EBX
+00940091 : POP EBP
+00940092 : RET 0xc

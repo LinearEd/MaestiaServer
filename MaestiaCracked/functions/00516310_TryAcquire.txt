@@ -1,0 +1,49 @@
+PROGRAM  : Maestia.exe
+FUNCTION : TryAcquire
+ENTRY    : 00516310
+BODY     : [[00516310, 00516330]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* public: virtual bool __thiscall GMutex::TryAcquire(void) */
+
+bool __thiscall GMutex::TryAcquire(GMutex *this)
+
+{
+  int *piVar1;
+  undefined4 *puVar2;
+  DWORD DVar3;
+  
+                    /* 0x116310  160  ?TryAcquire@GMutex@@UAE_NXZ */
+  puVar2 = *(undefined4 **)(this + 4);
+  DVar3 = WaitForSingleObject((HANDLE)*puVar2,0);
+  if (DVar3 != 0) {
+    return false;
+  }
+  piVar1 = puVar2 + 2;
+  *piVar1 = *piVar1 + 1;
+  return true;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00516310 : PUSH ESI
+00516311 : MOV ESI,dword ptr [ECX + 0x4]
+00516314 : MOV EAX,dword ptr [ESI]
+00516316 : PUSH 0x0
+00516318 : PUSH EAX
+00516319 : CALL dword ptr [0x00b85100]
+0051631f : TEST EAX,EAX
+00516321 : JZ 0x00516327
+00516323 : XOR AL,AL
+00516325 : POP ESI
+00516326 : RET
+00516327 : MOV EAX,0x1
+0051632c : ADD dword ptr [ESI + 0x8],EAX
+0051632f : POP ESI
+00516330 : RET

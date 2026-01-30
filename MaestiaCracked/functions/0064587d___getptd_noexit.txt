@@ -1,0 +1,98 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __getptd_noexit
+ENTRY    : 0064587d
+BODY     : [[0064587d, 006458f5]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __getptd_noexit
+   
+   Library: Visual Studio 2008 Release */
+
+_ptiddata __cdecl __getptd_noexit(void)
+
+{
+  DWORD dwErrCode;
+  code *pcVar1;
+  _ptiddata _Ptd;
+  int iVar2;
+  DWORD DVar3;
+  
+  dwErrCode = GetLastError();
+  pcVar1 = (code *)___set_flsgetvalue(DAT_00d67558);
+  _Ptd = (_ptiddata)(*pcVar1)();
+  if (_Ptd == (_ptiddata)0x0) {
+    _Ptd = __calloc_crt(1,0x214);
+    if (_Ptd != (_ptiddata)0x0) {
+      pcVar1 = (code *)__decode_pointer(DAT_00d7be54,DAT_00d67558,_Ptd);
+      iVar2 = (*pcVar1)();
+      if (iVar2 == 0) {
+        _free(_Ptd);
+        _Ptd = (_ptiddata)0x0;
+      }
+      else {
+        __initptd(_Ptd,(pthreadlocinfo)0x0);
+        DVar3 = GetCurrentThreadId();
+        _Ptd->_thandle = 0xffffffff;
+        _Ptd->_tid = DVar3;
+      }
+    }
+  }
+  SetLastError(dwErrCode);
+  return _Ptd;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0064587d : MOV EDI,EDI
+0064587f : PUSH ESI
+00645880 : PUSH EDI
+00645881 : CALL dword ptr [0x00b85128]
+00645887 : PUSH dword ptr [0x00d67558]
+0064588d : MOV EDI,EAX
+0064588f : CALL 0x00645708
+00645894 : CALL EAX
+00645896 : MOV ESI,EAX
+00645898 : TEST ESI,ESI
+0064589a : JNZ 0x006458ea
+0064589c : PUSH 0x214
+006458a1 : PUSH 0x1
+006458a3 : CALL 0x006425a4
+006458a8 : MOV ESI,EAX
+006458aa : POP ECX
+006458ab : POP ECX
+006458ac : TEST ESI,ESI
+006458ae : JZ 0x006458ea
+006458b0 : PUSH ESI
+006458b1 : PUSH dword ptr [0x00d67558]
+006458b7 : PUSH dword ptr [0x00d7be54]
+006458bd : CALL 0x0064566d
+006458c2 : POP ECX
+006458c3 : CALL EAX
+006458c5 : TEST EAX,EAX
+006458c7 : JZ 0x006458e1
+006458c9 : PUSH 0x0
+006458cb : PUSH ESI
+006458cc : CALL 0x00645796
+006458d1 : POP ECX
+006458d2 : POP ECX
+006458d3 : CALL dword ptr [0x00b85168]
+006458d9 : OR dword ptr [ESI + 0x4],0xffffffff
+006458dd : MOV dword ptr [ESI],EAX
+006458df : JMP 0x006458ea
+006458e1 : PUSH ESI
+006458e2 : CALL 0x0063610d
+006458e7 : POP ECX
+006458e8 : XOR ESI,ESI
+006458ea : PUSH EDI
+006458eb : CALL dword ptr [0x00b8526c]
+006458f1 : POP EDI
+006458f2 : MOV EAX,ESI
+006458f4 : POP ESI
+006458f5 : RET

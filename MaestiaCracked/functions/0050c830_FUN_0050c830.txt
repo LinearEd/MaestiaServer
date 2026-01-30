@@ -1,0 +1,77 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0050c830
+ENTRY    : 0050c830
+BODY     : [[0050c830, 0050c879]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined4 * FUN_0050c830(undefined4 *param_1)
+
+{
+  int *piVar1;
+  undefined4 *in_ECX;
+  GRefCountNTSImpl *this;
+  
+  piVar1 = (int *)*in_ECX;
+  this = (GRefCountNTSImpl *)0x0;
+  if (piVar1 != (int *)0x0) {
+    if (piVar1[1] == 0) {
+      *piVar1 = *piVar1 + -1;
+      if (*piVar1 == 0) {
+        FUN_00515cf0(piVar1);
+      }
+      *in_ECX = 0;
+    }
+    else {
+      this = (GRefCountNTSImpl *)piVar1[1];
+      if (this != (GRefCountNTSImpl *)0x0) {
+        *(int *)(this + 4) = *(int *)(this + 4) + 1;
+        *(int *)(this + 4) = *(int *)(this + 4) + 1;
+      }
+    }
+  }
+  *param_1 = this;
+  if (this != (GRefCountNTSImpl *)0x0) {
+    GRefCountNTSImpl::Release(this);
+  }
+  return param_1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0050c830 : PUSH ESI
+0050c831 : PUSH EDI
+0050c832 : MOV EDI,ECX
+0050c834 : MOV EAX,dword ptr [EDI]
+0050c836 : XOR ESI,ESI
+0050c838 : TEST EAX,EAX
+0050c83a : JZ 0x0050c853
+0050c83c : CMP dword ptr [EAX + 0x4],ESI
+0050c83f : JZ 0x0050c86b
+0050c841 : MOV ESI,dword ptr [EAX + 0x4]
+0050c844 : TEST ESI,ESI
+0050c846 : JZ 0x0050c853
+0050c848 : MOV EAX,0x1
+0050c84d : ADD dword ptr [ESI + 0x4],EAX
+0050c850 : ADD dword ptr [ESI + 0x4],EAX
+0050c853 : MOV EDI,dword ptr [ESP + 0xc]
+0050c857 : MOV dword ptr [EDI],ESI
+0050c859 : TEST ESI,ESI
+0050c85b : JZ 0x0050c864
+0050c85d : MOV ECX,ESI
+0050c85f : CALL 0x004ff7c0
+0050c864 : MOV EAX,EDI
+0050c866 : POP EDI
+0050c867 : POP ESI
+0050c868 : RET 0x4
+0050c86b : ADD dword ptr [EAX],-0x1
+0050c86e : JNZ 0x0050c876
+0050c870 : PUSH EAX
+0050c871 : CALL 0x00515cf0
+0050c876 : MOV dword ptr [EDI],ESI
+0050c878 : JMP 0x0050c853

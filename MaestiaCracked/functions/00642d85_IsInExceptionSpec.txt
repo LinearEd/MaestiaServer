@@ -1,0 +1,107 @@
+PROGRAM  : Maestia.exe
+FUNCTION : IsInExceptionSpec
+ENTRY    : 00642d85
+BODY     : [[00642d85, 00642dff]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    unsigned char __cdecl IsInExceptionSpec(struct EHExceptionRecord *,struct _s_ESTypeList const *)
+   
+   Library: Visual Studio 2008 Release */
+
+uchar __cdecl IsInExceptionSpec(EHExceptionRecord *param_1,_s_ESTypeList *param_2)
+
+{
+  int iVar1;
+  int iVar2;
+  int *piVar3;
+  int *unaff_EDI;
+  int local_c;
+  uchar local_5;
+  
+  if (unaff_EDI == (int *)0x0) {
+    _inconsistency();
+    terminate();
+  }
+  local_c = 0;
+  local_5 = '\0';
+  if (0 < *unaff_EDI) {
+    do {
+      piVar3 = *(int **)(*(int *)(param_1 + 0x1c) + 0xc);
+      iVar2 = *piVar3;
+      if (0 < iVar2) {
+        do {
+          piVar3 = piVar3 + 1;
+          iVar1 = ___TypeMatch(unaff_EDI[1] + local_c * 0x10,*piVar3,*(undefined4 *)(param_1 + 0x1c)
+                              );
+          if (iVar1 != 0) {
+            local_5 = '\x01';
+            break;
+          }
+          iVar2 = iVar2 + -1;
+        } while (0 < iVar2);
+      }
+      local_c = local_c + 1;
+    } while (local_c < *unaff_EDI);
+  }
+  return local_5;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00642d85 : MOV EDI,EDI
+00642d87 : PUSH EBP
+00642d88 : MOV EBP,ESP
+00642d8a : SUB ESP,0xc
+00642d8d : TEST EDI,EDI
+00642d8f : JNZ 0x00642d9b
+00642d91 : CALL 0x0064c7d9
+00642d96 : CALL 0x0064c78d
+00642d9b : AND dword ptr [EBP + -0x8],0x0
+00642d9f : CMP dword ptr [EDI],0x0
+00642da2 : MOV byte ptr [EBP + -0x1],0x0
+00642da6 : JLE 0x00642dfb
+00642da8 : PUSH EBX
+00642da9 : PUSH ESI
+00642daa : MOV EAX,dword ptr [EBP + 0x8]
+00642dad : MOV EAX,dword ptr [EAX + 0x1c]
+00642db0 : MOV EAX,dword ptr [EAX + 0xc]
+00642db3 : MOV EBX,dword ptr [EAX]
+00642db5 : LEA ESI,[EAX + 0x4]
+00642db8 : TEST EBX,EBX
+00642dba : JLE 0x00642def
+00642dbc : MOV EAX,dword ptr [EBP + -0x8]
+00642dbf : SHL EAX,0x4
+00642dc2 : MOV dword ptr [EBP + -0xc],EAX
+00642dc5 : MOV ECX,dword ptr [EBP + 0x8]
+00642dc8 : PUSH dword ptr [ECX + 0x1c]
+00642dcb : MOV EAX,dword ptr [ESI]
+00642dcd : PUSH EAX
+00642dce : MOV EAX,dword ptr [EDI + 0x4]
+00642dd1 : ADD EAX,dword ptr [EBP + -0xc]
+00642dd4 : PUSH EAX
+00642dd5 : CALL 0x00642b39
+00642dda : ADD ESP,0xc
+00642ddd : TEST EAX,EAX
+00642ddf : JNZ 0x00642deb
+00642de1 : DEC EBX
+00642de2 : ADD ESI,0x4
+00642de5 : TEST EBX,EBX
+00642de7 : JG 0x00642dc5
+00642de9 : JMP 0x00642def
+00642deb : MOV byte ptr [EBP + -0x1],0x1
+00642def : INC dword ptr [EBP + -0x8]
+00642df2 : MOV EAX,dword ptr [EBP + -0x8]
+00642df5 : CMP EAX,dword ptr [EDI]
+00642df7 : JL 0x00642daa
+00642df9 : POP ESI
+00642dfa : POP EBX
+00642dfb : MOV AL,byte ptr [EBP + -0x1]
+00642dfe : LEAVE
+00642dff : RET

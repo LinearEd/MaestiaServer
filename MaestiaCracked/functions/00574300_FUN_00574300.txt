@@ -1,0 +1,105 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00574300
+ENTRY    : 00574300
+BODY     : [[00574300, 00574377]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00574300(void)
+
+{
+  int *piVar1;
+  uint uVar2;
+  int iVar3;
+  undefined4 *in_ECX;
+  uint uVar4;
+  
+  *in_ECX = &PTR_FUN_00b8d228;
+  if ((*(byte *)(in_ECX + 1) & 0x80) == 0) {
+    *in_ECX = &PTR_LAB_00b8b0b8;
+    return;
+  }
+  piVar1 = *(int **)((int)in_ECX + 5);
+  if (piVar1 == (int *)0x0) {
+    *in_ECX = &PTR_LAB_00b8b0b8;
+    return;
+  }
+  uVar2 = piVar1[1];
+  uVar4 = 0;
+  if (uVar2 != 0) {
+    do {
+      iVar3 = *(int *)(*piVar1 + uVar4 * 4);
+      if (iVar3 != 0) {
+        if (*(GRefCountImpl **)(iVar3 + 0x10) != (GRefCountImpl *)0x0) {
+          GRefCountImpl::Release(*(GRefCountImpl **)(iVar3 + 0x10));
+        }
+        FUN_00515cf0(iVar3);
+      }
+      uVar4 = uVar4 + 1;
+    } while (uVar4 < uVar2);
+  }
+  FUN_00515cf0(*piVar1);
+  FUN_00515cf0(piVar1);
+  *in_ECX = &PTR_LAB_00b8b0b8;
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00574300 : PUSH ECX
+00574301 : PUSH ESI
+00574302 : MOV ESI,ECX
+00574304 : MOV dword ptr [ESI],0xb8d228
+0057430a : TEST byte ptr [ESI + 0x4],0x80
+0057430e : MOV dword ptr [ESP + 0x4],ESI
+00574312 : JZ 0x0057436f
+00574314 : PUSH EBX
+00574315 : MOV EBX,dword ptr [ESI + 0x5]
+00574318 : TEST EBX,EBX
+0057431a : JZ 0x00574365
+0057431c : PUSH EBP
+0057431d : MOV EBP,dword ptr [EBX + 0x4]
+00574320 : PUSH EDI
+00574321 : XOR EDI,EDI
+00574323 : TEST EBP,EBP
+00574325 : JBE 0x0057434b
+00574327 : MOV EAX,dword ptr [EBX]
+00574329 : MOV ESI,dword ptr [EAX + EDI*0x4]
+0057432c : TEST ESI,ESI
+0057432e : JZ 0x00574342
+00574330 : MOV ECX,dword ptr [ESI + 0x10]
+00574333 : TEST ECX,ECX
+00574335 : JZ 0x0057433c
+00574337 : CALL 0x004ff7e0
+0057433c : PUSH ESI
+0057433d : CALL 0x00515cf0
+00574342 : INC EDI
+00574343 : CMP EDI,EBP
+00574345 : JC 0x00574327
+00574347 : MOV ESI,dword ptr [ESP + 0x10]
+0057434b : MOV ECX,dword ptr [EBX]
+0057434d : PUSH ECX
+0057434e : CALL 0x00515cf0
+00574353 : PUSH EBX
+00574354 : CALL 0x00515cf0
+00574359 : POP EDI
+0057435a : POP EBP
+0057435b : POP EBX
+0057435c : MOV dword ptr [ESI],0xb8b0b8
+00574362 : POP ESI
+00574363 : POP ECX
+00574364 : RET
+00574365 : POP EBX
+00574366 : MOV dword ptr [ESI],0xb8b0b8
+0057436c : POP ESI
+0057436d : POP ECX
+0057436e : RET
+0057436f : MOV dword ptr [ESI],0xb8b0b8
+00574375 : POP ESI
+00574376 : POP ECX
+00574377 : RET

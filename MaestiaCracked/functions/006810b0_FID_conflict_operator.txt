@@ -1,0 +1,86 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FID_conflict:operator==
+ENTRY    : 006810b0
+BODY     : [[006810b0, 0068111d]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Multiple Matches With Different Base Names
+    int __cdecl operator==(struct _GUID const &,struct _GUID const &)
+    int __cdecl IsEqualGUID(struct _GUID const &,struct _GUID const &)
+   
+   Library: Visual Studio 2008 Release */
+
+bool FID_conflict_operator__(byte *param_1,byte *param_2)
+
+{
+  uint uVar1;
+  int iVar2;
+  
+  uVar1 = 0x10;
+  do {
+    if (*(int *)param_1 != *(int *)param_2) {
+      iVar2 = (uint)*param_1 - (uint)*param_2;
+      if (((iVar2 == 0) && (iVar2 = (uint)param_1[1] - (uint)param_2[1], iVar2 == 0)) &&
+         (iVar2 = (uint)param_1[2] - (uint)param_2[2], iVar2 == 0)) {
+        iVar2 = (uint)param_1[3] - (uint)param_2[3];
+      }
+      return (iVar2 >> 0x1f | 1U) == 0;
+    }
+    uVar1 = uVar1 - 4;
+    param_2 = param_2 + 4;
+    param_1 = param_1 + 4;
+  } while (3 < uVar1);
+  return true;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006810b0 : MOV ECX,dword ptr [ESP + 0x8]
+006810b4 : MOV EDX,dword ptr [ESP + 0x4]
+006810b8 : MOV EAX,0x10
+006810bd : PUSH ESI
+006810be : MOV EDI,EDI
+006810c0 : MOV ESI,dword ptr [EDX]
+006810c2 : CMP ESI,dword ptr [ECX]
+006810c4 : JNZ 0x006810e1
+006810c6 : SUB EAX,0x4
+006810c9 : ADD ECX,0x4
+006810cc : ADD EDX,0x4
+006810cf : CMP EAX,0x4
+006810d2 : JNC 0x006810c0
+006810d4 : XOR EAX,EAX
+006810d6 : XOR EDX,EDX
+006810d8 : TEST EAX,EAX
+006810da : SETZ DL
+006810dd : POP ESI
+006810de : MOV EAX,EDX
+006810e0 : RET
+006810e1 : MOVZX EAX,byte ptr [EDX]
+006810e4 : MOVZX ESI,byte ptr [ECX]
+006810e7 : SUB EAX,ESI
+006810e9 : JNZ 0x0068110d
+006810eb : MOVZX EAX,byte ptr [EDX + 0x1]
+006810ef : MOVZX ESI,byte ptr [ECX + 0x1]
+006810f3 : SUB EAX,ESI
+006810f5 : JNZ 0x0068110d
+006810f7 : MOVZX EAX,byte ptr [EDX + 0x2]
+006810fb : MOVZX ESI,byte ptr [ECX + 0x2]
+006810ff : SUB EAX,ESI
+00681101 : JNZ 0x0068110d
+00681103 : MOVZX EAX,byte ptr [EDX + 0x3]
+00681107 : MOVZX ECX,byte ptr [ECX + 0x3]
+0068110b : SUB EAX,ECX
+0068110d : SAR EAX,0x1f
+00681110 : OR EAX,0x1
+00681113 : XOR EDX,EDX
+00681115 : TEST EAX,EAX
+00681117 : SETZ DL
+0068111a : POP ESI
+0068111b : MOV EAX,EDX
+0068111d : RET

@@ -1,0 +1,74 @@
+PROGRAM  : Maestia.exe
+FUNCTION : _ftell
+ENTRY    : 0063751f
+BODY     : [[0063751f, 00637582]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* WARNING: Function: __SEH_prolog4 replaced with injection: SEH_prolog4 */
+/* WARNING: Function: __SEH_epilog4 replaced with injection: EH_epilog3 */
+/* Library Function - Single Match
+    _ftell
+   
+   Library: Visual Studio 2008 Release */
+
+long __cdecl _ftell(FILE *_File)
+
+{
+  int *piVar1;
+  long lVar2;
+  
+  if (_File == (FILE *)0x0) {
+    piVar1 = __errno();
+    *piVar1 = 0x16;
+    __invalid_parameter(0,0,0,0,0);
+    lVar2 = -1;
+  }
+  else {
+    __lock_file(_File);
+    lVar2 = __ftell_nolock(_File);
+    FUN_00637583();
+  }
+  return lVar2;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0063751f : PUSH 0xc
+00637521 : PUSH 0xcecbd8
+00637526 : CALL 0x0064c228
+0063752b : XOR EAX,EAX
+0063752d : XOR ESI,ESI
+0063752f : CMP dword ptr [EBP + 0x8],ESI
+00637532 : SETNZ AL
+00637535 : CMP EAX,ESI
+00637537 : JNZ 0x00637556
+00637539 : CALL 0x0063ab82
+0063753e : MOV dword ptr [EAX],0x16
+00637544 : PUSH ESI
+00637545 : PUSH ESI
+00637546 : PUSH ESI
+00637547 : PUSH ESI
+00637548 : PUSH ESI
+00637549 : CALL 0x006372b8
+0063754e : ADD ESP,0x14
+00637551 : OR EAX,0xffffffff
+00637554 : JMP 0x0063757d
+00637556 : PUSH dword ptr [EBP + 0x8]
+00637559 : CALL 0x0063d990
+0063755e : POP ECX
+0063755f : MOV dword ptr [EBP + -0x4],ESI
+00637562 : PUSH dword ptr [EBP + 0x8]
+00637565 : CALL 0x00637382
+0063756a : POP ECX
+0063756b : MOV dword ptr [EBP + -0x1c],EAX
+0063756e : MOV dword ptr [EBP + -0x4],0xfffffffe
+00637575 : CALL 0x00637583
+0063757a : MOV EAX,dword ptr [EBP + -0x1c]
+0063757d : CALL 0x0064c26d
+00637582 : RET

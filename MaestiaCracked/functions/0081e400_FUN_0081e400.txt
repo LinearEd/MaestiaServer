@@ -1,0 +1,98 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0081e400
+ENTRY    : 0081e400
+BODY     : [[0081e400, 0081e48e]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_0081e400(undefined4 param_1)
+
+{
+  HRSRC in_EAX;
+  DWORD DVar1;
+  HGLOBAL hResData;
+  PBYTE presbits;
+  HICON pHVar2;
+  
+  if (in_EAX != (HRSRC)0x0) {
+    DVar1 = SizeofResource(DAT_00d7cd78,in_EAX);
+    hResData = LoadResource(DAT_00d7cd78,in_EAX);
+    if (hResData != (HGLOBAL)0x0) {
+      presbits = LockResource(hResData);
+      pHVar2 = CreateIconFromResource(presbits,DVar1,0,0x30000);
+      DVar1 = GetLastError();
+      if (0 < (int)DVar1) {
+        DVar1 = DVar1 & 0xffff | 0x80070000;
+      }
+      if (pHVar2 == (HICON)0x0) {
+        FUN_008018d0(L"Can\'t create cursor, result %08x",DVar1);
+        return;
+      }
+      FUN_007cbac0(DAT_017251d0,param_1,pHVar2);
+    }
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0081e400 : PUSH EBP
+0081e401 : MOV EBP,ESP
+0081e403 : PUSH ECX
+0081e404 : PUSH ESI
+0081e405 : MOV ESI,EAX
+0081e407 : PUSH EDI
+0081e408 : TEST ESI,ESI
+0081e40a : JZ 0x0081e488
+0081e40c : MOV EAX,[0x00d7cd78]
+0081e411 : PUSH ESI
+0081e412 : PUSH EAX
+0081e413 : CALL dword ptr [0x00b851fc]
+0081e419 : MOV ECX,dword ptr [0x00d7cd78]
+0081e41f : PUSH ESI
+0081e420 : PUSH ECX
+0081e421 : MOV EDI,EAX
+0081e423 : CALL dword ptr [0x00b85200]
+0081e429 : TEST EAX,EAX
+0081e42b : JZ 0x0081e488
+0081e42d : PUSH EAX
+0081e42e : CALL dword ptr [0x00b85204]
+0081e434 : PUSH 0x30000
+0081e439 : PUSH 0x0
+0081e43b : PUSH EDI
+0081e43c : PUSH EAX
+0081e43d : CALL dword ptr [0x00b85490]
+0081e443 : MOV ESI,EAX
+0081e445 : CALL dword ptr [0x00b85128]
+0081e44b : TEST EAX,EAX
+0081e44d : JLE 0x0081e459
+0081e44f : AND EAX,0xffff
+0081e454 : OR EAX,0x80070000
+0081e459 : TEST ESI,ESI
+0081e45b : JNZ 0x0081e478
+0081e45d : MOV ESI,dword ptr [0x00da98e8]
+0081e463 : PUSH EAX
+0081e464 : PUSH 0xc325a8
+0081e469 : CALL 0x008018d0
+0081e46e : ADD ESP,0x8
+0081e471 : POP EDI
+0081e472 : POP ESI
+0081e473 : POP ECX
+0081e474 : POP EBP
+0081e475 : RET 0x4
+0081e478 : MOV EDX,dword ptr [EBP + 0x8]
+0081e47b : MOV EAX,[0x017251d0]
+0081e480 : PUSH ESI
+0081e481 : PUSH EDX
+0081e482 : PUSH EAX
+0081e483 : CALL 0x007cbac0
+0081e488 : POP EDI
+0081e489 : POP ESI
+0081e48a : POP ECX
+0081e48b : POP EBP
+0081e48c : RET 0x4

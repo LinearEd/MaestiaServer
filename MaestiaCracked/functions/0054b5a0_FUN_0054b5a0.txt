@@ -1,0 +1,88 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0054b5a0
+ENTRY    : 0054b5a0
+BODY     : [[0054b5a0, 0054b613]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+uint FUN_0054b5a0(uint param_1,undefined1 *param_2)
+
+{
+  int *piVar1;
+  undefined1 uVar2;
+  int in_ECX;
+  
+  if ((*(byte *)(in_ECX + 0x143) & 3) != 0) {
+    FUN_00549ad0();
+    *(byte *)(in_ECX + 0x143) = *(byte *)(in_ECX + 0x143) & 0xfc;
+  }
+  if ((((int *)(in_ECX + 0x28) == (int *)0x0) || (*(uint *)(in_ECX + 0x2c) <= param_1)) ||
+     ((int)param_1 < 0)) {
+    if (param_2 != (undefined1 *)0x0) {
+      *param_2 = 0;
+    }
+    return 0xffffffff;
+  }
+  if (param_2 != (undefined1 *)0x0) {
+    uVar2 = FUN_00599270();
+    *param_2 = uVar2;
+  }
+  piVar1 = *(int **)(*(int *)(in_ECX + 0x28) + param_1 * 4);
+  if (*piVar1 < 0) {
+    return (uint)*(byte *)((int)piVar1 + 0xb);
+  }
+  return piVar1[8];
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0054b5a0 : PUSH ESI
+0054b5a1 : MOV ESI,ECX
+0054b5a3 : TEST byte ptr [ESI + 0x143],0x3
+0054b5aa : PUSH EDI
+0054b5ab : JZ 0x0054b5b9
+0054b5ad : CALL 0x00549ad0
+0054b5b2 : AND byte ptr [ESI + 0x143],0xfc
+0054b5b9 : ADD ESI,0x28
+0054b5bc : JZ 0x0054b601
+0054b5be : MOV EDI,dword ptr [ESP + 0xc]
+0054b5c2 : CMP EDI,dword ptr [ESI + 0x4]
+0054b5c5 : JNC 0x0054b601
+0054b5c7 : TEST EDI,EDI
+0054b5c9 : JL 0x0054b601
+0054b5cb : PUSH EBX
+0054b5cc : MOV EBX,dword ptr [ESP + 0x14]
+0054b5d0 : TEST EBX,EBX
+0054b5d2 : JZ 0x0054b5e0
+0054b5d4 : MOV EAX,dword ptr [ESI]
+0054b5d6 : MOV ECX,dword ptr [EAX + EDI*0x4]
+0054b5d9 : CALL 0x00599270
+0054b5de : MOV byte ptr [EBX],AL
+0054b5e0 : MOV ECX,dword ptr [ESI]
+0054b5e2 : MOV EAX,dword ptr [ECX + EDI*0x4]
+0054b5e5 : MOV EDX,dword ptr [EAX]
+0054b5e7 : SHR EDX,0x1f
+0054b5ea : POP EBX
+0054b5eb : TEST DL,0x1
+0054b5ee : JZ 0x0054b5f9
+0054b5f0 : MOVZX EAX,byte ptr [EAX + 0xb]
+0054b5f4 : POP EDI
+0054b5f5 : POP ESI
+0054b5f6 : RET 0x8
+0054b5f9 : MOV EAX,dword ptr [EAX + 0x20]
+0054b5fc : POP EDI
+0054b5fd : POP ESI
+0054b5fe : RET 0x8
+0054b601 : MOV EAX,dword ptr [ESP + 0x10]
+0054b605 : TEST EAX,EAX
+0054b607 : JZ 0x0054b60c
+0054b609 : MOV byte ptr [EAX],0x0
+0054b60c : POP EDI
+0054b60d : OR EAX,0xffffffff
+0054b610 : POP ESI
+0054b611 : RET 0x8

@@ -1,0 +1,90 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00589c60
+ENTRY    : 00589c60
+BODY     : [[00589c60, 00589ce6]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+float10 FUN_00589c60(void)
+
+{
+  int iVar1;
+  int iVar2;
+  int in_ECX;
+  float local_8;
+  int iStack_4;
+  
+  if (*(int **)(in_ECX + 0x1ac) == (int *)0x0) {
+    local_8 = 1.4013e-43;
+  }
+  else {
+    local_8 = (float)**(int **)(in_ECX + 0x1ac);
+  }
+  local_8 = (float)(int)local_8 / 100.0;
+  for (iVar1 = *(int *)(in_ECX + 0x20); iVar1 != 0; iVar1 = *(int *)(iVar1 + 0x20)) {
+    iVar2 = (**(code **)(*(int *)(iVar1 + 0x68) + 8))();
+    if (iVar2 == 2) {
+      iVar2 = FUN_0054ed10();
+      if (*(int **)(iVar2 + 0x1ac) == (int *)0x0) {
+        iStack_4 = 100;
+      }
+      else {
+        iStack_4 = **(int **)(iVar2 + 0x1ac);
+      }
+      local_8 = ((float)iStack_4 / 100.0) * local_8;
+    }
+  }
+  return (float10)local_8;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00589c60 : MOV EAX,dword ptr [ECX + 0x1ac]
+00589c66 : SUB ESP,0x8
+00589c69 : TEST EAX,EAX
+00589c6b : JZ 0x00589c74
+00589c6d : MOV EAX,dword ptr [EAX]
+00589c6f : MOV dword ptr [ESP],EAX
+00589c72 : JMP 0x00589c7b
+00589c74 : MOV dword ptr [ESP],0x64
+00589c7b : FILD dword ptr [ESP]
+00589c7e : PUSH EDI
+00589c7f : MOV EDI,dword ptr [ECX + 0x20]
+00589c82 : FDIV double ptr [0x00cdf2a8]
+00589c88 : FSTP float ptr [ESP + 0x4]
+00589c8c : TEST EDI,EDI
+00589c8e : JZ 0x00589cde
+00589c90 : PUSH ESI
+00589c91 : MOV EDX,dword ptr [EDI + 0x68]
+00589c94 : MOV EAX,dword ptr [EDX + 0x8]
+00589c97 : LEA ESI,[EDI + 0x68]
+00589c9a : MOV ECX,ESI
+00589c9c : CALL EAX
+00589c9e : CMP EAX,0x2
+00589ca1 : JNZ 0x00589cd6
+00589ca3 : MOV ECX,ESI
+00589ca5 : CALL 0x0054ed10
+00589caa : MOV EAX,dword ptr [EAX + 0x1ac]
+00589cb0 : TEST EAX,EAX
+00589cb2 : JZ 0x00589cbc
+00589cb4 : MOV ECX,dword ptr [EAX]
+00589cb6 : MOV dword ptr [ESP + 0xc],ECX
+00589cba : JMP 0x00589cc4
+00589cbc : MOV dword ptr [ESP + 0xc],0x64
+00589cc4 : FILD dword ptr [ESP + 0xc]
+00589cc8 : FDIV double ptr [0x00cdf2a8]
+00589cce : FMUL float ptr [ESP + 0x8]
+00589cd2 : FSTP float ptr [ESP + 0x8]
+00589cd6 : MOV EDI,dword ptr [EDI + 0x20]
+00589cd9 : TEST EDI,EDI
+00589cdb : JNZ 0x00589c91
+00589cdd : POP ESI
+00589cde : FLD float ptr [ESP + 0x4]
+00589ce2 : POP EDI
+00589ce3 : ADD ESP,0x8
+00589ce6 : RET

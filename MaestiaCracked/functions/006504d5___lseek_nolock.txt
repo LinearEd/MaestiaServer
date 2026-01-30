@@ -1,0 +1,99 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __lseek_nolock
+ENTRY    : 006504d5
+BODY     : [[006504d5, 00650549]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __lseek_nolock
+   
+   Library: Visual Studio 2008 Release */
+
+long __cdecl __lseek_nolock(int _FileHandle,long _Offset,int _Origin)
+
+{
+  byte *pbVar1;
+  HANDLE hFile;
+  int *piVar2;
+  DWORD DVar3;
+  ulong uVar4;
+  
+  hFile = (HANDLE)__get_osfhandle(_FileHandle);
+  if (hFile == (HANDLE)0xffffffff) {
+    piVar2 = __errno();
+    *piVar2 = 9;
+    DVar3 = 0xffffffff;
+  }
+  else {
+    DVar3 = SetFilePointer(hFile,_Offset,(PLONG)0x0,_Origin);
+    if (DVar3 == 0xffffffff) {
+      uVar4 = GetLastError();
+    }
+    else {
+      uVar4 = 0;
+    }
+    if (uVar4 == 0) {
+      pbVar1 = (byte *)((&DAT_01728c40)[_FileHandle >> 5] + 4 + (_FileHandle & 0x1fU) * 0x40);
+      *pbVar1 = *pbVar1 & 0xfd;
+    }
+    else {
+      __dosmaperr(uVar4);
+      DVar3 = 0xffffffff;
+    }
+  }
+  return DVar3;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006504d5 : MOV EDI,EDI
+006504d7 : PUSH EBP
+006504d8 : MOV EBP,ESP
+006504da : PUSH ESI
+006504db : MOV ESI,dword ptr [EBP + 0x8]
+006504de : PUSH ESI
+006504df : CALL 0x0065cc0b
+006504e4 : POP ECX
+006504e5 : CMP EAX,-0x1
+006504e8 : JNZ 0x006504fa
+006504ea : CALL 0x0063ab82
+006504ef : MOV dword ptr [EAX],0x9
+006504f5 : OR EAX,0xffffffff
+006504f8 : JMP 0x00650547
+006504fa : PUSH EDI
+006504fb : PUSH dword ptr [EBP + 0x10]
+006504fe : PUSH 0x0
+00650500 : PUSH dword ptr [EBP + 0xc]
+00650503 : PUSH EAX
+00650504 : CALL dword ptr [0x00b85334]
+0065050a : MOV EDI,EAX
+0065050c : CMP EDI,-0x1
+0065050f : JNZ 0x00650519
+00650511 : CALL dword ptr [0x00b85128]
+00650517 : JMP 0x0065051b
+00650519 : XOR EAX,EAX
+0065051b : TEST EAX,EAX
+0065051d : JZ 0x0065052b
+0065051f : PUSH EAX
+00650520 : CALL 0x0063aba8
+00650525 : POP ECX
+00650526 : OR EAX,0xffffffff
+00650529 : JMP 0x00650546
+0065052b : MOV EAX,ESI
+0065052d : SAR EAX,0x5
+00650530 : MOV EAX,dword ptr [EAX*0x4 + 0x1728c40]
+00650537 : AND ESI,0x1f
+0065053a : SHL ESI,0x6
+0065053d : LEA EAX,[EAX + ESI*0x1 + 0x4]
+00650541 : AND byte ptr [EAX],0xfd
+00650544 : MOV EAX,EDI
+00650546 : POP EDI
+00650547 : POP ESI
+00650548 : POP EBP
+00650549 : RET

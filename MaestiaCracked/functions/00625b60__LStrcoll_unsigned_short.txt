@@ -1,0 +1,83 @@
+PROGRAM  : Maestia.exe
+FUNCTION : _LStrcoll<unsigned_short>
+ENTRY    : 00625b60
+BODY     : [[00625b60, 00625ba2]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    int __cdecl std::_LStrcoll<unsigned short>(unsigned short const *,unsigned short const
+   *,unsigned short const *,unsigned short const *,struct _Collvec const *)
+   
+   Library: Visual Studio 2008 Release */
+
+int __cdecl
+std::_LStrcoll<unsigned_short>
+          (ushort *param_1,ushort *param_2,ushort *param_3,ushort *param_4,_Collvec *param_5)
+
+{
+  ushort uVar1;
+  ushort uVar2;
+  uint uVar3;
+  
+  for (; param_1 != param_2; param_1 = param_1 + 1) {
+    if (param_3 == param_4) goto LAB_00625b8e;
+    uVar1 = *param_1;
+    uVar2 = *param_3;
+    if (uVar2 >= uVar1 && uVar2 != uVar1) goto LAB_00625b99;
+    if (uVar2 < uVar1) {
+      return 1;
+    }
+    param_3 = param_3 + 1;
+  }
+  if (param_3 == param_4) {
+LAB_00625b8e:
+    uVar3 = (uint)(param_1 != param_2);
+  }
+  else {
+LAB_00625b99:
+    uVar3 = 0xffffffff;
+  }
+  return uVar3;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00625b60 : MOV EDI,EDI
+00625b62 : PUSH EBP
+00625b63 : MOV EBP,ESP
+00625b65 : MOV EDX,dword ptr [EBP + 0x8]
+00625b68 : PUSH ESI
+00625b69 : MOV ESI,dword ptr [EBP + 0x10]
+00625b6c : JMP 0x00625b84
+00625b6e : CMP ESI,dword ptr [EBP + 0x14]
+00625b71 : JZ 0x00625b8e
+00625b73 : MOVZX EAX,word ptr [EDX]
+00625b76 : MOVZX ECX,word ptr [ESI]
+00625b79 : CMP CX,AX
+00625b7c : JA 0x00625b99
+00625b7e : JC 0x00625b9e
+00625b80 : INC EDX
+00625b81 : INC EDX
+00625b82 : INC ESI
+00625b83 : INC ESI
+00625b84 : CMP EDX,dword ptr [EBP + 0xc]
+00625b87 : JNZ 0x00625b6e
+00625b89 : CMP ESI,dword ptr [EBP + 0x14]
+00625b8c : JNZ 0x00625b99
+00625b8e : XOR EAX,EAX
+00625b90 : CMP EDX,dword ptr [EBP + 0xc]
+00625b93 : SETNZ AL
+00625b96 : POP ESI
+00625b97 : POP EBP
+00625b98 : RET
+00625b99 : OR EAX,0xffffffff
+00625b9c : JMP 0x00625b96
+00625b9e : XOR EAX,EAX
+00625ba0 : INC EAX
+00625ba1 : JMP 0x00625b96

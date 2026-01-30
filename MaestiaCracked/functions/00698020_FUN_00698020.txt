@@ -1,0 +1,95 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00698020
+ENTRY    : 00698020
+BODY     : [[00698020, 0069804c] [00698050, 0069808a]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+uint FUN_00698020(void)
+
+{
+  uint uVar1;
+  int iVar2;
+  int in_EDX;
+  int iVar3;
+  int unaff_ESI;
+  
+  uVar1 = *(uint *)(unaff_ESI + 0x34);
+  iVar2 = *(int *)(unaff_ESI + 0x24) + uVar1 * -4;
+  do {
+    uVar1 = uVar1 - 1;
+    if ((int)uVar1 < 0) goto LAB_0069805f;
+  } while (in_EDX < *(int *)(iVar2 + uVar1 * 4));
+  if (-1 < (int)uVar1) {
+    iVar3 = in_EDX;
+    if (in_EDX <= *(int *)(iVar2 + uVar1 * 4)) goto LAB_00698087;
+    do {
+      uVar1 = uVar1 - 1;
+      in_EDX = *(int *)(iVar2 + 4 + uVar1 * 4);
+      *(int *)(iVar2 + 4 + uVar1 * 4) = iVar3;
+      iVar3 = in_EDX;
+    } while (-1 < (int)uVar1);
+  }
+LAB_0069805f:
+  *(int *)(unaff_ESI + 0x28) = *(int *)(unaff_ESI + 0x28) + -4;
+  if (*(uint *)(unaff_ESI + 0x28) <= *(uint *)(unaff_ESI + 0x2c)) {
+    *(undefined4 *)(unaff_ESI + 0x30) = 0x62;
+    return CONCAT31((int3)(*(uint *)(unaff_ESI + 0x28) >> 8),1);
+  }
+  *(int *)(unaff_ESI + 0x34) = *(int *)(unaff_ESI + 0x34) + 1;
+  uVar1 = *(int *)(unaff_ESI + 0x34) * 4;
+  *(int *)(*(int *)(unaff_ESI + 0x24) + *(int *)(unaff_ESI + 0x34) * -4) = in_EDX;
+LAB_00698087:
+  return uVar1 & 0xffffff00;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00698020 : MOV ECX,dword ptr [ESI + 0x34]
+00698023 : LEA EAX,[ECX + -0x1]
+00698026 : ADD ECX,ECX
+00698028 : ADD ECX,ECX
+0069802a : PUSH EDI
+0069802b : MOV EDI,ECX
+0069802d : MOV ECX,dword ptr [ESI + 0x24]
+00698030 : SUB ECX,EDI
+00698032 : TEST EAX,EAX
+00698034 : JL 0x0069805f
+00698036 : CMP EDX,dword ptr [ECX + EAX*0x4]
+00698039 : JGE 0x00698042
+0069803b : SUB EAX,0x1
+0069803e : JNS 0x00698036
+00698040 : JMP 0x0069805f
+00698042 : TEST EAX,EAX
+00698044 : JL 0x0069805f
+00698046 : CMP EDX,dword ptr [ECX + EAX*0x4]
+00698049 : JLE 0x00698087
+0069804b : JMP 0x00698050
+00698050 : SUB EAX,0x1
+00698053 : MOV EDI,dword ptr [ECX + EAX*0x4 + 0x4]
+00698057 : MOV dword ptr [ECX + EAX*0x4 + 0x4],EDX
+0069805b : MOV EDX,EDI
+0069805d : JNS 0x00698050
+0069805f : ADD dword ptr [ESI + 0x28],-0x4
+00698063 : MOV EAX,dword ptr [ESI + 0x28]
+00698066 : CMP EAX,dword ptr [ESI + 0x2c]
+00698069 : JA 0x00698076
+0069806b : MOV dword ptr [ESI + 0x30],0x62
+00698072 : MOV AL,0x1
+00698074 : POP EDI
+00698075 : RET
+00698076 : INC dword ptr [ESI + 0x34]
+00698079 : MOV EAX,dword ptr [ESI + 0x34]
+0069807c : MOV ECX,dword ptr [ESI + 0x24]
+0069807f : ADD EAX,EAX
+00698081 : ADD EAX,EAX
+00698083 : SUB ECX,EAX
+00698085 : MOV dword ptr [ECX],EDX
+00698087 : XOR AL,AL
+00698089 : POP EDI
+0069808a : RET

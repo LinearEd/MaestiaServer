@@ -1,0 +1,73 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00922520
+ENTRY    : 00922520
+BODY     : [[00922520, 0092256c]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+short FUN_00922520(void)
+
+{
+  short sVar1;
+  short sVar2;
+  int *piVar3;
+  int iVar4;
+  int iVar5;
+  int *unaff_EDI;
+  
+  iVar5 = 1;
+  sVar1 = 0;
+  iVar4 = 10;
+  do {
+    piVar3 = (int *)(**(code **)(*unaff_EDI + 0x74))(iVar5 % 6,iVar5 / 6);
+    if (piVar3 != (int *)0x0) {
+      sVar2 = (**(code **)(*piVar3 + 0x40))();
+      sVar1 = sVar1 + sVar2;
+    }
+    iVar5 = iVar5 + 1;
+    iVar4 = iVar4 + -1;
+  } while (iVar4 != 0);
+  return sVar1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00922520 : PUSH EBP
+00922521 : MOV EBP,ESP
+00922523 : SUB ESP,0x8
+00922526 : PUSH EBX
+00922527 : PUSH ESI
+00922528 : MOV ESI,0x1
+0092252d : MOV dword ptr [EBP + -0x4],0x0
+00922534 : LEA EBX,[ESI + 0x9]
+00922537 : MOV EAX,ESI
+00922539 : CDQ
+0092253a : MOV ECX,0x6
+0092253f : IDIV ECX
+00922541 : MOV ECX,EDI
+00922543 : PUSH EAX
+00922544 : MOV EAX,dword ptr [EDI]
+00922546 : PUSH EDX
+00922547 : MOV EDX,dword ptr [EAX + 0x74]
+0092254a : CALL EDX
+0092254c : TEST EAX,EAX
+0092254e : JZ 0x0092255d
+00922550 : MOV EDX,dword ptr [EAX]
+00922552 : MOV ECX,EAX
+00922554 : MOV EAX,dword ptr [EDX + 0x40]
+00922557 : CALL EAX
+00922559 : ADD word ptr [EBP + -0x4],AX
+0092255d : INC ESI
+0092255e : SUB EBX,0x1
+00922561 : JNZ 0x00922537
+00922563 : MOV AX,word ptr [EBP + -0x4]
+00922567 : POP ESI
+00922568 : POP EBX
+00922569 : MOV ESP,EBP
+0092256b : POP EBP
+0092256c : RET

@@ -1,0 +1,64 @@
+PROGRAM  : Maestia.exe
+FUNCTION : _GetLcidFromLanguage
+ENTRY    : 0065593a
+BODY     : [[0065593a, 00655975]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    _GetLcidFromLanguage
+   
+   Library: Visual Studio 2008 Release */
+
+void _GetLcidFromLanguage(void)
+
+{
+  size_t sVar1;
+  undefined4 uVar2;
+  undefined4 *unaff_ESI;
+  
+  sVar1 = _strlen((char *)*unaff_ESI);
+  unaff_ESI[4] = (uint)(sVar1 == 3);
+  if ((sVar1 == 3) == 0) {
+    uVar2 = _GetPrimaryLen();
+  }
+  else {
+    uVar2 = 2;
+  }
+  unaff_ESI[3] = uVar2;
+  EnumSystemLocalesA(_LanguageEnumProc_4,1);
+  if ((*(byte *)(unaff_ESI + 2) & 4) == 0) {
+    unaff_ESI[2] = 0;
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0065593a : PUSH dword ptr [ESI]
+0065593c : CALL 0x00640960
+00655941 : SUB EAX,0x3
+00655944 : NEG EAX
+00655946 : SBB EAX,EAX
+00655948 : INC EAX
+00655949 : POP ECX
+0065594a : MOV dword ptr [ESI + 0x10],EAX
+0065594d : JZ 0x00655954
+0065594f : PUSH 0x2
+00655951 : POP EAX
+00655952 : JMP 0x0065595b
+00655954 : MOV EDX,dword ptr [ESI]
+00655956 : CALL 0x00655519
+0065595b : PUSH 0x1
+0065595d : PUSH 0x655812
+00655962 : MOV dword ptr [ESI + 0xc],EAX
+00655965 : CALL dword ptr [0x00b85390]
+0065596b : TEST byte ptr [ESI + 0x8],0x4
+0065596f : JNZ 0x00655975
+00655971 : AND dword ptr [ESI + 0x8],0x0
+00655975 : RET

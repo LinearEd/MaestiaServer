@@ -1,0 +1,54 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __itoa_s
+ENTRY    : 00644cc6
+BODY     : [[00644cc6, 00644cef]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __itoa_s
+   
+   Library: Visual Studio 2008 Release */
+
+errno_t __cdecl __itoa_s(int _Value,char *_DstBuf,size_t _Size,int _Radix)
+
+{
+  errno_t eVar1;
+  undefined4 uVar2;
+  
+  if ((_Radix == 10) && (_Value < 0)) {
+    uVar2 = 1;
+    _Radix = 10;
+  }
+  else {
+    uVar2 = 0;
+  }
+  eVar1 = xtoa_s(_Size,_Radix,uVar2);
+  return eVar1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00644cc6 : MOV EDI,EDI
+00644cc8 : PUSH EBP
+00644cc9 : MOV EBP,ESP
+00644ccb : CMP dword ptr [EBP + 0x14],0xa
+00644ccf : MOV EAX,dword ptr [EBP + 0x8]
+00644cd2 : JNZ 0x00644cde
+00644cd4 : TEST EAX,EAX
+00644cd6 : JGE 0x00644cde
+00644cd8 : PUSH 0x1
+00644cda : PUSH 0xa
+00644cdc : JMP 0x00644ce3
+00644cde : PUSH 0x0
+00644ce0 : PUSH dword ptr [EBP + 0x14]
+00644ce3 : PUSH dword ptr [EBP + 0x10]
+00644ce6 : MOV ECX,dword ptr [EBP + 0xc]
+00644ce9 : CALL 0x00644be9
+00644cee : POP EBP
+00644cef : RET

@@ -1,0 +1,94 @@
+PROGRAM  : Maestia.exe
+FUNCTION : getSystemCP
+ENTRY    : 006510ff
+BODY     : [[006510ff, 0065117a]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    int __cdecl getSystemCP(int)
+   
+   Library: Visual Studio 2008 Release */
+
+int __cdecl getSystemCP(int param_1)
+
+{
+  UINT UVar1;
+  int unaff_ESI;
+  int local_14 [2];
+  int local_c;
+  char local_8;
+  
+  _LocaleUpdate::_LocaleUpdate((_LocaleUpdate *)local_14,(localeinfo_struct *)0x0);
+  DAT_00d7c0ac = 0;
+  if (unaff_ESI == -2) {
+    DAT_00d7c0ac = 1;
+    UVar1 = GetOEMCP();
+  }
+  else if (unaff_ESI == -3) {
+    DAT_00d7c0ac = 1;
+    UVar1 = GetACP();
+  }
+  else {
+    if (unaff_ESI != -4) {
+      if (local_8 == '\0') {
+        DAT_00d7c0ac = 0;
+        return unaff_ESI;
+      }
+      *(uint *)(local_c + 0x70) = *(uint *)(local_c + 0x70) & 0xfffffffd;
+      return unaff_ESI;
+    }
+    UVar1 = *(UINT *)(local_14[0] + 4);
+    DAT_00d7c0ac = 1;
+  }
+  if (local_8 != '\0') {
+    *(uint *)(local_c + 0x70) = *(uint *)(local_c + 0x70) & 0xfffffffd;
+  }
+  return UVar1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006510ff : MOV EDI,EDI
+00651101 : PUSH EBP
+00651102 : MOV EBP,ESP
+00651104 : SUB ESP,0x10
+00651107 : PUSH EBX
+00651108 : XOR EBX,EBX
+0065110a : PUSH EBX
+0065110b : LEA ECX,[EBP + -0x10]
+0065110e : CALL 0x00637880
+00651113 : MOV dword ptr [0x00d7c0ac],EBX
+00651119 : CMP ESI,-0x2
+0065111c : JNZ 0x0065113c
+0065111e : MOV dword ptr [0x00d7c0ac],0x1
+00651128 : CALL dword ptr [0x00b85354]
+0065112e : CMP byte ptr [EBP + -0x4],BL
+00651131 : JZ 0x00651178
+00651133 : MOV ECX,dword ptr [EBP + -0x8]
+00651136 : AND dword ptr [ECX + 0x70],0xfffffffd
+0065113a : JMP 0x00651178
+0065113c : CMP ESI,-0x3
+0065113f : JNZ 0x00651153
+00651141 : MOV dword ptr [0x00d7c0ac],0x1
+0065114b : CALL dword ptr [0x00b85194]
+00651151 : JMP 0x0065112e
+00651153 : CMP ESI,-0x4
+00651156 : JNZ 0x0065116a
+00651158 : MOV EAX,dword ptr [EBP + -0x10]
+0065115b : MOV EAX,dword ptr [EAX + 0x4]
+0065115e : MOV dword ptr [0x00d7c0ac],0x1
+00651168 : JMP 0x0065112e
+0065116a : CMP byte ptr [EBP + -0x4],BL
+0065116d : JZ 0x00651176
+0065116f : MOV EAX,dword ptr [EBP + -0x8]
+00651172 : AND dword ptr [EAX + 0x70],0xfffffffd
+00651176 : MOV EAX,ESI
+00651178 : POP EBX
+00651179 : LEAVE
+0065117a : RET

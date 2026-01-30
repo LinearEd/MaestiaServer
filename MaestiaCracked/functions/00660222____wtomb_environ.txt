@@ -1,0 +1,129 @@
+PROGRAM  : Maestia.exe
+FUNCTION : ___wtomb_environ
+ENTRY    : 00660222
+BODY     : [[00660222, 006602b8]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    ___wtomb_environ
+   
+   Library: Visual Studio 2008 Release */
+
+int __cdecl ___wtomb_environ(void)
+
+{
+  LPCWSTR lpWideCharStr;
+  size_t _Count;
+  int iVar1;
+  undefined4 *puVar2;
+  char *local_8;
+  
+  local_8 = (LPSTR)0x0;
+  lpWideCharStr = (LPCWSTR)*DAT_00d7b7a8;
+  puVar2 = DAT_00d7b7a8;
+  while( true ) {
+    if (lpWideCharStr == (LPCWSTR)0x0) {
+      return 0;
+    }
+    _Count = WideCharToMultiByte(0,0,lpWideCharStr,-1,(LPSTR)0x0,0,(LPCSTR)0x0,(LPBOOL)0x0);
+    if ((_Count == 0) || (local_8 = __calloc_crt(_Count,1), local_8 == (LPSTR)0x0)) break;
+    iVar1 = WideCharToMultiByte(0,0,(LPCWSTR)*puVar2,-1,local_8,_Count,(LPCSTR)0x0,(LPBOOL)0x0);
+    if (iVar1 == 0) {
+      _free(local_8);
+      return -1;
+    }
+    iVar1 = ___crtsetenv(&local_8,0);
+    if ((iVar1 < 0) && (local_8 != (LPSTR)0x0)) {
+      _free(local_8);
+      local_8 = (LPSTR)0x0;
+    }
+    puVar2 = puVar2 + 1;
+    lpWideCharStr = (LPCWSTR)*puVar2;
+  }
+  return -1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00660222 : MOV EDI,EDI
+00660224 : PUSH EBP
+00660225 : MOV EBP,ESP
+00660227 : PUSH ECX
+00660228 : PUSH ECX
+00660229 : PUSH EBX
+0066022a : PUSH ESI
+0066022b : XOR ESI,ESI
+0066022d : PUSH EDI
+0066022e : MOV EDI,dword ptr [0x00d7b7a8]
+00660234 : MOV dword ptr [EBP + -0x4],ESI
+00660237 : MOV EAX,dword ptr [EDI]
+00660239 : CMP EAX,ESI
+0066023b : JZ 0x006602a2
+0066023d : MOV EBX,dword ptr [0x00b85130]
+00660243 : PUSH ESI
+00660244 : PUSH ESI
+00660245 : PUSH ESI
+00660246 : PUSH ESI
+00660247 : PUSH -0x1
+00660249 : PUSH EAX
+0066024a : PUSH ESI
+0066024b : PUSH ESI
+0066024c : CALL EBX
+0066024e : MOV dword ptr [EBP + -0x8],EAX
+00660251 : CMP EAX,ESI
+00660253 : JZ 0x006602a9
+00660255 : PUSH 0x1
+00660257 : PUSH EAX
+00660258 : CALL 0x006425a4
+0066025d : POP ECX
+0066025e : POP ECX
+0066025f : MOV dword ptr [EBP + -0x4],EAX
+00660262 : CMP EAX,ESI
+00660264 : JZ 0x006602a9
+00660266 : PUSH ESI
+00660267 : PUSH ESI
+00660268 : PUSH dword ptr [EBP + -0x8]
+0066026b : PUSH EAX
+0066026c : PUSH -0x1
+0066026e : PUSH dword ptr [EDI]
+00660270 : PUSH ESI
+00660271 : PUSH ESI
+00660272 : CALL EBX
+00660274 : TEST EAX,EAX
+00660276 : JZ 0x006602ae
+00660278 : LEA EAX,[EBP + -0x4]
+0066027b : PUSH ESI
+0066027c : PUSH EAX
+0066027d : CALL 0x00660dd2
+00660282 : POP ECX
+00660283 : POP ECX
+00660284 : TEST EAX,EAX
+00660286 : JGE 0x00660299
+00660288 : CMP dword ptr [EBP + -0x4],ESI
+0066028b : JZ 0x00660299
+0066028d : PUSH dword ptr [EBP + -0x4]
+00660290 : CALL 0x0063610d
+00660295 : POP ECX
+00660296 : MOV dword ptr [EBP + -0x4],ESI
+00660299 : ADD EDI,0x4
+0066029c : MOV EAX,dword ptr [EDI]
+0066029e : CMP EAX,ESI
+006602a0 : JNZ 0x00660243
+006602a2 : XOR EAX,EAX
+006602a4 : POP EDI
+006602a5 : POP ESI
+006602a6 : POP EBX
+006602a7 : LEAVE
+006602a8 : RET
+006602a9 : OR EAX,0xffffffff
+006602ac : JMP 0x006602a4
+006602ae : PUSH dword ptr [EBP + -0x4]
+006602b1 : CALL 0x0063610d
+006602b6 : POP ECX
+006602b7 : JMP 0x006602a9

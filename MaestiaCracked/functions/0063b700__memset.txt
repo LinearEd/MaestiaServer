@@ -1,0 +1,117 @@
+PROGRAM  : Maestia.exe
+FUNCTION : _memset
+ENTRY    : 0063b700
+BODY     : [[0063b700, 0063b779]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    _memset
+   
+   Libraries: Visual Studio 2005 Debug, Visual Studio 2005 Release, Visual Studio 2008 Debug, Visual
+   Studio 2008 Release */
+
+void * __cdecl _memset(void *_Dst,int _Val,size_t _Size)
+
+{
+  uint uVar1;
+  void *pvVar2;
+  uint uVar3;
+  size_t sVar4;
+  uint *puVar5;
+  
+  if (_Size == 0) {
+    return _Dst;
+  }
+  uVar1 = _Val & 0xff;
+  if ((((char)_Val == '\0') && (0xff < _Size)) && (DAT_01728c2c != 0)) {
+    pvVar2 = (void *)__VEC_memzero();
+    return pvVar2;
+  }
+  puVar5 = _Dst;
+  if (3 < _Size) {
+    uVar3 = -(int)_Dst & 3;
+    sVar4 = _Size;
+    if (uVar3 != 0) {
+      sVar4 = _Size - uVar3;
+      do {
+        *(char *)puVar5 = (char)_Val;
+        puVar5 = (uint *)((int)puVar5 + 1);
+        uVar3 = uVar3 - 1;
+      } while (uVar3 != 0);
+    }
+    uVar1 = uVar1 * 0x1010101;
+    _Size = sVar4 & 3;
+    uVar3 = sVar4 >> 2;
+    if (uVar3 != 0) {
+      for (; uVar3 != 0; uVar3 = uVar3 - 1) {
+        *puVar5 = uVar1;
+        puVar5 = puVar5 + 1;
+      }
+      if (_Size == 0) {
+        return _Dst;
+      }
+    }
+  }
+  do {
+    *(char *)puVar5 = (char)uVar1;
+    puVar5 = (uint *)((int)puVar5 + 1);
+    _Size = _Size - 1;
+  } while (_Size != 0);
+  return _Dst;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0063b700 : MOV EDX,dword ptr [ESP + 0xc]
+0063b704 : MOV ECX,dword ptr [ESP + 0x4]
+0063b708 : TEST EDX,EDX
+0063b70a : JZ 0x0063b775
+0063b70c : XOR EAX,EAX
+0063b70e : MOV AL,byte ptr [ESP + 0x8]
+0063b712 : TEST AL,AL
+0063b714 : JNZ 0x0063b72c
+0063b716 : CMP EDX,0x100
+0063b71c : JC 0x0063b72c
+0063b71e : CMP dword ptr [0x01728c2c],0x0
+0063b725 : JZ 0x0063b72c
+0063b727 : JMP 0x006589af
+0063b72c : PUSH EDI
+0063b72d : MOV EDI,ECX
+0063b72f : CMP EDX,0x4
+0063b732 : JC 0x0063b765
+0063b734 : NEG ECX
+0063b736 : AND ECX,0x3
+0063b739 : JZ 0x0063b747
+0063b73b : SUB EDX,ECX
+0063b73d : MOV byte ptr [EDI],AL
+0063b73f : ADD EDI,0x1
+0063b742 : SUB ECX,0x1
+0063b745 : JNZ 0x0063b73d
+0063b747 : MOV ECX,EAX
+0063b749 : SHL EAX,0x8
+0063b74c : ADD EAX,ECX
+0063b74e : MOV ECX,EAX
+0063b750 : SHL EAX,0x10
+0063b753 : ADD EAX,ECX
+0063b755 : MOV ECX,EDX
+0063b757 : AND EDX,0x3
+0063b75a : SHR ECX,0x2
+0063b75d : JZ 0x0063b765
+0063b75f : STOSD.REP ES:EDI
+0063b761 : TEST EDX,EDX
+0063b763 : JZ 0x0063b76f
+0063b765 : MOV byte ptr [EDI],AL
+0063b767 : ADD EDI,0x1
+0063b76a : SUB EDX,0x1
+0063b76d : JNZ 0x0063b765
+0063b76f : MOV EAX,dword ptr [ESP + 0x8]
+0063b773 : POP EDI
+0063b774 : RET
+0063b775 : MOV EAX,dword ptr [ESP + 0x4]
+0063b779 : RET

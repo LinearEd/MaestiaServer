@@ -1,0 +1,107 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __set_osfhnd
+ENTRY    : 0065cb04
+BODY     : [[0065cb04, 0065cb84]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __set_osfhnd
+   
+   Library: Visual Studio 2008 Release */
+
+int __cdecl __set_osfhnd(int param_1,intptr_t param_2)
+
+{
+  int *piVar1;
+  ulong *puVar2;
+  int iVar3;
+  DWORD nStdHandle;
+  
+  if ((-1 < param_1) && ((uint)param_1 < DAT_01728c30)) {
+    iVar3 = (param_1 & 0x1fU) * 0x40;
+    if (*(int *)(iVar3 + (&DAT_01728c40)[param_1 >> 5]) == -1) {
+      if (DAT_00d66f78 == 1) {
+        if (param_1 == 0) {
+          nStdHandle = 0xfffffff6;
+        }
+        else if (param_1 == 1) {
+          nStdHandle = 0xfffffff5;
+        }
+        else {
+          if (param_1 != 2) goto LAB_0065cb61;
+          nStdHandle = 0xfffffff4;
+        }
+        SetStdHandle(nStdHandle,(HANDLE)param_2);
+      }
+LAB_0065cb61:
+      *(intptr_t *)(iVar3 + (&DAT_01728c40)[param_1 >> 5]) = param_2;
+      return 0;
+    }
+  }
+  piVar1 = __errno();
+  *piVar1 = 9;
+  puVar2 = ___doserrno();
+  *puVar2 = 0;
+  return -1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0065cb04 : MOV EDI,EDI
+0065cb06 : PUSH EBP
+0065cb07 : MOV EBP,ESP
+0065cb09 : MOV EAX,dword ptr [EBP + 0x8]
+0065cb0c : PUSH ESI
+0065cb0d : PUSH EDI
+0065cb0e : TEST EAX,EAX
+0065cb10 : JL 0x0065cb6b
+0065cb12 : CMP EAX,dword ptr [0x01728c30]
+0065cb18 : JNC 0x0065cb6b
+0065cb1a : MOV ECX,EAX
+0065cb1c : SAR ECX,0x5
+0065cb1f : MOV ESI,EAX
+0065cb21 : AND ESI,0x1f
+0065cb24 : LEA EDI,[ECX*0x4 + 0x1728c40]
+0065cb2b : MOV ECX,dword ptr [EDI]
+0065cb2d : SHL ESI,0x6
+0065cb30 : CMP dword ptr [ESI + ECX*0x1],-0x1
+0065cb34 : JNZ 0x0065cb6b
+0065cb36 : CMP dword ptr [0x00d66f78],0x1
+0065cb3d : PUSH EBX
+0065cb3e : MOV EBX,dword ptr [EBP + 0xc]
+0065cb41 : JNZ 0x0065cb61
+0065cb43 : SUB EAX,0x0
+0065cb46 : JZ 0x0065cb58
+0065cb48 : DEC EAX
+0065cb49 : JZ 0x0065cb53
+0065cb4b : DEC EAX
+0065cb4c : JNZ 0x0065cb61
+0065cb4e : PUSH EBX
+0065cb4f : PUSH -0xc
+0065cb51 : JMP 0x0065cb5b
+0065cb53 : PUSH EBX
+0065cb54 : PUSH -0xb
+0065cb56 : JMP 0x0065cb5b
+0065cb58 : PUSH EBX
+0065cb59 : PUSH -0xa
+0065cb5b : CALL dword ptr [0x00b85218]
+0065cb61 : MOV EAX,dword ptr [EDI]
+0065cb63 : MOV dword ptr [ESI + EAX*0x1],EBX
+0065cb66 : XOR EAX,EAX
+0065cb68 : POP EBX
+0065cb69 : JMP 0x0065cb81
+0065cb6b : CALL 0x0063ab82
+0065cb70 : MOV dword ptr [EAX],0x9
+0065cb76 : CALL 0x0063ab95
+0065cb7b : AND dword ptr [EAX],0x0
+0065cb7e : OR EAX,0xffffffff
+0065cb81 : POP EDI
+0065cb82 : POP ESI
+0065cb83 : POP EBP
+0065cb84 : RET

@@ -1,0 +1,62 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005021e0
+ENTRY    : 005021e0
+BODY     : [[005021e0, 0050221b]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_005021e0(undefined4 *param_1)
+
+{
+  int *piVar1;
+  int *piVar2;
+  int in_ECX;
+  
+  FUN_0051bc20(*param_1);
+  piVar2 = (int *)param_1[1];
+  if (*piVar2 != 0) {
+    piVar1 = (int *)(*piVar2 + 4);
+    *piVar1 = *piVar1 + 1;
+  }
+  if (*(GRefCountNTSImpl **)(in_ECX + 4) != (GRefCountNTSImpl *)0x0) {
+    GRefCountNTSImpl::Release(*(GRefCountNTSImpl **)(in_ECX + 4));
+    *(int *)(in_ECX + 4) = *piVar2;
+    return;
+  }
+  *(int *)(in_ECX + 4) = *piVar2;
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005021e0 : PUSH ESI
+005021e1 : PUSH EDI
+005021e2 : MOV EDI,dword ptr [ESP + 0xc]
+005021e6 : MOV EAX,dword ptr [EDI]
+005021e8 : PUSH EAX
+005021e9 : MOV ESI,ECX
+005021eb : CALL 0x0051bc20
+005021f0 : MOV EDI,dword ptr [EDI + 0x4]
+005021f3 : MOV EAX,dword ptr [EDI]
+005021f5 : TEST EAX,EAX
+005021f7 : JZ 0x005021fc
+005021f9 : INC dword ptr [EAX + 0x4]
+005021fc : MOV ECX,dword ptr [ESI + 0x4]
+005021ff : TEST ECX,ECX
+00502201 : JZ 0x00502212
+00502203 : CALL 0x004ff7c0
+00502208 : MOV ECX,dword ptr [EDI]
+0050220a : POP EDI
+0050220b : MOV dword ptr [ESI + 0x4],ECX
+0050220e : POP ESI
+0050220f : RET 0x4
+00502212 : MOV EDX,dword ptr [EDI]
+00502214 : POP EDI
+00502215 : MOV dword ptr [ESI + 0x4],EDX
+00502218 : POP ESI
+00502219 : RET 0x4

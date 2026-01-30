@@ -1,0 +1,157 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00502f10
+ENTRY    : 00502f10
+BODY     : [[00502f10, 0050300f]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+int * FUN_00502f10(void)
+
+{
+  undefined2 uVar1;
+  undefined2 uVar2;
+  GRefCountImpl *this;
+  uint uVar3;
+  int *in_ECX;
+  char *pcVar4;
+  int *local_8 [2];
+  
+  if (*(short *)(in_ECX[0x27] + 0x18) == 0) {
+    return (int *)0x0;
+  }
+  FUN_00502290(local_8,in_ECX[0x27] + 0x10);
+  if (local_8[0] == (int *)0x0) {
+    this = (GRefCountImpl *)(**(code **)(*in_ECX + 0x94))();
+    if (this == (GRefCountImpl *)0x0) goto LAB_00502fe4;
+    GRefCountImpl::AddRef(this);
+    uVar3 = *(uint *)(in_ECX[0x27] + 0x48);
+    uVar2 = (undefined2)in_ECX[4];
+    uVar1 = *(undefined2 *)(in_ECX[0x27] + 0x18);
+    pcVar4 = 
+    "Error: Resource for font id = %d is not found in text field id = %d, def text = \'%s\'\n";
+  }
+  else {
+    uVar3 = (**(code **)(*local_8[0] + 8))();
+    if ((uVar3 & 0xff00) == 0x200) {
+      if (local_8[0] != (int *)0x0) {
+        FUN_00524240();
+      }
+      return local_8[0];
+    }
+    this = (GRefCountImpl *)(**(code **)(*in_ECX + 0x94))();
+    if (this == (GRefCountImpl *)0x0) goto LAB_00502fe4;
+    GRefCountImpl::AddRef(this);
+    uVar3 = *(uint *)(in_ECX[0x27] + 0x48);
+    uVar2 = (undefined2)in_ECX[4];
+    uVar1 = *(undefined2 *)(in_ECX[0x27] + 0x18);
+    pcVar4 = 
+    "Error: Font id = %d is referring to non-font resource in text field id = %d, def text = \'%s\'\n"
+    ;
+  }
+  FUN_00500460(this + 0xc,pcVar4,uVar1,uVar2,(uVar3 & 0xfffffffc) + 8);
+  GRefCountImpl::Release(this);
+LAB_00502fe4:
+  if (local_8[0] != (int *)0x0) {
+    FUN_00524240();
+  }
+  return (int *)0x0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00502f10 : SUB ESP,0x8
+00502f13 : PUSH ESI
+00502f14 : MOV ESI,ECX
+00502f16 : MOV EAX,dword ptr [ESI + 0x9c]
+00502f1c : MOVZX ECX,word ptr [EAX + 0x18]
+00502f20 : TEST ECX,ECX
+00502f22 : JNZ 0x00502f2b
+00502f24 : XOR EAX,EAX
+00502f26 : POP ESI
+00502f27 : ADD ESP,0x8
+00502f2a : RET
+00502f2b : MOV ECX,dword ptr [ESI + 0xa4]
+00502f31 : PUSH EDI
+00502f32 : ADD EAX,0x10
+00502f35 : PUSH EAX
+00502f36 : LEA EDX,[ESP + 0xc]
+00502f3a : PUSH EDX
+00502f3b : CALL 0x00502290
+00502f40 : MOV ECX,dword ptr [ESP + 0x8]
+00502f44 : TEST ECX,ECX
+00502f46 : JNZ 0x00502f86
+00502f48 : MOV EAX,dword ptr [ESI]
+00502f4a : MOV EDX,dword ptr [EAX + 0x94]
+00502f50 : MOV ECX,ESI
+00502f52 : CALL EDX
+00502f54 : MOV EDI,EAX
+00502f56 : TEST EDI,EDI
+00502f58 : JZ 0x00502fe4
+00502f5e : MOV ECX,EDI
+00502f60 : CALL 0x00523dd0
+00502f65 : MOV EAX,dword ptr [ESI + 0x9c]
+00502f6b : MOV ECX,dword ptr [EAX + 0x48]
+00502f6e : MOVZX EDX,word ptr [ESI + 0x10]
+00502f72 : MOVZX EAX,word ptr [EAX + 0x18]
+00502f76 : AND ECX,0xfffffffc
+00502f79 : ADD ECX,0x8
+00502f7c : PUSH ECX
+00502f7d : PUSH EDX
+00502f7e : PUSH EAX
+00502f7f : PUSH 0xb86338
+00502f84 : JMP 0x00502fd1
+00502f86 : MOV EDX,dword ptr [ECX]
+00502f88 : MOV EAX,dword ptr [EDX + 0x8]
+00502f8b : CALL EAX
+00502f8d : AND EAX,0xff00
+00502f92 : CMP EAX,0x200
+00502f97 : JZ 0x00502ff9
+00502f99 : MOV EDX,dword ptr [ESI]
+00502f9b : MOV EAX,dword ptr [EDX + 0x94]
+00502fa1 : MOV ECX,ESI
+00502fa3 : CALL EAX
+00502fa5 : MOV EDI,EAX
+00502fa7 : TEST EDI,EDI
+00502fa9 : JZ 0x00502fe4
+00502fab : MOV ECX,EDI
+00502fad : CALL 0x00523dd0
+00502fb2 : MOV EAX,dword ptr [ESI + 0x9c]
+00502fb8 : MOV ECX,dword ptr [EAX + 0x48]
+00502fbb : MOVZX EDX,word ptr [ESI + 0x10]
+00502fbf : MOVZX EAX,word ptr [EAX + 0x18]
+00502fc3 : AND ECX,0xfffffffc
+00502fc6 : ADD ECX,0x8
+00502fc9 : PUSH ECX
+00502fca : PUSH EDX
+00502fcb : PUSH EAX
+00502fcc : PUSH 0xb862d8
+00502fd1 : LEA ECX,[EDI + 0xc]
+00502fd4 : PUSH ECX
+00502fd5 : CALL 0x00500460
+00502fda : ADD ESP,0x14
+00502fdd : MOV ECX,EDI
+00502fdf : CALL 0x004ff7e0
+00502fe4 : MOV ECX,dword ptr [ESP + 0x8]
+00502fe8 : TEST ECX,ECX
+00502fea : JZ 0x00502ff1
+00502fec : CALL 0x00524240
+00502ff1 : POP EDI
+00502ff2 : XOR EAX,EAX
+00502ff4 : POP ESI
+00502ff5 : ADD ESP,0x8
+00502ff8 : RET
+00502ff9 : MOV ECX,dword ptr [ESP + 0x8]
+00502ffd : MOV ESI,ECX
+00502fff : TEST ECX,ECX
+00503001 : JZ 0x00503008
+00503003 : CALL 0x00524240
+00503008 : POP EDI
+00503009 : MOV EAX,ESI
+0050300b : POP ESI
+0050300c : ADD ESP,0x8
+0050300f : RET

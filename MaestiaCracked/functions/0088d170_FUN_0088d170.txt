@@ -1,0 +1,87 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0088d170
+ENTRY    : 0088d170
+BODY     : [[0088d170, 0088d203]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_0088d170(void)
+
+{
+  float fVar1;
+  int iVar2;
+  float fVar3;
+  int in_EAX;
+  int in_EDX;
+  
+  iVar2 = *(int *)(in_EAX + 0x410);
+  if (iVar2 != 0) {
+    fVar1 = *(float *)((uint)(*(char *)(iVar2 + 300) == '\0') * 0x30 + 0x94 + iVar2);
+    fVar3 = (float)in_EDX;
+    if (in_EDX < 0) {
+      fVar3 = fVar3 + 4.2949673e+09;
+    }
+    if (fVar3 * 0.001 < fVar1) {
+      if (1e-11 < (*(float *)(iVar2 + 0x138) * fVar3 * 0.001) / fVar1) {
+        FUN_0079c3c0();
+        return;
+      }
+      FUN_008018d0(L"[AvaBaseCharacter::ApplyAnimDelay] Zero FrameSpeed %d,%d");
+    }
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0088d170 : PUSH EBP
+0088d171 : MOV EBP,ESP
+0088d173 : PUSH ECX
+0088d174 : PUSH ESI
+0088d175 : MOV ESI,EAX
+0088d177 : MOV EAX,dword ptr [ESI + 0x410]
+0088d17d : TEST EAX,EAX
+0088d17f : JZ 0x0088d1ff
+0088d181 : XOR ECX,ECX
+0088d183 : CMP byte ptr [EAX + 0x12c],CL
+0088d189 : SETZ CL
+0088d18c : LEA ECX,[ECX + ECX*0x2]
+0088d18f : SHL ECX,0x4
+0088d192 : MOVSS XMM1,dword ptr [ECX + EAX*0x1 + 0x94]
+0088d19b : MOV ECX,EDX
+0088d19d : MOV dword ptr [EBP + -0x4],ECX
+0088d1a0 : FILD dword ptr [EBP + -0x4]
+0088d1a3 : TEST ECX,ECX
+0088d1a5 : JGE 0x0088d1ad
+0088d1a7 : FADD float ptr [0x00cdf0e0]
+0088d1ad : FMUL float ptr [0x00cdf128]
+0088d1b3 : FSTP float ptr [EBP + -0x4]
+0088d1b6 : MOVSS XMM2,dword ptr [EBP + -0x4]
+0088d1bb : COMISS XMM1,XMM2
+0088d1be : JBE 0x0088d1ff
+0088d1c0 : MOVSS XMM0,dword ptr [EAX + 0x138]
+0088d1c8 : MULSS XMM0,XMM2
+0088d1cc : DIVSS XMM0,XMM1
+0088d1d0 : COMISS XMM0,dword ptr [0x00cdf5d0]
+0088d1d7 : JBE 0x0088d1e3
+0088d1d9 : CALL 0x0079c3c0
+0088d1de : POP ESI
+0088d1df : MOV ESP,EBP
+0088d1e1 : POP EBP
+0088d1e2 : RET
+0088d1e3 : MOVZX EAX,word ptr [ESI + 0x43a]
+0088d1ea : MOV ESI,dword ptr [0x00da98e8]
+0088d1f0 : PUSH EAX
+0088d1f1 : PUSH EDX
+0088d1f2 : PUSH 0xc46298
+0088d1f7 : CALL 0x008018d0
+0088d1fc : ADD ESP,0xc
+0088d1ff : POP ESI
+0088d200 : MOV ESP,EBP
+0088d202 : POP EBP
+0088d203 : RET

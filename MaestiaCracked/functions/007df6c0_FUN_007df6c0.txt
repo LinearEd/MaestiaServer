@@ -1,0 +1,109 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_007df6c0
+ENTRY    : 007df6c0
+BODY     : [[007df6c0, 007df6e8] [007df6f0, 007df774]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* WARNING: Removing unreachable block (ram,0x007df70f) */
+/* WARNING: Removing unreachable block (ram,0x007df730) */
+
+void FUN_007df6c0(void)
+
+{
+  uint uVar1;
+  int unaff_ESI;
+  uint uVar2;
+  float fVar3;
+  float fVar4;
+  undefined4 local_14;
+  
+  *(undefined2 *)(unaff_ESI + 0x18a) = 0;
+  while( true ) {
+    uVar2 = *(uint *)(unaff_ESI + 0x16c);
+    if (*(uint *)(unaff_ESI + 0x16c) < *(uint *)(unaff_ESI + 0x170)) {
+      uVar2 = *(uint *)(unaff_ESI + 0x170);
+    }
+    uVar1 = (uint)*(ushort *)(unaff_ESI + 0x18a);
+    fVar4 = 2.0;
+    fVar3 = 1.0;
+    while( true ) {
+      if ((uVar1 & 1) != 0) {
+        fVar3 = fVar3 * fVar4;
+      }
+      uVar1 = uVar1 >> 1;
+      if (uVar1 == 0) break;
+      fVar4 = fVar4 * fVar4;
+    }
+    local_14 = (uint)(longlong)ROUND(fVar3);
+    if (uVar2 <= local_14) break;
+    *(ushort *)(unaff_ESI + 0x18a) = *(ushort *)(unaff_ESI + 0x18a) + 1;
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+007df6c0 : PUSH EBP
+007df6c1 : MOV EBP,ESP
+007df6c3 : MOVSS XMM3,dword ptr [0x00cdf144]
+007df6cb : MOVSS XMM2,dword ptr [0x00c10fc4]
+007df6d3 : SUB ESP,0x10
+007df6d6 : PUSH EBX
+007df6d7 : MOV EBX,dword ptr [ESI + 0x170]
+007df6dd : XOR EAX,EAX
+007df6df : PUSH EDI
+007df6e0 : MOV word ptr [ESI + 0x18a],AX
+007df6e7 : JMP 0x007df6f0
+007df6f0 : MOV EDI,dword ptr [ESI + 0x16c]
+007df6f6 : CMP EBX,EDI
+007df6f8 : JBE 0x007df6fc
+007df6fa : MOV EDI,EBX
+007df6fc : MOVZX EDX,word ptr [ESI + 0x18a]
+007df703 : MOVZX ECX,DX
+007df706 : MOVAPS XMM1,XMM3
+007df709 : MOV EAX,ECX
+007df70b : TEST ECX,ECX
+007df70d : JGE 0x007df711
+007df70f : NEG EAX
+007df711 : MOVAPS XMM0,XMM2
+007df714 : TEST AL,0x1
+007df716 : JZ 0x007df71c
+007df718 : MULSS XMM0,XMM1
+007df71c : SHR EAX,0x1
+007df71e : JZ 0x007df72c
+007df720 : MOVAPS XMM4,XMM1
+007df723 : MULSS XMM4,XMM1
+007df727 : MOVAPS XMM1,XMM4
+007df72a : JMP 0x007df714
+007df72c : TEST ECX,ECX
+007df72e : JGE 0x007df73e
+007df730 : MOVAPS XMM1,XMM2
+007df733 : DIVSS XMM1,XMM0
+007df737 : MOVSS dword ptr [EBP + -0x8],XMM1
+007df73c : JMP 0x007df743
+007df73e : MOVSS dword ptr [EBP + -0x8],XMM0
+007df743 : FLD float ptr [EBP + -0x8]
+007df746 : FNSTCW word ptr [EBP + -0x2]
+007df749 : MOVZX EAX,word ptr [EBP + -0x2]
+007df74d : OR EAX,0xc00
+007df752 : MOV dword ptr [EBP + -0xc],EAX
+007df755 : FLDCW word ptr [EBP + -0xc]
+007df758 : FISTP qword ptr [EBP + -0x10]
+007df75b : MOV ECX,dword ptr [EBP + -0x10]
+007df75e : FLDCW word ptr [EBP + -0x2]
+007df761 : CMP EDI,ECX
+007df763 : JBE 0x007df76f
+007df765 : INC EDX
+007df766 : MOV word ptr [ESI + 0x18a],DX
+007df76d : JMP 0x007df6f0
+007df76f : POP EDI
+007df770 : POP EBX
+007df771 : MOV ESP,EBP
+007df773 : POP EBP
+007df774 : RET

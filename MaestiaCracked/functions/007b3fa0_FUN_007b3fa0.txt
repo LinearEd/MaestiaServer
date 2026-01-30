@@ -1,0 +1,90 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_007b3fa0
+ENTRY    : 007b3fa0
+BODY     : [[007b3fa0, 007b402a]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+uint FUN_007b3fa0(void)
+
+{
+  HANDLE Process;
+  BOOL BVar1;
+  PROCESS_MEMORY_COUNTERS *ppsmemCounters;
+  DWORD cb;
+  PROCESS_MEMORY_COUNTERS local_70;
+  _MEMORYSTATUSEX local_48;
+  
+  cb = 0x28;
+  ppsmemCounters = &local_70;
+  local_70.cb = 0x28;
+  Process = GetCurrentProcess();
+  BVar1 = GetProcessMemoryInfo(Process,ppsmemCounters,cb);
+  if (BVar1 == 0) {
+    return 0;
+  }
+  if (DAT_01725220 == 0 && DAT_01725224 == 0) {
+    _memset(&local_48,0,0x40);
+    local_48.dwLength = 0x40;
+    GlobalMemoryStatusEx(&local_48);
+    DAT_01725220 = local_48.ullTotalVirtual._0_4_;
+    DAT_01725224 = local_48.ullTotalVirtual._4_4_;
+  }
+  return DAT_01725220 - local_70.WorkingSetSize >> 0x14 |
+         (DAT_01725224 - (uint)(DAT_01725220 < local_70.WorkingSetSize)) * 0x1000;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+007b3fa0 : PUSH EBP
+007b3fa1 : MOV EBP,ESP
+007b3fa3 : AND ESP,0xfffffff8
+007b3fa6 : SUB ESP,0x6c
+007b3fa9 : PUSH ESI
+007b3faa : PUSH 0x28
+007b3fac : LEA EAX,[ESP + 0xc]
+007b3fb0 : PUSH EAX
+007b3fb1 : MOV dword ptr [ESP + 0x10],0x28
+007b3fb9 : CALL dword ptr [0x00b85134]
+007b3fbf : PUSH EAX
+007b3fc0 : CALL 0x0061146e
+007b3fc5 : TEST EAX,EAX
+007b3fc7 : JNZ 0x007b3fce
+007b3fc9 : POP ESI
+007b3fca : MOV ESP,EBP
+007b3fcc : POP EBP
+007b3fcd : RET
+007b3fce : MOV EAX,[0x01725220]
+007b3fd3 : MOV ECX,dword ptr [0x01725224]
+007b3fd9 : MOV EDX,EAX
+007b3fdb : OR EDX,ECX
+007b3fdd : JNZ 0x007b4015
+007b3fdf : PUSH 0x40
+007b3fe1 : PUSH EDX
+007b3fe2 : LEA EAX,[ESP + 0x38]
+007b3fe6 : PUSH EAX
+007b3fe7 : CALL 0x0063b700
+007b3fec : ADD ESP,0xc
+007b3fef : LEA ECX,[ESP + 0x30]
+007b3ff3 : PUSH ECX
+007b3ff4 : MOV dword ptr [ESP + 0x34],0x40
+007b3ffc : CALL dword ptr [0x00b85138]
+007b4002 : MOV EAX,dword ptr [ESP + 0x58]
+007b4006 : MOV ECX,dword ptr [ESP + 0x5c]
+007b400a : MOV [0x01725220],EAX
+007b400f : MOV dword ptr [0x01725224],ECX
+007b4015 : MOV EDX,dword ptr [ESP + 0x14]
+007b4019 : XOR ESI,ESI
+007b401b : SUB EAX,EDX
+007b401d : SBB ECX,ESI
+007b401f : SHRD EAX,ECX,0x14
+007b4023 : SHR ECX,0x14
+007b4026 : POP ESI
+007b4027 : MOV ESP,EBP
+007b4029 : POP EBP
+007b402a : RET

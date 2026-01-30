@@ -1,0 +1,165 @@
+PROGRAM  : Maestia.exe
+FUNCTION : _fprintf
+ENTRY    : 00636757
+BODY     : [[00636757, 00636868]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* WARNING: Function: __SEH_prolog4 replaced with injection: SEH_prolog4 */
+/* WARNING: Function: __SEH_epilog4 replaced with injection: EH_epilog3 */
+/* Library Function - Single Match
+    _fprintf
+   
+   Library: Visual Studio 2008 Release */
+
+int __cdecl _fprintf(FILE *_File,char *_Format,...)
+
+{
+  int *piVar1;
+  uint uVar2;
+  int _Flag;
+  undefined *puVar3;
+  int local_20;
+  
+  local_20 = 0;
+  if ((_File == (FILE *)0x0) || (_Format == (char *)0x0)) {
+    piVar1 = __errno();
+    *piVar1 = 0x16;
+    __invalid_parameter(0,0,0,0,0);
+    return -1;
+  }
+  __lock_file(_File);
+  if ((_File->_flag & 0x40) == 0) {
+    uVar2 = __fileno(_File);
+    if ((uVar2 == 0xffffffff) || (uVar2 == 0xfffffffe)) {
+      puVar3 = &DAT_00d677f0;
+    }
+    else {
+      puVar3 = (undefined *)((uVar2 & 0x1f) * 0x40 + (&DAT_01728c40)[(int)uVar2 >> 5]);
+    }
+    if ((puVar3[0x24] & 0x7f) == 0) {
+      if ((uVar2 == 0xffffffff) || (uVar2 == 0xfffffffe)) {
+        puVar3 = &DAT_00d677f0;
+      }
+      else {
+        puVar3 = (undefined *)((uVar2 & 0x1f) * 0x40 + (&DAT_01728c40)[(int)uVar2 >> 5]);
+      }
+      if ((puVar3[0x24] & 0x80) == 0) goto LAB_0063682c;
+    }
+    piVar1 = __errno();
+    *piVar1 = 0x16;
+    __invalid_parameter(0,0,0,0,0);
+    local_20 = -1;
+  }
+LAB_0063682c:
+  if (local_20 == 0) {
+    _Flag = __stbuf(_File);
+    local_20 = __output_l(_File,_Format,(_locale_t)0x0,&stack0x0000000c);
+    __ftbuf(_Flag,_File);
+  }
+  FUN_00636869();
+  return local_20;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00636757 : PUSH 0xc
+00636759 : PUSH 0xcecb98
+0063675e : CALL 0x0064c228
+00636763 : XOR ESI,ESI
+00636765 : MOV dword ptr [EBP + -0x1c],ESI
+00636768 : XOR EAX,EAX
+0063676a : MOV EBX,dword ptr [EBP + 0x8]
+0063676d : CMP EBX,ESI
+0063676f : SETNZ AL
+00636772 : CMP EAX,ESI
+00636774 : JNZ 0x00636796
+00636776 : CALL 0x0063ab82
+0063677b : MOV dword ptr [EAX],0x16
+00636781 : PUSH ESI
+00636782 : PUSH ESI
+00636783 : PUSH ESI
+00636784 : PUSH ESI
+00636785 : PUSH ESI
+00636786 : CALL 0x006372b8
+0063678b : ADD ESP,0x14
+0063678e : OR EAX,0xffffffff
+00636791 : JMP 0x00636863
+00636796 : XOR EAX,EAX
+00636798 : CMP dword ptr [EBP + 0xc],ESI
+0063679b : SETNZ AL
+0063679e : CMP EAX,ESI
+006367a0 : JZ 0x00636776
+006367a2 : MOV dword ptr [EBP + 0x8],EBX
+006367a5 : PUSH EBX
+006367a6 : CALL 0x0063d990
+006367ab : POP ECX
+006367ac : MOV dword ptr [EBP + -0x4],ESI
+006367af : TEST byte ptr [EBX + 0xc],0x40
+006367b3 : JNZ 0x0063682c
+006367b5 : PUSH EBX
+006367b6 : CALL 0x0064dfc6
+006367bb : POP ECX
+006367bc : CMP EAX,-0x1
+006367bf : JZ 0x006367dc
+006367c1 : CMP EAX,-0x2
+006367c4 : JZ 0x006367dc
+006367c6 : MOV EDX,EAX
+006367c8 : SAR EDX,0x5
+006367cb : MOV ECX,EAX
+006367cd : AND ECX,0x1f
+006367d0 : SHL ECX,0x6
+006367d3 : ADD ECX,dword ptr [EDX*0x4 + 0x1728c40]
+006367da : JMP 0x006367e1
+006367dc : MOV ECX,0xd677f0
+006367e1 : TEST byte ptr [ECX + 0x24],0x7f
+006367e5 : JNZ 0x00636810
+006367e7 : CMP EAX,-0x1
+006367ea : JZ 0x00636805
+006367ec : CMP EAX,-0x2
+006367ef : JZ 0x00636805
+006367f1 : MOV ECX,EAX
+006367f3 : SAR ECX,0x5
+006367f6 : AND EAX,0x1f
+006367f9 : SHL EAX,0x6
+006367fc : ADD EAX,dword ptr [ECX*0x4 + 0x1728c40]
+00636803 : JMP 0x0063680a
+00636805 : MOV EAX,0xd677f0
+0063680a : TEST byte ptr [EAX + 0x24],0x80
+0063680e : JZ 0x0063682c
+00636810 : CALL 0x0063ab82
+00636815 : MOV dword ptr [EAX],0x16
+0063681b : PUSH ESI
+0063681c : PUSH ESI
+0063681d : PUSH ESI
+0063681e : PUSH ESI
+0063681f : PUSH ESI
+00636820 : CALL 0x006372b8
+00636825 : ADD ESP,0x14
+00636828 : OR dword ptr [EBP + -0x1c],0xffffffff
+0063682c : CMP dword ptr [EBP + -0x1c],ESI
+0063682f : JNZ 0x00636854
+00636831 : PUSH EBX
+00636832 : CALL 0x006501d4
+00636837 : MOV EDI,EAX
+00636839 : LEA EAX,[EBP + 0x10]
+0063683c : PUSH EAX
+0063683d : PUSH ESI
+0063683e : PUSH dword ptr [EBP + 0xc]
+00636841 : PUSH EBX
+00636842 : CALL 0x0064a9ad
+00636847 : MOV dword ptr [EBP + -0x1c],EAX
+0063684a : PUSH EBX
+0063684b : PUSH EDI
+0063684c : CALL 0x00650270
+00636851 : ADD ESP,0x1c
+00636854 : MOV dword ptr [EBP + -0x4],0xfffffffe
+0063685b : CALL 0x00636869
+00636860 : MOV EAX,dword ptr [EBP + -0x1c]
+00636863 : CALL 0x0064c26d
+00636868 : RET

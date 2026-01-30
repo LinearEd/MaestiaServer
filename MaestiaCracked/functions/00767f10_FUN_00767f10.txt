@@ -1,0 +1,54 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00767f10
+ENTRY    : 00767f10
+BODY     : [[00767f10, 00767f2c] [00767f30, 00767f3f]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+int FUN_00767f10(void)
+
+{
+  int iVar1;
+  int iVar2;
+  int in_EDX;
+  int *piVar3;
+  int unaff_ESI;
+  
+  iVar1 = 0;
+  iVar2 = *(int *)(in_EDX + 0x1dc) - *(int *)(in_EDX + 0x1d8) >> 2;
+  if (0 < iVar2) {
+    piVar3 = *(int **)(in_EDX + 0x1d8);
+    do {
+      if (*piVar3 == unaff_ESI) {
+        return iVar1;
+      }
+      iVar1 = iVar1 + 1;
+      piVar3 = piVar3 + 1;
+    } while (iVar1 < iVar2);
+  }
+  return -1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00767f10 : MOV ECX,dword ptr [EDX + 0x1dc]
+00767f16 : SUB ECX,dword ptr [EDX + 0x1d8]
+00767f1c : XOR EAX,EAX
+00767f1e : SAR ECX,0x2
+00767f21 : TEST ECX,ECX
+00767f23 : JLE 0x00767f3c
+00767f25 : MOV EDX,dword ptr [EDX + 0x1d8]
+00767f2b : JMP 0x00767f30
+00767f30 : CMP dword ptr [EDX],ESI
+00767f32 : JZ 0x00767f3f
+00767f34 : INC EAX
+00767f35 : ADD EDX,0x4
+00767f38 : CMP EAX,ECX
+00767f3a : JL 0x00767f30
+00767f3c : OR EAX,0xffffffff
+00767f3f : RET

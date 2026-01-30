@@ -1,0 +1,56 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005b4310
+ENTRY    : 005b4310
+BODY     : [[005b4310, 005b434b]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_005b4310(byte param_1)
+
+{
+  LONG LVar1;
+  int in_ECX;
+  uint uVar2;
+  
+  uVar2 = *(uint *)(in_ECX + 0x38) & 0xfffffffc;
+  LVar1 = InterlockedExchangeAdd((LONG *)(uVar2 + 4),-1);
+  if (LVar1 == 1) {
+    FUN_00515cf0(uVar2);
+  }
+  FUN_00552060();
+  if ((param_1 & 1) != 0) {
+    FUN_00515cf0(in_ECX);
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005b4310 : PUSH ESI
+005b4311 : PUSH EDI
+005b4312 : MOV EDI,ECX
+005b4314 : MOV ESI,dword ptr [EDI + 0x38]
+005b4317 : AND ESI,0xfffffffc
+005b431a : PUSH -0x1
+005b431c : LEA EAX,[ESI + 0x4]
+005b431f : PUSH EAX
+005b4320 : CALL dword ptr [0x00b851cc]
+005b4326 : SUB EAX,0x1
+005b4329 : JNZ 0x005b4331
+005b432b : PUSH ESI
+005b432c : CALL 0x00515cf0
+005b4331 : MOV ECX,EDI
+005b4333 : CALL 0x00552060
+005b4338 : TEST byte ptr [ESP + 0xc],0x1
+005b433d : JZ 0x005b4345
+005b433f : PUSH EDI
+005b4340 : CALL 0x00515cf0
+005b4345 : MOV EAX,EDI
+005b4347 : POP EDI
+005b4348 : POP ESI
+005b4349 : RET 0x4

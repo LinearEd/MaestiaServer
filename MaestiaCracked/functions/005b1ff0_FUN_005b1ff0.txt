@@ -1,0 +1,82 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005b1ff0
+ENTRY    : 005b1ff0
+BODY     : [[005b1ff0, 005b2048]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+int * FUN_005b1ff0(int *param_1,int *param_2,char *param_3,int param_4)
+
+{
+  int *piVar1;
+  char cVar2;
+  char *pcVar3;
+  int iVar4;
+  
+  if (param_4 == 0) {
+    pcVar3 = param_3;
+    do {
+      cVar2 = *pcVar3;
+      pcVar3 = pcVar3 + 1;
+    } while (cVar2 != '\0');
+    param_4 = (int)pcVar3 - (int)(param_3 + 1);
+  }
+  else {
+    param_4 = param_4 - (int)param_3;
+  }
+  if (0 < param_4) {
+    iVar4 = FUN_00525450(param_3,param_4);
+    *(int *)(iVar4 + 8) = *(int *)(iVar4 + 8) + 1;
+    *param_1 = iVar4;
+    return param_1;
+  }
+  iVar4 = *(int *)(*param_2 + 8);
+  piVar1 = (int *)(iVar4 + 8);
+  *piVar1 = *piVar1 + 1;
+  *param_1 = iVar4;
+  return param_1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005b1ff0 : MOV EAX,dword ptr [ESP + 0x10]
+005b1ff4 : MOV EDX,dword ptr [ESP + 0xc]
+005b1ff8 : TEST EAX,EAX
+005b1ffa : JNZ 0x005b200e
+005b1ffc : MOV EAX,EDX
+005b1ffe : PUSH ESI
+005b1fff : LEA ESI,[EAX + 0x1]
+005b2002 : MOV CL,byte ptr [EAX]
+005b2004 : INC EAX
+005b2005 : TEST CL,CL
+005b2007 : JNZ 0x005b2002
+005b2009 : SUB EAX,ESI
+005b200b : POP ESI
+005b200c : JMP 0x005b2010
+005b200e : SUB EAX,EDX
+005b2010 : TEST EAX,EAX
+005b2012 : JLE 0x005b2036
+005b2014 : MOV ECX,dword ptr [ESP + 0x8]
+005b2018 : MOV ECX,dword ptr [ECX]
+005b201a : ADD ECX,0x8
+005b201d : PUSH EAX
+005b201e : PUSH EDX
+005b201f : ADD ECX,0x24c
+005b2025 : CALL 0x00525450
+005b202a : MOV ECX,dword ptr [ESP + 0x4]
+005b202e : INC dword ptr [EAX + 0x8]
+005b2031 : MOV dword ptr [ECX],EAX
+005b2033 : MOV EAX,ECX
+005b2035 : RET
+005b2036 : MOV EDX,dword ptr [ESP + 0x8]
+005b203a : MOV EAX,dword ptr [EDX]
+005b203c : MOV ECX,dword ptr [EAX + 0x8]
+005b203f : MOV EAX,dword ptr [ESP + 0x4]
+005b2043 : INC dword ptr [ECX + 0x8]
+005b2046 : MOV dword ptr [EAX],ECX
+005b2048 : RET

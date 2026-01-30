@@ -1,0 +1,55 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0075b380
+ENTRY    : 0075b380
+BODY     : [[0075b380, 0075b3c5]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+uint FUN_0075b380(float param_1)
+
+{
+  float fVar1;
+  uint uVar2;
+  int *in_ECX;
+  
+  uVar2 = 0;
+  if ((((*in_ECX != 0) && (uVar2 = *(uint *)(*in_ECX + 0x184), uVar2 != 0)) && (uVar2 != 2)) &&
+     (((float)in_ECX[9] < 1000.0 &&
+      (fVar1 = (float)in_ECX[8], in_ECX[8] = (int)(fVar1 + param_1),
+      (float)in_ECX[9] <= fVar1 + param_1)))) {
+    return CONCAT31((int3)(uVar2 >> 8),1);
+  }
+  return uVar2 & 0xffffff00;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0075b380 : PUSH EBP
+0075b381 : MOV EBP,ESP
+0075b383 : MOV EAX,dword ptr [ECX]
+0075b385 : TEST EAX,EAX
+0075b387 : JNZ 0x0075b38f
+0075b389 : XOR AL,AL
+0075b38b : POP EBP
+0075b38c : RET 0x4
+0075b38f : MOV EAX,dword ptr [EAX + 0x184]
+0075b395 : TEST EAX,EAX
+0075b397 : JZ 0x0075b389
+0075b399 : CMP EAX,0x2
+0075b39c : JZ 0x0075b389
+0075b39e : MOVSS XMM1,dword ptr [ECX + 0x24]
+0075b3a3 : COMISS XMM1,dword ptr [0x00cdf16c]
+0075b3aa : JNC 0x0075b389
+0075b3ac : MOVSS XMM0,dword ptr [ECX + 0x20]
+0075b3b1 : ADDSS XMM0,dword ptr [EBP + 0x8]
+0075b3b6 : COMISS XMM1,XMM0
+0075b3b9 : MOVSS dword ptr [ECX + 0x20],XMM0
+0075b3be : JA 0x0075b389
+0075b3c0 : MOV AL,0x1
+0075b3c2 : POP EBP
+0075b3c3 : RET 0x4

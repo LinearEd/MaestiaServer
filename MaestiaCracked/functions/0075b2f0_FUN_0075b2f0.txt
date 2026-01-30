@@ -1,0 +1,88 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0075b2f0
+ENTRY    : 0075b2f0
+BODY     : [[0075b2f0, 0075b37c]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_0075b2f0(float param_1)
+
+{
+  int iVar1;
+  int iVar2;
+  undefined4 *puVar3;
+  int unaff_EDI;
+  
+  if (param_1 == 0.0) {
+    param_1 = 0.01;
+  }
+  iVar2 = 0;
+  if (0 < *(int *)(unaff_EDI + 0x24c)) {
+    puVar3 = (undefined4 *)(unaff_EDI + 0x14c);
+    do {
+      iVar1 = FUN_00612a40(*puVar3);
+      if ((iVar1 != 0) && ((*(uint *)(iVar1 + 0x68) & 0x10000) == 0)) {
+        FUN_00613320(*puVar3,*(float *)(*(int *)(unaff_EDI + 0x2c) + (-0x14c - unaff_EDI) +
+                                       (int)puVar3) * param_1);
+      }
+      iVar2 = iVar2 + 1;
+      puVar3 = puVar3 + 1;
+    } while (iVar2 < *(int *)(unaff_EDI + 0x24c));
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0075b2f0 : PUSH EBP
+0075b2f1 : MOV EBP,ESP
+0075b2f3 : PUSH ECX
+0075b2f4 : MOVSS XMM0,dword ptr [EBP + 0x8]
+0075b2f9 : UCOMISS XMM0,dword ptr [0x00b9b0b4]
+0075b300 : LAHF
+0075b301 : TEST AH,0x44
+0075b304 : JP 0x0075b313
+0075b306 : MOVSS XMM0,dword ptr [0x00cdf23c]
+0075b30e : MOVSS dword ptr [EBP + 0x8],XMM0
+0075b313 : PUSH EBX
+0075b314 : XOR EBX,EBX
+0075b316 : CMP dword ptr [EDI + 0x24c],EBX
+0075b31c : JLE 0x0075b376
+0075b31e : MOV EAX,0xfffffeb4
+0075b323 : SUB EAX,EDI
+0075b325 : PUSH ESI
+0075b326 : LEA ESI,[EDI + 0x14c]
+0075b32c : MOV dword ptr [EBP + -0x4],EAX
+0075b32f : NOP
+0075b330 : MOV EAX,dword ptr [ESI]
+0075b332 : PUSH EAX
+0075b333 : CALL 0x00612a40
+0075b338 : ADD ESP,0x4
+0075b33b : TEST EAX,EAX
+0075b33d : JZ 0x0075b369
+0075b33f : TEST dword ptr [EAX + 0x68],0x10000
+0075b346 : JNZ 0x0075b369
+0075b348 : MOV ECX,dword ptr [EDI + 0x2c]
+0075b34b : ADD ECX,dword ptr [EBP + -0x4]
+0075b34e : MOV EDX,dword ptr [ESI]
+0075b350 : MOVSS XMM0,dword ptr [ECX + ESI*0x1]
+0075b355 : MULSS XMM0,dword ptr [EBP + 0x8]
+0075b35a : PUSH ECX
+0075b35b : MOVSS dword ptr [ESP],XMM0
+0075b360 : PUSH EDX
+0075b361 : CALL 0x00613320
+0075b366 : ADD ESP,0x8
+0075b369 : INC EBX
+0075b36a : ADD ESI,0x4
+0075b36d : CMP EBX,dword ptr [EDI + 0x24c]
+0075b373 : JL 0x0075b330
+0075b375 : POP ESI
+0075b376 : POP EBX
+0075b377 : MOV ESP,EBP
+0075b379 : POP EBP
+0075b37a : RET 0x4

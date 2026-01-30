@@ -1,0 +1,116 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __wcsicoll
+ENTRY    : 0063bf75
+BODY     : [[0063bf75, 0063c007]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __wcsicoll
+   
+   Library: Visual Studio 2008 Release */
+
+int __cdecl __wcsicoll(wchar_t *_Str1,wchar_t *_Str2)
+
+{
+  wchar_t wVar1;
+  wchar_t wVar2;
+  int *piVar3;
+  int iVar4;
+  
+  if (DAT_00d7b7c8 == 0) {
+    if ((_Str1 == (wchar_t *)0x0) || (_Str2 == (wchar_t *)0x0)) {
+      piVar3 = __errno();
+      *piVar3 = 0x16;
+      __invalid_parameter(0,0,0,0,0);
+      iVar4 = 0x7fffffff;
+    }
+    else {
+      do {
+        wVar1 = *_Str1;
+        if ((0x40 < (ushort)wVar1) && ((ushort)wVar1 < 0x5b)) {
+          wVar1 = wVar1 + L' ';
+        }
+        wVar2 = *_Str2;
+        if ((0x40 < (ushort)wVar2) && ((ushort)wVar2 < 0x5b)) {
+          wVar2 = wVar2 + L' ';
+        }
+        _Str1 = _Str1 + 1;
+        _Str2 = _Str2 + 1;
+      } while ((wVar1 != L'\0') && (wVar1 == wVar2));
+      iVar4 = (uint)(ushort)wVar1 - (uint)(ushort)wVar2;
+    }
+  }
+  else {
+    iVar4 = __wcsicoll_l(_Str1,_Str2,(_locale_t)0x0);
+  }
+  return iVar4;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0063bf75 : MOV EDI,EDI
+0063bf77 : PUSH EBP
+0063bf78 : MOV EBP,ESP
+0063bf7a : PUSH ESI
+0063bf7b : XOR ESI,ESI
+0063bf7d : PUSH EDI
+0063bf7e : CMP dword ptr [0x00d7b7c8],ESI
+0063bf84 : JNZ 0x0063bff5
+0063bf86 : MOV EDI,dword ptr [EBP + 0x8]
+0063bf89 : CMP EDI,ESI
+0063bf8b : JNZ 0x0063bfac
+0063bf8d : CALL 0x0063ab82
+0063bf92 : PUSH ESI
+0063bf93 : PUSH ESI
+0063bf94 : PUSH ESI
+0063bf95 : PUSH ESI
+0063bf96 : PUSH ESI
+0063bf97 : MOV dword ptr [EAX],0x16
+0063bf9d : CALL 0x006372b8
+0063bfa2 : ADD ESP,0x14
+0063bfa5 : MOV EAX,0x7fffffff
+0063bfaa : JMP 0x0063c004
+0063bfac : MOV EDX,dword ptr [EBP + 0xc]
+0063bfaf : CMP EDX,ESI
+0063bfb1 : JZ 0x0063bf8d
+0063bfb3 : MOVZX EAX,word ptr [EDI]
+0063bfb6 : CMP AX,0x41
+0063bfba : JC 0x0063bfc5
+0063bfbc : CMP AX,0x5a
+0063bfc0 : JA 0x0063bfc5
+0063bfc2 : ADD EAX,0x20
+0063bfc5 : MOVZX ECX,AX
+0063bfc8 : MOVZX EAX,word ptr [EDX]
+0063bfcb : CMP AX,0x41
+0063bfcf : JC 0x0063bfda
+0063bfd1 : CMP AX,0x5a
+0063bfd5 : JA 0x0063bfda
+0063bfd7 : ADD EAX,0x20
+0063bfda : INC EDI
+0063bfdb : INC EDI
+0063bfdc : INC EDX
+0063bfdd : INC EDX
+0063bfde : MOVZX EAX,AX
+0063bfe1 : CMP CX,SI
+0063bfe4 : JZ 0x0063bfeb
+0063bfe6 : CMP CX,AX
+0063bfe9 : JZ 0x0063bfb3
+0063bfeb : MOVZX EDX,AX
+0063bfee : MOVZX EAX,CX
+0063bff1 : SUB EAX,EDX
+0063bff3 : JMP 0x0063c004
+0063bff5 : PUSH ESI
+0063bff6 : PUSH dword ptr [EBP + 0xc]
+0063bff9 : PUSH dword ptr [EBP + 0x8]
+0063bffc : CALL 0x0063be94
+0063c001 : ADD ESP,0xc
+0063c004 : POP EDI
+0063c005 : POP ESI
+0063c006 : POP EBP
+0063c007 : RET

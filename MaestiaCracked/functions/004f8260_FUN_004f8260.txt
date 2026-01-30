@@ -1,0 +1,58 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_004f8260
+ENTRY    : 004f8260
+BODY     : [[004f8260, 004f82aa]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+uint FUN_004f8260(void)
+
+{
+  ushort *in_EAX;
+  uint uVar1;
+  int unaff_ESI;
+  undefined8 uVar2;
+  
+  uVar2 = FUN_0063871f((*in_EAX ^ 0xdeadbeef) & 0x7fffffff,0x1f31d);
+  uVar1 = (int)((ulonglong)uVar2 >> 0x20) * 0x41a7 + (int)uVar2 * -0xb14;
+  if ((int)uVar1 < 0) {
+    uVar1 = uVar1 + 0x7fffffff;
+  }
+  uVar1 = *(uint *)(unaff_ESI + 0x20) & uVar1;
+  if (*(uint *)(unaff_ESI + 0x24) <= uVar1) {
+    uVar1 = uVar1 + (-1 - (*(uint *)(unaff_ESI + 0x20) >> 1));
+  }
+  return uVar1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+004f8260 : PUSH ECX
+004f8261 : MOVZX ECX,word ptr [EAX]
+004f8264 : XOR ECX,0xdeadbeef
+004f826a : AND ECX,0x7fffffff
+004f8270 : PUSH 0x1f31d
+004f8275 : PUSH ECX
+004f8276 : CALL 0x0063871f
+004f827b : IMUL EDX,EDX,0x41a7
+004f8281 : IMUL EAX,EAX,0xb14
+004f8287 : ADD ESP,0x8
+004f828a : SUB EDX,EAX
+004f828c : JNS 0x004f8294
+004f828e : ADD EDX,0x7fffffff
+004f8294 : MOV ECX,dword ptr [ESI + 0x20]
+004f8297 : MOV EAX,ECX
+004f8299 : AND EAX,EDX
+004f829b : CMP dword ptr [ESI + 0x24],EAX
+004f829e : JA 0x004f82a9
+004f82a0 : SHR ECX,0x1
+004f82a2 : OR EDX,0xffffffff
+004f82a5 : SUB EDX,ECX
+004f82a7 : ADD EAX,EDX
+004f82a9 : POP ECX
+004f82aa : RET

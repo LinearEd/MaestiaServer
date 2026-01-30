@@ -1,0 +1,131 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_009292d0
+ENTRY    : 009292d0
+BODY     : [[009292d0, 0092939a]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_009292d0(int param_1)
+
+{
+  int iVar1;
+  uint8_t *packet;
+  byte bVar2;
+  uint8_t uVar3;
+  void *local_10;
+  undefined1 *puStack_c;
+  undefined4 local_8;
+  
+  puStack_c = &LAB_00b3fae3;
+  local_10 = ExceptionList;
+  ExceptionList = &local_10;
+  iVar1 = *(int *)(param_1 + 0x80);
+  uVar3 = '\0';
+  if (iVar1 == 0) {
+    uVar3 = '\x01';
+  }
+  else if (iVar1 == 1) {
+    uVar3 = '\x03';
+  }
+  else if (iVar1 == 2) {
+    uVar3 = '\n';
+  }
+  iVar1 = *(int *)ThreadLocalStoragePointer;
+  bVar2 = (byte)((ulonglong)(*(byte *)(iVar1 + 0x18) + 1) % 3);
+  *(byte *)(iVar1 + 0x18) = bVar2;
+  packet = (uint8_t *)((uint)bVar2 * 0x2000 + 0x122cb8 + iVar1);
+  if (packet == (uint8_t *)0x0) {
+    packet = (uint8_t *)0x0;
+  }
+  else {
+    packet[0] = '\0';
+    packet[1] = '\0';
+    packet[2] = '4';
+    packet[3] = 0xd8;
+    packet[4] = uVar3;
+  }
+  local_8 = 0xffffffff;
+  if ((*(int *)(DAT_017247d4 + 4) != 0) && (*(char *)(DAT_017247d4 + 8) != '\0')) {
+    FUN_00a0dd40(*(int *)(DAT_017247d4 + 4),5,packet);
+  }
+  ExceptionList = local_10;
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+009292d0 : PUSH EBP
+009292d1 : MOV EBP,ESP
+009292d3 : PUSH -0x1
+009292d5 : PUSH 0xb3fae3
+009292da : MOV EAX,FS:[0x0]
+009292e0 : PUSH EAX
+009292e1 : PUSH EBX
+009292e2 : PUSH ESI
+009292e3 : PUSH EDI
+009292e4 : MOV EAX,[0x00d66fa0]
+009292e9 : XOR EAX,EBP
+009292eb : PUSH EAX
+009292ec : LEA EAX,[EBP + -0xc]
+009292ef : MOV FS:[0x0],EAX
+009292f5 : MOV EAX,dword ptr [EBP + 0x8]
+009292f8 : MOV EAX,dword ptr [EAX + 0x80]
+009292fe : XOR EBX,EBX
+00929300 : TEST EAX,EAX
+00929302 : JNZ 0x00929309
+00929304 : LEA EBX,[EAX + 0x1]
+00929307 : JMP 0x0092931b
+00929309 : CMP EAX,0x1
+0092930c : JNZ 0x00929313
+0092930e : LEA EBX,[EAX + 0x2]
+00929311 : JMP 0x0092931b
+00929313 : CMP EAX,0x2
+00929316 : JNZ 0x0092931b
+00929318 : LEA EBX,[EAX + 0x8]
+0092931b : MOV ECX,dword ptr FS:[0x2c]
+00929322 : MOV ECX,dword ptr [ECX]
+00929324 : MOVZX EAX,byte ptr [ECX + 0x18]
+00929328 : INC EAX
+00929329 : CDQ
+0092932a : MOV ESI,0x3
+0092932f : IDIV ESI
+00929331 : MOV byte ptr [ECX + 0x18],DL
+00929334 : MOVZX EDX,DL
+00929337 : SHL EDX,0xd
+0092933a : LEA EAX,[EDX + ECX*0x1 + 0x122cb8]
+00929341 : MOV dword ptr [EBP + 0x8],EAX
+00929344 : MOV dword ptr [EBP + -0x4],0x0
+0092934b : TEST EAX,EAX
+0092934d : JZ 0x00929361
+0092934f : XOR ECX,ECX
+00929351 : MOV word ptr [EAX],CX
+00929354 : MOV byte ptr [EAX + 0x2],0x34
+00929358 : MOV byte ptr [EAX + 0x3],0xd8
+0092935c : MOV byte ptr [EAX + 0x4],BL
+0092935f : JMP 0x00929363
+00929361 : XOR EAX,EAX
+00929363 : MOV dword ptr [EBP + -0x4],0xffffffff
+0092936a : MOV EDX,dword ptr [0x017247d4]
+00929370 : MOV ECX,dword ptr [EDX + 0x4]
+00929373 : TEST ECX,ECX
+00929375 : JZ 0x00929387
+00929377 : CMP byte ptr [EDX + 0x8],0x0
+0092937b : JZ 0x00929387
+0092937d : PUSH 0x5
+0092937f : PUSH ECX
+00929380 : MOV EDI,EAX
+00929382 : CALL 0x00a0dd40
+00929387 : MOV ECX,dword ptr [EBP + -0xc]
+0092938a : MOV dword ptr FS:[0x0],ECX
+00929391 : POP ECX
+00929392 : POP EDI
+00929393 : POP ESI
+00929394 : POP EBX
+00929395 : MOV ESP,EBP
+00929397 : POP EBP
+00929398 : RET 0x4

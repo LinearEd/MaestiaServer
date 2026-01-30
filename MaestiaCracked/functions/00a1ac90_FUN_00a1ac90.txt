@@ -1,0 +1,124 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00a1ac90
+ENTRY    : 00a1ac90
+BODY     : [[00a1ac90, 00a1ad63]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined4 FUN_00a1ac90(int *param_1,int *param_2)
+
+{
+  int iVar1;
+  int iVar2;
+  int iVar3;
+  int iVar4;
+  int iVar5;
+  float fVar6;
+  float fVar7;
+  float fVar8;
+  float fVar9;
+  
+  iVar1 = *param_1;
+  iVar2 = *param_2;
+  iVar3 = *(int *)(DAT_0172491c + 0x17c);
+  if (*(int *)(iVar3 + 0x1f54) != 0) {
+    iVar4 = FUN_00ab6640(*(undefined4 *)(iVar1 + 4));
+    iVar5 = FUN_00ab6640(*(undefined4 *)(iVar2 + 4));
+    if (iVar4 == 0) {
+      if (iVar5 != 0) {
+        return 1;
+      }
+    }
+    else if (iVar5 == 0) {
+      return 0xffffffff;
+    }
+  }
+  fVar8 = *(float *)(iVar1 + 0x1a4) - *(float *)(iVar3 + 0x1a4);
+  fVar9 = *(float *)(iVar2 + 0x1a4) - *(float *)(iVar3 + 0x1a4);
+  fVar6 = *(float *)(iVar1 + 0x1ac) - *(float *)(iVar3 + 0x1ac);
+  fVar7 = *(float *)(iVar2 + 0x1ac) - *(float *)(iVar3 + 0x1ac);
+  fVar6 = fVar6 * fVar6 + fVar8 * fVar8;
+  fVar7 = fVar7 * fVar7 + fVar9 * fVar9;
+  if (fVar6 < fVar7) {
+    return 0xffffffff;
+  }
+  if (fVar7 < fVar6) {
+    return 1;
+  }
+  return 0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00a1ac90 : PUSH EBP
+00a1ac91 : MOV EBP,ESP
+00a1ac93 : MOV EAX,dword ptr [EBP + 0x8]
+00a1ac96 : MOV ECX,dword ptr [EBP + 0xc]
+00a1ac99 : MOV EDX,dword ptr [0x0172491c]
+00a1ac9f : PUSH EBX
+00a1aca0 : MOV EBX,dword ptr [EAX]
+00a1aca2 : MOV EAX,dword ptr [ECX]
+00a1aca4 : PUSH ESI
+00a1aca5 : MOV ESI,dword ptr [EDX + 0x17c]
+00a1acab : MOV ECX,dword ptr [ESI + 0x1f54]
+00a1acb1 : MOV dword ptr [EBP + 0x8],EAX
+00a1acb4 : TEST ECX,ECX
+00a1acb6 : JZ 0x00a1acf6
+00a1acb8 : MOV EAX,dword ptr [EBX + 0x4]
+00a1acbb : PUSH EDI
+00a1acbc : PUSH EAX
+00a1acbd : CALL 0x00ab6640
+00a1acc2 : MOV ECX,dword ptr [ESI + 0x1f54]
+00a1acc8 : MOV EDI,EAX
+00a1acca : MOV EAX,dword ptr [EBP + 0x8]
+00a1accd : MOV EAX,dword ptr [EAX + 0x4]
+00a1acd0 : PUSH EAX
+00a1acd1 : CALL 0x00ab6640
+00a1acd6 : TEST EDI,EDI
+00a1acd8 : POP EDI
+00a1acd9 : JZ 0x00a1ace6
+00a1acdb : TEST EAX,EAX
+00a1acdd : JNZ 0x00a1acf3
+00a1acdf : POP ESI
+00a1ace0 : OR EAX,0xffffffff
+00a1ace3 : POP EBX
+00a1ace4 : POP EBP
+00a1ace5 : RET
+00a1ace6 : TEST EAX,EAX
+00a1ace8 : JZ 0x00a1acf3
+00a1acea : POP ESI
+00a1aceb : MOV EAX,0x1
+00a1acf0 : POP EBX
+00a1acf1 : POP EBP
+00a1acf2 : RET
+00a1acf3 : MOV EAX,dword ptr [EBP + 0x8]
+00a1acf6 : MOVSS XMM2,dword ptr [EBX + 0x1a4]
+00a1acfe : SUBSS XMM2,dword ptr [ESI + 0x1a4]
+00a1ad06 : MOVSS XMM3,dword ptr [EAX + 0x1a4]
+00a1ad0e : SUBSS XMM3,dword ptr [ESI + 0x1a4]
+00a1ad16 : MOVSS XMM0,dword ptr [EBX + 0x1ac]
+00a1ad1e : SUBSS XMM0,dword ptr [ESI + 0x1ac]
+00a1ad26 : MOVSS XMM1,dword ptr [EAX + 0x1ac]
+00a1ad2e : SUBSS XMM1,dword ptr [ESI + 0x1ac]
+00a1ad36 : MOVAPS XMM4,XMM2
+00a1ad39 : MULSS XMM4,XMM2
+00a1ad3d : MOVAPS XMM2,XMM3
+00a1ad40 : MULSS XMM0,XMM0
+00a1ad44 : MULSS XMM1,XMM1
+00a1ad48 : MULSS XMM2,XMM3
+00a1ad4c : ADDSS XMM0,XMM4
+00a1ad50 : ADDSS XMM1,XMM2
+00a1ad54 : COMISS XMM1,XMM0
+00a1ad57 : JA 0x00a1acdf
+00a1ad59 : COMISS XMM0,XMM1
+00a1ad5c : JA 0x00a1acea
+00a1ad5e : POP ESI
+00a1ad5f : XOR EAX,EAX
+00a1ad61 : POP EBX
+00a1ad62 : POP EBP
+00a1ad63 : RET

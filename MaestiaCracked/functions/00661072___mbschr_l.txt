@@ -1,0 +1,154 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __mbschr_l
+ENTRY    : 00661072
+BODY     : [[00661072, 0066112d]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __mbschr_l
+   
+   Library: Visual Studio 2008 Release */
+
+uchar * __cdecl __mbschr_l(uchar *_Str,uint _Ch,_locale_t _Locale)
+
+{
+  byte bVar1;
+  byte bVar2;
+  int *piVar3;
+  byte *pbVar4;
+  _LocaleUpdate local_14 [4];
+  int local_10;
+  int local_c;
+  char local_8;
+  
+  _LocaleUpdate::_LocaleUpdate(local_14,_Locale);
+  if (_Str == (uchar *)0x0) {
+    piVar3 = __errno();
+    *piVar3 = 0x16;
+    __invalid_parameter(0,0,0,0,0);
+    if (local_8 != '\0') {
+      *(uint *)(local_c + 0x70) = *(uint *)(local_c + 0x70) & 0xfffffffd;
+    }
+    _Str = (byte *)0x0;
+  }
+  else {
+    if (*(int *)(local_10 + 8) == 0) {
+      _Str = (uchar *)FUN_00638800(_Str,_Ch);
+    }
+    else {
+      while( true ) {
+        bVar2 = *_Str;
+        if (bVar2 == 0) break;
+        if ((*(byte *)(bVar2 + 0x1d + local_10) & 4) == 0) {
+          pbVar4 = _Str;
+          if (_Ch == bVar2) break;
+        }
+        else {
+          bVar1 = _Str[1];
+          if (bVar1 == 0) goto LAB_0066111c;
+          pbVar4 = _Str + 1;
+          if (_Ch == CONCAT11(bVar2,bVar1)) goto LAB_0066110e;
+        }
+        _Str = pbVar4 + 1;
+      }
+      if (_Ch != (ushort)bVar2) {
+LAB_0066111c:
+        if (local_8 != '\0') {
+          *(uint *)(local_c + 0x70) = *(uint *)(local_c + 0x70) & 0xfffffffd;
+        }
+        return (uchar *)0x0;
+      }
+    }
+LAB_0066110e:
+    if (local_8 != '\0') {
+      *(uint *)(local_c + 0x70) = *(uint *)(local_c + 0x70) & 0xfffffffd;
+    }
+  }
+  return _Str;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00661072 : MOV EDI,EDI
+00661074 : PUSH EBP
+00661075 : MOV EBP,ESP
+00661077 : SUB ESP,0x10
+0066107a : PUSH EBX
+0066107b : PUSH dword ptr [EBP + 0x10]
+0066107e : LEA ECX,[EBP + -0x10]
+00661081 : CALL 0x00637880
+00661086 : MOV EAX,dword ptr [EBP + 0x8]
+00661089 : XOR EBX,EBX
+0066108b : CMP EAX,EBX
+0066108d : JNZ 0x006610b7
+0066108f : CALL 0x0063ab82
+00661094 : PUSH EBX
+00661095 : PUSH EBX
+00661096 : PUSH EBX
+00661097 : PUSH EBX
+00661098 : PUSH EBX
+00661099 : MOV dword ptr [EAX],0x16
+0066109f : CALL 0x006372b8
+006610a4 : ADD ESP,0x14
+006610a7 : CMP byte ptr [EBP + -0x4],BL
+006610aa : JZ 0x006610b3
+006610ac : MOV EAX,dword ptr [EBP + -0x8]
+006610af : AND dword ptr [EAX + 0x70],0xfffffffd
+006610b3 : XOR EAX,EAX
+006610b5 : JMP 0x0066112b
+006610b7 : PUSH ESI
+006610b8 : MOV ESI,dword ptr [EBP + -0xc]
+006610bb : CMP dword ptr [ESI + 0x8],EBX
+006610be : JNZ 0x006610fa
+006610c0 : PUSH dword ptr [EBP + 0xc]
+006610c3 : PUSH EAX
+006610c4 : CALL 0x00638800
+006610c9 : POP ECX
+006610ca : POP ECX
+006610cb : JMP 0x0066110e
+006610cd : MOVZX EDX,CL
+006610d0 : TEST byte ptr [EDX + ESI*0x1 + 0x1d],0x4
+006610d5 : JZ 0x006610f1
+006610d7 : INC EAX
+006610d8 : MOV DL,byte ptr [EAX]
+006610da : CMP DL,BL
+006610dc : JZ 0x0066111c
+006610de : MOVZX ECX,CX
+006610e1 : MOVZX EDX,DL
+006610e4 : SHL ECX,0x8
+006610e7 : OR ECX,EDX
+006610e9 : CMP dword ptr [EBP + 0xc],ECX
+006610ec : JNZ 0x006610f9
+006610ee : DEC EAX
+006610ef : JMP 0x0066110e
+006610f1 : MOVZX EDX,CX
+006610f4 : CMP dword ptr [EBP + 0xc],EDX
+006610f7 : JZ 0x00661106
+006610f9 : INC EAX
+006610fa : MOVZX CX,byte ptr [EAX]
+006610fe : MOVZX ECX,CX
+00661101 : CMP CX,BX
+00661104 : JNZ 0x006610cd
+00661106 : MOVZX ECX,CX
+00661109 : CMP dword ptr [EBP + 0xc],ECX
+0066110c : JNZ 0x0066111c
+0066110e : CMP byte ptr [EBP + -0x4],BL
+00661111 : JZ 0x0066112a
+00661113 : MOV ECX,dword ptr [EBP + -0x8]
+00661116 : AND dword ptr [ECX + 0x70],0xfffffffd
+0066111a : JMP 0x0066112a
+0066111c : CMP byte ptr [EBP + -0x4],BL
+0066111f : JZ 0x00661128
+00661121 : MOV EAX,dword ptr [EBP + -0x8]
+00661124 : AND dword ptr [EAX + 0x70],0xfffffffd
+00661128 : XOR EAX,EAX
+0066112a : POP ESI
+0066112b : POP EBX
+0066112c : LEAVE
+0066112d : RET

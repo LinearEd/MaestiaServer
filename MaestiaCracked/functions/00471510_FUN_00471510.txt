@@ -1,0 +1,69 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00471510
+ENTRY    : 00471510
+BODY     : [[00471510, 00471524] [00471530, 00471560]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+uint FUN_00471510(void)
+
+{
+  ushort *puVar1;
+  uint in_EAX;
+  uint uVar2;
+  int *in_ECX;
+  ushort *puVar3;
+  
+  *(undefined4 *)(in_EAX + 0x38) = 0;
+  uVar2 = in_EAX;
+  if (*in_ECX != 0x11) {
+    puVar3 = (ushort *)(in_ECX + 2);
+    do {
+      uVar2 = *(uint *)(puVar3 + -2);
+      *(int *)(in_EAX + 0x38) =
+           *(int *)(in_EAX + 0x38) + (uint)*puVar3 * *(int *)(&DAT_00d72c34 + uVar2 * 4);
+      puVar1 = puVar3 + 2;
+      puVar3 = puVar3 + 6;
+    } while (*(int *)puVar1 != 0x11);
+  }
+  if (*(int *)(in_EAX + 0x38) != 0) {
+    uVar2 = FUN_006ebf90(in_EAX + 4);
+    return uVar2;
+  }
+  return uVar2 & 0xffffff00;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00471510 : PUSH EBX
+00471511 : PUSH ESI
+00471512 : MOV ESI,EAX
+00471514 : MOV dword ptr [ESI + 0x38],0x0
+0047151b : CMP dword ptr [ECX],0x11
+0047151e : JZ 0x0047154a
+00471520 : LEA EDX,[ECX + 0x8]
+00471523 : JMP 0x00471530
+00471530 : MOVZX EBX,word ptr [EDX]
+00471533 : MOV EAX,dword ptr [EDX + -0x4]
+00471536 : IMUL EBX,dword ptr [EAX*0x4 + 0xd72c34]
+0047153e : ADD dword ptr [ESI + 0x38],EBX
+00471541 : ADD EDX,0xc
+00471544 : CMP dword ptr [EDX + -0x8],0x11
+00471548 : JNZ 0x00471530
+0047154a : CMP dword ptr [ESI + 0x38],0x0
+0047154e : JBE 0x0047155c
+00471550 : ADD ESI,0x4
+00471553 : PUSH ESI
+00471554 : CALL 0x006ebf90
+00471559 : POP ESI
+0047155a : POP EBX
+0047155b : RET
+0047155c : POP ESI
+0047155d : XOR AL,AL
+0047155f : POP EBX
+00471560 : RET

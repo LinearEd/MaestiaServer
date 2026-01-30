@@ -1,0 +1,113 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00781090
+ENTRY    : 00781090
+BODY     : [[00781090, 00781162]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+int FUN_00781090(float *param_1)
+
+{
+  uint3 uVar1;
+  float *in_ECX;
+  float *in_EDX;
+  float *unaff_ESI;
+  float *unaff_EDI;
+  float fVar2;
+  float fVar3;
+  float fVar4;
+  
+  fVar2 = in_ECX[1] * param_1[1] + in_ECX[2] * param_1[2] + *in_ECX * *param_1 + param_1[3];
+  fVar3 = in_EDX[1] * param_1[1] + in_EDX[2] * param_1[2] + *param_1 * *in_EDX;
+  uVar1 = CONCAT21((short)((uint)param_1 >> 0x10),
+                   (fVar3 == 0.0) << 6 | NAN(fVar3) << 2 | 2U | fVar3 < 0.0);
+  if (fVar3 != 0.0) {
+    fVar4 = (in_ECX[3] - fVar2) * (1.0 / fVar3);
+    fVar3 = (-in_ECX[3] - fVar2) * (1.0 / fVar3);
+    fVar2 = fVar3;
+    if (fVar4 < fVar3) {
+      fVar2 = fVar4;
+    }
+    *unaff_ESI = fVar2;
+    if (fVar3 < fVar4) {
+      fVar3 = fVar4;
+    }
+    *unaff_EDI = fVar3;
+    return CONCAT31(uVar1,1);
+  }
+  if (in_ECX[3] < fVar2) {
+    return (uint)uVar1 << 8;
+  }
+  *unaff_ESI = 0.0;
+  *unaff_EDI = 1e+32;
+  return CONCAT31(uVar1,1);
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00781090 : PUSH EBP
+00781091 : MOV EBP,ESP
+00781093 : MOV EAX,dword ptr [EBP + 0x8]
+00781096 : MOVSS XMM4,dword ptr [EAX + 0x4]
+0078109b : MOVSS XMM3,dword ptr [EAX + 0x8]
+007810a0 : MOVSS XMM0,dword ptr [ECX + 0x4]
+007810a5 : MOVSS XMM2,dword ptr [ECX + 0x8]
+007810aa : MOVSS XMM1,dword ptr [EAX]
+007810ae : MULSS XMM2,XMM3
+007810b2 : MULSS XMM0,XMM4
+007810b6 : ADDSS XMM0,XMM2
+007810ba : MOVSS XMM2,dword ptr [ECX]
+007810be : MULSS XMM2,XMM1
+007810c2 : MULSS XMM1,dword ptr [EDX]
+007810c6 : ADDSS XMM0,XMM2
+007810ca : MOVSS XMM2,dword ptr [EDX + 0x4]
+007810cf : ADDSS XMM0,dword ptr [EAX + 0xc]
+007810d4 : MULSS XMM2,XMM4
+007810d8 : MOVSS XMM4,dword ptr [EDX + 0x8]
+007810dd : MULSS XMM4,XMM3
+007810e1 : ADDSS XMM2,XMM4
+007810e5 : ADDSS XMM2,XMM1
+007810e9 : XORPS XMM1,XMM1
+007810ec : UCOMISS XMM2,XMM1
+007810ef : LAHF
+007810f0 : TEST AH,0x44
+007810f3 : JP 0x00781117
+007810f5 : MOVSS XMM2,dword ptr [ECX + 0xc]
+007810fa : COMISS XMM2,XMM0
+007810fd : JC 0x00781113
+007810ff : MOVSS XMM0,dword ptr [0x00cdf174]
+00781107 : MOVSS dword ptr [ESI],XMM1
+0078110b : MOVSS dword ptr [EDI],XMM0
+0078110f : MOV AL,0x1
+00781111 : POP EBP
+00781112 : RET
+00781113 : XOR AL,AL
+00781115 : POP EBP
+00781116 : RET
+00781117 : MOVSS XMM1,dword ptr [ECX + 0xc]
+0078111c : MOVSS XMM3,dword ptr [0x00c10fc4]
+00781124 : DIVSS XMM3,XMM2
+00781128 : MOVAPS XMM2,XMM1
+0078112b : XORPS XMM1,xmmword ptr [0x00cdf0c0]
+00781132 : SUBSS XMM2,XMM0
+00781136 : SUBSS XMM1,XMM0
+0078113a : MULSS XMM2,XMM3
+0078113e : MULSS XMM1,XMM3
+00781142 : COMISS XMM1,XMM2
+00781145 : JBE 0x0078114c
+00781147 : MOVAPS XMM0,XMM2
+0078114a : JMP 0x0078114f
+0078114c : MOVAPS XMM0,XMM1
+0078114f : COMISS XMM2,XMM1
+00781152 : MOVSS dword ptr [ESI],XMM0
+00781156 : JBE 0x0078115b
+00781158 : MOVAPS XMM1,XMM2
+0078115b : MOVSS dword ptr [EDI],XMM1
+0078115f : MOV AL,0x1
+00781161 : POP EBP
+00781162 : RET

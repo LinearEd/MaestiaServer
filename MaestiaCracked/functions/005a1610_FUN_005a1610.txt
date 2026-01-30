@@ -1,0 +1,135 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005a1610
+ENTRY    : 005a1610
+BODY     : [[005a1610, 005a16dd]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+int FUN_005a1610(int param_1,undefined4 param_2,int *param_3)
+
+{
+  int iVar1;
+  int *Value;
+  LONG *Target;
+  int in_ECX;
+  
+  FUN_00566c30(param_1,param_2);
+  iVar1 = *(int *)(in_ECX + 0x20);
+  if (*(uint *)(iVar1 + 0xc) < 0x10) {
+    Value = (int *)FUN_00561460(0x10);
+  }
+  else {
+    Value = *(int **)(iVar1 + 8);
+    *(int **)(iVar1 + 8) = Value + 4;
+    *(uint *)(iVar1 + 0xc) = *(uint *)(iVar1 + 0xc) - 0x10;
+  }
+  if (Value != (int *)0x0) {
+    *Value = 0;
+    Value[1] = 0;
+    Value[3] = 0;
+    if ((int *)*param_3 != (int *)0x0) {
+      (**(code **)(*(int *)*param_3 + 4))(param_3[1]);
+    }
+    if ((int *)*Value != (int *)0x0) {
+      (**(code **)(*(int *)*Value + 8))(Value[1]);
+    }
+    *Value = *param_3;
+    Value[1] = param_3[1];
+    Value[2] = *(int *)(param_1 + 4);
+    if (*(int *)(in_ECX + 0x2d8) == 0) {
+      *(int **)(in_ECX + 0x2d8) = Value;
+    }
+    Target = (LONG *)(iVar1 + 0xa0);
+    if (*(int *)(iVar1 + 0xa0) != 0) {
+      Target = (LONG *)(*(int *)(iVar1 + 0xa4) + 0xc);
+    }
+    InterlockedExchange(Target,(LONG)Value);
+    *(int **)(iVar1 + 0xa4) = Value;
+    *(int *)(in_ECX + 0x2c8) = *(int *)(in_ECX + 0x2c8) + 1;
+  }
+  return param_1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005a1610 : PUSH EBX
+005a1611 : MOV EBX,dword ptr [ESP + 0x8]
+005a1615 : PUSH EBP
+005a1616 : PUSH ESI
+005a1617 : PUSH EDI
+005a1618 : PUSH ECX
+005a1619 : MOV EDI,ECX
+005a161b : MOV ECX,dword ptr [ESP + 0x1c]
+005a161f : MOV EAX,ESP
+005a1621 : MOV dword ptr [EAX],ECX
+005a1623 : MOV ECX,dword ptr [EDI + 0x20]
+005a1626 : PUSH EBX
+005a1627 : CALL 0x00566c30
+005a162c : MOV EBP,dword ptr [EDI + 0x20]
+005a162f : MOV EAX,dword ptr [EBP + 0xc]
+005a1632 : LEA ECX,[EBP + 0x8]
+005a1635 : CMP EAX,0x10
+005a1638 : JC 0x005a1649
+005a163a : MOV ESI,dword ptr [ECX]
+005a163c : LEA EDX,[ESI + 0x10]
+005a163f : ADD EAX,-0x10
+005a1642 : MOV dword ptr [ECX],EDX
+005a1644 : MOV dword ptr [ECX + 0x4],EAX
+005a1647 : JMP 0x005a1652
+005a1649 : PUSH 0x10
+005a164b : CALL 0x00561460
+005a1650 : MOV ESI,EAX
+005a1652 : XOR EAX,EAX
+005a1654 : CMP ESI,EAX
+005a1656 : JZ 0x005a16d5
+005a1658 : MOV EBX,dword ptr [ESP + 0x1c]
+005a165c : MOV dword ptr [ESI],EAX
+005a165e : MOV dword ptr [ESI + 0x4],EAX
+005a1661 : MOV dword ptr [ESI + 0xc],EAX
+005a1664 : MOV ECX,dword ptr [EBX]
+005a1666 : CMP ECX,EAX
+005a1668 : JZ 0x005a1675
+005a166a : MOV EAX,dword ptr [ECX]
+005a166c : MOV EDX,dword ptr [EBX + 0x4]
+005a166f : MOV EAX,dword ptr [EAX + 0x4]
+005a1672 : PUSH EDX
+005a1673 : CALL EAX
+005a1675 : MOV ECX,dword ptr [ESI]
+005a1677 : TEST ECX,ECX
+005a1679 : JZ 0x005a1686
+005a167b : MOV EDX,dword ptr [ECX]
+005a167d : MOV EAX,dword ptr [ESI + 0x4]
+005a1680 : MOV EDX,dword ptr [EDX + 0x8]
+005a1683 : PUSH EAX
+005a1684 : CALL EDX
+005a1686 : MOV EAX,dword ptr [EBX]
+005a1688 : MOV dword ptr [ESI],EAX
+005a168a : MOV ECX,dword ptr [EBX + 0x4]
+005a168d : MOV EBX,dword ptr [ESP + 0x14]
+005a1691 : MOV dword ptr [ESI + 0x4],ECX
+005a1694 : MOV EAX,dword ptr [EBX + 0x4]
+005a1697 : MOV dword ptr [ESI + 0x8],EAX
+005a169a : CMP dword ptr [EDI + 0x2d8],0x0
+005a16a1 : JNZ 0x005a16a9
+005a16a3 : MOV dword ptr [EDI + 0x2d8],ESI
+005a16a9 : CMP dword ptr [EBP + 0xa0],0x0
+005a16b0 : LEA EAX,[EBP + 0xa0]
+005a16b6 : PUSH ESI
+005a16b7 : JZ 0x005a16c2
+005a16b9 : MOV EAX,dword ptr [EBP + 0xa4]
+005a16bf : ADD EAX,0xc
+005a16c2 : PUSH EAX
+005a16c3 : CALL dword ptr [0x00b85108]
+005a16c9 : MOV dword ptr [EBP + 0xa4],ESI
+005a16cf : INC dword ptr [EDI + 0x2c8]
+005a16d5 : POP EDI
+005a16d6 : POP ESI
+005a16d7 : POP EBP
+005a16d8 : MOV EAX,EBX
+005a16da : POP EBX
+005a16db : RET 0xc

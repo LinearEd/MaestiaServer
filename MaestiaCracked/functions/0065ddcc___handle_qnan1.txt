@@ -1,0 +1,64 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __handle_qnan1
+ENTRY    : 0065ddcc
+BODY     : [[0065ddcc, 0065de20]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __handle_qnan1
+   
+   Library: Visual Studio 2008 Release */
+
+float10 __handle_qnan1(undefined4 param_1,double param_2,undefined4 param_3)
+
+{
+  int *piVar1;
+  float10 fVar2;
+  
+  if (DAT_00d68284 == 0) {
+    fVar2 = (float10)__umatherr(1,param_1,param_2,0,param_2,param_3);
+    return fVar2;
+  }
+  piVar1 = __errno();
+  *piVar1 = 0x21;
+  __ctrlfp();
+  return (float10)param_2;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0065ddcc : MOV EDI,EDI
+0065ddce : PUSH EBP
+0065ddcf : MOV EBP,ESP
+0065ddd1 : CMP dword ptr [0x00d68284],0x0
+0065ddd8 : JNZ 0x0065de02
+0065ddda : PUSH dword ptr [EBP + 0x14]
+0065dddd : FLD double ptr [EBP + 0xc]
+0065dde0 : SUB ESP,0x18
+0065dde3 : FSTP double ptr [ESP + 0x10]
+0065dde7 : FLDZ
+0065dde9 : FSTP double ptr [ESP + 0x8]
+0065dded : FLD double ptr [EBP + 0xc]
+0065ddf0 : FSTP double ptr [ESP]
+0065ddf3 : PUSH dword ptr [EBP + 0x8]
+0065ddf6 : PUSH 0x1
+0065ddf8 : CALL 0x0065dd2c
+0065ddfd : ADD ESP,0x24
+0065de00 : POP EBP
+0065de01 : RET
+0065de02 : CALL 0x0063ab82
+0065de07 : PUSH 0xffff
+0065de0c : PUSH dword ptr [EBP + 0x14]
+0065de0f : MOV dword ptr [EAX],0x21
+0065de15 : CALL 0x0065e064
+0065de1a : FLD double ptr [EBP + 0xc]
+0065de1d : POP ECX
+0065de1e : POP ECX
+0065de1f : POP EBP
+0065de20 : RET

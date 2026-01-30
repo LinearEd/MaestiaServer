@@ -1,0 +1,96 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00540100
+ENTRY    : 00540100
+BODY     : [[00540100, 00540162]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00540100(void)
+
+{
+  int iVar1;
+  uint uVar2;
+  int *in_ECX;
+  short *psVar3;
+  
+  uVar2 = in_ECX[1];
+  if (uVar2 != 0) {
+    iVar1 = *in_ECX;
+    if ((iVar1 == 0) || (uVar2 <= uVar2 - 1)) {
+      psVar3 = (short *)0x0;
+    }
+    else {
+      psVar3 = (short *)(iVar1 + (uVar2 - 1) * 2);
+    }
+    if (*psVar3 == 0) {
+      if (uVar2 != 0) {
+        if ((iVar1 == 0) || (uVar2 <= uVar2 - 1)) {
+          psVar3 = (short *)0x0;
+        }
+        else {
+          psVar3 = (short *)(iVar1 + (uVar2 - 1) * 2);
+        }
+        if (*psVar3 == 0) {
+          uVar2 = uVar2 - 1;
+        }
+      }
+      FUN_0053fde0(uVar2,1);
+      iVar1 = in_ECX[1];
+      if ((iVar1 != 0) && (*(short *)(*in_ECX + -2 + iVar1 * 2) == 0)) {
+        in_ECX[1] = iVar1 + -1;
+      }
+    }
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00540100 : PUSH ESI
+00540101 : MOV ESI,ECX
+00540103 : MOV EAX,dword ptr [ESI + 0x4]
+00540106 : TEST EAX,EAX
+00540108 : JBE 0x00540161
+0054010a : MOV ECX,dword ptr [ESI]
+0054010c : LEA EDX,[EAX + -0x1]
+0054010f : TEST ECX,ECX
+00540111 : JZ 0x0054011c
+00540113 : CMP EDX,EAX
+00540115 : JNC 0x0054011c
+00540117 : LEA EDX,[ECX + EDX*0x2]
+0054011a : JMP 0x0054011e
+0054011c : XOR EDX,EDX
+0054011e : CMP word ptr [EDX],0x0
+00540122 : JNZ 0x00540161
+00540124 : TEST EAX,EAX
+00540126 : JBE 0x00540141
+00540128 : LEA EDX,[EAX + -0x1]
+0054012b : TEST ECX,ECX
+0054012d : JZ 0x00540138
+0054012f : CMP EDX,EAX
+00540131 : JNC 0x00540138
+00540133 : LEA ECX,[ECX + EDX*0x2]
+00540136 : JMP 0x0054013a
+00540138 : XOR ECX,ECX
+0054013a : CMP word ptr [ECX],0x0
+0054013e : JNZ 0x00540141
+00540140 : DEC EAX
+00540141 : PUSH 0x1
+00540143 : PUSH EAX
+00540144 : LEA ECX,[ESI + 0x10]
+00540147 : CALL 0x0053fde0
+0054014c : MOV EAX,dword ptr [ESI + 0x4]
+0054014f : TEST EAX,EAX
+00540151 : JBE 0x00540161
+00540153 : MOV ECX,dword ptr [ESI]
+00540155 : CMP word ptr [ECX + EAX*0x2 + -0x2],0x0
+0054015b : JNZ 0x00540161
+0054015d : DEC EAX
+0054015e : MOV dword ptr [ESI + 0x4],EAX
+00540161 : POP ESI
+00540162 : RET

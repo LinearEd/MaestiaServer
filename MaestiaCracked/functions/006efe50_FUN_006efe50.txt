@@ -1,0 +1,67 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_006efe50
+ENTRY    : 006efe50
+BODY     : [[006efe50, 006efe9b]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined4 FUN_006efe50(void)
+
+{
+  HCRYPTPROV hProv;
+  BOOL BVar1;
+  DWORD DVar2;
+  HCRYPTKEY *unaff_ESI;
+  
+  if (*unaff_ESI == 0) {
+    if ((HCRYPTPROV *)unaff_ESI[1] == (HCRYPTPROV *)0x0) {
+      FUN_006ee470(L"[ERROR][RsaKey::GetCryptProv] m_pRsaCrypter is null.\n");
+      hProv = 0;
+    }
+    else {
+      hProv = *(HCRYPTPROV *)unaff_ESI[1];
+    }
+    BVar1 = CryptGenKey(hProv,0xa400,1,unaff_ESI);
+    if (BVar1 == 0) {
+      DVar2 = GetLastError();
+      FUN_006ee470(L"[ERROR][RsaKey::CreateKey] CryptGenKey error. %d\n",DVar2);
+      return 0;
+    }
+  }
+  return 1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006efe50 : CMP dword ptr [ESI],0x0
+006efe53 : JNZ 0x006efe99
+006efe55 : MOV EAX,dword ptr [ESI + 0x4]
+006efe58 : TEST EAX,EAX
+006efe5a : JNZ 0x006efe6d
+006efe5c : PUSH 0xbf38d0
+006efe61 : CALL 0x006ee470
+006efe66 : ADD ESP,0x4
+006efe69 : XOR EAX,EAX
+006efe6b : JMP 0x006efe6f
+006efe6d : MOV EAX,dword ptr [EAX]
+006efe6f : PUSH ESI
+006efe70 : PUSH 0x1
+006efe72 : PUSH 0xa400
+006efe77 : PUSH EAX
+006efe78 : CALL dword ptr [0x00b85014]
+006efe7e : TEST EAX,EAX
+006efe80 : JNZ 0x006efe99
+006efe82 : CALL dword ptr [0x00b85128]
+006efe88 : PUSH EAX
+006efe89 : PUSH 0xbf3568
+006efe8e : CALL 0x006ee470
+006efe93 : ADD ESP,0x8
+006efe96 : XOR AL,AL
+006efe98 : RET
+006efe99 : MOV AL,0x1
+006efe9b : RET

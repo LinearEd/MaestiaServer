@@ -1,0 +1,101 @@
+PROGRAM  : Maestia.exe
+FUNCTION : _TranslateName
+ENTRY    : 006553bb
+BODY     : [[006553bb, 0065541c]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    _TranslateName
+   
+   Library: Visual Studio 2008 Release */
+
+bool _TranslateName(int param_1,int param_2,undefined4 *param_3)
+
+{
+  undefined4 *puVar1;
+  int iVar2;
+  int iVar3;
+  int iVar4;
+  bool bVar5;
+  
+  iVar3 = 0;
+  iVar2 = 1;
+  if (-1 < param_2) {
+    do {
+      bVar5 = iVar2 == 0;
+      iVar2 = 0;
+      if (bVar5) break;
+      iVar4 = (param_2 + iVar3) / 2;
+      puVar1 = (undefined4 *)(param_1 + iVar4 * 8);
+      iVar2 = __stricmp((char *)*param_3,(char *)*puVar1);
+      if (iVar2 == 0) {
+        *param_3 = puVar1 + 1;
+      }
+      else if (iVar2 < 0) {
+        param_2 = iVar4 + -1;
+      }
+      else {
+        iVar3 = iVar4 + 1;
+      }
+    } while (iVar3 <= param_2);
+  }
+  return iVar2 == 0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006553bb : MOV EDI,EDI
+006553bd : PUSH EBP
+006553be : MOV EBP,ESP
+006553c0 : XOR EAX,EAX
+006553c2 : PUSH EBX
+006553c3 : XOR EBX,EBX
+006553c5 : INC EAX
+006553c6 : CMP dword ptr [EBP + 0xc],EBX
+006553c9 : JL 0x00655411
+006553cb : PUSH ESI
+006553cc : PUSH EDI
+006553cd : TEST EAX,EAX
+006553cf : JZ 0x0065540f
+006553d1 : MOV EAX,dword ptr [EBP + 0xc]
+006553d4 : ADD EAX,EBX
+006553d6 : CDQ
+006553d7 : SUB EAX,EDX
+006553d9 : MOV ESI,EAX
+006553db : MOV EAX,dword ptr [EBP + 0x8]
+006553de : SAR ESI,0x1
+006553e0 : LEA EDI,[EAX + ESI*0x8]
+006553e3 : PUSH dword ptr [EDI]
+006553e5 : MOV EAX,dword ptr [EBP + 0x10]
+006553e8 : PUSH dword ptr [EAX]
+006553ea : CALL 0x0063b8b9
+006553ef : POP ECX
+006553f0 : POP ECX
+006553f1 : TEST EAX,EAX
+006553f3 : JNZ 0x006553ff
+006553f5 : MOV ECX,dword ptr [EBP + 0x10]
+006553f8 : ADD EDI,0x4
+006553fb : MOV dword ptr [ECX],EDI
+006553fd : JMP 0x0065540a
+006553ff : JGE 0x00655407
+00655401 : DEC ESI
+00655402 : MOV dword ptr [EBP + 0xc],ESI
+00655405 : JMP 0x0065540a
+00655407 : LEA EBX,[ESI + 0x1]
+0065540a : CMP EBX,dword ptr [EBP + 0xc]
+0065540d : JLE 0x006553cd
+0065540f : POP EDI
+00655410 : POP ESI
+00655411 : XOR ECX,ECX
+00655413 : TEST EAX,EAX
+00655415 : SETZ CL
+00655418 : POP EBX
+00655419 : MOV EAX,ECX
+0065541b : POP EBP
+0065541c : RET

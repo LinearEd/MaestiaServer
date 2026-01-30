@@ -1,0 +1,97 @@
+PROGRAM  : Maestia.exe
+FUNCTION : ___crtGetEnvironmentStringsW
+ENTRY    : 00656123
+BODY     : [[00656123, 00656179]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    ___crtGetEnvironmentStringsW
+   
+   Library: Visual Studio 2008 Release */
+
+LPVOID __cdecl ___crtGetEnvironmentStringsW(void)
+
+{
+  WCHAR WVar1;
+  LPWCH _Src;
+  WCHAR *pWVar2;
+  WCHAR *pWVar3;
+  size_t _Size;
+  void *_Dst;
+  
+  _Src = GetEnvironmentStringsW();
+  if (_Src != (LPWCH)0x0) {
+    WVar1 = *_Src;
+    pWVar3 = _Src;
+    while (WVar1 != L'\0') {
+      do {
+        pWVar2 = pWVar3;
+        pWVar3 = pWVar2 + 1;
+      } while (*pWVar3 != L'\0');
+      pWVar3 = pWVar2 + 2;
+      WVar1 = *pWVar3;
+    }
+    _Size = (int)pWVar3 + (2 - (int)_Src);
+    _Dst = __malloc_crt(_Size);
+    if (_Dst != (void *)0x0) {
+      _memcpy(_Dst,_Src,_Size);
+    }
+    FreeEnvironmentStringsW(_Src);
+    return _Dst;
+  }
+  return (LPVOID)0x0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00656123 : MOV EDI,EDI
+00656125 : PUSH ESI
+00656126 : CALL dword ptr [0x00b85398]
+0065612c : MOV ESI,EAX
+0065612e : XOR ECX,ECX
+00656130 : CMP ESI,ECX
+00656132 : JNZ 0x00656138
+00656134 : XOR EAX,EAX
+00656136 : POP ESI
+00656137 : RET
+00656138 : CMP word ptr [ESI],CX
+0065613b : JZ 0x0065614b
+0065613d : INC EAX
+0065613e : INC EAX
+0065613f : CMP word ptr [EAX],CX
+00656142 : JNZ 0x0065613d
+00656144 : INC EAX
+00656145 : INC EAX
+00656146 : CMP word ptr [EAX],CX
+00656149 : JNZ 0x0065613d
+0065614b : SUB EAX,ESI
+0065614d : INC EAX
+0065614e : PUSH EBX
+0065614f : INC EAX
+00656150 : MOV EBX,EAX
+00656152 : PUSH EDI
+00656153 : PUSH EBX
+00656154 : CALL 0x0064255f
+00656159 : MOV EDI,EAX
+0065615b : POP ECX
+0065615c : TEST EDI,EDI
+0065615e : JNZ 0x0065616d
+00656160 : PUSH ESI
+00656161 : CALL dword ptr [0x00b8539c]
+00656167 : MOV EAX,EDI
+00656169 : POP EDI
+0065616a : POP EBX
+0065616b : POP ESI
+0065616c : RET
+0065616d : PUSH EBX
+0065616e : PUSH ESI
+0065616f : PUSH EDI
+00656170 : CALL 0x0063ae40
+00656175 : ADD ESP,0xc
+00656178 : JMP 0x00656160

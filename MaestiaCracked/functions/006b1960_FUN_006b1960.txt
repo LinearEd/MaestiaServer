@@ -1,0 +1,95 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_006b1960
+ENTRY    : 006b1960
+BODY     : [[006b1960, 006b1977] [006b1980, 006b19d6]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+int FUN_006b1960(char *param_1,size_t param_2,int param_3)
+
+{
+  char cVar1;
+  char *_Str1;
+  char *pcVar2;
+  int iVar3;
+  int iVar4;
+  
+  iVar4 = 0;
+  if (0 < *(int *)(param_3 + 0x118)) {
+    do {
+      _Str1 = *(char **)(*(int *)(param_3 + 0x11c) + iVar4 * 4);
+      if ((_Str1 != (char *)0x0) && (*_Str1 == *param_1)) {
+        pcVar2 = _Str1;
+        do {
+          cVar1 = *pcVar2;
+          pcVar2 = pcVar2 + 1;
+        } while (cVar1 != '\0');
+        if (((int)pcVar2 - (int)(_Str1 + 1) == param_2) &&
+           (iVar3 = _strncmp(_Str1,param_1,param_2), iVar3 == 0)) {
+          return iVar4;
+        }
+      }
+      iVar4 = iVar4 + 1;
+    } while (iVar4 < *(int *)(param_3 + 0x118));
+  }
+  return 0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006b1960 : PUSH EBX
+006b1961 : MOV EBX,dword ptr [ESP + 0x10]
+006b1965 : PUSH EBP
+006b1966 : PUSH ESI
+006b1967 : PUSH EDI
+006b1968 : XOR EDI,EDI
+006b196a : CMP dword ptr [EBX + 0x118],EDI
+006b1970 : JLE 0x006b19c9
+006b1972 : MOV EBP,dword ptr [ESP + 0x18]
+006b1976 : JMP 0x006b1980
+006b1980 : MOV EAX,dword ptr [EBX + 0x11c]
+006b1986 : MOV EDX,dword ptr [EAX + EDI*0x4]
+006b1989 : TEST EDX,EDX
+006b198b : JZ 0x006b19c0
+006b198d : MOV CL,byte ptr [EDX]
+006b198f : MOV EAX,dword ptr [ESP + 0x14]
+006b1993 : CMP CL,byte ptr [EAX]
+006b1995 : JNZ 0x006b19c0
+006b1997 : MOV EAX,EDX
+006b1999 : LEA ESI,[EAX + 0x1]
+006b199c : LEA ESP,[ESP]
+006b19a0 : MOV CL,byte ptr [EAX]
+006b19a2 : INC EAX
+006b19a3 : TEST CL,CL
+006b19a5 : JNZ 0x006b19a0
+006b19a7 : SUB EAX,ESI
+006b19a9 : CMP EAX,EBP
+006b19ab : JNZ 0x006b19c0
+006b19ad : MOV ECX,dword ptr [ESP + 0x14]
+006b19b1 : PUSH EBP
+006b19b2 : PUSH ECX
+006b19b3 : PUSH EDX
+006b19b4 : CALL 0x0063abcb
+006b19b9 : ADD ESP,0xc
+006b19bc : TEST EAX,EAX
+006b19be : JZ 0x006b19d0
+006b19c0 : INC EDI
+006b19c1 : CMP EDI,dword ptr [EBX + 0x118]
+006b19c7 : JL 0x006b1980
+006b19c9 : POP EDI
+006b19ca : POP ESI
+006b19cb : POP EBP
+006b19cc : XOR EAX,EAX
+006b19ce : POP EBX
+006b19cf : RET
+006b19d0 : MOV EAX,EDI
+006b19d2 : POP EDI
+006b19d3 : POP ESI
+006b19d4 : POP EBP
+006b19d5 : POP EBX
+006b19d6 : RET

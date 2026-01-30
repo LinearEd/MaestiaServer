@@ -1,0 +1,158 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __vsnwprintf_l
+ENTRY    : 0063919d
+BODY     : [[0063919d, 00639270]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __vsnwprintf_l
+   
+   Library: Visual Studio 2008 Release */
+
+int __cdecl
+__vsnwprintf_l(wchar_t *_DstBuf,size_t _MaxCount,wchar_t *_Format,_locale_t _Locale,va_list _ArgList
+              )
+
+{
+  int *piVar1;
+  int iVar2;
+  FILE local_24;
+  
+  if (_Format == (wchar_t *)0x0) {
+    piVar1 = __errno();
+    *piVar1 = 0x16;
+    __invalid_parameter(0,0,0,0,0);
+    iVar2 = -1;
+  }
+  else if ((_MaxCount == 0) || (_DstBuf != (wchar_t *)0x0)) {
+    local_24._flag = 0x42;
+    local_24._base = (char *)_DstBuf;
+    local_24._ptr = (char *)_DstBuf;
+    if (_MaxCount < 0x40000000) {
+      local_24._cnt = _MaxCount * 2;
+    }
+    else {
+      local_24._cnt = 0x7fffffff;
+    }
+    iVar2 = __woutput_l(&local_24,_Format,_Locale,_ArgList);
+    if (_DstBuf != (wchar_t *)0x0) {
+      local_24._cnt = local_24._cnt + -1;
+      if (local_24._cnt < 0) {
+        __flsbuf(0,&local_24);
+      }
+      else {
+        *local_24._ptr = 0;
+        local_24._ptr = (char *)((int)local_24._ptr + 1);
+      }
+      local_24._cnt = local_24._cnt + -1;
+      if (local_24._cnt < 0) {
+        __flsbuf(0,&local_24);
+      }
+      else {
+        *local_24._ptr = 0;
+      }
+    }
+  }
+  else {
+    piVar1 = __errno();
+    *piVar1 = 0x16;
+    __invalid_parameter(0,0,0,0,0);
+    iVar2 = -1;
+  }
+  return iVar2;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0063919d : MOV EDI,EDI
+0063919f : PUSH EBP
+006391a0 : MOV EBP,ESP
+006391a2 : SUB ESP,0x20
+006391a5 : PUSH EBX
+006391a6 : XOR EBX,EBX
+006391a8 : CMP dword ptr [EBP + 0x10],EBX
+006391ab : JNZ 0x006391cd
+006391ad : CALL 0x0063ab82
+006391b2 : PUSH EBX
+006391b3 : PUSH EBX
+006391b4 : PUSH EBX
+006391b5 : PUSH EBX
+006391b6 : PUSH EBX
+006391b7 : MOV dword ptr [EAX],0x16
+006391bd : CALL 0x006372b8
+006391c2 : ADD ESP,0x14
+006391c5 : OR EAX,0xffffffff
+006391c8 : JMP 0x0063926e
+006391cd : MOV EAX,dword ptr [EBP + 0xc]
+006391d0 : PUSH ESI
+006391d1 : MOV ESI,dword ptr [EBP + 0x8]
+006391d4 : CMP EAX,EBX
+006391d6 : JZ 0x006391f9
+006391d8 : CMP ESI,EBX
+006391da : JNZ 0x006391f9
+006391dc : CALL 0x0063ab82
+006391e1 : PUSH EBX
+006391e2 : PUSH EBX
+006391e3 : PUSH EBX
+006391e4 : PUSH EBX
+006391e5 : PUSH EBX
+006391e6 : MOV dword ptr [EAX],0x16
+006391ec : CALL 0x006372b8
+006391f1 : ADD ESP,0x14
+006391f4 : OR EAX,0xffffffff
+006391f7 : JMP 0x0063926d
+006391f9 : MOV dword ptr [EBP + -0x14],0x42
+00639200 : MOV dword ptr [EBP + -0x18],ESI
+00639203 : MOV dword ptr [EBP + -0x20],ESI
+00639206 : CMP EAX,0x3fffffff
+0063920b : JBE 0x00639216
+0063920d : MOV dword ptr [EBP + -0x1c],0x7fffffff
+00639214 : JMP 0x0063921b
+00639216 : ADD EAX,EAX
+00639218 : MOV dword ptr [EBP + -0x1c],EAX
+0063921b : PUSH EDI
+0063921c : PUSH dword ptr [EBP + 0x18]
+0063921f : LEA EAX,[EBP + -0x20]
+00639222 : PUSH dword ptr [EBP + 0x14]
+00639225 : PUSH dword ptr [EBP + 0x10]
+00639228 : PUSH EAX
+00639229 : CALL 0x006460b5
+0063922e : ADD ESP,0x10
+00639231 : MOV EDI,EAX
+00639233 : CMP ESI,EBX
+00639235 : JZ 0x0063926c
+00639237 : DEC dword ptr [EBP + -0x1c]
+0063923a : JS 0x00639246
+0063923c : MOV EAX,dword ptr [EBP + -0x20]
+0063923f : MOV byte ptr [EAX],BL
+00639241 : INC dword ptr [EBP + -0x20]
+00639244 : JMP 0x00639252
+00639246 : LEA EAX,[EBP + -0x20]
+00639249 : PUSH EAX
+0063924a : PUSH EBX
+0063924b : CALL 0x00645eff
+00639250 : POP ECX
+00639251 : POP ECX
+00639252 : DEC dword ptr [EBP + -0x1c]
+00639255 : JS 0x0063925e
+00639257 : MOV EAX,dword ptr [EBP + -0x20]
+0063925a : MOV byte ptr [EAX],BL
+0063925c : JMP 0x0063926a
+0063925e : LEA EAX,[EBP + -0x20]
+00639261 : PUSH EAX
+00639262 : PUSH EBX
+00639263 : CALL 0x00645eff
+00639268 : POP ECX
+00639269 : POP ECX
+0063926a : MOV EAX,EDI
+0063926c : POP EDI
+0063926d : POP ESI
+0063926e : POP EBX
+0063926f : LEAVE
+00639270 : RET

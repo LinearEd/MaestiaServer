@@ -1,0 +1,72 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0069d890
+ENTRY    : 0069d890
+BODY     : [[0069d890, 0069d8e8]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_0069d890(int param_1,int param_2,int param_3,char param_4)
+
+{
+  int *piVar1;
+  short sVar2;
+  int iVar3;
+  int iVar4;
+  
+  iVar3 = *(int *)(param_1 + 0x14);
+  if (*(char *)(param_1 + 0x4c) != '\0') {
+    sVar2 = *(short *)(iVar3 + 2);
+    iVar4 = *(int *)(iVar3 + 8);
+    piVar1 = (int *)(*(int *)(iVar3 + 4) + sVar2 * 8);
+    if (*(char *)(param_1 + 0x4e) != '\0') {
+      param_2 = param_2 >> 0x10;
+      param_3 = param_3 >> 0x10;
+    }
+    *piVar1 = param_2;
+    piVar1[1] = param_3;
+    *(char *)(iVar4 + sVar2) = (param_4 == '\0') + '\x01';
+    *(int *)(param_1 + 0x18) = *piVar1;
+    *(int *)(param_1 + 0x1c) = piVar1[1];
+  }
+  *(short *)(iVar3 + 2) = *(short *)(iVar3 + 2) + 1;
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0069d890 : PUSH ESI
+0069d891 : MOV ESI,dword ptr [ESP + 0x8]
+0069d895 : CMP byte ptr [ESI + 0x4c],0x0
+0069d899 : MOV EAX,dword ptr [ESI + 0x14]
+0069d89c : JZ 0x0069d8e3
+0069d89e : MOVSX EDX,word ptr [EAX + 0x2]
+0069d8a2 : MOV ECX,dword ptr [EAX + 0x4]
+0069d8a5 : PUSH EDI
+0069d8a6 : MOV EDI,dword ptr [EAX + 0x8]
+0069d8a9 : ADD EDI,EDX
+0069d8ab : CMP byte ptr [ESI + 0x4e],0x0
+0069d8af : LEA ECX,[ECX + EDX*0x8]
+0069d8b2 : JZ 0x0069d8be
+0069d8b4 : SAR dword ptr [ESP + 0x10],0x10
+0069d8b9 : SAR dword ptr [ESP + 0x14],0x10
+0069d8be : MOV EDX,dword ptr [ESP + 0x10]
+0069d8c2 : CMP byte ptr [ESP + 0x18],0x0
+0069d8c7 : MOV dword ptr [ECX],EDX
+0069d8c9 : MOV EDX,dword ptr [ESP + 0x14]
+0069d8cd : MOV dword ptr [ECX + 0x4],EDX
+0069d8d0 : SETZ DL
+0069d8d3 : INC DL
+0069d8d5 : MOV byte ptr [EDI],DL
+0069d8d7 : MOV EDX,dword ptr [ECX]
+0069d8d9 : MOV dword ptr [ESI + 0x18],EDX
+0069d8dc : MOV ECX,dword ptr [ECX + 0x4]
+0069d8df : MOV dword ptr [ESI + 0x1c],ECX
+0069d8e2 : POP EDI
+0069d8e3 : INC word ptr [EAX + 0x2]
+0069d8e7 : POP ESI
+0069d8e8 : RET

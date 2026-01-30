@@ -1,0 +1,62 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_006b29a0
+ENTRY    : 006b29a0
+BODY     : [[006b29a0, 006b29cd]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_006b29a0(void)
+
+{
+  uint uVar1;
+  int *piVar2;
+  int in_ECX;
+  uint in_EDX;
+  int unaff_ESI;
+  int unaff_EDI;
+  
+  if ((unaff_ESI != 0) && (uVar1 = 0, in_EDX != 0)) {
+    do {
+      piVar2 = (int *)(in_ECX + uVar1 * 8);
+      *piVar2 = *piVar2 + unaff_ESI;
+      uVar1 = uVar1 + 1;
+    } while (uVar1 < in_EDX);
+  }
+  if ((unaff_EDI != 0) && (in_EDX != 0)) {
+    piVar2 = (int *)(in_ECX + 4);
+    do {
+      *piVar2 = *piVar2 + unaff_EDI;
+      piVar2 = piVar2 + 2;
+      in_EDX = in_EDX - 1;
+    } while (in_EDX != 0);
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006b29a0 : TEST ESI,ESI
+006b29a2 : JZ 0x006b29b8
+006b29a4 : XOR EAX,EAX
+006b29a6 : TEST EDX,EDX
+006b29a8 : JBE 0x006b29b8
+006b29aa : LEA EBX,[EBX]
+006b29b0 : ADD dword ptr [ECX + EAX*0x8],ESI
+006b29b3 : INC EAX
+006b29b4 : CMP EAX,EDX
+006b29b6 : JC 0x006b29b0
+006b29b8 : TEST EDI,EDI
+006b29ba : JZ 0x006b29cd
+006b29bc : TEST EDX,EDX
+006b29be : JBE 0x006b29cd
+006b29c0 : LEA EAX,[ECX + 0x4]
+006b29c3 : ADD dword ptr [EAX],EDI
+006b29c5 : ADD EAX,0x8
+006b29c8 : SUB EDX,0x1
+006b29cb : JNZ 0x006b29c3
+006b29cd : RET

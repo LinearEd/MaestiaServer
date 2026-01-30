@@ -1,0 +1,144 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00740000
+ENTRY    : 00740000
+BODY     : [[00740000, 00740110]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00740000(int param_1,undefined4 param_2,char param_3)
+
+{
+  int iVar1;
+  int iVar2;
+  undefined4 uVar3;
+  undefined4 in_EDX;
+  undefined4 unaff_EDI;
+  undefined4 local_10c;
+  undefined1 local_108 [256];
+  uint local_8;
+  
+  local_8 = DAT_00d66fa0 ^ (uint)&stack0xfffffffc;
+  iVar1 = InternetConnectA(param_2,unaff_EDI,0,0,0,1,-(uint)(param_3 != '\0') & 0x8000000,0);
+  if (iVar1 == 0) {
+    GetLastError();
+    FUN_004c3cc0(
+                "InternetDownloader::OpenFtpFile - InternetConnect(%s) failed, error %d, passive %d\n"
+                );
+    __security_check_cookie(local_8 ^ (uint)&stack0xfffffffc);
+    return;
+  }
+  FUN_00410870("%s/%s",local_10c,in_EDX);
+  iVar2 = FtpOpenFileA(iVar1,local_108,0x80000000,2,0);
+  *(int *)(param_1 + 0x108) = iVar2;
+  if (iVar2 != 0) {
+    uVar3 = FtpGetFileSize(iVar2,&local_10c);
+    *(undefined4 *)(param_1 + 0x110) = uVar3;
+    FUN_004c3cc0("InternetDownloader::OpenFtpFile - filesize %d\n",uVar3);
+    __security_check_cookie(local_8 ^ (uint)&stack0xfffffffc);
+    return;
+  }
+  InternetCloseHandle(iVar1);
+  __security_check_cookie(local_8 ^ (uint)&stack0xfffffffc);
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00740000 : PUSH EBP
+00740001 : MOV EBP,ESP
+00740003 : SUB ESP,0x10c
+00740009 : MOV EAX,[0x00d66fa0]
+0074000e : XOR EAX,EBP
+00740010 : MOV dword ptr [EBP + -0x4],EAX
+00740013 : MOV EAX,dword ptr [EBP + 0xc]
+00740016 : PUSH EBX
+00740017 : MOV EBX,dword ptr [EBP + 0x8]
+0074001a : MOV dword ptr [EBP + 0xfffffef8],ECX
+00740020 : MOVZX ECX,byte ptr [EBP + 0x10]
+00740024 : PUSH ESI
+00740025 : PUSH 0x0
+00740027 : NEG ECX
+00740029 : SBB ECX,ECX
+0074002b : AND ECX,0x8000000
+00740031 : PUSH ECX
+00740032 : PUSH 0x1
+00740034 : PUSH 0x0
+00740036 : PUSH 0x0
+00740038 : PUSH 0x0
+0074003a : PUSH EDI
+0074003b : PUSH EAX
+0074003c : MOV dword ptr [EBP + 0xfffffef4],EDX
+00740042 : CALL dword ptr [0x00b85578]
+00740048 : MOV ESI,EAX
+0074004a : TEST ESI,ESI
+0074004c : JNZ 0x0074007c
+0074004e : MOVZX EDX,byte ptr [EBP + 0x10]
+00740052 : PUSH EDX
+00740053 : CALL dword ptr [0x00b85128]
+00740059 : PUSH EAX
+0074005a : PUSH EDI
+0074005b : PUSH 0xc07d60
+00740060 : CALL 0x004c3cc0
+00740065 : ADD ESP,0x10
+00740068 : POP ESI
+00740069 : XOR EAX,EAX
+0074006b : POP EBX
+0074006c : MOV ECX,dword ptr [EBP + -0x4]
+0074006f : XOR ECX,EBP
+00740071 : CALL 0x00633e6b
+00740076 : MOV ESP,EBP
+00740078 : POP EBP
+00740079 : RET 0xc
+0074007c : MOV EAX,dword ptr [EBP + 0xfffffef4]
+00740082 : MOV ECX,dword ptr [EBP + 0xfffffef8]
+00740088 : PUSH EAX
+00740089 : PUSH ECX
+0074008a : PUSH 0xc07db4
+0074008f : LEA EDX,[EBP + 0xfffffefc]
+00740095 : CALL 0x00410870
+0074009a : ADD ESP,0xc
+0074009d : PUSH 0x0
+0074009f : PUSH 0x2
+007400a1 : PUSH 0x80000000
+007400a6 : LEA EDX,[EBP + 0xfffffefc]
+007400ac : PUSH EDX
+007400ad : PUSH ESI
+007400ae : CALL dword ptr [0x00b85574]
+007400b4 : MOV dword ptr [EBX + 0x108],EAX
+007400ba : TEST EAX,EAX
+007400bc : JZ 0x007400f4
+007400be : LEA ECX,[EBP + 0xfffffef8]
+007400c4 : PUSH ECX
+007400c5 : PUSH EAX
+007400c6 : CALL dword ptr [0x00b85570]
+007400cc : PUSH EAX
+007400cd : PUSH 0xc07dbc
+007400d2 : MOV dword ptr [EBX + 0x110],EAX
+007400d8 : CALL 0x004c3cc0
+007400dd : ADD ESP,0x8
+007400e0 : MOV EAX,ESI
+007400e2 : POP ESI
+007400e3 : POP EBX
+007400e4 : MOV ECX,dword ptr [EBP + -0x4]
+007400e7 : XOR ECX,EBP
+007400e9 : CALL 0x00633e6b
+007400ee : MOV ESP,EBP
+007400f0 : POP EBP
+007400f1 : RET 0xc
+007400f4 : PUSH ESI
+007400f5 : CALL dword ptr [0x00b8558c]
+007400fb : MOV ECX,dword ptr [EBP + -0x4]
+007400fe : XOR ESI,ESI
+00740100 : MOV EAX,ESI
+00740102 : POP ESI
+00740103 : XOR ECX,EBP
+00740105 : POP EBX
+00740106 : CALL 0x00633e6b
+0074010b : MOV ESP,EBP
+0074010d : POP EBP
+0074010e : RET 0xc

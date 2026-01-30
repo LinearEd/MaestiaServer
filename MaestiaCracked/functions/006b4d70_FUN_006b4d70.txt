@@ -1,0 +1,83 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_006b4d70
+ENTRY    : 006b4d70
+BODY     : [[006b4d70, 006b4df5]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined4 FUN_006b4d70(void)
+
+{
+  byte bVar1;
+  int iVar2;
+  int in_EAX;
+  int iVar3;
+  
+  *(int *)(in_EAX + 0x168) = *(int *)(in_EAX + 0x168) + *(int *)(in_EAX + 0x174);
+  iVar2 = *(int *)(in_EAX + 0x16c);
+  if (*(int *)(in_EAX + 0x168) < iVar2) {
+    bVar1 = *(byte *)(*(int *)(in_EAX + 0x164) + *(int *)(in_EAX + 0x168));
+    *(byte *)(in_EAX + 0x170) = bVar1;
+    iVar3 = (int)*(char *)((int)&PTR_DAT_00bebb18 + (uint)bVar1);
+    *(int *)(in_EAX + 0x174) = iVar3;
+    if (iVar3 < 0) {
+      if (iVar2 < *(int *)(in_EAX + 0x168) + 1) goto LAB_006b4dea;
+      *(uint *)(in_EAX + 0x174) =
+           2 - (uint)*(byte *)(*(int *)(in_EAX + 0x164) + 1 + *(int *)(in_EAX + 0x168)) * iVar3;
+    }
+    if (*(int *)(in_EAX + 0x168) + *(int *)(in_EAX + 0x174) <= iVar2) {
+      return 0;
+    }
+  }
+LAB_006b4dea:
+  *(undefined4 *)(in_EAX + 0xc) = 0x83;
+  return 1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006b4d70 : MOV ECX,dword ptr [EAX + 0x174]
+006b4d76 : ADD dword ptr [EAX + 0x168],ECX
+006b4d7c : MOV ECX,dword ptr [EAX + 0x168]
+006b4d82 : PUSH ESI
+006b4d83 : PUSH EDI
+006b4d84 : MOV EDI,dword ptr [EAX + 0x16c]
+006b4d8a : CMP ECX,EDI
+006b4d8c : JGE 0x006b4dea
+006b4d8e : MOV EDX,dword ptr [EAX + 0x164]
+006b4d94 : MOV CL,byte ptr [EDX + ECX*0x1]
+006b4d97 : MOV byte ptr [EAX + 0x170],CL
+006b4d9d : MOVZX ECX,CL
+006b4da0 : MOVSX ECX,byte ptr [ECX + 0xbebb18]
+006b4da7 : MOV dword ptr [EAX + 0x174],ECX
+006b4dad : TEST ECX,ECX
+006b4daf : JGE 0x006b4dd5
+006b4db1 : MOV ESI,dword ptr [EAX + 0x168]
+006b4db7 : PUSH EBX
+006b4db8 : LEA EBX,[ESI + 0x1]
+006b4dbb : CMP EBX,EDI
+006b4dbd : POP EBX
+006b4dbe : JG 0x006b4dea
+006b4dc0 : MOVZX EDX,byte ptr [EDX + ESI*0x1 + 0x1]
+006b4dc5 : IMUL EDX,ECX
+006b4dc8 : MOV ECX,0x2
+006b4dcd : SUB ECX,EDX
+006b4dcf : MOV dword ptr [EAX + 0x174],ECX
+006b4dd5 : MOV EDX,dword ptr [EAX + 0x168]
+006b4ddb : ADD EDX,dword ptr [EAX + 0x174]
+006b4de1 : CMP EDX,EDI
+006b4de3 : JG 0x006b4dea
+006b4de5 : POP EDI
+006b4de6 : XOR AL,AL
+006b4de8 : POP ESI
+006b4de9 : RET
+006b4dea : POP EDI
+006b4deb : MOV dword ptr [EAX + 0xc],0x83
+006b4df2 : MOV AL,0x1
+006b4df4 : POP ESI
+006b4df5 : RET

@@ -1,0 +1,75 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00609600
+ENTRY    : 00609600
+BODY     : [[00609600, 0060966d]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00609600(uint param_1)
+
+{
+  uint uVar1;
+  undefined4 uVar2;
+  int in_ECX;
+  
+  uVar1 = param_1;
+  if (*(uint *)(in_ECX + 8) <= param_1) {
+    if (*(int *)(in_ECX + 0xc) == 0) {
+      param_1 = 0x105;
+      uVar2 = FUN_00515d60(in_ECX,0x400,&param_1);
+    }
+    else {
+      uVar2 = FUN_00515c80(*(int *)(in_ECX + 0xc),*(uint *)(in_ECX + 8) * 4 + 0x400);
+    }
+    *(int *)(in_ECX + 8) = *(int *)(in_ECX + 8) + 0x100;
+    *(undefined4 *)(in_ECX + 0xc) = uVar2;
+  }
+  param_1 = 0x105;
+  uVar2 = FUN_00515d60(in_ECX,0x1000,&param_1);
+  *(undefined4 *)(*(int *)(in_ECX + 0xc) + uVar1 * 4) = uVar2;
+  *(int *)(in_ECX + 4) = *(int *)(in_ECX + 4) + 1;
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00609600 : PUSH ESI
+00609601 : MOV ESI,ECX
+00609603 : MOV EAX,dword ptr [ESI + 0x8]
+00609606 : PUSH EDI
+00609607 : MOV EDI,dword ptr [ESP + 0xc]
+0060960b : CMP EDI,EAX
+0060960d : JC 0x00609648
+0060960f : MOV ECX,dword ptr [ESI + 0xc]
+00609612 : TEST ECX,ECX
+00609614 : JZ 0x00609626
+00609616 : LEA EAX,[EAX*0x4 + 0x400]
+0060961d : PUSH EAX
+0060961e : PUSH ECX
+0060961f : CALL 0x00515c80
+00609624 : JMP 0x0060963e
+00609626 : LEA EAX,[ESP + 0xc]
+0060962a : PUSH EAX
+0060962b : PUSH 0x400
+00609630 : PUSH ESI
+00609631 : MOV dword ptr [ESP + 0x18],0x105
+00609639 : CALL 0x00515d60
+0060963e : ADD dword ptr [ESI + 0x8],0x100
+00609645 : MOV dword ptr [ESI + 0xc],EAX
+00609648 : LEA ECX,[ESP + 0xc]
+0060964c : PUSH ECX
+0060964d : PUSH 0x1000
+00609652 : PUSH ESI
+00609653 : MOV dword ptr [ESP + 0x18],0x105
+0060965b : CALL 0x00515d60
+00609660 : MOV EDX,dword ptr [ESI + 0xc]
+00609663 : MOV dword ptr [EDX + EDI*0x4],EAX
+00609666 : INC dword ptr [ESI + 0x4]
+00609669 : POP EDI
+0060966a : POP ESI
+0060966b : RET 0x4

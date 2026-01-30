@@ -1,0 +1,50 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0096b500
+ENTRY    : 0096b500
+BODY     : [[0096b500, 0096b50c] [0096b510, 0096b525]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+uint FUN_0096b500(void)
+
+{
+  int *piVar1;
+  int in_ECX;
+  int in_EDX;
+  
+  piVar1 = *(int **)(in_ECX + 0x40);
+  while( true ) {
+    if (piVar1 == *(int **)(in_ECX + 0x44)) {
+      return (uint)piVar1 & 0xffffff00;
+    }
+    if (*(int *)(*piVar1 + 4) == in_EDX) break;
+    piVar1 = piVar1 + 1;
+  }
+  return CONCAT31((int3)((uint)piVar1 >> 8),1);
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0096b500 : MOV EAX,dword ptr [ECX + 0x40]
+0096b503 : MOV ECX,dword ptr [ECX + 0x44]
+0096b506 : PUSH ESI
+0096b507 : CMP EAX,ECX
+0096b509 : JZ 0x0096b51e
+0096b50b : JMP 0x0096b510
+0096b510 : MOV ESI,dword ptr [EAX]
+0096b512 : CMP dword ptr [ESI + 0x4],EDX
+0096b515 : JZ 0x0096b522
+0096b517 : ADD EAX,0x4
+0096b51a : CMP EAX,ECX
+0096b51c : JNZ 0x0096b510
+0096b51e : XOR AL,AL
+0096b520 : POP ESI
+0096b521 : RET
+0096b522 : MOV AL,0x1
+0096b524 : POP ESI
+0096b525 : RET

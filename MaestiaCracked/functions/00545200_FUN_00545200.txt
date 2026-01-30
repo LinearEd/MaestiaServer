@@ -1,0 +1,99 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00545200
+ENTRY    : 00545200
+BODY     : [[00545200, 005452a8]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined4 FUN_00545200(void)
+
+{
+  int iVar1;
+  float fVar2;
+  int in_ECX;
+  float local_c;
+  int local_8;
+  
+  if ((*(byte *)(in_ECX + 0x141) & 8) == 0) {
+    if ((*(int *)(in_ECX + 0x118) == 0) ||
+       (local_8 = 0x4b0, (*(byte *)(*(int *)(in_ECX + 0x118) + 0x68) & 1) != 0)) {
+      local_8 = 0;
+    }
+    iVar1 = *(int *)(in_ECX + 0x104);
+    if (iVar1 == 0) {
+      local_c = 0.0;
+    }
+    else {
+      local_c = (float)iVar1;
+      if (iVar1 < 0) {
+        local_c = local_c + 4.2949673e+09;
+      }
+    }
+    fVar2 = (local_c - (*(float *)(in_ECX + 0x48) - *(float *)(in_ECX + 0x40))) + (float)local_8;
+    if (fVar2 < 0.0) {
+      fVar2 = 0.0;
+    }
+    local_8 = (int)(longlong)ROUND(fVar2);
+    return local_8;
+  }
+  return 0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00545200 : SUB ESP,0xc
+00545203 : TEST byte ptr [ECX + 0x141],0x8
+0054520a : JZ 0x00545212
+0054520c : XOR EAX,EAX
+0054520e : ADD ESP,0xc
+00545211 : RET
+00545212 : MOV EAX,dword ptr [ECX + 0x118]
+00545218 : TEST EAX,EAX
+0054521a : JZ 0x0054522a
+0054521c : TEST byte ptr [EAX + 0x68],0x1
+00545220 : MOV dword ptr [ESP + 0x4],0x4b0
+00545228 : JZ 0x00545232
+0054522a : MOV dword ptr [ESP + 0x4],0x0
+00545232 : MOV EAX,dword ptr [ECX + 0x104]
+00545238 : FLDZ
+0054523a : TEST EAX,EAX
+0054523c : JBE 0x00545251
+0054523e : MOV dword ptr [ESP],EAX
+00545241 : FILD dword ptr [ESP]
+00545244 : JGE 0x0054524c
+00545246 : FADD float ptr [0x00cdf0e0]
+0054524c : FSTP float ptr [ESP]
+0054524f : JMP 0x00545254
+00545251 : FST float ptr [ESP]
+00545254 : FLD float ptr [ESP]
+00545257 : FLD float ptr [ECX + 0x48]
+0054525a : FSUB float ptr [ECX + 0x40]
+0054525d : FSTP float ptr [ESP]
+00545260 : FSUB float ptr [ESP]
+00545263 : FIADD dword ptr [ESP + 0x4]
+00545267 : FSTP float ptr [ESP + 0x4]
+0054526b : FLD float ptr [ESP + 0x4]
+0054526f : FCOM
+00545271 : FNSTSW AX
+00545273 : TEST AH,0x5
+00545276 : JP 0x0054527c
+00545278 : FSTP ST0
+0054527a : JMP 0x0054527e
+0054527c : FSTP ST1
+0054527e : FNSTCW word ptr [ESP]
+00545281 : MOVZX EAX,word ptr [ESP]
+00545285 : FSTP float ptr [ESP + 0x4]
+00545289 : FLD float ptr [ESP + 0x4]
+0054528d : OR EAX,0xc00
+00545292 : MOV dword ptr [ESP + 0x4],EAX
+00545296 : FLDCW word ptr [ESP + 0x4]
+0054529a : FISTP qword ptr [ESP + 0x4]
+0054529e : MOV EAX,dword ptr [ESP + 0x4]
+005452a2 : FLDCW word ptr [ESP]
+005452a5 : ADD ESP,0xc
+005452a8 : RET

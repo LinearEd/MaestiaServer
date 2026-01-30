@@ -1,0 +1,64 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00677220
+ENTRY    : 00677220
+BODY     : [[00677220, 00677264]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00677220(int param_1,int param_2)
+
+{
+  uint uVar1;
+  LONG LVar2;
+  uint *puVar3;
+  
+  puVar3 = (uint *)(param_1 + -0x14 + param_2 * 0x14);
+  for (; param_2 != 0; param_2 = param_2 + -1) {
+    uVar1 = *puVar3;
+    LVar2 = InterlockedExchangeAdd((LONG *)((uVar1 & 0xfffffffc) + 4),-1);
+    if (LVar2 == 1) {
+      FUN_00515cf0(uVar1 & 0xfffffffc);
+    }
+    puVar3 = puVar3 + -5;
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00677220 : MOV EAX,dword ptr [ESP + 0x8]
+00677224 : MOV EDX,dword ptr [ESP + 0x4]
+00677228 : LEA ECX,[EAX + EAX*0x4]
+0067722b : PUSH EDI
+0067722c : LEA EDI,[EDX + ECX*0x4 + -0x14]
+00677230 : TEST EAX,EAX
+00677232 : JBE 0x00677263
+00677234 : PUSH EBX
+00677235 : MOV EBX,dword ptr [0x00b851cc]
+0067723b : PUSH EBP
+0067723c : PUSH ESI
+0067723d : MOV EBP,EAX
+0067723f : NOP
+00677240 : MOV ESI,dword ptr [EDI]
+00677242 : AND ESI,0xfffffffc
+00677245 : PUSH -0x1
+00677247 : LEA EAX,[ESI + 0x4]
+0067724a : PUSH EAX
+0067724b : CALL EBX
+0067724d : SUB EAX,0x1
+00677250 : JNZ 0x00677258
+00677252 : PUSH ESI
+00677253 : CALL 0x00515cf0
+00677258 : SUB EDI,0x14
+0067725b : SUB EBP,0x1
+0067725e : JNZ 0x00677240
+00677260 : POP ESI
+00677261 : POP EBP
+00677262 : POP EBX
+00677263 : POP EDI
+00677264 : RET

@@ -1,0 +1,87 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005ab500
+ENTRY    : 005ab500
+BODY     : [[005ab500, 005ab558]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+int FUN_005ab500(int param_1)
+
+{
+  int *piVar1;
+  int iVar2;
+  int iVar3;
+  int *in_ECX;
+  int iVar4;
+  
+  *(undefined4 *)(param_1 + 0x1c) = 0;
+  *(undefined4 *)(param_1 + 0x18) = 0;
+  *(undefined4 *)(param_1 + 0x14) = 0;
+  iVar3 = *in_ECX;
+  if (iVar3 == 0) {
+    *in_ECX = param_1;
+    *(int **)(param_1 + 0x14) = in_ECX;
+    return 0;
+  }
+  iVar4 = param_1;
+  if (iVar3 != param_1) {
+    while( true ) {
+      piVar1 = (int *)(iVar3 + 0x18 + (iVar4 >> 0x1f) * -4);
+      iVar2 = *piVar1;
+      iVar4 = iVar4 * 2;
+      if (iVar2 == 0) break;
+      iVar3 = iVar2;
+      if (iVar2 == param_1) {
+        return iVar2;
+      }
+    }
+    *piVar1 = param_1;
+    *(int *)(param_1 + 0x14) = iVar3;
+    iVar3 = 0;
+  }
+  return iVar3;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005ab500 : MOV EDX,dword ptr [ESP + 0x4]
+005ab504 : MOV dword ptr [EDX + 0x1c],0x0
+005ab50b : MOV dword ptr [EDX + 0x18],0x0
+005ab512 : MOV dword ptr [EDX + 0x14],0x0
+005ab519 : MOV EAX,dword ptr [ECX]
+005ab51b : PUSH ESI
+005ab51c : PUSH EDI
+005ab51d : TEST EAX,EAX
+005ab51f : JNZ 0x005ab52b
+005ab521 : POP EDI
+005ab522 : MOV dword ptr [ECX],EDX
+005ab524 : MOV dword ptr [EDX + 0x14],ECX
+005ab527 : POP ESI
+005ab528 : RET 0x4
+005ab52b : MOV EDI,EDX
+005ab52d : CMP EAX,EDX
+005ab52f : JZ 0x005ab554
+005ab531 : MOV ECX,EDI
+005ab533 : SHR ECX,0x1f
+005ab536 : LEA ESI,[EAX + ECX*0x4 + 0x18]
+005ab53a : MOV ECX,dword ptr [ESI]
+005ab53c : ADD EDI,EDI
+005ab53e : TEST ECX,ECX
+005ab540 : JZ 0x005ab54d
+005ab542 : MOV EAX,ECX
+005ab544 : CMP EAX,EDX
+005ab546 : JNZ 0x005ab531
+005ab548 : POP EDI
+005ab549 : POP ESI
+005ab54a : RET 0x4
+005ab54d : MOV dword ptr [ESI],EDX
+005ab54f : MOV dword ptr [EDX + 0x14],EAX
+005ab552 : XOR EAX,EAX
+005ab554 : POP EDI
+005ab555 : POP ESI
+005ab556 : RET 0x4

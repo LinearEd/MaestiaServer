@@ -1,0 +1,87 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00687a80
+ENTRY    : 00687a80
+BODY     : [[00687a80, 00687ae6]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined2 FUN_00687a80(int *param_1,undefined4 *param_2)
+
+{
+  int iVar1;
+  undefined4 *puVar2;
+  undefined2 uVar3;
+  
+  puVar2 = param_2;
+  uVar3 = 0;
+  *param_2 = 0;
+  iVar1 = param_1[2];
+  if ((uint)param_1[1] <= iVar1 + 1U) {
+LAB_00687adc:
+    *puVar2 = 0x55;
+    return 0;
+  }
+  if ((code *)param_1[5] == (code *)0x0) {
+    puVar2 = (undefined4 *)(*param_1 + iVar1);
+    if (puVar2 == (undefined4 *)0x0) goto LAB_00687ad5;
+  }
+  else {
+    iVar1 = (*(code *)param_1[5])(param_1,iVar1,&param_2,2);
+    if (iVar1 != 2) goto LAB_00687adc;
+    puVar2 = &param_2;
+  }
+  uVar3 = CONCAT11(*(undefined1 *)puVar2,*(undefined1 *)((int)puVar2 + 1));
+LAB_00687ad5:
+  param_1[2] = param_1[2] + 2;
+  return uVar3;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00687a80 : PUSH ESI
+00687a81 : MOV ESI,dword ptr [ESP + 0x8]
+00687a85 : PUSH EDI
+00687a86 : MOV EDI,dword ptr [ESP + 0x10]
+00687a8a : XOR EAX,EAX
+00687a8c : MOV dword ptr [EDI],EAX
+00687a8e : MOV EDX,dword ptr [ESI + 0x8]
+00687a91 : LEA ECX,[EDX + 0x1]
+00687a94 : CMP ECX,dword ptr [ESI + 0x4]
+00687a97 : JNC 0x00687adc
+00687a99 : MOV ECX,dword ptr [ESI + 0x14]
+00687a9c : TEST ECX,ECX
+00687a9e : JZ 0x00687ab9
+00687aa0 : PUSH 0x2
+00687aa2 : LEA EAX,[ESP + 0x14]
+00687aa6 : PUSH EAX
+00687aa7 : PUSH EDX
+00687aa8 : PUSH ESI
+00687aa9 : CALL ECX
+00687aab : ADD ESP,0x10
+00687aae : CMP EAX,0x2
+00687ab1 : JNZ 0x00687adc
+00687ab3 : LEA ECX,[ESP + 0x10]
+00687ab7 : JMP 0x00687abf
+00687ab9 : MOV ECX,dword ptr [ESI]
+00687abb : ADD ECX,EDX
+00687abd : JZ 0x00687ad5
+00687abf : MOVSX DX,byte ptr [ECX]
+00687ac3 : MOVZX AX,byte ptr [ECX + 0x1]
+00687ac8 : ADD ECX,0x2
+00687acb : SHL DX,0x8
+00687acf : OR DX,AX
+00687ad2 : MOVZX EAX,DX
+00687ad5 : ADD dword ptr [ESI + 0x8],0x2
+00687ad9 : POP EDI
+00687ada : POP ESI
+00687adb : RET
+00687adc : MOV dword ptr [EDI],0x55
+00687ae2 : POP EDI
+00687ae3 : XOR EAX,EAX
+00687ae5 : POP ESI
+00687ae6 : RET

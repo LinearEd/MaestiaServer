@@ -1,0 +1,53 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __allshr
+ENTRY    : 00b0b070
+BODY     : [[00b0b070, 00b0b090]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __allshr
+   
+   Library: Visual Studio */
+
+undefined8 __allshr(void)
+
+{
+  uint in_EAX;
+  byte in_CL;
+  int in_EDX;
+  int iVar1;
+  
+  iVar1 = in_EDX >> 0x1f;
+  if (0x3f < in_CL) {
+    return CONCAT44(iVar1,iVar1);
+  }
+  if (in_CL < 0x20) {
+    return CONCAT44(in_EDX >> (in_CL & 0x1f),
+                    in_EAX >> (in_CL & 0x1f) | in_EDX << 0x20 - (in_CL & 0x1f));
+  }
+  return CONCAT44(iVar1,in_EDX >> (in_CL & 0x1f));
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00b0b070 : CMP CL,0x40
+00b0b073 : JNC 0x00b0b08b
+00b0b075 : CMP CL,0x20
+00b0b078 : JNC 0x00b0b080
+00b0b07a : SHRD EAX,EDX,CL
+00b0b07d : SAR EDX,CL
+00b0b07f : RET
+00b0b080 : MOV EAX,EDX
+00b0b082 : SAR EDX,0x1f
+00b0b085 : AND CL,0x1f
+00b0b088 : SAR EAX,CL
+00b0b08a : RET
+00b0b08b : SAR EDX,0x1f
+00b0b08e : MOV EAX,EDX
+00b0b090 : RET

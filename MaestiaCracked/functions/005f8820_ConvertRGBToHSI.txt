@@ -1,0 +1,153 @@
+PROGRAM  : Maestia.exe
+FUNCTION : ConvertRGBToHSI
+ENTRY    : 005f8820
+BODY     : [[005f8820, 005f8909]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* public: static void __stdcall GColor::ConvertRGBToHSI(double,double,double,double *,double
+   *,double *) */
+
+void GColor::ConvertRGBToHSI
+               (double param_1,double param_2,double param_3,double *param_4,double *param_5,
+               double *param_6)
+
+{
+  float10 fVar1;
+  float10 fVar2;
+  float10 fVar3;
+  float10 fVar4;
+  float10 fVar5;
+  float10 fVar6;
+  double dVar7;
+  
+                    /* 0x1f8820  68  ?ConvertRGBToHSI@GColor@@SGXNNNPAN00@Z */
+  fVar1 = (float10)param_1;
+  fVar2 = (float10)param_2;
+  fVar3 = (float10)param_3;
+  fVar4 = (fVar1 + fVar2 + fVar3) / (float10)3.0;
+  fVar6 = (float10)0;
+  if (fVar6 == fVar4) {
+    dVar7 = 1.0;
+  }
+  else {
+    fVar5 = fVar2;
+    if (fVar1 < fVar2) {
+      fVar5 = fVar1;
+    }
+    if (fVar3 <= fVar5) {
+      fVar5 = fVar3;
+    }
+    dVar7 = (double)((float10)1 - fVar5 / fVar4);
+  }
+  if ((fVar2 != fVar1) || (fVar3 != fVar2)) {
+    FUN_0063bdc0(dVar7,(double)((((fVar1 - fVar2) + fVar1) - fVar3) * (float10)0.5));
+    fVar6 = (float10)FUN_0063c8f0();
+    if (param_2 <= param_3) {
+      fVar6 = (float10)0.6366197723675814 - fVar6;
+    }
+    fVar4 = (float10)(double)fVar4;
+  }
+  *param_4 = (double)fVar6;
+  *param_5 = dVar7;
+  *param_6 = (double)fVar4;
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005f8820 : SUB ESP,0x10
+005f8823 : FLD double ptr [ESP + 0x14]
+005f8827 : FLD ST0
+005f8829 : FLD double ptr [ESP + 0x1c]
+005f882d : FADD ST1,ST0
+005f882f : FLD double ptr [ESP + 0x24]
+005f8833 : FADD ST2,ST0
+005f8835 : FXCH ST2
+005f8837 : FDIV double ptr [0x00b8bee8]
+005f883d : FST double ptr [ESP + 0x14]
+005f8841 : FLDZ
+005f8843 : FLD ST0
+005f8845 : FUCOMP ST2
+005f8847 : FNSTSW AX
+005f8849 : TEST AH,0x44
+005f884c : JP 0x005f8855
+005f884e : FLD1
+005f8850 : FSTP double ptr [ESP]
+005f8853 : JMP 0x005f887e
+005f8855 : FXCH ST4
+005f8857 : FCOM ST2
+005f8859 : FNSTSW AX
+005f885b : TEST AH,0x5
+005f885e : JP 0x005f8864
+005f8860 : FLD ST0
+005f8862 : JMP 0x005f8866
+005f8864 : FLD ST2
+005f8866 : FCOM ST4
+005f8868 : FNSTSW AX
+005f886a : TEST AH,0x5
+005f886d : JNP 0x005f8873
+005f886f : FSTP ST0
+005f8871 : FLD ST3
+005f8873 : FDIV ST0,ST2
+005f8875 : FLD1
+005f8877 : FSUBRP
+005f8879 : FSTP double ptr [ESP]
+005f887c : FXCH ST4
+005f887e : FLD ST2
+005f8880 : FUCOMP ST5
+005f8882 : FNSTSW AX
+005f8884 : TEST AH,0x44
+005f8887 : JP 0x005f889c
+005f8889 : FLD ST3
+005f888b : FUCOMP ST3
+005f888d : FNSTSW AX
+005f888f : TEST AH,0x44
+005f8892 : JP 0x005f889c
+005f8894 : FSTP ST3
+005f8896 : FSTP ST1
+005f8898 : FSTP ST2
+005f889a : JMP 0x005f88ef
+005f889c : FSTP ST1
+005f889e : FSTP ST0
+005f88a0 : FLD ST2
+005f88a2 : FSUB ST0,ST1
+005f88a4 : FLD ST0
+005f88a6 : FXCH
+005f88a8 : FADD ST0,ST4
+005f88aa : FSUB ST0,ST3
+005f88ac : FMUL double ptr [0x00cdf120]
+005f88b2 : FSTP double ptr [ESP + 0x8]
+005f88b6 : FXCH ST3
+005f88b8 : FSUB ST0,ST2
+005f88ba : FXCH
+005f88bc : FSUBRP ST2,ST0
+005f88be : FMULP
+005f88c0 : FLD ST1
+005f88c2 : FMULP ST2
+005f88c4 : FADDP
+005f88c6 : CALL 0x0063bdc0
+005f88cb : FDIVR double ptr [ESP + 0x8]
+005f88cf : CALL 0x0063c8f0
+005f88d4 : FLD double ptr [ESP + 0x24]
+005f88d8 : FCOMP double ptr [ESP + 0x1c]
+005f88dc : FNSTSW AX
+005f88de : TEST AH,0x5
+005f88e1 : JNP 0x005f88e9
+005f88e3 : FSUBR double ptr [0x00b95658]
+005f88e9 : FLD double ptr [ESP + 0x14]
+005f88ed : FXCH
+005f88ef : MOV EAX,dword ptr [ESP + 0x2c]
+005f88f3 : MOV ECX,dword ptr [ESP + 0x30]
+005f88f7 : FSTP double ptr [EAX]
+005f88f9 : FLD double ptr [ESP]
+005f88fc : MOV EDX,dword ptr [ESP + 0x34]
+005f8900 : FSTP double ptr [ECX]
+005f8902 : FSTP double ptr [EDX]
+005f8904 : ADD ESP,0x10
+005f8907 : RET 0x24

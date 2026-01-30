@@ -1,0 +1,68 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00586dd0
+ENTRY    : 00586dd0
+BODY     : [[00586dd0, 00586e2a]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00586dd0(int param_1,int param_2)
+
+{
+  int *piVar1;
+  
+  if (param_2 != 0) {
+    piVar1 = (int *)(param_1 + param_2 * 0x1c + -0x10);
+    do {
+      if (((*(byte *)(piVar1 + 1) & 2) == 0) && (piVar1[-1] != 0)) {
+        FUN_00503db0();
+      }
+      piVar1[-1] = 0;
+      if (((*(byte *)(piVar1 + 1) & 1) == 0) && (*piVar1 != 0)) {
+        FUN_00503db0();
+      }
+      *piVar1 = 0;
+      piVar1 = piVar1 + -7;
+      param_2 = param_2 + -1;
+    } while (param_2 != 0);
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00586dd0 : MOV EAX,dword ptr [ESP + 0x8]
+00586dd4 : MOV EDX,dword ptr [ESP + 0x4]
+00586dd8 : LEA ECX,[EAX*0x8 + 0x0]
+00586ddf : SUB ECX,EAX
+00586de1 : LEA ECX,[EDX + ECX*0x4 + -0x1c]
+00586de5 : TEST EAX,EAX
+00586de7 : JBE 0x00586e2a
+00586de9 : PUSH ESI
+00586dea : PUSH EDI
+00586deb : LEA ESI,[ECX + 0xc]
+00586dee : MOV EDI,EAX
+00586df0 : TEST byte ptr [ESI + 0x4],0x2
+00586df4 : JNZ 0x00586e02
+00586df6 : MOV ECX,dword ptr [ESI + -0x4]
+00586df9 : TEST ECX,ECX
+00586dfb : JZ 0x00586e02
+00586dfd : CALL 0x00503db0
+00586e02 : TEST byte ptr [ESI + 0x4],0x1
+00586e06 : MOV dword ptr [ESI + -0x4],0x0
+00586e0d : JNZ 0x00586e1a
+00586e0f : MOV ECX,dword ptr [ESI]
+00586e11 : TEST ECX,ECX
+00586e13 : JZ 0x00586e1a
+00586e15 : CALL 0x00503db0
+00586e1a : MOV dword ptr [ESI],0x0
+00586e20 : SUB ESI,0x1c
+00586e23 : SUB EDI,0x1
+00586e26 : JNZ 0x00586df0
+00586e28 : POP EDI
+00586e29 : POP ESI
+00586e2a : RET

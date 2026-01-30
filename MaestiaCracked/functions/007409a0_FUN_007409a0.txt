@@ -1,0 +1,57 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_007409a0
+ENTRY    : 007409a0
+BODY     : [[007409a0, 007409d0]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_007409a0(void)
+
+{
+  char cVar1;
+  char *in_EAX;
+  char *pcVar2;
+  
+  do {
+    pcVar2 = in_EAX;
+    in_EAX = pcVar2 + 1;
+  } while (*pcVar2 != '\0');
+  while( true ) {
+    pcVar2 = pcVar2 + -1;
+    cVar1 = *pcVar2;
+    if ((((cVar1 != ' ') && (cVar1 != '\t')) && (cVar1 != '\n')) && (cVar1 != '\r')) break;
+    *pcVar2 = '\0';
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+007409a0 : MOV ECX,EAX
+007409a2 : PUSH ESI
+007409a3 : LEA ESI,[ECX + 0x1]
+007409a6 : MOV DL,byte ptr [ECX]
+007409a8 : INC ECX
+007409a9 : TEST DL,DL
+007409ab : JNZ 0x007409a6
+007409ad : SUB ECX,ESI
+007409af : LEA EDX,[ECX + EAX*0x1 + -0x1]
+007409b3 : POP ESI
+007409b4 : MOV CL,byte ptr [EDX]
+007409b6 : CMP CL,0x20
+007409b9 : JZ 0x007409ca
+007409bb : CMP CL,0x9
+007409be : JZ 0x007409ca
+007409c0 : CMP CL,0xa
+007409c3 : JZ 0x007409ca
+007409c5 : CMP CL,0xd
+007409c8 : JNZ 0x007409d0
+007409ca : MOV byte ptr [EDX],0x0
+007409cd : DEC EDX
+007409ce : JMP 0x007409b4
+007409d0 : RET

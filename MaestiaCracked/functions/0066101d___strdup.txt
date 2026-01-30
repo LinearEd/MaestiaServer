@@ -1,0 +1,89 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __strdup
+ENTRY    : 0066101d
+BODY     : [[0066101d, 00661063] [00661067, 00661071]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __strdup
+   
+   Library: Visual Studio 2008 Release */
+
+char * __cdecl __strdup(char *_Src)
+
+{
+  char *_Dst;
+  size_t sVar1;
+  errno_t eVar2;
+  
+  if (_Src == (char *)0x0) {
+    _Dst = (char *)0x0;
+  }
+  else {
+    sVar1 = _strlen(_Src);
+    _Dst = _malloc(sVar1 + 1);
+    if (_Dst == (char *)0x0) {
+      _Dst = (char *)0x0;
+    }
+    else {
+      eVar2 = _strcpy_s(_Dst,sVar1 + 1,_Src);
+      if (eVar2 != 0) {
+                    /* WARNING: Subroutine does not return */
+        __invoke_watson((wchar_t *)0x0,(wchar_t *)0x0,(wchar_t *)0x0,0,0);
+      }
+    }
+  }
+  return _Dst;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0066101d : MOV EDI,EDI
+0066101f : PUSH EBP
+00661020 : MOV EBP,ESP
+00661022 : PUSH EBX
+00661023 : XOR EBX,EBX
+00661025 : CMP dword ptr [EBP + 0x8],EBX
+00661028 : JNZ 0x0066102e
+0066102a : XOR EAX,EAX
+0066102c : JMP 0x0066106f
+0066102e : PUSH ESI
+0066102f : PUSH EDI
+00661030 : PUSH dword ptr [EBP + 0x8]
+00661033 : CALL 0x00640960
+00661038 : MOV ESI,EAX
+0066103a : INC ESI
+0066103b : PUSH ESI
+0066103c : CALL 0x00636043
+00661041 : MOV EDI,EAX
+00661043 : POP ECX
+00661044 : POP ECX
+00661045 : CMP EDI,EBX
+00661047 : JZ 0x0066106b
+00661049 : PUSH dword ptr [EBP + 0x8]
+0066104c : PUSH ESI
+0066104d : PUSH EDI
+0066104e : CALL 0x00638300
+00661053 : ADD ESP,0xc
+00661056 : TEST EAX,EAX
+00661058 : JZ 0x00661067
+0066105a : PUSH EBX
+0066105b : PUSH EBX
+0066105c : PUSH EBX
+0066105d : PUSH EBX
+0066105e : PUSH EBX
+0066105f : CALL 0x00637169
+00661067 : MOV EAX,EDI
+00661069 : JMP 0x0066106d
+0066106b : XOR EAX,EAX
+0066106d : POP EDI
+0066106e : POP ESI
+0066106f : POP EBX
+00661070 : POP EBP
+00661071 : RET

@@ -1,0 +1,75 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00521390
+ENTRY    : 00521390
+BODY     : [[00521390, 005213ea]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+uint FUN_00521390(int *param_1,undefined1 *param_2,char param_3)
+
+{
+  int iVar1;
+  uint in_EAX;
+  uint uVar2;
+  int *in_ECX;
+  
+  if (param_3 == '\0') {
+    uVar2 = FUN_00520ab0(param_1,param_2);
+    return uVar2;
+  }
+  iVar1 = *in_ECX;
+  if (iVar1 != 0) {
+    in_EAX = FUN_0051db50(param_1,*(uint *)(*param_1 + 0xc) & *(uint *)(iVar1 + 4));
+    if ((-1 < (int)in_EAX) && (iVar1 = iVar1 + (in_EAX * 3 + 3) * 4, in_EAX = 0, iVar1 != 0)) {
+      if (param_2 != (undefined1 *)0x0) {
+        *param_2 = *(undefined1 *)(iVar1 + 4);
+      }
+      return CONCAT31((int3)((uint)iVar1 >> 8),1);
+    }
+  }
+  return in_EAX & 0xffffff00;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00521390 : CMP byte ptr [ESP + 0xc],0x0
+00521395 : JZ 0x005213d9
+00521397 : PUSH ESI
+00521398 : MOV ESI,dword ptr [ECX]
+0052139a : TEST ESI,ESI
+0052139c : JZ 0x005213d3
+0052139e : MOV EAX,dword ptr [ESP + 0x8]
+005213a2 : MOV EDX,dword ptr [EAX]
+005213a4 : MOV EDX,dword ptr [EDX + 0xc]
+005213a7 : AND EDX,dword ptr [ESI + 0x4]
+005213aa : PUSH EDX
+005213ab : PUSH EAX
+005213ac : CALL 0x0051db50
+005213b1 : TEST EAX,EAX
+005213b3 : JL 0x005213d3
+005213b5 : LEA EAX,[EAX + EAX*0x2 + 0x3]
+005213b9 : LEA EAX,[ESI + EAX*0x4]
+005213bc : TEST EAX,EAX
+005213be : JZ 0x005213d3
+005213c0 : MOV ECX,dword ptr [ESP + 0xc]
+005213c4 : TEST ECX,ECX
+005213c6 : JZ 0x005213cd
+005213c8 : MOV DL,byte ptr [EAX + 0x4]
+005213cb : MOV byte ptr [ECX],DL
+005213cd : MOV AL,0x1
+005213cf : POP ESI
+005213d0 : RET 0xc
+005213d3 : XOR AL,AL
+005213d5 : POP ESI
+005213d6 : RET 0xc
+005213d9 : MOV EAX,dword ptr [ESP + 0x8]
+005213dd : MOV EDX,dword ptr [ESP + 0x4]
+005213e1 : PUSH EAX
+005213e2 : PUSH EDX
+005213e3 : CALL 0x00520ab0
+005213e8 : RET 0xc

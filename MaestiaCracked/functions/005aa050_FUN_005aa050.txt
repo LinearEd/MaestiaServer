@@ -1,0 +1,73 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005aa050
+ENTRY    : 005aa050
+BODY     : [[005aa050, 005aa0a1]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_005aa050(uint param_1,int param_2)
+
+{
+  int *piVar1;
+  uint uVar2;
+  int iVar3;
+  int in_ECX;
+  undefined4 *puVar4;
+  
+  uVar2 = (param_1 - 1) + param_2 >> 0x14;
+  param_1 = param_1 >> 0x14;
+  if (param_1 <= uVar2) {
+    iVar3 = (uVar2 - param_1) + 1;
+    puVar4 = (undefined4 *)(in_ECX + 4 + param_1 * 8);
+    do {
+      piVar1 = puVar4 + 1;
+      *piVar1 = *piVar1 + -1;
+      if (*piVar1 == 0) {
+        thunk_FUN_005f6410(*puVar4,0x400,0x400);
+        *puVar4 = 0;
+      }
+      puVar4 = puVar4 + 2;
+      iVar3 = iVar3 + -1;
+    } while (iVar3 != 0);
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005aa050 : MOV EAX,dword ptr [ESP + 0x8]
+005aa054 : PUSH EDI
+005aa055 : MOV EDI,ECX
+005aa057 : MOV ECX,dword ptr [ESP + 0x8]
+005aa05b : LEA EAX,[ECX + EAX*0x1 + -0x1]
+005aa05f : SHR EAX,0x14
+005aa062 : SHR ECX,0x14
+005aa065 : CMP ECX,EAX
+005aa067 : JA 0x005aa09e
+005aa069 : PUSH EBX
+005aa06a : SUB EAX,ECX
+005aa06c : INC EAX
+005aa06d : PUSH ESI
+005aa06e : LEA ESI,[EDI + ECX*0x8 + 0x4]
+005aa072 : MOV EBX,EAX
+005aa074 : MOV ECX,dword ptr [EDI]
+005aa076 : ADD dword ptr [ESI + 0x4],-0x1
+005aa07a : JNZ 0x005aa094
+005aa07c : MOV EDX,dword ptr [ESI]
+005aa07e : PUSH 0x400
+005aa083 : PUSH 0x400
+005aa088 : PUSH EDX
+005aa089 : CALL 0x005a8880
+005aa08e : MOV dword ptr [ESI],0x0
+005aa094 : ADD ESI,0x8
+005aa097 : SUB EBX,0x1
+005aa09a : JNZ 0x005aa074
+005aa09c : POP ESI
+005aa09d : POP EBX
+005aa09e : POP EDI
+005aa09f : RET 0x8

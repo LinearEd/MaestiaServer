@@ -1,0 +1,102 @@
+PROGRAM  : Maestia.exe
+FUNCTION : _LocaleUpdate
+ENTRY    : 00637880
+BODY     : [[00637880, 00637906]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    public: __thiscall _LocaleUpdate::_LocaleUpdate(struct localeinfo_struct *)
+   
+   Library: Visual Studio 2008 Release */
+
+_LocaleUpdate * __thiscall
+_LocaleUpdate::_LocaleUpdate(_LocaleUpdate *this,localeinfo_struct *param_1)
+
+{
+  uint *puVar1;
+  _ptiddata p_Var2;
+  pthreadlocinfo ptVar3;
+  pthreadmbcinfo ptVar4;
+  
+  this[0xc] = (_LocaleUpdate)0x0;
+  if (param_1 == (localeinfo_struct *)0x0) {
+    p_Var2 = __getptd();
+    *(_ptiddata *)(this + 8) = p_Var2;
+    *(pthreadlocinfo *)this = p_Var2->ptlocinfo;
+    *(pthreadmbcinfo *)(this + 4) = p_Var2->ptmbcinfo;
+    if ((*(undefined **)this != PTR_DAT_00d67e38) && ((p_Var2->_ownlocale & DAT_00d67d50) == 0)) {
+      ptVar3 = ___updatetlocinfo();
+      *(pthreadlocinfo *)this = ptVar3;
+    }
+    if ((*(undefined **)(this + 4) != PTR_DAT_00d67c58) &&
+       ((*(uint *)(*(int *)(this + 8) + 0x70) & DAT_00d67d50) == 0)) {
+      ptVar4 = ___updatetmbcinfo();
+      *(pthreadmbcinfo *)(this + 4) = ptVar4;
+    }
+    if ((*(byte *)(*(int *)(this + 8) + 0x70) & 2) == 0) {
+      puVar1 = (uint *)(*(int *)(this + 8) + 0x70);
+      *puVar1 = *puVar1 | 2;
+      this[0xc] = (_LocaleUpdate)0x1;
+    }
+  }
+  else {
+    *(pthreadlocinfo *)this = param_1->locinfo;
+    *(pthreadmbcinfo *)(this + 4) = param_1->mbcinfo;
+  }
+  return this;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00637880 : MOV EDI,EDI
+00637882 : PUSH EBP
+00637883 : MOV EBP,ESP
+00637885 : MOV EAX,dword ptr [EBP + 0x8]
+00637888 : PUSH ESI
+00637889 : MOV ESI,ECX
+0063788b : MOV byte ptr [ESI + 0xc],0x0
+0063788f : TEST EAX,EAX
+00637891 : JNZ 0x006378f6
+00637893 : CALL 0x006458f6
+00637898 : MOV dword ptr [ESI + 0x8],EAX
+0063789b : MOV ECX,dword ptr [EAX + 0x6c]
+0063789e : MOV dword ptr [ESI],ECX
+006378a0 : MOV ECX,dword ptr [EAX + 0x68]
+006378a3 : MOV dword ptr [ESI + 0x4],ECX
+006378a6 : MOV ECX,dword ptr [ESI]
+006378a8 : CMP ECX,dword ptr [0x00d67e38]
+006378ae : JZ 0x006378c2
+006378b0 : MOV ECX,dword ptr [0x00d67d50]
+006378b6 : TEST dword ptr [EAX + 0x70],ECX
+006378b9 : JNZ 0x006378c2
+006378bb : CALL 0x00639caf
+006378c0 : MOV dword ptr [ESI],EAX
+006378c2 : MOV EAX,dword ptr [ESI + 0x4]
+006378c5 : CMP EAX,dword ptr [0x00d67c58]
+006378cb : JZ 0x006378e3
+006378cd : MOV EAX,dword ptr [ESI + 0x8]
+006378d0 : MOV ECX,dword ptr [0x00d67d50]
+006378d6 : TEST dword ptr [EAX + 0x70],ECX
+006378d9 : JNZ 0x006378e3
+006378db : CALL 0x0065105b
+006378e0 : MOV dword ptr [ESI + 0x4],EAX
+006378e3 : MOV EAX,dword ptr [ESI + 0x8]
+006378e6 : TEST byte ptr [EAX + 0x70],0x2
+006378ea : JNZ 0x00637900
+006378ec : OR dword ptr [EAX + 0x70],0x2
+006378f0 : MOV byte ptr [ESI + 0xc],0x1
+006378f4 : JMP 0x00637900
+006378f6 : MOV ECX,dword ptr [EAX]
+006378f8 : MOV dword ptr [ESI],ECX
+006378fa : MOV EAX,dword ptr [EAX + 0x4]
+006378fd : MOV dword ptr [ESI + 0x4],EAX
+00637900 : MOV EAX,ESI
+00637902 : POP ESI
+00637903 : POP EBP
+00637904 : RET 0x4

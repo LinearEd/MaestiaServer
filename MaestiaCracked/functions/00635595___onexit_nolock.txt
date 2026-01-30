@@ -1,0 +1,137 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __onexit_nolock
+ENTRY    : 00635595
+BODY     : [[00635595, 0063564e]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __onexit_nolock
+   
+   Library: Visual Studio 2008 Release */
+
+undefined4 __onexit_nolock(undefined4 param_1)
+
+{
+  undefined4 *_Memory;
+  undefined4 *puVar1;
+  size_t sVar2;
+  size_t sVar3;
+  void *pvVar4;
+  undefined4 uVar5;
+  int iVar6;
+  
+  _Memory = (undefined4 *)__decode_pointer(DAT_01729d70);
+  puVar1 = (undefined4 *)__decode_pointer(DAT_01729d6c);
+  if ((puVar1 < _Memory) || (iVar6 = (int)puVar1 - (int)_Memory, iVar6 + 4U < 4)) {
+    return 0;
+  }
+  sVar2 = __msize(_Memory);
+  if (sVar2 < iVar6 + 4U) {
+    sVar3 = 0x800;
+    if (sVar2 < 0x800) {
+      sVar3 = sVar2;
+    }
+    if ((sVar3 + sVar2 < sVar2) ||
+       (pvVar4 = __realloc_crt(_Memory,sVar3 + sVar2), pvVar4 == (void *)0x0)) {
+      if (sVar2 + 0x10 < sVar2) {
+        return 0;
+      }
+      pvVar4 = __realloc_crt(_Memory,sVar2 + 0x10);
+      if (pvVar4 == (void *)0x0) {
+        return 0;
+      }
+    }
+    puVar1 = (undefined4 *)((int)pvVar4 + (iVar6 >> 2) * 4);
+    DAT_01729d70 = __encode_pointer(pvVar4);
+  }
+  uVar5 = __encode_pointer(param_1);
+  *puVar1 = uVar5;
+  DAT_01729d6c = __encode_pointer(puVar1 + 1);
+  return param_1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00635595 : MOV EDI,EDI
+00635597 : PUSH EBP
+00635598 : MOV EBP,ESP
+0063559a : PUSH ECX
+0063559b : PUSH EBX
+0063559c : PUSH ESI
+0063559d : PUSH EDI
+0063559e : PUSH dword ptr [0x01729d70]
+006355a4 : CALL 0x0064566d
+006355a9 : PUSH dword ptr [0x01729d6c]
+006355af : MOV EDI,EAX
+006355b1 : MOV dword ptr [EBP + -0x4],EDI
+006355b4 : CALL 0x0064566d
+006355b9 : MOV ESI,EAX
+006355bb : POP ECX
+006355bc : POP ECX
+006355bd : CMP ESI,EDI
+006355bf : JC 0x00635648
+006355c5 : MOV EBX,ESI
+006355c7 : SUB EBX,EDI
+006355c9 : LEA EAX,[EBX + 0x4]
+006355cc : CMP EAX,0x4
+006355cf : JC 0x00635648
+006355d1 : PUSH EDI
+006355d2 : CALL 0x0064c183
+006355d7 : MOV EDI,EAX
+006355d9 : LEA EAX,[EBX + 0x4]
+006355dc : POP ECX
+006355dd : CMP EDI,EAX
+006355df : JNC 0x00635629
+006355e1 : MOV EAX,0x800
+006355e6 : CMP EDI,EAX
+006355e8 : JNC 0x006355ec
+006355ea : MOV EAX,EDI
+006355ec : ADD EAX,EDI
+006355ee : CMP EAX,EDI
+006355f0 : JC 0x00635601
+006355f2 : PUSH EAX
+006355f3 : PUSH dword ptr [EBP + -0x4]
+006355f6 : CALL 0x006425f0
+006355fb : POP ECX
+006355fc : POP ECX
+006355fd : TEST EAX,EAX
+006355ff : JNZ 0x00635617
+00635601 : LEA EAX,[EDI + 0x10]
+00635604 : CMP EAX,EDI
+00635606 : JC 0x00635648
+00635608 : PUSH EAX
+00635609 : PUSH dword ptr [EBP + -0x4]
+0063560c : CALL 0x006425f0
+00635611 : POP ECX
+00635612 : POP ECX
+00635613 : TEST EAX,EAX
+00635615 : JZ 0x00635648
+00635617 : SAR EBX,0x2
+0063561a : PUSH EAX
+0063561b : LEA ESI,[EAX + EBX*0x4]
+0063561e : CALL 0x006455f2
+00635623 : POP ECX
+00635624 : MOV [0x01729d70],EAX
+00635629 : PUSH dword ptr [EBP + 0x8]
+0063562c : CALL 0x006455f2
+00635631 : MOV dword ptr [ESI],EAX
+00635633 : ADD ESI,0x4
+00635636 : PUSH ESI
+00635637 : CALL 0x006455f2
+0063563c : POP ECX
+0063563d : MOV [0x01729d6c],EAX
+00635642 : MOV EAX,dword ptr [EBP + 0x8]
+00635645 : POP ECX
+00635646 : JMP 0x0063564a
+00635648 : XOR EAX,EAX
+0063564a : POP EDI
+0063564b : POP ESI
+0063564c : POP EBX
+0063564d : LEAVE
+0063564e : RET

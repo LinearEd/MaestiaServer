@@ -1,0 +1,80 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00a28880
+ENTRY    : 00a28880
+BODY     : [[00a28880, 00a288e1]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00a28880(void)
+
+{
+  int *piVar1;
+  int *_Dst;
+  int iVar2;
+  rsize_t _DstSize;
+  int iVar3;
+  int unaff_EDI;
+  
+  _Dst = *(int **)(unaff_EDI + 0x9c);
+  piVar1 = *(int **)(unaff_EDI + 0xa0);
+  while( true ) {
+    if (_Dst == piVar1) {
+      *(undefined4 *)(unaff_EDI + 0xa8) = 0;
+      return;
+    }
+    iVar2 = *_Dst;
+    iVar3 = *(int *)(unaff_EDI + 0xa0) - (int)(_Dst + 1) >> 2;
+    if (0 < iVar3) {
+      _DstSize = iVar3 * 4;
+      _memmove_s(_Dst,_DstSize,_Dst + 1,_DstSize);
+    }
+    *(int *)(unaff_EDI + 0xa0) = *(int *)(unaff_EDI + 0xa0) + -4;
+    FUN_0040eab0();
+    if (iVar2 != 0) break;
+    piVar1 = *(int **)(unaff_EDI + 0xa0);
+  }
+                    /* WARNING: Subroutine does not return */
+  FUN_006f04e0();
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00a28880 : PUSH ECX
+00a28881 : PUSH EBX
+00a28882 : MOV EBX,dword ptr [EDI + 0x9c]
+00a28888 : PUSH ESI
+00a28889 : CMP EBX,dword ptr [EDI + 0xa0]
+00a2888f : JZ 0x00a288d4
+00a28891 : MOV EAX,dword ptr [EDI + 0xa0]
+00a28897 : MOV ESI,dword ptr [EBX]
+00a28899 : LEA ECX,[EBX + 0x4]
+00a2889c : SUB EAX,ECX
+00a2889e : SAR EAX,0x2
+00a288a1 : TEST EAX,EAX
+00a288a3 : JLE 0x00a288b5
+00a288a5 : ADD EAX,EAX
+00a288a7 : ADD EAX,EAX
+00a288a9 : PUSH EAX
+00a288aa : PUSH ECX
+00a288ab : PUSH EAX
+00a288ac : PUSH EBX
+00a288ad : CALL 0x00634101
+00a288b2 : ADD ESP,0x10
+00a288b5 : ADD dword ptr [EDI + 0xa0],-0x4
+00a288bc : CALL 0x0040eab0
+00a288c1 : TEST ESI,ESI
+00a288c3 : JZ 0x00a288cc
+00a288c5 : MOV ECX,ESI
+00a288c7 : CALL 0x006f04e0
+00a288cc : CMP EBX,dword ptr [EDI + 0xa0]
+00a288d2 : JNZ 0x00a28891
+00a288d4 : POP ESI
+00a288d5 : MOV dword ptr [EDI + 0xa8],0x0
+00a288df : POP EBX
+00a288e0 : POP ECX
+00a288e1 : RET

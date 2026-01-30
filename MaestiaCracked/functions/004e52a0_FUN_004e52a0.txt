@@ -1,0 +1,100 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_004e52a0
+ENTRY    : 004e52a0
+BODY     : [[004e52a0, 004e5314]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_004e52a0(void)
+
+{
+  int iVar1;
+  int *piVar2;
+  uint uVar3;
+  int in_ECX;
+  int iVar4;
+  int local_c;
+  int local_8;
+  
+  FUN_004e6410();
+  iVar4 = in_ECX + 0xa44;
+  local_8 = 0x16;
+  do {
+    *(char *)(iVar4 + 4) = (char)(*(int *)(in_ECX + 0x10) - *(int *)(in_ECX + 0xc) >> 2);
+    iVar1 = *(int *)(in_ECX + 0xc);
+    if (iVar1 == 0) {
+      uVar3 = 0;
+    }
+    else {
+      uVar3 = *(int *)(in_ECX + 0x14) - iVar1 >> 2;
+    }
+    piVar2 = *(int **)(in_ECX + 0x10);
+    if ((uint)((int)piVar2 - iVar1 >> 2) < uVar3) {
+      *piVar2 = iVar4;
+      *(int **)(in_ECX + 0x10) = piVar2 + 1;
+    }
+    else {
+      local_c = iVar4;
+      FUN_0042fe80(in_ECX + 8,piVar2,&local_c);
+    }
+    iVar4 = iVar4 + 0x34;
+    local_8 = local_8 + -1;
+  } while (local_8 != 0);
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+004e52a0 : PUSH EBP
+004e52a1 : MOV EBP,ESP
+004e52a3 : SUB ESP,0x8
+004e52a6 : PUSH EBX
+004e52a7 : PUSH ESI
+004e52a8 : PUSH EDI
+004e52a9 : MOV EDI,ECX
+004e52ab : CALL 0x004e6410
+004e52b0 : LEA ESI,[EDI + 0x8]
+004e52b3 : ADD EDI,0xa44
+004e52b9 : MOV dword ptr [EBP + -0x4],0x16
+004e52c0 : MOV EAX,dword ptr [ESI + 0x8]
+004e52c3 : SUB EAX,dword ptr [ESI + 0x4]
+004e52c6 : MOV dword ptr [EBP + -0x8],EDI
+004e52c9 : SAR EAX,0x2
+004e52cc : MOV byte ptr [EDI + 0x4],AL
+004e52cf : MOV EDX,dword ptr [ESI + 0x4]
+004e52d2 : TEST EDX,EDX
+004e52d4 : JNZ 0x004e52da
+004e52d6 : XOR EAX,EAX
+004e52d8 : JMP 0x004e52e2
+004e52da : MOV EAX,dword ptr [ESI + 0xc]
+004e52dd : SUB EAX,EDX
+004e52df : SAR EAX,0x2
+004e52e2 : MOV ECX,dword ptr [ESI + 0x8]
+004e52e5 : MOV EBX,ECX
+004e52e7 : SUB EBX,EDX
+004e52e9 : SAR EBX,0x2
+004e52ec : CMP EBX,EAX
+004e52ee : JNC 0x004e52fa
+004e52f0 : MOV dword ptr [ECX],EDI
+004e52f2 : ADD ECX,0x4
+004e52f5 : MOV dword ptr [ESI + 0x8],ECX
+004e52f8 : JMP 0x004e5305
+004e52fa : LEA EDX,[EBP + -0x8]
+004e52fd : PUSH EDX
+004e52fe : PUSH ECX
+004e52ff : PUSH ESI
+004e5300 : CALL 0x0042fe80
+004e5305 : ADD EDI,0x34
+004e5308 : SUB dword ptr [EBP + -0x4],0x1
+004e530c : JNZ 0x004e52c0
+004e530e : POP EDI
+004e530f : POP ESI
+004e5310 : POP EBX
+004e5311 : MOV ESP,EBP
+004e5313 : POP EBP
+004e5314 : RET

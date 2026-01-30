@@ -1,0 +1,122 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __aulldvrm
+ENTRY    : 0063c810
+BODY     : [[0063c810, 0063c8a4]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __aulldvrm
+   
+   Library: Visual Studio 2008 Release */
+
+undefined8 __aulldvrm(uint param_1,uint param_2,uint param_3,uint param_4)
+
+{
+  ulonglong uVar1;
+  longlong lVar2;
+  uint uVar3;
+  int iVar4;
+  uint uVar5;
+  uint uVar6;
+  uint uVar7;
+  uint uVar8;
+  uint uVar9;
+  
+  uVar3 = param_1;
+  uVar8 = param_4;
+  uVar6 = param_2;
+  uVar9 = param_3;
+  if (param_4 == 0) {
+    uVar3 = param_2 / param_3;
+    iVar4 = (int)(((ulonglong)param_2 % (ulonglong)param_3 << 0x20 | (ulonglong)param_1) /
+                 (ulonglong)param_3);
+  }
+  else {
+    do {
+      uVar5 = uVar8 >> 1;
+      uVar9 = uVar9 >> 1 | (uint)((uVar8 & 1) != 0) << 0x1f;
+      uVar7 = uVar6 >> 1;
+      uVar3 = uVar3 >> 1 | (uint)((uVar6 & 1) != 0) << 0x1f;
+      uVar8 = uVar5;
+      uVar6 = uVar7;
+    } while (uVar5 != 0);
+    uVar1 = CONCAT44(uVar7,uVar3) / (ulonglong)uVar9;
+    iVar4 = (int)uVar1;
+    lVar2 = (ulonglong)param_3 * (uVar1 & 0xffffffff);
+    uVar3 = (uint)((ulonglong)lVar2 >> 0x20);
+    uVar8 = uVar3 + iVar4 * param_4;
+    if (((CARRY4(uVar3,iVar4 * param_4)) || (param_2 < uVar8)) ||
+       ((param_2 <= uVar8 && (param_1 < (uint)lVar2)))) {
+      iVar4 = iVar4 + -1;
+    }
+    uVar3 = 0;
+  }
+  return CONCAT44(uVar3,iVar4);
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0063c810 : PUSH ESI
+0063c811 : MOV EAX,dword ptr [ESP + 0x14]
+0063c815 : OR EAX,EAX
+0063c817 : JNZ 0x0063c841
+0063c819 : MOV ECX,dword ptr [ESP + 0x10]
+0063c81d : MOV EAX,dword ptr [ESP + 0xc]
+0063c821 : XOR EDX,EDX
+0063c823 : DIV ECX
+0063c825 : MOV EBX,EAX
+0063c827 : MOV EAX,dword ptr [ESP + 0x8]
+0063c82b : DIV ECX
+0063c82d : MOV ESI,EAX
+0063c82f : MOV EAX,EBX
+0063c831 : MUL dword ptr [ESP + 0x10]
+0063c835 : MOV ECX,EAX
+0063c837 : MOV EAX,ESI
+0063c839 : MUL dword ptr [ESP + 0x10]
+0063c83d : ADD EDX,ECX
+0063c83f : JMP 0x0063c888
+0063c841 : MOV ECX,EAX
+0063c843 : MOV EBX,dword ptr [ESP + 0x10]
+0063c847 : MOV EDX,dword ptr [ESP + 0xc]
+0063c84b : MOV EAX,dword ptr [ESP + 0x8]
+0063c84f : SHR ECX,0x1
+0063c851 : RCR EBX,0x1
+0063c853 : SHR EDX,0x1
+0063c855 : RCR EAX,0x1
+0063c857 : OR ECX,ECX
+0063c859 : JNZ 0x0063c84f
+0063c85b : DIV EBX
+0063c85d : MOV ESI,EAX
+0063c85f : MUL dword ptr [ESP + 0x14]
+0063c863 : MOV ECX,EAX
+0063c865 : MOV EAX,dword ptr [ESP + 0x10]
+0063c869 : MUL ESI
+0063c86b : ADD EDX,ECX
+0063c86d : JC 0x0063c87d
+0063c86f : CMP EDX,dword ptr [ESP + 0xc]
+0063c873 : JA 0x0063c87d
+0063c875 : JC 0x0063c886
+0063c877 : CMP EAX,dword ptr [ESP + 0x8]
+0063c87b : JBE 0x0063c886
+0063c87d : DEC ESI
+0063c87e : SUB EAX,dword ptr [ESP + 0x10]
+0063c882 : SBB EDX,dword ptr [ESP + 0x14]
+0063c886 : XOR EBX,EBX
+0063c888 : SUB EAX,dword ptr [ESP + 0x8]
+0063c88c : SBB EDX,dword ptr [ESP + 0xc]
+0063c890 : NEG EDX
+0063c892 : NEG EAX
+0063c894 : SBB EDX,0x0
+0063c897 : MOV ECX,EDX
+0063c899 : MOV EDX,EBX
+0063c89b : MOV EBX,ECX
+0063c89d : MOV ECX,EAX
+0063c89f : MOV EAX,ESI
+0063c8a1 : POP ESI
+0063c8a2 : RET 0x10

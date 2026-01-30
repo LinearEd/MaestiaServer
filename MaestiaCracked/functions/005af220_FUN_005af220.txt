@@ -1,0 +1,148 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005af220
+ENTRY    : 005af220
+BODY     : [[005af220, 005af2ed]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_005af220(void *param_1,uint param_2)
+
+{
+  int iVar1;
+  uint uVar2;
+  int *piVar3;
+  int in_ECX;
+  int iVar4;
+  uint _Size;
+  uint uVar5;
+  void *_Src;
+  void *local_8;
+  uint uStack_4;
+  
+  uVar5 = param_2;
+  uVar2 = *(uint *)(in_ECX + 0x24);
+  param_2 = 0;
+  if (uVar5 != 0) {
+    iVar4 = 0;
+    do {
+      if (uVar2 <= param_2) {
+        return;
+      }
+      if (param_2 < 0x10) {
+        iVar1 = iVar4 + 0x34 + in_ECX;
+        piVar3 = (int *)(iVar4 + 0x34 + in_ECX);
+      }
+      else {
+        iVar1 = *(int *)(in_ECX + 0x28) + -0xc0 + iVar4;
+        piVar3 = (int *)(*(int *)(in_ECX + 0x28) + -0xc0 + iVar4);
+      }
+      if (*piVar3 == 0) {
+        _Size = (uint)*(byte *)(iVar1 + 8);
+        if (uVar5 < *(byte *)(iVar1 + 8)) {
+          _Size = uVar5;
+        }
+        _Src = *(void **)(iVar1 + 4);
+LAB_005af2c2:
+        _memcpy(param_1,_Src,_Size);
+        uVar5 = uVar5 - _Size;
+        param_1 = (void *)((int)param_1 + _Size);
+      }
+      else if ((*piVar3 == 2) && (*(int **)(iVar1 + 4) != (int *)0x0)) {
+        (**(code **)(**(int **)(iVar1 + 4) + 0x10))(&local_8);
+        _Size = uStack_4;
+        _Src = local_8;
+        if (uVar5 < uStack_4) {
+          _Size = uVar5;
+        }
+        goto LAB_005af2c2;
+      }
+      param_2 = param_2 + 1;
+      iVar4 = iVar4 + 0xc;
+    } while (uVar5 != 0);
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005af220 : SUB ESP,0xc
+005af223 : PUSH EBP
+005af224 : PUSH EDI
+005af225 : MOV EDI,dword ptr [ESP + 0x1c]
+005af229 : MOV EBP,ECX
+005af22b : MOV EAX,dword ptr [EBP + 0x24]
+005af22e : XOR EDX,EDX
+005af230 : MOV dword ptr [ESP + 0x8],EAX
+005af234 : MOV dword ptr [ESP + 0x1c],EDX
+005af238 : TEST EDI,EDI
+005af23a : JZ 0x005af2e6
+005af240 : PUSH EBX
+005af241 : XOR EBX,EBX
+005af243 : PUSH ESI
+005af244 : CMP EDX,dword ptr [ESP + 0x10]
+005af248 : JNC 0x005af2e4
+005af24e : CMP EDX,0x10
+005af251 : JNC 0x005af259
+005af253 : LEA ECX,[EBX + EBP*0x1 + 0x34]
+005af257 : JMP 0x005af263
+005af259 : MOV ECX,dword ptr [EBP + 0x28]
+005af25c : LEA ECX,[ECX + EBX*0x1 + 0xffffff40]
+005af263 : CMP EDX,0x10
+005af266 : JNC 0x005af26e
+005af268 : LEA EAX,[EBX + EBP*0x1 + 0x34]
+005af26c : JMP 0x005af278
+005af26e : MOV EAX,dword ptr [EBP + 0x28]
+005af271 : LEA EAX,[EAX + EBX*0x1 + 0xffffff40]
+005af278 : MOV EAX,dword ptr [EAX]
+005af27a : SUB EAX,0x0
+005af27d : JZ 0x005af2ae
+005af27f : SUB EAX,0x2
+005af282 : JNZ 0x005af2d4
+005af284 : MOV ECX,dword ptr [ECX + 0x4]
+005af287 : TEST ECX,ECX
+005af289 : JZ 0x005af2d4
+005af28b : MOV EDX,dword ptr [ECX]
+005af28d : MOV EDX,dword ptr [EDX + 0x10]
+005af290 : LEA EAX,[ESP + 0x14]
+005af294 : PUSH EAX
+005af295 : CALL EDX
+005af297 : MOV ESI,dword ptr [ESP + 0x18]
+005af29b : CMP EDI,ESI
+005af29d : JNC 0x005af2a1
+005af29f : MOV ESI,EDI
+005af2a1 : MOV EAX,dword ptr [ESP + 0x14]
+005af2a5 : MOV ECX,dword ptr [ESP + 0x20]
+005af2a9 : PUSH ESI
+005af2aa : PUSH EAX
+005af2ab : PUSH ECX
+005af2ac : JMP 0x005af2c2
+005af2ae : MOVZX ESI,byte ptr [ECX + 0x8]
+005af2b2 : CMP EDI,ESI
+005af2b4 : JNC 0x005af2b8
+005af2b6 : MOV ESI,EDI
+005af2b8 : MOV EDX,dword ptr [ECX + 0x4]
+005af2bb : MOV EAX,dword ptr [ESP + 0x20]
+005af2bf : PUSH ESI
+005af2c0 : PUSH EDX
+005af2c1 : PUSH EAX
+005af2c2 : CALL 0x0063ae40
+005af2c7 : MOV EDX,dword ptr [ESP + 0x30]
+005af2cb : ADD ESP,0xc
+005af2ce : SUB EDI,ESI
+005af2d0 : ADD dword ptr [ESP + 0x20],ESI
+005af2d4 : INC EDX
+005af2d5 : ADD EBX,0xc
+005af2d8 : MOV dword ptr [ESP + 0x24],EDX
+005af2dc : TEST EDI,EDI
+005af2de : JNZ 0x005af244
+005af2e4 : POP ESI
+005af2e5 : POP EBX
+005af2e6 : POP EDI
+005af2e7 : POP EBP
+005af2e8 : ADD ESP,0xc
+005af2eb : RET 0x8

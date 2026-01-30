@@ -1,0 +1,96 @@
+PROGRAM  : Maestia.exe
+FUNCTION : _free
+ENTRY    : 0063610d
+BODY     : [[0063610d, 00636162] [0063616c, 0063619a]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* WARNING: Function: __SEH_prolog4 replaced with injection: SEH_prolog4 */
+/* WARNING: Function: __SEH_epilog4 replaced with injection: EH_epilog3 */
+/* Library Function - Single Match
+    _free
+   
+   Library: Visual Studio 2008 Release */
+
+void __cdecl _free(void *_Memory)
+
+{
+  int iVar1;
+  BOOL BVar2;
+  int *piVar3;
+  DWORD DVar4;
+  
+  if (_Memory != (void *)0x0) {
+    if (DAT_01728d40 == 3) {
+      __lock(4);
+      iVar1 = ___sbh_find_block(_Memory);
+      if (iVar1 != 0) {
+        ___sbh_free_block(iVar1,_Memory);
+      }
+      FUN_00636163();
+      if (iVar1 != 0) {
+        return;
+      }
+    }
+    BVar2 = HeapFree(DAT_00d7c09c,0,_Memory);
+    if (BVar2 == 0) {
+      piVar3 = __errno();
+      DVar4 = GetLastError();
+      iVar1 = __get_errno_from_oserr(DVar4);
+      *piVar3 = iVar1;
+    }
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0063610d : PUSH 0xc
+0063610f : PUSH 0xcecab8
+00636114 : CALL 0x0064c228
+00636119 : MOV ESI,dword ptr [EBP + 0x8]
+0063611c : TEST ESI,ESI
+0063611e : JZ 0x00636195
+00636120 : CMP dword ptr [0x01728d40],0x3
+00636127 : JNZ 0x0063616c
+00636129 : PUSH 0x4
+0063612b : CALL 0x0064c598
+00636130 : POP ECX
+00636131 : AND dword ptr [EBP + -0x4],0x0
+00636135 : PUSH ESI
+00636136 : CALL 0x0064cc12
+0063613b : POP ECX
+0063613c : MOV dword ptr [EBP + -0x1c],EAX
+0063613f : TEST EAX,EAX
+00636141 : JZ 0x0063614c
+00636143 : PUSH ESI
+00636144 : PUSH EAX
+00636145 : CALL 0x0064cc42
+0063614a : POP ECX
+0063614b : POP ECX
+0063614c : MOV dword ptr [EBP + -0x4],0xfffffffe
+00636153 : CALL 0x00636163
+00636158 : CMP dword ptr [EBP + -0x1c],0x0
+0063615c : JNZ 0x00636195
+0063615e : PUSH dword ptr [EBP + 0x8]
+00636161 : JMP 0x0063616d
+0063616c : PUSH ESI
+0063616d : PUSH 0x0
+0063616f : PUSH dword ptr [0x00d7c09c]
+00636175 : CALL dword ptr [0x00b852c4]
+0063617b : TEST EAX,EAX
+0063617d : JNZ 0x00636195
+0063617f : CALL 0x0063ab82
+00636184 : MOV ESI,EAX
+00636186 : CALL dword ptr [0x00b85128]
+0063618c : PUSH EAX
+0063618d : CALL 0x0063ab40
+00636192 : MOV dword ptr [ESI],EAX
+00636194 : POP ECX
+00636195 : CALL 0x0064c26d
+0063619a : RET

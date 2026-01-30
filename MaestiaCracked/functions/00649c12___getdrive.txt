@@ -1,0 +1,131 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __getdrive
+ENTRY    : 00649c12
+BODY     : [[00649c12, 00649cda]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __getdrive
+   
+   Library: Visual Studio 2008 Release */
+
+int __cdecl __getdrive(void)
+
+{
+  bool bVar1;
+  DWORD DVar2;
+  byte *lpBuffer;
+  int *piVar3;
+  int iVar4;
+  byte local_110 [264];
+  uint local_8;
+  
+  local_8 = DAT_00d66fa0 ^ (uint)&stack0xfffffffc;
+  bVar1 = false;
+  lpBuffer = local_110;
+  DVar2 = GetCurrentDirectoryA(0x105,(LPSTR)lpBuffer);
+  if (0x104 < (int)DVar2) {
+    lpBuffer = __calloc_crt(DVar2 + 1,1);
+    if (lpBuffer == (byte *)0x0) {
+      piVar3 = __errno();
+      *piVar3 = 0xc;
+      DVar2 = 0;
+    }
+    else {
+      bVar1 = true;
+      if (DVar2 != 0) {
+        DVar2 = GetCurrentDirectoryA(DVar2 + 1,(LPSTR)lpBuffer);
+      }
+    }
+  }
+  if (DVar2 == 0) {
+    piVar3 = __errno();
+    *piVar3 = 0xc;
+  }
+  else if (lpBuffer[1] == 0x3a) {
+    _toupper((uint)*lpBuffer);
+  }
+  if (bVar1) {
+    _free(lpBuffer);
+  }
+  iVar4 = __security_check_cookie(local_8 ^ (uint)&stack0xfffffffc);
+  return iVar4;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00649c12 : MOV EDI,EDI
+00649c14 : PUSH EBP
+00649c15 : MOV EBP,ESP
+00649c17 : SUB ESP,0x114
+00649c1d : MOV EAX,[0x00d66fa0]
+00649c22 : XOR EAX,EBP
+00649c24 : MOV dword ptr [EBP + -0x4],EAX
+00649c27 : AND dword ptr [EBP + 0xfffffef0],0x0
+00649c2e : PUSH EBX
+00649c2f : PUSH ESI
+00649c30 : PUSH EDI
+00649c31 : MOV EDI,dword ptr [0x00b85214]
+00649c37 : LEA EBX,[EBP + 0xfffffef4]
+00649c3d : MOV EAX,EBX
+00649c3f : PUSH EAX
+00649c40 : PUSH 0x105
+00649c45 : CALL EDI
+00649c47 : MOV ESI,EAX
+00649c49 : CMP ESI,0x104
+00649c4f : JLE 0x00649c92
+00649c51 : LEA EAX,[ESI + 0x1]
+00649c54 : PUSH 0x1
+00649c56 : PUSH EAX
+00649c57 : MOV dword ptr [EBP + 0xfffffeec],EAX
+00649c5d : CALL 0x006425a4
+00649c62 : MOV EBX,EAX
+00649c64 : POP ECX
+00649c65 : POP ECX
+00649c66 : TEST EBX,EBX
+00649c68 : JNZ 0x00649c79
+00649c6a : CALL 0x0063ab82
+00649c6f : MOV dword ptr [EAX],0xc
+00649c75 : XOR ESI,ESI
+00649c77 : JMP 0x00649c92
+00649c79 : MOV dword ptr [EBP + 0xfffffef0],0x1
+00649c83 : TEST ESI,ESI
+00649c85 : JZ 0x00649c92
+00649c87 : PUSH EBX
+00649c88 : PUSH dword ptr [EBP + 0xfffffeec]
+00649c8e : CALL EDI
+00649c90 : MOV ESI,EAX
+00649c92 : XOR EDI,EDI
+00649c94 : TEST ESI,ESI
+00649c96 : JZ 0x00649caf
+00649c98 : CMP byte ptr [EBX + 0x1],0x3a
+00649c9c : JNZ 0x00649cba
+00649c9e : MOVZX EAX,byte ptr [EBX]
+00649ca1 : PUSH EAX
+00649ca2 : CALL 0x00637b5e
+00649ca7 : MOV EDI,EAX
+00649ca9 : POP ECX
+00649caa : SUB EDI,0x40
+00649cad : JMP 0x00649cba
+00649caf : CALL 0x0063ab82
+00649cb4 : MOV dword ptr [EAX],0xc
+00649cba : CMP dword ptr [EBP + 0xfffffef0],0x0
+00649cc1 : JZ 0x00649cca
+00649cc3 : PUSH EBX
+00649cc4 : CALL 0x0063610d
+00649cc9 : POP ECX
+00649cca : MOV ECX,dword ptr [EBP + -0x4]
+00649ccd : MOV EAX,EDI
+00649ccf : POP EDI
+00649cd0 : POP ESI
+00649cd1 : XOR ECX,EBP
+00649cd3 : POP EBX
+00649cd4 : CALL 0x00633e6b
+00649cd9 : LEAVE
+00649cda : RET

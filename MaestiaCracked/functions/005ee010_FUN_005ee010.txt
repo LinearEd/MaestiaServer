@@ -1,0 +1,91 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005ee010
+ENTRY    : 005ee010
+BODY     : [[005ee010, 005ee06f]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_005ee010(uint param_1)
+
+{
+  uint uVar1;
+  undefined4 *puVar2;
+  int *in_ECX;
+  int iVar3;
+  uint uVar4;
+  
+  uVar1 = in_ECX[1];
+  if (param_1 < uVar1) {
+    uVar4 = param_1;
+    if ((uint)in_ECX[2] >> 1 <= param_1) goto LAB_005ee041;
+  }
+  else {
+    if (param_1 < (uint)in_ECX[2]) goto LAB_005ee041;
+    uVar4 = (param_1 >> 2) + param_1;
+  }
+  FUN_00561ce0(in_ECX,uVar4);
+LAB_005ee041:
+  in_ECX[1] = param_1;
+  if (uVar1 < param_1) {
+    puVar2 = (undefined4 *)(*in_ECX + uVar1 * 8);
+    for (iVar3 = param_1 - uVar1; iVar3 != 0; iVar3 = iVar3 + -1) {
+      if (puVar2 != (undefined4 *)0x0) {
+        puVar2[1] = 0;
+        *puVar2 = 0xffffffff;
+      }
+      puVar2 = puVar2 + 2;
+    }
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005ee010 : PUSH EBX
+005ee011 : PUSH ESI
+005ee012 : MOV ESI,dword ptr [ESP + 0xc]
+005ee016 : PUSH EDI
+005ee017 : MOV EDI,ECX
+005ee019 : MOV EBX,dword ptr [EDI + 0x4]
+005ee01c : CMP ESI,EBX
+005ee01e : JNC 0x005ee02c
+005ee020 : MOV EAX,dword ptr [EDI + 0x8]
+005ee023 : SHR EAX,0x1
+005ee025 : CMP ESI,EAX
+005ee027 : JNC 0x005ee041
+005ee029 : PUSH ESI
+005ee02a : JMP 0x005ee03b
+005ee02c : CMP ESI,dword ptr [EDI + 0x8]
+005ee02f : JC 0x005ee041
+005ee031 : MOV ECX,ESI
+005ee033 : SHR ECX,0x2
+005ee036 : ADD ECX,ESI
+005ee038 : PUSH ECX
+005ee039 : MOV ECX,EDI
+005ee03b : PUSH EDI
+005ee03c : CALL 0x00561ce0
+005ee041 : MOV dword ptr [EDI + 0x4],ESI
+005ee044 : CMP ESI,EBX
+005ee046 : JBE 0x005ee06a
+005ee048 : SUB ESI,EBX
+005ee04a : MOV EDX,dword ptr [EDI]
+005ee04c : LEA EAX,[EDX + EBX*0x8]
+005ee04f : JZ 0x005ee06a
+005ee051 : FLDZ
+005ee053 : TEST EAX,EAX
+005ee055 : JZ 0x005ee060
+005ee057 : FST float ptr [EAX + 0x4]
+005ee05a : MOV dword ptr [EAX],0xffffffff
+005ee060 : ADD EAX,0x8
+005ee063 : SUB ESI,0x1
+005ee066 : JNZ 0x005ee053
+005ee068 : FSTP ST0
+005ee06a : POP EDI
+005ee06b : POP ESI
+005ee06c : POP EBX
+005ee06d : RET 0x4

@@ -1,0 +1,57 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005a0070
+ENTRY    : 005a0070
+BODY     : [[005a0070, 005a00bb]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+uint FUN_005a0070(int param_1,uint param_2,uint param_3)
+
+{
+  short sVar1;
+  
+  for (; (((sVar1 = *(short *)(param_1 + param_2 * 2), sVar1 == 9 || (sVar1 == 0xd)) ||
+          (sVar1 == 0x20)) || (sVar1 == 0x3000)); param_2 = param_2 + 1) {
+  }
+  if ((param_1 != 0) && (*(short *)(param_1 + param_2 * 2) == 10)) {
+    param_2 = param_2 + 1;
+  }
+  if (param_3 < param_2) {
+    param_2 = 0xffffffff;
+  }
+  return param_2;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005a0070 : MOV EDX,dword ptr [ESP + 0x4]
+005a0074 : MOV EAX,dword ptr [ESP + 0x8]
+005a0078 : PUSH ESI
+005a0079 : LEA ESP,[ESP]
+005a0080 : MOVZX ECX,word ptr [EDX + EAX*0x2]
+005a0084 : CMP CX,0x9
+005a0088 : JZ 0x005a00a0
+005a008a : CMP CX,0xd
+005a008e : JZ 0x005a00a0
+005a0090 : CMP CX,0x20
+005a0094 : JZ 0x005a00a0
+005a0096 : MOV ESI,0x3000
+005a009b : CMP CX,SI
+005a009e : JNZ 0x005a00a3
+005a00a0 : INC EAX
+005a00a1 : JMP 0x005a0080
+005a00a3 : POP ESI
+005a00a4 : TEST EDX,EDX
+005a00a6 : JZ 0x005a00b0
+005a00a8 : CMP word ptr [EDX + EAX*0x2],0xa
+005a00ad : JNZ 0x005a00b0
+005a00af : INC EAX
+005a00b0 : CMP EAX,dword ptr [ESP + 0xc]
+005a00b4 : JBE 0x005a00b9
+005a00b6 : OR EAX,0xffffffff
+005a00b9 : RET 0xc

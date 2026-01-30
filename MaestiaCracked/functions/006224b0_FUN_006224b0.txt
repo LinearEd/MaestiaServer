@@ -1,0 +1,90 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_006224b0
+ENTRY    : 006224b0
+BODY     : [[006224b0, 00622513]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+int FUN_006224b0(int param_1,int param_2,int param_3)
+
+{
+  int *piVar1;
+  int iVar2;
+  
+  if (param_3 < 1) {
+    return 0;
+  }
+  if ((param_2 != 0) && (piVar1 = *(int **)(param_2 + 0xc), piVar1 != (int *)0x0)) {
+    iVar2 = *(int *)(param_2 + 4) - *(int *)(param_2 + 8);
+    if (iVar2 < param_3) {
+      param_3 = iVar2;
+    }
+    iVar2 = 0;
+    if (0 < param_3) {
+      do {
+        *(int *)(param_1 + iVar2 * 4) = *piVar1 + 0x10;
+        iVar2 = iVar2 + 1;
+        *(undefined4 *)(*piVar1 + 8) = 1;
+        piVar1 = (int *)piVar1[1];
+      } while (iVar2 < param_3);
+    }
+    *(int **)(param_2 + 0xc) = piVar1;
+    if (piVar1 != (int *)0x0) {
+      piVar1[2] = 0;
+    }
+    *(int *)(param_2 + 8) = *(int *)(param_2 + 8) + param_3;
+    return param_3;
+  }
+  return 0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006224b0 : MOV EAX,dword ptr [ESP + 0xc]
+006224b4 : TEST EAX,EAX
+006224b6 : JG 0x006224bb
+006224b8 : XOR EAX,EAX
+006224ba : RET
+006224bb : PUSH EDI
+006224bc : MOV EDI,dword ptr [ESP + 0xc]
+006224c0 : TEST EDI,EDI
+006224c2 : JZ 0x006224cb
+006224c4 : MOV ECX,dword ptr [EDI + 0xc]
+006224c7 : TEST ECX,ECX
+006224c9 : JNZ 0x006224cf
+006224cb : XOR EAX,EAX
+006224cd : POP EDI
+006224ce : RET
+006224cf : MOV EDX,dword ptr [EDI + 0x4]
+006224d2 : SUB EDX,dword ptr [EDI + 0x8]
+006224d5 : CMP EAX,EDX
+006224d7 : CMOVG EAX,EDX
+006224da : XOR EDX,EDX
+006224dc : TEST EAX,EAX
+006224de : JLE 0x00622501
+006224e0 : PUSH EBP
+006224e1 : PUSH ESI
+006224e2 : MOV ESI,dword ptr [ESP + 0x10]
+006224e6 : MOV EBP,dword ptr [ECX]
+006224e8 : ADD EBP,0x10
+006224eb : MOV dword ptr [ESI + EDX*0x4],EBP
+006224ee : MOV EBP,dword ptr [ECX]
+006224f0 : INC EDX
+006224f1 : CMP EDX,EAX
+006224f3 : MOV dword ptr [EBP + 0x8],0x1
+006224fa : MOV ECX,dword ptr [ECX + 0x4]
+006224fd : JL 0x006224e6
+006224ff : POP ESI
+00622500 : POP EBP
+00622501 : MOV dword ptr [EDI + 0xc],ECX
+00622504 : TEST ECX,ECX
+00622506 : JZ 0x0062250f
+00622508 : MOV dword ptr [ECX + 0x8],0x0
+0062250f : ADD dword ptr [EDI + 0x8],EAX
+00622512 : POP EDI
+00622513 : RET

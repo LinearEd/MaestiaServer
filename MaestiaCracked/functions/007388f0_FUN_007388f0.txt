@@ -1,0 +1,85 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_007388f0
+ENTRY    : 007388f0
+BODY     : [[007388f0, 00738935]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+uint FUN_007388f0(void)
+
+{
+  byte bVar1;
+  uint uVar2;
+  byte *pbVar3;
+  int iVar4;
+  byte *pbVar5;
+  byte *unaff_ESI;
+  bool bVar6;
+  
+  uVar2 = 0;
+  do {
+    pbVar3 = (&PTR_s_ModelViewProjection_00d6cf30)[uVar2];
+    pbVar5 = unaff_ESI;
+    do {
+      bVar1 = *pbVar3;
+      bVar6 = bVar1 < *pbVar5;
+      if (bVar1 != *pbVar5) {
+LAB_00738920:
+        iVar4 = (1 - (uint)bVar6) - (uint)(bVar6 != 0);
+        goto LAB_00738925;
+      }
+      if (bVar1 == 0) break;
+      bVar1 = pbVar3[1];
+      bVar6 = bVar1 < pbVar5[1];
+      if (bVar1 != pbVar5[1]) goto LAB_00738920;
+      pbVar3 = pbVar3 + 2;
+      pbVar5 = pbVar5 + 2;
+    } while (bVar1 != 0);
+    iVar4 = 0;
+LAB_00738925:
+    if (iVar4 == 0) {
+      return uVar2;
+    }
+    uVar2 = uVar2 + 1;
+    if (0x4a < uVar2) {
+      return 0x4c;
+    }
+  } while( true );
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+007388f0 : XOR EAX,EAX
+007388f2 : PUSH EBX
+007388f3 : MOV ECX,dword ptr [EAX*0x4 + 0xd6cf30]
+007388fa : MOV EDX,ESI
+007388fc : LEA ESP,[ESP]
+00738900 : MOV BL,byte ptr [ECX]
+00738902 : CMP BL,byte ptr [EDX]
+00738904 : JNZ 0x00738920
+00738906 : TEST BL,BL
+00738908 : JZ 0x0073891c
+0073890a : MOV BL,byte ptr [ECX + 0x1]
+0073890d : CMP BL,byte ptr [EDX + 0x1]
+00738910 : JNZ 0x00738920
+00738912 : ADD ECX,0x2
+00738915 : ADD EDX,0x2
+00738918 : TEST BL,BL
+0073891a : JNZ 0x00738900
+0073891c : XOR ECX,ECX
+0073891e : JMP 0x00738925
+00738920 : SBB ECX,ECX
+00738922 : SBB ECX,-0x1
+00738925 : TEST ECX,ECX
+00738927 : JZ 0x00738934
+00738929 : INC EAX
+0073892a : CMP EAX,0x4b
+0073892d : JC 0x007388f3
+0073892f : MOV EAX,0x4c
+00738934 : POP EBX
+00738935 : RET

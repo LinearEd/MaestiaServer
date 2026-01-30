@@ -1,0 +1,73 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __errcode
+ENTRY    : 0065dcf8
+BODY     : [[0065dcf8, 0065dd2b]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __errcode
+   
+   Library: Visual Studio 2008 Release */
+
+char __errcode(byte param_1)
+
+{
+  char cVar1;
+  
+  if ((param_1 & 0x20) == 0) {
+    if ((param_1 & 8) != 0) {
+      return '\x01';
+    }
+    if ((param_1 & 4) == 0) {
+      if ((param_1 & 1) == 0) {
+        return (param_1 & 2) * '\x02';
+      }
+      cVar1 = '\x03';
+    }
+    else {
+      cVar1 = '\x02';
+    }
+  }
+  else {
+    cVar1 = '\x05';
+  }
+  return cVar1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0065dcf8 : MOV EDI,EDI
+0065dcfa : PUSH EBP
+0065dcfb : MOV EBP,ESP
+0065dcfd : MOV AL,byte ptr [EBP + 0x8]
+0065dd00 : TEST AL,0x20
+0065dd02 : JZ 0x0065dd08
+0065dd04 : PUSH 0x5
+0065dd06 : JMP 0x0065dd1f
+0065dd08 : TEST AL,0x8
+0065dd0a : JZ 0x0065dd11
+0065dd0c : XOR EAX,EAX
+0065dd0e : INC EAX
+0065dd0f : POP EBP
+0065dd10 : RET
+0065dd11 : TEST AL,0x4
+0065dd13 : JZ 0x0065dd19
+0065dd15 : PUSH 0x2
+0065dd17 : JMP 0x0065dd1f
+0065dd19 : TEST AL,0x1
+0065dd1b : JZ 0x0065dd22
+0065dd1d : PUSH 0x3
+0065dd1f : POP EAX
+0065dd20 : POP EBP
+0065dd21 : RET
+0065dd22 : MOVZX EAX,AL
+0065dd25 : AND EAX,0x2
+0065dd28 : ADD EAX,EAX
+0065dd2a : POP EBP
+0065dd2b : RET

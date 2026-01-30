@@ -1,0 +1,128 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005887b0
+ENTRY    : 005887b0
+BODY     : [[005887b0, 00588877]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_005887b0(undefined4 param_1)
+
+{
+  int *piVar1;
+  undefined4 uVar2;
+  LONG LVar3;
+  int in_ECX;
+  uint uVar4;
+  int iVar5;
+  uint local_1c;
+  uint local_18;
+  int local_14;
+  uint *local_10;
+  uint *local_c;
+  
+  piVar1 = *(int **)(in_ECX + 0xc);
+  if ((piVar1 != (int *)0x0) && (local_18 = 0, local_14 = in_ECX, piVar1[1] != 0)) {
+    do {
+      uVar4 = local_18;
+      iVar5 = *(int *)(*piVar1 + local_18 * 4);
+      FUN_00561690();
+      iVar5 = *(int *)(*(int *)(iVar5 + 0x20) + 0x98);
+      if (iVar5 != 0) {
+        local_10 = &local_1c;
+        local_c = local_10;
+        do {
+          uVar2 = (**(code **)(**(int **)(iVar5 + 4) + 0x3c))();
+          FUN_0051c480(uVar2);
+          FUN_00508d40(param_1,&local_10);
+          uVar4 = local_1c & 0xfffffffc;
+          LVar3 = InterlockedExchangeAdd((LONG *)(uVar4 + 4),-1);
+          if (LVar3 == 1) {
+            FUN_00515cf0(uVar4);
+          }
+          iVar5 = *(int *)(iVar5 + 0xc);
+          uVar4 = local_18;
+        } while (iVar5 != 0);
+      }
+      piVar1 = *(int **)(local_14 + 0xc);
+      local_18 = uVar4 + 1;
+    } while (local_18 < (uint)piVar1[1]);
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005887b0 : PUSH EBP
+005887b1 : MOV EBP,ESP
+005887b3 : AND ESP,0xfffffff8
+005887b6 : SUB ESP,0x14
+005887b9 : MOV EAX,dword ptr [ECX + 0xc]
+005887bc : PUSH EBX
+005887bd : PUSH ESI
+005887be : PUSH EDI
+005887bf : MOV dword ptr [ESP + 0x14],ECX
+005887c3 : TEST EAX,EAX
+005887c5 : JZ 0x0058886f
+005887cb : XOR ESI,ESI
+005887cd : MOV dword ptr [ESP + 0x10],ESI
+005887d1 : CMP dword ptr [EAX + 0x4],ESI
+005887d4 : JBE 0x0058886f
+005887da : MOV EBX,dword ptr [EBP + 0x8]
+005887dd : LEA ECX,[ECX]
+005887e0 : MOV EAX,dword ptr [EAX]
+005887e2 : MOV EDI,dword ptr [EAX + ESI*0x4]
+005887e5 : MOV ECX,dword ptr [EDI + 0x20]
+005887e8 : CALL 0x00561690
+005887ed : MOV EAX,dword ptr [EDI + 0x20]
+005887f0 : MOV EDI,dword ptr [EAX + 0x98]
+005887f6 : ADD EAX,0x98
+005887fb : TEST EDI,EDI
+005887fd : JZ 0x0058885a
+005887ff : LEA ECX,[ESP + 0xc]
+00588803 : MOV EDX,ECX
+00588805 : MOV dword ptr [ESP + 0x18],ECX
+00588809 : MOV dword ptr [ESP + 0x1c],EDX
+0058880d : LEA ECX,[ECX]
+00588810 : MOV ECX,dword ptr [EDI + 0x4]
+00588813 : MOV EAX,dword ptr [ECX]
+00588815 : MOV EDX,dword ptr [EAX + 0x3c]
+00588818 : CALL EDX
+0058881a : PUSH EAX
+0058881b : LEA ECX,[ESP + 0x10]
+0058881f : CALL 0x0051c480
+00588824 : LEA EAX,[ESP + 0x18]
+00588828 : PUSH EAX
+00588829 : PUSH EBX
+0058882a : MOV ECX,EBX
+0058882c : CALL 0x00508d40
+00588831 : MOV ESI,dword ptr [ESP + 0xc]
+00588835 : AND ESI,0xfffffffc
+00588838 : PUSH -0x1
+0058883a : LEA ECX,[ESI + 0x4]
+0058883d : PUSH ECX
+0058883e : CALL dword ptr [0x00b851cc]
+00588844 : SUB EAX,0x1
+00588847 : JNZ 0x0058884f
+00588849 : PUSH ESI
+0058884a : CALL 0x00515cf0
+0058884f : MOV EDI,dword ptr [EDI + 0xc]
+00588852 : TEST EDI,EDI
+00588854 : JNZ 0x00588810
+00588856 : MOV ESI,dword ptr [ESP + 0x10]
+0058885a : MOV EDX,dword ptr [ESP + 0x14]
+0058885e : MOV EAX,dword ptr [EDX + 0xc]
+00588861 : INC ESI
+00588862 : MOV dword ptr [ESP + 0x10],ESI
+00588866 : CMP ESI,dword ptr [EAX + 0x4]
+00588869 : JC 0x005887e0
+0058886f : POP EDI
+00588870 : POP ESI
+00588871 : POP EBX
+00588872 : MOV ESP,EBP
+00588874 : POP EBP
+00588875 : RET 0x4

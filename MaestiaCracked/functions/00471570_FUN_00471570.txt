@@ -1,0 +1,115 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00471570
+ENTRY    : 00471570
+BODY     : [[00471570, 0047160f]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined1 FUN_00471570(int param_1)
+
+{
+  int iVar1;
+  undefined4 uVar2;
+  int in_ECX;
+  undefined1 uVar3;
+  int unaff_ESI;
+  
+  iVar1 = *(int *)(unaff_ESI + 0x38);
+  uVar3 = 1;
+  if (iVar1 == 0) {
+    if (in_ECX != 0) {
+      FUN_00807d70("CGeometryBufferRI::Reserve failed, vertex size not yet known");
+      uVar3 = 0;
+    }
+  }
+  else if (in_ECX != 0) {
+    uVar2 = FUN_00808040("CGeometryBufferRI_Vertices",unaff_ESI + 0x60);
+    FUN_004753a0(uVar2,iVar1 * in_ECX);
+  }
+  iVar1 = *(int *)(unaff_ESI + 0x58);
+  if (iVar1 != 0) {
+    if (param_1 != 0) {
+      uVar2 = FUN_00808040("CGeometryBufferRI_Index",unaff_ESI + 100);
+      FUN_004753a0(uVar2,iVar1 * param_1);
+    }
+    return 1;
+  }
+  if (param_1 != 0) {
+    FUN_00807d70("CGeometryBufferRI::Reserve failed, index size not yet known");
+    return 0;
+  }
+  return uVar3;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00471570 : PUSH EBP
+00471571 : MOV EBP,ESP
+00471573 : MOV EAX,dword ptr [ESI + 0x38]
+00471576 : PUSH EBX
+00471577 : PUSH EDI
+00471578 : MOV BL,0x1
+0047157a : TEST EAX,EAX
+0047157c : JBE 0x004715a4
+0047157e : TEST ECX,ECX
+00471580 : JBE 0x004715b7
+00471582 : IMUL EAX,ECX
+00471585 : MOV EDI,EAX
+00471587 : LEA EAX,[ESI + 0x60]
+0047158a : PUSH EAX
+0047158b : PUSH 0xcd62f8
+00471590 : CALL 0x00808040
+00471595 : ADD ESP,0x8
+00471598 : PUSH EDI
+00471599 : PUSH EAX
+0047159a : LEA EDI,[ESI + 0x24]
+0047159d : CALL 0x004753a0
+004715a2 : JMP 0x004715b7
+004715a4 : TEST ECX,ECX
+004715a6 : JBE 0x004715b7
+004715a8 : PUSH 0xcd6314
+004715ad : CALL 0x00807d70
+004715b2 : ADD ESP,0x4
+004715b5 : XOR BL,BL
+004715b7 : MOV EAX,dword ptr [ESI + 0x58]
+004715ba : TEST EAX,EAX
+004715bc : JBE 0x004715ed
+004715be : MOV ECX,dword ptr [EBP + 0x8]
+004715c1 : TEST ECX,ECX
+004715c3 : JBE 0x004715e5
+004715c5 : IMUL EAX,ECX
+004715c8 : LEA ECX,[ESI + 0x64]
+004715cb : PUSH ECX
+004715cc : MOV EDI,EAX
+004715ce : PUSH 0xcd6354
+004715d3 : CALL 0x00808040
+004715d8 : ADD ESP,0x8
+004715db : PUSH EDI
+004715dc : PUSH EAX
+004715dd : LEA EDI,[ESI + 0x44]
+004715e0 : CALL 0x004753a0
+004715e5 : MOV AL,0x1
+004715e7 : POP EDI
+004715e8 : POP EBX
+004715e9 : POP EBP
+004715ea : RET 0x4
+004715ed : CMP dword ptr [EBP + 0x8],0x0
+004715f1 : JBE 0x00471608
+004715f3 : PUSH 0xcd636c
+004715f8 : CALL 0x00807d70
+004715fd : ADD ESP,0x4
+00471600 : XOR AL,AL
+00471602 : POP EDI
+00471603 : POP EBX
+00471604 : POP EBP
+00471605 : RET 0x4
+00471608 : POP EDI
+00471609 : MOV AL,BL
+0047160b : POP EBX
+0047160c : POP EBP
+0047160d : RET 0x4

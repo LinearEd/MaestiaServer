@@ -1,0 +1,140 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_004bd820
+ENTRY    : 004bd820
+BODY     : [[004bd820, 004bd8f2]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_004bd820(undefined8 *param_1)
+
+{
+  ushort *puVar1;
+  short in_AX;
+  int iVar2;
+  uint uVar3;
+  uint uVar4;
+  ushort *in_EDX;
+  ushort unaff_SI;
+  
+  if (unaff_SI <= *in_EDX) {
+    *param_1 = *(undefined8 *)(in_EDX + 2);
+    param_1[1] = *(undefined8 *)(in_EDX + 6);
+    return;
+  }
+  iVar2 = (int)in_AX;
+  if (in_EDX[iVar2 * 10 + -10] <= unaff_SI) {
+    *param_1 = *(undefined8 *)(in_EDX + iVar2 * 10 + -8);
+    param_1[1] = *(undefined8 *)(in_EDX + iVar2 * 10 + -4);
+    return;
+  }
+  uVar4 = 0;
+  if (0 < iVar2 + -1) {
+    uVar3 = 0;
+    do {
+      if (unaff_SI < in_EDX[(uVar3 * 5 + 5) * 2]) {
+        puVar1 = in_EDX + (uVar4 & 0xffff) * 10;
+        if (in_EDX[(uVar4 & 0xffff) * 10] == unaff_SI) {
+          *param_1 = *(undefined8 *)(puVar1 + 2);
+          param_1[1] = *(undefined8 *)(puVar1 + 6);
+          return;
+        }
+        D3DXQuaternionSlerp(param_1,puVar1 + 2,puVar1 + 0xc,
+                            (float)(int)((uint)unaff_SI - (uint)*puVar1) /
+                            (float)(int)((uint)puVar1[10] - (uint)*puVar1));
+        return;
+      }
+      uVar4 = uVar4 + 1;
+      uVar3 = uVar4 & 0xffff;
+    } while ((int)uVar3 < iVar2 + -1);
+  }
+  *param_1 = *(undefined8 *)(in_EDX + 2);
+  param_1[1] = *(undefined8 *)(in_EDX + 6);
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+004bd820 : PUSH EBP
+004bd821 : MOV EBP,ESP
+004bd823 : PUSH EBX
+004bd824 : MOV EBX,dword ptr [EBP + 0x8]
+004bd827 : CMP SI,word ptr [EDX]
+004bd82a : JA 0x004bd842
+004bd82c : MOVQ XMM0,qword ptr [EDX + 0x4]
+004bd831 : MOVQ qword ptr [EBX],XMM0
+004bd835 : MOVQ XMM0,qword ptr [EDX + 0xc]
+004bd83a : MOVQ qword ptr [EBX + 0x8],XMM0
+004bd83f : POP EBX
+004bd840 : POP EBP
+004bd841 : RET
+004bd842 : CWDE
+004bd843 : LEA ECX,[EAX + EAX*0x4]
+004bd846 : CMP SI,word ptr [EDX + ECX*0x4 + -0x14]
+004bd84b : LEA ECX,[EDX + ECX*0x4]
+004bd84e : JC 0x004bd866
+004bd850 : MOVQ XMM0,qword ptr [ECX + -0x10]
+004bd855 : MOVQ qword ptr [EBX],XMM0
+004bd859 : MOVQ XMM0,qword ptr [ECX + -0x8]
+004bd85e : MOVQ qword ptr [EBX + 0x8],XMM0
+004bd863 : POP EBX
+004bd864 : POP EBP
+004bd865 : RET
+004bd866 : PUSH EDI
+004bd867 : LEA EDI,[EAX + -0x1]
+004bd86a : XOR ECX,ECX
+004bd86c : TEST EDI,EDI
+004bd86e : JLE 0x004bd884
+004bd870 : XOR EAX,EAX
+004bd872 : LEA EAX,[EAX + EAX*0x4 + 0x5]
+004bd876 : CMP SI,word ptr [EDX + EAX*0x4]
+004bd87a : JC 0x004bd89b
+004bd87c : INC ECX
+004bd87d : MOVZX EAX,CX
+004bd880 : CMP EAX,EDI
+004bd882 : JL 0x004bd872
+004bd884 : MOVQ XMM0,qword ptr [EDX + 0x4]
+004bd889 : MOVQ qword ptr [EBX],XMM0
+004bd88d : MOVQ XMM0,qword ptr [EDX + 0xc]
+004bd892 : POP EDI
+004bd893 : MOVQ qword ptr [EBX + 0x8],XMM0
+004bd898 : POP EBX
+004bd899 : POP EBP
+004bd89a : RET
+004bd89b : MOVZX EAX,CX
+004bd89e : LEA ECX,[EAX + EAX*0x4]
+004bd8a1 : CMP word ptr [EDX + ECX*0x4],SI
+004bd8a5 : LEA EAX,[EDX + ECX*0x4]
+004bd8a8 : JNZ 0x004bd8c1
+004bd8aa : MOVQ XMM0,qword ptr [EAX + 0x4]
+004bd8af : MOVQ qword ptr [EBX],XMM0
+004bd8b3 : MOVQ XMM0,qword ptr [EAX + 0xc]
+004bd8b8 : POP EDI
+004bd8b9 : MOVQ qword ptr [EBX + 0x8],XMM0
+004bd8be : POP EBX
+004bd8bf : POP EBP
+004bd8c0 : RET
+004bd8c1 : MOVZX ECX,word ptr [EAX]
+004bd8c4 : MOVZX EDX,SI
+004bd8c7 : SUB EDX,ECX
+004bd8c9 : CVTSI2SS XMM0,EDX
+004bd8cd : MOVZX EDX,word ptr [EAX + 0x14]
+004bd8d1 : PUSH ECX
+004bd8d2 : SUB EDX,ECX
+004bd8d4 : CVTSI2SS XMM1,EDX
+004bd8d8 : LEA ECX,[EAX + 0x18]
+004bd8db : DIVSS XMM0,XMM1
+004bd8df : MOVSS dword ptr [ESP],XMM0
+004bd8e4 : PUSH ECX
+004bd8e5 : ADD EAX,0x4
+004bd8e8 : PUSH EAX
+004bd8e9 : PUSH EBX
+004bd8ea : CALL 0x004ff758
+004bd8ef : POP EDI
+004bd8f0 : POP EBX
+004bd8f1 : POP EBP
+004bd8f2 : RET

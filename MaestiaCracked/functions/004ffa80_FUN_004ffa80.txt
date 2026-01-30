@@ -1,0 +1,64 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_004ffa80
+ENTRY    : 004ffa80
+BODY     : [[004ffa80, 004ffac3]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_004ffa80(void)
+
+{
+  short sVar1;
+  int iVar2;
+  int *in_ECX;
+  
+  iVar2 = in_ECX[1];
+  if ((0 < iVar2) && (*(short *)(*in_ECX + -2 + iVar2 * 2) == 0)) {
+    iVar2 = iVar2 + -1;
+  }
+  while( true ) {
+    iVar2 = iVar2 + -1;
+    if (iVar2 < 0) {
+      return;
+    }
+    sVar1 = *(short *)(*in_ECX + iVar2 * 2);
+    if ((sVar1 != 10) && (sVar1 != 0xd)) break;
+    in_ECX[1] = in_ECX[1] + -1;
+    *(undefined2 *)(*in_ECX + iVar2 * 2) = 0;
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+004ffa80 : MOV EAX,dword ptr [ECX + 0x4]
+004ffa83 : TEST EAX,EAX
+004ffa85 : JLE 0x004ffa92
+004ffa87 : MOV EDX,dword ptr [ECX]
+004ffa89 : CMP word ptr [EDX + EAX*0x2 + -0x2],0x0
+004ffa8f : JNZ 0x004ffa92
+004ffa91 : DEC EAX
+004ffa92 : PUSH ESI
+004ffa93 : LEA ESI,[EAX + -0x1]
+004ffa96 : TEST ESI,ESI
+004ffa98 : JL 0x004ffac2
+004ffa9a : LEA EBX,[EBX]
+004ffaa0 : MOV EAX,dword ptr [ECX]
+004ffaa2 : MOVZX EDX,word ptr [EAX + ESI*0x2]
+004ffaa6 : LEA EAX,[EAX + ESI*0x2]
+004ffaa9 : CMP DX,0xa
+004ffaad : JZ 0x004ffab5
+004ffaaf : CMP DX,0xd
+004ffab3 : JNZ 0x004ffac2
+004ffab5 : DEC dword ptr [ECX + 0x4]
+004ffab8 : XOR EDX,EDX
+004ffaba : SUB ESI,0x1
+004ffabd : MOV word ptr [EAX],DX
+004ffac0 : JNS 0x004ffaa0
+004ffac2 : POP ESI
+004ffac3 : RET

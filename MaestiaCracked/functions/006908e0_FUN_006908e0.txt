@@ -1,0 +1,49 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_006908e0
+ENTRY    : 006908e0
+BODY     : [[006908e0, 00690909]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+int * FUN_006908e0(void)
+
+{
+  int *piVar1;
+  int in_ECX;
+  int *piVar2;
+  int in_EDX;
+  
+  piVar1 = *(int **)(in_ECX + 0x9c);
+  piVar2 = piVar1 + (uint)*(ushort *)(in_ECX + 0x98) * 4;
+  while( true ) {
+    if (piVar2 <= piVar1) {
+      return (int *)0x0;
+    }
+    if ((*piVar1 == in_EDX) && (piVar1[3] != 0)) break;
+    piVar1 = piVar1 + 4;
+  }
+  return piVar1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006908e0 : MOV EAX,dword ptr [ECX + 0x9c]
+006908e6 : MOVZX ECX,word ptr [ECX + 0x98]
+006908ed : SHL ECX,0x4
+006908f0 : ADD ECX,EAX
+006908f2 : CMP EAX,ECX
+006908f4 : JNC 0x00690907
+006908f6 : CMP dword ptr [EAX],EDX
+006908f8 : JNZ 0x00690900
+006908fa : CMP dword ptr [EAX + 0xc],0x0
+006908fe : JNZ 0x00690909
+00690900 : ADD EAX,0x10
+00690903 : CMP EAX,ECX
+00690905 : JC 0x006908f6
+00690907 : XOR EAX,EAX
+00690909 : RET

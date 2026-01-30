@@ -1,0 +1,46 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005542a0
+ENTRY    : 005542a0
+BODY     : [[005542a0, 005542ca]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_005542a0(float *param_1,float *param_2)
+
+{
+  int iVar1;
+  int *in_ECX;
+  
+  iVar1 = *in_ECX;
+  *param_1 = (float)*(int *)(iVar1 + 0x2c);
+  *param_2 = (float)*(int *)(iVar1 + 0x30);
+  if ((*(byte *)(iVar1 + 0x70) & 0x80) != 0) {
+    *param_1 = *param_1 * *(float *)(iVar1 + 0x6c);
+    *param_2 = *(float *)(iVar1 + 0x6c) * *param_2;
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005542a0 : MOV EAX,dword ptr [ECX]
+005542a2 : FILD dword ptr [EAX + 0x2c]
+005542a5 : MOV ECX,dword ptr [ESP + 0x4]
+005542a9 : MOV EDX,dword ptr [ESP + 0x8]
+005542ad : FSTP float ptr [ECX]
+005542af : FILD dword ptr [EAX + 0x30]
+005542b2 : FSTP float ptr [EDX]
+005542b4 : TEST byte ptr [EAX + 0x70],0x80
+005542b8 : JZ 0x005542c8
+005542ba : FLD float ptr [ECX]
+005542bc : FMUL float ptr [EAX + 0x6c]
+005542bf : FSTP float ptr [ECX]
+005542c1 : FLD float ptr [EAX + 0x6c]
+005542c4 : FMUL float ptr [EDX]
+005542c6 : FSTP float ptr [EDX]
+005542c8 : RET 0x8

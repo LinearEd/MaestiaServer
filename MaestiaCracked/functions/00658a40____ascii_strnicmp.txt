@@ -1,0 +1,116 @@
+PROGRAM  : Maestia.exe
+FUNCTION : ___ascii_strnicmp
+ENTRY    : 00658a40
+BODY     : [[00658a40, 00658aa0]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    ___ascii_strnicmp
+   
+   Library: Visual Studio 2008 Release */
+
+int __cdecl ___ascii_strnicmp(char *_Str1,char *_Str2,size_t _MaxCount)
+
+{
+  char cVar1;
+  byte bVar2;
+  ushort uVar3;
+  uint uVar4;
+  int iVar5;
+  bool bVar6;
+  
+  iVar5 = 0;
+  if (_MaxCount != 0) {
+    do {
+      bVar2 = *_Str1;
+      cVar1 = *_Str2;
+      uVar3 = CONCAT11(bVar2,cVar1);
+      if (bVar2 == 0) break;
+      uVar3 = CONCAT11(bVar2,cVar1);
+      uVar4 = (uint)uVar3;
+      if (cVar1 == '\0') break;
+      _Str1 = (char *)((byte *)_Str1 + 1);
+      _Str2 = _Str2 + 1;
+      if ((0x40 < bVar2) && (bVar2 < 0x5b)) {
+        uVar4 = (uint)CONCAT11(bVar2 + 0x20,cVar1);
+      }
+      uVar3 = (ushort)uVar4;
+      bVar2 = (byte)uVar4;
+      if ((0x40 < bVar2) && (bVar2 < 0x5b)) {
+        uVar3 = (ushort)CONCAT31((int3)(uVar4 >> 8),bVar2 + 0x20);
+      }
+      bVar2 = (byte)(uVar3 >> 8);
+      bVar6 = bVar2 < (byte)uVar3;
+      if (bVar2 != (byte)uVar3) goto LAB_00658a91;
+      _MaxCount = _MaxCount - 1;
+    } while (_MaxCount != 0);
+    iVar5 = 0;
+    bVar2 = (byte)(uVar3 >> 8);
+    bVar6 = bVar2 < (byte)uVar3;
+    if (bVar2 != (byte)uVar3) {
+LAB_00658a91:
+      iVar5 = -1;
+      if (!bVar6) {
+        iVar5 = 1;
+      }
+    }
+  }
+  return iVar5;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00658a40 : PUSH EBP
+00658a41 : MOV EBP,ESP
+00658a43 : PUSH EDI
+00658a44 : PUSH ESI
+00658a45 : PUSH EBX
+00658a46 : MOV ECX,dword ptr [EBP + 0x10]
+00658a49 : OR ECX,ECX
+00658a4b : JZ 0x00658a9a
+00658a4d : MOV ESI,dword ptr [EBP + 0x8]
+00658a50 : MOV EDI,dword ptr [EBP + 0xc]
+00658a53 : MOV BH,0x41
+00658a55 : MOV BL,0x5a
+00658a57 : MOV DH,0x20
+00658a59 : LEA ECX,[ECX]
+00658a5c : MOV AH,byte ptr [ESI]
+00658a5e : OR AH,AH
+00658a60 : MOV AL,byte ptr [EDI]
+00658a62 : JZ 0x00658a8b
+00658a64 : OR AL,AL
+00658a66 : JZ 0x00658a8b
+00658a68 : ADD ESI,0x1
+00658a6b : ADD EDI,0x1
+00658a6e : CMP AH,BH
+00658a70 : JC 0x00658a78
+00658a72 : CMP AH,BL
+00658a74 : JA 0x00658a78
+00658a76 : ADD AH,DH
+00658a78 : CMP AL,BH
+00658a7a : JC 0x00658a82
+00658a7c : CMP AL,BL
+00658a7e : JA 0x00658a82
+00658a80 : ADD AL,DH
+00658a82 : CMP AH,AL
+00658a84 : JNZ 0x00658a91
+00658a86 : SUB ECX,0x1
+00658a89 : JNZ 0x00658a5c
+00658a8b : XOR ECX,ECX
+00658a8d : CMP AH,AL
+00658a8f : JZ 0x00658a9a
+00658a91 : MOV ECX,0xffffffff
+00658a96 : JC 0x00658a9a
+00658a98 : NEG ECX
+00658a9a : MOV EAX,ECX
+00658a9c : POP EBX
+00658a9d : POP ESI
+00658a9e : POP EDI
+00658a9f : LEAVE
+00658aa0 : RET

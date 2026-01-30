@@ -1,0 +1,140 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00989980
+ENTRY    : 00989980
+BODY     : [[00989980, 00989a56]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00989980(void)
+
+{
+  int iVar1;
+  undefined4 uVar2;
+  uint8_t *packet;
+  byte bVar3;
+  int unaff_ESI;
+  void *local_10;
+  undefined1 *puStack_c;
+  undefined4 local_8;
+  
+  local_8 = 0xffffffff;
+  puStack_c = &LAB_00b40ae1;
+  local_10 = ExceptionList;
+  if (*(int *)(unaff_ESI + 0x5c) == -1) {
+    return;
+  }
+  ExceptionList = &local_10;
+  FUN_00483f90(DAT_00d66fa0 ^ (uint)&stack0xfffffffc);
+  iVar1 = *(int *)ThreadLocalStoragePointer;
+  bVar3 = (byte)((ulonglong)(*(byte *)(iVar1 + 0x18) + 1) % 3);
+  *(byte *)(iVar1 + 0x18) = bVar3;
+  packet = (uint8_t *)((uint)bVar3 * 0x2000 + 0x122cb8 + iVar1);
+  if (*(char *)(unaff_ESI + 0x6b) == '\0') {
+    if (packet != (uint8_t *)0x0) {
+      uVar2 = *(undefined4 *)(unaff_ESI + 0x5c);
+      packet[0] = '\0';
+      packet[1] = '\0';
+      packet[2] = '6';
+      packet[3] = '$';
+      *(undefined4 *)(packet + 4) = uVar2;
+      goto LAB_00989a26;
+    }
+  }
+  else if (packet != (uint8_t *)0x0) {
+    uVar2 = *(undefined4 *)(unaff_ESI + 0x5c);
+    packet[0] = '\0';
+    packet[1] = '\0';
+    packet[2] = '6';
+    packet[3] = '.';
+    *(undefined4 *)(packet + 4) = uVar2;
+    goto LAB_00989a26;
+  }
+  packet = (uint8_t *)0x0;
+LAB_00989a26:
+  local_8 = 0xffffffff;
+  if ((*(int *)(DAT_017247d4 + 4) != 0) && (*(char *)(DAT_017247d4 + 8) != '\0')) {
+    FUN_00a0dd40(*(int *)(DAT_017247d4 + 4),8,packet);
+  }
+  ExceptionList = local_10;
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00989980 : PUSH EBP
+00989981 : MOV EBP,ESP
+00989983 : PUSH -0x1
+00989985 : PUSH 0xb40ae1
+0098998a : MOV EAX,FS:[0x0]
+00989990 : PUSH EAX
+00989991 : SUB ESP,0x8
+00989994 : PUSH EBX
+00989995 : PUSH EDI
+00989996 : MOV EAX,[0x00d66fa0]
+0098999b : XOR EAX,EBP
+0098999d : PUSH EAX
+0098999e : LEA EAX,[EBP + -0xc]
+009899a1 : MOV FS:[0x0],EAX
+009899a7 : OR EDI,0xffffffff
+009899aa : CMP dword ptr [ESI + 0x5c],EDI
+009899ad : JZ 0x00989a46
+009899b3 : CALL 0x00483f90
+009899b8 : MOV EAX,FS:[0x2c]
+009899be : MOV ECX,dword ptr [EAX]
+009899c0 : MOVZX EAX,byte ptr [ECX + 0x18]
+009899c4 : INC EAX
+009899c5 : CDQ
+009899c6 : LEA EBX,[EDI + 0x4]
+009899c9 : IDIV EBX
+009899cb : MOV byte ptr [ECX + 0x18],DL
+009899ce : MOVZX EDX,DL
+009899d1 : SHL EDX,0xd
+009899d4 : CMP byte ptr [ESI + 0x6b],0x0
+009899d8 : LEA EAX,[EDX + ECX*0x1 + 0x122cb8]
+009899df : MOV dword ptr [EBP + -0x10],EAX
+009899e2 : JZ 0x00989a04
+009899e4 : MOV dword ptr [EBP + -0x4],0x0
+009899eb : TEST EAX,EAX
+009899ed : JZ 0x00989a24
+009899ef : MOV ECX,dword ptr [ESI + 0x5c]
+009899f2 : XOR EDX,EDX
+009899f4 : MOV word ptr [EAX],DX
+009899f7 : MOV byte ptr [EAX + 0x2],0x36
+009899fb : MOV byte ptr [EAX + 0x3],0x2e
+009899ff : MOV dword ptr [EAX + 0x4],ECX
+00989a02 : JMP 0x00989a26
+00989a04 : MOV dword ptr [EBP + -0x4],0x1
+00989a0b : TEST EAX,EAX
+00989a0d : JZ 0x00989a24
+00989a0f : MOV ECX,dword ptr [ESI + 0x5c]
+00989a12 : XOR EDX,EDX
+00989a14 : MOV word ptr [EAX],DX
+00989a17 : MOV byte ptr [EAX + 0x2],0x36
+00989a1b : MOV byte ptr [EAX + 0x3],0x24
+00989a1f : MOV dword ptr [EAX + 0x4],ECX
+00989a22 : JMP 0x00989a26
+00989a24 : XOR EAX,EAX
+00989a26 : MOV dword ptr [EBP + -0x4],EDI
+00989a29 : MOV EDX,dword ptr [0x017247d4]
+00989a2f : MOV ECX,dword ptr [EDX + 0x4]
+00989a32 : TEST ECX,ECX
+00989a34 : JZ 0x00989a46
+00989a36 : CMP byte ptr [EDX + 0x8],0x0
+00989a3a : JZ 0x00989a46
+00989a3c : PUSH 0x8
+00989a3e : PUSH ECX
+00989a3f : MOV EDI,EAX
+00989a41 : CALL 0x00a0dd40
+00989a46 : MOV ECX,dword ptr [EBP + -0xc]
+00989a49 : MOV dword ptr FS:[0x0],ECX
+00989a50 : POP ECX
+00989a51 : POP EDI
+00989a52 : POP EBX
+00989a53 : MOV ESP,EBP
+00989a55 : POP EBP
+00989a56 : RET

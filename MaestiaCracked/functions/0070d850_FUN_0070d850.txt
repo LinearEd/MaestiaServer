@@ -1,0 +1,236 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0070d850
+ENTRY    : 0070d850
+BODY     : [[0070d850, 0070d9c8]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined4 FUN_0070d850(int param_1,DWORD param_2,uint param_3,int param_4)
+
+{
+  int *in_EAX;
+  undefined4 uVar1;
+  int iVar2;
+  LPCWSTR lpFileName;
+  HANDLE pvVar3;
+  LPVOID pvVar4;
+  SIZE_T dwNumberOfBytesToMap;
+  DWORD dwShareMode;
+  uint dwFileOffsetLow;
+  
+  (**(code **)(*in_EAX + 8))();
+  if (DAT_00da9b30 != '\0') {
+    uVar1 = FUN_0070d790(param_1);
+    return uVar1;
+  }
+  dwShareMode = 1;
+  param_2 = 0x77;
+  iVar2 = FUN_00407c10(&param_2,1);
+  if (iVar2 != -1) {
+    dwShareMode = 3;
+  }
+  if (*(uint *)(param_1 + 0x18) < 8) {
+    lpFileName = (LPCWSTR)(param_1 + 4);
+  }
+  else {
+    lpFileName = *(LPCWSTR *)(param_1 + 4);
+  }
+  pvVar3 = CreateFileW(lpFileName,0x80000000,dwShareMode,(LPSECURITY_ATTRIBUTES)0x0,3,0x80,
+                       (HANDLE)0x0);
+  in_EAX[4] = (int)pvVar3;
+  if (pvVar3 != (HANDLE)0xffffffff) {
+    param_2 = GetFileSize(pvVar3,(LPDWORD)0x0);
+    if (DAT_01726cd8 == 0) {
+      GetSystemInfo((LPSYSTEM_INFO)&DAT_01726cbc);
+    }
+    dwFileOffsetLow = ~(DAT_01726cd8 - 1U) & param_3;
+    dwNumberOfBytesToMap = (param_3 - dwFileOffsetLow) + param_4;
+    pvVar3 = CreateFileMappingW((HANDLE)in_EAX[4],(LPSECURITY_ATTRIBUTES)0x0,2,0,0,(LPCWSTR)0x0);
+    in_EAX[5] = (int)pvVar3;
+    if (pvVar3 != (HANDLE)0x0) {
+      if (param_2 < dwNumberOfBytesToMap + dwFileOffsetLow) {
+        dwNumberOfBytesToMap = param_2 - dwFileOffsetLow;
+      }
+      pvVar4 = MapViewOfFile(pvVar3,4,0,dwFileOffsetLow,dwNumberOfBytesToMap);
+      if (pvVar4 == (LPVOID)0x0) {
+        CloseHandle((HANDLE)in_EAX[4]);
+        in_EAX[4] = 0;
+        CloseHandle((HANDLE)in_EAX[5]);
+        in_EAX[5] = 0;
+        return 0;
+      }
+      in_EAX[0xc] = param_2;
+      if (dwNumberOfBytesToMap == 0) {
+        dwNumberOfBytesToMap = param_2 - dwFileOffsetLow;
+      }
+      in_EAX[6] = (int)pvVar4;
+      in_EAX[8] = dwNumberOfBytesToMap;
+      in_EAX[0xb] = dwNumberOfBytesToMap;
+      in_EAX[10] = dwFileOffsetLow;
+      in_EAX[7] = (int)pvVar4 + (param_3 - dwFileOffsetLow);
+      in_EAX[9] = 0;
+      *(undefined1 *)(in_EAX + 1) = 1;
+      FUN_00405eb0(param_1,0,0xffffffff);
+      return 1;
+    }
+    CloseHandle((HANDLE)in_EAX[4]);
+    in_EAX[4] = 0;
+  }
+  return 0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0070d850 : PUSH EBP
+0070d851 : MOV EBP,ESP
+0070d853 : PUSH ECX
+0070d854 : PUSH EBX
+0070d855 : MOV EBX,dword ptr [EBP + 0xc]
+0070d858 : PUSH ESI
+0070d859 : MOV ESI,EAX
+0070d85b : MOV EAX,dword ptr [ESI]
+0070d85d : MOV EDX,dword ptr [EAX + 0x8]
+0070d860 : PUSH EDI
+0070d861 : MOV ECX,ESI
+0070d863 : CALL EDX
+0070d865 : CMP byte ptr [0x00da9b30],0x0
+0070d86c : JZ 0x0070d881
+0070d86e : MOV EAX,dword ptr [EBP + 0x8]
+0070d871 : PUSH EAX
+0070d872 : MOV EAX,EBX
+0070d874 : CALL 0x0070d790
+0070d879 : POP EDI
+0070d87a : POP ESI
+0070d87b : POP EBX
+0070d87c : POP ECX
+0070d87d : POP EBP
+0070d87e : RET 0x10
+0070d881 : MOV EDI,0x1
+0070d886 : PUSH EDI
+0070d887 : LEA ECX,[EBP + 0xc]
+0070d88a : PUSH ECX
+0070d88b : XOR EAX,EAX
+0070d88d : MOV EDX,EBX
+0070d88f : MOV dword ptr [EBP + 0xc],0x77
+0070d896 : CALL 0x00407c10
+0070d89b : CMP EAX,-0x1
+0070d89e : JZ 0x0070d8a5
+0070d8a0 : MOV EDI,0x3
+0070d8a5 : MOV EAX,dword ptr [EBP + 0x8]
+0070d8a8 : CMP dword ptr [EAX + 0x18],0x8
+0070d8ac : JC 0x0070d8b3
+0070d8ae : MOV EAX,dword ptr [EAX + 0x4]
+0070d8b1 : JMP 0x0070d8b6
+0070d8b3 : ADD EAX,0x4
+0070d8b6 : PUSH 0x0
+0070d8b8 : PUSH 0x80
+0070d8bd : PUSH 0x3
+0070d8bf : PUSH 0x0
+0070d8c1 : PUSH EDI
+0070d8c2 : PUSH 0x80000000
+0070d8c7 : PUSH EAX
+0070d8c8 : CALL dword ptr [0x00b85164]
+0070d8ce : MOV dword ptr [ESI + 0x10],EAX
+0070d8d1 : CMP EAX,-0x1
+0070d8d4 : JZ 0x0070d935
+0070d8d6 : PUSH 0x0
+0070d8d8 : PUSH EAX
+0070d8d9 : CALL dword ptr [0x00b85310]
+0070d8df : CMP dword ptr [0x01726cd8],0x0
+0070d8e6 : MOV dword ptr [EBP + 0xc],EAX
+0070d8e9 : JNZ 0x0070d8f6
+0070d8eb : PUSH 0x1726cbc
+0070d8f0 : CALL dword ptr [0x00b85184]
+0070d8f6 : MOV EDI,dword ptr [0x01726cd8]
+0070d8fc : MOV EBX,dword ptr [EBP + 0x10]
+0070d8ff : MOV EDX,dword ptr [ESI + 0x10]
+0070d902 : PUSH 0x0
+0070d904 : PUSH 0x0
+0070d906 : PUSH 0x0
+0070d908 : DEC EDI
+0070d909 : PUSH 0x2
+0070d90b : NOT EDI
+0070d90d : AND EDI,EBX
+0070d90f : PUSH 0x0
+0070d911 : SUB EBX,EDI
+0070d913 : ADD EBX,dword ptr [EBP + 0x14]
+0070d916 : PUSH EDX
+0070d917 : CALL dword ptr [0x00b851a4]
+0070d91d : MOV dword ptr [ESI + 0x14],EAX
+0070d920 : TEST EAX,EAX
+0070d922 : JNZ 0x0070d93f
+0070d924 : MOV EAX,dword ptr [ESI + 0x10]
+0070d927 : PUSH EAX
+0070d928 : CALL dword ptr [0x00b85104]
+0070d92e : MOV dword ptr [ESI + 0x10],0x0
+0070d935 : XOR AL,AL
+0070d937 : POP EDI
+0070d938 : POP ESI
+0070d939 : POP EBX
+0070d93a : POP ECX
+0070d93b : POP EBP
+0070d93c : RET 0x10
+0070d93f : MOV ECX,dword ptr [EBP + 0xc]
+0070d942 : LEA EDX,[EBX + EDI*0x1]
+0070d945 : CMP EDX,ECX
+0070d947 : JBE 0x0070d94d
+0070d949 : MOV EBX,ECX
+0070d94b : SUB EBX,EDI
+0070d94d : PUSH EBX
+0070d94e : PUSH EDI
+0070d94f : PUSH 0x0
+0070d951 : PUSH 0x4
+0070d953 : PUSH EAX
+0070d954 : CALL dword ptr [0x00b851a8]
+0070d95a : TEST EAX,EAX
+0070d95c : JNZ 0x0070d982
+0070d95e : MOV EAX,dword ptr [ESI + 0x10]
+0070d961 : MOV EDI,dword ptr [0x00b85104]
+0070d967 : PUSH EAX
+0070d968 : CALL EDI
+0070d96a : MOV ECX,dword ptr [ESI + 0x14]
+0070d96d : XOR EBX,EBX
+0070d96f : PUSH ECX
+0070d970 : MOV dword ptr [ESI + 0x10],EBX
+0070d973 : CALL EDI
+0070d975 : MOV dword ptr [ESI + 0x14],EBX
+0070d978 : XOR AL,AL
+0070d97a : POP EDI
+0070d97b : POP ESI
+0070d97c : POP EBX
+0070d97d : POP ECX
+0070d97e : POP EBP
+0070d97f : RET 0x10
+0070d982 : MOV ECX,dword ptr [EBP + 0xc]
+0070d985 : MOV dword ptr [ESI + 0x30],ECX
+0070d988 : TEST EBX,EBX
+0070d98a : JNZ 0x0070d990
+0070d98c : SUB ECX,EDI
+0070d98e : MOV EBX,ECX
+0070d990 : MOV EDX,dword ptr [EBP + 0x8]
+0070d993 : MOV dword ptr [ESI + 0x18],EAX
+0070d996 : PUSH -0x1
+0070d998 : SUB EAX,EDI
+0070d99a : ADD EAX,dword ptr [EBP + 0x10]
+0070d99d : PUSH 0x0
+0070d99f : PUSH EDX
+0070d9a0 : LEA ECX,[ESI + 0x34]
+0070d9a3 : MOV dword ptr [ESI + 0x20],EBX
+0070d9a6 : MOV dword ptr [ESI + 0x2c],EBX
+0070d9a9 : MOV dword ptr [ESI + 0x28],EDI
+0070d9ac : MOV dword ptr [ESI + 0x1c],EAX
+0070d9af : MOV dword ptr [ESI + 0x24],0x0
+0070d9b6 : MOV byte ptr [ESI + 0x4],0x1
+0070d9ba : CALL 0x00405eb0
+0070d9bf : POP EDI
+0070d9c0 : POP ESI
+0070d9c1 : MOV AL,0x1
+0070d9c3 : POP EBX
+0070d9c4 : POP ECX
+0070d9c5 : POP EBP
+0070d9c6 : RET 0x10

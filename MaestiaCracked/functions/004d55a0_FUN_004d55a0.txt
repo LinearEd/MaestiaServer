@@ -1,0 +1,93 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_004d55a0
+ENTRY    : 004d55a0
+BODY     : [[004d55a0, 004d563c]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_004d55a0(void)
+
+{
+  wchar_t wVar1;
+  wchar_t *pwVar2;
+  uint uVar3;
+  wchar_t *in_ECX;
+  wchar_t *unaff_EDI;
+  undefined1 local_804 [2048];
+  uint local_4;
+  
+  local_4 = DAT_00d66fa0 ^ (uint)local_804;
+  if (in_ECX == (wchar_t *)0x0) {
+    in_ECX = L"";
+  }
+  pwVar2 = in_ECX;
+  do {
+    wVar1 = *pwVar2;
+    pwVar2 = pwVar2 + 1;
+  } while (wVar1 != L'\0');
+  uVar3 = (int)pwVar2 - (int)(in_ECX + 1) >> 1;
+  if (0xfe < uVar3) {
+    FUN_0040e4a0(L"ERROR StringConvertBuffer& set : jw_strlen=%d , buf_size= %d, ARRAY_SIZE(w_buf)=%d"
+                 ,uVar3,0x100,0xff);
+    FUN_004d6640(L"[ERROR] %s , %s",local_804,in_ECX);
+  }
+  _wcsncpy(unaff_EDI,in_ECX,0xff);
+  unaff_EDI[0xff] = L'\0';
+  *(undefined1 *)(unaff_EDI + 0x100) = 0;
+  __security_check_cookie(local_4 ^ (uint)local_804);
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+004d55a0 : SUB ESP,0x804
+004d55a6 : MOV EAX,[0x00d66fa0]
+004d55ab : XOR EAX,ESP
+004d55ad : MOV dword ptr [ESP + 0x800],EAX
+004d55b4 : PUSH ESI
+004d55b5 : MOV ESI,ECX
+004d55b7 : TEST ESI,ESI
+004d55b9 : JNZ 0x004d55c0
+004d55bb : MOV ESI,0xcca49c
+004d55c0 : MOV EAX,ESI
+004d55c2 : LEA EDX,[EAX + 0x2]
+004d55c5 : MOV CX,word ptr [EAX]
+004d55c8 : ADD EAX,0x2
+004d55cb : TEST CX,CX
+004d55ce : JNZ 0x004d55c5
+004d55d0 : SUB EAX,EDX
+004d55d2 : SAR EAX,0x1
+004d55d4 : CMP EAX,0xfe
+004d55d9 : JBE 0x004d5607
+004d55db : PUSH 0xff
+004d55e0 : PUSH 0x100
+004d55e5 : PUSH EAX
+004d55e6 : PUSH 0xcda7d0
+004d55eb : LEA EDX,[ESP + 0x14]
+004d55ef : CALL 0x0040e4a0
+004d55f4 : PUSH ESI
+004d55f5 : LEA EAX,[ESP + 0x18]
+004d55f9 : PUSH EAX
+004d55fa : PUSH 0xcca844
+004d55ff : CALL 0x004d6640
+004d5604 : ADD ESP,0x1c
+004d5607 : PUSH 0xff
+004d560c : PUSH ESI
+004d560d : PUSH EDI
+004d560e : CALL 0x00634e39
+004d5613 : XOR ECX,ECX
+004d5615 : ADD ESP,0xc
+004d5618 : MOV word ptr [EDI + 0x1fe],CX
+004d561f : MOV byte ptr [EDI + 0x200],CL
+004d5625 : MOV ECX,dword ptr [ESP + 0x804]
+004d562c : POP ESI
+004d562d : XOR ECX,ESP
+004d562f : MOV EAX,EDI
+004d5631 : CALL 0x00633e6b
+004d5636 : ADD ESP,0x804
+004d563c : RET

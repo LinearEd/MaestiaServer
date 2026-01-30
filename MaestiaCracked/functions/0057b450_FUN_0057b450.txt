@@ -1,0 +1,150 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0057b450
+ENTRY    : 0057b450
+BODY     : [[0057b450, 0057b54c]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined4 FUN_0057b450(int param_1,int *param_2,int param_3)
+
+{
+  uint uVar1;
+  char cVar2;
+  int iVar3;
+  int iVar4;
+  uint uVar5;
+  int unaff_retaddr;
+  undefined1 local_20 [4];
+  undefined1 auStack_1c [28];
+  
+  if ((param_2 == (int *)0x0) || (param_3 == 0)) {
+    return 0;
+  }
+  local_20[0] = 0;
+  cVar2 = (**(code **)(*param_2 + 0x2c))(param_1 + 0x78,*(int *)(param_1 + 0x78) + 0x140,local_20);
+  if ((cVar2 != '\0') &&
+     ((iVar3 = FUN_00526fa0(param_1), iVar3 != 0 &&
+      (iVar4 = (**(code **)(*(int *)(iVar3 + 0x10) + 8))(), iVar4 == 7)))) {
+    uVar1 = *(uint *)(iVar3 + 0x38);
+    uVar5 = 0;
+    *(uint *)(iVar3 + 8) = *(int *)(iVar3 + 8) + 1U & 0x8fffffff;
+    if (uVar1 != 0) {
+      do {
+        if ((*(int *)(*(int *)(iVar3 + 0x34) + uVar5 * 4) != 0) &&
+           (iVar4 = FUN_005270f0(param_1), iVar4 == unaff_retaddr)) {
+          FUN_00503db0();
+          FUN_00526bc0();
+          return 0;
+        }
+        uVar5 = uVar5 + 1;
+      } while (uVar5 < uVar1);
+    }
+    auStack_1c[0] = 0;
+    FUN_00527270(unaff_retaddr);
+    FUN_00585540(auStack_1c);
+    FUN_00526bc0();
+    FUN_00503db0();
+  }
+  FUN_00526bc0();
+  return 1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0057b450 : MOV ECX,dword ptr [ESP + 0x8]
+0057b454 : SUB ESP,0x20
+0057b457 : TEST ECX,ECX
+0057b459 : JZ 0x0057b547
+0057b45f : CMP dword ptr [ESP + 0x2c],0x0
+0057b464 : JZ 0x0057b547
+0057b46a : PUSH EBX
+0057b46b : MOV EBX,dword ptr [ESP + 0x28]
+0057b46f : MOV EDX,dword ptr [EBX + 0x78]
+0057b472 : PUSH EBP
+0057b473 : PUSH ESI
+0057b474 : MOV ESI,dword ptr [ECX]
+0057b476 : PUSH EDI
+0057b477 : LEA EAX,[EBX + 0x78]
+0057b47a : LEA EDI,[ESP + 0x10]
+0057b47e : PUSH EDI
+0057b47f : ADD EDX,0x140
+0057b485 : PUSH EDX
+0057b486 : PUSH EAX
+0057b487 : MOV EAX,dword ptr [ESI + 0x2c]
+0057b48a : MOV byte ptr [ESP + 0x1c],0x0
+0057b48f : CALL EAX
+0057b491 : TEST AL,AL
+0057b493 : JZ 0x0057b51a
+0057b499 : PUSH EBX
+0057b49a : MOV ECX,EDI
+0057b49c : CALL 0x00526fa0
+0057b4a1 : MOV ESI,EAX
+0057b4a3 : TEST ESI,ESI
+0057b4a5 : JZ 0x0057b51a
+0057b4a7 : MOV EDX,dword ptr [ESI + 0x10]
+0057b4aa : MOV EAX,dword ptr [EDX + 0x8]
+0057b4ad : LEA ECX,[ESI + 0x10]
+0057b4b0 : CALL EAX
+0057b4b2 : CMP EAX,0x7
+0057b4b5 : JNZ 0x0057b51a
+0057b4b7 : MOV ECX,dword ptr [ESI + 0x8]
+0057b4ba : MOV EBP,dword ptr [ESI + 0x38]
+0057b4bd : INC ECX
+0057b4be : AND ECX,0x8fffffff
+0057b4c4 : XOR EDI,EDI
+0057b4c6 : MOV dword ptr [ESI + 0x8],ECX
+0057b4c9 : TEST EBP,EBP
+0057b4cb : JBE 0x0057b4eb
+0057b4cd : LEA ECX,[ECX]
+0057b4d0 : MOV EDX,dword ptr [ESI + 0x34]
+0057b4d3 : MOV ECX,dword ptr [EDX + EDI*0x4]
+0057b4d6 : TEST ECX,ECX
+0057b4d8 : JZ 0x0057b4e6
+0057b4da : PUSH EBX
+0057b4db : CALL 0x005270f0
+0057b4e0 : CMP EAX,dword ptr [ESP + 0x3c]
+0057b4e4 : JZ 0x0057b52d
+0057b4e6 : INC EDI
+0057b4e7 : CMP EDI,EBP
+0057b4e9 : JC 0x0057b4d0
+0057b4eb : MOV EAX,dword ptr [ESP + 0x3c]
+0057b4ef : PUSH EAX
+0057b4f0 : LEA ECX,[ESP + 0x24]
+0057b4f4 : MOV byte ptr [ESP + 0x24],0x0
+0057b4f9 : CALL 0x00527270
+0057b4fe : LEA ECX,[ESP + 0x20]
+0057b502 : PUSH ECX
+0057b503 : MOV ECX,ESI
+0057b505 : CALL 0x00585540
+0057b50a : LEA ECX,[ESP + 0x20]
+0057b50e : CALL 0x00526bc0
+0057b513 : MOV ECX,ESI
+0057b515 : CALL 0x00503db0
+0057b51a : LEA ECX,[ESP + 0x10]
+0057b51e : CALL 0x00526bc0
+0057b523 : POP EDI
+0057b524 : POP ESI
+0057b525 : POP EBP
+0057b526 : MOV AL,0x1
+0057b528 : POP EBX
+0057b529 : ADD ESP,0x20
+0057b52c : RET
+0057b52d : MOV ECX,ESI
+0057b52f : CALL 0x00503db0
+0057b534 : LEA ECX,[ESP + 0x10]
+0057b538 : CALL 0x00526bc0
+0057b53d : POP EDI
+0057b53e : POP ESI
+0057b53f : POP EBP
+0057b540 : XOR AL,AL
+0057b542 : POP EBX
+0057b543 : ADD ESP,0x20
+0057b546 : RET
+0057b547 : XOR AL,AL
+0057b549 : ADD ESP,0x20
+0057b54c : RET

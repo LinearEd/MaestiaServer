@@ -1,0 +1,71 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __mtinitlocks
+ENTRY    : 0064c41c
+BODY     : [[0064c41c, 0064c466]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __mtinitlocks
+   
+   Library: Visual Studio 2008 Release */
+
+int __cdecl __mtinitlocks(void)
+
+{
+  int iVar1;
+  int iVar2;
+  undefined *puVar3;
+  
+  iVar2 = 0;
+  puVar3 = &DAT_00d7bf28;
+  do {
+    if ((&DAT_00d67694)[iVar2 * 2] == 1) {
+      (&DAT_00d67690)[iVar2 * 2] = puVar3;
+      puVar3 = puVar3 + 0x18;
+      iVar1 = ___crtInitCritSecAndSpinCount((&DAT_00d67690)[iVar2 * 2],4000);
+      if (iVar1 == 0) {
+        (&DAT_00d67690)[iVar2 * 2] = 0;
+        return 0;
+      }
+    }
+    iVar2 = iVar2 + 1;
+  } while (iVar2 < 0x24);
+  return 1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0064c41c : MOV EDI,EDI
+0064c41e : PUSH ESI
+0064c41f : PUSH EDI
+0064c420 : XOR ESI,ESI
+0064c422 : MOV EDI,0xd7bf28
+0064c427 : CMP dword ptr [ESI*0x8 + 0xd67694],0x1
+0064c42f : JNZ 0x0064c44f
+0064c431 : LEA EAX,[ESI*0x8 + 0xd67690]
+0064c438 : MOV dword ptr [EAX],EDI
+0064c43a : PUSH 0xfa0
+0064c43f : PUSH dword ptr [EAX]
+0064c441 : ADD EDI,0x18
+0064c444 : CALL 0x0064cbb2
+0064c449 : POP ECX
+0064c44a : POP ECX
+0064c44b : TEST EAX,EAX
+0064c44d : JZ 0x0064c45b
+0064c44f : INC ESI
+0064c450 : CMP ESI,0x24
+0064c453 : JL 0x0064c427
+0064c455 : XOR EAX,EAX
+0064c457 : INC EAX
+0064c458 : POP EDI
+0064c459 : POP ESI
+0064c45a : RET
+0064c45b : AND dword ptr [ESI*0x8 + 0xd67690],0x0
+0064c463 : XOR EAX,EAX
+0064c465 : JMP 0x0064c458

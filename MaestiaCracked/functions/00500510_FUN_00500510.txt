@@ -1,0 +1,94 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00500510
+ENTRY    : 00500510
+BODY     : [[00500510, 00500590]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+uint FUN_00500510(uint param_1)
+
+{
+  uint uVar1;
+  int iVar2;
+  uint uVar3;
+  undefined4 uVar4;
+  int in_ECX;
+  
+  uVar1 = param_1;
+  if (*(uint *)(in_ECX + 8) <= param_1) {
+    if (*(int *)(in_ECX + 0xc) == 0) {
+      param_1 = 2;
+      iVar2 = FUN_00515d60(in_ECX,0x14,&param_1);
+    }
+    else {
+      iVar2 = FUN_00515c80(*(int *)(in_ECX + 0xc),*(uint *)(in_ECX + 8) * 4 + 0x14);
+    }
+    uVar3 = 0;
+    if (iVar2 == 0) goto LAB_0050054f;
+    *(int *)(in_ECX + 8) = *(int *)(in_ECX + 8) + 5;
+    *(int *)(in_ECX + 0xc) = iVar2;
+  }
+  param_1 = 2;
+  uVar4 = FUN_00515d60(in_ECX,0x1000,&param_1);
+  *(undefined4 *)(*(int *)(in_ECX + 0xc) + uVar1 * 4) = uVar4;
+  uVar3 = *(uint *)(in_ECX + 0xc);
+  if (*(int *)(uVar3 + uVar1 * 4) != 0) {
+    *(int *)(in_ECX + 4) = *(int *)(in_ECX + 4) + 1;
+    return 1;
+  }
+LAB_0050054f:
+  return uVar3 & 0xffffff00;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00500510 : PUSH ESI
+00500511 : MOV ESI,ECX
+00500513 : MOV EAX,dword ptr [ESI + 0x8]
+00500516 : PUSH EDI
+00500517 : MOV EDI,dword ptr [ESP + 0xc]
+0050051b : CMP EDI,EAX
+0050051d : JC 0x0050055d
+0050051f : MOV ECX,dword ptr [ESI + 0xc]
+00500522 : TEST ECX,ECX
+00500524 : JZ 0x00500536
+00500526 : LEA EAX,[EAX*0x4 + 0x14]
+0050052d : PUSH EAX
+0050052e : PUSH ECX
+0050052f : CALL 0x00515c80
+00500534 : JMP 0x0050054b
+00500536 : LEA EAX,[ESP + 0xc]
+0050053a : PUSH EAX
+0050053b : PUSH 0x14
+0050053d : PUSH ESI
+0050053e : MOV dword ptr [ESP + 0x18],0x2
+00500546 : CALL 0x00515d60
+0050054b : TEST EAX,EAX
+0050054d : JNZ 0x00500556
+0050054f : POP EDI
+00500550 : XOR AL,AL
+00500552 : POP ESI
+00500553 : RET 0x4
+00500556 : ADD dword ptr [ESI + 0x8],0x5
+0050055a : MOV dword ptr [ESI + 0xc],EAX
+0050055d : LEA ECX,[ESP + 0xc]
+00500561 : PUSH ECX
+00500562 : PUSH 0x1000
+00500567 : PUSH ESI
+00500568 : MOV dword ptr [ESP + 0x18],0x2
+00500570 : CALL 0x00515d60
+00500575 : MOV EDX,dword ptr [ESI + 0xc]
+00500578 : MOV dword ptr [EDX + EDI*0x4],EAX
+0050057b : MOV EAX,dword ptr [ESI + 0xc]
+0050057e : CMP dword ptr [EAX + EDI*0x4],0x0
+00500582 : JZ 0x0050054f
+00500584 : MOV EAX,0x1
+00500589 : ADD dword ptr [ESI + 0x4],EAX
+0050058c : POP EDI
+0050058d : POP ESI
+0050058e : RET 0x4

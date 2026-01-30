@@ -1,0 +1,106 @@
+PROGRAM  : Maestia.exe
+FUNCTION : _GetRangeOfTrysToCheck
+ENTRY    : 00640ca3
+BODY     : [[00640ca3, 00640d17]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    struct _s_TryBlockMapEntry const * __cdecl _GetRangeOfTrysToCheck(struct _s_FuncInfo const
+   *,int,int,unsigned int *,unsigned int *)
+   
+   Library: Visual Studio 2008 Release */
+
+_s_TryBlockMapEntry * __cdecl
+_GetRangeOfTrysToCheck(_s_FuncInfo *param_1,int param_2,int param_3,uint *param_4,uint *param_5)
+
+{
+  TryBlockMapEntry *pTVar1;
+  uint uVar2;
+  uint uVar3;
+  uint uVar4;
+  uint uVar5;
+  
+  pTVar1 = param_1->pTryBlockMap;
+  uVar5 = param_1->nTryBlocks;
+  uVar2 = uVar5;
+  uVar3 = uVar5;
+  while (uVar4 = uVar2, -1 < param_2) {
+    if (uVar5 == 0xffffffff) {
+      _inconsistency();
+    }
+    uVar5 = uVar5 - 1;
+    if (((pTVar1[uVar5].tryHigh < param_3) && (param_3 <= pTVar1[uVar5].catchHigh)) ||
+       (uVar2 = uVar4, uVar5 == 0xffffffff)) {
+      param_2 = param_2 + -1;
+      uVar2 = uVar5;
+      uVar3 = uVar4;
+    }
+  }
+  uVar5 = uVar5 + 1;
+  *param_4 = uVar5;
+  *param_5 = uVar3;
+  if ((param_1->nTryBlocks < uVar3) || (uVar3 < uVar5)) {
+    _inconsistency();
+  }
+  return pTVar1 + uVar5;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00640ca3 : MOV EDI,EDI
+00640ca5 : PUSH EBP
+00640ca6 : MOV EBP,ESP
+00640ca8 : PUSH ECX
+00640ca9 : PUSH EBX
+00640caa : PUSH ESI
+00640cab : PUSH EDI
+00640cac : MOV EDI,dword ptr [EBP + 0x8]
+00640caf : MOV EAX,dword ptr [EDI + 0x10]
+00640cb2 : MOV ESI,dword ptr [EDI + 0xc]
+00640cb5 : MOV dword ptr [EBP + -0x4],EAX
+00640cb8 : MOV EBX,ESI
+00640cba : JMP 0x00640ce9
+00640cbc : CMP ESI,-0x1
+00640cbf : JNZ 0x00640cc6
+00640cc1 : CALL 0x0064c7d9
+00640cc6 : MOV ECX,dword ptr [EBP + -0x4]
+00640cc9 : DEC ESI
+00640cca : MOV EAX,ESI
+00640ccc : IMUL EAX,EAX,0x14
+00640ccf : ADD EAX,ECX
+00640cd1 : MOV ECX,dword ptr [EBP + 0x10]
+00640cd4 : CMP dword ptr [EAX + 0x4],ECX
+00640cd7 : JGE 0x00640cde
+00640cd9 : CMP ECX,dword ptr [EAX + 0x8]
+00640cdc : JLE 0x00640ce3
+00640cde : CMP ESI,-0x1
+00640ce1 : JNZ 0x00640cec
+00640ce3 : DEC dword ptr [EBP + 0xc]
+00640ce6 : MOV EBX,dword ptr [EBP + 0x8]
+00640ce9 : MOV dword ptr [EBP + 0x8],ESI
+00640cec : CMP dword ptr [EBP + 0xc],0x0
+00640cf0 : JGE 0x00640cbc
+00640cf2 : MOV EAX,dword ptr [EBP + 0x14]
+00640cf5 : INC ESI
+00640cf6 : MOV dword ptr [EAX],ESI
+00640cf8 : MOV EAX,dword ptr [EBP + 0x18]
+00640cfb : MOV dword ptr [EAX],EBX
+00640cfd : CMP EBX,dword ptr [EDI + 0xc]
+00640d00 : JA 0x00640d06
+00640d02 : CMP ESI,EBX
+00640d04 : JBE 0x00640d0b
+00640d06 : CALL 0x0064c7d9
+00640d0b : MOV EAX,ESI
+00640d0d : IMUL EAX,EAX,0x14
+00640d10 : ADD EAX,dword ptr [EBP + -0x4]
+00640d13 : POP EDI
+00640d14 : POP ESI
+00640d15 : POP EBX
+00640d16 : LEAVE
+00640d17 : RET

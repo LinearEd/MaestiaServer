@@ -1,0 +1,82 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005aa8b0
+ENTRY    : 005aa8b0
+BODY     : [[005aa8b0, 005aa916]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+int FUN_005aa8b0(int param_1,uint param_2,uint param_3)
+
+{
+  uint uVar1;
+  int iVar2;
+  int iVar3;
+  uint uVar4;
+  
+  uVar1 = param_2 >> 5;
+  param_2 = param_2 & 0x1f;
+  uVar4 = *(uint *)(param_1 + uVar1 * 4) & *(uint *)(&DAT_00b951c8 + param_2 * 4);
+  if (uVar4 != *(uint *)(&DAT_00b951c8 + param_2 * 4)) {
+    iVar2 = FUN_005aa7e0(uVar4 >> (sbyte)param_2);
+    return iVar2;
+  }
+  iVar2 = -param_2;
+  uVar4 = (uVar1 + 1) * 0x20;
+  do {
+    iVar2 = iVar2 + 0x20;
+    if (param_3 <= uVar4) break;
+    uVar1 = uVar1 + 1;
+    uVar4 = uVar4 + 0x20;
+  } while (*(int *)(param_1 + uVar1 * 4) == -1);
+  iVar3 = FUN_005aa7e0(*(undefined4 *)(param_1 + uVar1 * 4));
+  return iVar3 + iVar2;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005aa8b0 : MOV ECX,dword ptr [ESP + 0x8]
+005aa8b4 : PUSH ESI
+005aa8b5 : MOV EAX,ECX
+005aa8b7 : PUSH EDI
+005aa8b8 : MOV EDI,dword ptr [ESP + 0xc]
+005aa8bc : SHR EAX,0x5
+005aa8bf : MOV EDX,dword ptr [EDI + EAX*0x4]
+005aa8c2 : AND ECX,0x1f
+005aa8c5 : MOV ESI,dword ptr [ECX*0x4 + 0xb951c8]
+005aa8cc : AND EDX,ESI
+005aa8ce : CMP EDX,ESI
+005aa8d0 : JZ 0x005aa8e0
+005aa8d2 : SHR EDX,CL
+005aa8d4 : PUSH EDX
+005aa8d5 : CALL 0x005aa7e0
+005aa8da : ADD ESP,0x4
+005aa8dd : POP EDI
+005aa8de : POP ESI
+005aa8df : RET
+005aa8e0 : MOV EDX,dword ptr [ESP + 0x14]
+005aa8e4 : MOV ESI,0x20
+005aa8e9 : SUB ESI,ECX
+005aa8eb : LEA ECX,[EAX + 0x1]
+005aa8ee : SHL ECX,0x5
+005aa8f1 : CMP ECX,EDX
+005aa8f3 : JNC 0x005aa906
+005aa8f5 : INC EAX
+005aa8f6 : ADD ECX,0x20
+005aa8f9 : CMP dword ptr [EDI + EAX*0x4],-0x1
+005aa8fd : JNZ 0x005aa906
+005aa8ff : ADD ESI,0x20
+005aa902 : CMP ECX,EDX
+005aa904 : JC 0x005aa8f5
+005aa906 : MOV EAX,dword ptr [EDI + EAX*0x4]
+005aa909 : PUSH EAX
+005aa90a : CALL 0x005aa7e0
+005aa90f : ADD ESP,0x4
+005aa912 : POP EDI
+005aa913 : ADD EAX,ESI
+005aa915 : POP ESI
+005aa916 : RET

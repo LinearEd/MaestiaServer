@@ -1,0 +1,294 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_008300f0
+ENTRY    : 008300f0
+BODY     : [[008300f0, 00830330]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined4 FUN_008300f0(uint param_1)
+
+{
+  int *piVar1;
+  uint uVar2;
+  uint uVar3;
+  int iVar4;
+  undefined4 uVar5;
+  HANDLE pvVar6;
+  uintptr_t uVar7;
+  void *in_ECX;
+  wchar_t *pwVar8;
+  undefined1 local_2c [24];
+  uint local_14;
+  void *local_10;
+  undefined1 *puStack_c;
+  undefined4 local_8;
+  
+  uVar2 = param_1;
+  local_8 = 0xffffffff;
+  puStack_c = &LAB_00b4c26f;
+  local_10 = ExceptionList;
+  uVar3 = DAT_00d66fa0 ^ (uint)&stack0xfffffffc;
+  ExceptionList = &local_10;
+  iVar4 = FUN_0082d930(*(int *)(param_1 + 4) + 0x1c);
+  if (iVar4 == 0) {
+    piVar1 = *(int **)(*DAT_00da9894 + 0x1a8);
+    iVar4 = *(int *)(uVar2 + 4);
+    if (*(uint *)(iVar4 + 0x34) < 8) {
+      iVar4 = iVar4 + 0x20;
+    }
+    else {
+      iVar4 = *(int *)(iVar4 + 0x20);
+    }
+    uVar5 = FUN_00404750(L"Unknown macro function [%s]",iVar4);
+    local_8 = 0;
+    (**(code **)(*piVar1 + 0x44))(uVar5,3);
+    local_8 = 0xffffffff;
+    if (7 < local_14) {
+                    /* WARNING: Subroutine does not return */
+      FUN_006f04e0();
+    }
+    ExceptionList = local_10;
+    return 0;
+  }
+  if (*(int *)((int)in_ECX + 0x6c) == 0) {
+    pvVar6 = CreateEventW((LPSECURITY_ATTRIBUTES)0x0,1,0,(LPCWSTR)0x0);
+    *(HANDLE *)((int)in_ECX + 0x70) = pvVar6;
+    uVar7 = __beginthreadex((void *)0x0,0,(_StartAddress *)&LAB_008300b0,in_ECX,4,&param_1);
+    *(uintptr_t *)((int)in_ECX + 0x6c) = uVar7;
+    if (uVar7 == 0) {
+      FUN_0082d680(uVar3);
+      FUN_00406460(L"Fail to create Macro run thread");
+      local_8 = 2;
+      (**(code **)(**(int **)(*DAT_00da9894 + 0x1a8) + 0x44))(local_2c,3);
+      local_8 = 0xffffffff;
+      FUN_00406560();
+      ExceptionList = local_10;
+      return 0;
+    }
+    FUN_0044cb70((int)in_ECX + 0x78,uVar2);
+    ResumeThread(*(HANDLE *)((int)in_ECX + 0x6c));
+    ExceptionList = local_10;
+    return 1;
+  }
+  if ((uint)((*(int *)((int)in_ECX + 0x80) - *(int *)((int)in_ECX + 0x7c)) / 0x1c) < 2) {
+    pwVar8 = L"Unknown";
+  }
+  else {
+    iVar4 = *(int *)((int)in_ECX + 0x7c);
+    if (*(uint *)(iVar4 + 0x34) < 8) {
+      pwVar8 = (wchar_t *)(iVar4 + 0x20);
+    }
+    else {
+      pwVar8 = *(wchar_t **)(iVar4 + 0x20);
+    }
+  }
+  FUN_008018d0(L"AvaAdminCmd::StartMacro: already running macro exists %s",pwVar8);
+  piVar1 = *(int **)(*DAT_00da9894 + 0x1a8);
+  uVar5 = FUN_00404750(L"Already running macro exists [%s]",pwVar8);
+  local_8 = 1;
+  (**(code **)(*piVar1 + 0x44))(uVar5,3);
+  local_8 = 0xffffffff;
+  if (7 < local_14) {
+                    /* WARNING: Subroutine does not return */
+    FUN_006f04e0();
+  }
+  ExceptionList = local_10;
+  return 0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+008300f0 : PUSH EBP
+008300f1 : MOV EBP,ESP
+008300f3 : PUSH -0x1
+008300f5 : PUSH 0xb4c26f
+008300fa : MOV EAX,FS:[0x0]
+00830100 : PUSH EAX
+00830101 : SUB ESP,0x20
+00830104 : PUSH EBX
+00830105 : PUSH ESI
+00830106 : PUSH EDI
+00830107 : MOV EAX,[0x00d66fa0]
+0083010c : XOR EAX,EBP
+0083010e : PUSH EAX
+0083010f : LEA EAX,[EBP + -0xc]
+00830112 : MOV FS:[0x0],EAX
+00830118 : MOV EBX,dword ptr [EBP + 0x8]
+0083011b : MOV ESI,ECX
+0083011d : MOV EAX,dword ptr [EBX + 0x4]
+00830120 : ADD EAX,0x1c
+00830123 : PUSH EAX
+00830124 : MOV EDI,ESI
+00830126 : CALL 0x0082d930
+0083012b : TEST EAX,EAX
+0083012d : JNZ 0x008301b4
+00830133 : MOV EAX,[0x00da9894]
+00830138 : MOV EAX,dword ptr [EAX]
+0083013a : MOV EDI,dword ptr [EAX + 0x1a8]
+00830140 : MOV EAX,dword ptr [EBX + 0x4]
+00830143 : ADD EAX,0x1c
+00830146 : MOV EBX,0x8
+0083014b : CMP dword ptr [EAX + 0x18],EBX
+0083014e : JC 0x00830155
+00830150 : MOV EAX,dword ptr [EAX + 0x4]
+00830153 : JMP 0x00830158
+00830155 : ADD EAX,0x4
+00830158 : PUSH EAX
+00830159 : PUSH 0xc35d48
+0083015e : LEA ESI,[EBP + -0x28]
+00830161 : CALL 0x00404750
+00830166 : ADD ESP,0x8
+00830169 : XOR ESI,ESI
+0083016b : MOV dword ptr [EBP + -0x4],ESI
+0083016e : MOV EDX,dword ptr [EDI]
+00830170 : PUSH 0x3
+00830172 : PUSH EAX
+00830173 : MOV EAX,dword ptr [EDX + 0x44]
+00830176 : MOV ECX,EDI
+00830178 : CALL EAX
+0083017a : MOV dword ptr [EBP + -0x4],0xffffffff
+00830181 : CMP dword ptr [EBP + -0x10],EBX
+00830184 : JC 0x0083018e
+00830186 : MOV ECX,dword ptr [EBP + -0x24]
+00830189 : CALL 0x006f04e0
+0083018e : XOR ECX,ECX
+00830190 : MOV dword ptr [EBP + -0x10],0x7
+00830197 : MOV dword ptr [EBP + -0x14],ESI
+0083019a : MOV word ptr [EBP + -0x24],CX
+0083019e : XOR EAX,EAX
+008301a0 : MOV ECX,dword ptr [EBP + -0xc]
+008301a3 : MOV dword ptr FS:[0x0],ECX
+008301aa : POP ECX
+008301ab : POP EDI
+008301ac : POP ESI
+008301ad : POP EBX
+008301ae : MOV ESP,EBP
+008301b0 : POP EBP
+008301b1 : RET 0x4
+008301b4 : CMP dword ptr [ESI + 0x6c],0x0
+008301b8 : JZ 0x0083027c
+008301be : MOV ECX,dword ptr [ESI + 0x80]
+008301c4 : SUB ECX,dword ptr [ESI + 0x7c]
+008301c7 : MOV EAX,0x92492493
+008301cc : IMUL ECX
+008301ce : ADD EDX,ECX
+008301d0 : SAR EDX,0x4
+008301d3 : MOV EAX,EDX
+008301d5 : SHR EAX,0x1f
+008301d8 : ADD EAX,EDX
+008301da : CMP EAX,0x1
+008301dd : JBE 0x008301f5
+008301df : MOV ESI,dword ptr [ESI + 0x7c]
+008301e2 : ADD ESI,0x1c
+008301e5 : CMP dword ptr [ESI + 0x18],0x8
+008301e9 : JC 0x008301f0
+008301eb : MOV EBX,dword ptr [ESI + 0x4]
+008301ee : JMP 0x008301fa
+008301f0 : LEA EBX,[ESI + 0x4]
+008301f3 : JMP 0x008301fa
+008301f5 : MOV EBX,0xc35d80
+008301fa : MOV ESI,dword ptr [0x00da98e8]
+00830200 : PUSH EBX
+00830201 : PUSH 0xc35d90
+00830206 : CALL 0x008018d0
+0083020b : MOV ECX,dword ptr [0x00da9894]
+00830211 : MOV EAX,dword ptr [ECX]
+00830213 : MOV EDI,dword ptr [EAX + 0x1a8]
+00830219 : PUSH EBX
+0083021a : PUSH 0xc35e08
+0083021f : LEA ESI,[EBP + -0x28]
+00830222 : CALL 0x00404750
+00830227 : ADD ESP,0x10
+0083022a : MOV dword ptr [EBP + -0x4],0x1
+00830231 : MOV EDX,dword ptr [EDI]
+00830233 : PUSH 0x3
+00830235 : PUSH EAX
+00830236 : MOV EAX,dword ptr [EDX + 0x44]
+00830239 : MOV ECX,EDI
+0083023b : CALL EAX
+0083023d : MOV dword ptr [EBP + -0x4],0xffffffff
+00830244 : CMP dword ptr [EBP + -0x10],0x8
+00830248 : JC 0x00830252
+0083024a : MOV ECX,dword ptr [EBP + -0x24]
+0083024d : CALL 0x006f04e0
+00830252 : XOR ECX,ECX
+00830254 : MOV dword ptr [EBP + -0x10],0x7
+0083025b : MOV dword ptr [EBP + -0x14],0x0
+00830262 : MOV word ptr [EBP + -0x24],CX
+00830266 : XOR EAX,EAX
+00830268 : MOV ECX,dword ptr [EBP + -0xc]
+0083026b : MOV dword ptr FS:[0x0],ECX
+00830272 : POP ECX
+00830273 : POP EDI
+00830274 : POP ESI
+00830275 : POP EBX
+00830276 : MOV ESP,EBP
+00830278 : POP EBP
+00830279 : RET 0x4
+0083027c : PUSH 0x0
+0083027e : PUSH 0x0
+00830280 : PUSH 0x1
+00830282 : PUSH 0x0
+00830284 : CALL dword ptr [0x00b851e0]
+0083028a : LEA EDX,[EBP + 0x8]
+0083028d : PUSH EDX
+0083028e : PUSH 0x4
+00830290 : PUSH ESI
+00830291 : PUSH 0x8300b0
+00830296 : PUSH 0x0
+00830298 : PUSH 0x0
+0083029a : MOV dword ptr [ESI + 0x70],EAX
+0083029d : CALL 0x00635f44
+008302a2 : ADD ESP,0x18
+008302a5 : MOV dword ptr [ESI + 0x6c],EAX
+008302a8 : TEST EAX,EAX
+008302aa : JNZ 0x00830304
+008302ac : CALL 0x0082d680
+008302b1 : PUSH 0xc35e50
+008302b6 : LEA ECX,[EBP + -0x28]
+008302b9 : CALL 0x00406460
+008302be : MOV dword ptr [EBP + -0x4],0x2
+008302c5 : MOV EAX,[0x00da9894]
+008302ca : MOV EAX,dword ptr [EAX]
+008302cc : MOV ECX,dword ptr [EAX + 0x1a8]
+008302d2 : MOV EDX,dword ptr [ECX]
+008302d4 : MOV EDX,dword ptr [EDX + 0x44]
+008302d7 : PUSH 0x3
+008302d9 : LEA EAX,[EBP + -0x28]
+008302dc : PUSH EAX
+008302dd : CALL EDX
+008302df : MOV dword ptr [EBP + -0x4],0xffffffff
+008302e6 : LEA ECX,[EBP + -0x28]
+008302e9 : CALL 0x00406560
+008302ee : XOR EAX,EAX
+008302f0 : MOV ECX,dword ptr [EBP + -0xc]
+008302f3 : MOV dword ptr FS:[0x0],ECX
+008302fa : POP ECX
+008302fb : POP EDI
+008302fc : POP ESI
+008302fd : POP EBX
+008302fe : MOV ESP,EBP
+00830300 : POP EBP
+00830301 : RET 0x4
+00830304 : PUSH EBX
+00830305 : LEA EAX,[ESI + 0x78]
+00830308 : PUSH EAX
+00830309 : CALL 0x0044cb70
+0083030e : MOV ECX,dword ptr [ESI + 0x6c]
+00830311 : PUSH ECX
+00830312 : CALL dword ptr [0x00b851e4]
+00830318 : MOV EAX,0x1
+0083031d : MOV ECX,dword ptr [EBP + -0xc]
+00830320 : MOV dword ptr FS:[0x0],ECX
+00830327 : POP ECX
+00830328 : POP EDI
+00830329 : POP ESI
+0083032a : POP EBX
+0083032b : MOV ESP,EBP
+0083032d : POP EBP
+0083032e : RET 0x4

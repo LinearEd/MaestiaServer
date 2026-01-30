@@ -1,0 +1,62 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005d9500
+ENTRY    : 005d9500
+BODY     : [[005d9500, 005d953d]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined4 FUN_005d9500(int param_1,int param_2)
+
+{
+  int iVar1;
+  int iVar2;
+  
+  iVar1 = *(int *)(param_1 + 0x1c);
+  if (iVar1 == 0) {
+    return 0;
+  }
+  iVar2 = *(int *)(iVar1 + 0x1c);
+  while( true ) {
+    if (iVar2 == iVar1 + 0x10) {
+      return 0;
+    }
+    if (*(int *)(iVar2 + 0x10) == param_2) break;
+    iVar2 = *(int *)(iVar2 + 0xc);
+  }
+  FUN_005d9460(iVar2);
+  return 1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005d9500 : MOV EAX,dword ptr [ESP + 0x4]
+005d9504 : MOV EDX,dword ptr [EAX + 0x1c]
+005d9507 : TEST EDX,EDX
+005d9509 : JNZ 0x005d9510
+005d950b : XOR AL,AL
+005d950d : RET 0x8
+005d9510 : MOV EAX,dword ptr [EDX + 0x1c]
+005d9513 : ADD EDX,0x10
+005d9516 : PUSH ESI
+005d9517 : CMP EAX,EDX
+005d9519 : JZ 0x005d952c
+005d951b : MOV ESI,dword ptr [ESP + 0xc]
+005d951f : NOP
+005d9520 : CMP dword ptr [EAX + 0x10],ESI
+005d9523 : JZ 0x005d9532
+005d9525 : MOV EAX,dword ptr [EAX + 0xc]
+005d9528 : CMP EAX,EDX
+005d952a : JNZ 0x005d9520
+005d952c : XOR AL,AL
+005d952e : POP ESI
+005d952f : RET 0x8
+005d9532 : PUSH EAX
+005d9533 : CALL 0x005d9460
+005d9538 : MOV AL,0x1
+005d953a : POP ESI
+005d953b : RET 0x8

@@ -1,0 +1,153 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __alldiv
+ENTRY    : 0063c760
+BODY     : [[0063c760, 0063c809]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __alldiv
+   
+   Library: Visual Studio 2008 Release */
+
+undefined8 __alldiv(uint param_1,uint param_2,uint param_3,uint param_4)
+
+{
+  ulonglong uVar1;
+  longlong lVar2;
+  uint uVar3;
+  int iVar4;
+  uint uVar5;
+  uint uVar6;
+  uint uVar7;
+  uint uVar8;
+  bool bVar10;
+  char cVar11;
+  uint uVar9;
+  
+  cVar11 = (int)param_2 < 0;
+  if ((bool)cVar11) {
+    bVar10 = param_1 != 0;
+    param_1 = -param_1;
+    param_2 = -(uint)bVar10 - param_2;
+  }
+  if ((int)param_4 < 0) {
+    cVar11 = cVar11 + '\x01';
+    bVar10 = param_3 != 0;
+    param_3 = -param_3;
+    param_4 = -(uint)bVar10 - param_4;
+  }
+  uVar3 = param_1;
+  uVar5 = param_3;
+  uVar6 = param_2;
+  uVar9 = param_4;
+  if (param_4 == 0) {
+    uVar3 = param_2 / param_3;
+    iVar4 = (int)(((ulonglong)param_2 % (ulonglong)param_3 << 0x20 | (ulonglong)param_1) /
+                 (ulonglong)param_3);
+  }
+  else {
+    do {
+      uVar8 = uVar9 >> 1;
+      uVar5 = uVar5 >> 1 | (uint)((uVar9 & 1) != 0) << 0x1f;
+      uVar7 = uVar6 >> 1;
+      uVar3 = uVar3 >> 1 | (uint)((uVar6 & 1) != 0) << 0x1f;
+      uVar6 = uVar7;
+      uVar9 = uVar8;
+    } while (uVar8 != 0);
+    uVar1 = CONCAT44(uVar7,uVar3) / (ulonglong)uVar5;
+    iVar4 = (int)uVar1;
+    lVar2 = (ulonglong)param_3 * (uVar1 & 0xffffffff);
+    uVar3 = (uint)((ulonglong)lVar2 >> 0x20);
+    uVar5 = uVar3 + iVar4 * param_4;
+    if (((CARRY4(uVar3,iVar4 * param_4)) || (param_2 < uVar5)) ||
+       ((param_2 <= uVar5 && (param_1 < (uint)lVar2)))) {
+      iVar4 = iVar4 + -1;
+    }
+    uVar3 = 0;
+  }
+  if (cVar11 == '\x01') {
+    bVar10 = iVar4 != 0;
+    iVar4 = -iVar4;
+    uVar3 = -(uint)bVar10 - uVar3;
+  }
+  return CONCAT44(uVar3,iVar4);
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0063c760 : PUSH EDI
+0063c761 : PUSH ESI
+0063c762 : PUSH EBX
+0063c763 : XOR EDI,EDI
+0063c765 : MOV EAX,dword ptr [ESP + 0x14]
+0063c769 : OR EAX,EAX
+0063c76b : JGE 0x0063c781
+0063c76d : INC EDI
+0063c76e : MOV EDX,dword ptr [ESP + 0x10]
+0063c772 : NEG EAX
+0063c774 : NEG EDX
+0063c776 : SBB EAX,0x0
+0063c779 : MOV dword ptr [ESP + 0x14],EAX
+0063c77d : MOV dword ptr [ESP + 0x10],EDX
+0063c781 : MOV EAX,dword ptr [ESP + 0x1c]
+0063c785 : OR EAX,EAX
+0063c787 : JGE 0x0063c79d
+0063c789 : INC EDI
+0063c78a : MOV EDX,dword ptr [ESP + 0x18]
+0063c78e : NEG EAX
+0063c790 : NEG EDX
+0063c792 : SBB EAX,0x0
+0063c795 : MOV dword ptr [ESP + 0x1c],EAX
+0063c799 : MOV dword ptr [ESP + 0x18],EDX
+0063c79d : OR EAX,EAX
+0063c79f : JNZ 0x0063c7b9
+0063c7a1 : MOV ECX,dword ptr [ESP + 0x18]
+0063c7a5 : MOV EAX,dword ptr [ESP + 0x14]
+0063c7a9 : XOR EDX,EDX
+0063c7ab : DIV ECX
+0063c7ad : MOV EBX,EAX
+0063c7af : MOV EAX,dword ptr [ESP + 0x10]
+0063c7b3 : DIV ECX
+0063c7b5 : MOV EDX,EBX
+0063c7b7 : JMP 0x0063c7fa
+0063c7b9 : MOV EBX,EAX
+0063c7bb : MOV ECX,dword ptr [ESP + 0x18]
+0063c7bf : MOV EDX,dword ptr [ESP + 0x14]
+0063c7c3 : MOV EAX,dword ptr [ESP + 0x10]
+0063c7c7 : SHR EBX,0x1
+0063c7c9 : RCR ECX,0x1
+0063c7cb : SHR EDX,0x1
+0063c7cd : RCR EAX,0x1
+0063c7cf : OR EBX,EBX
+0063c7d1 : JNZ 0x0063c7c7
+0063c7d3 : DIV ECX
+0063c7d5 : MOV ESI,EAX
+0063c7d7 : MUL dword ptr [ESP + 0x1c]
+0063c7db : MOV ECX,EAX
+0063c7dd : MOV EAX,dword ptr [ESP + 0x18]
+0063c7e1 : MUL ESI
+0063c7e3 : ADD EDX,ECX
+0063c7e5 : JC 0x0063c7f5
+0063c7e7 : CMP EDX,dword ptr [ESP + 0x14]
+0063c7eb : JA 0x0063c7f5
+0063c7ed : JC 0x0063c7f6
+0063c7ef : CMP EAX,dword ptr [ESP + 0x10]
+0063c7f3 : JBE 0x0063c7f6
+0063c7f5 : DEC ESI
+0063c7f6 : XOR EDX,EDX
+0063c7f8 : MOV EAX,ESI
+0063c7fa : DEC EDI
+0063c7fb : JNZ 0x0063c804
+0063c7fd : NEG EDX
+0063c7ff : NEG EAX
+0063c801 : SBB EDX,0x0
+0063c804 : POP EBX
+0063c805 : POP ESI
+0063c806 : POP EDI
+0063c807 : RET 0x10

@@ -1,0 +1,174 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __alldvrm
+ENTRY    : 0063d110
+BODY     : [[0063d110, 0063d1ee]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __alldvrm
+   
+   Library: Visual Studio 2008 Release */
+
+undefined8 __alldvrm(uint param_1,uint param_2,uint param_3,uint param_4)
+
+{
+  ulonglong uVar1;
+  longlong lVar2;
+  uint uVar3;
+  int iVar4;
+  uint uVar5;
+  uint uVar6;
+  uint uVar7;
+  uint uVar8;
+  bool bVar10;
+  char cVar11;
+  uint uVar9;
+  
+  cVar11 = (int)param_2 < 0;
+  if ((bool)cVar11) {
+    bVar10 = param_1 != 0;
+    param_1 = -param_1;
+    param_2 = -(uint)bVar10 - param_2;
+  }
+  if ((int)param_4 < 0) {
+    cVar11 = cVar11 + '\x01';
+    bVar10 = param_3 != 0;
+    param_3 = -param_3;
+    param_4 = -(uint)bVar10 - param_4;
+  }
+  uVar3 = param_1;
+  uVar5 = param_3;
+  uVar6 = param_2;
+  uVar9 = param_4;
+  if (param_4 == 0) {
+    uVar3 = param_2 / param_3;
+    iVar4 = (int)(((ulonglong)param_2 % (ulonglong)param_3 << 0x20 | (ulonglong)param_1) /
+                 (ulonglong)param_3);
+  }
+  else {
+    do {
+      uVar8 = uVar9 >> 1;
+      uVar5 = uVar5 >> 1 | (uint)((uVar9 & 1) != 0) << 0x1f;
+      uVar7 = uVar6 >> 1;
+      uVar3 = uVar3 >> 1 | (uint)((uVar6 & 1) != 0) << 0x1f;
+      uVar6 = uVar7;
+      uVar9 = uVar8;
+    } while (uVar8 != 0);
+    uVar1 = CONCAT44(uVar7,uVar3) / (ulonglong)uVar5;
+    iVar4 = (int)uVar1;
+    lVar2 = (ulonglong)param_3 * (uVar1 & 0xffffffff);
+    uVar3 = (uint)((ulonglong)lVar2 >> 0x20);
+    uVar5 = uVar3 + iVar4 * param_4;
+    if (((CARRY4(uVar3,iVar4 * param_4)) || (param_2 < uVar5)) ||
+       ((param_2 <= uVar5 && (param_1 < (uint)lVar2)))) {
+      iVar4 = iVar4 + -1;
+    }
+    uVar3 = 0;
+  }
+  if (cVar11 == '\x01') {
+    bVar10 = iVar4 != 0;
+    iVar4 = -iVar4;
+    uVar3 = -(uint)bVar10 - uVar3;
+  }
+  return CONCAT44(uVar3,iVar4);
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0063d110 : PUSH EDI
+0063d111 : PUSH ESI
+0063d112 : PUSH EBP
+0063d113 : XOR EDI,EDI
+0063d115 : XOR EBP,EBP
+0063d117 : MOV EAX,dword ptr [ESP + 0x14]
+0063d11b : OR EAX,EAX
+0063d11d : JGE 0x0063d134
+0063d11f : INC EDI
+0063d120 : INC EBP
+0063d121 : MOV EDX,dword ptr [ESP + 0x10]
+0063d125 : NEG EAX
+0063d127 : NEG EDX
+0063d129 : SBB EAX,0x0
+0063d12c : MOV dword ptr [ESP + 0x14],EAX
+0063d130 : MOV dword ptr [ESP + 0x10],EDX
+0063d134 : MOV EAX,dword ptr [ESP + 0x1c]
+0063d138 : OR EAX,EAX
+0063d13a : JGE 0x0063d150
+0063d13c : INC EDI
+0063d13d : MOV EDX,dword ptr [ESP + 0x18]
+0063d141 : NEG EAX
+0063d143 : NEG EDX
+0063d145 : SBB EAX,0x0
+0063d148 : MOV dword ptr [ESP + 0x1c],EAX
+0063d14c : MOV dword ptr [ESP + 0x18],EDX
+0063d150 : OR EAX,EAX
+0063d152 : JNZ 0x0063d17c
+0063d154 : MOV ECX,dword ptr [ESP + 0x18]
+0063d158 : MOV EAX,dword ptr [ESP + 0x14]
+0063d15c : XOR EDX,EDX
+0063d15e : DIV ECX
+0063d160 : MOV EBX,EAX
+0063d162 : MOV EAX,dword ptr [ESP + 0x10]
+0063d166 : DIV ECX
+0063d168 : MOV ESI,EAX
+0063d16a : MOV EAX,EBX
+0063d16c : MUL dword ptr [ESP + 0x18]
+0063d170 : MOV ECX,EAX
+0063d172 : MOV EAX,ESI
+0063d174 : MUL dword ptr [ESP + 0x18]
+0063d178 : ADD EDX,ECX
+0063d17a : JMP 0x0063d1c3
+0063d17c : MOV EBX,EAX
+0063d17e : MOV ECX,dword ptr [ESP + 0x18]
+0063d182 : MOV EDX,dword ptr [ESP + 0x14]
+0063d186 : MOV EAX,dword ptr [ESP + 0x10]
+0063d18a : SHR EBX,0x1
+0063d18c : RCR ECX,0x1
+0063d18e : SHR EDX,0x1
+0063d190 : RCR EAX,0x1
+0063d192 : OR EBX,EBX
+0063d194 : JNZ 0x0063d18a
+0063d196 : DIV ECX
+0063d198 : MOV ESI,EAX
+0063d19a : MUL dword ptr [ESP + 0x1c]
+0063d19e : MOV ECX,EAX
+0063d1a0 : MOV EAX,dword ptr [ESP + 0x18]
+0063d1a4 : MUL ESI
+0063d1a6 : ADD EDX,ECX
+0063d1a8 : JC 0x0063d1b8
+0063d1aa : CMP EDX,dword ptr [ESP + 0x14]
+0063d1ae : JA 0x0063d1b8
+0063d1b0 : JC 0x0063d1c1
+0063d1b2 : CMP EAX,dword ptr [ESP + 0x10]
+0063d1b6 : JBE 0x0063d1c1
+0063d1b8 : DEC ESI
+0063d1b9 : SUB EAX,dword ptr [ESP + 0x18]
+0063d1bd : SBB EDX,dword ptr [ESP + 0x1c]
+0063d1c1 : XOR EBX,EBX
+0063d1c3 : SUB EAX,dword ptr [ESP + 0x10]
+0063d1c7 : SBB EDX,dword ptr [ESP + 0x14]
+0063d1cb : DEC EBP
+0063d1cc : JNS 0x0063d1d5
+0063d1ce : NEG EDX
+0063d1d0 : NEG EAX
+0063d1d2 : SBB EDX,0x0
+0063d1d5 : MOV ECX,EDX
+0063d1d7 : MOV EDX,EBX
+0063d1d9 : MOV EBX,ECX
+0063d1db : MOV ECX,EAX
+0063d1dd : MOV EAX,ESI
+0063d1df : DEC EDI
+0063d1e0 : JNZ 0x0063d1e9
+0063d1e2 : NEG EDX
+0063d1e4 : NEG EAX
+0063d1e6 : SBB EDX,0x0
+0063d1e9 : POP EBP
+0063d1ea : POP ESI
+0063d1eb : POP EDI
+0063d1ec : RET 0x10

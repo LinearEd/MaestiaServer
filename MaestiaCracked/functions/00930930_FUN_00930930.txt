@@ -1,0 +1,80 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00930930
+ENTRY    : 00930930
+BODY     : [[00930930, 009309a3]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00930930(void)
+
+{
+  short in_AX;
+  int iVar1;
+  int unaff_EDI;
+  
+  if (in_AX == *(short *)(unaff_EDI + 0x5c)) {
+    (**(code **)(**(int **)(unaff_EDI + 0x48) + 0x78))();
+  }
+  else if ((ushort)(in_AX - 1U) < 3) {
+    (**(code **)(**(int **)(unaff_EDI + 0x4c + (uint)(ushort)(in_AX - 1U) * 4) + 0x78))();
+  }
+  else {
+    FUN_008018d0(L"[CRITICAL] AvaGuiQuickSlot::DeleteItem (%d)",in_AX);
+  }
+  if (*(int *)(unaff_EDI + 100) != 0) {
+    iVar1 = FUN_009f2740(*(int *)(unaff_EDI + 100));
+    if ((iVar1 != 0) && (*(short *)(iVar1 + 0xc0) == 0)) {
+      *(undefined4 *)(unaff_EDI + 100) = 0;
+    }
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00930930 : PUSH ESI
+00930931 : CMP AX,word ptr [EDI + 0x5c]
+00930935 : JNZ 0x00930945
+00930937 : MOV ECX,dword ptr [EDI + 0x48]
+0093093a : MOV ESI,dword ptr [ECX]
+0093093c : PUSH EAX
+0093093d : MOV EAX,dword ptr [ESI + 0x78]
+00930940 : PUSH EDX
+00930941 : CALL EAX
+00930943 : JMP 0x0093097a
+00930945 : LEA ECX,[EAX + -0x1]
+00930948 : MOVZX ECX,CX
+0093094b : CMP CX,0x3
+0093094f : JNC 0x00930963
+00930951 : MOVZX ECX,CX
+00930954 : MOV ECX,dword ptr [EDI + ECX*0x4 + 0x4c]
+00930958 : MOV ESI,dword ptr [ECX]
+0093095a : PUSH EAX
+0093095b : PUSH EDX
+0093095c : MOV EDX,dword ptr [ESI + 0x78]
+0093095f : CALL EDX
+00930961 : JMP 0x0093097a
+00930963 : MOV ESI,dword ptr [0x00da98e8]
+00930969 : MOVZX EAX,AX
+0093096c : PUSH EAX
+0093096d : PUSH 0xc6de88
+00930972 : CALL 0x008018d0
+00930977 : ADD ESP,0x8
+0093097a : MOV EAX,dword ptr [EDI + 0x64]
+0093097d : POP ESI
+0093097e : TEST EAX,EAX
+00930980 : JZ 0x009309a3
+00930982 : MOV ECX,dword ptr [0x017247f0]
+00930988 : PUSH EAX
+00930989 : CALL 0x009f2740
+0093098e : TEST EAX,EAX
+00930990 : JZ 0x009309a3
+00930992 : CMP word ptr [EAX + 0xc0],0x0
+0093099a : JNZ 0x009309a3
+0093099c : MOV dword ptr [EDI + 0x64],0x0
+009309a3 : RET

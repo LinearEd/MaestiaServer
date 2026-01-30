@@ -1,0 +1,58 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_004ffb40
+ENTRY    : 004ffb40
+BODY     : [[004ffb40, 004ffb6c]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+int FUN_004ffb40(byte *param_1,byte *param_2)
+
+{
+  byte bVar1;
+  bool bVar2;
+  
+  while( true ) {
+    bVar1 = *param_1;
+    bVar2 = bVar1 < *param_2;
+    if (bVar1 != *param_2) break;
+    if (bVar1 == 0) {
+      return 0;
+    }
+    bVar1 = param_1[1];
+    bVar2 = bVar1 < param_2[1];
+    if (bVar1 != param_2[1]) break;
+    param_1 = param_1 + 2;
+    param_2 = param_2 + 2;
+    if (bVar1 == 0) {
+      return 0;
+    }
+  }
+  return (1 - (uint)bVar2) - (uint)(bVar2 != 0);
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+004ffb40 : MOV EDX,dword ptr [ESP + 0x8]
+004ffb44 : MOV ECX,dword ptr [ESP + 0x4]
+004ffb48 : MOV AL,byte ptr [ECX]
+004ffb4a : CMP AL,byte ptr [EDX]
+004ffb4c : JNZ 0x004ffb67
+004ffb4e : TEST AL,AL
+004ffb50 : JZ 0x004ffb64
+004ffb52 : MOV AL,byte ptr [ECX + 0x1]
+004ffb55 : CMP AL,byte ptr [EDX + 0x1]
+004ffb58 : JNZ 0x004ffb67
+004ffb5a : ADD ECX,0x2
+004ffb5d : ADD EDX,0x2
+004ffb60 : TEST AL,AL
+004ffb62 : JNZ 0x004ffb48
+004ffb64 : XOR EAX,EAX
+004ffb66 : RET
+004ffb67 : SBB EAX,EAX
+004ffb69 : SBB EAX,-0x1
+004ffb6c : RET

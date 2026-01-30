@@ -1,0 +1,72 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __updatetlocinfoEx_nolock
+ENTRY    : 00639c71
+BODY     : [[00639c71, 00639cae]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __updatetlocinfoEx_nolock
+   
+   Library: Visual Studio 2008 Release */
+
+int * __updatetlocinfoEx_nolock(void)
+
+{
+  int *piVar1;
+  undefined4 *in_EAX;
+  int *unaff_EDI;
+  
+  if ((unaff_EDI != (int *)0x0) && (in_EAX != (undefined4 *)0x0)) {
+    piVar1 = (int *)*in_EAX;
+    if (piVar1 != unaff_EDI) {
+      *in_EAX = unaff_EDI;
+      ___addlocaleref();
+      if (piVar1 != (int *)0x0) {
+        ___removelocaleref(piVar1);
+        if ((*piVar1 == 0) && (piVar1 != (int *)&DAT_00d67d60)) {
+          ___freetlocinfo(piVar1);
+        }
+      }
+    }
+    return unaff_EDI;
+  }
+  return (int *)0x0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00639c71 : TEST EDI,EDI
+00639c73 : JZ 0x00639cac
+00639c75 : TEST EAX,EAX
+00639c77 : JZ 0x00639cac
+00639c79 : PUSH ESI
+00639c7a : MOV ESI,dword ptr [EAX]
+00639c7c : CMP ESI,EDI
+00639c7e : JZ 0x00639ca8
+00639c80 : PUSH EDI
+00639c81 : MOV dword ptr [EAX],EDI
+00639c83 : CALL 0x00639b23
+00639c88 : POP ECX
+00639c89 : TEST ESI,ESI
+00639c8b : JZ 0x00639ca8
+00639c8d : PUSH ESI
+00639c8e : CALL 0x00639bb2
+00639c93 : CMP dword ptr [ESI],0x0
+00639c96 : POP ECX
+00639c97 : JNZ 0x00639ca8
+00639c99 : CMP ESI,0xd67d60
+00639c9f : JZ 0x00639ca8
+00639ca1 : PUSH ESI
+00639ca2 : CALL 0x006399da
+00639ca7 : POP ECX
+00639ca8 : MOV EAX,EDI
+00639caa : POP ESI
+00639cab : RET
+00639cac : XOR EAX,EAX
+00639cae : RET

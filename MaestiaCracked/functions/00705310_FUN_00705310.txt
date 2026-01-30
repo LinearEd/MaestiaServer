@@ -1,0 +1,76 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00705310
+ENTRY    : 00705310
+BODY     : [[00705310, 00705352]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00705310(void)
+
+{
+  uint *in_EAX;
+  byte bVar1;
+  byte bVar2;
+  int in_ECX;
+  uint uVar3;
+  int iVar4;
+  byte *pbVar5;
+  
+  iVar4 = 0;
+  *in_EAX = 0;
+  uVar3 = 0;
+  do {
+    pbVar5 = (byte *)(iVar4 + in_ECX);
+    bVar1 = (byte)uVar3;
+    uVar3 = uVar3 + 8;
+    iVar4 = iVar4 + 1;
+    *in_EAX = *in_EAX | (uint)*pbVar5 << (bVar1 & 0x1f);
+  } while (uVar3 < 0x10);
+  in_EAX[1] = 0;
+  uVar3 = 0;
+  pbVar5 = (byte *)(in_ECX + 2);
+  do {
+    bVar1 = *pbVar5;
+    bVar2 = (byte)uVar3;
+    uVar3 = uVar3 + 8;
+    pbVar5 = pbVar5 + 1;
+    in_EAX[1] = in_EAX[1] | (uint)bVar1 << (bVar2 & 0x1f);
+  } while (uVar3 < 0x20);
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00705310 : PUSH ESI
+00705311 : MOV ESI,ECX
+00705313 : XOR EDX,EDX
+00705315 : MOV dword ptr [EAX],0x0
+0070531b : XOR ECX,ECX
+0070531d : PUSH EDI
+0070531e : MOV EDI,EDI
+00705320 : MOVZX EDI,byte ptr [EDX + ESI*0x1]
+00705324 : SHL EDI,CL
+00705326 : ADD ECX,0x8
+00705329 : INC EDX
+0070532a : OR dword ptr [EAX],EDI
+0070532c : CMP ECX,0x10
+0070532f : JC 0x00705320
+00705331 : MOV dword ptr [EAX + 0x4],0x0
+00705338 : XOR ECX,ECX
+0070533a : LEA EDX,[ESI + 0x2]
+0070533d : POP EDI
+0070533e : MOV EDI,EDI
+00705340 : MOVZX ESI,byte ptr [EDX]
+00705343 : SHL ESI,CL
+00705345 : ADD ECX,0x8
+00705348 : INC EDX
+00705349 : OR dword ptr [EAX + 0x4],ESI
+0070534c : CMP ECX,0x20
+0070534f : JC 0x00705340
+00705351 : POP ESI
+00705352 : RET

@@ -1,0 +1,126 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00808620
+ENTRY    : 00808620
+BODY     : [[00808620, 008086fa]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00808620(char param_1)
+
+{
+  HWND pHVar1;
+  HIMC pHVar2;
+  DWORD DVar3;
+  BOOL fShow;
+  undefined1 local_50 [16];
+  undefined8 local_40;
+  LONG local_38;
+  tagCANDIDATEFORM local_30;
+  
+  DVar3 = 0;
+  if (DAT_00da98a8 != 0) {
+    fShow = 0;
+    pHVar1 = ImmGetDefaultIMEWnd(*(HWND *)(DAT_00da98a8 + 8));
+    ShowOwnedPopups(pHVar1,fShow);
+    if (param_1 != '\0') {
+      pHVar1 = ImmGetDefaultIMEWnd(*(HWND *)(DAT_00da98a8 + 8));
+      pHVar2 = ImmGetContext(pHVar1);
+      local_40._0_4_ = 0;
+      local_40._4_4_ = 0;
+      local_38 = 0;
+      local_50._8_4_ = 0xfffffe0c;
+      local_50._0_8_ = 0xfffffe0c00000020;
+      local_50._12_4_ = 0;
+      ImmSetCompositionWindow(pHVar2,(LPCOMPOSITIONFORM)local_50);
+      local_30.rcArea.left = 0;
+      local_30.rcArea.top = 0;
+      local_30.rcArea.right = 0;
+      local_30.rcArea.bottom = 0;
+      do {
+        local_30.dwStyle = 0x80;
+        local_30.dwIndex = DVar3;
+        local_30.ptCurrentPos.x = 0xfffffe0c;
+        local_30.ptCurrentPos.y = 0xfffffe0c;
+        local_30.rcArea.right = 5000;
+        local_30.rcArea.bottom = 2000;
+        ImmSetCandidateWindow(pHVar2,&local_30);
+        DVar3 = DVar3 + 1;
+      } while ((int)DVar3 < 4);
+      ImmReleaseContext(*(HWND *)(DAT_00da98a8 + 8),pHVar2);
+    }
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00808620 : PUSH EBP
+00808621 : MOV EBP,ESP
+00808623 : AND ESP,0xfffffff0
+00808626 : MOV EAX,[0x00da98a8]
+0080862b : SUB ESP,0x44
+0080862e : PUSH EBX
+0080862f : PUSH ESI
+00808630 : XOR ESI,ESI
+00808632 : PUSH EDI
+00808633 : CMP EAX,ESI
+00808635 : JZ 0x008086f4
+0080863b : MOV EAX,dword ptr [EAX + 0x8]
+0080863e : PUSH ESI
+0080863f : PUSH EAX
+00808640 : CALL 0x0061144a
+00808645 : PUSH EAX
+00808646 : CALL dword ptr [0x00b854e8]
+0080864c : CMP byte ptr [EBP + 0x8],0x0
+00808650 : JZ 0x008086f4
+00808656 : MOV EAX,[0x00da98a8]
+0080865b : MOV EAX,dword ptr [EAX + 0x8]
+0080865e : PUSH EAX
+0080865f : CALL 0x0061144a
+00808664 : PUSH EAX
+00808665 : CALL 0x00611450
+0080866a : LEA ECX,[ESP + 0x10]
+0080866e : MOV EDI,EAX
+00808670 : PXOR XMM0,XMM0
+00808674 : MOVDQA xmmword ptr [ESP + 0x10],XMM0
+0080867a : PUSH ECX
+0080867b : MOV EBX,0xfffffe0c
+00808680 : PUSH EDI
+00808681 : MOVQ qword ptr [ESP + 0x28],XMM0
+00808687 : MOV dword ptr [ESP + 0x30],ESI
+0080868b : MOV dword ptr [ESP + 0x18],0x20
+00808693 : MOV dword ptr [ESP + 0x1c],EBX
+00808697 : MOV dword ptr [ESP + 0x20],EBX
+0080869b : CALL 0x00611456
+008086a0 : PXOR XMM0,XMM0
+008086a4 : MOVDQA xmmword ptr [ESP + 0x30],XMM0
+008086aa : MOVDQA xmmword ptr [ESP + 0x40],XMM0
+008086b0 : LEA EDX,[ESP + 0x30]
+008086b4 : PUSH EDX
+008086b5 : PUSH EDI
+008086b6 : MOV dword ptr [ESP + 0x38],ESI
+008086ba : MOV dword ptr [ESP + 0x3c],0x80
+008086c2 : MOV dword ptr [ESP + 0x40],EBX
+008086c6 : MOV dword ptr [ESP + 0x44],EBX
+008086ca : MOV dword ptr [ESP + 0x54],0x7d0
+008086d2 : MOV dword ptr [ESP + 0x50],0x1388
+008086da : CALL 0x0061145c
+008086df : INC ESI
+008086e0 : CMP ESI,0x4
+008086e3 : JL 0x008086b0
+008086e5 : MOV EAX,[0x00da98a8]
+008086ea : MOV ECX,dword ptr [EAX + 0x8]
+008086ed : PUSH EDI
+008086ee : PUSH ECX
+008086ef : CALL 0x00611462
+008086f4 : POP EDI
+008086f5 : POP ESI
+008086f6 : POP EBX
+008086f7 : MOV ESP,EBP
+008086f9 : POP EBP
+008086fa : RET

@@ -1,0 +1,93 @@
+PROGRAM  : Maestia.exe
+FUNCTION : TryAcquireCancel
+ENTRY    : 00518420
+BODY     : [[00518420, 005184a0]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* public: virtual bool __thiscall GSemaphore::TryAcquireCancel(void) */
+
+bool __thiscall GSemaphore::TryAcquireCancel(GSemaphore *this)
+
+{
+  HandlerArray *Addend;
+  LONG LVar1;
+  HandlerArray *local_4;
+  
+                    /* 0x118420  165  ?TryAcquireCancel@GSemaphore@@UAE_NXZ */
+  local_4 = (HandlerArray *)this;
+  GMutex::Lock((GMutex *)(this + 0xc));
+  if (*(int *)(this + 8) + -1 < 0) {
+    *(undefined4 *)(this + 8) = 0;
+  }
+  else {
+    *(int *)(this + 8) = *(int *)(this + 8) + -1;
+  }
+  GWaitCondition::Notify((GWaitCondition *)(this + 0x20));
+  local_4 = (HandlerArray *)0x0;
+  FUN_00517000(&local_4);
+  GMutex::Unlock((GMutex *)(this + 0xc));
+  Addend = local_4;
+  if (local_4 != (HandlerArray *)0x0) {
+    GWaitable::HandlerArray::CallWaitHandlers(local_4);
+    LVar1 = InterlockedExchangeAdd((LONG *)Addend,-1);
+    if (LVar1 == 1) {
+      FUN_005a20f0();
+      FUN_00515cf0(*(undefined4 *)(Addend + 4));
+      FUN_00515cf0(Addend);
+    }
+  }
+  return true;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00518420 : PUSH ECX
+00518421 : PUSH ESI
+00518422 : LEA ESI,[ECX + -0xc]
+00518425 : PUSH EDI
+00518426 : LEA EDI,[ESI + 0x18]
+00518429 : MOV ECX,EDI
+0051842b : CALL 0x005162b0
+00518430 : MOV EAX,dword ptr [ESI + 0x14]
+00518433 : SUB EAX,0x1
+00518436 : JS 0x0051843d
+00518438 : DEC dword ptr [ESI + 0x14]
+0051843b : JMP 0x00518444
+0051843d : MOV dword ptr [ESI + 0x14],0x0
+00518444 : LEA ECX,[ESI + 0x2c]
+00518447 : CALL 0x00516450
+0051844c : LEA ECX,[ESP + 0x8]
+00518450 : PUSH ECX
+00518451 : MOV ECX,ESI
+00518453 : MOV dword ptr [ESP + 0xc],0x0
+0051845b : CALL 0x00517000
+00518460 : MOV ECX,EDI
+00518462 : CALL 0x005170a0
+00518467 : MOV ESI,dword ptr [ESP + 0x8]
+0051846b : TEST ESI,ESI
+0051846d : JZ 0x0051849b
+0051846f : MOV ECX,ESI
+00518471 : CALL 0x00517e90
+00518476 : PUSH -0x1
+00518478 : PUSH ESI
+00518479 : CALL dword ptr [0x00b851cc]
+0051847f : SUB EAX,0x1
+00518482 : JNZ 0x0051849b
+00518484 : LEA ECX,[ESI + 0x10]
+00518487 : CALL 0x005a20f0
+0051848c : MOV EDX,dword ptr [ESI + 0x4]
+0051848f : PUSH EDX
+00518490 : CALL 0x00515cf0
+00518495 : PUSH ESI
+00518496 : CALL 0x00515cf0
+0051849b : POP EDI
+0051849c : MOV AL,0x1
+0051849e : POP ESI
+0051849f : POP ECX
+005184a0 : RET

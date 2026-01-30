@@ -1,0 +1,154 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __stricmp_l
+ENTRY    : 0063b7e4
+BODY     : [[0063b7e4, 0063b8b8]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __stricmp_l
+   
+   Library: Visual Studio 2008 Release */
+
+int __cdecl __stricmp_l(char *_Str1,char *_Str2,_locale_t _Locale)
+
+{
+  int *piVar1;
+  int iVar2;
+  int iVar3;
+  localeinfo_struct local_14;
+  int local_c;
+  char local_8;
+  
+  _LocaleUpdate::_LocaleUpdate((_LocaleUpdate *)&local_14,_Locale);
+  if (_Str1 == (char *)0x0) {
+    piVar1 = __errno();
+    *piVar1 = 0x16;
+    __invalid_parameter(0,0,0,0,0);
+    if (local_8 != '\0') {
+      *(uint *)(local_c + 0x70) = *(uint *)(local_c + 0x70) & 0xfffffffd;
+    }
+    iVar2 = 0x7fffffff;
+  }
+  else if (_Str2 == (char *)0x0) {
+    piVar1 = __errno();
+    *piVar1 = 0x16;
+    __invalid_parameter(0,0,0,0,0);
+    if (local_8 != '\0') {
+      *(uint *)(local_c + 0x70) = *(uint *)(local_c + 0x70) & 0xfffffffd;
+    }
+    iVar2 = 0x7fffffff;
+  }
+  else {
+    if ((local_14.locinfo)->lc_category[0].wlocale == (wchar_t *)0x0) {
+      iVar2 = ___ascii_stricmp(_Str1,_Str2);
+    }
+    else {
+      do {
+        iVar2 = __tolower_l((uint)(byte)*_Str1,&local_14);
+        _Str1 = _Str1 + 1;
+        iVar3 = __tolower_l((uint)(byte)*_Str2,&local_14);
+        _Str2 = (char *)((byte *)_Str2 + 1);
+        if (iVar2 == 0) break;
+      } while (iVar2 == iVar3);
+      iVar2 = iVar2 - iVar3;
+    }
+    if (local_8 != '\0') {
+      *(uint *)(local_c + 0x70) = *(uint *)(local_c + 0x70) & 0xfffffffd;
+    }
+  }
+  return iVar2;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0063b7e4 : MOV EDI,EDI
+0063b7e6 : PUSH EBP
+0063b7e7 : MOV EBP,ESP
+0063b7e9 : SUB ESP,0x10
+0063b7ec : PUSH EBX
+0063b7ed : PUSH dword ptr [EBP + 0x10]
+0063b7f0 : LEA ECX,[EBP + -0x10]
+0063b7f3 : CALL 0x00637880
+0063b7f8 : XOR EBX,EBX
+0063b7fa : CMP dword ptr [EBP + 0x8],EBX
+0063b7fd : JNZ 0x0063b82d
+0063b7ff : CALL 0x0063ab82
+0063b804 : PUSH EBX
+0063b805 : PUSH EBX
+0063b806 : PUSH EBX
+0063b807 : PUSH EBX
+0063b808 : PUSH EBX
+0063b809 : MOV dword ptr [EAX],0x16
+0063b80f : CALL 0x006372b8
+0063b814 : ADD ESP,0x14
+0063b817 : CMP byte ptr [EBP + -0x4],BL
+0063b81a : JZ 0x0063b823
+0063b81c : MOV EAX,dword ptr [EBP + -0x8]
+0063b81f : AND dword ptr [EAX + 0x70],0xfffffffd
+0063b823 : MOV EAX,0x7fffffff
+0063b828 : JMP 0x0063b8b6
+0063b82d : PUSH EDI
+0063b82e : MOV EDI,dword ptr [EBP + 0xc]
+0063b831 : CMP EDI,EBX
+0063b833 : JNZ 0x0063b860
+0063b835 : CALL 0x0063ab82
+0063b83a : PUSH EBX
+0063b83b : PUSH EBX
+0063b83c : PUSH EBX
+0063b83d : PUSH EBX
+0063b83e : PUSH EBX
+0063b83f : MOV dword ptr [EAX],0x16
+0063b845 : CALL 0x006372b8
+0063b84a : ADD ESP,0x14
+0063b84d : CMP byte ptr [EBP + -0x4],BL
+0063b850 : JZ 0x0063b859
+0063b852 : MOV EAX,dword ptr [EBP + -0x8]
+0063b855 : AND dword ptr [EAX + 0x70],0xfffffffd
+0063b859 : MOV EAX,0x7fffffff
+0063b85e : JMP 0x0063b8b5
+0063b860 : MOV EAX,dword ptr [EBP + -0x10]
+0063b863 : CMP dword ptr [EAX + 0x14],EBX
+0063b866 : JNZ 0x0063b875
+0063b868 : PUSH EDI
+0063b869 : PUSH dword ptr [EBP + 0x8]
+0063b86c : CALL 0x0063b7ab
+0063b871 : POP ECX
+0063b872 : POP ECX
+0063b873 : JMP 0x0063b8a9
+0063b875 : PUSH ESI
+0063b876 : MOV EAX,dword ptr [EBP + 0x8]
+0063b879 : MOVZX EAX,byte ptr [EAX]
+0063b87c : LEA ECX,[EBP + -0x10]
+0063b87f : PUSH ECX
+0063b880 : PUSH EAX
+0063b881 : CALL 0x00637907
+0063b886 : INC dword ptr [EBP + 0x8]
+0063b889 : MOV ESI,EAX
+0063b88b : MOVZX EAX,byte ptr [EDI]
+0063b88e : LEA ECX,[EBP + -0x10]
+0063b891 : PUSH ECX
+0063b892 : PUSH EAX
+0063b893 : CALL 0x00637907
+0063b898 : ADD ESP,0x10
+0063b89b : INC EDI
+0063b89c : CMP ESI,EBX
+0063b89e : JZ 0x0063b8a4
+0063b8a0 : CMP ESI,EAX
+0063b8a2 : JZ 0x0063b876
+0063b8a4 : SUB ESI,EAX
+0063b8a6 : MOV EAX,ESI
+0063b8a8 : POP ESI
+0063b8a9 : CMP byte ptr [EBP + -0x4],BL
+0063b8ac : JZ 0x0063b8b5
+0063b8ae : MOV ECX,dword ptr [EBP + -0x8]
+0063b8b1 : AND dword ptr [ECX + 0x70],0xfffffffd
+0063b8b5 : POP EDI
+0063b8b6 : POP EBX
+0063b8b7 : LEAVE
+0063b8b8 : RET

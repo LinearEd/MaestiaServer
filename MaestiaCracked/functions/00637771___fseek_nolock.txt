@@ -1,0 +1,107 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __fseek_nolock
+ENTRY    : 00637771
+BODY     : [[00637771, 006377fa]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __fseek_nolock
+   
+   Library: Visual Studio 2008 Release */
+
+int __cdecl __fseek_nolock(FILE *_File,long _Offset,int _Origin)
+
+{
+  uint uVar1;
+  int *piVar2;
+  int iVar3;
+  long lVar4;
+  
+  if ((_File->_flag & 0x83U) == 0) {
+    piVar2 = __errno();
+    *piVar2 = 0x16;
+    iVar3 = -1;
+  }
+  else {
+    _File->_flag = _File->_flag & 0xffffffef;
+    if (_Origin == 1) {
+      lVar4 = __ftell_nolock(_File);
+      _Offset = _Offset + lVar4;
+      _Origin = 0;
+    }
+    __flush(_File);
+    uVar1 = _File->_flag;
+    if ((char)uVar1 < '\0') {
+      _File->_flag = uVar1 & 0xfffffffc;
+    }
+    else if ((((uVar1 & 1) != 0) && ((uVar1 & 8) != 0)) && ((uVar1 & 0x400) == 0)) {
+      _File->_bufsiz = 0x200;
+    }
+    iVar3 = __fileno(_File);
+    lVar4 = __lseek(iVar3,_Offset,_Origin);
+    iVar3 = (lVar4 != -1) - 1;
+  }
+  return iVar3;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00637771 : MOV EDI,EDI
+00637773 : PUSH EBP
+00637774 : MOV EBP,ESP
+00637776 : PUSH ESI
+00637777 : MOV ESI,dword ptr [EBP + 0x8]
+0063777a : MOV EAX,dword ptr [ESI + 0xc]
+0063777d : TEST AL,0x83
+0063777f : JNZ 0x00637791
+00637781 : CALL 0x0063ab82
+00637786 : MOV dword ptr [EAX],0x16
+0063778c : OR EAX,0xffffffff
+0063778f : JMP 0x006377f8
+00637791 : AND EAX,0xffffffef
+00637794 : CMP dword ptr [EBP + 0x10],0x1
+00637798 : MOV dword ptr [ESI + 0xc],EAX
+0063779b : JNZ 0x006377ab
+0063779d : PUSH ESI
+0063779e : CALL 0x00637382
+006377a3 : ADD dword ptr [EBP + 0xc],EAX
+006377a6 : AND dword ptr [EBP + 0x10],0x0
+006377aa : POP ECX
+006377ab : PUSH ESI
+006377ac : CALL 0x0063946d
+006377b1 : MOV EAX,dword ptr [ESI + 0xc]
+006377b4 : POP ECX
+006377b5 : TEST AL,AL
+006377b7 : JNS 0x006377c1
+006377b9 : AND EAX,0xfffffffc
+006377bc : MOV dword ptr [ESI + 0xc],EAX
+006377bf : JMP 0x006377d7
+006377c1 : TEST AL,0x1
+006377c3 : JZ 0x006377d7
+006377c5 : TEST AL,0x8
+006377c7 : JZ 0x006377d7
+006377c9 : TEST EAX,0x400
+006377ce : JNZ 0x006377d7
+006377d0 : MOV dword ptr [ESI + 0x18],0x200
+006377d7 : PUSH dword ptr [EBP + 0x10]
+006377da : PUSH dword ptr [EBP + 0xc]
+006377dd : PUSH ESI
+006377de : CALL 0x0064dfc6
+006377e3 : POP ECX
+006377e4 : PUSH EAX
+006377e5 : CALL 0x0065054a
+006377ea : XOR ECX,ECX
+006377ec : ADD ESP,0xc
+006377ef : CMP EAX,-0x1
+006377f2 : SETNZ CL
+006377f5 : DEC ECX
+006377f6 : MOV EAX,ECX
+006377f8 : POP ESI
+006377f9 : POP EBP
+006377fa : RET

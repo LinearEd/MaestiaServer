@@ -1,0 +1,138 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __Stolx
+ENTRY    : 0063331c
+BODY     : [[0063331c, 006333c0]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __Stolx
+   
+   Library: Visual Studio 2008 Release */
+
+uint __Stolx(byte *param_1,int *param_2,undefined4 param_3,undefined4 *param_4)
+
+{
+  byte bVar1;
+  byte *pbVar2;
+  int iVar3;
+  uint uVar4;
+  int *piVar5;
+  byte *pbVar6;
+  
+  pbVar2 = param_1;
+  piVar5 = param_2;
+  if (param_2 == (int *)0x0) {
+    piVar5 = (int *)&param_1;
+  }
+  bVar1 = *param_1;
+  pbVar6 = param_1;
+  while (iVar3 = _isspace((uint)bVar1), iVar3 != 0) {
+    pbVar6 = pbVar6 + 1;
+    bVar1 = *pbVar6;
+  }
+  bVar1 = *pbVar6;
+  if ((bVar1 == 0x2d) || (bVar1 == 0x2b)) {
+    param_2 = (int *)CONCAT13(bVar1,param_2._0_3_);
+    pbVar6 = pbVar6 + 1;
+  }
+  else {
+    param_2 = (int *)CONCAT13(0x2b,param_2._0_3_);
+  }
+  uVar4 = FUN_00633181(pbVar6,piVar5,param_3,param_4);
+  if (pbVar6 == (byte *)*piVar5) {
+    *piVar5 = (int)pbVar2;
+  }
+  if (((pbVar2 != (byte *)*piVar5) || (uVar4 == 0)) &&
+     ((param_2._3_1_ != '+' || (uVar4 < 0x80000000)))) {
+    if (param_2._3_1_ != '-') {
+      return uVar4;
+    }
+    if (uVar4 < 0x80000001) {
+      return -uVar4;
+    }
+  }
+  piVar5 = __errno();
+  *piVar5 = 0x22;
+  if (param_4 != (undefined4 *)0x0) {
+    *param_4 = 1;
+  }
+  return (param_2._3_1_ == '-') + 0x7fffffff;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0063331c : MOV EDI,EDI
+0063331e : PUSH EBP
+0063331f : MOV EBP,ESP
+00633321 : PUSH EBX
+00633322 : PUSH ESI
+00633323 : PUSH EDI
+00633324 : MOV EDI,dword ptr [EBP + 0xc]
+00633327 : TEST EDI,EDI
+00633329 : JNZ 0x0063332e
+0063332b : LEA EDI,[EBP + 0x8]
+0063332e : MOV EBX,dword ptr [EBP + 0x8]
+00633331 : MOVZX EAX,byte ptr [EBX]
+00633334 : MOV ESI,EBX
+00633336 : JMP 0x0063333c
+00633338 : INC ESI
+00633339 : MOVZX EAX,byte ptr [ESI]
+0063333c : PUSH EAX
+0063333d : CALL 0x006398a7
+00633342 : POP ECX
+00633343 : TEST EAX,EAX
+00633345 : JNZ 0x00633338
+00633347 : MOV AL,byte ptr [ESI]
+00633349 : CMP AL,0x2d
+0063334b : JZ 0x00633357
+0063334d : CMP AL,0x2b
+0063334f : JZ 0x00633357
+00633351 : MOV byte ptr [EBP + 0xf],0x2b
+00633355 : JMP 0x0063335b
+00633357 : MOV byte ptr [EBP + 0xf],AL
+0063335a : INC ESI
+0063335b : PUSH dword ptr [EBP + 0x14]
+0063335e : PUSH dword ptr [EBP + 0x10]
+00633361 : PUSH EDI
+00633362 : PUSH ESI
+00633363 : CALL 0x00633181
+00633368 : ADD ESP,0x10
+0063336b : CMP ESI,dword ptr [EDI]
+0063336d : JNZ 0x00633371
+0063336f : MOV dword ptr [EDI],EBX
+00633371 : MOV ESI,0x7fffffff
+00633376 : CMP EBX,dword ptr [EDI]
+00633378 : JNZ 0x0063337e
+0063337a : TEST EAX,EAX
+0063337c : JNZ 0x00633395
+0063337e : CMP byte ptr [EBP + 0xf],0x2b
+00633382 : JNZ 0x00633388
+00633384 : CMP EAX,ESI
+00633386 : JA 0x00633395
+00633388 : CMP byte ptr [EBP + 0xf],0x2d
+0063338c : JNZ 0x006333bc
+0063338e : CMP EAX,0x80000000
+00633393 : JBE 0x006333ba
+00633395 : CALL 0x0063ab82
+0063339a : MOV dword ptr [EAX],0x22
+006333a0 : MOV EAX,dword ptr [EBP + 0x14]
+006333a3 : TEST EAX,EAX
+006333a5 : JZ 0x006333ad
+006333a7 : MOV dword ptr [EAX],0x1
+006333ad : XOR EAX,EAX
+006333af : CMP byte ptr [EBP + 0xf],0x2d
+006333b3 : SETZ AL
+006333b6 : ADD EAX,ESI
+006333b8 : JMP 0x006333bc
+006333ba : NEG EAX
+006333bc : POP EDI
+006333bd : POP ESI
+006333be : POP EBX
+006333bf : POP EBP
+006333c0 : RET

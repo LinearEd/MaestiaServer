@@ -1,0 +1,88 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_006bf610
+ENTRY    : 006bf610
+BODY     : [[006bf610, 006bf671]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined4 FUN_006bf610(void)
+
+{
+  void *_Dst;
+  uint _Size;
+  int iVar1;
+  int iVar2;
+  int unaff_ESI;
+  int local_4;
+  
+  _Size = *(uint *)(unaff_ESI + 0x54);
+  if (_Size == 0) {
+    iVar2 = 0x200;
+  }
+  else {
+    iVar2 = (_Size >> 2) + _Size;
+  }
+  iVar1 = FUN_0068a220(*(undefined4 *)(unaff_ESI + 0xa8),3,_Size,iVar2,
+                       *(undefined4 *)(unaff_ESI + 0x4c),&local_4);
+  *(int *)(unaff_ESI + 0x4c) = iVar1;
+  if (local_4 != 0) {
+    return 0xffffffff;
+  }
+  _Dst = (void *)(iVar1 + iVar2 * 2);
+  *(void **)(unaff_ESI + 0x50) = _Dst;
+  _memmove(_Dst,(void *)(iVar1 + _Size * 2),_Size);
+  *(int *)(unaff_ESI + 0x54) = iVar2;
+  return 0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006bf610 : PUSH ECX
+006bf611 : MOV EAX,dword ptr [ESI + 0xa8]
+006bf617 : PUSH EBX
+006bf618 : PUSH EDI
+006bf619 : MOV EDI,dword ptr [ESI + 0x54]
+006bf61c : TEST EDI,EDI
+006bf61e : JNZ 0x006bf627
+006bf620 : MOV EBX,0x200
+006bf625 : JMP 0x006bf62e
+006bf627 : MOV EBX,EDI
+006bf629 : SHR EBX,0x2
+006bf62c : ADD EBX,EDI
+006bf62e : MOV EDX,dword ptr [ESI + 0x4c]
+006bf631 : LEA ECX,[ESP + 0x8]
+006bf635 : PUSH ECX
+006bf636 : PUSH EDX
+006bf637 : PUSH EBX
+006bf638 : PUSH EDI
+006bf639 : PUSH 0x3
+006bf63b : PUSH EAX
+006bf63c : CALL 0x0068a220
+006bf641 : ADD ESP,0x18
+006bf644 : CMP dword ptr [ESP + 0x8],0x0
+006bf649 : MOV dword ptr [ESI + 0x4c],EAX
+006bf64c : JZ 0x006bf655
+006bf64e : POP EDI
+006bf64f : OR EAX,0xffffffff
+006bf652 : POP EBX
+006bf653 : POP ECX
+006bf654 : RET
+006bf655 : LEA ECX,[EAX + EBX*0x2]
+006bf658 : PUSH EDI
+006bf659 : LEA EAX,[EAX + EDI*0x2]
+006bf65c : PUSH EAX
+006bf65d : PUSH ECX
+006bf65e : MOV dword ptr [ESI + 0x50],ECX
+006bf661 : CALL 0x00636880
+006bf666 : ADD ESP,0xc
+006bf669 : POP EDI
+006bf66a : MOV dword ptr [ESI + 0x54],EBX
+006bf66d : XOR EAX,EAX
+006bf66f : POP EBX
+006bf670 : POP ECX
+006bf671 : RET

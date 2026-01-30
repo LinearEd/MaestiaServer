@@ -1,0 +1,83 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00519910
+ENTRY    : 00519910
+BODY     : [[00519910, 0051994c] [00519950, 00519967]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00519910(int *param_1)
+
+{
+  uint uVar1;
+  uint uVar2;
+  int *in_ECX;
+  
+  uVar1 = param_1[1];
+  if (uVar1 < (uint)in_ECX[1]) {
+    uVar2 = uVar1;
+    if ((uint)in_ECX[2] >> 1 <= uVar1) goto LAB_00519942;
+  }
+  else {
+    if (uVar1 < (uint)in_ECX[2]) goto LAB_00519942;
+    uVar2 = (uVar1 >> 2) + uVar1;
+  }
+  FUN_0057c3a0(in_ECX,uVar2);
+LAB_00519942:
+  uVar2 = 0;
+  in_ECX[1] = uVar1;
+  if (uVar1 != 0) {
+    do {
+      *(undefined4 *)(*in_ECX + uVar2 * 4) = *(undefined4 *)(*param_1 + uVar2 * 4);
+      uVar2 = uVar2 + 1;
+    } while (uVar2 < (uint)in_ECX[1]);
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00519910 : PUSH EBX
+00519911 : MOV EBX,dword ptr [ESP + 0x8]
+00519915 : PUSH ESI
+00519916 : PUSH EDI
+00519917 : MOV EDI,dword ptr [EBX + 0x4]
+0051991a : MOV ESI,ECX
+0051991c : CMP EDI,dword ptr [ESI + 0x4]
+0051991f : JNC 0x0051992d
+00519921 : MOV EAX,dword ptr [ESI + 0x8]
+00519924 : SHR EAX,0x1
+00519926 : CMP EDI,EAX
+00519928 : JNC 0x00519942
+0051992a : PUSH EDI
+0051992b : JMP 0x0051993c
+0051992d : CMP EDI,dword ptr [ESI + 0x8]
+00519930 : JC 0x00519942
+00519932 : MOV ECX,EDI
+00519934 : SHR ECX,0x2
+00519937 : ADD ECX,EDI
+00519939 : PUSH ECX
+0051993a : MOV ECX,ESI
+0051993c : PUSH ESI
+0051993d : CALL 0x0057c3a0
+00519942 : XOR EAX,EAX
+00519944 : MOV dword ptr [ESI + 0x4],EDI
+00519947 : TEST EDI,EDI
+00519949 : JBE 0x00519960
+0051994b : JMP 0x00519950
+00519950 : MOV EDX,dword ptr [EBX]
+00519952 : MOV EDX,dword ptr [EDX + EAX*0x4]
+00519955 : MOV ECX,dword ptr [ESI]
+00519957 : MOV dword ptr [ECX + EAX*0x4],EDX
+0051995a : INC EAX
+0051995b : CMP EAX,dword ptr [ESI + 0x4]
+0051995e : JC 0x00519950
+00519960 : POP EDI
+00519961 : MOV EAX,ESI
+00519963 : POP ESI
+00519964 : POP EBX
+00519965 : RET 0x4

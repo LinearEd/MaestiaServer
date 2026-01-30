@@ -1,0 +1,90 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005631e0
+ENTRY    : 005631e0
+BODY     : [[005631e0, 00563252]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_005631e0(void)
+
+{
+  undefined4 *puVar1;
+  LONG LVar2;
+  int *in_ECX;
+  int iVar3;
+  uint uVar4;
+  int local_8;
+  
+  if (*in_ECX != 0) {
+    iVar3 = 0;
+    local_8 = *(int *)(*in_ECX + 4) + 1;
+    do {
+      puVar1 = (undefined4 *)(iVar3 + 8 + *in_ECX);
+      if (*(int *)(iVar3 + 8 + *in_ECX) != -2) {
+        uVar4 = puVar1[3] & 0xfffffffc;
+        LVar2 = InterlockedExchangeAdd((LONG *)(uVar4 + 4),-1);
+        if (LVar2 == 1) {
+          FUN_00515cf0(uVar4);
+        }
+        *puVar1 = 0xfffffffe;
+      }
+      iVar3 = iVar3 + 0x10;
+      local_8 = local_8 + -1;
+    } while (local_8 != 0);
+    FUN_00515cf0(*in_ECX);
+    *in_ECX = 0;
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005631e0 : SUB ESP,0x8
+005631e3 : PUSH ESI
+005631e4 : MOV ESI,ECX
+005631e6 : MOV EAX,dword ptr [ESI]
+005631e8 : MOV dword ptr [ESP + 0x8],ESI
+005631ec : TEST EAX,EAX
+005631ee : JZ 0x0056324e
+005631f0 : MOV EAX,dword ptr [EAX + 0x4]
+005631f3 : PUSH EBX
+005631f4 : PUSH EBP
+005631f5 : MOV EBP,dword ptr [0x00b851cc]
+005631fb : XOR EBX,EBX
+005631fd : INC EAX
+005631fe : PUSH EDI
+005631ff : MOV dword ptr [ESP + 0x10],EAX
+00563203 : MOV EAX,dword ptr [ESI]
+00563205 : CMP dword ptr [EBX + EAX*0x1 + 0x8],-0x2
+0056320a : LEA EDI,[EBX + EAX*0x1 + 0x8]
+0056320e : JZ 0x00563233
+00563210 : MOV ESI,dword ptr [EDI + 0xc]
+00563213 : AND ESI,0xfffffffc
+00563216 : PUSH -0x1
+00563218 : LEA ECX,[ESI + 0x4]
+0056321b : PUSH ECX
+0056321c : CALL EBP
+0056321e : SUB EAX,0x1
+00563221 : JNZ 0x00563229
+00563223 : PUSH ESI
+00563224 : CALL 0x00515cf0
+00563229 : MOV ESI,dword ptr [ESP + 0x14]
+0056322d : MOV dword ptr [EDI],0xfffffffe
+00563233 : ADD EBX,0x10
+00563236 : SUB dword ptr [ESP + 0x10],0x1
+0056323b : JNZ 0x00563203
+0056323d : MOV EDX,dword ptr [ESI]
+0056323f : PUSH EDX
+00563240 : CALL 0x00515cf0
+00563245 : POP EDI
+00563246 : POP EBP
+00563247 : MOV dword ptr [ESI],0x0
+0056324d : POP EBX
+0056324e : POP ESI
+0056324f : ADD ESP,0x8
+00563252 : RET

@@ -1,0 +1,73 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00991c80
+ENTRY    : 00991c80
+BODY     : [[00991c80, 00991ccb]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00991c80(undefined4 param_1)
+
+{
+  int iVar1;
+  int iVar2;
+  int in_ECX;
+  int iVar3;
+  
+  iVar1 = *(int *)(in_ECX + 0x3c);
+  iVar3 = *(int *)(iVar1 + 0xc) * *(int *)(iVar1 + 8);
+  iVar2 = 0;
+  if (iVar3 < 1) {
+    *(undefined4 *)(in_ECX + 0x2c) = param_1;
+    return;
+  }
+  do {
+    if (*(int *)(*(int *)(iVar1 + 0x10) + iVar2 * 4) != 0) {
+      *(undefined4 *)(*(int *)(*(int *)(iVar1 + 0x10) + iVar2 * 4) + 0x18) = param_1;
+    }
+    iVar2 = iVar2 + 1;
+  } while (iVar2 < iVar3);
+  *(undefined4 *)(in_ECX + 0x2c) = param_1;
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00991c80 : PUSH EBP
+00991c81 : MOV EBP,ESP
+00991c83 : PUSH ESI
+00991c84 : PUSH EDI
+00991c85 : MOV EDI,dword ptr [ECX + 0x3c]
+00991c88 : MOV ESI,dword ptr [EDI + 0xc]
+00991c8b : IMUL ESI,dword ptr [EDI + 0x8]
+00991c8f : XOR EAX,EAX
+00991c91 : TEST ESI,ESI
+00991c93 : JLE 0x00991cc0
+00991c95 : PUSH EBX
+00991c96 : MOV EBX,dword ptr [EBP + 0x8]
+00991c99 : LEA ESP,[ESP]
+00991ca0 : MOV EDX,dword ptr [EDI + 0x10]
+00991ca3 : CMP dword ptr [EDX + EAX*0x4],0x0
+00991ca7 : LEA EDX,[EDX + EAX*0x4]
+00991caa : JZ 0x00991cb1
+00991cac : MOV EDX,dword ptr [EDX]
+00991cae : MOV dword ptr [EDX + 0x18],EBX
+00991cb1 : INC EAX
+00991cb2 : CMP EAX,ESI
+00991cb4 : JL 0x00991ca0
+00991cb6 : MOV dword ptr [ECX + 0x2c],EBX
+00991cb9 : POP EBX
+00991cba : POP EDI
+00991cbb : POP ESI
+00991cbc : POP EBP
+00991cbd : RET 0x4
+00991cc0 : MOV EAX,dword ptr [EBP + 0x8]
+00991cc3 : POP EDI
+00991cc4 : MOV dword ptr [ECX + 0x2c],EAX
+00991cc7 : POP ESI
+00991cc8 : POP EBP
+00991cc9 : RET 0x4

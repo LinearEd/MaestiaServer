@@ -8,17 +8,16 @@ namespace DevServer.Packets
     {
         public DPKUL_CHAR_RS_NPC()
         {
-             Length = Convert.ToUInt16(Marshal.SizeOf(this));
-
+            Length = Convert.ToUInt16(Marshal.SizeOf(this));
             Type = PacketType.DPKUL_CHAR_RS_NPC;
         }
 
-        public int UnknownInt;
-        public int UnknownInt2;
-        public int UnknownInt3;
-        public int UnknownInt4;
-        public int UnknownInt5;
-        public short UnknownShort;
-        public byte UnknownByte;
+        public int NpcUniqueId;    // Unique instance ID for this NPC spawn
+        public int NpcTemplateId;  // NPC type/template from game data
+        public int PositionX;      // X coordinate (encoded)
+        public int PositionY;      // Y coordinate (encoded)
+        public int PositionZ;      // Z coordinate (encoded)
+        public short Rotation;     // Facing direction
+        public byte NpcType;       // NPC type (0=normal, 1=quest, etc)
     }
 }

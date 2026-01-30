@@ -1,0 +1,150 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005d9ca0
+ENTRY    : 005d9ca0
+BODY     : [[005d9ca0, 005d9d70]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+uint FUN_005d9ca0(uint param_1,byte *param_2,uint param_3)
+
+{
+  byte *pbVar1;
+  int iVar2;
+  uint uVar3;
+  int in_ECX;
+  byte *pbVar4;
+  
+  uVar3 = (uint)*(byte *)(in_ECX + 0x5c);
+  if ((param_1 != *(byte *)(in_ECX + 0x5c)) ||
+     (uVar3 = param_3, param_3 != *(byte *)(in_ECX + 0x5d))) {
+    return uVar3 & 0xffffff00;
+  }
+  if (param_3 < 7) {
+    pbVar1 = (byte *)(in_ECX + 0x5e);
+    pbVar4 = param_2;
+    for (; param_2 = pbVar1, 3 < param_3; param_3 = param_3 - 4) {
+      if (*(int *)pbVar4 != *(int *)param_2) goto LAB_005d9d0d;
+      pbVar4 = pbVar4 + 4;
+      pbVar1 = param_2 + 4;
+    }
+  }
+  else {
+    pbVar4 = *(byte **)(in_ECX + 0x60);
+    for (; 3 < param_3; param_3 = param_3 - 4) {
+      if (*(int *)pbVar4 != *(int *)param_2) goto LAB_005d9d0d;
+      param_2 = param_2 + 4;
+      pbVar4 = pbVar4 + 4;
+    }
+  }
+  if (param_3 == 0) {
+    return 1;
+  }
+LAB_005d9d0d:
+  iVar2 = (uint)*pbVar4 - (uint)*param_2;
+  if (iVar2 == 0) {
+    if (param_3 < 2) {
+      return 1;
+    }
+    iVar2 = (uint)pbVar4[1] - (uint)param_2[1];
+    if (iVar2 == 0) {
+      if (param_3 < 3) {
+        return 1;
+      }
+      iVar2 = (uint)pbVar4[2] - (uint)param_2[2];
+      if (iVar2 == 0) {
+        if (param_3 < 4) {
+          return 1;
+        }
+        iVar2 = (uint)pbVar4[3] - (uint)param_2[3];
+      }
+    }
+  }
+  return CONCAT31((int3)(iVar2 >> 0x1f),(iVar2 >> 0x1f | 1U) == 0);
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005d9ca0 : MOVZX EAX,byte ptr [ECX + 0x5c]
+005d9ca4 : CMP dword ptr [ESP + 0x4],EAX
+005d9ca8 : JNZ 0x005d9d6c
+005d9cae : MOVZX EDX,byte ptr [ECX + 0x5d]
+005d9cb2 : MOV EAX,dword ptr [ESP + 0xc]
+005d9cb6 : CMP EAX,EDX
+005d9cb8 : JNZ 0x005d9d6c
+005d9cbe : PUSH ESI
+005d9cbf : PUSH EDI
+005d9cc0 : MOV ESI,EAX
+005d9cc2 : CMP EAX,0x6
+005d9cc5 : JA 0x005d9ce9
+005d9cc7 : MOV EDX,dword ptr [ESP + 0x10]
+005d9ccb : ADD ECX,0x5e
+005d9cce : CMP EAX,0x4
+005d9cd1 : JC 0x005d9d09
+005d9cd3 : MOV EAX,dword ptr [EDX]
+005d9cd5 : CMP EAX,dword ptr [ECX]
+005d9cd7 : JNZ 0x005d9d0d
+005d9cd9 : SUB ESI,0x4
+005d9cdc : ADD ECX,0x4
+005d9cdf : ADD EDX,0x4
+005d9ce2 : CMP ESI,0x4
+005d9ce5 : JNC 0x005d9cd3
+005d9ce7 : JMP 0x005d9d09
+005d9ce9 : MOV EDX,dword ptr [ECX + 0x60]
+005d9cec : MOV ECX,dword ptr [ESP + 0x10]
+005d9cf0 : CMP EAX,0x4
+005d9cf3 : JC 0x005d9d09
+005d9cf5 : MOV EAX,dword ptr [EDX]
+005d9cf7 : CMP EAX,dword ptr [ECX]
+005d9cf9 : JNZ 0x005d9d0d
+005d9cfb : SUB ESI,0x4
+005d9cfe : ADD ECX,0x4
+005d9d01 : ADD EDX,0x4
+005d9d04 : CMP ESI,0x4
+005d9d07 : JNC 0x005d9cf5
+005d9d09 : TEST ESI,ESI
+005d9d0b : JZ 0x005d9d5c
+005d9d0d : MOVZX EDI,byte ptr [ECX]
+005d9d10 : MOVZX EAX,byte ptr [EDX]
+005d9d13 : SUB EAX,EDI
+005d9d15 : JNZ 0x005d9d48
+005d9d17 : CMP ESI,0x1
+005d9d1a : JBE 0x005d9d5c
+005d9d1c : MOVZX EAX,byte ptr [EDX + 0x1]
+005d9d20 : MOVZX EDI,byte ptr [ECX + 0x1]
+005d9d24 : SUB EAX,EDI
+005d9d26 : JNZ 0x005d9d48
+005d9d28 : CMP ESI,0x2
+005d9d2b : JBE 0x005d9d5c
+005d9d2d : MOVZX EAX,byte ptr [EDX + 0x2]
+005d9d31 : MOVZX EDI,byte ptr [ECX + 0x2]
+005d9d35 : SUB EAX,EDI
+005d9d37 : JNZ 0x005d9d48
+005d9d39 : CMP ESI,0x3
+005d9d3c : JBE 0x005d9d5c
+005d9d3e : MOVZX EAX,byte ptr [EDX + 0x3]
+005d9d42 : MOVZX ECX,byte ptr [ECX + 0x3]
+005d9d46 : SUB EAX,ECX
+005d9d48 : SAR EAX,0x1f
+005d9d4b : OR EAX,0x1
+005d9d4e : XOR EDX,EDX
+005d9d50 : TEST EAX,EAX
+005d9d52 : SETZ DL
+005d9d55 : POP EDI
+005d9d56 : MOV AL,DL
+005d9d58 : POP ESI
+005d9d59 : RET 0xc
+005d9d5c : XOR EAX,EAX
+005d9d5e : XOR EDX,EDX
+005d9d60 : TEST EAX,EAX
+005d9d62 : SETZ DL
+005d9d65 : POP EDI
+005d9d66 : MOV AL,DL
+005d9d68 : POP ESI
+005d9d69 : RET 0xc
+005d9d6c : XOR AL,AL
+005d9d6e : RET 0xc

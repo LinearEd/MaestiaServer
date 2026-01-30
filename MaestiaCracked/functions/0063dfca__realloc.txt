@@ -1,0 +1,321 @@
+PROGRAM  : Maestia.exe
+FUNCTION : _realloc
+ENTRY    : 0063dfca
+BODY     : [[0063dfca, 0063e107] [0063e117, 0063e1e4]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* WARNING: Function: __SEH_prolog4 replaced with injection: SEH_prolog4 */
+/* WARNING: Function: __SEH_epilog4 replaced with injection: EH_epilog3 */
+/* Library Function - Single Match
+    _realloc
+   
+   Library: Visual Studio 2008 Release */
+
+void * __cdecl _realloc(void *_Memory,size_t _NewSize)
+
+{
+  void *pvVar1;
+  int iVar2;
+  uint uVar3;
+  int *piVar4;
+  DWORD DVar5;
+  LPVOID pvVar6;
+  int local_24;
+  void *local_20;
+  
+  if (_Memory == (void *)0x0) {
+    pvVar1 = _malloc(_NewSize);
+    return pvVar1;
+  }
+  if (_NewSize == 0) {
+    _free(_Memory);
+    return (void *)0x0;
+  }
+  if (DAT_01728d40 == 3) {
+    do {
+      local_20 = (void *)0x0;
+      if (0xffffffe0 < _NewSize) goto LAB_0063e1a3;
+      __lock(4);
+      local_24 = ___sbh_find_block(_Memory);
+      if (local_24 != 0) {
+        if (_NewSize <= DAT_01728d4c) {
+          iVar2 = ___sbh_resize_block(local_24,_Memory,_NewSize);
+          if (iVar2 == 0) {
+            local_20 = (void *)___sbh_alloc_block(_NewSize);
+            if (local_20 != (void *)0x0) {
+              uVar3 = *(int *)((int)_Memory + -4) - 1;
+              if (_NewSize <= uVar3) {
+                uVar3 = _NewSize;
+              }
+              _memcpy(local_20,_Memory,uVar3);
+              local_24 = ___sbh_find_block(_Memory);
+              ___sbh_free_block(local_24,_Memory);
+            }
+          }
+          else {
+            local_20 = _Memory;
+          }
+        }
+        if (local_20 == (void *)0x0) {
+          if (_NewSize == 0) {
+            _NewSize = 1;
+          }
+          _NewSize = _NewSize + 0xf & 0xfffffff0;
+          local_20 = HeapAlloc(DAT_00d7c09c,0,_NewSize);
+          if (local_20 != (LPVOID)0x0) {
+            uVar3 = *(int *)((int)_Memory + -4) - 1;
+            if (_NewSize <= uVar3) {
+              uVar3 = _NewSize;
+            }
+            _memcpy(local_20,_Memory,uVar3);
+            ___sbh_free_block(local_24,_Memory);
+          }
+        }
+      }
+      FUN_0063e10e();
+      if (local_24 == 0) {
+        if (_NewSize == 0) {
+          _NewSize = 1;
+        }
+        _NewSize = _NewSize + 0xf & 0xfffffff0;
+        local_20 = HeapReAlloc(DAT_00d7c09c,0,_Memory,_NewSize);
+      }
+      if (local_20 != (void *)0x0) {
+        return local_20;
+      }
+      if (DAT_00d7c0a0 == 0) {
+        piVar4 = __errno();
+        if (local_24 != 0) {
+          *piVar4 = 0xc;
+          return (void *)0x0;
+        }
+        goto LAB_0063e1d0;
+      }
+      iVar2 = __callnewh(_NewSize);
+    } while (iVar2 != 0);
+    piVar4 = __errno();
+    if (local_24 != 0) goto LAB_0063e1af;
+  }
+  else {
+    do {
+      if (0xffffffe0 < _NewSize) goto LAB_0063e1a3;
+      if (_NewSize == 0) {
+        _NewSize = 1;
+      }
+      pvVar6 = HeapReAlloc(DAT_00d7c09c,0,_Memory,_NewSize);
+      if (pvVar6 != (LPVOID)0x0) {
+        return pvVar6;
+      }
+      if (DAT_00d7c0a0 == 0) {
+        piVar4 = __errno();
+LAB_0063e1d0:
+        DVar5 = GetLastError();
+        iVar2 = __get_errno_from_oserr(DVar5);
+        *piVar4 = iVar2;
+        return (void *)0x0;
+      }
+      iVar2 = __callnewh(_NewSize);
+    } while (iVar2 != 0);
+    piVar4 = __errno();
+  }
+  DVar5 = GetLastError();
+  iVar2 = __get_errno_from_oserr(DVar5);
+  *piVar4 = iVar2;
+  return (void *)0x0;
+LAB_0063e1a3:
+  __callnewh(_NewSize);
+  piVar4 = __errno();
+LAB_0063e1af:
+  *piVar4 = 0xc;
+  return (void *)0x0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0063dfca : PUSH 0x10
+0063dfcc : PUSH 0xcecde8
+0063dfd1 : CALL 0x0064c228
+0063dfd6 : MOV EBX,dword ptr [EBP + 0x8]
+0063dfd9 : TEST EBX,EBX
+0063dfdb : JNZ 0x0063dfeb
+0063dfdd : PUSH dword ptr [EBP + 0xc]
+0063dfe0 : CALL 0x00636043
+0063dfe5 : POP ECX
+0063dfe6 : JMP 0x0063e1b7
+0063dfeb : MOV ESI,dword ptr [EBP + 0xc]
+0063dfee : TEST ESI,ESI
+0063dff0 : JNZ 0x0063dffe
+0063dff2 : PUSH EBX
+0063dff3 : CALL 0x0063610d
+0063dff8 : POP ECX
+0063dff9 : JMP 0x0063e1b5
+0063dffe : CMP dword ptr [0x01728d40],0x3
+0063e005 : JNZ 0x0063e19e
+0063e00b : XOR EDI,EDI
+0063e00d : MOV dword ptr [EBP + -0x1c],EDI
+0063e010 : CMP ESI,-0x20
+0063e013 : JA 0x0063e1a3
+0063e019 : PUSH 0x4
+0063e01b : CALL 0x0064c598
+0063e020 : POP ECX
+0063e021 : MOV dword ptr [EBP + -0x4],EDI
+0063e024 : PUSH EBX
+0063e025 : CALL 0x0064cc12
+0063e02a : POP ECX
+0063e02b : MOV dword ptr [EBP + -0x20],EAX
+0063e02e : CMP EAX,EDI
+0063e030 : JZ 0x0063e0d4
+0063e036 : CMP ESI,dword ptr [0x01728d4c]
+0063e03c : JA 0x0063e087
+0063e03e : PUSH ESI
+0063e03f : PUSH EBX
+0063e040 : PUSH EAX
+0063e041 : CALL 0x0064d110
+0063e046 : ADD ESP,0xc
+0063e049 : TEST EAX,EAX
+0063e04b : JZ 0x0063e052
+0063e04d : MOV dword ptr [EBP + -0x1c],EBX
+0063e050 : JMP 0x0063e087
+0063e052 : PUSH ESI
+0063e053 : CALL 0x0064d3f1
+0063e058 : POP ECX
+0063e059 : MOV dword ptr [EBP + -0x1c],EAX
+0063e05c : CMP EAX,EDI
+0063e05e : JZ 0x0063e087
+0063e060 : MOV EAX,dword ptr [EBX + -0x4]
+0063e063 : DEC EAX
+0063e064 : CMP EAX,ESI
+0063e066 : JC 0x0063e06a
+0063e068 : MOV EAX,ESI
+0063e06a : PUSH EAX
+0063e06b : PUSH EBX
+0063e06c : PUSH dword ptr [EBP + -0x1c]
+0063e06f : CALL 0x0063ae40
+0063e074 : PUSH EBX
+0063e075 : CALL 0x0064cc12
+0063e07a : MOV dword ptr [EBP + -0x20],EAX
+0063e07d : PUSH EBX
+0063e07e : PUSH EAX
+0063e07f : CALL 0x0064cc42
+0063e084 : ADD ESP,0x18
+0063e087 : CMP dword ptr [EBP + -0x1c],EDI
+0063e08a : JNZ 0x0063e0d4
+0063e08c : CMP ESI,EDI
+0063e08e : JNZ 0x0063e096
+0063e090 : XOR ESI,ESI
+0063e092 : INC ESI
+0063e093 : MOV dword ptr [EBP + 0xc],ESI
+0063e096 : ADD ESI,0xf
+0063e099 : AND ESI,0xfffffff0
+0063e09c : MOV dword ptr [EBP + 0xc],ESI
+0063e09f : PUSH ESI
+0063e0a0 : PUSH EDI
+0063e0a1 : PUSH dword ptr [0x00d7c09c]
+0063e0a7 : CALL dword ptr [0x00b852c8]
+0063e0ad : MOV dword ptr [EBP + -0x1c],EAX
+0063e0b0 : CMP EAX,EDI
+0063e0b2 : JZ 0x0063e0d4
+0063e0b4 : MOV EAX,dword ptr [EBX + -0x4]
+0063e0b7 : DEC EAX
+0063e0b8 : CMP EAX,ESI
+0063e0ba : JC 0x0063e0be
+0063e0bc : MOV EAX,ESI
+0063e0be : PUSH EAX
+0063e0bf : PUSH EBX
+0063e0c0 : PUSH dword ptr [EBP + -0x1c]
+0063e0c3 : CALL 0x0063ae40
+0063e0c8 : PUSH EBX
+0063e0c9 : PUSH dword ptr [EBP + -0x20]
+0063e0cc : CALL 0x0064cc42
+0063e0d1 : ADD ESP,0x14
+0063e0d4 : MOV dword ptr [EBP + -0x4],0xfffffffe
+0063e0db : CALL 0x0063e10e
+0063e0e0 : CMP dword ptr [EBP + -0x20],0x0
+0063e0e4 : JNZ 0x0063e117
+0063e0e6 : TEST ESI,ESI
+0063e0e8 : JNZ 0x0063e0eb
+0063e0ea : INC ESI
+0063e0eb : ADD ESI,0xf
+0063e0ee : AND ESI,0xfffffff0
+0063e0f1 : MOV dword ptr [EBP + 0xc],ESI
+0063e0f4 : PUSH ESI
+0063e0f5 : PUSH EBX
+0063e0f6 : PUSH 0x0
+0063e0f8 : PUSH dword ptr [0x00d7c09c]
+0063e0fe : CALL dword ptr [0x00b852b4]
+0063e104 : MOV EDI,EAX
+0063e106 : JMP 0x0063e11a
+0063e117 : MOV EDI,dword ptr [EBP + -0x1c]
+0063e11a : TEST EDI,EDI
+0063e11c : JNZ 0x0063e1e1
+0063e122 : CMP dword ptr [0x00d7c0a0],EDI
+0063e128 : JZ 0x0063e156
+0063e12a : PUSH ESI
+0063e12b : CALL 0x0063fe60
+0063e130 : POP ECX
+0063e131 : TEST EAX,EAX
+0063e133 : JNZ 0x0063e00b
+0063e139 : CALL 0x0063ab82
+0063e13e : CMP dword ptr [EBP + -0x20],EDI
+0063e141 : JNZ 0x0063e1af
+0063e143 : MOV ESI,EAX
+0063e145 : CALL dword ptr [0x00b85128]
+0063e14b : PUSH EAX
+0063e14c : CALL 0x0063ab40
+0063e151 : POP ECX
+0063e152 : MOV dword ptr [ESI],EAX
+0063e154 : JMP 0x0063e1b5
+0063e156 : TEST EDI,EDI
+0063e158 : JNZ 0x0063e1e1
+0063e15e : CALL 0x0063ab82
+0063e163 : CMP dword ptr [EBP + -0x20],EDI
+0063e166 : JZ 0x0063e1d0
+0063e168 : MOV dword ptr [EAX],0xc
+0063e16e : JMP 0x0063e1e1
+0063e170 : TEST ESI,ESI
+0063e172 : JNZ 0x0063e175
+0063e174 : INC ESI
+0063e175 : PUSH ESI
+0063e176 : PUSH EBX
+0063e177 : PUSH 0x0
+0063e179 : PUSH dword ptr [0x00d7c09c]
+0063e17f : CALL dword ptr [0x00b852b4]
+0063e185 : MOV EDI,EAX
+0063e187 : TEST EDI,EDI
+0063e189 : JNZ 0x0063e1e1
+0063e18b : CMP dword ptr [0x00d7c0a0],EAX
+0063e191 : JZ 0x0063e1c7
+0063e193 : PUSH ESI
+0063e194 : CALL 0x0063fe60
+0063e199 : POP ECX
+0063e19a : TEST EAX,EAX
+0063e19c : JZ 0x0063e1bd
+0063e19e : CMP ESI,-0x20
+0063e1a1 : JBE 0x0063e170
+0063e1a3 : PUSH ESI
+0063e1a4 : CALL 0x0063fe60
+0063e1a9 : POP ECX
+0063e1aa : CALL 0x0063ab82
+0063e1af : MOV dword ptr [EAX],0xc
+0063e1b5 : XOR EAX,EAX
+0063e1b7 : CALL 0x0064c26d
+0063e1bc : RET
+0063e1bd : CALL 0x0063ab82
+0063e1c2 : JMP 0x0063e143
+0063e1c7 : TEST EDI,EDI
+0063e1c9 : JNZ 0x0063e1e1
+0063e1cb : CALL 0x0063ab82
+0063e1d0 : MOV ESI,EAX
+0063e1d2 : CALL dword ptr [0x00b85128]
+0063e1d8 : PUSH EAX
+0063e1d9 : CALL 0x0063ab40
+0063e1de : MOV dword ptr [ESI],EAX
+0063e1e0 : POP ECX
+0063e1e1 : MOV EAX,EDI
+0063e1e3 : JMP 0x0063e1b7

@@ -1,0 +1,60 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005686c0
+ENTRY    : 005686c0
+BODY     : [[005686c0, 00568707]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_005686c0(int param_1,char param_2)
+
+{
+  int in_ECX;
+  
+  if ((*(int *)(in_ECX + 4) != 0) && ((*(byte *)(in_ECX + 8) & 1) == 0)) {
+    FUN_00503db0();
+  }
+  *(int *)(in_ECX + 4) = param_1;
+  if (param_2 == '\0') {
+    *(byte *)(in_ECX + 8) = *(byte *)(in_ECX + 8) & 0xfe;
+  }
+  else {
+    *(byte *)(in_ECX + 8) = *(byte *)(in_ECX + 8) | 1;
+  }
+  if ((param_1 != 0) && ((*(byte *)(in_ECX + 8) & 1) == 0)) {
+    *(uint *)(param_1 + 8) = *(int *)(param_1 + 8) + 1U & 0x8fffffff;
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005686c0 : PUSH ESI
+005686c1 : MOV ESI,ECX
+005686c3 : MOV ECX,dword ptr [ESI + 0x4]
+005686c6 : TEST ECX,ECX
+005686c8 : JZ 0x005686d5
+005686ca : TEST byte ptr [ESI + 0x8],0x1
+005686ce : JNZ 0x005686d5
+005686d0 : CALL 0x00503db0
+005686d5 : CMP byte ptr [ESP + 0xc],0x0
+005686da : MOV EAX,dword ptr [ESP + 0x8]
+005686de : MOV dword ptr [ESI + 0x4],EAX
+005686e1 : JZ 0x005686e9
+005686e3 : OR byte ptr [ESI + 0x8],0x1
+005686e7 : JMP 0x005686ed
+005686e9 : AND byte ptr [ESI + 0x8],0xfe
+005686ed : TEST EAX,EAX
+005686ef : JZ 0x00568704
+005686f1 : TEST byte ptr [ESI + 0x8],0x1
+005686f5 : JNZ 0x00568704
+005686f7 : MOV ECX,dword ptr [EAX + 0x8]
+005686fa : INC ECX
+005686fb : AND ECX,0x8fffffff
+00568701 : MOV dword ptr [EAX + 0x8],ECX
+00568704 : POP ESI
+00568705 : RET 0x8

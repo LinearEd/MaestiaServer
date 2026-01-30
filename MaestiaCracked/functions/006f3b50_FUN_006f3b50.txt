@@ -1,0 +1,83 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_006f3b50
+ENTRY    : 006f3b50
+BODY     : [[006f3b50, 006f3bcc]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined4 FUN_006f3b50(int param_1)
+
+{
+  HANDLE pvVar1;
+  int iVar2;
+  
+  if (param_1 != 0) {
+    FUN_006ee470(L"AvSocket::SendBlockModeThread - begin");
+    do {
+      if (*(int *)(param_1 + 0x242c) == 0) {
+        pvVar1 = CreateEventA((LPSECURITY_ATTRIBUTES)0x0,1,0,(LPCSTR)0x0);
+        *(HANDLE *)(param_1 + 0x242c) = pvVar1;
+      }
+      pvVar1 = *(HANDLE *)(param_1 + 0x242c);
+      if (pvVar1 != (HANDLE)0x0) {
+        WaitForSingleObject(pvVar1,1000);
+        ResetEvent(pvVar1);
+      }
+      iVar2 = FUN_006f3280();
+    } while (iVar2 != 0);
+    FUN_006ee470(L"LOG - [AvSocket::SendBlockModeThread] Exit Thread\n");
+  }
+  return 0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006f3b50 : PUSH EBP
+006f3b51 : MOV EBP,ESP
+006f3b53 : AND ESP,0xfffffff8
+006f3b56 : PUSH ECX
+006f3b57 : PUSH EBX
+006f3b58 : PUSH ESI
+006f3b59 : PUSH EDI
+006f3b5a : MOV EDI,dword ptr [EBP + 0x8]
+006f3b5d : TEST EDI,EDI
+006f3b5f : JZ 0x006f3bc2
+006f3b61 : PUSH 0xbf7568
+006f3b66 : CALL 0x006ee470
+006f3b6b : MOV EBX,dword ptr [0x00b85100]
+006f3b71 : ADD ESP,0x4
+006f3b74 : CMP dword ptr [EDI + 0x242c],0x0
+006f3b7b : JNZ 0x006f3b91
+006f3b7d : PUSH 0x0
+006f3b7f : PUSH 0x0
+006f3b81 : PUSH 0x1
+006f3b83 : PUSH 0x0
+006f3b85 : CALL dword ptr [0x00b85234]
+006f3b8b : MOV dword ptr [EDI + 0x242c],EAX
+006f3b91 : MOV ESI,dword ptr [EDI + 0x242c]
+006f3b97 : TEST ESI,ESI
+006f3b99 : JZ 0x006f3baa
+006f3b9b : PUSH 0x3e8
+006f3ba0 : PUSH ESI
+006f3ba1 : CALL EBX
+006f3ba3 : PUSH ESI
+006f3ba4 : CALL dword ptr [0x00b851dc]
+006f3baa : MOV ECX,EDI
+006f3bac : CALL 0x006f3280
+006f3bb1 : TEST EAX,EAX
+006f3bb3 : JNZ 0x006f3b74
+006f3bb5 : PUSH 0xbf75b8
+006f3bba : CALL 0x006ee470
+006f3bbf : ADD ESP,0x4
+006f3bc2 : POP EDI
+006f3bc3 : POP ESI
+006f3bc4 : XOR EAX,EAX
+006f3bc6 : POP EBX
+006f3bc7 : MOV ESP,EBP
+006f3bc9 : POP EBP
+006f3bca : RET 0x4

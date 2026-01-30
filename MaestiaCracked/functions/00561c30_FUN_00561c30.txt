@@ -1,0 +1,86 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00561c30
+ENTRY    : 00561c30
+BODY     : [[00561c30, 00561ca0]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00561c30(int *param_1,int param_2,char param_3)
+
+{
+  LPCRITICAL_SECTION lpCriticalSection;
+  uint uVar1;
+  int iVar2;
+  int iVar3;
+  int in_ECX;
+  
+  uVar1 = *(uint *)(in_ECX + 4);
+  iVar2 = *(int *)(param_2 + 0x1c);
+  lpCriticalSection = (LPCRITICAL_SECTION)(iVar2 + 0x50);
+  EnterCriticalSection(lpCriticalSection);
+  if (*(uint *)(iVar2 + 0x48) <= uVar1) {
+    LeaveCriticalSection(lpCriticalSection);
+    return;
+  }
+  iVar2 = *(int *)(*(int *)(iVar2 + 0x44) + uVar1 * 4);
+  LeaveCriticalSection(lpCriticalSection);
+  if ((iVar2 != 0) &&
+     (0 < *(int *)(*(int *)(*(int *)(*(int *)(iVar2 + 0x1c) + 0xc) + 0x20) + 0x100))) {
+    if ((param_3 != '\0') && (iVar3 = (**(code **)(*param_1 + 0x48))(), iVar2 == iVar3)) {
+      return;
+    }
+    FUN_0058adf0(iVar2);
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00561c30 : MOV EAX,dword ptr [ESP + 0x8]
+00561c34 : PUSH EBX
+00561c35 : MOV EBX,dword ptr [ECX + 0x4]
+00561c38 : PUSH ESI
+00561c39 : MOV ESI,dword ptr [EAX + 0x1c]
+00561c3c : PUSH EDI
+00561c3d : LEA EDI,[ESI + 0x50]
+00561c40 : PUSH EDI
+00561c41 : CALL dword ptr [0x00b85118]
+00561c47 : PUSH EDI
+00561c48 : CMP EBX,dword ptr [ESI + 0x48]
+00561c4b : JC 0x00561c59
+00561c4d : CALL dword ptr [0x00b8511c]
+00561c53 : POP EDI
+00561c54 : POP ESI
+00561c55 : POP EBX
+00561c56 : RET 0xc
+00561c59 : MOV ECX,dword ptr [ESI + 0x44]
+00561c5c : MOV ESI,dword ptr [ECX + EBX*0x4]
+00561c5f : CALL dword ptr [0x00b8511c]
+00561c65 : TEST ESI,ESI
+00561c67 : JZ 0x00561c9b
+00561c69 : MOV EDX,dword ptr [ESI + 0x1c]
+00561c6c : MOV EAX,dword ptr [EDX + 0xc]
+00561c6f : MOV ECX,dword ptr [EAX + 0x20]
+00561c72 : CMP dword ptr [ECX + 0x100],0x0
+00561c79 : JLE 0x00561c9b
+00561c7b : CMP byte ptr [ESP + 0x18],0x0
+00561c80 : MOV EDI,dword ptr [ESP + 0x10]
+00561c84 : JZ 0x00561c93
+00561c86 : MOV EDX,dword ptr [EDI]
+00561c88 : MOV EAX,dword ptr [EDX + 0x48]
+00561c8b : MOV ECX,EDI
+00561c8d : CALL EAX
+00561c8f : CMP ESI,EAX
+00561c91 : JZ 0x00561c9b
+00561c93 : PUSH ESI
+00561c94 : MOV ECX,EDI
+00561c96 : CALL 0x0058adf0
+00561c9b : POP EDI
+00561c9c : POP ESI
+00561c9d : POP EBX
+00561c9e : RET 0xc

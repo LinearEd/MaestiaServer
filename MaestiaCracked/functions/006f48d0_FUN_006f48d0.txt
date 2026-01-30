@@ -1,0 +1,131 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_006f48d0
+ENTRY    : 006f48d0
+BODY     : [[006f48d0, 006f49b0]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_006f48d0(void)
+
+{
+  uint uVar1;
+  int iVar2;
+  LPCRITICAL_SECTION local_24;
+  char *local_20;
+  undefined4 local_1c;
+  int local_18;
+  undefined4 local_14;
+  void *local_10;
+  undefined1 *puStack_c;
+  undefined4 local_8;
+  
+  local_8 = 0xffffffff;
+  puStack_c = &LAB_00b3028e;
+  local_10 = ExceptionList;
+  uVar1 = DAT_00d66fa0 ^ (uint)&stack0xfffffffc;
+  ExceptionList = &local_10;
+  local_18 = 0;
+  local_24 = (LPCRITICAL_SECTION)&DAT_00d72354;
+  local_20 = ".\\AvIoBase.cpp";
+  local_1c = 0x1b2;
+  local_14 = 1;
+  FUN_006ef1a0(&local_24);
+  local_8 = 0;
+  if (DAT_00da9d3c != 0) {
+    DAT_00da9d3c = 0;
+    FUN_006ee470(L"LOG - [AvIoBase::AvIOCPWorkerThread] Post Destroy Msg\n",uVar1);
+    iVar2 = 0;
+    if (0 < (int)DAT_00da9d40) {
+      do {
+        PostQueuedCompletionStatus(DAT_00d6a620,0,0,(LPOVERLAPPED)0x0);
+        iVar2 = iVar2 + 1;
+      } while (iVar2 < (int)DAT_00da9d40);
+    }
+    WaitForMultipleObjects(DAT_00da9d40,(HANDLE *)&DAT_00d8be40,1,2000);
+    CloseHandle(DAT_00d6a620);
+  }
+  local_8 = 0xffffffff;
+  if (local_18 != 0) {
+    LeaveCriticalSection(local_24);
+  }
+  ExceptionList = local_10;
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006f48d0 : PUSH EBP
+006f48d1 : MOV EBP,ESP
+006f48d3 : PUSH -0x1
+006f48d5 : PUSH 0xb3028e
+006f48da : MOV EAX,FS:[0x0]
+006f48e0 : PUSH EAX
+006f48e1 : SUB ESP,0x14
+006f48e4 : PUSH EBX
+006f48e5 : PUSH ESI
+006f48e6 : PUSH EDI
+006f48e7 : MOV EAX,[0x00d66fa0]
+006f48ec : XOR EAX,EBP
+006f48ee : PUSH EAX
+006f48ef : LEA EAX,[EBP + -0xc]
+006f48f2 : MOV FS:[0x0],EAX
+006f48f8 : LEA EAX,[EBP + -0x20]
+006f48fb : XOR EBX,EBX
+006f48fd : PUSH EAX
+006f48fe : MOV dword ptr [EBP + -0x14],EBX
+006f4901 : MOV dword ptr [EBP + -0x20],0xd72354
+006f4908 : MOV dword ptr [EBP + -0x1c],0xbf77bc
+006f490f : MOV dword ptr [EBP + -0x18],0x1b2
+006f4916 : MOV dword ptr [EBP + -0x10],0x1
+006f491d : CALL 0x006ef1a0
+006f4922 : MOV dword ptr [EBP + -0x4],EBX
+006f4925 : CMP dword ptr [0x00da9d3c],EBX
+006f492b : JZ 0x006f4986
+006f492d : PUSH 0xbf77d0
+006f4932 : MOV dword ptr [0x00da9d3c],EBX
+006f4938 : CALL 0x006ee470
+006f493d : MOV EAX,[0x00da9d40]
+006f4942 : ADD ESP,0x4
+006f4945 : XOR ESI,ESI
+006f4947 : CMP EAX,EBX
+006f4949 : JLE 0x006f4967
+006f494b : MOV EDI,dword ptr [0x00b85388]
+006f4951 : MOV EDX,dword ptr [0x00d6a620]
+006f4957 : PUSH EBX
+006f4958 : PUSH EBX
+006f4959 : PUSH EBX
+006f495a : PUSH EDX
+006f495b : CALL EDI
+006f495d : MOV EAX,[0x00da9d40]
+006f4962 : INC ESI
+006f4963 : CMP ESI,EAX
+006f4965 : JL 0x006f4951
+006f4967 : PUSH 0x7d0
+006f496c : PUSH 0x1
+006f496e : PUSH 0xd8be40
+006f4973 : PUSH EAX
+006f4974 : CALL dword ptr [0x00b85384]
+006f497a : MOV EAX,[0x00d6a620]
+006f497f : PUSH EAX
+006f4980 : CALL dword ptr [0x00b85104]
+006f4986 : MOV dword ptr [EBP + -0x4],0xffffffff
+006f498d : CMP dword ptr [EBP + -0x14],EBX
+006f4990 : JZ 0x006f499f
+006f4992 : MOV ECX,dword ptr [EBP + -0x20]
+006f4995 : PUSH ECX
+006f4996 : CALL dword ptr [0x00b8511c]
+006f499c : MOV dword ptr [EBP + -0x14],EBX
+006f499f : MOV ECX,dword ptr [EBP + -0xc]
+006f49a2 : MOV dword ptr FS:[0x0],ECX
+006f49a9 : POP ECX
+006f49aa : POP EDI
+006f49ab : POP ESI
+006f49ac : POP EBX
+006f49ad : MOV ESP,EBP
+006f49af : POP EBP
+006f49b0 : RET

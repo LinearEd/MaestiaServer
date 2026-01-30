@@ -1,0 +1,87 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005a7a20
+ENTRY    : 005a7a20
+BODY     : [[005a7a20, 005a7a8b]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+int FUN_005a7a20(int param_1,int param_2,byte param_3,uint param_4)
+
+{
+  int iVar1;
+  uint uVar2;
+  uint uVar3;
+  
+  if (param_1 != 0) {
+    iVar1 = param_1;
+    do {
+      uVar2 = iVar1 + param_4 & ~param_4;
+      for (uVar3 = uVar2 - iVar1; (uVar3 != 0 && (uVar3 < 0x10)); uVar3 = uVar3 + param_4 + 1) {
+        uVar2 = uVar2 + param_4 + 1;
+      }
+      uVar3 = (uint)*(ushort *)(iVar1 + 0xc);
+      if (0x20 < uVar3) {
+        uVar3 = *(uint *)(iVar1 + 0x10);
+      }
+      if (uVar2 + (param_2 << (param_3 & 0x1f)) <= (uVar3 << (param_3 & 0x1f)) + iVar1) {
+        return iVar1;
+      }
+      iVar1 = *(int *)(iVar1 + 4);
+    } while (iVar1 != param_1);
+  }
+  return 0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005a7a20 : MOV EAX,dword ptr [ESP + 0x4]
+005a7a24 : PUSH EBX
+005a7a25 : PUSH EBP
+005a7a26 : PUSH ESI
+005a7a27 : PUSH EDI
+005a7a28 : TEST EAX,EAX
+005a7a2a : JZ 0x005a7a83
+005a7a2c : MOV EBX,dword ptr [ESP + 0x20]
+005a7a30 : MOV EBP,dword ptr [ESP + 0x18]
+005a7a34 : MOV ECX,dword ptr [ESP + 0x1c]
+005a7a38 : MOV ESI,EBX
+005a7a3a : NOT ESI
+005a7a3c : SHL EBP,CL
+005a7a3e : MOV dword ptr [ESP + 0x18],ESI
+005a7a42 : LEA EDX,[EAX + EBX*0x1]
+005a7a45 : AND EDX,ESI
+005a7a47 : MOV ESI,EDX
+005a7a49 : SUB ESI,EAX
+005a7a4b : JZ 0x005a7a5e
+005a7a4d : LEA ECX,[ECX]
+005a7a50 : CMP ESI,0x10
+005a7a53 : JNC 0x005a7a5e
+005a7a55 : LEA EDI,[EBX + 0x1]
+005a7a58 : ADD EDX,EDI
+005a7a5a : ADD ESI,EDI
+005a7a5c : JNZ 0x005a7a50
+005a7a5e : MOVZX ESI,word ptr [EAX + 0xc]
+005a7a62 : CMP ESI,0x21
+005a7a65 : JC 0x005a7a6a
+005a7a67 : MOV ESI,dword ptr [EAX + 0x10]
+005a7a6a : SHL ESI,CL
+005a7a6c : ADD EDX,EBP
+005a7a6e : ADD ESI,EAX
+005a7a70 : CMP EDX,ESI
+005a7a72 : JBE 0x005a7a85
+005a7a74 : MOV EAX,dword ptr [EAX + 0x4]
+005a7a77 : CMP EAX,dword ptr [ESP + 0x14]
+005a7a7b : JZ 0x005a7a83
+005a7a7d : MOV ESI,dword ptr [ESP + 0x18]
+005a7a81 : JMP 0x005a7a42
+005a7a83 : XOR EAX,EAX
+005a7a85 : POP EDI
+005a7a86 : POP ESI
+005a7a87 : POP EBP
+005a7a88 : POP EBX
+005a7a89 : RET 0x10

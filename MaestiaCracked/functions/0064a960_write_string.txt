@@ -1,0 +1,78 @@
+PROGRAM  : Maestia.exe
+FUNCTION : write_string
+ENTRY    : 0064a960
+BODY     : [[0064a960, 0064a9ac]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    _write_string
+   
+   Library: Visual Studio 2008 Release */
+
+void __cdecl write_string(int param_1)
+
+{
+  int *in_EAX;
+  int *piVar1;
+  int unaff_EDI;
+  
+  if (((*(byte *)(unaff_EDI + 0xc) & 0x40) == 0) || (*(int *)(unaff_EDI + 8) != 0)) {
+    while (0 < param_1) {
+      param_1 = param_1 + -1;
+      write_char();
+      if (*in_EAX == -1) {
+        piVar1 = __errno();
+        if (*piVar1 != 0x2a) {
+          return;
+        }
+        write_char();
+      }
+    }
+  }
+  else {
+    *in_EAX = *in_EAX + param_1;
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0064a960 : MOV EDI,EDI
+0064a962 : PUSH EBP
+0064a963 : MOV EBP,ESP
+0064a965 : TEST byte ptr [EDI + 0xc],0x40
+0064a969 : PUSH EBX
+0064a96a : PUSH ESI
+0064a96b : MOV ESI,EAX
+0064a96d : MOV EBX,ECX
+0064a96f : JZ 0x0064a9a3
+0064a971 : CMP dword ptr [EDI + 0x8],0x0
+0064a975 : JNZ 0x0064a9a3
+0064a977 : MOV EAX,dword ptr [EBP + 0x8]
+0064a97a : ADD dword ptr [ESI],EAX
+0064a97c : JMP 0x0064a9a9
+0064a97e : MOV AL,byte ptr [EBX]
+0064a980 : DEC dword ptr [EBP + 0x8]
+0064a983 : MOV ECX,EDI
+0064a985 : CALL 0x0064b545
+0064a98a : INC EBX
+0064a98b : CMP dword ptr [ESI],-0x1
+0064a98e : JNZ 0x0064a9a3
+0064a990 : CALL 0x0063ab82
+0064a995 : CMP dword ptr [EAX],0x2a
+0064a998 : JNZ 0x0064a9a9
+0064a99a : MOV ECX,EDI
+0064a99c : MOV AL,0x3f
+0064a99e : CALL 0x0064b545
+0064a9a3 : CMP dword ptr [EBP + 0x8],0x0
+0064a9a7 : JG 0x0064a97e
+0064a9a9 : POP ESI
+0064a9aa : POP EBX
+0064a9ab : POP EBP
+0064a9ac : RET

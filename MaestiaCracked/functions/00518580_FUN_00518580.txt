@@ -1,0 +1,72 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00518580
+ENTRY    : 00518580
+BODY     : [[00518580, 005185e4]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00518580(void)
+
+{
+  LONG *Addend;
+  LONG LVar1;
+  GRefCountImplCore *in_ECX;
+  
+  *(undefined ***)in_ECX = &PTR_FUN_00b871d0;
+  *(undefined ***)(in_ECX + 0xc) = &PTR_LAB_00b871bc;
+  GWaitable::RemoveWaitHandler
+            (*(GWaitable **)(in_ECX + 0x10),(_func_void_void_ptr *)&LAB_00518010,in_ECX);
+  Addend = *(LONG **)(in_ECX + 8);
+  *(undefined ***)(in_ECX + 0xc) = &PTR_FUN_00cd40d4;
+  *(undefined ***)in_ECX = &PTR_FUN_00b87170;
+  if (Addend != (LONG *)0x0) {
+    LVar1 = InterlockedExchangeAdd(Addend,-1);
+    if ((LVar1 == 1) && (Addend != (LONG *)0x0)) {
+      FUN_005a20f0();
+      FUN_00515cf0(Addend[1]);
+      FUN_00515cf0(Addend);
+    }
+  }
+  GRefCountImplCore::~GRefCountImplCore(in_ECX);
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00518580 : PUSH ESI
+00518581 : MOV ESI,ECX
+00518583 : MOV ECX,dword ptr [ESI + 0x10]
+00518586 : PUSH EDI
+00518587 : PUSH ESI
+00518588 : PUSH 0x518010
+0051858d : MOV dword ptr [ESI],0xb871d0
+00518593 : MOV dword ptr [ESI + 0xc],0xb871bc
+0051859a : CALL 0x00517db0
+0051859f : MOV EDI,dword ptr [ESI + 0x8]
+005185a2 : MOV dword ptr [ESI + 0xc],0xcd40d4
+005185a9 : MOV dword ptr [ESI],0xb87170
+005185af : TEST EDI,EDI
+005185b1 : JZ 0x005185dc
+005185b3 : PUSH -0x1
+005185b5 : PUSH EDI
+005185b6 : CALL dword ptr [0x00b851cc]
+005185bc : SUB EAX,0x1
+005185bf : JNZ 0x005185dc
+005185c1 : TEST EDI,EDI
+005185c3 : JZ 0x005185dc
+005185c5 : LEA ECX,[EDI + 0x10]
+005185c8 : CALL 0x005a20f0
+005185cd : MOV EAX,dword ptr [EDI + 0x4]
+005185d0 : PUSH EAX
+005185d1 : CALL 0x00515cf0
+005185d6 : PUSH EDI
+005185d7 : CALL 0x00515cf0
+005185dc : POP EDI
+005185dd : MOV ECX,ESI
+005185df : POP ESI
+005185e0 : JMP 0x004ff7b0

@@ -1,0 +1,118 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __fpclass
+ENTRY    : 0065fe3e
+BODY     : [[0065fe3e, 0065fed1]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __fpclass
+   
+   Library: Visual Studio 2008 Release */
+
+int __cdecl __fpclass(double _X)
+
+{
+  int iVar1;
+  undefined4 uStack_8;
+  
+  if ((_X._6_2_ & 0x7ff0) == 0x7ff0) {
+    iVar1 = __sptype();
+    if (iVar1 == 1) {
+      return 0x200;
+    }
+    if (iVar1 == 2) {
+      uStack_8 = 4;
+    }
+    else {
+      if (iVar1 != 3) {
+        return 1;
+      }
+      uStack_8 = 2;
+    }
+    return uStack_8;
+  }
+  if ((((ulonglong)_X & 0x7ff0000000000000) == 0) &&
+     ((((ulonglong)_X & 0xfffff00000000) != 0 || (_X._0_4_ != 0)))) {
+    return (-(uint)(((ulonglong)_X & 0x8000000000000000) != 0) & 0xffffff90) + 0x80;
+  }
+  if (_X == 0.0) {
+    return (-(uint)(((ulonglong)_X & 0x8000000000000000) != 0) & 0xffffffe0) + 0x40;
+  }
+  return (-(uint)(((ulonglong)_X & 0x8000000000000000) != 0) & 0xffffff08) + 0x100;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0065fe3e : MOV EDI,EDI
+0065fe40 : PUSH EBP
+0065fe41 : MOV EBP,ESP
+0065fe43 : MOV EAX,dword ptr [EBP + 0xe]
+0065fe46 : MOV ECX,0x7ff0
+0065fe4b : MOV EDX,EAX
+0065fe4d : AND EDX,ECX
+0065fe4f : CMP DX,CX
+0065fe52 : JNZ 0x0065fe81
+0065fe54 : FLD double ptr [EBP + 0x8]
+0065fe57 : PUSH ECX
+0065fe58 : PUSH ECX
+0065fe59 : FSTP double ptr [ESP]
+0065fe5c : CALL 0x0065df2a
+0065fe61 : DEC EAX
+0065fe62 : POP ECX
+0065fe63 : POP ECX
+0065fe64 : JZ 0x0065fe7a
+0065fe66 : DEC EAX
+0065fe67 : JZ 0x0065fe75
+0065fe69 : DEC EAX
+0065fe6a : JZ 0x0065fe71
+0065fe6c : XOR EAX,EAX
+0065fe6e : INC EAX
+0065fe6f : POP EBP
+0065fe70 : RET
+0065fe71 : PUSH 0x2
+0065fe73 : JMP 0x0065fe77
+0065fe75 : PUSH 0x4
+0065fe77 : POP EAX
+0065fe78 : POP EBP
+0065fe79 : RET
+0065fe7a : MOV EAX,0x200
+0065fe7f : POP EBP
+0065fe80 : RET
+0065fe81 : AND EAX,0x8000
+0065fe86 : MOV ECX,EAX
+0065fe88 : TEST DX,DX
+0065fe8b : JNZ 0x0065fea8
+0065fe8d : TEST dword ptr [EBP + 0xc],0xfffff
+0065fe94 : JNZ 0x0065fe9c
+0065fe96 : CMP dword ptr [EBP + 0x8],0x0
+0065fe9a : JZ 0x0065fea8
+0065fe9c : NEG EAX
+0065fe9e : SBB EAX,EAX
+0065fea0 : AND EAX,0xffffff90
+0065fea3 : SUB EAX,-0x80
+0065fea6 : POP EBP
+0065fea7 : RET
+0065fea8 : FLDZ
+0065feaa : FCOMP double ptr [EBP + 0x8]
+0065fead : FNSTSW AX
+0065feaf : TEST AH,0x44
+0065feb2 : MOV EAX,ECX
+0065feb4 : JP 0x0065fec2
+0065feb6 : NEG EAX
+0065feb8 : SBB EAX,EAX
+0065feba : AND EAX,0xffffffe0
+0065febd : ADD EAX,0x40
+0065fec0 : POP EBP
+0065fec1 : RET
+0065fec2 : NEG EAX
+0065fec4 : SBB EAX,EAX
+0065fec6 : AND EAX,0xffffff08
+0065fecb : ADD EAX,0x100
+0065fed0 : POP EBP
+0065fed1 : RET

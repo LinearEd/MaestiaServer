@@ -1,0 +1,107 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __free_locale
+ENTRY    : 00639d78
+BODY     : [[00639d78, 00639e21]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* WARNING: Function: __SEH_prolog4 replaced with injection: SEH_prolog4 */
+/* WARNING: Function: __SEH_epilog4 replaced with injection: EH_epilog3 */
+/* Library Function - Single Match
+    __free_locale
+   
+   Library: Visual Studio 2008 Release */
+
+void __cdecl __free_locale(_locale_t _Locale)
+
+{
+  pthreadlocinfo ptVar1;
+  LONG LVar2;
+  
+  if (_Locale != (_locale_t)0x0) {
+    __lock(0xd);
+    if (_Locale->mbcinfo != (pthreadmbcinfo)0x0) {
+      LVar2 = InterlockedDecrement(&_Locale->mbcinfo->refcount);
+      if ((LVar2 == 0) && (_Locale->mbcinfo != (pthreadmbcinfo)&DAT_00d67830)) {
+        _free(_Locale->mbcinfo);
+      }
+    }
+    FUN_00639e25();
+    if (_Locale->locinfo != (pthreadlocinfo)0x0) {
+      __lock(0xc);
+      ___removelocaleref(_Locale->locinfo);
+      ptVar1 = _Locale->locinfo;
+      if (((ptVar1 != (pthreadlocinfo)0x0) && (ptVar1->refcount == 0)) &&
+         (ptVar1 != (pthreadlocinfo)&DAT_00d67d60)) {
+        ___freetlocinfo(ptVar1);
+      }
+      FUN_00639e31();
+    }
+    _Locale->locinfo = (pthreadlocinfo)0xbaadf00d;
+    _Locale->mbcinfo = (pthreadmbcinfo)0xbaadf00d;
+    _free(_Locale);
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00639d78 : PUSH 0x8
+00639d7a : PUSH 0xcecd20
+00639d7f : CALL 0x0064c228
+00639d84 : MOV ESI,dword ptr [EBP + 0x8]
+00639d87 : TEST ESI,ESI
+00639d89 : JZ 0x00639e1c
+00639d8f : PUSH 0xd
+00639d91 : CALL 0x0064c598
+00639d96 : POP ECX
+00639d97 : AND dword ptr [EBP + -0x4],0x0
+00639d9b : MOV EAX,dword ptr [ESI + 0x4]
+00639d9e : TEST EAX,EAX
+00639da0 : JZ 0x00639dbe
+00639da2 : PUSH EAX
+00639da3 : CALL dword ptr [0x00b851b0]
+00639da9 : TEST EAX,EAX
+00639dab : JNZ 0x00639dbe
+00639dad : MOV EAX,dword ptr [ESI + 0x4]
+00639db0 : CMP EAX,0xd67830
+00639db5 : JZ 0x00639dbe
+00639db7 : PUSH EAX
+00639db8 : CALL 0x0063610d
+00639dbd : POP ECX
+00639dbe : MOV dword ptr [EBP + -0x4],0xfffffffe
+00639dc5 : CALL 0x00639e25
+00639dca : CMP dword ptr [ESI],0x0
+00639dcd : JZ 0x00639e0b
+00639dcf : PUSH 0xc
+00639dd1 : CALL 0x0064c598
+00639dd6 : POP ECX
+00639dd7 : MOV dword ptr [EBP + -0x4],0x1
+00639dde : PUSH dword ptr [ESI]
+00639de0 : CALL 0x00639bb2
+00639de5 : POP ECX
+00639de6 : MOV EAX,dword ptr [ESI]
+00639de8 : TEST EAX,EAX
+00639dea : JZ 0x00639dff
+00639dec : CMP dword ptr [EAX],0x0
+00639def : JNZ 0x00639dff
+00639df1 : CMP EAX,0xd67d60
+00639df6 : JZ 0x00639dff
+00639df8 : PUSH EAX
+00639df9 : CALL 0x006399da
+00639dfe : POP ECX
+00639dff : MOV dword ptr [EBP + -0x4],0xfffffffe
+00639e06 : CALL 0x00639e31
+00639e0b : MOV EAX,0xbaadf00d
+00639e10 : MOV dword ptr [ESI],EAX
+00639e12 : MOV dword ptr [ESI + 0x4],EAX
+00639e15 : PUSH ESI
+00639e16 : CALL 0x0063610d
+00639e1b : POP ECX
+00639e1c : CALL 0x0064c26d
+00639e21 : RET

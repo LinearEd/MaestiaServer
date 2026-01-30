@@ -1,0 +1,143 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00704fe0
+ENTRY    : 00704fe0
+BODY     : [[00704fe0, 007050e7]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+void FUN_00704fe0(undefined4 param_1)
+
+{
+  WCHAR WVar1;
+  char *pcVar2;
+  LPCWSTR pWVar3;
+  char *pcVar4;
+  LPCWSTR lpWideCharStr;
+  char *unaff_EDI;
+  void *local_10;
+  undefined1 *puStack_c;
+  undefined4 local_8;
+  
+  puStack_c = &LAB_00b13a16;
+  local_10 = ExceptionList;
+  ExceptionList = &local_10;
+  if (*unaff_EDI != '\0') {
+    if ((DAT_017266a4 & 1) == 0) {
+      DAT_017266a4 = DAT_017266a4 | 1;
+      local_8 = 0;
+      DAT_017266a0 = 7;
+      _DAT_0172669c = 0;
+      DAT_0172668c = (LPCWSTR)((uint)DAT_0172668c & 0xffff0000);
+      _atexit((_func_4879 *)&LAB_00b847e0);
+    }
+    local_8 = 0xffffffff;
+    FUN_00405eb0(param_1,0,0xffffffff);
+    lpWideCharStr = DAT_0172668c;
+    if (DAT_017266a0 < 8) {
+      lpWideCharStr = (LPCWSTR)&DAT_0172668c;
+    }
+    pWVar3 = lpWideCharStr;
+    do {
+      WVar1 = *pWVar3;
+      pWVar3 = pWVar3 + 1;
+    } while (WVar1 != L'\0');
+    WideCharToMultiByte(0x3b5,0,lpWideCharStr,-1,&DAT_01726288,
+                        ((int)pWVar3 - (int)(lpWideCharStr + 1) >> 1) * 2 + 2,(LPCSTR)0x0,
+                        (LPBOOL)0x0);
+    pcVar2 = &DAT_01726288;
+    do {
+      pcVar4 = pcVar2;
+      pcVar2 = pcVar4 + 1;
+    } while (*pcVar4 != '\0');
+    WriteFile(*(HANDLE *)(unaff_EDI + 4),&DAT_01726288,(DWORD)(pcVar4 + -0x1726288),
+              (LPDWORD)&DAT_01726284,(LPOVERLAPPED)0x0);
+  }
+  ExceptionList = local_10;
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00704fe0 : PUSH EBP
+00704fe1 : MOV EBP,ESP
+00704fe3 : PUSH -0x1
+00704fe5 : PUSH 0xb13a16
+00704fea : MOV EAX,FS:[0x0]
+00704ff0 : PUSH EAX
+00704ff1 : PUSH ESI
+00704ff2 : MOV EAX,[0x00d66fa0]
+00704ff7 : XOR EAX,EBP
+00704ff9 : PUSH EAX
+00704ffa : LEA EAX,[EBP + -0xc]
+00704ffd : MOV FS:[0x0],EAX
+00705003 : CMP byte ptr [EDI],0x0
+00705006 : JZ 0x007050d6
+0070500c : MOV EAX,0x1
+00705011 : TEST byte ptr [0x017266a4],AL
+00705017 : JNZ 0x00705056
+00705019 : OR dword ptr [0x017266a4],EAX
+0070501f : MOV dword ptr [EBP + -0x4],0x0
+00705026 : XOR EAX,EAX
+00705028 : PUSH 0xb847e0
+0070502d : MOV dword ptr [0x017266a0],0x7
+00705037 : MOV dword ptr [0x0172669c],0x0
+00705041 : MOV [0x0172668c],AX
+00705047 : CALL 0x006356bc
+0070504c : ADD ESP,0x4
+0070504f : MOV dword ptr [EBP + -0x4],0xffffffff
+00705056 : MOV ECX,dword ptr [EBP + 0x8]
+00705059 : PUSH -0x1
+0070505b : PUSH 0x0
+0070505d : PUSH ECX
+0070505e : MOV ECX,0x1726688
+00705063 : CALL 0x00405eb0
+00705068 : CMP dword ptr [0x017266a0],0x8
+0070506f : MOV EDX,dword ptr [0x0172668c]
+00705075 : JNC 0x0070507c
+00705077 : MOV EDX,0x172668c
+0070507c : MOV EAX,EDX
+0070507e : LEA ESI,[EAX + 0x2]
+00705081 : MOV CX,word ptr [EAX]
+00705084 : ADD EAX,0x2
+00705087 : TEST CX,CX
+0070508a : JNZ 0x00705081
+0070508c : PUSH 0x0
+0070508e : SUB EAX,ESI
+00705090 : PUSH 0x0
+00705092 : SAR EAX,0x1
+00705094 : LEA EAX,[EAX + EAX*0x1 + 0x2]
+00705098 : PUSH EAX
+00705099 : PUSH 0x1726288
+0070509e : PUSH -0x1
+007050a0 : PUSH EDX
+007050a1 : PUSH 0x0
+007050a3 : PUSH 0x3b5
+007050a8 : CALL dword ptr [0x00b85130]
+007050ae : MOV EAX,0x1726288
+007050b3 : LEA EDX,[EAX + 0x1]
+007050b6 : MOV CL,byte ptr [EAX]
+007050b8 : INC EAX
+007050b9 : TEST CL,CL
+007050bb : JNZ 0x007050b6
+007050bd : MOV ECX,dword ptr [EDI + 0x4]
+007050c0 : PUSH 0x0
+007050c2 : PUSH 0x1726284
+007050c7 : SUB EAX,EDX
+007050c9 : PUSH EAX
+007050ca : PUSH 0x1726288
+007050cf : PUSH ECX
+007050d0 : CALL dword ptr [0x00b851c0]
+007050d6 : MOV ECX,dword ptr [EBP + -0xc]
+007050d9 : MOV dword ptr FS:[0x0],ECX
+007050e0 : POP ECX
+007050e1 : POP ESI
+007050e2 : MOV ESP,EBP
+007050e4 : POP EBP
+007050e5 : RET 0x4

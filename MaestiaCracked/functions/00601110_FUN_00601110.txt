@@ -1,0 +1,94 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00601110
+ENTRY    : 00601110
+BODY     : [[00601110, 00601186]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined4 * FUN_00601110(undefined4 param_1,uint param_2)
+
+{
+  int *piVar1;
+  uint uVar2;
+  undefined4 *in_ECX;
+  
+  *in_ECX = param_1;
+  piVar1 = in_ECX + 1;
+  *piVar1 = 0;
+  in_ECX[2] = 0;
+  in_ECX[3] = 0;
+  FUN_005f8d90(param_2);
+  if (param_2 < (uint)in_ECX[2]) {
+    uVar2 = param_2;
+    if ((uint)in_ECX[3] >> 1 <= param_2) goto LAB_00601164;
+  }
+  else {
+    if (param_2 < (uint)in_ECX[3]) goto LAB_00601164;
+    uVar2 = (param_2 >> 2) + param_2;
+  }
+  FUN_0057c3a0(piVar1,uVar2);
+LAB_00601164:
+  uVar2 = 0;
+  in_ECX[2] = param_2;
+  if (in_ECX[2] != 0) {
+    do {
+      *(undefined4 *)(*piVar1 + uVar2 * 4) = 0xffffffff;
+      uVar2 = uVar2 + 1;
+    } while (uVar2 < (uint)in_ECX[2]);
+  }
+  return in_ECX;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00601110 : MOV EAX,dword ptr [ESP + 0x4]
+00601114 : PUSH EBX
+00601115 : MOV EBX,dword ptr [ESP + 0xc]
+00601119 : PUSH ESI
+0060111a : PUSH EDI
+0060111b : MOV EDI,ECX
+0060111d : MOV dword ptr [EDI],EAX
+0060111f : LEA ESI,[EDI + 0x4]
+00601122 : MOV dword ptr [ESI],0x0
+00601128 : MOV dword ptr [ESI + 0x4],0x0
+0060112f : MOV dword ptr [ESI + 0x8],0x0
+00601136 : MOV ECX,dword ptr [EDI]
+00601138 : PUSH EBX
+00601139 : CALL 0x005f8d90
+0060113e : CMP EBX,dword ptr [ESI + 0x4]
+00601141 : JNC 0x0060114f
+00601143 : MOV ECX,dword ptr [ESI + 0x8]
+00601146 : SHR ECX,0x1
+00601148 : CMP EBX,ECX
+0060114a : JNC 0x00601164
+0060114c : PUSH EBX
+0060114d : JMP 0x0060115c
+0060114f : CMP EBX,dword ptr [ESI + 0x8]
+00601152 : JC 0x00601164
+00601154 : MOV EDX,EBX
+00601156 : SHR EDX,0x2
+00601159 : ADD EDX,EBX
+0060115b : PUSH EDX
+0060115c : PUSH ESI
+0060115d : MOV ECX,ESI
+0060115f : CALL 0x0057c3a0
+00601164 : XOR EAX,EAX
+00601166 : MOV dword ptr [ESI + 0x4],EBX
+00601169 : CMP dword ptr [EDI + 0x8],EAX
+0060116c : JBE 0x0060117f
+0060116e : MOV EDI,EDI
+00601170 : MOV ECX,dword ptr [ESI]
+00601172 : MOV dword ptr [ECX + EAX*0x4],0xffffffff
+00601179 : INC EAX
+0060117a : CMP EAX,dword ptr [EDI + 0x8]
+0060117d : JC 0x00601170
+0060117f : MOV EAX,EDI
+00601181 : POP EDI
+00601182 : POP ESI
+00601183 : POP EBX
+00601184 : RET 0x8

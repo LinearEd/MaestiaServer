@@ -1,0 +1,83 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0057bf20
+ENTRY    : 0057bf20
+BODY     : [[0057bf20, 0057bf71]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined4 FUN_0057bf20(int *param_1,int *param_2)
+
+{
+  byte bVar1;
+  byte *pbVar2;
+  int iVar3;
+  byte *pbVar4;
+  bool bVar5;
+  
+  if (*param_1 == *param_2) {
+    pbVar4 = (byte *)((param_2[1] & 0xfffffffcU) + 8);
+    pbVar2 = (byte *)((param_1[1] & 0xfffffffcU) + 8);
+    do {
+      bVar1 = *pbVar2;
+      bVar5 = bVar1 < *pbVar4;
+      if (bVar1 != *pbVar4) {
+LAB_0057bf60:
+        iVar3 = (1 - (uint)bVar5) - (uint)(bVar5 != 0);
+        goto LAB_0057bf65;
+      }
+      if (bVar1 == 0) break;
+      bVar1 = pbVar2[1];
+      bVar5 = bVar1 < pbVar4[1];
+      if (bVar1 != pbVar4[1]) goto LAB_0057bf60;
+      pbVar2 = pbVar2 + 2;
+      pbVar4 = pbVar4 + 2;
+    } while (bVar1 != 0);
+    iVar3 = 0;
+LAB_0057bf65:
+    if (iVar3 == 0) {
+      return 1;
+    }
+  }
+  return 0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0057bf20 : MOV EAX,dword ptr [ESP + 0x4]
+0057bf24 : MOV EDX,dword ptr [EAX]
+0057bf26 : MOV ECX,dword ptr [ESP + 0x8]
+0057bf2a : CMP EDX,dword ptr [ECX]
+0057bf2c : JNZ 0x0057bf6f
+0057bf2e : MOV ECX,dword ptr [ECX + 0x4]
+0057bf31 : MOV EAX,dword ptr [EAX + 0x4]
+0057bf34 : AND ECX,0xfffffffc
+0057bf37 : AND EAX,0xfffffffc
+0057bf3a : ADD ECX,0x8
+0057bf3d : ADD EAX,0x8
+0057bf40 : MOV DL,byte ptr [EAX]
+0057bf42 : CMP DL,byte ptr [ECX]
+0057bf44 : JNZ 0x0057bf60
+0057bf46 : TEST DL,DL
+0057bf48 : JZ 0x0057bf5c
+0057bf4a : MOV DL,byte ptr [EAX + 0x1]
+0057bf4d : CMP DL,byte ptr [ECX + 0x1]
+0057bf50 : JNZ 0x0057bf60
+0057bf52 : ADD EAX,0x2
+0057bf55 : ADD ECX,0x2
+0057bf58 : TEST DL,DL
+0057bf5a : JNZ 0x0057bf40
+0057bf5c : XOR EAX,EAX
+0057bf5e : JMP 0x0057bf65
+0057bf60 : SBB EAX,EAX
+0057bf62 : SBB EAX,-0x1
+0057bf65 : TEST EAX,EAX
+0057bf67 : JNZ 0x0057bf6f
+0057bf69 : MOV EAX,0x1
+0057bf6e : RET
+0057bf6f : XOR EAX,EAX
+0057bf71 : RET

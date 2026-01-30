@@ -1,0 +1,109 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00663420
+ENTRY    : 00663420
+BODY     : [[00663420, 006634a5]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined4 FUN_00663420(int param_1,short *param_2)
+
+{
+  short *psVar1;
+  short *psVar2;
+  short *psVar3;
+  int iVar4;
+  
+  if (param_2 == (short *)0x0) {
+    return 0x80004003;
+  }
+  psVar3 = *(short **)(param_1 + 0x30);
+  if (psVar3 == (short *)0x0) {
+    *param_2 = 0;
+  }
+  else {
+    iVar4 = 0x80;
+    psVar1 = param_2;
+    do {
+      psVar2 = psVar1;
+      if ((iVar4 == -0x7fffff7e) || (*psVar3 == 0)) {
+        if (iVar4 == 0) {
+          psVar2 = psVar2 + -1;
+        }
+        *psVar2 = 0;
+        goto LAB_00663485;
+      }
+      *psVar2 = *psVar3;
+      psVar3 = psVar3 + 1;
+      iVar4 = iVar4 + -1;
+      psVar1 = psVar2 + 1;
+    } while (iVar4 != 0);
+    *psVar2 = 0;
+  }
+LAB_00663485:
+  *(undefined4 *)(param_2 + 0x80) = *(undefined4 *)(param_1 + 0x34);
+  if (*(int *)(param_1 + 0x34) != 0) {
+    (**(code **)(**(int **)(param_1 + 0x34) + 4))(*(int **)(param_1 + 0x34));
+  }
+  return 0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00663420 : PUSH EDI
+00663421 : MOV EDI,dword ptr [ESP + 0xc]
+00663425 : TEST EDI,EDI
+00663427 : JNZ 0x00663432
+00663429 : MOV EAX,0x80004003
+0066342e : POP EDI
+0066342f : RET 0x8
+00663432 : PUSH EBX
+00663433 : MOV EBX,dword ptr [ESP + 0xc]
+00663437 : MOV EDX,dword ptr [EBX + 0x30]
+0066343a : TEST EDX,EDX
+0066343c : JZ 0x00663480
+0066343e : PUSH ESI
+0066343f : MOV ESI,0x80
+00663444 : MOV EAX,EDI
+00663446 : LEA ECX,[ESI + 0x7fffff7e]
+0066344c : TEST ECX,ECX
+0066344e : JZ 0x00663471
+00663450 : MOVZX ECX,word ptr [EDX]
+00663453 : TEST CX,CX
+00663456 : JZ 0x00663471
+00663458 : MOV word ptr [EAX],CX
+0066345b : ADD EAX,0x2
+0066345e : ADD EDX,0x2
+00663461 : SUB ESI,0x1
+00663464 : JNZ 0x00663446
+00663466 : SUB EAX,0x2
+00663469 : XOR EDX,EDX
+0066346b : MOV word ptr [EAX],DX
+0066346e : POP ESI
+0066346f : JMP 0x00663485
+00663471 : TEST ESI,ESI
+00663473 : JNZ 0x00663478
+00663475 : SUB EAX,0x2
+00663478 : XOR EDX,EDX
+0066347a : MOV word ptr [EAX],DX
+0066347d : POP ESI
+0066347e : JMP 0x00663485
+00663480 : XOR EAX,EAX
+00663482 : MOV word ptr [EDI],AX
+00663485 : MOV ECX,dword ptr [EBX + 0x34]
+00663488 : MOV dword ptr [EDI + 0x100],ECX
+0066348e : CMP dword ptr [EBX + 0x34],0x0
+00663492 : JZ 0x0066349f
+00663494 : MOV EAX,dword ptr [EBX + 0x34]
+00663497 : MOV EDX,dword ptr [EAX]
+00663499 : PUSH EAX
+0066349a : MOV EAX,dword ptr [EDX + 0x4]
+0066349d : CALL EAX
+0066349f : POP EBX
+006634a0 : XOR EAX,EAX
+006634a2 : POP EDI
+006634a3 : RET 0x8

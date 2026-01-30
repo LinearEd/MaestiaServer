@@ -1,0 +1,126 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00563280
+ENTRY    : 00563280
+BODY     : [[00563280, 0056334d]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+char FUN_00563280(int param_1,char param_2)
+
+{
+  char cVar1;
+  undefined4 *Value;
+  int iVar2;
+  int in_ECX;
+  LONG *Target;
+  GMutex *this;
+  
+  FUN_005a13b0();
+  cVar1 = '\x01';
+  Value = (undefined4 *)FUN_005a1110();
+  if (Value != (undefined4 *)0x0) {
+    *Value = *(undefined4 *)(in_ECX + 0x78);
+    iVar2 = *(int *)(param_1 + 0x314);
+    if (iVar2 == 0) {
+      iVar2 = param_1 + 0x28;
+    }
+    Value[1] = ((*(int *)(iVar2 + 0x34) - *(int *)(iVar2 + 0x30)) - *(int *)(param_1 + 0x26c)) +
+               *(int *)(iVar2 + 0x2c);
+  }
+  this = (GMutex *)(*(int *)(in_ECX + 0x84) + 8);
+  GMutex::Lock(this);
+  if (Value == (undefined4 *)0x0) {
+    *(undefined4 *)(in_ECX + 0x74) = 4;
+    cVar1 = '\0';
+  }
+  else {
+    Target = (LONG *)(in_ECX + 0x88);
+    if (*(int *)(in_ECX + 0x88) != 0) {
+      Target = (LONG *)(*(int *)(in_ECX + 0x8c) + 0x20);
+    }
+    InterlockedExchange(Target,(LONG)Value);
+    *(int *)(in_ECX + 0x78) = *(int *)(in_ECX + 0x78) + 1;
+    *(undefined4 **)(in_ECX + 0x8c) = Value;
+    if (param_2 == '\0') goto LAB_0056333c;
+    *(undefined4 *)(in_ECX + 0x74) = 2;
+  }
+  if ((param_2 != '\0') || (cVar1 == '\0')) {
+    GWaitCondition::NotifyAll((GWaitCondition *)(*(int *)(in_ECX + 0x84) + 0x1c));
+  }
+LAB_0056333c:
+  GMutex::Unlock(this);
+  return cVar1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00563280 : PUSH EBX
+00563281 : PUSH EBP
+00563282 : MOV EBP,dword ptr [ESP + 0xc]
+00563286 : PUSH ESI
+00563287 : MOV ESI,ECX
+00563289 : PUSH EDI
+0056328a : MOV ECX,EBP
+0056328c : CALL 0x005a13b0
+00563291 : MOV ECX,EBP
+00563293 : MOV byte ptr [ESP + 0x14],0x1
+00563298 : CALL 0x005a1110
+0056329d : MOV EDI,EAX
+0056329f : TEST EDI,EDI
+005632a1 : JZ 0x005632c7
+005632a3 : MOV EAX,dword ptr [ESI + 0x78]
+005632a6 : MOV dword ptr [EDI],EAX
+005632a8 : MOV EAX,dword ptr [EBP + 0x314]
+005632ae : TEST EAX,EAX
+005632b0 : JNZ 0x005632b5
+005632b2 : LEA EAX,[EBP + 0x28]
+005632b5 : MOV ECX,dword ptr [EAX + 0x34]
+005632b8 : SUB ECX,dword ptr [EAX + 0x30]
+005632bb : SUB ECX,dword ptr [EBP + 0x26c]
+005632c1 : ADD ECX,dword ptr [EAX + 0x2c]
+005632c4 : MOV dword ptr [EDI + 0x4],ECX
+005632c7 : MOV EBP,dword ptr [ESI + 0x84]
+005632cd : ADD EBP,0x8
+005632d0 : MOV ECX,EBP
+005632d2 : CALL 0x005162b0
+005632d7 : MOV BL,byte ptr [ESP + 0x18]
+005632db : TEST EDI,EDI
+005632dd : JZ 0x00563318
+005632df : CMP dword ptr [ESI + 0x88],0x0
+005632e6 : LEA EAX,[ESI + 0x88]
+005632ec : PUSH EDI
+005632ed : JNZ 0x005632f2
+005632ef : PUSH EAX
+005632f0 : JMP 0x005632fc
+005632f2 : MOV EDX,dword ptr [ESI + 0x8c]
+005632f8 : ADD EDX,0x20
+005632fb : PUSH EDX
+005632fc : CALL dword ptr [0x00b85108]
+00563302 : INC dword ptr [ESI + 0x78]
+00563305 : MOV dword ptr [ESI + 0x8c],EDI
+0056330b : TEST BL,BL
+0056330d : JZ 0x0056333c
+0056330f : MOV dword ptr [ESI + 0x74],0x2
+00563316 : JMP 0x00563324
+00563318 : MOV dword ptr [ESI + 0x74],0x4
+0056331f : MOV byte ptr [ESP + 0x14],0x0
+00563324 : TEST BL,BL
+00563326 : JNZ 0x0056332e
+00563328 : CMP byte ptr [ESP + 0x14],BL
+0056332c : JNZ 0x0056333c
+0056332e : MOV ECX,dword ptr [ESI + 0x84]
+00563334 : ADD ECX,0x1c
+00563337 : CALL 0x00516460
+0056333c : MOV ECX,EBP
+0056333e : CALL 0x005170a0
+00563343 : MOV AL,byte ptr [ESP + 0x14]
+00563347 : POP EDI
+00563348 : POP ESI
+00563349 : POP EBP
+0056334a : POP EBX
+0056334b : RET 0x8

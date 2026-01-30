@@ -1,0 +1,82 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00473030
+ENTRY    : 00473030
+BODY     : [[00473030, 00473072]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+void FUN_00473030(void)
+
+{
+  int *in_EAX;
+  int in_ECX;
+  int iVar1;
+  int iVar2;
+  int iVar3;
+  
+  iVar2 = *(int *)(in_ECX + 4);
+  if (iVar2 == 0) {
+    *in_EAX = 0;
+    in_EAX[1] = 0;
+    return;
+  }
+  do {
+    iVar1 = *(int *)(in_ECX + 0x10) + iVar2;
+    iVar3 = iVar2;
+    while( true ) {
+      if (*(int *)(iVar1 + 0x18) == 0) {
+        in_EAX[1] = in_ECX + 0xc;
+        *in_EAX = iVar3;
+        return;
+      }
+      iVar2 = _DAT_00000018;
+      if (iVar3 != 0) {
+        iVar2 = *(int *)(*(int *)(in_ECX + 0x10) + iVar3 + 0x18);
+      }
+      if (iVar2 != 0) break;
+      iVar1 = 0;
+      iVar3 = iVar2;
+    }
+  } while( true );
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00473030 : PUSH ESI
+00473031 : MOV ESI,ECX
+00473033 : MOV EDX,dword ptr [ESI + 0x4]
+00473036 : TEST EDX,EDX
+00473038 : JNZ 0x00473045
+0047303a : MOV dword ptr [EAX],EDX
+0047303c : MOV dword ptr [EAX + 0x4],EDX
+0047303f : POP ESI
+00473040 : RET
+00473041 : TEST EDX,EDX
+00473043 : JZ 0x0047304c
+00473045 : MOV ECX,dword ptr [ESI + 0x10]
+00473048 : ADD ECX,EDX
+0047304a : JMP 0x0047304e
+0047304c : XOR ECX,ECX
+0047304e : CMP dword ptr [ECX + 0x18],0x0
+00473052 : JZ 0x00473069
+00473054 : TEST EDX,EDX
+00473056 : JZ 0x00473062
+00473058 : MOV ECX,dword ptr [ESI + 0x10]
+0047305b : ADD ECX,EDX
+0047305d : MOV EDX,dword ptr [ECX + 0x18]
+00473060 : JMP 0x00473041
+00473062 : XOR ECX,ECX
+00473064 : MOV EDX,dword ptr [ECX + 0x18]
+00473067 : JMP 0x00473041
+00473069 : ADD ESI,0xc
+0047306c : MOV dword ptr [EAX + 0x4],ESI
+0047306f : MOV dword ptr [EAX],EDX
+00473071 : POP ESI
+00473072 : RET

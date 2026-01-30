@@ -1,0 +1,115 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __hw_cw
+ENTRY    : 00658c6f
+BODY     : [[00658c6f, 00658cfc]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __hw_cw
+   
+   Library: Visual Studio 2008 Release */
+
+uint __hw_cw(void)
+
+{
+  uint uVar1;
+  uint uVar2;
+  uint unaff_EBX;
+  
+  uVar1 = (uint)((unaff_EBX & 0x10) != 0);
+  if ((unaff_EBX & 8) != 0) {
+    uVar1 = uVar1 | 4;
+  }
+  if ((unaff_EBX & 4) != 0) {
+    uVar1 = uVar1 | 8;
+  }
+  if ((unaff_EBX & 2) != 0) {
+    uVar1 = uVar1 | 0x10;
+  }
+  if ((unaff_EBX & 1) != 0) {
+    uVar1 = uVar1 | 0x20;
+  }
+  if ((unaff_EBX & 0x80000) != 0) {
+    uVar1 = uVar1 | 2;
+  }
+  uVar2 = unaff_EBX & 0x300;
+  if (uVar2 != 0) {
+    if (uVar2 == 0x100) {
+      uVar1 = uVar1 | 0x400;
+    }
+    else if (uVar2 == 0x200) {
+      uVar1 = uVar1 | 0x800;
+    }
+    else if (uVar2 == 0x300) {
+      uVar1 = uVar1 | 0xc00;
+    }
+  }
+  if ((unaff_EBX & 0x30000) == 0) {
+    uVar1 = uVar1 | 0x300;
+  }
+  else if ((unaff_EBX & 0x30000) == 0x10000) {
+    uVar1 = uVar1 | 0x200;
+  }
+  if ((unaff_EBX & 0x40000) != 0) {
+    uVar1 = uVar1 | 0x1000;
+  }
+  return uVar1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00658c6f : XOR EAX,EAX
+00658c71 : TEST BL,0x10
+00658c74 : JZ 0x00658c77
+00658c76 : INC EAX
+00658c77 : TEST BL,0x8
+00658c7a : JZ 0x00658c7f
+00658c7c : OR EAX,0x4
+00658c7f : TEST BL,0x4
+00658c82 : JZ 0x00658c87
+00658c84 : OR EAX,0x8
+00658c87 : TEST BL,0x2
+00658c8a : JZ 0x00658c8f
+00658c8c : OR EAX,0x10
+00658c8f : TEST BL,0x1
+00658c92 : JZ 0x00658c97
+00658c94 : OR EAX,0x20
+00658c97 : TEST EBX,0x80000
+00658c9d : JZ 0x00658ca2
+00658c9f : OR EAX,0x2
+00658ca2 : MOV ECX,EBX
+00658ca4 : MOV EDX,0x300
+00658ca9 : AND ECX,EDX
+00658cab : PUSH ESI
+00658cac : MOV ESI,0x200
+00658cb1 : JZ 0x00658cd6
+00658cb3 : CMP ECX,0x100
+00658cb9 : JZ 0x00658cd1
+00658cbb : CMP ECX,ESI
+00658cbd : JZ 0x00658cca
+00658cbf : CMP ECX,EDX
+00658cc1 : JNZ 0x00658cd6
+00658cc3 : OR EAX,0xc00
+00658cc8 : JMP 0x00658cd6
+00658cca : OR EAX,0x800
+00658ccf : JMP 0x00658cd6
+00658cd1 : OR EAX,0x400
+00658cd6 : MOV ECX,EBX
+00658cd8 : AND ECX,0x30000
+00658cde : JZ 0x00658cec
+00658ce0 : CMP ECX,0x10000
+00658ce6 : JNZ 0x00658cee
+00658ce8 : OR EAX,ESI
+00658cea : JMP 0x00658cee
+00658cec : OR EAX,EDX
+00658cee : POP ESI
+00658cef : TEST EBX,0x40000
+00658cf5 : JZ 0x00658cfc
+00658cf7 : OR EAX,0x1000
+00658cfc : RET

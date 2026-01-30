@@ -1,0 +1,91 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005adea0
+ENTRY    : 005adea0
+BODY     : [[005adea0, 005adeb9] [005adec0, 005adf22]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined4 FUN_005adea0(uint param_1,int param_2)
+
+{
+  uint uVar1;
+  uint uVar2;
+  uint local_8 [2];
+  
+  local_8[0] = param_1;
+  if (param_1 != param_2 + param_1) {
+    do {
+      uVar1 = FUN_0051aa70(local_8);
+      if (uVar1 == 0) {
+        return 0;
+      }
+      uVar1 = uVar1 & 0xffff;
+      uVar2 = (uint)*(ushort *)(&DAT_00b88408 + (uVar1 >> 8) * 2);
+      if (uVar2 == 0) {
+        return 0;
+      }
+      if ((uVar2 != 1) &&
+         ((1 << ((byte)uVar1 & 0xf) &
+          (uint)*(ushort *)(&DAT_00b88408 + ((uVar1 >> 4 & 0xf) + uVar2) * 2)) == 0)) {
+        return 0;
+      }
+    } while (local_8[0] < param_2 + param_1);
+  }
+  return 1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005adea0 : SUB ESP,0x8
+005adea3 : MOV EAX,dword ptr [ESP + 0xc]
+005adea7 : MOV ECX,dword ptr [ESP + 0x10]
+005adeab : PUSH ESI
+005adeac : LEA ESI,[ECX + EAX*0x1]
+005adeaf : PUSH EDI
+005adeb0 : MOV dword ptr [ESP + 0x8],EAX
+005adeb4 : CMP EAX,ESI
+005adeb6 : JZ 0x005adf13
+005adeb8 : JMP 0x005adec0
+005adec0 : LEA EDX,[ESP + 0x8]
+005adec4 : PUSH EDX
+005adec5 : CALL 0x0051aa70
+005adeca : TEST EAX,EAX
+005adecc : JZ 0x005adf1b
+005adece : MOVZX EAX,AX
+005aded1 : MOV ECX,EAX
+005aded3 : SHR ECX,0x8
+005aded6 : MOVZX EDX,word ptr [ECX*0x2 + 0xb88408]
+005adede : TEST EDX,EDX
+005adee0 : JZ 0x005adf1b
+005adee2 : CMP EDX,0x1
+005adee5 : JZ 0x005adf0d
+005adee7 : MOV ECX,EAX
+005adee9 : SHR EAX,0x4
+005adeec : AND EAX,0xf
+005adeef : AND ECX,0xf
+005adef2 : ADD EAX,EDX
+005adef4 : MOVZX EDX,word ptr [EAX*0x2 + 0xb88408]
+005adefc : MOV EDI,0x1
+005adf01 : SHL EDI,CL
+005adf03 : AND EDI,EDX
+005adf05 : NEG EDI
+005adf07 : SBB EDI,EDI
+005adf09 : NEG EDI
+005adf0b : JZ 0x005adf1b
+005adf0d : CMP dword ptr [ESP + 0x8],ESI
+005adf11 : JC 0x005adec0
+005adf13 : POP EDI
+005adf14 : MOV AL,0x1
+005adf16 : POP ESI
+005adf17 : ADD ESP,0x8
+005adf1a : RET
+005adf1b : POP EDI
+005adf1c : XOR AL,AL
+005adf1e : POP ESI
+005adf1f : ADD ESP,0x8
+005adf22 : RET

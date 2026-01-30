@@ -1,0 +1,75 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00526cd0
+ENTRY    : 00526cd0
+BODY     : [[00526cd0, 00526d27]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00526cd0(int *param_1)
+
+{
+  int iVar1;
+  char *in_ECX;
+  
+  if ((*in_ECX != '\b') || (*(int *)(in_ECX + 4) != *param_1)) {
+    FUN_00526400();
+    *in_ECX = '\b';
+    in_ECX[0xc] = '\0';
+    iVar1 = *param_1;
+    *(int *)(in_ECX + 4) = iVar1;
+    if (iVar1 != 0) {
+      *(uint *)(iVar1 + 8) = *(int *)(iVar1 + 8) + 1U & 0x8fffffff;
+    }
+    in_ECX[8] = '\0';
+    in_ECX[9] = '\0';
+    in_ECX[10] = '\0';
+    in_ECX[0xb] = '\0';
+    if (param_1[1] != 0) {
+      FUN_005686c0(param_1[1],*(byte *)(param_1 + 2) & 1);
+    }
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00526cd0 : PUSH ESI
+00526cd1 : MOV ESI,ECX
+00526cd3 : CMP byte ptr [ESI],0x8
+00526cd6 : PUSH EDI
+00526cd7 : MOV EDI,dword ptr [ESP + 0xc]
+00526cdb : JNZ 0x00526ce4
+00526cdd : MOV EAX,dword ptr [ESI + 0x4]
+00526ce0 : CMP EAX,dword ptr [EDI]
+00526ce2 : JZ 0x00526d23
+00526ce4 : CALL 0x00526400
+00526ce9 : MOV byte ptr [ESI],0x8
+00526cec : LEA ECX,[ESI + 0x4]
+00526cef : XOR EDX,EDX
+00526cf1 : MOV byte ptr [ECX + 0x8],DL
+00526cf4 : MOV EAX,dword ptr [EDI]
+00526cf6 : MOV dword ptr [ECX],EAX
+00526cf8 : CMP EAX,EDX
+00526cfa : JZ 0x00526d09
+00526cfc : MOV ESI,dword ptr [EAX + 0x8]
+00526cff : INC ESI
+00526d00 : AND ESI,0x8fffffff
+00526d06 : MOV dword ptr [EAX + 0x8],ESI
+00526d09 : MOV dword ptr [ECX + 0x4],EDX
+00526d0c : MOV EAX,dword ptr [EDI + 0x4]
+00526d0f : CMP EAX,EDX
+00526d11 : JZ 0x00526d23
+00526d13 : MOV DL,byte ptr [EDI + 0x8]
+00526d16 : AND DL,0x1
+00526d19 : MOVZX EDX,DL
+00526d1c : PUSH EDX
+00526d1d : PUSH EAX
+00526d1e : CALL 0x005686c0
+00526d23 : POP EDI
+00526d24 : POP ESI
+00526d25 : RET 0x4

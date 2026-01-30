@@ -1,0 +1,60 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00a63a80
+ENTRY    : 00a63a80
+BODY     : [[00a63a80, 00a63aa9]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+int FUN_00a63a80(void)
+
+{
+  int iVar1;
+  int in_EAX;
+  uint uVar2;
+  uint uVar3;
+  int *piVar4;
+  int unaff_EDI;
+  
+  uVar3 = 0;
+  uVar2 = *(int *)(in_EAX + 0xc) - *(int *)(in_EAX + 8) >> 2;
+  if (uVar2 != 0) {
+    piVar4 = *(int **)(in_EAX + 8);
+    do {
+      iVar1 = *piVar4;
+      if ((iVar1 != 0) && (*(int *)(iVar1 + 0x30) == unaff_EDI)) {
+        return iVar1;
+      }
+      uVar3 = uVar3 + 1;
+      piVar4 = piVar4 + 1;
+    } while (uVar3 < uVar2);
+  }
+  return 0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00a63a80 : MOV ECX,dword ptr [EAX + 0xc]
+00a63a83 : SUB ECX,dword ptr [EAX + 0x8]
+00a63a86 : XOR EDX,EDX
+00a63a88 : SAR ECX,0x2
+00a63a8b : PUSH ESI
+00a63a8c : TEST ECX,ECX
+00a63a8e : JBE 0x00a63aa6
+00a63a90 : MOV ESI,dword ptr [EAX + 0x8]
+00a63a93 : MOV EAX,dword ptr [ESI]
+00a63a95 : TEST EAX,EAX
+00a63a97 : JZ 0x00a63a9e
+00a63a99 : CMP dword ptr [EAX + 0x30],EDI
+00a63a9c : JZ 0x00a63aa8
+00a63a9e : INC EDX
+00a63a9f : ADD ESI,0x4
+00a63aa2 : CMP EDX,ECX
+00a63aa4 : JC 0x00a63a93
+00a63aa6 : XOR EAX,EAX
+00a63aa8 : POP ESI
+00a63aa9 : RET

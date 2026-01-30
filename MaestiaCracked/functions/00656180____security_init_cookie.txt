@@ -1,0 +1,103 @@
+PROGRAM  : Maestia.exe
+FUNCTION : ___security_init_cookie
+ENTRY    : 00656180
+BODY     : [[00656180, 00656215]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    ___security_init_cookie
+   
+   Library: Visual Studio 2008 Release */
+
+void __cdecl ___security_init_cookie(void)
+
+{
+  DWORD DVar1;
+  DWORD DVar2;
+  DWORD DVar3;
+  uint uVar4;
+  LARGE_INTEGER local_14;
+  _FILETIME local_c;
+  
+  local_c.dwLowDateTime = 0;
+  local_c.dwHighDateTime = 0;
+  if ((DAT_00d66fa0 == 0xbb40e64e) || ((DAT_00d66fa0 & 0xffff0000) == 0)) {
+    GetSystemTimeAsFileTime(&local_c);
+    uVar4 = local_c.dwHighDateTime ^ local_c.dwLowDateTime;
+    DVar1 = GetCurrentProcessId();
+    DVar2 = GetCurrentThreadId();
+    DVar3 = GetTickCount();
+    QueryPerformanceCounter(&local_14);
+    DAT_00d66fa0 = uVar4 ^ DVar1 ^ DVar2 ^ DVar3 ^ local_14.s.HighPart ^ local_14.s.LowPart;
+    if (DAT_00d66fa0 == 0xbb40e64e) {
+      DAT_00d66fa0 = 0xbb40e64f;
+    }
+    else if ((DAT_00d66fa0 & 0xffff0000) == 0) {
+      DAT_00d66fa0 = DAT_00d66fa0 | DAT_00d66fa0 << 0x10;
+    }
+  }
+  DAT_00d66fa4 = ~DAT_00d66fa0;
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00656180 : MOV EDI,EDI
+00656182 : PUSH EBP
+00656183 : MOV EBP,ESP
+00656185 : SUB ESP,0x10
+00656188 : MOV EAX,[0x00d66fa0]
+0065618d : AND dword ptr [EBP + -0x8],0x0
+00656191 : AND dword ptr [EBP + -0x4],0x0
+00656195 : PUSH EBX
+00656196 : PUSH EDI
+00656197 : MOV EDI,0xbb40e64e
+0065619c : MOV EBX,0xffff0000
+006561a1 : CMP EAX,EDI
+006561a3 : JZ 0x006561b2
+006561a5 : TEST EBX,EAX
+006561a7 : JZ 0x006561b2
+006561a9 : NOT EAX
+006561ab : MOV [0x00d66fa4],EAX
+006561b0 : JMP 0x00656212
+006561b2 : PUSH ESI
+006561b3 : LEA EAX,[EBP + -0x8]
+006561b6 : PUSH EAX
+006561b7 : CALL dword ptr [0x00b85180]
+006561bd : MOV ESI,dword ptr [EBP + -0x4]
+006561c0 : XOR ESI,dword ptr [EBP + -0x8]
+006561c3 : CALL dword ptr [0x00b850e4]
+006561c9 : XOR ESI,EAX
+006561cb : CALL dword ptr [0x00b85168]
+006561d1 : XOR ESI,EAX
+006561d3 : CALL dword ptr [0x00b850d8]
+006561d9 : XOR ESI,EAX
+006561db : LEA EAX,[EBP + -0x10]
+006561de : PUSH EAX
+006561df : CALL dword ptr [0x00b85258]
+006561e5 : MOV EAX,dword ptr [EBP + -0xc]
+006561e8 : XOR EAX,dword ptr [EBP + -0x10]
+006561eb : XOR ESI,EAX
+006561ed : CMP ESI,EDI
+006561ef : JNZ 0x006561f8
+006561f1 : MOV ESI,0xbb40e64f
+006561f6 : JMP 0x00656203
+006561f8 : TEST EBX,ESI
+006561fa : JNZ 0x00656203
+006561fc : MOV EAX,ESI
+006561fe : SHL EAX,0x10
+00656201 : OR ESI,EAX
+00656203 : MOV dword ptr [0x00d66fa0],ESI
+00656209 : NOT ESI
+0065620b : MOV dword ptr [0x00d66fa4],ESI
+00656211 : POP ESI
+00656212 : POP EDI
+00656213 : POP EBX
+00656214 : LEAVE
+00656215 : RET

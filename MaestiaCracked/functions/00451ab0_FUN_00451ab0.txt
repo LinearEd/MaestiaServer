@@ -1,0 +1,69 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00451ab0
+ENTRY    : 00451ab0
+BODY     : [[00451ab0, 00451ae9]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00451ab0(void)
+
+{
+  char cVar1;
+  char *pcVar2;
+  size_t _Size;
+  char *in_EDX;
+  int unaff_EDI;
+  
+  if (in_EDX == (char *)0x0) {
+    *(undefined4 *)(unaff_EDI + 4) = 0;
+    *(undefined1 *)(unaff_EDI + 8) = 0;
+    return;
+  }
+  pcVar2 = in_EDX;
+  do {
+    cVar1 = *pcVar2;
+    pcVar2 = pcVar2 + 1;
+  } while (cVar1 != '\0');
+  _Size = (int)pcVar2 - (int)(in_EDX + 1);
+  if (_Size != 0) {
+    _memmove((void *)(unaff_EDI + 8),in_EDX,_Size);
+  }
+  *(size_t *)(unaff_EDI + 4) = _Size;
+  *(undefined1 *)(_Size + 8 + unaff_EDI) = 0;
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00451ab0 : TEST EDX,EDX
+00451ab2 : JNZ 0x00451abd
+00451ab4 : MOV dword ptr [EDI + 0x4],EDX
+00451ab7 : MOV byte ptr [EDI + 0x8],DL
+00451aba : MOV EAX,EDI
+00451abc : RET
+00451abd : MOV EAX,EDX
+00451abf : PUSH ESI
+00451ac0 : LEA ESI,[EAX + 0x1]
+00451ac3 : MOV CL,byte ptr [EAX]
+00451ac5 : INC EAX
+00451ac6 : TEST CL,CL
+00451ac8 : JNZ 0x00451ac3
+00451aca : SUB EAX,ESI
+00451acc : MOV ESI,EAX
+00451ace : JZ 0x00451ade
+00451ad0 : PUSH ESI
+00451ad1 : PUSH EDX
+00451ad2 : LEA EAX,[EDI + 0x8]
+00451ad5 : PUSH EAX
+00451ad6 : CALL 0x00636880
+00451adb : ADD ESP,0xc
+00451ade : MOV dword ptr [EDI + 0x4],ESI
+00451ae1 : MOV byte ptr [ESI + EDI*0x1 + 0x8],0x0
+00451ae6 : POP ESI
+00451ae7 : MOV EAX,EDI
+00451ae9 : RET

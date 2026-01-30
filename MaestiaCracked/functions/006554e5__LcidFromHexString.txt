@@ -1,0 +1,65 @@
+PROGRAM  : Maestia.exe
+FUNCTION : _LcidFromHexString
+ENTRY    : 006554e5
+BODY     : [[006554e5, 00655518]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    _LcidFromHexString
+   
+   Library: Visual Studio 2008 Release */
+
+int _LcidFromHexString(void)
+
+{
+  char cVar1;
+  char *in_EDX;
+  int iVar2;
+  
+  iVar2 = 0;
+  while (cVar1 = *in_EDX, cVar1 != '\0') {
+    in_EDX = in_EDX + 1;
+    if ((byte)(cVar1 + 0x9fU) < 6) {
+      cVar1 = cVar1 + -0x27;
+    }
+    else if ((byte)(cVar1 + 0xbfU) < 6) {
+      cVar1 = cVar1 + -7;
+    }
+    iVar2 = iVar2 * 0x10 + -0x30 + (int)cVar1;
+  }
+  return iVar2;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006554e5 : MOV EDI,EDI
+006554e7 : PUSH ESI
+006554e8 : XOR ESI,ESI
+006554ea : JMP 0x0065550f
+006554ec : MOV AL,CL
+006554ee : SUB AL,0x61
+006554f0 : INC EDX
+006554f1 : CMP AL,0x5
+006554f3 : JA 0x006554fa
+006554f5 : ADD CL,0xd9
+006554f8 : JMP 0x00655505
+006554fa : MOV AL,CL
+006554fc : SUB AL,0x41
+006554fe : CMP AL,0x5
+00655500 : JA 0x00655505
+00655502 : ADD CL,0xf9
+00655505 : MOVSX EAX,CL
+00655508 : SHL ESI,0x4
+0065550b : LEA ESI,[ESI + EAX*0x1 + -0x30]
+0065550f : MOV CL,byte ptr [EDX]
+00655511 : TEST CL,CL
+00655513 : JNZ 0x006554ec
+00655515 : MOV EAX,ESI
+00655517 : POP ESI
+00655518 : RET

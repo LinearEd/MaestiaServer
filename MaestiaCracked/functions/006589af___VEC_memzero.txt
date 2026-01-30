@@ -1,0 +1,115 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __VEC_memzero
+ENTRY    : 006589af
+BODY     : [[006589af, 00658a3d]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __VEC_memzero
+   
+   Libraries: Visual Studio 2005 Debug, Visual Studio 2005 Release, Visual Studio 2008 Debug, Visual
+   Studio 2008 Release */
+
+undefined1 * __VEC_memzero(undefined1 *param_1,undefined4 param_2,uint param_3)
+
+{
+  int iVar1;
+  uint uVar2;
+  int iVar3;
+  undefined1 *puVar4;
+  
+  uVar2 = (int)param_1 >> 0x1f;
+  iVar3 = (((uint)param_1 ^ uVar2) - uVar2 & 0xf ^ uVar2) - uVar2;
+  if (iVar3 == 0) {
+    uVar2 = param_3 & 0x7f;
+    if (param_3 != uVar2) {
+      fastzero_I(param_1,param_3 - uVar2);
+    }
+    if (uVar2 != 0) {
+      puVar4 = param_1 + (param_3 - uVar2);
+      for (; uVar2 != 0; uVar2 = uVar2 - 1) {
+        *puVar4 = 0;
+        puVar4 = puVar4 + 1;
+      }
+    }
+  }
+  else {
+    iVar3 = 0x10 - iVar3;
+    puVar4 = param_1;
+    for (iVar1 = iVar3; iVar1 != 0; iVar1 = iVar1 + -1) {
+      *puVar4 = 0;
+      puVar4 = puVar4 + 1;
+    }
+    __VEC_memzero(param_1 + iVar3,0,param_3 - iVar3);
+  }
+  return param_1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006589af : PUSH EBP
+006589b0 : MOV EBP,ESP
+006589b2 : SUB ESP,0x10
+006589b5 : MOV dword ptr [EBP + -0x4],EDI
+006589b8 : MOV EAX,dword ptr [EBP + 0x8]
+006589bb : CDQ
+006589bc : MOV EDI,EAX
+006589be : XOR EDI,EDX
+006589c0 : SUB EDI,EDX
+006589c2 : AND EDI,0xf
+006589c5 : XOR EDI,EDX
+006589c7 : SUB EDI,EDX
+006589c9 : TEST EDI,EDI
+006589cb : JNZ 0x00658a09
+006589cd : MOV ECX,dword ptr [EBP + 0x10]
+006589d0 : MOV EDX,ECX
+006589d2 : AND EDX,0x7f
+006589d5 : MOV dword ptr [EBP + -0xc],EDX
+006589d8 : CMP ECX,EDX
+006589da : JZ 0x006589ee
+006589dc : SUB ECX,EDX
+006589de : PUSH ECX
+006589df : PUSH EAX
+006589e0 : CALL 0x00658958
+006589e5 : ADD ESP,0x8
+006589e8 : MOV EAX,dword ptr [EBP + 0x8]
+006589eb : MOV EDX,dword ptr [EBP + -0xc]
+006589ee : TEST EDX,EDX
+006589f0 : JZ 0x00658a37
+006589f2 : ADD EAX,dword ptr [EBP + 0x10]
+006589f5 : SUB EAX,EDX
+006589f7 : MOV dword ptr [EBP + -0x8],EAX
+006589fa : XOR EAX,EAX
+006589fc : MOV EDI,dword ptr [EBP + -0x8]
+006589ff : MOV ECX,dword ptr [EBP + -0xc]
+00658a02 : STOSB.REP ES:EDI
+00658a04 : MOV EAX,dword ptr [EBP + 0x8]
+00658a07 : JMP 0x00658a37
+00658a09 : NEG EDI
+00658a0b : ADD EDI,0x10
+00658a0e : MOV dword ptr [EBP + -0x10],EDI
+00658a11 : XOR EAX,EAX
+00658a13 : MOV EDI,dword ptr [EBP + 0x8]
+00658a16 : MOV ECX,dword ptr [EBP + -0x10]
+00658a19 : STOSB.REP ES:EDI
+00658a1b : MOV EAX,dword ptr [EBP + -0x10]
+00658a1e : MOV ECX,dword ptr [EBP + 0x8]
+00658a21 : MOV EDX,dword ptr [EBP + 0x10]
+00658a24 : ADD ECX,EAX
+00658a26 : SUB EDX,EAX
+00658a28 : PUSH EDX
+00658a29 : PUSH 0x0
+00658a2b : PUSH ECX
+00658a2c : CALL 0x006589af
+00658a31 : ADD ESP,0xc
+00658a34 : MOV EAX,dword ptr [EBP + 0x8]
+00658a37 : MOV EDI,dword ptr [EBP + -0x4]
+00658a3a : MOV ESP,EBP
+00658a3c : POP EBP
+00658a3d : RET

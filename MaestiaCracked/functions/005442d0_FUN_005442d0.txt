@@ -1,0 +1,80 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005442d0
+ENTRY    : 005442d0
+BODY     : [[005442d0, 0054436f]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_005442d0(float param_1)
+
+{
+  int in_ECX;
+  undefined2 local_8;
+  
+  if (param_1 < 256.0) {
+    if (((longlong)ROUND(param_1 * 16.0) & 0xfU) != 0) {
+      *(ushort *)(in_ECX + 6) = *(ushort *)(in_ECX + 6) | 0x10;
+      *(ushort *)(in_ECX + 4) =
+           *(ushort *)(in_ECX + 4) ^
+           (*(ushort *)(in_ECX + 4) ^ (ushort)(longlong)ROUND(param_1 * 16.0)) & 0xfff;
+      return;
+    }
+  }
+  *(ushort *)(in_ECX + 6) = *(ushort *)(in_ECX + 6) & 0xffef;
+  local_8 = (ushort)(int)ROUND(param_1);
+  *(ushort *)(in_ECX + 4) = *(ushort *)(in_ECX + 4) ^ (local_8 ^ *(ushort *)(in_ECX + 4)) & 0xfff;
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005442d0 : FLD float ptr [0x00cdf208]
+005442d6 : SUB ESP,0x8
+005442d9 : FLD float ptr [ESP + 0xc]
+005442dd : FCOM
+005442df : FNSTSW AX
+005442e1 : FSTP ST1
+005442e3 : TEST AH,0x5
+005442e6 : JP 0x00544332
+005442e8 : FLD double ptr [0x00b86b68]
+005442ee : FNSTCW word ptr [ESP + 0xc]
+005442f2 : MOVZX EAX,word ptr [ESP + 0xc]
+005442f7 : FMUL ST1
+005442f9 : OR EAX,0xc00
+005442fe : MOV dword ptr [ESP],EAX
+00544301 : FLDCW word ptr [ESP]
+00544304 : FISTP qword ptr [ESP]
+00544307 : MOV EAX,dword ptr [ESP]
+0054430a : FLDCW word ptr [ESP + 0xc]
+0054430e : TEST AL,0xf
+00544310 : JZ 0x00544332
+00544312 : MOV DX,word ptr [ECX + 0x4]
+00544316 : FSTP ST0
+00544318 : OR word ptr [ECX + 0x6],0x10
+0054431d : XOR DX,AX
+00544320 : MOV EAX,0xfff
+00544325 : AND DX,AX
+00544328 : XOR word ptr [ECX + 0x4],DX
+0054432c : ADD ESP,0x8
+0054432f : RET 0x4
+00544332 : FNSTCW word ptr [ESP + 0xc]
+00544336 : MOV EDX,0xffef
+0054433b : MOVZX EAX,word ptr [ESP + 0xc]
+00544340 : AND word ptr [ECX + 0x6],DX
+00544344 : OR EAX,0xc00
+00544349 : MOV dword ptr [ESP],EAX
+0054434c : MOV EDX,0xfff
+00544351 : FLDCW word ptr [ESP]
+00544354 : FISTP dword ptr [ESP]
+00544357 : MOV AX,word ptr [ESP]
+0054435b : XOR AX,word ptr [ECX + 0x4]
+0054435f : FLDCW word ptr [ESP + 0xc]
+00544363 : AND AX,DX
+00544366 : XOR word ptr [ECX + 0x4],AX
+0054436a : ADD ESP,0x8
+0054436d : RET 0x4

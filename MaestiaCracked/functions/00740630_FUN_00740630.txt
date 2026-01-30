@@ -1,0 +1,95 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00740630
+ENTRY    : 00740630
+BODY     : [[00740630, 0074068d]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined4 FUN_00740630(void)
+
+{
+  char cVar1;
+  undefined4 uVar2;
+  int *piVar3;
+  uint uVar4;
+  int *unaff_EDI;
+  
+  uVar2 = (**(code **)(*unaff_EDI + 0x1c))();
+  if ((char)unaff_EDI[5] == '\0') {
+    if ((unaff_EDI[6] != 0) &&
+       (cVar1 = (**(code **)(*(int *)unaff_EDI[6] + 8))(uVar2), cVar1 != '\0')) {
+      return 1;
+    }
+  }
+  else {
+    piVar3 = (int *)unaff_EDI[6];
+    uVar4 = 0;
+    if (piVar3[1] != 0) {
+      do {
+        cVar1 = (**(code **)(**(int **)(*piVar3 + uVar4 * 4) + 8))(uVar2);
+        if (cVar1 != '\0') {
+          return 1;
+        }
+        piVar3 = (int *)unaff_EDI[6];
+        uVar4 = uVar4 + 1;
+      } while (uVar4 < (uint)piVar3[1]);
+      return 0;
+    }
+  }
+  return 0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00740630 : MOV EAX,dword ptr [EDI]
+00740632 : MOV EDX,dword ptr [EAX + 0x1c]
+00740635 : PUSH EBX
+00740636 : PUSH ESI
+00740637 : MOV ECX,EDI
+00740639 : CALL EDX
+0074063b : CMP byte ptr [EDI + 0x14],0x0
+0074063f : MOV EBX,EAX
+00740641 : JZ 0x00740674
+00740643 : MOV EAX,dword ptr [EDI + 0x18]
+00740646 : XOR ESI,ESI
+00740648 : CMP dword ptr [EAX + 0x4],ESI
+0074064b : JBE 0x00740689
+0074064d : LEA ECX,[ECX]
+00740650 : MOV EAX,dword ptr [EAX]
+00740652 : MOV ECX,dword ptr [EAX + ESI*0x4]
+00740655 : MOV EDX,dword ptr [ECX]
+00740657 : MOV EAX,dword ptr [EDX + 0x8]
+0074065a : PUSH EBX
+0074065b : CALL EAX
+0074065d : TEST AL,AL
+0074065f : JNZ 0x0074066f
+00740661 : MOV EAX,dword ptr [EDI + 0x18]
+00740664 : INC ESI
+00740665 : CMP ESI,dword ptr [EAX + 0x4]
+00740668 : JC 0x00740650
+0074066a : POP ESI
+0074066b : XOR AL,AL
+0074066d : POP EBX
+0074066e : RET
+0074066f : POP ESI
+00740670 : MOV AL,0x1
+00740672 : POP EBX
+00740673 : RET
+00740674 : CMP dword ptr [EDI + 0x18],0x0
+00740678 : JZ 0x00740689
+0074067a : MOV ECX,dword ptr [EDI + 0x18]
+0074067d : MOV EDX,dword ptr [ECX]
+0074067f : MOV EAX,dword ptr [EDX + 0x8]
+00740682 : PUSH EBX
+00740683 : CALL EAX
+00740685 : TEST AL,AL
+00740687 : JNZ 0x0074066f
+00740689 : POP ESI
+0074068a : XOR AL,AL
+0074068c : POP EBX
+0074068d : RET

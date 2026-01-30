@@ -1,0 +1,107 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005f7710
+ENTRY    : 005f7710
+BODY     : [[005f7710, 005f77af]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+size_t FUN_005f7710(void *param_1,size_t param_2)
+
+{
+  size_t sVar1;
+  int *piVar2;
+  int in_ECX;
+  
+  if ((*(int *)(in_ECX + 0x1c) != 0) && (*(int *)(in_ECX + 0x1c) != 2)) {
+    _fflush(*(FILE **)(in_ECX + 0x10));
+  }
+  *(undefined4 *)(in_ECX + 0x1c) = 2;
+  sVar1 = _fwrite(param_1,1,param_2,*(FILE **)(in_ECX + 0x10));
+  if ((int)sVar1 < (int)param_2) {
+    piVar2 = __errno();
+    if (*piVar2 == 2) {
+      *(undefined4 *)(in_ECX + 0x18) = 0x1001;
+      return sVar1;
+    }
+    piVar2 = __errno();
+    if (*piVar2 != 0xd) {
+      piVar2 = __errno();
+      if (*piVar2 != 1) {
+        piVar2 = __errno();
+        *(uint *)(in_ECX + 0x18) = (*piVar2 == 0x1c) + 0x1003;
+        return sVar1;
+      }
+    }
+    *(undefined4 *)(in_ECX + 0x18) = 0x1002;
+  }
+  return sVar1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005f7710 : PUSH EBX
+005f7711 : PUSH ESI
+005f7712 : MOV ESI,ECX
+005f7714 : MOV EAX,dword ptr [ESI + 0x1c]
+005f7717 : PUSH EDI
+005f7718 : TEST EAX,EAX
+005f771a : JZ 0x005f772d
+005f771c : CMP EAX,0x2
+005f771f : JZ 0x005f772d
+005f7721 : MOV EAX,dword ptr [ESI + 0x10]
+005f7724 : PUSH EAX
+005f7725 : CALL 0x006395f7
+005f772a : ADD ESP,0x4
+005f772d : MOV ECX,dword ptr [ESI + 0x10]
+005f7730 : MOV EDI,dword ptr [ESP + 0x14]
+005f7734 : MOV EDX,dword ptr [ESP + 0x10]
+005f7738 : PUSH ECX
+005f7739 : PUSH EDI
+005f773a : PUSH 0x1
+005f773c : PUSH EDX
+005f773d : MOV dword ptr [ESI + 0x1c],0x2
+005f7744 : CALL 0x006376ef
+005f7749 : MOV EBX,EAX
+005f774b : ADD ESP,0x10
+005f774e : CMP EBX,EDI
+005f7750 : JGE 0x005f77a8
+005f7752 : CALL 0x0063ab82
+005f7757 : CMP dword ptr [EAX],0x2
+005f775a : JNZ 0x005f776c
+005f775c : MOV EAX,0x1001
+005f7761 : POP EDI
+005f7762 : MOV dword ptr [ESI + 0x18],EAX
+005f7765 : POP ESI
+005f7766 : MOV EAX,EBX
+005f7768 : POP EBX
+005f7769 : RET 0x8
+005f776c : CALL 0x0063ab82
+005f7771 : CMP dword ptr [EAX],0xd
+005f7774 : JZ 0x005f77a0
+005f7776 : CALL 0x0063ab82
+005f777b : CMP dword ptr [EAX],0x1
+005f777e : JZ 0x005f77a0
+005f7780 : CALL 0x0063ab82
+005f7785 : XOR ECX,ECX
+005f7787 : CMP dword ptr [EAX],0x1c
+005f778a : POP EDI
+005f778b : SETZ CL
+005f778e : ADD ECX,0x1003
+005f7794 : MOV EAX,ECX
+005f7796 : MOV dword ptr [ESI + 0x18],EAX
+005f7799 : POP ESI
+005f779a : MOV EAX,EBX
+005f779c : POP EBX
+005f779d : RET 0x8
+005f77a0 : MOV EAX,0x1002
+005f77a5 : MOV dword ptr [ESI + 0x18],EAX
+005f77a8 : POP EDI
+005f77a9 : POP ESI
+005f77aa : MOV EAX,EBX
+005f77ac : POP EBX
+005f77ad : RET 0x8

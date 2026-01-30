@@ -1,0 +1,128 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __Strcoll
+ENTRY    : 00633a0e
+BODY     : [[00633a0e, 00633aa0]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __Strcoll
+   
+   Library: Visual Studio 2008 Release */
+
+int __cdecl __Strcoll(char *param_1,char *param_2,char *param_3,char *param_4,_Collvec *param_5)
+
+{
+  int iVar1;
+  wchar_t *_Code_page;
+  size_t _Size;
+  int *piVar2;
+  LPCWSTR _LocaleName;
+  size_t _CchCount1;
+  size_t _CchCount2;
+  
+  _CchCount1 = (int)param_2 - (int)param_1;
+  _CchCount2 = (int)param_4 - (int)param_3;
+  if (param_5 == (_Collvec *)0x0) {
+    iVar1 = ____lc_handle_func();
+    _LocaleName = *(LPCWSTR *)(iVar1 + 4);
+    _Code_page = (wchar_t *)____lc_collate_cp_func();
+  }
+  else {
+    _LocaleName = (LPCWSTR)param_5->_Page;
+    _Code_page = param_5->_LocaleName;
+  }
+  if (_LocaleName == (LPCWSTR)0x0) {
+    _Size = _CchCount1;
+    if ((int)_CchCount2 <= (int)_CchCount1) {
+      _Size = _CchCount2;
+    }
+    iVar1 = _memcmp(param_1,param_3,_Size);
+    if ((iVar1 == 0) && (_CchCount1 != _CchCount2)) {
+      iVar1 = (uint)((int)_CchCount2 <= (int)_CchCount1) * 2 + -1;
+    }
+  }
+  else {
+    iVar1 = ___crtCompareStringA
+                      ((_locale_t)0x0,_LocaleName,0x1000,param_1,_CchCount1,param_3,_CchCount2,
+                       (int)_Code_page);
+    if (iVar1 == 0) {
+      piVar2 = __errno();
+      *piVar2 = 0x16;
+      iVar1 = 0x7fffffff;
+    }
+    else {
+      iVar1 = iVar1 + -2;
+    }
+  }
+  return iVar1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00633a0e : MOV EDI,EDI
+00633a10 : PUSH EBP
+00633a11 : MOV EBP,ESP
+00633a13 : MOV EAX,dword ptr [EBP + 0x18]
+00633a16 : PUSH EBX
+00633a17 : PUSH ESI
+00633a18 : MOV ESI,dword ptr [EBP + 0xc]
+00633a1b : SUB ESI,dword ptr [EBP + 0x8]
+00633a1e : PUSH EDI
+00633a1f : MOV EDI,dword ptr [EBP + 0x14]
+00633a22 : SUB EDI,dword ptr [EBP + 0x10]
+00633a25 : TEST EAX,EAX
+00633a27 : JNZ 0x00633a38
+00633a29 : CALL 0x00642ac3
+00633a2e : MOV EBX,dword ptr [EAX + 0x4]
+00633a31 : CALL 0x00642a9d
+00633a36 : JMP 0x00633a3d
+00633a38 : MOV EBX,dword ptr [EAX]
+00633a3a : MOV EAX,dword ptr [EAX + 0x4]
+00633a3d : TEST EBX,EBX
+00633a3f : JNZ 0x00633a6b
+00633a41 : CMP ESI,EDI
+00633a43 : MOV EAX,ESI
+00633a45 : JL 0x00633a49
+00633a47 : MOV EAX,EDI
+00633a49 : PUSH EAX
+00633a4a : PUSH dword ptr [EBP + 0x10]
+00633a4d : PUSH dword ptr [EBP + 0x8]
+00633a50 : CALL 0x00640edf
+00633a55 : ADD ESP,0xc
+00633a58 : TEST EAX,EAX
+00633a5a : JNZ 0x00633a9c
+00633a5c : CMP ESI,EDI
+00633a5e : JZ 0x00633a9c
+00633a60 : CMP ESI,EDI
+00633a62 : SETGE AL
+00633a65 : LEA EAX,[EAX + EAX*0x1 + -0x1]
+00633a69 : JMP 0x00633a9c
+00633a6b : PUSH EAX
+00633a6c : PUSH EDI
+00633a6d : PUSH dword ptr [EBP + 0x10]
+00633a70 : PUSH ESI
+00633a71 : PUSH dword ptr [EBP + 0x8]
+00633a74 : PUSH 0x1000
+00633a79 : PUSH EBX
+00633a7a : PUSH 0x0
+00633a7c : CALL 0x00645195
+00633a81 : ADD ESP,0x20
+00633a84 : TEST EAX,EAX
+00633a86 : JNZ 0x00633a9a
+00633a88 : CALL 0x0063ab82
+00633a8d : MOV dword ptr [EAX],0x16
+00633a93 : MOV EAX,0x7fffffff
+00633a98 : JMP 0x00633a9c
+00633a9a : DEC EAX
+00633a9b : DEC EAX
+00633a9c : POP EDI
+00633a9d : POP ESI
+00633a9e : POP EBX
+00633a9f : POP EBP
+00633aa0 : RET

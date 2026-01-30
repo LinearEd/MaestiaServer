@@ -1,0 +1,155 @@
+PROGRAM  : Maestia.exe
+FUNCTION : ObtainSemaphore
+ENTRY    : 00517840
+BODY     : [[00517840, 00517923]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* public: bool __thiscall GSemaphore::ObtainSemaphore(int,unsigned int) */
+
+bool __thiscall GSemaphore::ObtainSemaphore(GSemaphore *this,int param_1,uint param_2)
+
+{
+  GMutex *this_00;
+  bool bVar1;
+  int iVar2;
+  int iVar3;
+  
+                    /* 0x117840  124  ?ObtainSemaphore@GSemaphore@@QAE_NHI@Z */
+  if (*(int *)(this + 0x10) < param_1) {
+    return false;
+  }
+  this_00 = (GMutex *)(this + 0x18);
+  GMutex::Lock(this_00);
+  if (*(int *)(this + 0x14) + param_1 <= *(int *)(this + 0x10)) {
+    *(int *)(this + 0x14) = *(int *)(this + 0x14) + param_1;
+    GMutex::Unlock(this_00);
+    return true;
+  }
+  if (param_2 != 0) {
+    if (param_2 == 0xffffffff) {
+      if (*(int *)(this + 0x10) < *(int *)(this + 0x14) + param_1) {
+        do {
+          GWaitCondition::Wait((GWaitCondition *)(this + 0x2c),this_00,0xffffffff);
+        } while (*(int *)(this + 0x10) < *(int *)(this + 0x14) + param_1);
+      }
+LAB_005178b7:
+      *(int *)(this + 0x14) = *(int *)(this + 0x14) + param_1;
+      GMutex::Unlock(this_00);
+      return true;
+    }
+    iVar2 = FUN_005aa2b0();
+    bVar1 = GWaitCondition::Wait((GWaitCondition *)(this + 0x2c),this_00,param_2);
+    if (bVar1) {
+      do {
+        if (*(int *)(this + 0x14) + param_1 <= *(int *)(this + 0x10)) goto LAB_005178b7;
+        iVar3 = FUN_005aa2b0();
+        if (param_2 <= (uint)(iVar3 - iVar2)) break;
+        bVar1 = GWaitCondition::Wait
+                          ((GWaitCondition *)(this + 0x2c),this_00,param_2 - (iVar3 - iVar2));
+      } while (bVar1);
+    }
+  }
+  GMutex::Unlock(this_00);
+  return false;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00517840 : SUB ESP,0x8
+00517843 : PUSH EBP
+00517844 : MOV EBP,dword ptr [ESP + 0x10]
+00517848 : PUSH ESI
+00517849 : MOV ESI,ECX
+0051784b : CMP EBP,dword ptr [ESI + 0x10]
+0051784e : JLE 0x0051785a
+00517850 : POP ESI
+00517851 : XOR AL,AL
+00517853 : POP EBP
+00517854 : ADD ESP,0x8
+00517857 : RET 0x8
+0051785a : PUSH EDI
+0051785b : LEA EDI,[ESI + 0x18]
+0051785e : MOV ECX,EDI
+00517860 : CALL 0x005162b0
+00517865 : MOV EAX,dword ptr [ESI + 0x14]
+00517868 : ADD EAX,EBP
+0051786a : CMP EAX,dword ptr [ESI + 0x10]
+0051786d : JG 0x00517884
+0051786f : ADD dword ptr [ESI + 0x14],EBP
+00517872 : MOV ECX,EDI
+00517874 : CALL 0x005170a0
+00517879 : POP EDI
+0051787a : POP ESI
+0051787b : MOV AL,0x1
+0051787d : POP EBP
+0051787e : ADD ESP,0x8
+00517881 : RET 0x8
+00517884 : PUSH EBX
+00517885 : MOV EBX,dword ptr [ESP + 0x20]
+00517889 : TEST EBX,EBX
+0051788b : JZ 0x00517911
+00517891 : CMP EBX,-0x1
+00517894 : JNZ 0x005178cd
+00517896 : MOV ECX,dword ptr [ESI + 0x14]
+00517899 : ADD ECX,EBP
+0051789b : CMP ECX,dword ptr [ESI + 0x10]
+0051789e : JLE 0x005178b7
+005178a0 : LEA EBX,[ESI + 0x2c]
+005178a3 : PUSH -0x1
+005178a5 : PUSH EDI
+005178a6 : MOV ECX,EBX
+005178a8 : CALL 0x00516820
+005178ad : MOV EDX,dword ptr [ESI + 0x14]
+005178b0 : ADD EDX,EBP
+005178b2 : CMP EDX,dword ptr [ESI + 0x10]
+005178b5 : JG 0x005178a3
+005178b7 : ADD dword ptr [ESI + 0x14],EBP
+005178ba : MOV ECX,EDI
+005178bc : CALL 0x005170a0
+005178c1 : POP EBX
+005178c2 : POP EDI
+005178c3 : POP ESI
+005178c4 : MOV AL,0x1
+005178c6 : POP EBP
+005178c7 : ADD ESP,0x8
+005178ca : RET 0x8
+005178cd : CALL 0x005aa2b0
+005178d2 : PUSH EBX
+005178d3 : LEA ECX,[ESI + 0x2c]
+005178d6 : PUSH EDI
+005178d7 : MOV dword ptr [ESP + 0x18],EAX
+005178db : MOV dword ptr [ESP + 0x1c],EDX
+005178df : CALL 0x00516820
+005178e4 : TEST AL,AL
+005178e6 : JZ 0x00517911
+005178e8 : MOV EAX,dword ptr [ESI + 0x14]
+005178eb : ADD EAX,EBP
+005178ed : CMP EAX,dword ptr [ESI + 0x10]
+005178f0 : JLE 0x005178b7
+005178f2 : CALL 0x005aa2b0
+005178f7 : SUB EAX,dword ptr [ESP + 0x10]
+005178fb : CMP EAX,EBX
+005178fd : JNC 0x00517911
+005178ff : MOV ECX,EBX
+00517901 : SUB ECX,EAX
+00517903 : PUSH ECX
+00517904 : PUSH EDI
+00517905 : LEA ECX,[ESI + 0x2c]
+00517908 : CALL 0x00516820
+0051790d : TEST AL,AL
+0051790f : JNZ 0x005178e8
+00517911 : MOV ECX,EDI
+00517913 : CALL 0x005170a0
+00517918 : POP EBX
+00517919 : POP EDI
+0051791a : POP ESI
+0051791b : XOR AL,AL
+0051791d : POP EBP
+0051791e : ADD ESP,0x8
+00517921 : RET 0x8

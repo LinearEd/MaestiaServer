@@ -1,0 +1,76 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00599580
+ENTRY    : 00599580
+BODY     : [[00599580, 005995c2]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+uint FUN_00599580(void)
+
+{
+  int *piVar1;
+  int *in_ECX;
+  uint uVar2;
+  uint uVar3;
+  uint uVar4;
+  
+  if (in_ECX[1] == 0) {
+    return 0;
+  }
+  uVar4 = 0x7fffffff;
+  for (uVar3 = 0; (uVar3 < (uint)in_ECX[1] && (-1 < (int)uVar3)); uVar3 = uVar3 + 1) {
+    piVar1 = *(int **)(*in_ECX + uVar3 * 4);
+    if (*piVar1 < 0) {
+      uVar2 = (uint)*(ushort *)((int)piVar1 + 0x16);
+    }
+    else {
+      uVar2 = piVar1[6];
+    }
+    if ((int)uVar2 < (int)uVar4) {
+      uVar4 = uVar2;
+    }
+  }
+  return uVar4;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00599580 : PUSH EBP
+00599581 : MOV EBP,dword ptr [ECX + 0x4]
+00599584 : TEST EBP,EBP
+00599586 : JNZ 0x0059958c
+00599588 : XOR EAX,EAX
+0059958a : POP EBP
+0059958b : RET
+0059958c : PUSH ESI
+0059958d : PUSH EDI
+0059958e : XOR ESI,ESI
+00599590 : MOV EDI,0x7fffffff
+00599595 : CMP ESI,EBP
+00599597 : JNC 0x005995bd
+00599599 : TEST ESI,ESI
+0059959b : JL 0x005995bd
+0059959d : MOV EAX,dword ptr [ECX]
+0059959f : MOV EDX,dword ptr [EAX + ESI*0x4]
+005995a2 : MOV EAX,dword ptr [EDX]
+005995a4 : SHR EAX,0x1f
+005995a7 : TEST AL,0x1
+005995a9 : JZ 0x005995b1
+005995ab : MOVZX EDX,word ptr [EDX + 0x16]
+005995af : JMP 0x005995b4
+005995b1 : MOV EDX,dword ptr [EDX + 0x18]
+005995b4 : CMP EDX,EDI
+005995b6 : JGE 0x005995ba
+005995b8 : MOV EDI,EDX
+005995ba : INC ESI
+005995bb : JMP 0x00599595
+005995bd : MOV EAX,EDI
+005995bf : POP EDI
+005995c0 : POP ESI
+005995c1 : POP EBP
+005995c2 : RET

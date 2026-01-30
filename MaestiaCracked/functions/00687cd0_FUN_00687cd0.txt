@@ -1,0 +1,78 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00687cd0
+ENTRY    : 00687cd0
+BODY     : [[00687cd0, 00687d25]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+int FUN_00687cd0(void)
+
+{
+  uint in_EAX;
+  uint uVar1;
+  int iVar2;
+  uint uVar3;
+  uint uVar4;
+  uint uVar5;
+  
+  uVar1 = in_EAX;
+  if ((int)in_EAX < 0) {
+    uVar1 = -in_EAX;
+  }
+  uVar3 = (uVar1 & 0xffff) * 0x4585 + (uVar1 >> 0x10) * 0xb9e9;
+  uVar5 = (uVar1 & 0xffff) * 0xb9e9 >> 0x10;
+  uVar4 = uVar3;
+  if (uVar3 < uVar5) {
+    uVar4 = uVar5;
+  }
+  iVar2 = (uVar1 >> 0x10) * 0x4585 + (uVar3 + uVar5 >> 0x10);
+  if (uVar3 + uVar5 < uVar4) {
+    iVar2 = iVar2 + 0x10000;
+  }
+  if ((int)in_EAX < 0) {
+    iVar2 = -iVar2;
+  }
+  return iVar2;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00687cd0 : PUSH EDI
+00687cd1 : MOV EDI,EAX
+00687cd3 : TEST EAX,EAX
+00687cd5 : JGE 0x00687cd9
+00687cd7 : NEG EAX
+00687cd9 : PUSH ESI
+00687cda : MOVZX ESI,AX
+00687cdd : MOV EDX,EAX
+00687cdf : SHR EDX,0x10
+00687ce2 : MOV ECX,ESI
+00687ce4 : IMUL ESI,ESI,0xb9e9
+00687cea : MOV EAX,EDX
+00687cec : IMUL EDX,EDX,0xb9e9
+00687cf2 : IMUL ECX,ECX,0x4585
+00687cf8 : ADD ECX,EDX
+00687cfa : IMUL EAX,EAX,0x4585
+00687d00 : SHR ESI,0x10
+00687d03 : MOV EDX,ECX
+00687d05 : CMP ECX,ESI
+00687d07 : JNC 0x00687d0b
+00687d09 : MOV EDX,ESI
+00687d0b : ADD ECX,ESI
+00687d0d : MOV ESI,ECX
+00687d0f : SHR ESI,0x10
+00687d12 : ADD EAX,ESI
+00687d14 : POP ESI
+00687d15 : CMP ECX,EDX
+00687d17 : JNC 0x00687d1e
+00687d19 : ADD EAX,0x10000
+00687d1e : TEST EDI,EDI
+00687d20 : POP EDI
+00687d21 : JGE 0x00687d25
+00687d23 : NEG EAX
+00687d25 : RET

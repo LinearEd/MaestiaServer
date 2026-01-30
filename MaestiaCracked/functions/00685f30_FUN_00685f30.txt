@@ -1,0 +1,96 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00685f30
+ENTRY    : 00685f30
+BODY     : [[00685f30, 00685fb5]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+uint FUN_00685f30(uint param_1,uint param_2)
+
+{
+  uint uVar1;
+  
+  uVar1 = param_1;
+  if ((int)param_1 < 0) {
+    uVar1 = -param_1;
+  }
+  param_1 = param_1 ^ param_2;
+  if ((int)param_2 < 0) {
+    param_2 = -param_2;
+  }
+  if (param_2 == 0) {
+    param_2 = 0x7fffffff;
+  }
+  else if ((int)uVar1 >> 0x10 == 0) {
+    param_2 = (((int)param_2 >> 1) + uVar1 * 0x10000) / param_2;
+  }
+  else {
+    FUN_00685d40();
+    param_2 = FUN_00685d00();
+  }
+  if ((int)param_1 < 0) {
+    param_2 = -param_2;
+  }
+  return param_2;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00685f30 : MOV ECX,dword ptr [ESP + 0x4]
+00685f34 : SUB ESP,0x10
+00685f37 : PUSH EBX
+00685f38 : PUSH EBP
+00685f39 : MOV EBP,ECX
+00685f3b : TEST ECX,ECX
+00685f3d : JGE 0x00685f41
+00685f3f : NEG ECX
+00685f41 : MOV EBX,dword ptr [ESP + 0x20]
+00685f45 : XOR EBP,EBX
+00685f47 : TEST EBX,EBX
+00685f49 : JGE 0x00685f4f
+00685f4b : NEG EBX
+00685f4d : TEST EBX,EBX
+00685f4f : JNZ 0x00685f58
+00685f51 : MOV EAX,0x7fffffff
+00685f56 : JMP 0x00685faa
+00685f58 : MOV EAX,ECX
+00685f5a : SAR EAX,0x10
+00685f5d : SHL ECX,0x10
+00685f60 : TEST EAX,EAX
+00685f62 : JNZ 0x00685f70
+00685f64 : MOV EAX,EBX
+00685f66 : SAR EAX,0x1
+00685f68 : ADD EAX,ECX
+00685f6a : XOR EDX,EDX
+00685f6c : DIV EBX
+00685f6e : JMP 0x00685faa
+00685f70 : MOV dword ptr [ESP + 0xc],EAX
+00685f74 : PUSH ESI
+00685f75 : MOV EAX,EBX
+00685f77 : LEA EDX,[ESP + 0xc]
+00685f7b : PUSH EDI
+00685f7c : SAR EAX,0x1
+00685f7e : LEA ESI,[ESP + 0x18]
+00685f82 : MOV EDI,EDX
+00685f84 : MOV dword ptr [ESP + 0x10],ECX
+00685f88 : MOV dword ptr [ESP + 0x1c],0x0
+00685f90 : MOV dword ptr [ESP + 0x18],EAX
+00685f94 : CALL 0x00685d40
+00685f99 : MOV EAX,dword ptr [ESP + 0x10]
+00685f9d : MOV ECX,dword ptr [ESP + 0x14]
+00685fa1 : MOV EDX,EBX
+00685fa3 : CALL 0x00685d00
+00685fa8 : POP EDI
+00685fa9 : POP ESI
+00685faa : TEST EBP,EBP
+00685fac : POP EBP
+00685fad : POP EBX
+00685fae : JGE 0x00685fb2
+00685fb0 : NEG EAX
+00685fb2 : ADD ESP,0x10
+00685fb5 : RET

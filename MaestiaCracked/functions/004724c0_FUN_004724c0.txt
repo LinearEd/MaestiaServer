@@ -1,0 +1,65 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_004724c0
+ENTRY    : 004724c0
+BODY     : [[004724c0, 00472501]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+int * FUN_004724c0(void)
+
+{
+  int *piVar1;
+  size_t _Size;
+  int unaff_EDI;
+  
+  _Size = unaff_EDI * 0x34 + 4;
+  if (DAT_00da98c8 == (int *)0x0) {
+    piVar1 = _malloc(_Size);
+  }
+  else {
+    piVar1 = (int *)(**(code **)(*DAT_00da98c8 + 4))();
+  }
+  if (piVar1 != (int *)0x0) {
+    _DAT_00da98cc = _DAT_00da98cc + _Size;
+    _DAT_00da98d0 = _DAT_00da98d0 + 1;
+    *piVar1 = unaff_EDI;
+    return piVar1 + 1;
+  }
+  return (int *)0x0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+004724c0 : MOV ECX,dword ptr [0x00da98c8]
+004724c6 : PUSH ESI
+004724c7 : MOV ESI,EDI
+004724c9 : IMUL ESI,ESI,0x34
+004724cc : ADD ESI,0x4
+004724cf : PUSH ESI
+004724d0 : TEST ECX,ECX
+004724d2 : JZ 0x004724dd
+004724d4 : MOV EAX,dword ptr [ECX]
+004724d6 : MOV EDX,dword ptr [EAX + 0x4]
+004724d9 : CALL EDX
+004724db : JMP 0x004724e5
+004724dd : CALL 0x00636043
+004724e2 : ADD ESP,0x4
+004724e5 : TEST EAX,EAX
+004724e7 : JZ 0x004724fe
+004724e9 : ADD dword ptr [0x00da98cc],ESI
+004724ef : INC dword ptr [0x00da98d0]
+004724f5 : LEA ECX,[EAX + 0x4]
+004724f8 : MOV dword ptr [EAX],EDI
+004724fa : MOV EAX,ECX
+004724fc : POP ESI
+004724fd : RET
+004724fe : XOR EAX,EAX
+00472500 : POP ESI
+00472501 : RET

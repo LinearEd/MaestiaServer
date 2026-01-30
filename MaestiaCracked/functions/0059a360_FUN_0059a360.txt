@@ -1,0 +1,96 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0059a360
+ENTRY    : 0059a360
+BODY     : [[0059a360, 0059a3d8]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_0059a360(int param_1,int param_2,undefined4 *param_3)
+
+{
+  int *piVar1;
+  ushort *puVar2;
+  
+  if (param_2 != 0) {
+    puVar2 = (ushort *)(param_1 + 6);
+    do {
+      if ((*puVar2 >> 0xe & 1) != 0) {
+        if ((*puVar2 >> 0xd & 1) != 0) {
+          piVar1 = (int *)*param_3;
+          *piVar1 = *piVar1 + -1;
+          if (*piVar1 == 0) {
+            FUN_00500860();
+            FUN_00515cf0(piVar1);
+          }
+          param_3 = param_3 + 1;
+        }
+        if ((*puVar2 >> 0xc & 1) != 0) {
+          param_3 = param_3 + 1;
+        }
+        if ((*puVar2 >> 0xb & 1) != 0) {
+          GRefCountNTSImpl::Release((GRefCountNTSImpl *)*param_3);
+          param_3 = param_3 + 1;
+        }
+      }
+      puVar2 = puVar2 + 4;
+      param_2 = param_2 + -1;
+    } while (param_2 != 0);
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0059a360 : MOV EAX,dword ptr [ESP + 0x8]
+0059a364 : TEST EAX,EAX
+0059a366 : JBE 0x0059a3d8
+0059a368 : PUSH EBX
+0059a369 : MOV EBX,dword ptr [ESP + 0x10]
+0059a36d : PUSH EBP
+0059a36e : PUSH ESI
+0059a36f : PUSH EDI
+0059a370 : MOV EDI,dword ptr [ESP + 0x14]
+0059a374 : ADD EDI,0x6
+0059a377 : MOV EBP,EAX
+0059a379 : LEA ESP,[ESP]
+0059a380 : MOVZX EAX,word ptr [EDI]
+0059a383 : MOV ECX,EAX
+0059a385 : SHR ECX,0xe
+0059a388 : TEST CL,0x1
+0059a38b : JZ 0x0059a3cc
+0059a38d : SHR EAX,0xd
+0059a390 : TEST AL,0x1
+0059a392 : JZ 0x0059a3ab
+0059a394 : MOV ESI,dword ptr [EBX]
+0059a396 : ADD dword ptr [ESI],-0x1
+0059a399 : JNZ 0x0059a3a8
+0059a39b : MOV ECX,ESI
+0059a39d : CALL 0x00500860
+0059a3a2 : PUSH ESI
+0059a3a3 : CALL 0x00515cf0
+0059a3a8 : ADD EBX,0x4
+0059a3ab : MOVZX EAX,word ptr [EDI]
+0059a3ae : MOV EDX,EAX
+0059a3b0 : SHR EDX,0xc
+0059a3b3 : TEST DL,0x1
+0059a3b6 : JZ 0x0059a3bb
+0059a3b8 : ADD EBX,0x4
+0059a3bb : SHR EAX,0xb
+0059a3be : TEST AL,0x1
+0059a3c0 : JZ 0x0059a3cc
+0059a3c2 : MOV ECX,dword ptr [EBX]
+0059a3c4 : CALL 0x004ff7c0
+0059a3c9 : ADD EBX,0x4
+0059a3cc : ADD EDI,0x8
+0059a3cf : SUB EBP,0x1
+0059a3d2 : JNZ 0x0059a380
+0059a3d4 : POP EDI
+0059a3d5 : POP ESI
+0059a3d6 : POP EBP
+0059a3d7 : POP EBX
+0059a3d8 : RET

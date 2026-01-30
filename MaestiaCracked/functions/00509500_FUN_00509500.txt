@@ -1,0 +1,108 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00509500
+ENTRY    : 00509500
+BODY     : [[00509500, 005095a7]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00509500(undefined4 param_1,GRefCountNTSImpl *param_2)
+
+{
+  undefined4 *puVar1;
+  LONG LVar2;
+  int in_ECX;
+  uint uVar3;
+  GRefCountNTSImpl *local_10;
+  undefined4 local_c;
+  undefined4 *local_8;
+  GRefCountNTSImpl **local_4;
+  
+  if (*(int *)(in_ECX + 0xec) == 0) {
+    local_c = 2;
+    puVar1 = (undefined4 *)FUN_00515d60(in_ECX,4,&local_c);
+    if (puVar1 == (undefined4 *)0x0) {
+      puVar1 = (undefined4 *)0x0;
+    }
+    else {
+      *puVar1 = 0;
+    }
+    *(undefined4 **)(in_ECX + 0xec) = puVar1;
+  }
+  if (param_2 != (GRefCountNTSImpl *)0x0) {
+    *(int *)(param_2 + 4) = *(int *)(param_2 + 4) + 1;
+  }
+  local_10 = param_2;
+  FUN_0051c480(param_1);
+  local_8 = &param_2;
+  local_4 = &local_10;
+  FUN_00508ca0(*(undefined4 *)(in_ECX + 0xec),&local_8);
+  uVar3 = (uint)param_2 & 0xfffffffc;
+  LVar2 = InterlockedExchangeAdd((LONG *)(uVar3 + 4),-1);
+  if (LVar2 == 1) {
+    FUN_00515cf0(uVar3);
+  }
+  if (local_10 != (GRefCountNTSImpl *)0x0) {
+    GRefCountNTSImpl::Release(local_10);
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00509500 : SUB ESP,0x10
+00509503 : PUSH ESI
+00509504 : MOV ESI,ECX
+00509506 : CMP dword ptr [ESI + 0xec],0x0
+0050950d : JNZ 0x00509538
+0050950f : LEA EAX,[ESP + 0x8]
+00509513 : PUSH EAX
+00509514 : PUSH 0x4
+00509516 : PUSH ESI
+00509517 : MOV dword ptr [ESP + 0x14],0x2
+0050951f : CALL 0x00515d60
+00509524 : TEST EAX,EAX
+00509526 : JZ 0x00509530
+00509528 : MOV dword ptr [EAX],0x0
+0050952e : JMP 0x00509532
+00509530 : XOR EAX,EAX
+00509532 : MOV dword ptr [ESI + 0xec],EAX
+00509538 : MOV EAX,dword ptr [ESP + 0x1c]
+0050953c : TEST EAX,EAX
+0050953e : JZ 0x00509543
+00509540 : INC dword ptr [EAX + 0x4]
+00509543 : MOV ECX,dword ptr [ESP + 0x18]
+00509547 : PUSH ECX
+00509548 : LEA ECX,[ESP + 0x20]
+0050954c : MOV dword ptr [ESP + 0x8],EAX
+00509550 : CALL 0x0051c480
+00509555 : MOV ECX,dword ptr [ESI + 0xec]
+0050955b : LEA EDX,[ESP + 0x1c]
+0050955f : MOV dword ptr [ESP + 0xc],EDX
+00509563 : LEA EDX,[ESP + 0xc]
+00509567 : PUSH EDX
+00509568 : LEA EAX,[ESP + 0x8]
+0050956c : PUSH ECX
+0050956d : MOV dword ptr [ESP + 0x18],EAX
+00509571 : CALL 0x00508ca0
+00509576 : MOV ESI,dword ptr [ESP + 0x1c]
+0050957a : AND ESI,0xfffffffc
+0050957d : PUSH -0x1
+0050957f : LEA EAX,[ESI + 0x4]
+00509582 : PUSH EAX
+00509583 : CALL dword ptr [0x00b851cc]
+00509589 : SUB EAX,0x1
+0050958c : JNZ 0x00509594
+0050958e : PUSH ESI
+0050958f : CALL 0x00515cf0
+00509594 : MOV ECX,dword ptr [ESP + 0x4]
+00509598 : POP ESI
+00509599 : TEST ECX,ECX
+0050959b : JZ 0x005095a2
+0050959d : CALL 0x004ff7c0
+005095a2 : ADD ESP,0x10
+005095a5 : RET 0x8

@@ -1,0 +1,386 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00740160
+ENTRY    : 00740160
+BODY     : [[00740160, 00740499]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* WARNING: Function: __alloca_probe replaced with injection: alloca_probe */
+
+void FUN_00740160(char *param_1)
+
+{
+  char cVar1;
+  char *pcVar2;
+  char *_Str2;
+  int iVar3;
+  DWORD DVar4;
+  undefined4 uVar5;
+  undefined4 *in_ECX;
+  char *pcVar6;
+  bool bVar7;
+  undefined4 local_6110;
+  char local_610c [8192];
+  char local_410c [8192];
+  char local_210c [8192];
+  char local_10c [260];
+  uint local_8;
+  
+  local_8 = DAT_00d66fa0 ^ (uint)&stack0xfffffffc;
+  _strcpy_s(local_10c,0x104,param_1);
+  for (pcVar2 = local_10c;
+      (((cVar1 = *pcVar2, cVar1 == ' ' || (cVar1 == '\t')) || (cVar1 == '\n')) || (cVar1 == '\r'));
+      pcVar2 = pcVar2 + 1) {
+  }
+  _Str2 = (char *)FUN_007409a0();
+  cVar1 = *_Str2;
+  pcVar2 = _Str2;
+  while (cVar1 != '\0') {
+    if (*pcVar2 == '\\') {
+      *pcVar2 = '/';
+    }
+    pcVar2 = pcVar2 + 1;
+    cVar1 = *pcVar2;
+  }
+  *in_ECX = 0;
+  FUN_0073ff60();
+  iVar3 = InternetOpenA(in_ECX + 1,1,0,0,0);
+  in_ECX[0x41] = iVar3;
+  if (iVar3 == 0) {
+    DVar4 = GetLastError();
+    FUN_004c3cc0("InternetDownloader::DownloadFile - InternetOpen failed, %d\n",DVar4);
+    __security_check_cookie(local_8 ^ (uint)&stack0xfffffffc);
+    return;
+  }
+  iVar3 = __strnicmp("ftp://",_Str2,6);
+  if (iVar3 == 0) {
+    pcVar6 = (char *)0x0;
+    _strcpy_s(local_410c,0x2000,_Str2 + 6);
+    pcVar2 = (char *)FUN_00638800(local_410c,0x2f);
+    if (pcVar2 != (char *)0x0) {
+      _strcpy_s(local_210c,0x2000,pcVar2);
+      *pcVar2 = '\0';
+      pcVar6 = _strrchr(local_210c,0x2f);
+      if (pcVar6 != (char *)0x0) {
+        _strcpy_s(local_610c,0x2000,pcVar6 + 1);
+        *pcVar6 = '\0';
+      }
+    }
+    local_6110 = 10000;
+    iVar3 = InternetSetOptionW(in_ECX[0x41],2,&local_6110,4);
+    if (iVar3 == 0) {
+      DVar4 = GetLastError();
+      FUN_004c3cc0("InternetDownloader::Open - INTERNET_OPTION_CONNECT_TIMEOUT set failed, error %d\n"
+                   ,DVar4);
+    }
+    iVar3 = InternetSetOptionW(in_ECX[0x41],8,&local_6110,4);
+    if (iVar3 == 0) {
+      DVar4 = GetLastError();
+      FUN_004c3cc0("InternetDownloader::Open - INTERNET_OPTION_DATA_RECEIVE_TIMEOUT set failed, error %d\n"
+                   ,DVar4);
+    }
+    FUN_004c3cc0("InternetDownloader::Open - try FTP, open (%s, %s, %s), passive %d\n",local_410c,
+                 local_210c,local_610c,DAT_00d6d05c);
+    if ((pcVar2 == (char *)0x0) || (pcVar6 == (char *)0x0)) {
+      FUN_004c3cc0("InternetDownloader::Open - URL Parse Error\n");
+    }
+    else {
+      bVar7 = DAT_00d6d05c != 0;
+      iVar3 = FUN_00740000(in_ECX,in_ECX[0x41],bVar7);
+      in_ECX[0x43] = iVar3;
+      if (iVar3 == 0) {
+        iVar3 = FUN_00740000(in_ECX,in_ECX[0x41],!bVar7);
+        in_ECX[0x43] = iVar3;
+        if (iVar3 != 0) {
+          DAT_00d6d05c = (uint)!bVar7;
+        }
+      }
+    }
+  }
+  else {
+    iVar3 = InternetOpenUrlA(in_ECX[0x41],_Str2,0,0,0,0);
+    in_ECX[0x42] = iVar3;
+    if (iVar3 == 0) {
+      DVar4 = GetLastError();
+      pcVar2 = "InternetDownloader::Open - url \'%s\', failed %d\n";
+    }
+    else {
+      uVar5 = InternetSetFilePointer(iVar3,0,0,2,0);
+      in_ECX[0x44] = uVar5;
+      InternetSetFilePointer(in_ECX[0x42],0,0,0,0);
+      DVar4 = in_ECX[0x44];
+      pcVar2 = "InternetDownloader::Open - url \'%s\', length %d\n";
+    }
+    FUN_004c3cc0(pcVar2,_Str2,DVar4);
+  }
+  if (in_ECX[0x42] != 0) {
+    __security_check_cookie(local_8 ^ (uint)&stack0xfffffffc);
+    return;
+  }
+  InternetCloseHandle(in_ECX[0x41]);
+  in_ECX[0x41] = 0;
+  __security_check_cookie(local_8 ^ (uint)&stack0xfffffffc);
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00740160 : PUSH EBP
+00740161 : MOV EBP,ESP
+00740163 : MOV EAX,0x6110
+00740168 : CALL 0x0063b780
+0074016d : MOV EAX,[0x00d66fa0]
+00740172 : XOR EAX,EBP
+00740174 : MOV dword ptr [EBP + -0x4],EAX
+00740177 : MOV EAX,dword ptr [EBP + 0x8]
+0074017a : PUSH ESI
+0074017b : PUSH EDI
+0074017c : PUSH EAX
+0074017d : LEA EAX,[EBP + 0xfffffef8]
+00740183 : PUSH 0x104
+00740188 : PUSH EAX
+00740189 : MOV ESI,ECX
+0074018b : CALL 0x00638300
+00740190 : ADD ESP,0xc
+00740193 : LEA EAX,[EBP + 0xfffffef8]
+00740199 : LEA ESP,[ESP]
+007401a0 : MOV CL,byte ptr [EAX]
+007401a2 : CMP CL,0x20
+007401a5 : JZ 0x007401b6
+007401a7 : CMP CL,0x9
+007401aa : JZ 0x007401b6
+007401ac : CMP CL,0xa
+007401af : JZ 0x007401b6
+007401b1 : CMP CL,0xd
+007401b4 : JNZ 0x007401b9
+007401b6 : INC EAX
+007401b7 : JMP 0x007401a0
+007401b9 : CALL 0x007409a0
+007401be : MOV EDI,EAX
+007401c0 : CMP byte ptr [EDI],0x0
+007401c3 : JZ 0x007401d3
+007401c5 : CMP byte ptr [EAX],0x5c
+007401c8 : JNZ 0x007401cd
+007401ca : MOV byte ptr [EAX],0x2f
+007401cd : INC EAX
+007401ce : CMP byte ptr [EAX],0x0
+007401d1 : JNZ 0x007401c5
+007401d3 : MOV dword ptr [ESI],0x0
+007401d9 : CALL 0x0073ff60
+007401de : PUSH 0x0
+007401e0 : PUSH 0x0
+007401e2 : PUSH 0x0
+007401e4 : PUSH 0x1
+007401e6 : LEA ECX,[ESI + 0x4]
+007401e9 : PUSH ECX
+007401ea : CALL dword ptr [0x00b85554]
+007401f0 : MOV dword ptr [ESI + 0x104],EAX
+007401f6 : TEST EAX,EAX
+007401f8 : JNZ 0x00740222
+007401fa : CALL dword ptr [0x00b85128]
+00740200 : PUSH EAX
+00740201 : PUSH 0xc0718c
+00740206 : CALL 0x004c3cc0
+0074020b : ADD ESP,0x8
+0074020e : POP EDI
+0074020f : XOR EAX,EAX
+00740211 : POP ESI
+00740212 : MOV ECX,dword ptr [EBP + -0x4]
+00740215 : XOR ECX,EBP
+00740217 : CALL 0x00633e6b
+0074021c : MOV ESP,EBP
+0074021e : POP EBP
+0074021f : RET 0x4
+00740222 : PUSH EBX
+00740223 : PUSH 0x6
+00740225 : PUSH EDI
+00740226 : PUSH 0xc07dec
+0074022b : CALL 0x0063b9fd
+00740230 : ADD ESP,0xc
+00740233 : TEST EAX,EAX
+00740235 : JNZ 0x007403e2
+0074023b : ADD EDI,0x6
+0074023e : PUSH EDI
+0074023f : LEA EDX,[EBP + 0xffffbef8]
+00740245 : PUSH 0x2000
+0074024a : PUSH EDX
+0074024b : XOR EBX,EBX
+0074024d : CALL 0x00638300
+00740252 : LEA EAX,[EBP + 0xffffbef8]
+00740258 : PUSH 0x2f
+0074025a : PUSH EAX
+0074025b : CALL 0x00638800
+00740260 : MOV EDI,EAX
+00740262 : ADD ESP,0x14
+00740265 : TEST EDI,EDI
+00740267 : JZ 0x007402af
+00740269 : PUSH EDI
+0074026a : LEA ECX,[EBP + 0xffffdef8]
+00740270 : PUSH 0x2000
+00740275 : PUSH ECX
+00740276 : CALL 0x00638300
+0074027b : LEA EDX,[EBP + 0xffffdef8]
+00740281 : PUSH 0x2f
+00740283 : PUSH EDX
+00740284 : MOV byte ptr [EDI],BL
+00740286 : CALL 0x0063b6d0
+0074028b : MOV EBX,EAX
+0074028d : ADD ESP,0x14
+00740290 : TEST EBX,EBX
+00740292 : JZ 0x007402af
+00740294 : LEA EAX,[EBX + 0x1]
+00740297 : PUSH EAX
+00740298 : LEA ECX,[EBP + 0xffff9ef8]
+0074029e : PUSH 0x2000
+007402a3 : PUSH ECX
+007402a4 : CALL 0x00638300
+007402a9 : ADD ESP,0xc
+007402ac : MOV byte ptr [EBX],0x0
+007402af : MOV EAX,dword ptr [ESI + 0x104]
+007402b5 : PUSH 0x4
+007402b7 : LEA EDX,[EBP + 0xffff9ef4]
+007402bd : PUSH EDX
+007402be : PUSH 0x2
+007402c0 : PUSH EAX
+007402c1 : MOV dword ptr [EBP + 0xffff9ef4],0x2710
+007402cb : CALL dword ptr [0x00b8556c]
+007402d1 : TEST EAX,EAX
+007402d3 : JNZ 0x007402e9
+007402d5 : CALL dword ptr [0x00b85128]
+007402db : PUSH EAX
+007402dc : PUSH 0xc07df8
+007402e1 : CALL 0x004c3cc0
+007402e6 : ADD ESP,0x8
+007402e9 : MOV EDX,dword ptr [ESI + 0x104]
+007402ef : PUSH 0x4
+007402f1 : LEA ECX,[EBP + 0xffff9ef4]
+007402f7 : PUSH ECX
+007402f8 : PUSH 0x8
+007402fa : PUSH EDX
+007402fb : CALL dword ptr [0x00b8556c]
+00740301 : TEST EAX,EAX
+00740303 : JNZ 0x00740319
+00740305 : CALL dword ptr [0x00b85128]
+0074030b : PUSH EAX
+0074030c : PUSH 0xc07e50
+00740311 : CALL 0x004c3cc0
+00740316 : ADD ESP,0x8
+00740319 : MOV EAX,[0x00d6d05c]
+0074031e : PUSH EAX
+0074031f : LEA ECX,[EBP + 0xffff9ef8]
+00740325 : PUSH ECX
+00740326 : LEA EDX,[EBP + 0xffffdef8]
+0074032c : PUSH EDX
+0074032d : LEA EAX,[EBP + 0xffffbef8]
+00740333 : PUSH EAX
+00740334 : PUSH 0xc07ea8
+00740339 : CALL 0x004c3cc0
+0074033e : ADD ESP,0x14
+00740341 : TEST EDI,EDI
+00740343 : JZ 0x007403d3
+00740349 : TEST EBX,EBX
+0074034b : JZ 0x007403d3
+00740351 : CMP dword ptr [0x00d6d05c],0x0
+00740358 : MOV EDX,dword ptr [ESI + 0x104]
+0074035e : SETNZ BL
+00740361 : MOV byte ptr [EBP + 0xffff9ef0],BL
+00740367 : MOV ECX,dword ptr [EBP + 0xffff9ef0]
+0074036d : PUSH ECX
+0074036e : PUSH EDX
+0074036f : PUSH ESI
+00740370 : LEA EDX,[EBP + 0xffff9ef8]
+00740376 : LEA ECX,[EBP + 0xffffdef8]
+0074037c : LEA EDI,[EBP + 0xffffbef8]
+00740382 : CALL 0x00740000
+00740387 : MOV dword ptr [ESI + 0x10c],EAX
+0074038d : TEST EAX,EAX
+0074038f : JNZ 0x0074044e
+00740395 : MOV EDX,dword ptr [ESI + 0x104]
+0074039b : TEST BL,BL
+0074039d : SETZ AL
+007403a0 : MOVZX ECX,AL
+007403a3 : PUSH ECX
+007403a4 : PUSH EDX
+007403a5 : PUSH ESI
+007403a6 : LEA EDX,[EBP + 0xffff9ef8]
+007403ac : LEA ECX,[EBP + 0xffffdef8]
+007403b2 : CALL 0x00740000
+007403b7 : MOV dword ptr [ESI + 0x10c],EAX
+007403bd : TEST EAX,EAX
+007403bf : JZ 0x0074044e
+007403c5 : XOR EAX,EAX
+007403c7 : TEST BL,BL
+007403c9 : SETZ AL
+007403cc : MOV [0x00d6d05c],EAX
+007403d1 : JMP 0x0074044e
+007403d3 : PUSH 0xc07254
+007403d8 : CALL 0x004c3cc0
+007403dd : ADD ESP,0x4
+007403e0 : JMP 0x0074044e
+007403e2 : MOV ECX,dword ptr [ESI + 0x104]
+007403e8 : PUSH 0x0
+007403ea : PUSH 0x0
+007403ec : PUSH 0x0
+007403ee : PUSH 0x0
+007403f0 : PUSH EDI
+007403f1 : PUSH ECX
+007403f2 : CALL dword ptr [0x00b85568]
+007403f8 : MOV dword ptr [ESI + 0x108],EAX
+007403fe : TEST EAX,EAX
+00740400 : JZ 0x00740439
+00740402 : MOV EBX,dword ptr [0x00b85564]
+00740408 : PUSH 0x0
+0074040a : PUSH 0x2
+0074040c : PUSH 0x0
+0074040e : PUSH 0x0
+00740410 : PUSH EAX
+00740411 : CALL EBX
+00740413 : MOV EDX,dword ptr [ESI + 0x108]
+00740419 : PUSH 0x0
+0074041b : PUSH 0x0
+0074041d : PUSH 0x0
+0074041f : PUSH 0x0
+00740421 : PUSH EDX
+00740422 : MOV dword ptr [ESI + 0x110],EAX
+00740428 : CALL EBX
+0074042a : MOV EAX,dword ptr [ESI + 0x110]
+00740430 : PUSH EAX
+00740431 : PUSH EDI
+00740432 : PUSH 0xc07eec
+00740437 : JMP 0x00740446
+00740439 : CALL dword ptr [0x00b85128]
+0074043f : PUSH EAX
+00740440 : PUSH EDI
+00740441 : PUSH 0xc07f1c
+00740446 : CALL 0x004c3cc0
+0074044b : ADD ESP,0xc
+0074044e : CMP dword ptr [ESI + 0x108],0x0
+00740455 : POP EBX
+00740456 : JNZ 0x00740483
+00740458 : MOV ECX,dword ptr [ESI + 0x104]
+0074045e : PUSH ECX
+0074045f : CALL dword ptr [0x00b8558c]
+00740465 : POP EDI
+00740466 : MOV dword ptr [ESI + 0x104],0x0
+00740470 : XOR EAX,EAX
+00740472 : POP ESI
+00740473 : MOV ECX,dword ptr [EBP + -0x4]
+00740476 : XOR ECX,EBP
+00740478 : CALL 0x00633e6b
+0074047d : MOV ESP,EBP
+0074047f : POP EBP
+00740480 : RET 0x4
+00740483 : MOV ECX,dword ptr [EBP + -0x4]
+00740486 : POP EDI
+00740487 : XOR ECX,EBP
+00740489 : MOV EAX,0x1
+0074048e : POP ESI
+0074048f : CALL 0x00633e6b
+00740494 : MOV ESP,EBP
+00740496 : POP EBP
+00740497 : RET 0x4

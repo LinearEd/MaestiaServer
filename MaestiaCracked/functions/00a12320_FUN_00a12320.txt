@@ -1,0 +1,143 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00a12320
+ENTRY    : 00a12320
+BODY     : [[00a12320, 00a1240b]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00a12320(int param_1)
+
+{
+  int *piVar1;
+  DWORD DVar2;
+  int iVar3;
+  FILE *_File;
+  
+  piVar1 = (int *)**(int **)(param_1 + 4);
+  _File = (FILE *)0x0;
+  iVar3 = 0;
+  if (piVar1 != *(int **)(param_1 + 4)) {
+    do {
+      if (((piVar1[5] != piVar1[10]) || (piVar1[6] != piVar1[0xb])) || (piVar1[7] != piVar1[0xc])) {
+        if (_File == (FILE *)0x0) {
+          _File = __wfopen(L"keymap.txt",L"w+t");
+          if (_File != (FILE *)0x0) goto LAB_00a1238c;
+          FUN_008018d0(L"SaveKeyMapSetting: failed to create/open file %s\n",L"keymap.txt");
+        }
+        else {
+LAB_00a1238c:
+          _fprintf(_File,"%d, %d, %d, %d\n",piVar1[4],piVar1[5],piVar1[6],piVar1[7]);
+        }
+        iVar3 = iVar3 + 1;
+      }
+      FUN_004100e0();
+    } while (piVar1 != (int *)*(int *)(param_1 + 4));
+    if (_File != (FILE *)0x0) {
+      _fclose(_File);
+      FUN_00a121f0();
+      return;
+    }
+    if (iVar3 != 0) goto LAB_00a123fb;
+  }
+  DVar2 = GetFileAttributesW(L"keymap.txt");
+  if (DVar2 != 0xffffffff) {
+    DeleteFileW(L"keymap.txt");
+  }
+LAB_00a123fb:
+  FUN_00a121f0();
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00a12320 : PUSH EBP
+00a12321 : MOV EBP,ESP
+00a12323 : PUSH ECX
+00a12324 : MOV EAX,dword ptr [EBP + 0x8]
+00a12327 : MOV EAX,dword ptr [EAX + 0x4]
+00a1232a : PUSH EBX
+00a1232b : PUSH ESI
+00a1232c : MOV ESI,dword ptr [EAX]
+00a1232e : PUSH EDI
+00a1232f : XOR EDI,EDI
+00a12331 : XOR EBX,EBX
+00a12333 : MOV dword ptr [EBP + -0x4],ESI
+00a12336 : CMP ESI,EAX
+00a12338 : JZ 0x00a123e0
+00a1233e : MOV ECX,dword ptr [ESI + 0x14]
+00a12341 : CMP ECX,dword ptr [ESI + 0x28]
+00a12344 : JNZ 0x00a12356
+00a12346 : MOV EDX,dword ptr [ESI + 0x18]
+00a12349 : CMP EDX,dword ptr [ESI + 0x2c]
+00a1234c : JNZ 0x00a12356
+00a1234e : MOV EAX,dword ptr [ESI + 0x1c]
+00a12351 : CMP EAX,dword ptr [ESI + 0x30]
+00a12354 : JZ 0x00a123ab
+00a12356 : TEST EDI,EDI
+00a12358 : JNZ 0x00a1238c
+00a1235a : PUSH 0xcbdf60
+00a1235f : PUSH 0xcbdf68
+00a12364 : CALL 0x00636404
+00a12369 : MOV EDI,EAX
+00a1236b : ADD ESP,0x8
+00a1236e : TEST EDI,EDI
+00a12370 : JNZ 0x00a1238c
+00a12372 : MOV ESI,dword ptr [0x00da98e8]
+00a12378 : PUSH 0xcbdf80
+00a1237d : PUSH 0xcbdf98
+00a12382 : CALL 0x008018d0
+00a12387 : ADD ESP,0x8
+00a1238a : JMP 0x00a123aa
+00a1238c : MOV ECX,dword ptr [ESI + 0x1c]
+00a1238f : MOV EDX,dword ptr [ESI + 0x18]
+00a12392 : MOV EAX,dword ptr [ESI + 0x14]
+00a12395 : PUSH ECX
+00a12396 : MOV ECX,dword ptr [ESI + 0x10]
+00a12399 : PUSH EDX
+00a1239a : PUSH EAX
+00a1239b : PUSH ECX
+00a1239c : PUSH 0xcbdffc
+00a123a1 : PUSH EDI
+00a123a2 : CALL 0x00636757
+00a123a7 : ADD ESP,0x18
+00a123aa : INC EBX
+00a123ab : LEA EDX,[EBP + -0x4]
+00a123ae : CALL 0x004100e0
+00a123b3 : MOV ESI,dword ptr [EBP + -0x4]
+00a123b6 : MOV EDX,dword ptr [EBP + 0x8]
+00a123b9 : CMP ESI,dword ptr [EDX + 0x4]
+00a123bc : JNZ 0x00a1233e
+00a123be : TEST EDI,EDI
+00a123c0 : JZ 0x00a123dc
+00a123c2 : PUSH EDI
+00a123c3 : CALL 0x006366db
+00a123c8 : MOV ESI,dword ptr [EBP + 0x8]
+00a123cb : ADD ESP,0x4
+00a123ce : CALL 0x00a121f0
+00a123d3 : POP EDI
+00a123d4 : POP ESI
+00a123d5 : POP EBX
+00a123d6 : MOV ESP,EBP
+00a123d8 : POP EBP
+00a123d9 : RET 0x4
+00a123dc : TEST EBX,EBX
+00a123de : JNZ 0x00a123fb
+00a123e0 : PUSH 0xcbe00c
+00a123e5 : CALL dword ptr [0x00b85120]
+00a123eb : CMP EAX,-0x1
+00a123ee : JZ 0x00a123fb
+00a123f0 : PUSH 0xcbe024
+00a123f5 : CALL dword ptr [0x00b85124]
+00a123fb : MOV ESI,dword ptr [EBP + 0x8]
+00a123fe : CALL 0x00a121f0
+00a12403 : POP EDI
+00a12404 : POP ESI
+00a12405 : POP EBX
+00a12406 : MOV ESP,EBP
+00a12408 : POP EBP
+00a12409 : RET 0x4

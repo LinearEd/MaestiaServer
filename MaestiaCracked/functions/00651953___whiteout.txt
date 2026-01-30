@@ -1,0 +1,60 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __whiteout
+ENTRY    : 00651953
+BODY     : [[00651953, 00651984]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __whiteout
+   
+   Library: Visual Studio 2008 Release */
+
+wint_t __whiteout(FILE *param_1)
+
+{
+  wint_t _C;
+  int iVar1;
+  int *unaff_ESI;
+  
+  do {
+    *unaff_ESI = *unaff_ESI + 1;
+    _C = __fgetwc_nolock(param_1);
+    if (_C == 0xffff) {
+      return 0xffff;
+    }
+    iVar1 = _iswctype(_C,8);
+  } while (iVar1 != 0);
+  return _C;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00651953 : MOV EDI,EDI
+00651955 : PUSH EBP
+00651956 : MOV EBP,ESP
+00651958 : PUSH EDI
+00651959 : PUSH dword ptr [EBP + 0x8]
+0065195c : INC dword ptr [ESI]
+0065195e : CALL 0x0063e2a3
+00651963 : MOVZX EDI,AX
+00651966 : MOV EAX,0xffff
+0065196b : POP ECX
+0065196c : CMP DI,AX
+0065196f : JZ 0x0065197f
+00651971 : PUSH 0x8
+00651973 : PUSH EDI
+00651974 : CALL 0x00651835
+00651979 : POP ECX
+0065197a : POP ECX
+0065197b : TEST EAX,EAX
+0065197d : JNZ 0x00651959
+0065197f : MOV AX,DI
+00651982 : POP EDI
+00651983 : POP EBP
+00651984 : RET

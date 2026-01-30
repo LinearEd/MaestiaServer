@@ -1,0 +1,76 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_006f00e0
+ENTRY    : 006f00e0
+BODY     : [[006f00e0, 006f0144]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined4 FUN_006f00e0(BYTE *param_1,DWORD *param_2,DWORD param_3)
+
+{
+  BOOL BVar1;
+  DWORD DVar2;
+  HCRYPTKEY *in_ECX;
+  
+  if ((int *)in_ECX[1] == (int *)0x0) {
+    FUN_006ee470(L"[ERROR][RsaKey::GetCryptProv] m_pRsaCrypter is null.\n");
+  }
+  else if ((*(int *)in_ECX[1] != 0) && (*in_ECX != 0)) {
+    BVar1 = CryptEncrypt(*in_ECX,0,1,0,param_1,param_2,param_3);
+    if (BVar1 == 0) {
+      DVar2 = GetLastError();
+      FUN_006ee470(L"[ERROR][RsaKey::Encrypt] CryptEncrypt error code %d\n",DVar2);
+      return 0;
+    }
+    return 1;
+  }
+  return 0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006f00e0 : PUSH EBP
+006f00e1 : MOV EBP,ESP
+006f00e3 : MOV EAX,dword ptr [ECX + 0x4]
+006f00e6 : TEST EAX,EAX
+006f00e8 : JNZ 0x006f00fd
+006f00ea : PUSH 0xbf38d0
+006f00ef : CALL 0x006ee470
+006f00f4 : ADD ESP,0x4
+006f00f7 : XOR AL,AL
+006f00f9 : POP EBP
+006f00fa : RET 0xc
+006f00fd : CMP dword ptr [EAX],0x0
+006f0100 : JZ 0x006f00f7
+006f0102 : MOV EAX,dword ptr [ECX]
+006f0104 : TEST EAX,EAX
+006f0106 : JZ 0x006f00f7
+006f0108 : MOV ECX,dword ptr [EBP + 0x10]
+006f010b : MOV EDX,dword ptr [EBP + 0xc]
+006f010e : PUSH ECX
+006f010f : MOV ECX,dword ptr [EBP + 0x8]
+006f0112 : PUSH EDX
+006f0113 : PUSH ECX
+006f0114 : PUSH 0x0
+006f0116 : PUSH 0x1
+006f0118 : PUSH 0x0
+006f011a : PUSH EAX
+006f011b : CALL dword ptr [0x00b85008]
+006f0121 : TEST EAX,EAX
+006f0123 : JNZ 0x006f013f
+006f0125 : CALL dword ptr [0x00b85128]
+006f012b : PUSH EAX
+006f012c : PUSH 0xbf3940
+006f0131 : CALL 0x006ee470
+006f0136 : ADD ESP,0x8
+006f0139 : XOR AL,AL
+006f013b : POP EBP
+006f013c : RET 0xc
+006f013f : MOV AL,0x1
+006f0141 : POP EBP
+006f0142 : RET 0xc

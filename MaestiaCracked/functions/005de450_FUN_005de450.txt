@@ -1,0 +1,90 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005de450
+ENTRY    : 005de450
+BODY     : [[005de450, 005de4e4]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined4 FUN_005de450(int param_1,uint *param_2)
+
+{
+  byte bVar1;
+  uint uVar2;
+  undefined4 *in_ECX;
+  
+  bVar1 = *(byte *)(param_1 + *(int *)*in_ECX);
+  param_1 = param_1 + *(int *)*in_ECX;
+  uVar2 = (uint)(bVar1 >> 2);
+  if ((bVar1 & 3) == 0) {
+    *param_2 = uVar2;
+    return 1;
+  }
+  if ((bVar1 & 3) != 1) {
+    if ((bVar1 & 3) != 2) {
+      *param_2 = (uint)*(uint3 *)(param_1 + 1) << 6 | uVar2;
+      return 4;
+    }
+    *param_2 = (uint)*(ushort *)(param_1 + 1) << 6 | uVar2;
+    return 3;
+  }
+  *param_2 = (uint)*(byte *)(param_1 + 1) << 6 | uVar2;
+  return 2;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005de450 : MOV EAX,dword ptr [ECX]
+005de452 : MOV ECX,dword ptr [EAX]
+005de454 : MOV EDX,dword ptr [ESP + 0x4]
+005de458 : MOVZX EAX,byte ptr [EDX + ECX*0x1]
+005de45c : ADD EDX,ECX
+005de45e : MOV ECX,EAX
+005de460 : AND ECX,0x3
+005de463 : SHR EAX,0x2
+005de466 : SUB ECX,0x0
+005de469 : JZ 0x005de4d7
+005de46b : SUB ECX,0x1
+005de46e : JZ 0x005de4c0
+005de470 : SUB ECX,0x1
+005de473 : JZ 0x005de4a0
+005de475 : MOVZX ECX,byte ptr [EDX + 0x3]
+005de479 : PUSH ESI
+005de47a : MOVZX ESI,byte ptr [EDX + 0x2]
+005de47e : MOVZX EDX,byte ptr [EDX + 0x1]
+005de482 : SHL ECX,0x8
+005de485 : OR ECX,ESI
+005de487 : SHL ECX,0x8
+005de48a : OR ECX,EDX
+005de48c : SHL ECX,0x6
+005de48f : OR ECX,EAX
+005de491 : MOV EAX,dword ptr [ESP + 0xc]
+005de495 : MOV dword ptr [EAX],ECX
+005de497 : MOV EAX,0x4
+005de49c : POP ESI
+005de49d : RET 0x8
+005de4a0 : MOVZX ECX,byte ptr [EDX + 0x2]
+005de4a4 : MOVZX EDX,byte ptr [EDX + 0x1]
+005de4a8 : SHL ECX,0x8
+005de4ab : OR ECX,EDX
+005de4ad : SHL ECX,0x6
+005de4b0 : OR ECX,EAX
+005de4b2 : MOV EAX,dword ptr [ESP + 0x8]
+005de4b6 : MOV dword ptr [EAX],ECX
+005de4b8 : MOV EAX,0x3
+005de4bd : RET 0x8
+005de4c0 : MOVZX ECX,byte ptr [EDX + 0x1]
+005de4c4 : MOV EDX,dword ptr [ESP + 0x8]
+005de4c8 : SHL ECX,0x6
+005de4cb : OR ECX,EAX
+005de4cd : MOV dword ptr [EDX],ECX
+005de4cf : MOV EAX,0x2
+005de4d4 : RET 0x8
+005de4d7 : MOV ECX,dword ptr [ESP + 0x8]
+005de4db : MOV dword ptr [ECX],EAX
+005de4dd : MOV EAX,0x1
+005de4e2 : RET 0x8

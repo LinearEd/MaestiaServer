@@ -1,0 +1,145 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00a0b2d0
+ENTRY    : 00a0b2d0
+BODY     : [[00a0b2d0, 00a0b394]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+bool FUN_00a0b2d0(LPCWSTR param_1,undefined4 param_2)
+
+{
+  HMODULE in_EAX;
+  FARPROC pFVar1;
+  HANDLE hObject;
+  DWORD DVar2;
+  HANDLE pvVar3;
+  int iVar4;
+  HANDLE pvVar5;
+  undefined4 uVar6;
+  DWORD *pDVar7;
+  undefined4 uVar8;
+  undefined4 uVar9;
+  DWORD local_10;
+  undefined4 local_c;
+  undefined4 local_8;
+  
+  pFVar1 = GetProcAddress(in_EAX,"MiniDumpWriteDump");
+  if (pFVar1 == (FARPROC)0x0) {
+    FUN_008018d0(L"[AvaCrashHandler::ExceptionFilter]: \'MiniDumpWriteDump API\'not found");
+    return false;
+  }
+  hObject = CreateFileW(param_1,0x40000000,2,(LPSECURITY_ATTRIBUTES)0x0,2,0x80,(HANDLE)0x0);
+  if (hObject == (HANDLE)0xffffffff) {
+    return false;
+  }
+  local_10 = GetCurrentThreadId();
+  uVar9 = 0;
+  local_c = param_2;
+  local_8 = 0;
+  uVar8 = 0;
+  if (DAT_00da9428 != 0) {
+    if (DAT_00da9428 == 1) {
+      uVar6 = 1;
+      goto LAB_00a0b36b;
+    }
+    if (DAT_00da9428 == 2) {
+      uVar6 = 2;
+      goto LAB_00a0b36b;
+    }
+  }
+  uVar6 = 0;
+LAB_00a0b36b:
+  pDVar7 = &local_10;
+  pvVar5 = hObject;
+  DVar2 = GetCurrentProcessId();
+  pvVar3 = GetCurrentProcess();
+  iVar4 = (*pFVar1)(pvVar3,DVar2,pvVar5,uVar6,pDVar7,uVar8,uVar9);
+  CloseHandle(hObject);
+  return iVar4 != 0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00a0b2d0 : PUSH EBP
+00a0b2d1 : MOV EBP,ESP
+00a0b2d3 : SUB ESP,0xc
+00a0b2d6 : PUSH EBX
+00a0b2d7 : PUSH ESI
+00a0b2d8 : PUSH 0xcab484
+00a0b2dd : PUSH EAX
+00a0b2de : XOR EBX,EBX
+00a0b2e0 : CALL dword ptr [0x00b85160]
+00a0b2e6 : MOV ESI,EAX
+00a0b2e8 : TEST ESI,ESI
+00a0b2ea : JNZ 0x00a0b307
+00a0b2ec : MOV ESI,dword ptr [0x00da98e8]
+00a0b2f2 : PUSH 0xcab498
+00a0b2f7 : CALL 0x008018d0
+00a0b2fc : ADD ESP,0x4
+00a0b2ff : POP ESI
+00a0b300 : XOR EAX,EAX
+00a0b302 : POP EBX
+00a0b303 : MOV ESP,EBP
+00a0b305 : POP EBP
+00a0b306 : RET
+00a0b307 : MOV ECX,dword ptr [EBP + 0x8]
+00a0b30a : PUSH EDI
+00a0b30b : PUSH 0x0
+00a0b30d : PUSH 0x80
+00a0b312 : PUSH 0x2
+00a0b314 : PUSH 0x0
+00a0b316 : PUSH 0x2
+00a0b318 : PUSH 0x40000000
+00a0b31d : PUSH ECX
+00a0b31e : CALL dword ptr [0x00b85164]
+00a0b324 : MOV EDI,EAX
+00a0b326 : CMP EDI,-0x1
+00a0b329 : JZ 0x00a0b38c
+00a0b32b : CALL dword ptr [0x00b85168]
+00a0b331 : MOV EDX,dword ptr [EBP + 0xc]
+00a0b334 : MOV dword ptr [EBP + -0xc],EAX
+00a0b337 : MOV EAX,[0x00da9428]
+00a0b33c : SUB EAX,0x0
+00a0b33f : PUSH 0x0
+00a0b341 : MOV dword ptr [EBP + -0x8],EDX
+00a0b344 : MOV dword ptr [EBP + -0x4],EBX
+00a0b347 : PUSH 0x0
+00a0b349 : JZ 0x00a0b365
+00a0b34b : SUB EAX,0x1
+00a0b34e : JZ 0x00a0b35d
+00a0b350 : SUB EAX,0x1
+00a0b353 : JNZ 0x00a0b365
+00a0b355 : LEA ECX,[EBP + -0xc]
+00a0b358 : PUSH ECX
+00a0b359 : PUSH 0x2
+00a0b35b : JMP 0x00a0b36b
+00a0b35d : LEA EDX,[EBP + -0xc]
+00a0b360 : PUSH EDX
+00a0b361 : PUSH 0x1
+00a0b363 : JMP 0x00a0b36b
+00a0b365 : LEA EAX,[EBP + -0xc]
+00a0b368 : PUSH EAX
+00a0b369 : PUSH 0x0
+00a0b36b : PUSH EDI
+00a0b36c : CALL dword ptr [0x00b850e4]
+00a0b372 : PUSH EAX
+00a0b373 : CALL dword ptr [0x00b85134]
+00a0b379 : PUSH EAX
+00a0b37a : CALL ESI
+00a0b37c : TEST EAX,EAX
+00a0b37e : JZ 0x00a0b385
+00a0b380 : MOV EBX,0x1
+00a0b385 : PUSH EDI
+00a0b386 : CALL dword ptr [0x00b85104]
+00a0b38c : POP EDI
+00a0b38d : POP ESI
+00a0b38e : MOV EAX,EBX
+00a0b390 : POP EBX
+00a0b391 : MOV ESP,EBP
+00a0b393 : POP EBP
+00a0b394 : RET

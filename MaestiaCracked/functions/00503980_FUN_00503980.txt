@@ -1,0 +1,89 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00503980
+ENTRY    : 00503980
+BODY     : [[00503980, 005039da]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00503980(uint param_1)
+
+{
+  uint uVar1;
+  int iVar2;
+  int *in_ECX;
+  int iVar3;
+  uint uVar4;
+  
+  uVar1 = in_ECX[1];
+  if (param_1 < uVar1) {
+    uVar4 = param_1;
+    if ((uint)in_ECX[2] >> 1 <= param_1) goto LAB_005039b1;
+  }
+  else {
+    if (param_1 < (uint)in_ECX[2]) goto LAB_005039b1;
+    uVar4 = (param_1 >> 2) + param_1;
+  }
+  FUN_00502cb0(in_ECX,uVar4);
+LAB_005039b1:
+  in_ECX[1] = param_1;
+  if (uVar1 < param_1) {
+    iVar2 = uVar1 * 0x10 + *in_ECX;
+    for (iVar3 = param_1 - uVar1; iVar3 != 0; iVar3 = iVar3 + -1) {
+      if (iVar2 != 0) {
+        *(undefined4 *)(iVar2 + 4) = 0xffffffff;
+      }
+      iVar2 = iVar2 + 0x10;
+    }
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00503980 : PUSH EBX
+00503981 : PUSH ESI
+00503982 : MOV ESI,dword ptr [ESP + 0xc]
+00503986 : PUSH EDI
+00503987 : MOV EDI,ECX
+00503989 : MOV EBX,dword ptr [EDI + 0x4]
+0050398c : CMP ESI,EBX
+0050398e : JNC 0x0050399c
+00503990 : MOV EAX,dword ptr [EDI + 0x8]
+00503993 : SHR EAX,0x1
+00503995 : CMP ESI,EAX
+00503997 : JNC 0x005039b1
+00503999 : PUSH ESI
+0050399a : JMP 0x005039ab
+0050399c : CMP ESI,dword ptr [EDI + 0x8]
+0050399f : JC 0x005039b1
+005039a1 : MOV ECX,ESI
+005039a3 : SHR ECX,0x2
+005039a6 : ADD ECX,ESI
+005039a8 : PUSH ECX
+005039a9 : MOV ECX,EDI
+005039ab : PUSH EDI
+005039ac : CALL 0x00502cb0
+005039b1 : MOV dword ptr [EDI + 0x4],ESI
+005039b4 : CMP ESI,EBX
+005039b6 : JBE 0x005039d5
+005039b8 : MOV EAX,EBX
+005039ba : SHL EAX,0x4
+005039bd : ADD EAX,dword ptr [EDI]
+005039bf : SUB ESI,EBX
+005039c1 : JZ 0x005039d5
+005039c3 : OR ECX,0xffffffff
+005039c6 : TEST EAX,EAX
+005039c8 : JZ 0x005039cd
+005039ca : MOV dword ptr [EAX + 0x4],ECX
+005039cd : ADD EAX,0x10
+005039d0 : SUB ESI,0x1
+005039d3 : JNZ 0x005039c6
+005039d5 : POP EDI
+005039d6 : POP ESI
+005039d7 : POP EBX
+005039d8 : RET 0x4

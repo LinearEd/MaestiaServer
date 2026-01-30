@@ -1,0 +1,80 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005440f0
+ENTRY    : 005440f0
+BODY     : [[005440f0, 0054418f]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+uint FUN_005440f0(byte param_1,uint param_2)
+
+{
+  ushort uVar1;
+  
+  uVar1 = (ushort)param_2;
+  if (((param_1 & 4) != 0) &&
+     ((((0x10ff < uVar1 && (uVar1 < 0x1200)) || ((0x312f < uVar1 && (uVar1 < 0x3190)))) ||
+      ((ushort)(uVar1 + 0x5400) < 0x2ba4)))) {
+    return param_2 & 0xffffff00;
+  }
+  if (((uVar1 < 0x1100) || (0x11ff < uVar1)) &&
+     (((uVar1 < 0x3000 || (0xd7af < uVar1)) &&
+      (((uVar1 < 0xf900 || (0xfaff < uVar1)) && (0xdc < (ushort)(uVar1 + 0x100))))))) {
+    return 0;
+  }
+  return 1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005440f0 : TEST byte ptr [ESP + 0x4],0x4
+005440f5 : MOV EAX,dword ptr [ESP + 0x8]
+005440f9 : JZ 0x00544138
+005440fb : MOV ECX,0x1100
+00544100 : CMP AX,CX
+00544103 : JC 0x0054410f
+00544105 : MOV EDX,0x11ff
+0054410a : CMP AX,DX
+0054410d : JBE 0x00544133
+0054410f : MOV ECX,0x3130
+00544114 : CMP AX,CX
+00544117 : JC 0x00544123
+00544119 : MOV EDX,0x318f
+0054411e : CMP AX,DX
+00544121 : JBE 0x00544133
+00544123 : LEA ECX,[EAX + 0x5400]
+00544129 : MOV EDX,0x2ba3
+0054412e : CMP CX,DX
+00544131 : JA 0x00544138
+00544133 : XOR AL,AL
+00544135 : RET 0x8
+00544138 : MOV ECX,0x1100
+0054413d : CMP AX,CX
+00544140 : JC 0x0054414c
+00544142 : MOV EDX,0x11ff
+00544147 : CMP AX,DX
+0054414a : JBE 0x00544183
+0054414c : MOV ECX,0x3000
+00544151 : CMP AX,CX
+00544154 : JC 0x00544160
+00544156 : MOV EDX,0xd7af
+0054415b : CMP AX,DX
+0054415e : JBE 0x00544183
+00544160 : MOV ECX,0xf900
+00544165 : CMP AX,CX
+00544168 : JC 0x00544174
+0054416a : MOV EDX,0xfaff
+0054416f : CMP AX,DX
+00544172 : JBE 0x00544183
+00544174 : ADD EAX,0x100
+00544179 : MOV ECX,0xdc
+0054417e : CMP AX,CX
+00544181 : JA 0x0054418b
+00544183 : MOV EAX,0x1
+00544188 : RET 0x8
+0054418b : XOR EAX,EAX
+0054418d : RET 0x8

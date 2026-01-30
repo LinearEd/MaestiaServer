@@ -1,0 +1,162 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FID_conflict:_getc
+ENTRY    : 0063eb60
+BODY     : [[0063eb60, 0063ec58]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* WARNING: Function: __SEH_prolog4 replaced with injection: SEH_prolog4 */
+/* WARNING: Function: __SEH_epilog4 replaced with injection: EH_epilog3 */
+/* Library Function - Multiple Matches With Different Base Names
+    _fgetc
+    _getc
+   
+   Library: Visual Studio 2008 Release */
+
+int __cdecl FID_conflict__getc(FILE *_File)
+
+{
+  int *piVar1;
+  uint uVar2;
+  undefined *puVar3;
+  uint local_20;
+  
+  local_20 = 0;
+  if (_File == (FILE *)0x0) {
+    piVar1 = __errno();
+    *piVar1 = 0x16;
+    __invalid_parameter(0,0,0,0,0);
+    return -1;
+  }
+  __lock_file(_File);
+  if ((_File->_flag & 0x40) == 0) {
+    uVar2 = __fileno(_File);
+    if ((uVar2 == 0xffffffff) || (uVar2 == 0xfffffffe)) {
+      puVar3 = &DAT_00d677f0;
+    }
+    else {
+      puVar3 = (undefined *)((uVar2 & 0x1f) * 0x40 + (&DAT_01728c40)[(int)uVar2 >> 5]);
+    }
+    if ((puVar3[0x24] & 0x7f) == 0) {
+      if ((uVar2 == 0xffffffff) || (uVar2 == 0xfffffffe)) {
+        puVar3 = &DAT_00d677f0;
+      }
+      else {
+        puVar3 = (undefined *)((uVar2 & 0x1f) * 0x40 + (&DAT_01728c40)[(int)uVar2 >> 5]);
+      }
+      if ((puVar3[0x24] & 0x80) == 0) goto LAB_0063ec26;
+    }
+    piVar1 = __errno();
+    *piVar1 = 0x16;
+    __invalid_parameter(0,0,0,0,0);
+    local_20 = 0xffffffff;
+  }
+LAB_0063ec26:
+  if (local_20 == 0) {
+    piVar1 = &_File->_cnt;
+    *piVar1 = *piVar1 + -1;
+    if (*piVar1 < 0) {
+      local_20 = __filbuf(_File);
+    }
+    else {
+      local_20 = (uint)(byte)*_File->_ptr;
+      _File->_ptr = _File->_ptr + 1;
+    }
+  }
+  FUN_0063ec5c();
+  return local_20;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0063eb60 : PUSH 0xc
+0063eb62 : PUSH 0xcece68
+0063eb67 : CALL 0x0064c228
+0063eb6c : XOR EDI,EDI
+0063eb6e : MOV dword ptr [EBP + -0x1c],EDI
+0063eb71 : XOR EAX,EAX
+0063eb73 : MOV ESI,dword ptr [EBP + 0x8]
+0063eb76 : CMP ESI,EDI
+0063eb78 : SETNZ AL
+0063eb7b : CMP EAX,EDI
+0063eb7d : JNZ 0x0063eb9f
+0063eb7f : CALL 0x0063ab82
+0063eb84 : MOV dword ptr [EAX],0x16
+0063eb8a : PUSH EDI
+0063eb8b : PUSH EDI
+0063eb8c : PUSH EDI
+0063eb8d : PUSH EDI
+0063eb8e : PUSH EDI
+0063eb8f : CALL 0x006372b8
+0063eb94 : ADD ESP,0x14
+0063eb97 : OR EAX,0xffffffff
+0063eb9a : JMP 0x0063ec53
+0063eb9f : PUSH ESI
+0063eba0 : CALL 0x0063d990
+0063eba5 : POP ECX
+0063eba6 : MOV dword ptr [EBP + -0x4],EDI
+0063eba9 : TEST byte ptr [ESI + 0xc],0x40
+0063ebad : JNZ 0x0063ec26
+0063ebaf : PUSH ESI
+0063ebb0 : CALL 0x0064dfc6
+0063ebb5 : POP ECX
+0063ebb6 : CMP EAX,-0x1
+0063ebb9 : JZ 0x0063ebd6
+0063ebbb : CMP EAX,-0x2
+0063ebbe : JZ 0x0063ebd6
+0063ebc0 : MOV EDX,EAX
+0063ebc2 : SAR EDX,0x5
+0063ebc5 : MOV ECX,EAX
+0063ebc7 : AND ECX,0x1f
+0063ebca : SHL ECX,0x6
+0063ebcd : ADD ECX,dword ptr [EDX*0x4 + 0x1728c40]
+0063ebd4 : JMP 0x0063ebdb
+0063ebd6 : MOV ECX,0xd677f0
+0063ebdb : TEST byte ptr [ECX + 0x24],0x7f
+0063ebdf : JNZ 0x0063ec0a
+0063ebe1 : CMP EAX,-0x1
+0063ebe4 : JZ 0x0063ebff
+0063ebe6 : CMP EAX,-0x2
+0063ebe9 : JZ 0x0063ebff
+0063ebeb : MOV ECX,EAX
+0063ebed : SAR ECX,0x5
+0063ebf0 : AND EAX,0x1f
+0063ebf3 : SHL EAX,0x6
+0063ebf6 : ADD EAX,dword ptr [ECX*0x4 + 0x1728c40]
+0063ebfd : JMP 0x0063ec04
+0063ebff : MOV EAX,0xd677f0
+0063ec04 : TEST byte ptr [EAX + 0x24],0x80
+0063ec08 : JZ 0x0063ec26
+0063ec0a : CALL 0x0063ab82
+0063ec0f : MOV dword ptr [EAX],0x16
+0063ec15 : PUSH EDI
+0063ec16 : PUSH EDI
+0063ec17 : PUSH EDI
+0063ec18 : PUSH EDI
+0063ec19 : PUSH EDI
+0063ec1a : CALL 0x006372b8
+0063ec1f : ADD ESP,0x14
+0063ec22 : OR dword ptr [EBP + -0x1c],0xffffffff
+0063ec26 : CMP dword ptr [EBP + -0x1c],EDI
+0063ec29 : JNZ 0x0063ec44
+0063ec2b : DEC dword ptr [ESI + 0x4]
+0063ec2e : JS 0x0063ec3a
+0063ec30 : MOV ECX,dword ptr [ESI]
+0063ec32 : MOVZX EAX,byte ptr [ECX]
+0063ec35 : INC ECX
+0063ec36 : MOV dword ptr [ESI],ECX
+0063ec38 : JMP 0x0063ec41
+0063ec3a : PUSH ESI
+0063ec3b : CALL 0x0064dc47
+0063ec40 : POP ECX
+0063ec41 : MOV dword ptr [EBP + -0x1c],EAX
+0063ec44 : MOV dword ptr [EBP + -0x4],0xfffffffe
+0063ec4b : CALL 0x0063ec5c
+0063ec50 : MOV EAX,dword ptr [EBP + -0x1c]
+0063ec53 : CALL 0x0064c26d
+0063ec58 : RET

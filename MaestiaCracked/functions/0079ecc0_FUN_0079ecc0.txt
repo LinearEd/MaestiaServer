@@ -1,0 +1,63 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0079ecc0
+ENTRY    : 0079ecc0
+BODY     : [[0079ecc0, 0079ed1a]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_0079ecc0(int param_1,int param_2,int param_3)
+
+{
+  float fVar1;
+  float fVar2;
+  int in_EAX;
+  int in_ECX;
+  float in_XMM2_Da;
+  float in_XMM3_Da;
+  
+  param_2 = param_2 + in_EAX * 3;
+  fVar1 = *(float *)(param_1 + param_2 * 4);
+  param_3 = param_3 + in_ECX * 3;
+  fVar2 = *(float *)(param_1 + param_3 * 4);
+  *(float *)(param_1 + param_2 * 4) = fVar1 - (fVar1 * in_XMM2_Da + fVar2) * in_XMM3_Da;
+  *(float *)(param_1 + param_3 * 4) = (fVar1 - fVar2 * in_XMM2_Da) * in_XMM3_Da + fVar2;
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0079ecc0 : PUSH EBP
+0079ecc1 : MOV EBP,ESP
+0079ecc3 : MOV EDX,dword ptr [EBP + 0x8]
+0079ecc6 : PUSH ESI
+0079ecc7 : MOV ESI,dword ptr [EBP + 0xc]
+0079ecca : LEA ESI,[ESI + EAX*0x2]
+0079eccd : ADD ESI,EAX
+0079eccf : MOVSS XMM0,dword ptr [EDX + ESI*0x4]
+0079ecd4 : LEA EAX,[EDX + ESI*0x4]
+0079ecd7 : MOV ESI,dword ptr [EBP + 0x10]
+0079ecda : LEA ESI,[ESI + ECX*0x2]
+0079ecdd : ADD ESI,ECX
+0079ecdf : MOVSS XMM1,dword ptr [EDX + ESI*0x4]
+0079ece4 : LEA ECX,[EDX + ESI*0x4]
+0079ece7 : MOVAPS XMM4,XMM0
+0079ecea : MULSS XMM4,XMM2
+0079ecee : ADDSS XMM4,XMM1
+0079ecf2 : MOVAPS XMM5,XMM0
+0079ecf5 : MULSS XMM4,XMM3
+0079ecf9 : SUBSS XMM5,XMM4
+0079ecfd : MOVAPS XMM4,XMM1
+0079ed00 : MULSS XMM4,XMM2
+0079ed04 : SUBSS XMM0,XMM4
+0079ed08 : MULSS XMM0,XMM3
+0079ed0c : MOVSS dword ptr [EAX],XMM5
+0079ed10 : ADDSS XMM0,XMM1
+0079ed14 : MOVSS dword ptr [ECX],XMM0
+0079ed18 : POP ESI
+0079ed19 : POP EBP
+0079ed1a : RET

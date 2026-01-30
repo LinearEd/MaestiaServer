@@ -1,0 +1,95 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00540090
+ENTRY    : 00540090
+BODY     : [[00540090, 005400f0]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00540090(void)
+
+{
+  int iVar1;
+  short *psVar2;
+  int *in_ECX;
+  uint uVar3;
+  
+  uVar3 = in_ECX[1];
+  if (uVar3 != 0) {
+    iVar1 = *in_ECX;
+    if ((iVar1 == 0) || (uVar3 <= uVar3 - 1)) {
+      psVar2 = (short *)0x0;
+    }
+    else {
+      psVar2 = (short *)(iVar1 + (uVar3 - 1) * 2);
+    }
+    if (*psVar2 == 0) {
+      if ((uVar3 != 0) && (uVar3 != 0)) {
+        if ((iVar1 == 0) || (uVar3 <= uVar3 - 1)) {
+          psVar2 = (short *)0x0;
+        }
+        else {
+          psVar2 = (short *)(iVar1 + (uVar3 - 1) * 2);
+        }
+        if (*psVar2 == 0) {
+          uVar3 = uVar3 - 1;
+        }
+      }
+      FUN_0053d280(uVar3,1);
+      FUN_0053fde0(uVar3 + 1,1);
+    }
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00540090 : MOV EAX,dword ptr [ECX + 0x4]
+00540093 : TEST EAX,EAX
+00540095 : JBE 0x005400f0
+00540097 : MOV EDX,dword ptr [ECX]
+00540099 : PUSH ESI
+0054009a : LEA ESI,[EAX + -0x1]
+0054009d : TEST EDX,EDX
+0054009f : JZ 0x005400aa
+005400a1 : CMP ESI,EAX
+005400a3 : JNC 0x005400aa
+005400a5 : LEA ESI,[EDX + ESI*0x2]
+005400a8 : JMP 0x005400ac
+005400aa : XOR ESI,ESI
+005400ac : CMP word ptr [ESI],0x0
+005400b0 : JNZ 0x005400ef
+005400b2 : PUSH EDI
+005400b3 : MOV EDI,EAX
+005400b5 : TEST EDI,EDI
+005400b7 : JBE 0x005400d6
+005400b9 : TEST EAX,EAX
+005400bb : JBE 0x005400d6
+005400bd : LEA ESI,[EAX + -0x1]
+005400c0 : TEST EDX,EDX
+005400c2 : JZ 0x005400cd
+005400c4 : CMP ESI,EAX
+005400c6 : JNC 0x005400cd
+005400c8 : LEA EAX,[EDX + ESI*0x2]
+005400cb : JMP 0x005400cf
+005400cd : XOR EAX,EAX
+005400cf : CMP word ptr [EAX],0x0
+005400d3 : JNZ 0x005400d6
+005400d5 : DEC EDI
+005400d6 : LEA ESI,[ECX + 0x10]
+005400d9 : PUSH 0x1
+005400db : PUSH EDI
+005400dc : MOV ECX,ESI
+005400de : CALL 0x0053d280
+005400e3 : PUSH 0x1
+005400e5 : INC EDI
+005400e6 : PUSH EDI
+005400e7 : MOV ECX,ESI
+005400e9 : CALL 0x0053fde0
+005400ee : POP EDI
+005400ef : POP ESI
+005400f0 : RET

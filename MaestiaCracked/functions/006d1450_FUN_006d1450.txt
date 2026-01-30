@@ -1,0 +1,198 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_006d1450
+ENTRY    : 006d1450
+BODY     : [[006d1450, 006d14b4] [006d14b7, 006d14e7] [006d14ea, 006d15e7]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_006d1450(int param_1,int param_2,uint param_3)
+
+{
+  undefined2 uVar1;
+  int iVar2;
+  undefined1 local_218 [4];
+  undefined2 local_214 [258];
+  uint local_10;
+  uint local_c;
+  uint local_8;
+  
+  local_10 = DAT_00d66fa0 ^ (uint)&stack0xfffffffc;
+  if ((*(uint *)(param_1 + 0x68) & 1) == 0) {
+    FUN_006c23a0(param_1,"Missing IHDR before hIST");
+  }
+  else {
+    if ((*(uint *)(param_1 + 0x68) & 4) != 0) {
+      FUN_006c24c0(param_1,"Invalid hIST after IDAT");
+      FUN_006cf140(param_1,param_3);
+      goto LAB_006d15da;
+    }
+    if ((*(uint *)(param_1 + 0x68) & 2) == 0) {
+      FUN_006c24c0(param_1,"Missing PLTE before hIST");
+      FUN_006cf140(param_1,param_3);
+      goto LAB_006d15da;
+    }
+    if ((param_2 != 0) && ((*(uint *)(param_2 + 8) & 0x40) != 0)) {
+      FUN_006c24c0(param_1,"Duplicate hIST chunk");
+      FUN_006cf140(param_1,param_3);
+      goto LAB_006d15da;
+    }
+  }
+  local_c = param_3 >> 1;
+  if ((local_c == *(ushort *)(param_1 + 0x118)) && (local_c < 0x101)) {
+    for (local_8 = 0; local_8 < local_c; local_8 = local_8 + 1) {
+      FUN_006cf100(param_1,local_218,2);
+      uVar1 = FUN_006cf0d0(local_218);
+      local_214[local_8] = uVar1;
+    }
+    iVar2 = FUN_006cf140(param_1,0);
+    if (iVar2 == 0) {
+      FUN_006cd9f0(param_1,param_2,local_214);
+    }
+  }
+  else {
+    FUN_006c24c0(param_1,"Incorrect hIST chunk length");
+    FUN_006cf140(param_1,param_3);
+  }
+LAB_006d15da:
+  __security_check_cookie(local_10 ^ (uint)&stack0xfffffffc);
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006d1450 : PUSH EBP
+006d1451 : MOV EBP,ESP
+006d1453 : SUB ESP,0x214
+006d1459 : MOV EAX,[0x00d66fa0]
+006d145e : XOR EAX,EBP
+006d1460 : MOV dword ptr [EBP + -0xc],EAX
+006d1463 : MOV EAX,dword ptr [EBP + 0x8]
+006d1466 : MOV ECX,dword ptr [EAX + 0x68]
+006d1469 : AND ECX,0x1
+006d146c : JNZ 0x006d1484
+006d146e : PUSH 0xbee9b8
+006d1473 : MOV EDX,dword ptr [EBP + 0x8]
+006d1476 : PUSH EDX
+006d1477 : CALL 0x006c23a0
+006d147c : ADD ESP,0x8
+006d147f : JMP 0x006d1521
+006d1484 : MOV EAX,dword ptr [EBP + 0x8]
+006d1487 : MOV ECX,dword ptr [EAX + 0x68]
+006d148a : AND ECX,0x4
+006d148d : JZ 0x006d14b7
+006d148f : PUSH 0xbee9a0
+006d1494 : MOV EDX,dword ptr [EBP + 0x8]
+006d1497 : PUSH EDX
+006d1498 : CALL 0x006c24c0
+006d149d : ADD ESP,0x8
+006d14a0 : MOV EAX,dword ptr [EBP + 0x10]
+006d14a3 : PUSH EAX
+006d14a4 : MOV ECX,dword ptr [EBP + 0x8]
+006d14a7 : PUSH ECX
+006d14a8 : CALL 0x006cf140
+006d14ad : ADD ESP,0x8
+006d14b0 : JMP 0x006d15da
+006d14b7 : MOV EDX,dword ptr [EBP + 0x8]
+006d14ba : MOV EAX,dword ptr [EDX + 0x68]
+006d14bd : AND EAX,0x2
+006d14c0 : JNZ 0x006d14ea
+006d14c2 : PUSH 0xbee984
+006d14c7 : MOV ECX,dword ptr [EBP + 0x8]
+006d14ca : PUSH ECX
+006d14cb : CALL 0x006c24c0
+006d14d0 : ADD ESP,0x8
+006d14d3 : MOV EDX,dword ptr [EBP + 0x10]
+006d14d6 : PUSH EDX
+006d14d7 : MOV EAX,dword ptr [EBP + 0x8]
+006d14da : PUSH EAX
+006d14db : CALL 0x006cf140
+006d14e0 : ADD ESP,0x8
+006d14e3 : JMP 0x006d15da
+006d14ea : CMP dword ptr [EBP + 0xc],0x0
+006d14ee : JZ 0x006d1521
+006d14f0 : MOV ECX,dword ptr [EBP + 0xc]
+006d14f3 : MOV EDX,dword ptr [ECX + 0x8]
+006d14f6 : AND EDX,0x40
+006d14f9 : JZ 0x006d1521
+006d14fb : PUSH 0xbee96c
+006d1500 : MOV EAX,dword ptr [EBP + 0x8]
+006d1503 : PUSH EAX
+006d1504 : CALL 0x006c24c0
+006d1509 : ADD ESP,0x8
+006d150c : MOV ECX,dword ptr [EBP + 0x10]
+006d150f : PUSH ECX
+006d1510 : MOV EDX,dword ptr [EBP + 0x8]
+006d1513 : PUSH EDX
+006d1514 : CALL 0x006cf140
+006d1519 : ADD ESP,0x8
+006d151c : JMP 0x006d15da
+006d1521 : MOV EAX,dword ptr [EBP + 0x10]
+006d1524 : SHR EAX,0x1
+006d1526 : MOV dword ptr [EBP + -0x8],EAX
+006d1529 : MOV ECX,dword ptr [EBP + 0x8]
+006d152c : MOVZX EDX,word ptr [ECX + 0x118]
+006d1533 : CMP dword ptr [EBP + -0x8],EDX
+006d1536 : JNZ 0x006d1541
+006d1538 : CMP dword ptr [EBP + -0x8],0x100
+006d153f : JBE 0x006d1564
+006d1541 : PUSH 0xbee950
+006d1546 : MOV EAX,dword ptr [EBP + 0x8]
+006d1549 : PUSH EAX
+006d154a : CALL 0x006c24c0
+006d154f : ADD ESP,0x8
+006d1552 : MOV ECX,dword ptr [EBP + 0x10]
+006d1555 : PUSH ECX
+006d1556 : MOV EDX,dword ptr [EBP + 0x8]
+006d1559 : PUSH EDX
+006d155a : CALL 0x006cf140
+006d155f : ADD ESP,0x8
+006d1562 : JMP 0x006d15da
+006d1564 : MOV dword ptr [EBP + -0x4],0x0
+006d156b : JMP 0x006d1576
+006d156d : MOV EAX,dword ptr [EBP + -0x4]
+006d1570 : ADD EAX,0x1
+006d1573 : MOV dword ptr [EBP + -0x4],EAX
+006d1576 : MOV ECX,dword ptr [EBP + -0x4]
+006d1579 : CMP ECX,dword ptr [EBP + -0x8]
+006d157c : JNC 0x006d15af
+006d157e : PUSH 0x2
+006d1580 : LEA EDX,[EBP + 0xfffffdec]
+006d1586 : PUSH EDX
+006d1587 : MOV EAX,dword ptr [EBP + 0x8]
+006d158a : PUSH EAX
+006d158b : CALL 0x006cf100
+006d1590 : ADD ESP,0xc
+006d1593 : LEA ECX,[EBP + 0xfffffdec]
+006d1599 : PUSH ECX
+006d159a : CALL 0x006cf0d0
+006d159f : ADD ESP,0x4
+006d15a2 : MOV EDX,dword ptr [EBP + -0x4]
+006d15a5 : MOV word ptr [EBP + EDX*0x2 + 0xfffffdf0],AX
+006d15ad : JMP 0x006d156d
+006d15af : PUSH 0x0
+006d15b1 : MOV EAX,dword ptr [EBP + 0x8]
+006d15b4 : PUSH EAX
+006d15b5 : CALL 0x006cf140
+006d15ba : ADD ESP,0x8
+006d15bd : TEST EAX,EAX
+006d15bf : JZ 0x006d15c3
+006d15c1 : JMP 0x006d15da
+006d15c3 : LEA ECX,[EBP + 0xfffffdf0]
+006d15c9 : PUSH ECX
+006d15ca : MOV EDX,dword ptr [EBP + 0xc]
+006d15cd : PUSH EDX
+006d15ce : MOV EAX,dword ptr [EBP + 0x8]
+006d15d1 : PUSH EAX
+006d15d2 : CALL 0x006cd9f0
+006d15d7 : ADD ESP,0xc
+006d15da : MOV ECX,dword ptr [EBP + -0xc]
+006d15dd : XOR ECX,EBP
+006d15df : CALL 0x00633e6b
+006d15e4 : MOV ESP,EBP
+006d15e6 : POP EBP
+006d15e7 : RET

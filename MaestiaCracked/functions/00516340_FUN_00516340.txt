@@ -1,0 +1,73 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00516340
+ENTRY    : 00516340
+BODY     : [[00516340, 0051634c] [00516350, 0051638d]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00516340(int param_1)
+
+{
+  int iVar1;
+  int in_ECX;
+  
+  iVar1 = *(int *)(in_ECX + 0x1c);
+  if (iVar1 != 0) {
+    while (iVar1 != param_1) {
+      iVar1 = *(int *)(iVar1 + 4);
+      if (iVar1 == 0) {
+        return;
+      }
+    }
+    if (*(int *)(param_1 + 8) == 0) {
+      *(undefined4 *)(in_ECX + 0x1c) = *(undefined4 *)(param_1 + 4);
+    }
+    else {
+      *(undefined4 *)(*(int *)(param_1 + 8) + 4) = *(undefined4 *)(param_1 + 4);
+    }
+    if (*(int *)(param_1 + 4) != 0) {
+      *(undefined4 *)(*(int *)(param_1 + 4) + 8) = *(undefined4 *)(param_1 + 8);
+      return;
+    }
+    *(undefined4 *)(in_ECX + 0x20) = *(undefined4 *)(param_1 + 8);
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00516340 : MOV EAX,dword ptr [ECX + 0x1c]
+00516343 : TEST EAX,EAX
+00516345 : JZ 0x0051638b
+00516347 : MOV EDX,dword ptr [ESP + 0x4]
+0051634b : JMP 0x00516350
+00516350 : CMP EAX,EDX
+00516352 : JZ 0x0051635e
+00516354 : MOV EAX,dword ptr [EAX + 0x4]
+00516357 : TEST EAX,EAX
+00516359 : JNZ 0x00516350
+0051635b : RET 0x4
+0051635e : MOV EAX,dword ptr [EDX + 0x8]
+00516361 : TEST EAX,EAX
+00516363 : JZ 0x0051636f
+00516365 : PUSH ESI
+00516366 : MOV ESI,dword ptr [EDX + 0x4]
+00516369 : MOV dword ptr [EAX + 0x4],ESI
+0051636c : POP ESI
+0051636d : JMP 0x00516375
+0051636f : MOV EAX,dword ptr [EDX + 0x4]
+00516372 : MOV dword ptr [ECX + 0x1c],EAX
+00516375 : MOV EAX,dword ptr [EDX + 0x4]
+00516378 : TEST EAX,EAX
+0051637a : JZ 0x00516385
+0051637c : MOV ECX,dword ptr [EDX + 0x8]
+0051637f : MOV dword ptr [EAX + 0x8],ECX
+00516382 : RET 0x4
+00516385 : MOV EDX,dword ptr [EDX + 0x8]
+00516388 : MOV dword ptr [ECX + 0x20],EDX
+0051638b : RET 0x4

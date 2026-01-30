@@ -1,0 +1,344 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __gmtime64_s
+ENTRY    : 0063415e
+BODY     : [[0063415e, 006343a0]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __gmtime64_s
+   
+   Library: Visual Studio 2008 Release */
+
+errno_t __cdecl __gmtime64_s(tm *_Tm,__time64_t *_Time)
+
+{
+  tm *ptVar1;
+  uint uVar2;
+  bool bVar3;
+  tm *ptVar4;
+  int *piVar5;
+  int iVar6;
+  uint uVar7;
+  undefined4 *puVar8;
+  int iVar9;
+  bool bVar10;
+  longlong lVar11;
+  longlong lVar12;
+  longlong lVar13;
+  
+  ptVar4 = _Tm;
+  bVar3 = false;
+  if ((_Tm == (tm *)0x0) || (_memset(_Tm,0xff,0x24), _Time == (__time64_t *)0x0)) {
+    piVar5 = __errno();
+    *piVar5 = 0x16;
+    __invalid_parameter(0,0,0,0,0);
+    return 0x16;
+  }
+  uVar7 = (uint)*_Time;
+  uVar2 = *(uint *)((int)_Time + 4);
+  lVar12 = *_Time;
+  if (((0x7fffffff < uVar2) && (((int)uVar2 < -1 || (uVar7 < 0xffff5740)))) ||
+     ((6 < (int)uVar2 && ((7 < (int)uVar2 || (0x934126cf < uVar7)))))) {
+    piVar5 = __errno();
+    *piVar5 = 0x16;
+    return 0x16;
+  }
+  iVar6 = __alldiv(uVar7,uVar2,0x1e13380,0);
+  _Tm = (tm *)(iVar6 + 0x46);
+  ptVar1 = (tm *)(iVar6 + 0x45);
+  lVar11 = __allmul(iVar6,iVar6 >> 0x1f,0xfffffe93,0xffffffff);
+  lVar11 = __allmul(lVar11 - (((iVar6 + 0x171) / 400 - (int)ptVar1 / 100) + -0x11 +
+                             ((int)((int)&ptVar1->tm_sec + ((int)ptVar1 >> 0x1f & 3U)) >> 2)),
+                    0x15180,0);
+  lVar11 = lVar11 + lVar12;
+  iVar9 = (int)lVar11;
+  if ((lVar11 < 0x100000000) && (lVar11 < 0)) {
+    lVar11 = lVar11 + 0x1e13380;
+    uVar7 = (uint)ptVar1 & 0x80000003;
+    bVar10 = uVar7 == 0;
+    if ((int)uVar7 < 0) {
+      bVar10 = (uVar7 - 1 | 0xfffffffc) == 0xffffffff;
+    }
+    _Tm = ptVar1;
+    if (((!bVar10) || ((int)ptVar1 % 100 == 0)) && ((iVar6 + 0x7b1) % 400 != 0)) goto LAB_006342e2;
+    lVar11 = CONCAT44((int)((ulonglong)lVar11 >> 0x20) + (uint)(0xfffeae7f < (uint)lVar11),
+                      iVar9 + 0x1e28500);
+  }
+  else {
+    uVar7 = (uint)_Tm & 0x80000003;
+    bVar10 = uVar7 == 0;
+    if ((int)uVar7 < 0) {
+      bVar10 = (uVar7 - 1 | 0xfffffffc) == 0xffffffff;
+    }
+    if (((!bVar10) || ((int)_Tm % 100 == 0)) && ((iVar6 + 0x7b2) % 400 != 0)) goto LAB_006342e2;
+  }
+  bVar3 = true;
+LAB_006342e2:
+  ptVar4->tm_year = (int)_Tm;
+  iVar6 = __alldiv(lVar11,0x15180,0);
+  ptVar4->tm_yday = iVar6;
+  lVar12 = __allmul(iVar6,iVar6 >> 0x1f,0xfffeae80,0xffffffff);
+  puVar8 = &DAT_00d67570;
+  if (!bVar3) {
+    puVar8 = (undefined4 *)&DAT_00d675a4;
+  }
+  iVar9 = 1;
+  iVar6 = puVar8[1];
+  while (iVar6 < ptVar4->tm_yday) {
+    iVar9 = iVar9 + 1;
+    iVar6 = puVar8[iVar9];
+  }
+  ptVar4->tm_mon = iVar9 + -1;
+  ptVar4->tm_mday = ptVar4->tm_yday - puVar8[iVar9 + -1];
+  iVar6 = __alldiv((int)*_Time,*(undefined4 *)((int)_Time + 4),0x15180,0);
+  ptVar4->tm_wday = (iVar6 + 4) % 7;
+  iVar6 = __alldiv(lVar12 + lVar11,0xe10,0);
+  ptVar4->tm_hour = iVar6;
+  lVar13 = __allmul(iVar6,iVar6 >> 0x1f,0xfffff1f0,0xffffffff);
+  lVar13 = lVar12 + lVar11 + lVar13;
+  iVar6 = __alldiv(lVar13,0x3c,0);
+  ptVar4->tm_min = iVar6;
+  ptVar4->tm_isdst = 0;
+  ptVar4->tm_sec = (int)lVar13 + iVar6 * -0x3c;
+  return 0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0063415e : MOV EDI,EDI
+00634160 : PUSH EBP
+00634161 : MOV EBP,ESP
+00634163 : SUB ESP,0x10
+00634166 : PUSH ESI
+00634167 : MOV ESI,dword ptr [EBP + 0x8]
+0063416a : PUSH EDI
+0063416b : XOR EDI,EDI
+0063416d : MOV dword ptr [EBP + -0x4],EDI
+00634170 : CMP ESI,EDI
+00634172 : JNZ 0x00634192
+00634174 : CALL 0x0063ab82
+00634179 : PUSH 0x16
+0063417b : POP ESI
+0063417c : PUSH EDI
+0063417d : PUSH EDI
+0063417e : PUSH EDI
+0063417f : PUSH EDI
+00634180 : PUSH EDI
+00634181 : MOV dword ptr [EAX],ESI
+00634183 : CALL 0x006372b8
+00634188 : ADD ESP,0x14
+0063418b : MOV EAX,ESI
+0063418d : JMP 0x0063439d
+00634192 : PUSH 0x24
+00634194 : PUSH 0xff
+00634199 : PUSH ESI
+0063419a : CALL 0x0063b700
+0063419f : MOV EAX,dword ptr [EBP + 0xc]
+006341a2 : ADD ESP,0xc
+006341a5 : CMP EAX,EDI
+006341a7 : JZ 0x00634174
+006341a9 : MOV ECX,dword ptr [EAX]
+006341ab : MOV EAX,dword ptr [EAX + 0x4]
+006341ae : CMP EAX,-0x1
+006341b1 : MOV dword ptr [EBP + -0x10],ECX
+006341b4 : MOV dword ptr [EBP + -0xc],EAX
+006341b7 : JG 0x006341cf
+006341b9 : JL 0x006341c3
+006341bb : CMP ECX,0xffff5740
+006341c1 : JNC 0x006341cf
+006341c3 : CALL 0x0063ab82
+006341c8 : PUSH 0x16
+006341ca : POP ESI
+006341cb : MOV dword ptr [EAX],ESI
+006341cd : JMP 0x0063418b
+006341cf : CMP EAX,0x7
+006341d2 : JL 0x006341de
+006341d4 : JG 0x006341c3
+006341d6 : CMP ECX,0x934126cf
+006341dc : JA 0x006341c3
+006341de : PUSH EBX
+006341df : PUSH EDI
+006341e0 : PUSH 0x1e13380
+006341e5 : PUSH EAX
+006341e6 : PUSH ECX
+006341e7 : CALL 0x0063c760
+006341ec : MOV ECX,EAX
+006341ee : ADD ECX,0x46
+006341f1 : LEA EAX,[ECX + 0x12b]
+006341f7 : CDQ
+006341f8 : MOV EBX,0x190
+006341fd : IDIV EBX
+006341ff : LEA EDI,[ECX + -0x1]
+00634202 : PUSH 0x64
+00634204 : MOV dword ptr [EBP + -0x8],EDI
+00634207 : MOV dword ptr [EBP + 0x8],ECX
+0063420a : MOV EBX,EAX
+0063420c : MOV EAX,EDI
+0063420e : CDQ
+0063420f : POP EDI
+00634210 : IDIV EDI
+00634212 : PUSH -0x1
+00634214 : PUSH 0xfffffe93
+00634219 : SUB EBX,EAX
+0063421b : MOV EAX,dword ptr [EBP + -0x8]
+0063421e : CDQ
+0063421f : AND EDX,0x3
+00634222 : ADD EAX,EDX
+00634224 : SAR EAX,0x2
+00634227 : LEA EAX,[EBX + EAX*0x1 + -0x11]
+0063422b : CDQ
+0063422c : MOV EDI,EAX
+0063422e : LEA EAX,[ECX + -0x46]
+00634231 : MOV EBX,EDX
+00634233 : CDQ
+00634234 : PUSH EDX
+00634235 : PUSH EAX
+00634236 : CALL 0x0063c720
+0063423b : SUB EAX,EDI
+0063423d : SBB EDX,EBX
+0063423f : PUSH 0x0
+00634241 : MOV EBX,0x15180
+00634246 : PUSH EBX
+00634247 : PUSH EDX
+00634248 : PUSH EAX
+00634249 : CALL 0x0063c720
+0063424e : MOV EDI,dword ptr [EBP + -0x10]
+00634251 : ADD EDI,EAX
+00634253 : ADC dword ptr [EBP + -0xc],EDX
+00634256 : CMP dword ptr [EBP + -0xc],0x0
+0063425a : JG 0x006342a9
+0063425c : JL 0x00634262
+0063425e : TEST EDI,EDI
+00634260 : JNC 0x006342a9
+00634262 : MOV EAX,dword ptr [EBP + -0x8]
+00634265 : ADD EDI,0x1e13380
+0063426b : ADC dword ptr [EBP + -0xc],0x0
+0063426f : MOV ECX,EAX
+00634271 : AND ECX,0x80000003
+00634277 : MOV dword ptr [EBP + 0x8],EAX
+0063427a : JNS 0x00634281
+0063427c : DEC ECX
+0063427d : OR ECX,0xfffffffc
+00634280 : INC ECX
+00634281 : JNZ 0x00634290
+00634283 : PUSH 0x64
+00634285 : CDQ
+00634286 : POP ECX
+00634287 : IDIV ECX
+00634289 : TEST EDX,EDX
+0063428b : JNZ 0x006342a1
+0063428d : MOV EAX,dword ptr [EBP + 0x8]
+00634290 : ADD EAX,0x76c
+00634295 : CDQ
+00634296 : MOV ECX,0x190
+0063429b : IDIV ECX
+0063429d : TEST EDX,EDX
+0063429f : JNZ 0x006342e2
+006342a1 : ADD EDI,EBX
+006342a3 : ADC dword ptr [EBP + -0xc],0x0
+006342a7 : JMP 0x006342db
+006342a9 : MOV EAX,dword ptr [EBP + 0x8]
+006342ac : MOV ECX,EAX
+006342ae : AND ECX,0x80000003
+006342b4 : JNS 0x006342bb
+006342b6 : DEC ECX
+006342b7 : OR ECX,0xfffffffc
+006342ba : INC ECX
+006342bb : JNZ 0x006342c7
+006342bd : PUSH 0x64
+006342bf : CDQ
+006342c0 : POP ECX
+006342c1 : IDIV ECX
+006342c3 : TEST EDX,EDX
+006342c5 : JNZ 0x006342db
+006342c7 : MOV EAX,dword ptr [EBP + 0x8]
+006342ca : ADD EAX,0x76c
+006342cf : CDQ
+006342d0 : MOV ECX,0x190
+006342d5 : IDIV ECX
+006342d7 : TEST EDX,EDX
+006342d9 : JNZ 0x006342e2
+006342db : MOV dword ptr [EBP + -0x4],0x1
+006342e2 : MOV EAX,dword ptr [EBP + 0x8]
+006342e5 : PUSH 0x0
+006342e7 : PUSH EBX
+006342e8 : PUSH dword ptr [EBP + -0xc]
+006342eb : MOV dword ptr [ESI + 0x14],EAX
+006342ee : PUSH EDI
+006342ef : CALL 0x0063c760
+006342f4 : PUSH -0x1
+006342f6 : MOV dword ptr [ESI + 0x1c],EAX
+006342f9 : CDQ
+006342fa : PUSH 0xfffeae80
+006342ff : PUSH EDX
+00634300 : PUSH EAX
+00634301 : CALL 0x0063c720
+00634306 : ADD EDI,EAX
+00634308 : ADC dword ptr [EBP + -0xc],EDX
+0063430b : CMP dword ptr [EBP + -0x4],0x0
+0063430f : MOV EDX,0xd67570
+00634314 : JNZ 0x0063431b
+00634316 : MOV EDX,0xd675a4
+0063431b : MOV EAX,dword ptr [ESI + 0x1c]
+0063431e : XOR ECX,ECX
+00634320 : INC ECX
+00634321 : CMP dword ptr [EDX + 0x4],EAX
+00634324 : JGE 0x00634333
+00634326 : MOV EBX,EAX
+00634328 : INC ECX
+00634329 : CMP dword ptr [EDX + ECX*0x4],EBX
+0063432c : JL 0x00634328
+0063432e : MOV EBX,0x15180
+00634333 : DEC ECX
+00634334 : MOV dword ptr [ESI + 0x10],ECX
+00634337 : SUB EAX,dword ptr [EDX + ECX*0x4]
+0063433a : PUSH 0x0
+0063433c : MOV dword ptr [ESI + 0xc],EAX
+0063433f : MOV EAX,dword ptr [EBP + 0xc]
+00634342 : PUSH EBX
+00634343 : PUSH dword ptr [EAX + 0x4]
+00634346 : PUSH dword ptr [EAX]
+00634348 : CALL 0x0063c760
+0063434d : PUSH 0x7
+0063434f : ADD EAX,0x4
+00634352 : POP ECX
+00634353 : CDQ
+00634354 : IDIV ECX
+00634356 : XOR EBX,EBX
+00634358 : PUSH EBX
+00634359 : PUSH 0xe10
+0063435e : PUSH dword ptr [EBP + -0xc]
+00634361 : PUSH EDI
+00634362 : MOV dword ptr [ESI + 0x18],EDX
+00634365 : CALL 0x0063c760
+0063436a : PUSH -0x1
+0063436c : MOV dword ptr [ESI + 0x8],EAX
+0063436f : CDQ
+00634370 : PUSH 0xfffff1f0
+00634375 : PUSH EDX
+00634376 : PUSH EAX
+00634377 : CALL 0x0063c720
+0063437c : PUSH EBX
+0063437d : ADD EDI,EAX
+0063437f : ADC dword ptr [EBP + -0xc],EDX
+00634382 : PUSH 0x3c
+00634384 : PUSH dword ptr [EBP + -0xc]
+00634387 : PUSH EDI
+00634388 : CALL 0x0063c760
+0063438d : MOV dword ptr [ESI + 0x4],EAX
+00634390 : IMUL EAX,EAX,0x3c
+00634393 : SUB EDI,EAX
+00634395 : MOV dword ptr [ESI + 0x20],EBX
+00634398 : MOV dword ptr [ESI],EDI
+0063439a : XOR EAX,EAX
+0063439c : POP EBX
+0063439d : POP EDI
+0063439e : POP ESI
+0063439f : LEAVE
+006343a0 : RET

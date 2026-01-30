@@ -1,0 +1,151 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00572430
+ENTRY    : 00572430
+BODY     : [[00572430, 00572510]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined1 FUN_00572430(undefined4 param_1,int *param_2,undefined4 param_3,undefined4 param_4)
+
+{
+  int iVar1;
+  undefined1 uVar2;
+  int iVar3;
+  int in_ECX;
+  GRefCountNTSImpl *pGVar4;
+  GRefCountNTSImpl *this;
+  undefined1 auStack_10 [16];
+  
+  if (*(int *)(in_ECX + 0x68) == 0) {
+    return 0;
+  }
+  iVar1 = *param_2;
+  if (iVar1 != 0) {
+    *(uint *)(iVar1 + 8) = *(int *)(iVar1 + 8) + 1U & 0x8fffffff;
+  }
+  iVar1 = *param_2;
+  this = (GRefCountNTSImpl *)0x0;
+  if ((param_2[1] != 0) &&
+     (this = (GRefCountNTSImpl *)FUN_0051d0a0(in_ECX), this != (GRefCountNTSImpl *)0x0)) {
+    *(int *)(this + 4) = *(int *)(this + 4) + 1;
+  }
+  if (iVar1 == 0) {
+    if (this == (GRefCountNTSImpl *)0x0) {
+      pGVar4 = (GRefCountNTSImpl *)0x0;
+    }
+    else {
+      pGVar4 = this + 0x68;
+    }
+  }
+  else {
+    pGVar4 = (GRefCountNTSImpl *)(iVar1 + 0x10);
+  }
+  iVar3 = (**(code **)(**(int **)(in_ECX + 0x68) + 0x5c))();
+  FUN_00526210(param_2 + 2);
+  uVar2 = FUN_0052c930(auStack_10,param_3,pGVar4,iVar3,param_4,
+                       (*(int *)(iVar3 + 8) - *(int *)(iVar3 + 0xc) >> 4) + -0x20 +
+                       *(int *)(iVar3 + 0x1c) * 0x20,param_1);
+  FUN_00526bc0();
+  if (this != (GRefCountNTSImpl *)0x0) {
+    GRefCountNTSImpl::Release(this);
+  }
+  if (iVar1 != 0) {
+    FUN_00503db0();
+  }
+  return uVar2;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00572430 : SUB ESP,0x10
+00572433 : PUSH ESI
+00572434 : MOV ESI,ECX
+00572436 : CMP dword ptr [ESI + 0x68],0x0
+0057243a : JZ 0x00572508
+00572440 : PUSH EBX
+00572441 : PUSH EBP
+00572442 : MOV EBP,dword ptr [ESP + 0x24]
+00572446 : MOV EAX,dword ptr [EBP]
+00572449 : PUSH EDI
+0057244a : TEST EAX,EAX
+0057244c : JZ 0x0057245b
+0057244e : MOV ECX,dword ptr [EAX + 0x8]
+00572451 : INC ECX
+00572452 : AND ECX,0x8fffffff
+00572458 : MOV dword ptr [EAX + 0x8],ECX
+0057245b : MOV ECX,dword ptr [EBP + 0x4]
+0057245e : MOV EBX,dword ptr [EBP]
+00572461 : XOR EDI,EDI
+00572463 : MOV dword ptr [ESP + 0x28],EBX
+00572467 : TEST ECX,ECX
+00572469 : JZ 0x0057247a
+0057246b : PUSH ESI
+0057246c : CALL 0x0051d0a0
+00572471 : TEST EAX,EAX
+00572473 : JZ 0x00572478
+00572475 : INC dword ptr [EAX + 0x4]
+00572478 : MOV EDI,EAX
+0057247a : TEST EBX,EBX
+0057247c : JZ 0x00572483
+0057247e : ADD EBX,0x10
+00572481 : JMP 0x0057248e
+00572483 : TEST EDI,EDI
+00572485 : JZ 0x0057248c
+00572487 : LEA EBX,[EDI + 0x68]
+0057248a : JMP 0x0057248e
+0057248c : XOR EBX,EBX
+0057248e : MOV ECX,dword ptr [ESI + 0x68]
+00572491 : MOV EDX,dword ptr [ECX]
+00572493 : MOV EAX,dword ptr [EDX + 0x5c]
+00572496 : CALL EAX
+00572498 : ADD EBP,0x8
+0057249b : PUSH EBP
+0057249c : LEA ECX,[ESP + 0x14]
+005724a0 : MOV ESI,EAX
+005724a2 : CALL 0x00526210
+005724a7 : MOV ECX,dword ptr [ESI + 0x8]
+005724aa : SUB ECX,dword ptr [ESI + 0xc]
+005724ad : MOV EDX,dword ptr [ESI + 0x1c]
+005724b0 : SAR ECX,0x4
+005724b3 : SHL EDX,0x5
+005724b6 : LEA EAX,[ECX + EDX*0x1 + -0x20]
+005724ba : MOV ECX,dword ptr [ESP + 0x24]
+005724be : MOV EDX,dword ptr [ESP + 0x30]
+005724c2 : PUSH ECX
+005724c3 : PUSH EAX
+005724c4 : MOV EAX,dword ptr [ESP + 0x34]
+005724c8 : PUSH EDX
+005724c9 : PUSH ESI
+005724ca : PUSH EBX
+005724cb : PUSH EAX
+005724cc : LEA ECX,[ESP + 0x28]
+005724d0 : PUSH ECX
+005724d1 : CALL 0x0052c930
+005724d6 : ADD ESP,0x1c
+005724d9 : LEA ECX,[ESP + 0x10]
+005724dd : MOV BL,AL
+005724df : CALL 0x00526bc0
+005724e4 : TEST EDI,EDI
+005724e6 : JZ 0x005724ef
+005724e8 : MOV ECX,EDI
+005724ea : CALL 0x004ff7c0
+005724ef : MOV ECX,dword ptr [ESP + 0x28]
+005724f3 : TEST ECX,ECX
+005724f5 : JZ 0x005724fc
+005724f7 : CALL 0x00503db0
+005724fc : POP EDI
+005724fd : POP EBP
+005724fe : MOV AL,BL
+00572500 : POP EBX
+00572501 : POP ESI
+00572502 : ADD ESP,0x10
+00572505 : RET 0x10
+00572508 : XOR AL,AL
+0057250a : POP ESI
+0057250b : ADD ESP,0x10
+0057250e : RET 0x10

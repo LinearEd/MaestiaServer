@@ -1,0 +1,152 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00805950
+ENTRY    : 00805950
+BODY     : [[00805950, 00805a4e]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00805950(void)
+
+{
+  byte bVar1;
+  char cVar2;
+  uint uVar3;
+  byte *pbVar4;
+  int iVar5;
+  int in_ECX;
+  byte *pbVar6;
+  bool bVar7;
+  undefined **local_118;
+  undefined4 local_114;
+  byte local_110 [256];
+  uint local_10;
+  void *local_c;
+  undefined1 *puStack_8;
+  undefined4 local_4;
+  
+  puStack_8 = &LAB_00b48790;
+  local_c = ExceptionList;
+  local_10 = DAT_00d66fa0 ^ (uint)&local_118;
+  uVar3 = DAT_00d66fa0 ^ (uint)&stack0xfffffee0;
+  ExceptionList = &local_c;
+  if (*(uint *)(in_ECX + 4) < *(int *)(in_ECX + 8) + 0x10U) goto LAB_00805a27;
+  local_118 = &PTR_FUN_00cd3f48;
+  local_114 = 0;
+  local_110[0] = 0;
+  local_4 = 0;
+  cVar2 = FUN_004576b0(&local_118,0x10);
+  if (cVar2 == '\0') {
+LAB_008059fd:
+    FUN_00807d70("CStParser::ParseHeader, expected header [%s] but got [%s]\n",&DAT_00c28f20,
+                 local_110,uVar3);
+  }
+  else {
+    pbVar6 = local_110;
+    pbVar4 = &DAT_00c28f20;
+    do {
+      bVar1 = *pbVar4;
+      bVar7 = bVar1 < *pbVar6;
+      if (bVar1 != *pbVar6) {
+LAB_008059f0:
+        iVar5 = (1 - (uint)bVar7) - (uint)(bVar7 != 0);
+        goto LAB_008059f5;
+      }
+      if (bVar1 == 0) break;
+      bVar1 = pbVar4[1];
+      bVar7 = bVar1 < pbVar6[1];
+      if (bVar1 != pbVar6[1]) goto LAB_008059f0;
+      pbVar4 = pbVar4 + 2;
+      pbVar6 = pbVar6 + 2;
+    } while (bVar1 != 0);
+    iVar5 = 0;
+LAB_008059f5:
+    if (iVar5 != 0) goto LAB_008059fd;
+  }
+  local_118 = &PTR_FUN_00cd3f48;
+LAB_00805a27:
+  local_4 = 0xffffffff;
+  ExceptionList = local_c;
+  __security_check_cookie(local_10 ^ (uint)&local_118);
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00805950 : PUSH -0x1
+00805952 : PUSH 0xb48790
+00805957 : MOV EAX,FS:[0x0]
+0080595d : PUSH EAX
+0080595e : SUB ESP,0x10c
+00805964 : MOV EAX,[0x00d66fa0]
+00805969 : XOR EAX,ESP
+0080596b : MOV dword ptr [ESP + 0x108],EAX
+00805972 : PUSH EBX
+00805973 : PUSH EDI
+00805974 : MOV EAX,[0x00d66fa0]
+00805979 : XOR EAX,ESP
+0080597b : PUSH EAX
+0080597c : LEA EAX,[ESP + 0x118]
+00805983 : MOV FS:[0x0],EAX
+00805989 : MOV EDI,ECX
+0080598b : MOV EAX,dword ptr [EDI + 0x8]
+0080598e : ADD EAX,0x10
+00805991 : XOR EBX,EBX
+00805993 : CMP EAX,dword ptr [EDI + 0x4]
+00805996 : JA 0x00805a27
+0080599c : MOV dword ptr [ESP + 0xc],0xcd3f48
+008059a4 : MOV dword ptr [ESP + 0x10],EBX
+008059a8 : MOV byte ptr [ESP + 0x14],BL
+008059ac : MOV dword ptr [ESP + 0x120],EBX
+008059b3 : PUSH 0x10
+008059b5 : LEA ECX,[ESP + 0x10]
+008059b9 : PUSH ECX
+008059ba : CALL 0x004576b0
+008059bf : TEST AL,AL
+008059c1 : JZ 0x008059fd
+008059c3 : LEA ECX,[ESP + 0x14]
+008059c7 : MOV EAX,0xc28f20
+008059cc : LEA ESP,[ESP]
+008059d0 : MOV DL,byte ptr [EAX]
+008059d2 : CMP DL,byte ptr [ECX]
+008059d4 : JNZ 0x008059f0
+008059d6 : CMP DL,BL
+008059d8 : JZ 0x008059ec
+008059da : MOV DL,byte ptr [EAX + 0x1]
+008059dd : CMP DL,byte ptr [ECX + 0x1]
+008059e0 : JNZ 0x008059f0
+008059e2 : ADD EAX,0x2
+008059e5 : ADD ECX,0x2
+008059e8 : CMP DL,BL
+008059ea : JNZ 0x008059d0
+008059ec : XOR EAX,EAX
+008059ee : JMP 0x008059f5
+008059f0 : SBB EAX,EAX
+008059f2 : SBB EAX,-0x1
+008059f5 : CMP EAX,EBX
+008059f7 : JNZ 0x008059fd
+008059f9 : MOV BL,0x1
+008059fb : JMP 0x00805a14
+008059fd : LEA EDX,[ESP + 0x14]
+00805a01 : PUSH EDX
+00805a02 : PUSH 0xc28f20
+00805a07 : PUSH 0xc28fc8
+00805a0c : CALL 0x00807d70
+00805a11 : ADD ESP,0xc
+00805a14 : MOV dword ptr [ESP + 0x120],0xffffffff
+00805a1f : MOV dword ptr [ESP + 0xc],0xcd3f48
+00805a27 : MOV AL,BL
+00805a29 : MOV ECX,dword ptr [ESP + 0x118]
+00805a30 : MOV dword ptr FS:[0x0],ECX
+00805a37 : POP ECX
+00805a38 : POP EDI
+00805a39 : POP EBX
+00805a3a : MOV ECX,dword ptr [ESP + 0x108]
+00805a41 : XOR ECX,ESP
+00805a43 : CALL 0x00633e6b
+00805a48 : ADD ESP,0x118
+00805a4e : RET

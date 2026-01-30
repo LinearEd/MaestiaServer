@@ -1,0 +1,148 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_006f3bd0
+ENTRY    : 006f3bd0
+BODY     : [[006f3bd0, 006f3ced]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined4 FUN_006f3bd0(undefined4 *param_1)
+
+{
+  ushort *puVar1;
+  ushort uVar2;
+  int in_EAX;
+  undefined4 uVar3;
+  int iVar4;
+  ushort uVar5;
+  undefined4 local_8;
+  
+  uVar3 = 0;
+  local_8 = 0;
+  if (*(uint *)(in_EAX + 0xfe4) < *(uint *)(in_EAX + 0xfe0)) {
+    while (iVar4 = *(int *)(in_EAX + 0xfe4), iVar4 + 4U <= *(uint *)(in_EAX + 0xfe0)) {
+      uVar2 = *(ushort *)(iVar4 + 0xfec + in_EAX);
+      puVar1 = (ushort *)(iVar4 + 0xfec + in_EAX);
+      uVar5 = uVar2 & 0x1fff;
+      if ((uVar5 < 4) || (0x1000 < uVar5)) {
+        FUN_006ee470(L"[CRITICAL][PACKETBROKEN][%d,%d]PACKET-SIZE = %d\n",(char)puVar1[1],
+                     *(undefined1 *)((int)puVar1 + 3),*puVar1 & 0x1fff);
+        *param_1 = 1;
+        return 0;
+      }
+      if (*(uint *)(in_EAX + 0xfe0) < (uVar2 & 0x1fff) + iVar4) {
+        return local_8;
+      }
+      iVar4 = FUN_006f4d40(puVar1);
+      if (iVar4 == 0) {
+        FUN_006ee470(L"[CRITICAL] AvPacket::Alloc Failed\n");
+        *param_1 = 1;
+        return 0;
+      }
+      FUN_006f27c0();
+      *(int *)(in_EAX + 0xfe4) = *(int *)(in_EAX + 0xfe4) + (*puVar1 & 0x1fff);
+      uVar3 = 1;
+      local_8 = 1;
+      if (*(uint *)(in_EAX + 0xfe0) <= *(uint *)(in_EAX + 0xfe4)) {
+        return uVar3;
+      }
+    }
+  }
+  return uVar3;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006f3bd0 : PUSH EBP
+006f3bd1 : MOV EBP,ESP
+006f3bd3 : PUSH ECX
+006f3bd4 : PUSH EBX
+006f3bd5 : PUSH ESI
+006f3bd6 : MOV ESI,EAX
+006f3bd8 : MOV ECX,dword ptr [ESI + 0xfe4]
+006f3bde : XOR EAX,EAX
+006f3be0 : PUSH EDI
+006f3be1 : MOV dword ptr [EBP + -0x4],EAX
+006f3be4 : CMP ECX,dword ptr [ESI + 0xfe0]
+006f3bea : JNC 0x006f3ce5
+006f3bf0 : MOV EDX,dword ptr [ESI + 0xfe4]
+006f3bf6 : MOV ECX,dword ptr [ESI + 0xfe0]
+006f3bfc : LEA EDI,[EDX + 0x4]
+006f3bff : CMP EDI,ECX
+006f3c01 : JA 0x006f3ce5
+006f3c07 : MOVZX EDI,word ptr [EDX + ESI*0x1 + 0xfec]
+006f3c0f : LEA EBX,[EDX + ESI*0x1 + 0xfec]
+006f3c16 : MOV ECX,EDI
+006f3c18 : AND ECX,0x1fff
+006f3c1e : CMP CX,0x4
+006f3c22 : JC 0x006f3cba
+006f3c28 : MOV EAX,0x1000
+006f3c2d : CMP CX,AX
+006f3c30 : JA 0x006f3cba
+006f3c36 : AND EDI,0x1fff
+006f3c3c : LEA ECX,[EDI + EDX*0x1]
+006f3c3f : CMP ECX,dword ptr [ESI + 0xfe0]
+006f3c45 : JA 0x006f3c8d
+006f3c47 : PUSH EBX
+006f3c48 : CALL 0x006f4d40
+006f3c4d : ADD ESP,0x4
+006f3c50 : TEST EAX,EAX
+006f3c52 : JZ 0x006f3c99
+006f3c54 : MOV EDI,EAX
+006f3c56 : CALL 0x006f27c0
+006f3c5b : MOVZX EDX,word ptr [EBX]
+006f3c5e : AND EDX,0x1fff
+006f3c64 : ADD dword ptr [ESI + 0xfe4],EDX
+006f3c6a : MOV ECX,dword ptr [ESI + 0xfe4]
+006f3c70 : MOV EAX,0x1
+006f3c75 : MOV dword ptr [EBP + -0x4],EAX
+006f3c78 : CMP ECX,dword ptr [ESI + 0xfe0]
+006f3c7e : JC 0x006f3bf0
+006f3c84 : POP EDI
+006f3c85 : POP ESI
+006f3c86 : POP EBX
+006f3c87 : MOV ESP,EBP
+006f3c89 : POP EBP
+006f3c8a : RET 0x4
+006f3c8d : MOV EAX,dword ptr [EBP + -0x4]
+006f3c90 : POP EDI
+006f3c91 : POP ESI
+006f3c92 : POP EBX
+006f3c93 : MOV ESP,EBP
+006f3c95 : POP EBP
+006f3c96 : RET 0x4
+006f3c99 : PUSH 0xbf7388
+006f3c9e : CALL 0x006ee470
+006f3ca3 : MOV EDX,dword ptr [EBP + 0x8]
+006f3ca6 : ADD ESP,0x4
+006f3ca9 : POP EDI
+006f3caa : POP ESI
+006f3cab : MOV dword ptr [EDX],0x1
+006f3cb1 : XOR EAX,EAX
+006f3cb3 : POP EBX
+006f3cb4 : MOV ESP,EBP
+006f3cb6 : POP EBP
+006f3cb7 : RET 0x4
+006f3cba : MOVZX EAX,word ptr [EBX]
+006f3cbd : MOVZX ECX,byte ptr [EBX + 0x3]
+006f3cc1 : MOVZX EDX,byte ptr [EBX + 0x2]
+006f3cc5 : AND EAX,0x1fff
+006f3cca : PUSH EAX
+006f3ccb : PUSH ECX
+006f3ccc : PUSH EDX
+006f3ccd : PUSH 0xbf7320
+006f3cd2 : CALL 0x006ee470
+006f3cd7 : MOV EAX,dword ptr [EBP + 0x8]
+006f3cda : ADD ESP,0x10
+006f3cdd : MOV dword ptr [EAX],0x1
+006f3ce3 : XOR EAX,EAX
+006f3ce5 : POP EDI
+006f3ce6 : POP ESI
+006f3ce7 : POP EBX
+006f3ce8 : MOV ESP,EBP
+006f3cea : POP EBP
+006f3ceb : RET 0x4

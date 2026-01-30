@@ -1,0 +1,85 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005ab460
+ENTRY    : 005ab460
+BODY     : [[005ab460, 005ab4d2]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_005ab460(int param_1,int *param_2,undefined4 param_3)
+
+{
+  uint uVar1;
+  undefined4 *in_ECX;
+  uint uVar2;
+  int iVar3;
+  
+  for (; param_1 != 0; param_1 = *(int *)(param_1 + 0x10)) {
+    FUN_005ab460(*(undefined4 *)(param_1 + 0xc),param_2,param_3);
+    iVar3 = param_1;
+    do {
+      uVar2 = iVar3 + 0xfffU & 0xfffff000;
+      uVar1 = (*(int *)(iVar3 + 0x24) << ((byte)*in_ECX & 0x1f)) + iVar3 & 0xfffff000;
+      if (uVar2 + 0x1000 <= uVar1) {
+        (**(code **)(*param_2 + 4))(param_3,0,uVar2,uVar1 - uVar2);
+      }
+      iVar3 = *(int *)(iVar3 + 4);
+    } while (iVar3 != param_1);
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005ab460 : PUSH EBX
+005ab461 : MOV EBX,dword ptr [ESP + 0x8]
+005ab465 : PUSH EBP
+005ab466 : MOV EBP,ECX
+005ab468 : TEST EBX,EBX
+005ab46a : JZ 0x005ab4ce
+005ab46c : PUSH ESI
+005ab46d : PUSH EDI
+005ab46e : MOV EDI,dword ptr [ESP + 0x18]
+005ab472 : MOV EAX,dword ptr [ESP + 0x1c]
+005ab476 : MOV ECX,dword ptr [EBX + 0xc]
+005ab479 : PUSH EAX
+005ab47a : PUSH EDI
+005ab47b : PUSH ECX
+005ab47c : MOV ECX,EBP
+005ab47e : CALL 0x005ab460
+005ab483 : MOV ESI,EBX
+005ab485 : MOV ECX,dword ptr [EBP]
+005ab488 : MOV EAX,dword ptr [ESI + 0x24]
+005ab48b : SHL EAX,CL
+005ab48d : LEA EDX,[ESI + 0xfff]
+005ab493 : AND EDX,0xfffff000
+005ab499 : LEA ECX,[EDX + 0x1000]
+005ab49f : ADD EAX,ESI
+005ab4a1 : AND EAX,0xfffff000
+005ab4a6 : CMP ECX,EAX
+005ab4a8 : JA 0x005ab4be
+005ab4aa : SUB EAX,EDX
+005ab4ac : PUSH EAX
+005ab4ad : MOV EAX,dword ptr [EDI]
+005ab4af : MOV EAX,dword ptr [EAX + 0x4]
+005ab4b2 : PUSH EDX
+005ab4b3 : MOV EDX,dword ptr [ESP + 0x24]
+005ab4b7 : PUSH 0x0
+005ab4b9 : PUSH EDX
+005ab4ba : MOV ECX,EDI
+005ab4bc : CALL EAX
+005ab4be : MOV ESI,dword ptr [ESI + 0x4]
+005ab4c1 : CMP ESI,EBX
+005ab4c3 : JNZ 0x005ab485
+005ab4c5 : MOV EBX,dword ptr [EBX + 0x10]
+005ab4c8 : TEST EBX,EBX
+005ab4ca : JNZ 0x005ab472
+005ab4cc : POP EDI
+005ab4cd : POP ESI
+005ab4ce : POP EBP
+005ab4cf : POP EBX
+005ab4d0 : RET 0xc

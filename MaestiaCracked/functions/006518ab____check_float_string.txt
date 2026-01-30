@@ -1,0 +1,91 @@
+PROGRAM  : Maestia.exe
+FUNCTION : ___check_float_string
+ENTRY    : 006518ab
+BODY     : [[006518ab, 00651904]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    ___check_float_string
+   
+   Library: Visual Studio 2008 Release */
+
+undefined4 ___check_float_string(size_t param_1,void *param_2,undefined4 *param_3)
+
+{
+  size_t _Count;
+  void *pvVar1;
+  size_t *unaff_ESI;
+  undefined4 *unaff_EDI;
+  
+  _Count = *unaff_ESI;
+  if (param_1 == _Count) {
+    if ((void *)*unaff_EDI == param_2) {
+      pvVar1 = __calloc_crt(_Count,4);
+      *unaff_EDI = pvVar1;
+      if (pvVar1 == (void *)0x0) {
+        return 0;
+      }
+      *param_3 = 1;
+      _memcpy((void *)*unaff_EDI,param_2,*unaff_ESI * 2);
+    }
+    else {
+      pvVar1 = __recalloc_crt((void *)*unaff_EDI,_Count,4);
+      if (pvVar1 == (void *)0x0) {
+        return 0;
+      }
+      *unaff_EDI = pvVar1;
+    }
+    *unaff_ESI = *unaff_ESI << 1;
+  }
+  return 1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006518ab : MOV EDI,EDI
+006518ad : PUSH EBP
+006518ae : MOV EBP,ESP
+006518b0 : MOV EAX,dword ptr [ESI]
+006518b2 : CMP dword ptr [EBP + 0x8],EAX
+006518b5 : JNZ 0x00651900
+006518b7 : MOV ECX,dword ptr [EDI]
+006518b9 : PUSH 0x4
+006518bb : PUSH EAX
+006518bc : CMP ECX,dword ptr [EBP + 0xc]
+006518bf : JNZ 0x006518ef
+006518c1 : CALL 0x006425a4
+006518c6 : POP ECX
+006518c7 : POP ECX
+006518c8 : MOV dword ptr [EDI],EAX
+006518ca : TEST EAX,EAX
+006518cc : JNZ 0x006518d2
+006518ce : XOR EAX,EAX
+006518d0 : POP EBP
+006518d1 : RET
+006518d2 : MOV EAX,dword ptr [EBP + 0x10]
+006518d5 : MOV dword ptr [EAX],0x1
+006518db : MOV EAX,dword ptr [ESI]
+006518dd : ADD EAX,EAX
+006518df : PUSH EAX
+006518e0 : PUSH dword ptr [EBP + 0xc]
+006518e3 : PUSH dword ptr [EDI]
+006518e5 : CALL 0x0063ae40
+006518ea : ADD ESP,0xc
+006518ed : JMP 0x006518fe
+006518ef : PUSH ECX
+006518f0 : CALL 0x0064263e
+006518f5 : ADD ESP,0xc
+006518f8 : TEST EAX,EAX
+006518fa : JZ 0x006518ce
+006518fc : MOV dword ptr [EDI],EAX
+006518fe : SHL dword ptr [ESI],0x1
+00651900 : XOR EAX,EAX
+00651902 : INC EAX
+00651903 : POP EBP
+00651904 : RET

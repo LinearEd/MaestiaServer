@@ -1,0 +1,94 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005bac90
+ENTRY    : 005bac90
+BODY     : [[005bac90, 005bad07]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_005bac90(int param_1)
+
+{
+  undefined8 uVar1;
+  byte *pbVar2;
+  char cVar3;
+  int iVar4;
+  
+  cVar3 = FUN_00526030(0x1b);
+  if (cVar3 == '\0') {
+    FUN_00526050("LoadVars",0,0);
+    return;
+  }
+  if (*(int *)(param_1 + 8) == 0) {
+    iVar4 = 0;
+  }
+  else {
+    iVar4 = *(int *)(param_1 + 8) + -0x10;
+  }
+  pbVar2 = *(byte **)(param_1 + 4);
+  if (*(double *)(iVar4 + 0x30) < 0.0) {
+    FUN_00526400();
+    *pbVar2 = 0;
+    return;
+  }
+  uVar1 = *(undefined8 *)(iVar4 + 0x30);
+  if (4 < *pbVar2) {
+    FUN_00526400();
+  }
+  *pbVar2 = 3;
+  *(undefined8 *)(pbVar2 + 4) = uVar1;
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005bac90 : SUB ESP,0x8
+005bac93 : PUSH ESI
+005bac94 : MOV ESI,dword ptr [ESP + 0x10]
+005bac98 : PUSH 0x1b
+005bac9a : MOV ECX,ESI
+005bac9c : CALL 0x00526030
+005baca1 : TEST AL,AL
+005baca3 : JNZ 0x005bacba
+005baca5 : PUSH 0x0
+005baca7 : PUSH 0x0
+005baca9 : PUSH 0xb8fd80
+005bacae : MOV ECX,ESI
+005bacb0 : CALL 0x00526050
+005bacb5 : POP ESI
+005bacb6 : ADD ESP,0x8
+005bacb9 : RET
+005bacba : MOV EAX,dword ptr [ESI + 0x8]
+005bacbd : TEST EAX,EAX
+005bacbf : JZ 0x005bacc6
+005bacc1 : LEA ECX,[EAX + -0x10]
+005bacc4 : JMP 0x005bacc8
+005bacc6 : XOR ECX,ECX
+005bacc8 : FLDZ
+005bacca : MOV ESI,dword ptr [ESI + 0x4]
+005baccd : FCOMP double ptr [ECX + 0x30]
+005bacd0 : FNSTSW AX
+005bacd2 : TEST AH,0x41
+005bacd5 : JNZ 0x005bace6
+005bacd7 : MOV ECX,ESI
+005bacd9 : CALL 0x00526400
+005bacde : MOV byte ptr [ESI],0x0
+005bace1 : POP ESI
+005bace2 : ADD ESP,0x8
+005bace5 : RET
+005bace6 : CMP byte ptr [ESI],0x5
+005bace9 : FLD double ptr [ECX + 0x30]
+005bacec : FSTP double ptr [ESP + 0x4]
+005bacf0 : JC 0x005bacf9
+005bacf2 : MOV ECX,ESI
+005bacf4 : CALL 0x00526400
+005bacf9 : FLD double ptr [ESP + 0x4]
+005bacfd : MOV byte ptr [ESI],0x3
+005bad00 : FSTP double ptr [ESI + 0x4]
+005bad03 : POP ESI
+005bad04 : ADD ESP,0x8
+005bad07 : RET

@@ -1,0 +1,112 @@
+PROGRAM  : Maestia.exe
+FUNCTION : _abort
+ENTRY    : 0063e6fa
+BODY     : [[0063e6fa, 0063e810]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    _abort
+   
+   Library: Visual Studio 2008 Release */
+
+void __cdecl _abort(void)
+
+{
+  code *pcVar1;
+  _PHNDLR p_Var2;
+  EXCEPTION_RECORD local_32c;
+  _EXCEPTION_POINTERS local_2dc;
+  undefined4 local_2d4;
+  
+  if (((byte)DAT_00d67340 & 1) != 0) {
+    __NMSG_WRITE(10);
+  }
+  p_Var2 = ___get_sigabrt();
+  if (p_Var2 != (_PHNDLR)0x0) {
+    _raise(0x16);
+  }
+  if (((byte)DAT_00d67340 & 2) != 0) {
+    local_2d4 = 0x10001;
+    _memset(&local_32c,0,0x50);
+    local_2dc.ExceptionRecord = &local_32c;
+    local_2dc.ContextRecord = (PCONTEXT)&local_2d4;
+    local_32c.ExceptionCode = 0x40000015;
+    SetUnhandledExceptionFilter((LPTOP_LEVEL_EXCEPTION_FILTER)0x0);
+    UnhandledExceptionFilter(&local_2dc);
+  }
+  __exit(3);
+  pcVar1 = (code *)swi(3);
+  (*pcVar1)();
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0063e6fa : MOV EDI,EDI
+0063e6fc : PUSH EBP
+0063e6fd : MOV EBP,ESP
+0063e6ff : SUB ESP,0x328
+0063e705 : MOV EAX,[0x00d66fa0]
+0063e70a : XOR EAX,EBP
+0063e70c : MOV dword ptr [EBP + -0x4],EAX
+0063e70f : TEST byte ptr [0x00d67340],0x1
+0063e716 : PUSH ESI
+0063e717 : JZ 0x0063e721
+0063e719 : PUSH 0xa
+0063e71b : CALL 0x0064540e
+0063e720 : POP ECX
+0063e721 : CALL 0x0064c9d7
+0063e726 : TEST EAX,EAX
+0063e728 : JZ 0x0063e732
+0063e72a : PUSH 0x16
+0063e72c : CALL 0x0064c9e4
+0063e731 : POP ECX
+0063e732 : TEST byte ptr [0x00d67340],0x2
+0063e739 : JZ 0x0063e809
+0063e73f : MOV dword ptr [EBP + 0xfffffde0],EAX
+0063e745 : MOV dword ptr [EBP + 0xfffffddc],ECX
+0063e74b : MOV dword ptr [EBP + 0xfffffdd8],EDX
+0063e751 : MOV dword ptr [EBP + 0xfffffdd4],EBX
+0063e757 : MOV dword ptr [EBP + 0xfffffdd0],ESI
+0063e75d : MOV dword ptr [EBP + 0xfffffdcc],EDI
+0063e763 : MOV word ptr [EBP + 0xfffffdf8],SS
+0063e76a : MOV word ptr [EBP + 0xfffffdec],CS
+0063e771 : MOV word ptr [EBP + 0xfffffdc8],DS
+0063e778 : MOV word ptr [EBP + 0xfffffdc4],ES
+0063e77f : MOV word ptr [EBP + 0xfffffdc0],FS
+0063e786 : MOV word ptr [EBP + 0xfffffdbc],GS
+0063e78d : PUSHFD
+0063e78e : POP dword ptr [EBP + 0xfffffdf0]
+0063e794 : MOV ESI,dword ptr [EBP + 0x4]
+0063e797 : LEA EAX,[EBP + 0x4]
+0063e79a : MOV dword ptr [EBP + 0xfffffdf4],EAX
+0063e7a0 : MOV dword ptr [EBP + 0xfffffd30],0x10001
+0063e7aa : MOV dword ptr [EBP + 0xfffffde8],ESI
+0063e7b0 : MOV EAX,dword ptr [EAX + -0x4]
+0063e7b3 : PUSH 0x50
+0063e7b5 : MOV dword ptr [EBP + 0xfffffde4],EAX
+0063e7bb : LEA EAX,[EBP + 0xfffffcd8]
+0063e7c1 : PUSH 0x0
+0063e7c3 : PUSH EAX
+0063e7c4 : CALL 0x0063b700
+0063e7c9 : LEA EAX,[EBP + 0xfffffcd8]
+0063e7cf : ADD ESP,0xc
+0063e7d2 : MOV dword ptr [EBP + 0xfffffd28],EAX
+0063e7d8 : LEA EAX,[EBP + 0xfffffd30]
+0063e7de : PUSH 0x0
+0063e7e0 : MOV dword ptr [EBP + 0xfffffcd8],0x40000015
+0063e7ea : MOV dword ptr [EBP + 0xfffffce4],ESI
+0063e7f0 : MOV dword ptr [EBP + 0xfffffd2c],EAX
+0063e7f6 : CALL dword ptr [0x00b8514c]
+0063e7fc : LEA EAX,[EBP + 0xfffffd28]
+0063e802 : PUSH EAX
+0063e803 : CALL dword ptr [0x00b852bc]
+0063e809 : PUSH 0x3
+0063e80b : CALL 0x00635989
+0063e810 : INT3

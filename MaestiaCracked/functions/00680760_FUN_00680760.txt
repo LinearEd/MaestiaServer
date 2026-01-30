@@ -1,0 +1,226 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00680760
+ENTRY    : 00680760
+BODY     : [[00680760, 006808bd]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+bool FUN_00680760(int param_1)
+
+{
+  bool bVar1;
+  bool bVar2;
+  HKL pHVar3;
+  HIMC pHVar4;
+  uint uVar5;
+  int in_ECX;
+  uint local_8;
+  DWORD local_4;
+  
+  pHVar3 = GetKeyboardLayout(0);
+  *(HKL *)(in_ECX + 0x58) = pHVar3;
+  pHVar4 = ImmGetContext(*(HWND *)(in_ECX + 0x14));
+  bVar2 = true;
+  if (pHVar4 == (HIMC)0x0) {
+    bVar2 = false;
+    ImmAssociateContextEx(*(HWND *)(in_ECX + 0x14),(HIMC)0x0,0x10);
+    pHVar4 = ImmGetContext(*(HWND *)(in_ECX + 0x14));
+    if (pHVar4 == (HIMC)0x0) {
+      ImmReleaseContext(*(HWND *)(in_ECX + 0x14),(HIMC)0x0);
+      return false;
+    }
+  }
+  bVar1 = true;
+  ImmGetConversionStatus(pHVar4,&local_8,&local_4);
+  if ((local_8 & 0xf) == 0) {
+    ImmSetOpenStatus(pHVar4,1);
+  }
+  local_8 = local_8 & 0xfffffff0;
+  uVar5 = *(uint *)(in_ECX + 0x58) & 0xffff;
+  if (uVar5 == 0x411) {
+    switch(param_1) {
+    case 0:
+      local_8 = local_8 | 8;
+      break;
+    case 1:
+      break;
+    default:
+      bVar1 = false;
+      break;
+    case 4:
+      local_8 = local_8 | 9;
+      break;
+    case 8:
+      local_8 = local_8 | 0xb;
+      break;
+    case 0x16:
+      local_8 = local_8 | 3;
+    }
+  }
+  if (uVar5 == 0x412) {
+    if (param_1 == 0x32) {
+      local_8 = local_8 | 9;
+    }
+    else if (param_1 == 0) {
+      local_8 = local_8 | 8;
+    }
+    else if (param_1 != 1) {
+      bVar1 = false;
+    }
+  }
+  if ((uVar5 == 0x404) || (uVar5 == 0x804)) {
+    if (param_1 == 2) {
+      local_8 = local_8 | 9;
+    }
+    else if (param_1 == 0) {
+      local_8 = local_8 | 8;
+    }
+    else if (param_1 != 1) {
+      bVar1 = false;
+      goto LAB_00680881;
+    }
+  }
+  if (bVar1) {
+    ImmSetConversionStatus(pHVar4,local_8,local_4);
+    *(undefined1 *)(in_ECX + 0x48) = 1;
+    ImmSetOpenStatus(pHVar4,1);
+  }
+LAB_00680881:
+  ImmReleaseContext(*(HWND *)(in_ECX + 0x14),pHVar4);
+  if (!bVar2) {
+    ImmAssociateContextEx(*(HWND *)(in_ECX + 0x14),(HIMC)0x0,0);
+  }
+  return bVar1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00680760 : SUB ESP,0xc
+00680763 : PUSH ESI
+00680764 : PUSH EDI
+00680765 : PUSH 0x0
+00680767 : MOV ESI,ECX
+00680769 : CALL dword ptr [0x00b8551c]
+0068076f : MOV dword ptr [ESI + 0x58],EAX
+00680772 : MOV EAX,dword ptr [ESI + 0x14]
+00680775 : PUSH EAX
+00680776 : CALL 0x00611450
+0068077b : MOV EDI,EAX
+0068077d : MOV byte ptr [ESP + 0xb],0x1
+00680782 : TEST EDI,EDI
+00680784 : JNZ 0x006807b9
+00680786 : MOV ECX,dword ptr [ESI + 0x14]
+00680789 : PUSH 0x10
+0068078b : PUSH EAX
+0068078c : PUSH ECX
+0068078d : MOV byte ptr [ESP + 0x17],AL
+00680791 : CALL 0x00685b9c
+00680796 : MOV EDX,dword ptr [ESI + 0x14]
+00680799 : PUSH EDX
+0068079a : CALL 0x00611450
+0068079f : MOV EDI,EAX
+006807a1 : TEST EDI,EDI
+006807a3 : JNZ 0x006807b9
+006807a5 : PUSH EAX
+006807a6 : MOV EAX,dword ptr [ESI + 0x14]
+006807a9 : PUSH EAX
+006807aa : CALL 0x00611462
+006807af : POP EDI
+006807b0 : XOR AL,AL
+006807b2 : POP ESI
+006807b3 : ADD ESP,0xc
+006807b6 : RET 0x4
+006807b9 : PUSH EBX
+006807ba : LEA ECX,[ESP + 0x14]
+006807be : PUSH ECX
+006807bf : LEA EDX,[ESP + 0x14]
+006807c3 : PUSH EDX
+006807c4 : PUSH EDI
+006807c5 : MOV BL,0x1
+006807c7 : CALL 0x00685b6c
+006807cc : TEST byte ptr [ESP + 0x10],0xf
+006807d1 : JNZ 0x006807db
+006807d3 : PUSH 0x1
+006807d5 : PUSH EDI
+006807d6 : CALL 0x00685b78
+006807db : MOV EAX,dword ptr [ESI + 0x58]
+006807de : AND dword ptr [ESP + 0x10],0xfffffff0
+006807e3 : MOV ECX,dword ptr [ESP + 0x1c]
+006807e7 : AND EAX,0xffff
+006807ec : CMP EAX,0x411
+006807f1 : JNZ 0x00680824
+006807f3 : CMP ECX,0x16
+006807f6 : JA 0x00680822
+006807f8 : MOVZX EDX,byte ptr [ECX + 0x6808d8]
+006807ff : JMP dword ptr [EDX*0x4 + 0x6808c0]
+00680806 : OR dword ptr [ESP + 0x10],0x8
+0068080b : JMP 0x00680824
+0068080d : OR dword ptr [ESP + 0x10],0x9
+00680812 : JMP 0x00680824
+00680814 : OR dword ptr [ESP + 0x10],0xb
+00680819 : JMP 0x00680824
+0068081b : OR dword ptr [ESP + 0x10],0x3
+00680820 : JMP 0x00680824
+00680822 : XOR BL,BL
+00680824 : CMP EAX,0x412
+00680829 : JNZ 0x00680849
+0068082b : CMP ECX,0x32
+0068082e : JNZ 0x00680837
+00680830 : OR dword ptr [ESP + 0x10],0x9
+00680835 : JMP 0x00680849
+00680837 : TEST ECX,ECX
+00680839 : JNZ 0x00680842
+0068083b : OR dword ptr [ESP + 0x10],0x8
+00680840 : JMP 0x00680849
+00680842 : CMP ECX,0x1
+00680845 : JZ 0x00680849
+00680847 : XOR BL,BL
+00680849 : CMP EAX,0x404
+0068084e : JZ 0x00680857
+00680850 : CMP EAX,0x804
+00680855 : JNZ 0x00680861
+00680857 : CMP ECX,0x2
+0068085a : JNZ 0x006808aa
+0068085c : OR dword ptr [ESP + 0x10],0x9
+00680861 : TEST BL,BL
+00680863 : JZ 0x00680881
+00680865 : MOV EAX,dword ptr [ESP + 0x14]
+00680869 : MOV ECX,dword ptr [ESP + 0x10]
+0068086d : PUSH EAX
+0068086e : PUSH ECX
+0068086f : PUSH EDI
+00680870 : CALL 0x00685b72
+00680875 : PUSH 0x1
+00680877 : PUSH EDI
+00680878 : MOV byte ptr [ESI + 0x48],0x1
+0068087c : CALL 0x00685b78
+00680881 : MOV EDX,dword ptr [ESI + 0x14]
+00680884 : PUSH EDI
+00680885 : PUSH EDX
+00680886 : CALL 0x00611462
+0068088b : CMP byte ptr [ESP + 0xf],0x0
+00680890 : JNZ 0x0068089f
+00680892 : MOV EAX,dword ptr [ESI + 0x14]
+00680895 : PUSH 0x0
+00680897 : PUSH 0x0
+00680899 : PUSH EAX
+0068089a : CALL 0x00685b9c
+0068089f : MOV AL,BL
+006808a1 : POP EBX
+006808a2 : POP EDI
+006808a3 : POP ESI
+006808a4 : ADD ESP,0xc
+006808a7 : RET 0x4
+006808aa : TEST ECX,ECX
+006808ac : JNZ 0x006808b5
+006808ae : OR dword ptr [ESP + 0x10],0x8
+006808b3 : JMP 0x00680861
+006808b5 : CMP ECX,0x1
+006808b8 : JZ 0x00680861
+006808ba : XOR BL,BL
+006808bc : JMP 0x00680881

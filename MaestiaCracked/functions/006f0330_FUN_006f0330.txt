@@ -1,0 +1,76 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_006f0330
+ENTRY    : 006f0330
+BODY     : [[006f0330, 006f03a5]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined4 FUN_006f0330(void)
+
+{
+  int iVar1;
+  int *unaff_ESI;
+  
+  if (*unaff_ESI != -0x41414142) {
+    return 0;
+  }
+  iVar1 = unaff_ESI[1];
+  if (*(int *)(iVar1 + 8 + (int)unaff_ESI) == -0x12121213) {
+    if (iVar1 < 0) {
+      if (((byte)DAT_01725270 & 0x10) != 0) {
+        RaiseException(0xbad22222,0xc0000025,0,(ULONG_PTR *)0x0);
+        return 1;
+      }
+    }
+    else {
+      InterlockedExchangeAdd((LONG *)&DAT_0172526c,-iVar1);
+      unaff_ESI[1] = unaff_ESI[1] | 0x80000000;
+      *unaff_ESI = -0xe110e12;
+      *(undefined4 *)(iVar1 + 8 + (int)unaff_ESI) = 0xf9eef9ee;
+      _free(unaff_ESI);
+    }
+  }
+  return 1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006f0330 : CMP dword ptr [ESI],0xbebebebe
+006f0336 : JNZ 0x006f03a3
+006f0338 : PUSH EDI
+006f0339 : MOV EDI,dword ptr [ESI + 0x4]
+006f033c : CMP dword ptr [EDI + ESI*0x1 + 0x8],0xedededed
+006f0344 : JNZ 0x006f039c
+006f0346 : TEST EDI,EDI
+006f0348 : JGE 0x006f036e
+006f034a : TEST byte ptr [0x01725270],0x10
+006f0351 : JZ 0x006f039c
+006f0353 : PUSH 0x0
+006f0355 : PUSH 0x0
+006f0357 : PUSH 0xc0000025
+006f035c : PUSH 0xbad22222
+006f0361 : CALL dword ptr [0x00b85300]
+006f0367 : MOV EAX,0x1
+006f036c : POP EDI
+006f036d : RET
+006f036e : MOV EAX,EDI
+006f0370 : NEG EAX
+006f0372 : PUSH EAX
+006f0373 : PUSH 0x172526c
+006f0378 : CALL dword ptr [0x00b851cc]
+006f037e : OR dword ptr [ESI + 0x4],0x80000000
+006f0385 : MOV dword ptr [ESI],0xf1eef1ee
+006f038b : PUSH ESI
+006f038c : MOV dword ptr [EDI + ESI*0x1 + 0x8],0xf9eef9ee
+006f0394 : CALL 0x0063610d
+006f0399 : ADD ESP,0x4
+006f039c : MOV EAX,0x1
+006f03a1 : POP EDI
+006f03a2 : RET
+006f03a3 : XOR EAX,EAX
+006f03a5 : RET

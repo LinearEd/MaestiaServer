@@ -1,0 +1,64 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_007a6a40
+ENTRY    : 007a6a40
+BODY     : [[007a6a40, 007a6a91]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_007a6a40(int param_1)
+
+{
+  float fVar1;
+  float fVar2;
+  int in_EAX;
+  int in_ECX;
+  
+  fVar1 = (float)in_EAX;
+  if (in_EAX < 0) {
+    fVar1 = fVar1 + 4.2949673e+09;
+  }
+  fVar2 = (float)param_1;
+  if (param_1 < 0) {
+    fVar2 = fVar2 + 4.2949673e+09;
+  }
+  fVar1 = fVar1 / fVar2;
+  *(float *)(in_ECX + 0x298) = fVar1;
+  if (*(float *)(in_ECX + 0x294) < fVar1) {
+    *(float *)(in_ECX + 0x294) = fVar1;
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+007a6a40 : PUSH EBP
+007a6a41 : MOV EBP,ESP
+007a6a43 : PUSH ECX
+007a6a44 : MOV dword ptr [EBP + -0x4],EAX
+007a6a47 : FILD dword ptr [EBP + -0x4]
+007a6a4a : TEST EAX,EAX
+007a6a4c : JGE 0x007a6a54
+007a6a4e : FADD float ptr [0x00cdf0e0]
+007a6a54 : MOV EDX,dword ptr [EBP + 0x8]
+007a6a57 : FILD dword ptr [EBP + 0x8]
+007a6a5a : TEST EDX,EDX
+007a6a5c : JGE 0x007a6a64
+007a6a5e : FADD float ptr [0x00cdf0e0]
+007a6a64 : FDIVP
+007a6a66 : FST float ptr [EBP + 0x8]
+007a6a69 : FLD float ptr [ECX + 0x294]
+007a6a6f : FXCH
+007a6a71 : MOVSS XMM0,dword ptr [EBP + 0x8]
+007a6a76 : MOVSS dword ptr [ECX + 0x298],XMM0
+007a6a7e : FCOMIP ST0,ST1
+007a6a80 : FSTP ST0
+007a6a82 : JBE 0x007a6a8c
+007a6a84 : MOVSS dword ptr [ECX + 0x294],XMM0
+007a6a8c : MOV ESP,EBP
+007a6a8e : POP EBP
+007a6a8f : RET 0x4

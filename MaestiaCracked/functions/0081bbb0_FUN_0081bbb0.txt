@@ -1,0 +1,77 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0081bbb0
+ENTRY    : 0081bbb0
+BODY     : [[0081bbb0, 0081bbee]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+int FUN_0081bbb0(void)
+
+{
+  char cVar1;
+  char *pcVar2;
+  int iVar3;
+  uint3 uVar4;
+  int iVar5;
+  char *unaff_ESI;
+  
+  pcVar2 = unaff_ESI;
+  do {
+    cVar1 = *pcVar2;
+    pcVar2 = pcVar2 + 1;
+  } while (cVar1 != '\0');
+  iVar3 = (int)pcVar2 - (int)(unaff_ESI + 1);
+  iVar5 = 0;
+  uVar4 = (uint3)((uint)iVar3 >> 8);
+  if (0 < iVar3) {
+    do {
+      if (('/' < *unaff_ESI) && (*unaff_ESI < ':')) break;
+      cVar1 = unaff_ESI[iVar5];
+      if ((cVar1 < '\0') || ((cVar1 < '0' || ('9' < cVar1)))) {
+        return (uint)uVar4 << 8;
+      }
+      iVar5 = iVar5 + 1;
+    } while (iVar5 < iVar3);
+  }
+  return CONCAT31(uVar4,1);
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0081bbb0 : MOV EAX,ESI
+0081bbb2 : LEA EDX,[EAX + 0x1]
+0081bbb5 : MOV CL,byte ptr [EAX]
+0081bbb7 : INC EAX
+0081bbb8 : TEST CL,CL
+0081bbba : JNZ 0x0081bbb5
+0081bbbc : SUB EAX,EDX
+0081bbbe : XOR EDX,EDX
+0081bbc0 : PUSH EBX
+0081bbc1 : TEST EAX,EAX
+0081bbc3 : JLE 0x0081bbe7
+0081bbc5 : MOV BL,byte ptr [ESI]
+0081bbc7 : CMP BL,0x30
+0081bbca : JL 0x0081bbd1
+0081bbcc : CMP BL,0x39
+0081bbcf : JLE 0x0081bbe7
+0081bbd1 : MOV CL,byte ptr [EDX + ESI*0x1]
+0081bbd4 : TEST CL,CL
+0081bbd6 : JS 0x0081bbeb
+0081bbd8 : CMP CL,0x30
+0081bbdb : JL 0x0081bbeb
+0081bbdd : CMP CL,0x39
+0081bbe0 : JG 0x0081bbeb
+0081bbe2 : INC EDX
+0081bbe3 : CMP EDX,EAX
+0081bbe5 : JL 0x0081bbc7
+0081bbe7 : MOV AL,0x1
+0081bbe9 : POP EBX
+0081bbea : RET
+0081bbeb : XOR AL,AL
+0081bbed : POP EBX
+0081bbee : RET

@@ -1,0 +1,110 @@
+PROGRAM  : Maestia.exe
+FUNCTION : GetHSI
+ENTRY    : 005f8960
+BODY     : [[005f8960, 005f8a14]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* public: void __thiscall GColor::GetHSI(float *,float *,float *)const  */
+
+void __thiscall GColor::GetHSI(GColor *this,float *param_1,float *param_2,float *param_3)
+
+{
+  float local_58;
+  undefined4 uStack_54;
+  float local_50;
+  undefined4 uStack_4c;
+  float local_48;
+  undefined4 uStack_44;
+  
+                    /* 0x1f8960  92  ?GetHSI@GColor@@QBEXPAM00@Z */
+  local_50 = 0.0;
+  local_48 = local_50;
+  if (this[2] != (GColor)0x0) {
+    local_48 = (float)(byte)this[2] / 255.0;
+  }
+  if (this[1] != (GColor)0x0) {
+    local_50 = (float)(byte)this[1] / 255.0;
+  }
+  local_58 = 0.0;
+  if (*this != (GColor)0x0) {
+    local_58 = (float)(byte)*this / 255.0;
+  }
+  ConvertRGBToHSI((double)local_48,(double)local_50,(double)local_58,(double *)&local_48,
+                  (double *)&local_50,(double *)&local_58);
+  *param_1 = (float)(double)CONCAT44(uStack_44,local_48);
+  *param_2 = (float)(double)CONCAT44(uStack_4c,local_50);
+  *param_3 = (float)(double)CONCAT44(uStack_54,local_58);
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005f8960 : PUSH EBP
+005f8961 : MOV EBP,ESP
+005f8963 : AND ESP,0xffffffc0
+005f8966 : MOV AL,byte ptr [ECX + 0x2]
+005f8969 : FLD double ptr [0x00b86b48]
+005f896f : FLDZ
+005f8971 : SUB ESP,0x40
+005f8974 : TEST AL,AL
+005f8976 : JNZ 0x005f897c
+005f8978 : FLD ST0
+005f897a : JMP 0x005f8989
+005f897c : MOVZX EAX,AL
+005f897f : MOV dword ptr [ESP + 0x28],EAX
+005f8983 : FILD dword ptr [ESP + 0x28]
+005f8987 : FDIV ST0,ST2
+005f8989 : MOV AL,byte ptr [ECX + 0x1]
+005f898c : FSTP float ptr [ESP + 0x38]
+005f8990 : TEST AL,AL
+005f8992 : JNZ 0x005f8998
+005f8994 : FLD ST0
+005f8996 : JMP 0x005f89a5
+005f8998 : MOVZX EDX,AL
+005f899b : MOV dword ptr [ESP + 0x28],EDX
+005f899f : FILD dword ptr [ESP + 0x28]
+005f89a3 : FDIV ST0,ST2
+005f89a5 : MOV CL,byte ptr [ECX]
+005f89a7 : FSTP float ptr [ESP + 0x30]
+005f89ab : TEST CL,CL
+005f89ad : JNZ 0x005f89b3
+005f89af : FSTP ST1
+005f89b1 : JMP 0x005f89c2
+005f89b3 : MOVZX EAX,CL
+005f89b6 : FSTP ST0
+005f89b8 : MOV dword ptr [ESP + 0x28],EAX
+005f89bc : FILD dword ptr [ESP + 0x28]
+005f89c0 : FDIVRP
+005f89c2 : LEA ECX,[ESP + 0x28]
+005f89c6 : FSTP float ptr [ESP + 0x28]
+005f89ca : FLD float ptr [ESP + 0x28]
+005f89ce : PUSH ECX
+005f89cf : LEA EDX,[ESP + 0x34]
+005f89d3 : PUSH EDX
+005f89d4 : LEA EAX,[ESP + 0x40]
+005f89d8 : PUSH EAX
+005f89d9 : SUB ESP,0x18
+005f89dc : FSTP double ptr [ESP + 0x10]
+005f89e0 : FLD float ptr [ESP + 0x54]
+005f89e4 : FSTP double ptr [ESP + 0x8]
+005f89e8 : FLD float ptr [ESP + 0x5c]
+005f89ec : FSTP double ptr [ESP]
+005f89ef : CALL 0x005f8820
+005f89f4 : FLD double ptr [ESP + 0x38]
+005f89f8 : MOV ECX,dword ptr [EBP + 0x8]
+005f89fb : MOV EDX,dword ptr [EBP + 0xc]
+005f89fe : FSTP float ptr [ECX]
+005f8a00 : FLD double ptr [ESP + 0x30]
+005f8a04 : MOV EAX,dword ptr [EBP + 0x10]
+005f8a07 : FSTP float ptr [EDX]
+005f8a09 : FLD double ptr [ESP + 0x28]
+005f8a0d : FSTP float ptr [EAX]
+005f8a0f : MOV ESP,EBP
+005f8a11 : POP EBP
+005f8a12 : RET 0xc

@@ -1,0 +1,71 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00597340
+ENTRY    : 00597340
+BODY     : [[00597340, 0059738c]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00597340(void)
+
+{
+  LONG LVar1;
+  int in_ECX;
+  uint uVar2;
+  
+  uVar2 = *(uint *)(in_ECX + 0x10) & 0xfffffffc;
+  LVar1 = InterlockedExchangeAdd((LONG *)(uVar2 + 4),-1);
+  if (LVar1 == 1) {
+    FUN_00515cf0(uVar2);
+  }
+  uVar2 = *(uint *)(in_ECX + 0xc) & 0xfffffffc;
+  LVar1 = InterlockedExchangeAdd((LONG *)(uVar2 + 4),-1);
+  if (LVar1 == 1) {
+    FUN_00515cf0(uVar2);
+  }
+  if (*(GRefCountNTSImpl **)(in_ECX + 4) != (GRefCountNTSImpl *)0x0) {
+    GRefCountNTSImpl::Release(*(GRefCountNTSImpl **)(in_ECX + 4));
+    return;
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00597340 : PUSH EBX
+00597341 : MOV EBX,dword ptr [0x00b851cc]
+00597347 : PUSH ESI
+00597348 : PUSH EDI
+00597349 : MOV EDI,ECX
+0059734b : MOV ESI,dword ptr [EDI + 0x10]
+0059734e : AND ESI,0xfffffffc
+00597351 : PUSH -0x1
+00597353 : LEA EAX,[ESI + 0x4]
+00597356 : PUSH EAX
+00597357 : CALL EBX
+00597359 : SUB EAX,0x1
+0059735c : JNZ 0x00597364
+0059735e : PUSH ESI
+0059735f : CALL 0x00515cf0
+00597364 : MOV ESI,dword ptr [EDI + 0xc]
+00597367 : AND ESI,0xfffffffc
+0059736a : PUSH -0x1
+0059736c : LEA ECX,[ESI + 0x4]
+0059736f : PUSH ECX
+00597370 : CALL EBX
+00597372 : SUB EAX,0x1
+00597375 : JNZ 0x0059737d
+00597377 : PUSH ESI
+00597378 : CALL 0x00515cf0
+0059737d : MOV ECX,dword ptr [EDI + 0x4]
+00597380 : POP EDI
+00597381 : POP ESI
+00597382 : POP EBX
+00597383 : TEST ECX,ECX
+00597385 : JZ 0x0059738c
+00597387 : JMP 0x004ff7c0
+0059738c : RET

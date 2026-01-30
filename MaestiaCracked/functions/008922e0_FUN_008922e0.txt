@@ -1,0 +1,106 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_008922e0
+ENTRY    : 008922e0
+BODY     : [[008922e0, 0089238d]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* WARNING: Removing unreachable block (ram,0x00892348) */
+
+void FUN_008922e0(undefined4 param_1)
+
+{
+  float fVar1;
+  undefined1 uVar2;
+  int iVar3;
+  int *in_ECX;
+  char cVar4;
+  
+  uVar2 = (**(code **)(*in_ECX + 0x200))();
+  cVar4 = (char)param_1;
+  FUN_00a6d180(in_ECX[0xe3],param_1,cVar4 == '\0',uVar2);
+  *(char *)(in_ECX + 0x500) = cVar4;
+  if ((cVar4 != '\0') && (iVar3 = FUN_00a6bba0(10), iVar3 != 0)) {
+    fVar1 = (float)((uint)in_ECX[0x31] / 6);
+    if (fVar1 == 0.0) {
+      fVar1 = 1.0;
+    }
+    if (*(int *)(iVar3 + 0x14) != 0) {
+      FUN_007cdb70(fVar1);
+      return;
+    }
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+008922e0 : PUSH EBP
+008922e1 : MOV EBP,ESP
+008922e3 : PUSH EBX
+008922e4 : PUSH ESI
+008922e5 : MOV ESI,ECX
+008922e7 : MOV EAX,dword ptr [ESI]
+008922e9 : MOV EDX,dword ptr [EAX + 0x200]
+008922ef : CALL EDX
+008922f1 : MOV EBX,dword ptr [EBP + 0x8]
+008922f4 : MOVZX EAX,AL
+008922f7 : TEST BL,BL
+008922f9 : SETZ CL
+008922fc : PUSH EAX
+008922fd : MOV EAX,dword ptr [ESI + 0x38c]
+00892303 : MOVZX EDX,CL
+00892306 : PUSH EDX
+00892307 : PUSH EBX
+00892308 : PUSH EAX
+00892309 : MOV ECX,0xa
+0089230e : CALL 0x00a6d180
+00892313 : MOV byte ptr [ESI + 0x1400],BL
+00892319 : TEST BL,BL
+0089231b : JZ 0x00892388
+0089231d : MOV ECX,dword ptr [ESI + 0x38c]
+00892323 : PUSH 0xa
+00892325 : CALL 0x00a6bba0
+0089232a : MOV ECX,EAX
+0089232c : TEST ECX,ECX
+0089232e : JZ 0x00892388
+00892330 : MOV EAX,0xaaaaaaab
+00892335 : MUL dword ptr [ESI + 0xc4]
+0089233b : SHR EDX,0x2
+0089233e : MOV dword ptr [EBP + 0x8],EDX
+00892341 : FILD dword ptr [EBP + 0x8]
+00892344 : TEST EDX,EDX
+00892346 : JGE 0x0089234e
+00892348 : FADD float ptr [0x00cdf0e0]
+0089234e : FLD ST0
+00892350 : FLDZ
+00892352 : FXCH
+00892354 : FUCOMIP ST0,ST1
+00892356 : FSTP ST0
+00892358 : LAHF
+00892359 : TEST AH,0x44
+0089235c : JP 0x00892370
+0089235e : MOVSS XMM0,dword ptr [0x00c10fc4]
+00892366 : FSTP ST0
+00892368 : MOVSS dword ptr [EBP + 0x8],XMM0
+0089236d : FLD float ptr [EBP + 0x8]
+00892370 : MOV ECX,dword ptr [ECX + 0x14]
+00892373 : TEST ECX,ECX
+00892375 : JZ 0x00892386
+00892377 : PUSH ECX
+00892378 : FSTP float ptr [ESP]
+0089237b : CALL 0x007cdb70
+00892380 : POP ESI
+00892381 : POP EBX
+00892382 : POP EBP
+00892383 : RET 0x4
+00892386 : FSTP ST0
+00892388 : POP ESI
+00892389 : POP EBX
+0089238a : POP EBP
+0089238b : RET 0x4

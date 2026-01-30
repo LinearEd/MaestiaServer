@@ -1,0 +1,174 @@
+PROGRAM  : Maestia.exe
+FUNCTION : ___sbh_alloc_new_group
+ENTRY    : 0064d008
+BODY     : [[0064d008, 0064d10f]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    ___sbh_alloc_new_group
+   
+   Library: Visual Studio 2008 Release */
+
+int ___sbh_alloc_new_group(int param_1)
+
+{
+  char cVar1;
+  int iVar2;
+  int iVar3;
+  int iVar4;
+  LPVOID pvVar5;
+  int *piVar6;
+  int iVar7;
+  int iVar8;
+  LPVOID lpAddress;
+  
+  iVar2 = *(int *)(param_1 + 0x10);
+  iVar8 = 0;
+  for (iVar3 = *(int *)(param_1 + 8); -1 < iVar3; iVar3 = iVar3 * 2) {
+    iVar8 = iVar8 + 1;
+  }
+  iVar3 = iVar8 * 0x204 + 0x144 + iVar2;
+  iVar7 = 0x3f;
+  iVar4 = iVar3;
+  do {
+    *(int *)(iVar4 + 8) = iVar4;
+    *(int *)(iVar4 + 4) = iVar4;
+    iVar4 = iVar4 + 8;
+    iVar7 = iVar7 + -1;
+  } while (iVar7 != 0);
+  lpAddress = (LPVOID)(iVar8 * 0x8000 + *(int *)(param_1 + 0xc));
+  pvVar5 = VirtualAlloc(lpAddress,0x8000,0x1000,4);
+  if (pvVar5 == (LPVOID)0x0) {
+    iVar8 = -1;
+  }
+  else {
+    if (lpAddress <= (LPVOID)((int)lpAddress + 0x7000U)) {
+      piVar6 = (int *)((int)lpAddress + 0x10);
+      iVar7 = ((uint)((int)((int)lpAddress + 0x7000U) - (int)lpAddress) >> 0xc) + 1;
+      do {
+        piVar6[-2] = -1;
+        piVar6[0x3fb] = -1;
+        *piVar6 = (int)(piVar6 + 0x3ff);
+        piVar6[-1] = 0xff0;
+        piVar6[1] = (int)(piVar6 + -0x401);
+        piVar6[0x3fa] = 0xff0;
+        piVar6 = piVar6 + 0x400;
+        iVar7 = iVar7 + -1;
+      } while (iVar7 != 0);
+    }
+    *(int *)(iVar3 + 0x1fc) = (int)lpAddress + 0xc;
+    *(int *)((int)lpAddress + 0x14) = iVar3 + 0x1f8;
+    *(int *)(iVar3 + 0x200) = (int)lpAddress + 0x700c;
+    *(int *)((int)lpAddress + 0x7010) = iVar3 + 0x1f8;
+    *(undefined4 *)(iVar2 + 0x44 + iVar8 * 4) = 0;
+    *(undefined4 *)(iVar2 + 0xc4 + iVar8 * 4) = 1;
+    cVar1 = *(char *)(iVar2 + 0x43);
+    *(char *)(iVar2 + 0x43) = cVar1 + '\x01';
+    if (cVar1 == '\0') {
+      *(uint *)(param_1 + 4) = *(uint *)(param_1 + 4) | 1;
+    }
+    *(uint *)(param_1 + 8) = *(uint *)(param_1 + 8) & ~(0x80000000U >> ((byte)iVar8 & 0x1f));
+  }
+  return iVar8;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0064d008 : MOV EDI,EDI
+0064d00a : PUSH EBP
+0064d00b : MOV EBP,ESP
+0064d00d : PUSH ECX
+0064d00e : PUSH ECX
+0064d00f : MOV ECX,dword ptr [EBP + 0x8]
+0064d012 : MOV EAX,dword ptr [ECX + 0x8]
+0064d015 : PUSH EBX
+0064d016 : PUSH ESI
+0064d017 : MOV ESI,dword ptr [ECX + 0x10]
+0064d01a : PUSH EDI
+0064d01b : XOR EBX,EBX
+0064d01d : JMP 0x0064d022
+0064d01f : ADD EAX,EAX
+0064d021 : INC EBX
+0064d022 : TEST EAX,EAX
+0064d024 : JGE 0x0064d01f
+0064d026 : MOV EAX,EBX
+0064d028 : IMUL EAX,EAX,0x204
+0064d02e : LEA EAX,[EAX + ESI*0x1 + 0x144]
+0064d035 : PUSH 0x3f
+0064d037 : MOV dword ptr [EBP + -0x8],EAX
+0064d03a : POP EDX
+0064d03b : MOV dword ptr [EAX + 0x8],EAX
+0064d03e : MOV dword ptr [EAX + 0x4],EAX
+0064d041 : ADD EAX,0x8
+0064d044 : DEC EDX
+0064d045 : JNZ 0x0064d03b
+0064d047 : PUSH 0x4
+0064d049 : MOV EDI,EBX
+0064d04b : PUSH 0x1000
+0064d050 : SHL EDI,0xf
+0064d053 : ADD EDI,dword ptr [ECX + 0xc]
+0064d056 : PUSH 0x8000
+0064d05b : PUSH EDI
+0064d05c : CALL dword ptr [0x00b85248]
+0064d062 : TEST EAX,EAX
+0064d064 : JNZ 0x0064d06e
+0064d066 : OR EAX,0xffffffff
+0064d069 : JMP 0x0064d10b
+0064d06e : LEA EDX,[EDI + 0x7000]
+0064d074 : MOV dword ptr [EBP + -0x4],EDX
+0064d077 : CMP EDI,EDX
+0064d079 : JA 0x0064d0be
+0064d07b : MOV ECX,EDX
+0064d07d : SUB ECX,EDI
+0064d07f : SHR ECX,0xc
+0064d082 : LEA EAX,[EDI + 0x10]
+0064d085 : INC ECX
+0064d086 : OR dword ptr [EAX + -0x8],0xffffffff
+0064d08a : OR dword ptr [EAX + 0xfec],0xffffffff
+0064d091 : LEA EDX,[EAX + 0xffc]
+0064d097 : MOV dword ptr [EAX],EDX
+0064d099 : LEA EDX,[EAX + 0xffffeffc]
+0064d09f : MOV dword ptr [EAX + -0x4],0xff0
+0064d0a6 : MOV dword ptr [EAX + 0x4],EDX
+0064d0a9 : MOV dword ptr [EAX + 0xfe8],0xff0
+0064d0b3 : ADD EAX,0x1000
+0064d0b8 : DEC ECX
+0064d0b9 : JNZ 0x0064d086
+0064d0bb : MOV EDX,dword ptr [EBP + -0x4]
+0064d0be : MOV EAX,dword ptr [EBP + -0x8]
+0064d0c1 : ADD EAX,0x1f8
+0064d0c6 : LEA ECX,[EDI + 0xc]
+0064d0c9 : MOV dword ptr [EAX + 0x4],ECX
+0064d0cc : MOV dword ptr [ECX + 0x8],EAX
+0064d0cf : LEA ECX,[EDX + 0xc]
+0064d0d2 : MOV dword ptr [EAX + 0x8],ECX
+0064d0d5 : MOV dword ptr [ECX + 0x4],EAX
+0064d0d8 : AND dword ptr [ESI + EBX*0x4 + 0x44],0x0
+0064d0dd : XOR EDI,EDI
+0064d0df : INC EDI
+0064d0e0 : MOV dword ptr [ESI + EBX*0x4 + 0xc4],EDI
+0064d0e7 : MOV AL,byte ptr [ESI + 0x43]
+0064d0ea : MOV CL,AL
+0064d0ec : INC CL
+0064d0ee : TEST AL,AL
+0064d0f0 : MOV EAX,dword ptr [EBP + 0x8]
+0064d0f3 : MOV byte ptr [ESI + 0x43],CL
+0064d0f6 : JNZ 0x0064d0fb
+0064d0f8 : OR dword ptr [EAX + 0x4],EDI
+0064d0fb : MOV EDX,0x80000000
+0064d100 : MOV ECX,EBX
+0064d102 : SHR EDX,CL
+0064d104 : NOT EDX
+0064d106 : AND dword ptr [EAX + 0x8],EDX
+0064d109 : MOV EAX,EBX
+0064d10b : POP EDI
+0064d10c : POP ESI
+0064d10d : POP EBX
+0064d10e : LEAVE
+0064d10f : RET

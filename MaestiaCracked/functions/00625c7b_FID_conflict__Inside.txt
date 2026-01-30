@@ -1,0 +1,76 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FID_conflict:_Inside
+ENTRY    : 00625c7b
+BODY     : [[00625c7b, 00625cb9]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Multiple Matches With Different Base Names
+    protected: bool __thiscall std::basic_string<unsigned short,struct std::char_traits<unsigned
+   short>,class std::allocator<unsigned short> >::_Inside(unsigned short const *)
+    protected: bool __thiscall std::basic_string<wchar_t,struct std::char_traits<wchar_t>,class
+   std::allocator<wchar_t> >::_Inside(wchar_t const *)
+   
+   Library: Visual Studio 2008 Release */
+
+uint FID_conflict__Inside(undefined4 *param_1)
+
+{
+  undefined4 *in_EAX;
+  int in_ECX;
+  undefined4 *puVar1;
+  
+  if (param_1 != (undefined4 *)0x0) {
+    in_EAX = (undefined4 *)(in_ECX + 4);
+    puVar1 = in_EAX;
+    if (7 < *(uint *)(in_ECX + 0x18)) {
+      puVar1 = (undefined4 *)*in_EAX;
+    }
+    if (puVar1 <= param_1) {
+      if (7 < *(uint *)(in_ECX + 0x18)) {
+        in_EAX = (undefined4 *)*in_EAX;
+      }
+      in_EAX = (undefined4 *)((int)in_EAX + *(int *)(in_ECX + 0x14) * 2);
+      if (param_1 < in_EAX) {
+        return CONCAT31((int3)((uint)in_EAX >> 8),1);
+      }
+    }
+  }
+  return (uint)in_EAX & 0xffffff00;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00625c7b : MOV EDI,EDI
+00625c7d : PUSH EBP
+00625c7e : MOV EBP,ESP
+00625c80 : CMP dword ptr [EBP + 0x8],0x0
+00625c84 : PUSH ESI
+00625c85 : JZ 0x00625cb3
+00625c87 : MOV ESI,dword ptr [ECX + 0x18]
+00625c8a : LEA EAX,[ECX + 0x4]
+00625c8d : CMP ESI,0x8
+00625c90 : JC 0x00625c96
+00625c92 : MOV EDX,dword ptr [EAX]
+00625c94 : JMP 0x00625c98
+00625c96 : MOV EDX,EAX
+00625c98 : CMP dword ptr [EBP + 0x8],EDX
+00625c9b : JC 0x00625cb3
+00625c9d : CMP ESI,0x8
+00625ca0 : JC 0x00625ca4
+00625ca2 : MOV EAX,dword ptr [EAX]
+00625ca4 : MOV ECX,dword ptr [ECX + 0x14]
+00625ca7 : LEA EAX,[EAX + ECX*0x2]
+00625caa : CMP EAX,dword ptr [EBP + 0x8]
+00625cad : JBE 0x00625cb3
+00625caf : MOV AL,0x1
+00625cb1 : JMP 0x00625cb5
+00625cb3 : XOR AL,AL
+00625cb5 : POP ESI
+00625cb6 : POP EBP
+00625cb7 : RET 0x4

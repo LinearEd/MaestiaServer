@@ -1,0 +1,97 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005ed6e0
+ENTRY    : 005ed6e0
+BODY     : [[005ed6e0, 005ed75f]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+float10 FUN_005ed6e0(void)
+
+{
+  float fVar1;
+  uint uVar2;
+  float *pfVar3;
+  int *in_ECX;
+  int iVar4;
+  uint uVar5;
+  float local_4;
+  
+  uVar2 = in_ECX[1];
+  local_4 = 0.0;
+  uVar5 = 0;
+  if (3 < (int)uVar2) {
+    iVar4 = (uVar2 - 4 >> 2) + 1;
+    uVar5 = iVar4 * 4;
+    pfVar3 = (float *)(*in_ECX + 0xc);
+    do {
+      iVar4 = iVar4 + -1;
+      local_4 = pfVar3[-2] + local_4 + *pfVar3 + pfVar3[2] + pfVar3[4];
+      pfVar3 = pfVar3 + 8;
+    } while (iVar4 != 0);
+  }
+  if (uVar5 < uVar2) {
+    pfVar3 = (float *)(*in_ECX + 4 + uVar5 * 8);
+    iVar4 = uVar2 - uVar5;
+    do {
+      fVar1 = *pfVar3;
+      pfVar3 = pfVar3 + 2;
+      iVar4 = iVar4 + -1;
+      local_4 = fVar1 + local_4;
+    } while (iVar4 != 0);
+  }
+  return (float10)local_4;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005ed6e0 : PUSH ECX
+005ed6e1 : FLDZ
+005ed6e3 : PUSH ESI
+005ed6e4 : MOV ESI,dword ptr [ECX + 0x4]
+005ed6e7 : FSTP float ptr [ESP + 0x4]
+005ed6eb : PUSH EDI
+005ed6ec : XOR EDI,EDI
+005ed6ee : CMP ESI,0x4
+005ed6f1 : JL 0x005ed73a
+005ed6f3 : MOV EAX,dword ptr [ECX]
+005ed6f5 : LEA EDX,[ESI + -0x4]
+005ed6f8 : SHR EDX,0x2
+005ed6fb : ADD EAX,0xc
+005ed6fe : INC EDX
+005ed6ff : LEA EDI,[EDX*0x4 + 0x0]
+005ed706 : FLD float ptr [EAX + -0x8]
+005ed709 : ADD EAX,0x20
+005ed70c : SUB EDX,0x1
+005ed70f : FADD float ptr [ESP + 0x8]
+005ed713 : FSTP float ptr [ESP + 0x8]
+005ed717 : FLD float ptr [ESP + 0x8]
+005ed71b : FADD float ptr [EAX + -0x20]
+005ed71e : FSTP float ptr [ESP + 0x8]
+005ed722 : FLD float ptr [ESP + 0x8]
+005ed726 : FADD float ptr [EAX + -0x18]
+005ed729 : FSTP float ptr [ESP + 0x8]
+005ed72d : FLD float ptr [ESP + 0x8]
+005ed731 : FADD float ptr [EAX + -0x10]
+005ed734 : FSTP float ptr [ESP + 0x8]
+005ed738 : JNZ 0x005ed706
+005ed73a : CMP EDI,ESI
+005ed73c : JNC 0x005ed758
+005ed73e : MOV EAX,dword ptr [ECX]
+005ed740 : LEA EAX,[EAX + EDI*0x8 + 0x4]
+005ed744 : SUB ESI,EDI
+005ed746 : FLD float ptr [EAX]
+005ed748 : ADD EAX,0x8
+005ed74b : SUB ESI,0x1
+005ed74e : FADD float ptr [ESP + 0x8]
+005ed752 : FSTP float ptr [ESP + 0x8]
+005ed756 : JNZ 0x005ed746
+005ed758 : FLD float ptr [ESP + 0x8]
+005ed75c : POP EDI
+005ed75d : POP ESI
+005ed75e : POP ECX
+005ed75f : RET

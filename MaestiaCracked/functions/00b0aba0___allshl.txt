@@ -1,0 +1,51 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __allshl
+ENTRY    : 00b0aba0
+BODY     : [[00b0aba0, 00b0abbe]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __allshl
+   
+   Library: Visual Studio */
+
+longlong __allshl(void)
+
+{
+  uint in_EAX;
+  byte in_CL;
+  int in_EDX;
+  
+  if (0x3f < in_CL) {
+    return 0;
+  }
+  if (in_CL < 0x20) {
+    return CONCAT44(in_EDX << (in_CL & 0x1f) | in_EAX >> 0x20 - (in_CL & 0x1f),
+                    in_EAX << (in_CL & 0x1f));
+  }
+  return (ulonglong)(in_EAX << (in_CL & 0x1f)) << 0x20;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00b0aba0 : CMP CL,0x40
+00b0aba3 : JNC 0x00b0abba
+00b0aba5 : CMP CL,0x20
+00b0aba8 : JNC 0x00b0abb0
+00b0abaa : SHLD EDX,EAX,CL
+00b0abad : SHL EAX,CL
+00b0abaf : RET
+00b0abb0 : MOV EDX,EAX
+00b0abb2 : XOR EAX,EAX
+00b0abb4 : AND CL,0x1f
+00b0abb7 : SHL EDX,CL
+00b0abb9 : RET
+00b0abba : XOR EAX,EAX
+00b0abbc : XOR EDX,EDX
+00b0abbe : RET

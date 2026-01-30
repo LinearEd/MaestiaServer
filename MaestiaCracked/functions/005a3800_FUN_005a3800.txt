@@ -1,0 +1,92 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005a3800
+ENTRY    : 005a3800
+BODY     : [[005a3800, 005a3876]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_005a3800(void)
+
+{
+  uint uVar1;
+  undefined4 *puVar2;
+  undefined4 *in_ECX;
+  undefined4 local_4;
+  
+  puVar2 = (undefined4 *)in_ECX[3];
+  if (puVar2 == (undefined4 *)0x0) {
+    uVar1 = in_ECX[2];
+    if (uVar1 < 0x7f) {
+      puVar2 = (undefined4 *)(in_ECX[1] + uVar1 * 0x14);
+      in_ECX[2] = uVar1 + 1;
+    }
+    else {
+      local_4 = 0xc4;
+      puVar2 = (undefined4 *)FUN_00515d60(in_ECX[4],0x9f0,&local_4);
+      puVar2[0x27b] = 0;
+      if (in_ECX[1] == 0) {
+        *in_ECX = puVar2;
+      }
+      else {
+        *(undefined4 **)(in_ECX[1] + 0x9ec) = puVar2;
+      }
+      in_ECX[1] = puVar2;
+      in_ECX[2] = 1;
+    }
+  }
+  else {
+    in_ECX[3] = *puVar2;
+  }
+  if (puVar2 != (undefined4 *)0x0) {
+    puVar2[4] = 0;
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005a3800 : PUSH ECX
+005a3801 : PUSH ESI
+005a3802 : MOV ESI,ECX
+005a3804 : MOV EAX,dword ptr [ESI + 0xc]
+005a3807 : TEST EAX,EAX
+005a3809 : JZ 0x005a3812
+005a380b : MOV ECX,dword ptr [EAX]
+005a380d : MOV dword ptr [ESI + 0xc],ECX
+005a3810 : JMP 0x005a3869
+005a3812 : MOV ECX,dword ptr [ESI + 0x8]
+005a3815 : CMP ECX,0x7f
+005a3818 : JNC 0x005a3829
+005a381a : MOV EAX,dword ptr [ESI + 0x4]
+005a381d : LEA EDX,[ECX + ECX*0x4]
+005a3820 : INC ECX
+005a3821 : LEA EAX,[EAX + EDX*0x4]
+005a3824 : MOV dword ptr [ESI + 0x8],ECX
+005a3827 : JMP 0x005a3869
+005a3829 : MOV EAX,dword ptr [ESI + 0x10]
+005a382c : LEA ECX,[ESP + 0x4]
+005a3830 : PUSH ECX
+005a3831 : PUSH 0x9f0
+005a3836 : PUSH EAX
+005a3837 : MOV dword ptr [ESP + 0x10],0xc4
+005a383f : CALL 0x00515d60
+005a3844 : MOV dword ptr [EAX + 0x9ec],0x0
+005a384e : MOV ECX,dword ptr [ESI + 0x4]
+005a3851 : TEST ECX,ECX
+005a3853 : JZ 0x005a385d
+005a3855 : MOV dword ptr [ECX + 0x9ec],EAX
+005a385b : JMP 0x005a385f
+005a385d : MOV dword ptr [ESI],EAX
+005a385f : MOV dword ptr [ESI + 0x4],EAX
+005a3862 : MOV dword ptr [ESI + 0x8],0x1
+005a3869 : POP ESI
+005a386a : TEST EAX,EAX
+005a386c : JZ 0x005a3875
+005a386e : MOV dword ptr [EAX + 0x10],0x0
+005a3875 : POP ECX
+005a3876 : RET

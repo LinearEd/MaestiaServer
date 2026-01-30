@@ -1,0 +1,178 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00696910
+ENTRY    : 00696910
+BODY     : [[00696910, 00696a20]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined4 FUN_00696910(undefined4 *param_1,int *param_2)
+
+{
+  ushort *puVar1;
+  int *in_ECX;
+  uint uVar2;
+  ushort *puVar3;
+  uint unaff_EDI;
+  
+  if ((*(ushort *)(in_ECX + 10) <= unaff_EDI) && (unaff_EDI <= *(ushort *)((int)in_ECX + 0x2a))) {
+    puVar1 = (ushort *)in_ECX[1];
+    puVar3 = puVar1 + *in_ECX * 0x14;
+    if (puVar1 != (ushort *)0x0) {
+      for (; puVar1 < puVar3; puVar1 = puVar1 + 0x14) {
+        if ((*puVar1 <= unaff_EDI) && (unaff_EDI <= puVar1[1])) {
+          uVar2 = (uint)(ushort)((short)unaff_EDI - *puVar1);
+          switch(puVar1[2]) {
+          case 1:
+          case 3:
+            *param_2 = *(int *)(*(int *)(puVar1 + 0xe) + uVar2 * 4);
+            *param_1 = puVar1;
+            return 0;
+          case 2:
+            *param_2 = uVar2 * *(int *)(puVar1 + 6) + *(int *)(puVar1 + 4);
+            *param_1 = puVar1;
+            return 0;
+          case 4:
+          case 5:
+            uVar2 = 0;
+            if (*(uint *)(puVar1 + 0xc) != 0) {
+              puVar3 = *(ushort **)(puVar1 + 0x10);
+              do {
+                if (*puVar3 == unaff_EDI) {
+                  if (puVar1[2] != 4) {
+                    *param_2 = *(int *)(puVar1 + 6) * uVar2 + *(int *)(puVar1 + 4);
+                    *param_1 = puVar1;
+                    return 0;
+                  }
+                  *param_2 = *(int *)(*(int *)(puVar1 + 0xe) + uVar2 * 4);
+                  *param_1 = puVar1;
+                  return 0;
+                }
+                uVar2 = uVar2 + 1;
+                puVar3 = puVar3 + 1;
+              } while (uVar2 < *(uint *)(puVar1 + 0xc));
+            }
+          }
+          break;
+        }
+      }
+    }
+  }
+  *param_1 = 0;
+  *param_2 = 0;
+  return 6;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00696910 : MOVZX EAX,word ptr [ECX + 0x28]
+00696914 : PUSH EBX
+00696915 : PUSH EBP
+00696916 : MOV EBP,dword ptr [ESP + 0x10]
+0069691a : PUSH ESI
+0069691b : CMP EDI,EAX
+0069691d : JC 0x00696956
+0069691f : MOVZX EDX,word ptr [ECX + 0x2a]
+00696923 : CMP EDI,EDX
+00696925 : JA 0x00696956
+00696927 : MOV EAX,dword ptr [ECX + 0x4]
+0069692a : MOV ECX,dword ptr [ECX]
+0069692c : LEA ECX,[ECX + ECX*0x4]
+0069692f : LEA ECX,[EAX + ECX*0x8]
+00696932 : TEST EAX,EAX
+00696934 : JZ 0x00696956
+00696936 : CMP EAX,ECX
+00696938 : JNC 0x00696956
+0069693a : LEA EBX,[EBX]
+00696940 : MOVZX EDX,word ptr [EAX]
+00696943 : CMP EDI,EDX
+00696945 : JC 0x0069694f
+00696947 : MOVZX EDX,word ptr [EAX + 0x2]
+0069694b : CMP EDI,EDX
+0069694d : JBE 0x00696970
+0069694f : ADD EAX,0x28
+00696952 : CMP EAX,ECX
+00696954 : JC 0x00696940
+00696956 : MOV EAX,dword ptr [ESP + 0x10]
+0069695a : MOV dword ptr [EAX],0x0
+00696960 : POP ESI
+00696961 : MOV dword ptr [EBP],0x0
+00696968 : POP EBP
+00696969 : MOV EAX,0x6
+0069696e : POP EBX
+0069696f : RET
+00696970 : MOVZX EBX,word ptr [EAX + 0x4]
+00696974 : MOV CX,DI
+00696977 : SUB CX,word ptr [EAX]
+0069697a : MOVZX EDX,CX
+0069697d : MOVZX ECX,BX
+00696980 : DEC ECX
+00696981 : CMP ECX,0x4
+00696984 : JA 0x00696956
+00696986 : JMP dword ptr [ECX*0x4 + 0x696a24]
+0069698d : MOV ECX,dword ptr [EAX + 0x1c]
+00696990 : MOVZX EDX,DX
+00696993 : MOV EDX,dword ptr [ECX + EDX*0x4]
+00696996 : MOV dword ptr [EBP],EDX
+00696999 : MOV EDX,dword ptr [ESP + 0x10]
+0069699d : POP ESI
+0069699e : POP EBP
+0069699f : MOV dword ptr [EDX],EAX
+006969a1 : XOR EAX,EAX
+006969a3 : POP EBX
+006969a4 : RET
+006969a5 : MOVZX ECX,DX
+006969a8 : IMUL ECX,dword ptr [EAX + 0xc]
+006969ac : ADD ECX,dword ptr [EAX + 0x8]
+006969af : MOV EDX,dword ptr [ESP + 0x10]
+006969b3 : POP ESI
+006969b4 : MOV dword ptr [EBP],ECX
+006969b7 : POP EBP
+006969b8 : MOV dword ptr [EDX],EAX
+006969ba : XOR EAX,EAX
+006969bc : POP EBX
+006969bd : RET
+006969be : MOV ESI,dword ptr [EAX + 0x18]
+006969c1 : XOR ECX,ECX
+006969c3 : TEST ESI,ESI
+006969c5 : JBE 0x00696956
+006969c7 : MOV EDX,dword ptr [EAX + 0x20]
+006969ca : LEA EBX,[EBX]
+006969d0 : MOVZX EBP,word ptr [EDX]
+006969d3 : CMP EBP,EDI
+006969d5 : JZ 0x006969e8
+006969d7 : INC ECX
+006969d8 : ADD EDX,0x2
+006969db : CMP ECX,ESI
+006969dd : JC 0x006969d0
+006969df : MOV EBP,dword ptr [ESP + 0x14]
+006969e3 : JMP 0x00696956
+006969e8 : CMP BX,0x4
+006969ec : JNZ 0x00696a06
+006969ee : MOV EDX,dword ptr [EAX + 0x1c]
+006969f1 : MOV ECX,dword ptr [EDX + ECX*0x4]
+006969f4 : MOV EDX,dword ptr [ESP + 0x14]
+006969f8 : MOV dword ptr [EDX],ECX
+006969fa : MOV EDX,dword ptr [ESP + 0x10]
+006969fe : POP ESI
+006969ff : POP EBP
+00696a00 : MOV dword ptr [EDX],EAX
+00696a02 : XOR EAX,EAX
+00696a04 : POP EBX
+00696a05 : RET
+00696a06 : MOV EDX,dword ptr [EAX + 0xc]
+00696a09 : IMUL EDX,ECX
+00696a0c : ADD EDX,dword ptr [EAX + 0x8]
+00696a0f : MOV ECX,dword ptr [ESP + 0x14]
+00696a13 : MOV dword ptr [ECX],EDX
+00696a15 : MOV EDX,dword ptr [ESP + 0x10]
+00696a19 : POP ESI
+00696a1a : POP EBP
+00696a1b : MOV dword ptr [EDX],EAX
+00696a1d : XOR EAX,EAX
+00696a1f : POP EBX
+00696a20 : RET

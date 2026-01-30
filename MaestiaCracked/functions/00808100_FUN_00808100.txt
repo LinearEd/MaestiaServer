@@ -1,0 +1,157 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00808100
+ENTRY    : 00808100
+BODY     : [[00808100, 00808231]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00808100(uint param_1)
+
+{
+  uint uVar1;
+  char *pcVar2;
+  uint *puVar3;
+  undefined1 auStack_134 [7];
+  byte local_12d;
+  int local_12c;
+  undefined **local_128;
+  undefined1 local_120 [260];
+  uint local_1c;
+  void *local_14;
+  undefined1 *puStack_10;
+  undefined4 local_c;
+  
+  local_c = 0xffffffff;
+  puStack_10 = &LAB_00b4c091;
+  local_14 = ExceptionList;
+  local_1c = DAT_00d66fa0 ^ (uint)auStack_134;
+  uVar1 = DAT_00d66fa0 ^ (uint)&stack0xfffffec0;
+  ExceptionList = &local_14;
+  local_12d = 1;
+  local_12c = 0;
+  puVar3 = &DAT_017211c4;
+  do {
+    if ((char)puVar3[0x43] == '\0') {
+      if (param_1 <= *puVar3) {
+        if ((char)puVar3[0x43] != '\0') {
+          FUN_00807d70("CSharedHeapBlock::Delete() called when buffer was locked");
+          local_12d = 0;
+          goto LAB_008081f4;
+        }
+        FUN_00455c80();
+        *puVar3 = 0;
+      }
+      local_12d = local_12d & 1;
+    }
+    else {
+      pcVar2 = (char *)(puVar3 + 3);
+      if ((uint *)pcVar2 == (uint *)0x0) {
+        pcVar2 = "UNKNOWN";
+      }
+      FUN_00455a80("CCore::DeleteAllTmpHeapBlocks, unable to delete block with handle [%d], still in use by [%s]"
+                   ,local_12c,pcVar2,uVar1);
+      local_c = 0;
+      FUN_00807d70(local_120);
+      _printf("%s\n",local_120);
+      local_12d = 0;
+      local_c = 0xffffffff;
+      local_128 = &PTR_FUN_00cd3f48;
+    }
+LAB_008081f4:
+    local_12c = local_12c + 1;
+    puVar3 = puVar3 + 0x45;
+    if (0x1722303 < (int)puVar3) {
+      ExceptionList = local_14;
+      __security_check_cookie(local_1c ^ (uint)auStack_134);
+      return;
+    }
+  } while( true );
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00808100 : PUSH EBP
+00808101 : MOV EBP,ESP
+00808103 : AND ESP,0xfffffff8
+00808106 : PUSH -0x1
+00808108 : PUSH 0xb4c091
+0080810d : MOV EAX,FS:[0x0]
+00808113 : PUSH EAX
+00808114 : SUB ESP,0x120
+0080811a : MOV EAX,[0x00d66fa0]
+0080811f : XOR EAX,ESP
+00808121 : MOV dword ptr [ESP + 0x118],EAX
+00808128 : PUSH EBX
+00808129 : PUSH ESI
+0080812a : PUSH EDI
+0080812b : MOV EAX,[0x00d66fa0]
+00808130 : XOR EAX,ESP
+00808132 : PUSH EAX
+00808133 : LEA EAX,[ESP + 0x130]
+0080813a : MOV FS:[0x0],EAX
+00808140 : MOV byte ptr [ESP + 0x17],0x1
+00808145 : MOV dword ptr [ESP + 0x18],0x0
+0080814d : MOV EDI,0x17211c4
+00808152 : CMP byte ptr [EDI + 0x10c],0x0
+00808159 : JNZ 0x00808195
+0080815b : MOV EAX,dword ptr [EBP + 0x8]
+0080815e : CMP dword ptr [EDI],EAX
+00808160 : JC 0x0080817a
+00808162 : XOR BL,BL
+00808164 : CMP byte ptr [EDI + 0x10c],BL
+0080816a : JNZ 0x00808182
+0080816c : LEA ESI,[EDI + -0x4]
+0080816f : CALL 0x00455c80
+00808174 : MOV dword ptr [EDI],0x0
+0080817a : MOV BL,0x1
+0080817c : AND byte ptr [ESP + 0x17],BL
+00808180 : JMP 0x008081f4
+00808182 : PUSH 0xcd41b8
+00808187 : CALL 0x00807d70
+0080818c : ADD ESP,0x4
+0080818f : AND byte ptr [ESP + 0x17],BL
+00808193 : JMP 0x008081f4
+00808195 : LEA EAX,[EDI + 0xc]
+00808198 : TEST EAX,EAX
+0080819a : JNZ 0x008081a1
+0080819c : MOV EAX,0xc29324
+008081a1 : MOV ECX,dword ptr [ESP + 0x18]
+008081a5 : PUSH EAX
+008081a6 : PUSH ECX
+008081a7 : PUSH 0xc29330
+008081ac : LEA ESI,[ESP + 0x28]
+008081b0 : CALL 0x00455a80
+008081b5 : MOV dword ptr [ESP + 0x144],0x0
+008081c0 : LEA EDX,[ESP + 0x30]
+008081c4 : PUSH EDX
+008081c5 : CALL 0x00807d70
+008081ca : LEA EAX,[ESP + 0x34]
+008081ce : PUSH EAX
+008081cf : PUSH 0xc2932c
+008081d4 : CALL 0x0063da6e
+008081d9 : ADD ESP,0x18
+008081dc : MOV byte ptr [ESP + 0x17],0x0
+008081e1 : MOV dword ptr [ESP + 0x138],0xffffffff
+008081ec : MOV dword ptr [ESP + 0x1c],0xcd3f48
+008081f4 : INC dword ptr [ESP + 0x18]
+008081f8 : ADD EDI,0x114
+008081fe : CMP EDI,0x1722304
+00808204 : JL 0x00808152
+0080820a : MOV AL,byte ptr [ESP + 0x17]
+0080820e : MOV ECX,dword ptr [ESP + 0x130]
+00808215 : MOV dword ptr FS:[0x0],ECX
+0080821c : POP ECX
+0080821d : POP EDI
+0080821e : POP ESI
+0080821f : POP EBX
+00808220 : MOV ECX,dword ptr [ESP + 0x118]
+00808227 : XOR ECX,ESP
+00808229 : CALL 0x00633e6b
+0080822e : MOV ESP,EBP
+00808230 : POP EBP
+00808231 : RET

@@ -1,0 +1,74 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00445280
+ENTRY    : 00445280
+BODY     : [[00445280, 004452c0]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00445280(void)
+
+{
+  int iVar1;
+  undefined4 *puVar2;
+  uint uVar3;
+  int in_EDX;
+  undefined4 *unaff_EDI;
+  
+  iVar1 = *(int *)(in_EDX + 4);
+  if (iVar1 == 0) {
+    uVar3 = 0;
+  }
+  else {
+    uVar3 = *(int *)(in_EDX + 0xc) - iVar1 >> 2;
+  }
+  puVar2 = *(undefined4 **)(in_EDX + 8);
+  if ((uint)((int)puVar2 - iVar1 >> 2) < uVar3) {
+    *puVar2 = *unaff_EDI;
+    *(undefined4 **)(in_EDX + 8) = puVar2 + 1;
+    return;
+  }
+  FUN_004452d0(in_EDX,puVar2,1,unaff_EDI);
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00445280 : PUSH ECX
+00445281 : PUSH EBX
+00445282 : PUSH ESI
+00445283 : MOV ESI,dword ptr [EDX + 0x4]
+00445286 : TEST ESI,ESI
+00445288 : JNZ 0x0044528e
+0044528a : XOR EAX,EAX
+0044528c : JMP 0x00445296
+0044528e : MOV EAX,dword ptr [EDX + 0xc]
+00445291 : SUB EAX,ESI
+00445293 : SAR EAX,0x2
+00445296 : MOV ECX,dword ptr [EDX + 0x8]
+00445299 : MOV EBX,ECX
+0044529b : SUB EBX,ESI
+0044529d : SAR EBX,0x2
+004452a0 : CMP EBX,EAX
+004452a2 : JNC 0x004452b3
+004452a4 : FLD float ptr [EDI]
+004452a6 : ADD ECX,0x4
+004452a9 : FSTP float ptr [ECX + -0x4]
+004452ac : MOV dword ptr [EDX + 0x8],ECX
+004452af : POP ESI
+004452b0 : POP EBX
+004452b1 : POP ECX
+004452b2 : RET
+004452b3 : PUSH EDI
+004452b4 : PUSH 0x1
+004452b6 : PUSH ECX
+004452b7 : PUSH EDX
+004452b8 : CALL 0x004452d0
+004452bd : POP ESI
+004452be : POP EBX
+004452bf : POP ECX
+004452c0 : RET

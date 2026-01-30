@@ -1,0 +1,142 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00808540
+ENTRY    : 00808540
+BODY     : [[00808540, 00808619]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* WARNING: Function: __alloca_probe replaced with injection: alloca_probe */
+
+void FUN_00808540(void)
+
+{
+  DWORD DVar1;
+  BOOL BVar2;
+  HANDLE hProcess;
+  uint uVar3;
+  int iVar4;
+  DWORD local_2014 [1024];
+  HANDLE local_1014 [1024];
+  ULONG_PTR local_14;
+  ULONG_PTR local_10;
+  uint local_c;
+  DWORD local_8;
+  
+  local_8 = 0x80854d;
+  DVar1 = GetProcessHeaps(0x400,local_1014);
+  uVar3 = 0;
+  if (DVar1 != 0) {
+    do {
+      local_8 = 2;
+      HeapSetInformation(local_1014[uVar3],HeapCompatibilityInformation,&local_8,4);
+      uVar3 = uVar3 + 1;
+    } while (uVar3 < DVar1);
+  }
+  BVar2 = EnumProcesses(local_2014,0x1000,&local_c);
+  if (BVar2 != 0) {
+    local_8 = GetCurrentProcessId();
+    iVar4 = 0;
+    if (local_c >> 2 != 0) {
+      do {
+        if ((local_2014[iVar4] != local_8) &&
+           (hProcess = OpenProcess(0x510,0,local_2014[iVar4]), hProcess != (HANDLE)0x0)) {
+          BVar2 = GetProcessWorkingSetSize(hProcess,&local_14,&local_10);
+          if ((BVar2 != 0) &&
+             (BVar2 = SetProcessWorkingSetSize(hProcess,0xffffffff,0xffffffff), BVar2 == 0)) {
+            FUN_00483f90();
+          }
+          CloseHandle(hProcess);
+        }
+        iVar4 = iVar4 + 1;
+      } while (iVar4 < (int)(local_c >> 2));
+    }
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00808540 : PUSH EBP
+00808541 : MOV EBP,ESP
+00808543 : MOV EAX,0x2010
+00808548 : CALL 0x0063b780
+0080854d : PUSH EBX
+0080854e : PUSH ESI
+0080854f : PUSH EDI
+00808550 : LEA EAX,[EBP + 0xffffeff0]
+00808556 : PUSH EAX
+00808557 : PUSH 0x400
+0080855c : CALL dword ptr [0x00b85220]
+00808562 : MOV EDI,EAX
+00808564 : XOR ESI,ESI
+00808566 : TEST EDI,EDI
+00808568 : JBE 0x0080858e
+0080856a : MOV EBX,dword ptr [0x00b853c4]
+00808570 : MOV EDX,dword ptr [EBP + ESI*0x4 + 0xffffeff0]
+00808577 : PUSH 0x4
+00808579 : LEA ECX,[EBP + -0x4]
+0080857c : PUSH ECX
+0080857d : PUSH 0x0
+0080857f : PUSH EDX
+00808580 : MOV dword ptr [EBP + -0x4],0x2
+00808587 : CALL EBX
+00808589 : INC ESI
+0080858a : CMP ESI,EDI
+0080858c : JC 0x00808570
+0080858e : LEA EAX,[EBP + -0x8]
+00808591 : PUSH EAX
+00808592 : PUSH 0x1000
+00808597 : LEA ECX,[EBP + 0xffffdff0]
+0080859d : PUSH ECX
+0080859e : CALL 0x00611474
+008085a3 : TEST EAX,EAX
+008085a5 : JZ 0x00808613
+008085a7 : CALL dword ptr [0x00b850e4]
+008085ad : MOV EBX,dword ptr [EBP + -0x8]
+008085b0 : SHR EBX,0x2
+008085b3 : XOR EDI,EDI
+008085b5 : MOV dword ptr [EBP + -0x4],EAX
+008085b8 : TEST EBX,EBX
+008085ba : JLE 0x00808613
+008085bc : LEA ESP,[ESP]
+008085c0 : MOV EAX,dword ptr [EBP + EDI*0x4 + 0xffffdff0]
+008085c7 : CMP EAX,dword ptr [EBP + -0x4]
+008085ca : JZ 0x0080860e
+008085cc : PUSH EAX
+008085cd : PUSH 0x0
+008085cf : PUSH 0x510
+008085d4 : CALL dword ptr [0x00b851ec]
+008085da : MOV ESI,EAX
+008085dc : TEST ESI,ESI
+008085de : JZ 0x0080860e
+008085e0 : LEA EDX,[EBP + -0xc]
+008085e3 : PUSH EDX
+008085e4 : LEA EAX,[EBP + -0x10]
+008085e7 : PUSH EAX
+008085e8 : PUSH ESI
+008085e9 : CALL dword ptr [0x00b85224]
+008085ef : TEST EAX,EAX
+008085f1 : JZ 0x00808607
+008085f3 : PUSH -0x1
+008085f5 : PUSH -0x1
+008085f7 : PUSH ESI
+008085f8 : CALL dword ptr [0x00b851f0]
+008085fe : TEST EAX,EAX
+00808600 : JNZ 0x00808607
+00808602 : CALL 0x00483f90
+00808607 : PUSH ESI
+00808608 : CALL dword ptr [0x00b85104]
+0080860e : INC EDI
+0080860f : CMP EDI,EBX
+00808611 : JL 0x008085c0
+00808613 : POP EDI
+00808614 : POP ESI
+00808615 : POP EBX
+00808616 : MOV ESP,EBP
+00808618 : POP EBP
+00808619 : RET

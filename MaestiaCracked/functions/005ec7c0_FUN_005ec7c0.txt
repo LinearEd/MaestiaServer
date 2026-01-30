@@ -1,0 +1,54 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005ec7c0
+ENTRY    : 005ec7c0
+BODY     : [[005ec7c0, 005ec7f1]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_005ec7c0(uint param_1,int param_2)
+
+{
+  int *piVar1;
+  GRefCountNTSImpl *this;
+  int *in_ECX;
+  
+  if (param_1 < (uint)in_ECX[1]) {
+    in_ECX[3] = 0;
+    piVar1 = (int *)(*in_ECX + param_1 * 4);
+    this = (GRefCountNTSImpl *)*piVar1;
+    if (this != (GRefCountNTSImpl *)0x0) {
+      GRefCountNTSImpl::Release(this);
+    }
+    *piVar1 = param_2;
+    if (param_2 != 0) {
+      *(int *)(param_2 + 4) = *(int *)(param_2 + 4) + 1;
+    }
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005ec7c0 : MOV EAX,dword ptr [ESP + 0x4]
+005ec7c4 : CMP EAX,dword ptr [ECX + 0x4]
+005ec7c7 : JNC 0x005ec7ef
+005ec7c9 : MOV dword ptr [ECX + 0xc],0x0
+005ec7d0 : MOV ECX,dword ptr [ECX]
+005ec7d2 : PUSH ESI
+005ec7d3 : LEA ESI,[ECX + EAX*0x4]
+005ec7d6 : MOV ECX,dword ptr [ESI]
+005ec7d8 : TEST ECX,ECX
+005ec7da : JZ 0x005ec7e1
+005ec7dc : CALL 0x004ff7c0
+005ec7e1 : MOV EAX,dword ptr [ESP + 0xc]
+005ec7e5 : MOV dword ptr [ESI],EAX
+005ec7e7 : POP ESI
+005ec7e8 : TEST EAX,EAX
+005ec7ea : JZ 0x005ec7ef
+005ec7ec : INC dword ptr [EAX + 0x4]
+005ec7ef : RET 0x8

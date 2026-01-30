@@ -1,0 +1,85 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0074b510
+ENTRY    : 0074b510
+BODY     : [[0074b510, 0074b56e]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_0074b510(undefined4 param_1)
+
+{
+  bool bVar1;
+  int iVar2;
+  char *pcVar3;
+  int *unaff_EDI;
+  
+  if ((unaff_EDI[1] != 1) && (unaff_EDI[1] != 2)) {
+    pcVar3 = (char *)unaff_EDI[3];
+    bVar1 = true;
+    if (pcVar3 != (char *)unaff_EDI[4]) {
+      do {
+        if ((*pcVar3 == '\0') && (*(int *)(pcVar3 + 4) == 0x10)) {
+          iVar2 = FUN_00724600(param_1);
+          *(int *)(pcVar3 + 4) = iVar2;
+          if (iVar2 != 8) {
+            bVar1 = false;
+          }
+        }
+        pcVar3 = pcVar3 + 0xc;
+      } while (pcVar3 != (char *)unaff_EDI[4]);
+      if (!bVar1) {
+        return;
+      }
+    }
+    (**(code **)(*unaff_EDI + 4))();
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0074b510 : PUSH EBP
+0074b511 : MOV EBP,ESP
+0074b513 : MOV EAX,dword ptr [EDI + 0x4]
+0074b516 : CMP EAX,0x1
+0074b519 : JZ 0x0074b56b
+0074b51b : CMP EAX,0x2
+0074b51e : JZ 0x0074b56b
+0074b520 : PUSH EBX
+0074b521 : PUSH ESI
+0074b522 : MOV ESI,dword ptr [EDI + 0xc]
+0074b525 : MOV BL,0x1
+0074b527 : CMP ESI,dword ptr [EDI + 0x10]
+0074b52a : JZ 0x0074b560
+0074b52c : LEA ESP,[ESP]
+0074b530 : CMP byte ptr [ESI],0x0
+0074b533 : JNZ 0x0074b554
+0074b535 : CMP dword ptr [ESI + 0x4],0x10
+0074b539 : JNZ 0x0074b554
+0074b53b : FLD float ptr [EBP + 0x8]
+0074b53e : MOV EAX,dword ptr [ESI + 0x8]
+0074b541 : PUSH ECX
+0074b542 : FSTP float ptr [ESP]
+0074b545 : CALL 0x00724600
+0074b54a : MOV dword ptr [ESI + 0x4],EAX
+0074b54d : CMP EAX,0x8
+0074b550 : JZ 0x0074b554
+0074b552 : XOR BL,BL
+0074b554 : ADD ESI,0xc
+0074b557 : CMP ESI,dword ptr [EDI + 0x10]
+0074b55a : JNZ 0x0074b530
+0074b55c : TEST BL,BL
+0074b55e : JZ 0x0074b569
+0074b560 : MOV EAX,dword ptr [EDI]
+0074b562 : MOV EDX,dword ptr [EAX + 0x4]
+0074b565 : MOV ECX,EDI
+0074b567 : CALL EDX
+0074b569 : POP ESI
+0074b56a : POP EBX
+0074b56b : POP EBP
+0074b56c : RET 0x4

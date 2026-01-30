@@ -1,0 +1,62 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00524bf0
+ENTRY    : 00524bf0
+BODY     : [[00524bf0, 00524c2f]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+int FUN_00524bf0(int param_1)
+
+{
+  int *piVar1;
+  int iVar2;
+  int *in_ECX;
+  int iVar3;
+  
+  piVar1 = (int *)*in_ECX;
+  if ((piVar1[3] & 0x8000000U) != 0) {
+    return (int)*(char *)(*piVar1 + param_1);
+  }
+  iVar3 = param_1;
+  param_1 = *piVar1;
+  do {
+    iVar2 = FUN_0051aa70(&param_1);
+    iVar3 = iVar3 + -1;
+    if (iVar2 == 0) {
+      return 0;
+    }
+  } while (-1 < iVar3);
+  return iVar2;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00524bf0 : MOV EAX,dword ptr [ECX]
+00524bf2 : TEST dword ptr [EAX + 0xc],0x8000000
+00524bf9 : JZ 0x00524c08
+00524bfb : MOV EAX,dword ptr [EAX]
+00524bfd : MOV ECX,dword ptr [ESP + 0x4]
+00524c01 : MOVSX EAX,byte ptr [EAX + ECX*0x1]
+00524c05 : RET 0x4
+00524c08 : MOV EDX,dword ptr [EAX]
+00524c0a : PUSH ESI
+00524c0b : MOV ESI,dword ptr [ESP + 0x8]
+00524c0f : MOV dword ptr [ESP + 0x8],EDX
+00524c13 : LEA EAX,[ESP + 0x8]
+00524c17 : PUSH EAX
+00524c18 : CALL 0x0051aa70
+00524c1d : DEC ESI
+00524c1e : TEST EAX,EAX
+00524c20 : JZ 0x00524c2a
+00524c22 : TEST ESI,ESI
+00524c24 : JGE 0x00524c13
+00524c26 : POP ESI
+00524c27 : RET 0x4
+00524c2a : XOR EAX,EAX
+00524c2c : POP ESI
+00524c2d : RET 0x4

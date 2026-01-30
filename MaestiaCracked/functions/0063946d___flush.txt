@@ -1,0 +1,99 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __flush
+ENTRY    : 0063946d
+BODY     : [[0063946d, 006394d4]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __flush
+   
+   Library: Visual Studio 2008 Release */
+
+int __cdecl __flush(FILE *_File)
+
+{
+  int _FileHandle;
+  uint uVar1;
+  int iVar2;
+  uint uVar3;
+  char *_Buf;
+  
+  iVar2 = 0;
+  if ((((byte)_File->_flag & 3) == 2) && ((_File->_flag & 0x108U) != 0)) {
+    _Buf = _File->_base;
+    uVar3 = (int)_File->_ptr - (int)_Buf;
+    if (0 < (int)uVar3) {
+      uVar1 = uVar3;
+      _FileHandle = __fileno(_File);
+      uVar1 = __write(_FileHandle,_Buf,uVar1);
+      if (uVar1 == uVar3) {
+        if ((char)_File->_flag < '\0') {
+          _File->_flag = _File->_flag & 0xfffffffd;
+        }
+      }
+      else {
+        _File->_flag = _File->_flag | 0x20;
+        iVar2 = -1;
+      }
+    }
+  }
+  _File->_cnt = 0;
+  _File->_ptr = _File->_base;
+  return iVar2;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0063946d : MOV EDI,EDI
+0063946f : PUSH EBP
+00639470 : MOV EBP,ESP
+00639472 : PUSH EBX
+00639473 : PUSH ESI
+00639474 : MOV ESI,dword ptr [EBP + 0x8]
+00639477 : MOV EAX,dword ptr [ESI + 0xc]
+0063947a : MOV ECX,EAX
+0063947c : AND CL,0x3
+0063947f : XOR EBX,EBX
+00639481 : CMP CL,0x2
+00639484 : JNZ 0x006394c6
+00639486 : TEST EAX,0x108
+0063948b : JZ 0x006394c6
+0063948d : MOV EAX,dword ptr [ESI + 0x8]
+00639490 : PUSH EDI
+00639491 : MOV EDI,dword ptr [ESI]
+00639493 : SUB EDI,EAX
+00639495 : TEST EDI,EDI
+00639497 : JLE 0x006394c5
+00639499 : PUSH EDI
+0063949a : PUSH EAX
+0063949b : PUSH ESI
+0063949c : CALL 0x0064dfc6
+006394a1 : POP ECX
+006394a2 : PUSH EAX
+006394a3 : CALL 0x00650d59
+006394a8 : ADD ESP,0xc
+006394ab : CMP EAX,EDI
+006394ad : JNZ 0x006394be
+006394af : MOV EAX,dword ptr [ESI + 0xc]
+006394b2 : TEST AL,AL
+006394b4 : JNS 0x006394c5
+006394b6 : AND EAX,0xfffffffd
+006394b9 : MOV dword ptr [ESI + 0xc],EAX
+006394bc : JMP 0x006394c5
+006394be : OR dword ptr [ESI + 0xc],0x20
+006394c2 : OR EBX,0xffffffff
+006394c5 : POP EDI
+006394c6 : MOV EAX,dword ptr [ESI + 0x8]
+006394c9 : AND dword ptr [ESI + 0x4],0x0
+006394cd : MOV dword ptr [ESI],EAX
+006394cf : POP ESI
+006394d0 : MOV EAX,EBX
+006394d2 : POP EBX
+006394d3 : POP EBP
+006394d4 : RET

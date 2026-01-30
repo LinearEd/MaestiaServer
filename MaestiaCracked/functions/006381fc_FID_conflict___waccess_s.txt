@@ -1,0 +1,106 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FID_conflict:__waccess_s
+ENTRY    : 006381fc
+BODY     : [[006381fc, 00638284]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Multiple Matches With Different Base Names
+    __access_s
+    __waccess_s
+   
+   Library: Visual Studio 2008 Release */
+
+errno_t __cdecl FID_conflict___waccess_s(wchar_t *_Filename,int _AccessMode)
+
+{
+  ulong *puVar1;
+  int *piVar2;
+  DWORD DVar3;
+  int iVar4;
+  
+  if ((_Filename == (wchar_t *)0x0) || ((_AccessMode & 0xfffffff9U) != 0)) {
+    puVar1 = ___doserrno();
+    *puVar1 = 0;
+    piVar2 = __errno();
+    *piVar2 = 0x16;
+    __invalid_parameter(0,0,0,0,0);
+    iVar4 = 0x16;
+  }
+  else {
+    DVar3 = GetFileAttributesW(_Filename);
+    if (DVar3 == 0xffffffff) {
+      DVar3 = GetLastError();
+      __dosmaperr(DVar3);
+    }
+    else {
+      if ((((DVar3 & 0x10) != 0) || ((DVar3 & 1) == 0)) || ((_AccessMode & 2U) == 0)) {
+        return 0;
+      }
+      puVar1 = ___doserrno();
+      *puVar1 = 5;
+      piVar2 = __errno();
+      *piVar2 = 0xd;
+    }
+    piVar2 = __errno();
+    iVar4 = *piVar2;
+  }
+  return iVar4;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006381fc : MOV EDI,EDI
+006381fe : PUSH EBP
+006381ff : MOV EBP,ESP
+00638201 : PUSH ESI
+00638202 : XOR ESI,ESI
+00638204 : CMP dword ptr [EBP + 0x8],ESI
+00638207 : JNZ 0x0063822d
+00638209 : CALL 0x0063ab95
+0063820e : MOV dword ptr [EAX],ESI
+00638210 : CALL 0x0063ab82
+00638215 : PUSH ESI
+00638216 : PUSH ESI
+00638217 : PUSH ESI
+00638218 : PUSH ESI
+00638219 : PUSH ESI
+0063821a : MOV dword ptr [EAX],0x16
+00638220 : CALL 0x006372b8
+00638225 : ADD ESP,0x14
+00638228 : PUSH 0x16
+0063822a : POP EAX
+0063822b : JMP 0x00638282
+0063822d : TEST dword ptr [EBP + 0xc],0xfffffff9
+00638234 : JNZ 0x00638209
+00638236 : PUSH dword ptr [EBP + 0x8]
+00638239 : CALL dword ptr [0x00b85120]
+0063823f : CMP EAX,-0x1
+00638242 : JNZ 0x0063825a
+00638244 : CALL dword ptr [0x00b85128]
+0063824a : PUSH EAX
+0063824b : CALL 0x0063aba8
+00638250 : POP ECX
+00638251 : CALL 0x0063ab82
+00638256 : MOV EAX,dword ptr [EAX]
+00638258 : JMP 0x00638282
+0063825a : TEST AL,0x10
+0063825c : JNZ 0x00638280
+0063825e : TEST AL,0x1
+00638260 : JZ 0x00638280
+00638262 : TEST byte ptr [EBP + 0xc],0x2
+00638266 : JZ 0x00638280
+00638268 : CALL 0x0063ab95
+0063826d : MOV dword ptr [EAX],0x5
+00638273 : CALL 0x0063ab82
+00638278 : MOV dword ptr [EAX],0xd
+0063827e : JMP 0x00638251
+00638280 : XOR EAX,EAX
+00638282 : POP ESI
+00638283 : POP EBP
+00638284 : RET

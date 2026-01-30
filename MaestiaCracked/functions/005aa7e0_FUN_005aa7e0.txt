@@ -1,0 +1,57 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005aa7e0
+ENTRY    : 005aa7e0
+BODY     : [[005aa7e0, 005aa847]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+uint FUN_005aa7e0(uint param_1)
+
+{
+  if ((param_1 & 0xffff) == 0xffff) {
+    if ((param_1 & 0xffffff) == 0xffffff) {
+      return (byte)(&DAT_00b954c8)[param_1 >> 0x18] + 0x18;
+    }
+    return (byte)(&DAT_00b954c8)[param_1 >> 0x10 & 0xff] + 0x10;
+  }
+  if ((param_1 & 0xff) == 0xff) {
+    return (byte)(&DAT_00b954c8)[param_1 >> 8 & 0xff] + 8;
+  }
+  return (uint)(byte)(&DAT_00b954c8)[param_1 & 0xff];
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005aa7e0 : MOV EAX,dword ptr [ESP + 0x4]
+005aa7e4 : MOVZX ECX,AX
+005aa7e7 : CMP ECX,0xffff
+005aa7ed : JZ 0x005aa817
+005aa7ef : MOV ECX,EAX
+005aa7f1 : AND ECX,0xff
+005aa7f7 : CMP ECX,0xff
+005aa7fd : JNZ 0x005aa80f
+005aa7ff : SHR EAX,0x8
+005aa802 : AND EAX,ECX
+005aa804 : MOVZX EAX,byte ptr [EAX + 0xb954c8]
+005aa80b : ADD EAX,0x8
+005aa80e : RET
+005aa80f : MOVZX EAX,byte ptr [ECX + 0xb954c8]
+005aa816 : RET
+005aa817 : MOV EDX,EAX
+005aa819 : AND EDX,0xffffff
+005aa81f : CMP EDX,0xffffff
+005aa825 : JNZ 0x005aa835
+005aa827 : SHR EAX,0x18
+005aa82a : MOVZX EAX,byte ptr [EAX + 0xb954c8]
+005aa831 : ADD EAX,0x18
+005aa834 : RET
+005aa835 : SHR EAX,0x10
+005aa838 : AND EAX,0xff
+005aa83d : MOVZX EAX,byte ptr [EAX + 0xb954c8]
+005aa844 : ADD EAX,0x10
+005aa847 : RET

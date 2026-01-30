@@ -1,0 +1,97 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00475100
+ENTRY    : 00475100
+BODY     : [[00475100, 0047517c]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+void FUN_00475100(int *param_1)
+
+{
+  uint *_Memory;
+  undefined4 *puVar1;
+  uint uVar2;
+  
+  puVar1 = (undefined4 *)*param_1;
+  if ((puVar1 != (undefined4 *)0x0) && (_Memory = puVar1 + -1, _Memory != (uint *)0x0)) {
+    _DAT_00da98cc = _DAT_00da98cc + *_Memory * -0x108 + -4;
+    uVar2 = 0;
+    if (*_Memory != 0) {
+      do {
+        (**(code **)*puVar1)(0);
+        uVar2 = uVar2 + 1;
+        puVar1 = puVar1 + 0x42;
+      } while (uVar2 < *_Memory);
+    }
+    if (DAT_00da98c8 != (int *)0x0) {
+      (**(code **)(*DAT_00da98c8 + 8))();
+      *param_1 = 0;
+      return;
+    }
+    _free(_Memory);
+    *param_1 = 0;
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00475100 : PUSH EBP
+00475101 : MOV EBP,ESP
+00475103 : MOV EAX,dword ptr [EBP + 0x8]
+00475106 : PUSH ESI
+00475107 : MOV ESI,dword ptr [EAX]
+00475109 : TEST ESI,ESI
+0047510b : JZ 0x0047517a
+0047510d : PUSH EBX
+0047510e : LEA EBX,[ESI + -0x4]
+00475111 : TEST EBX,EBX
+00475113 : JZ 0x00475179
+00475115 : MOV EAX,dword ptr [EBX]
+00475117 : MOV ECX,EAX
+00475119 : IMUL ECX,ECX,0x108
+0047511f : MOV EDX,0xfffffffc
+00475124 : SUB EDX,ECX
+00475126 : ADD dword ptr [0x00da98cc],EDX
+0047512c : PUSH EDI
+0047512d : XOR EDI,EDI
+0047512f : TEST EAX,EAX
+00475131 : JBE 0x00475148
+00475133 : MOV EAX,dword ptr [ESI]
+00475135 : MOV EDX,dword ptr [EAX]
+00475137 : PUSH 0x0
+00475139 : MOV ECX,ESI
+0047513b : CALL EDX
+0047513d : INC EDI
+0047513e : ADD ESI,0x108
+00475144 : CMP EDI,dword ptr [EBX]
+00475146 : JC 0x00475133
+00475148 : MOV ECX,dword ptr [0x00da98c8]
+0047514e : POP EDI
+0047514f : PUSH EBX
+00475150 : TEST ECX,ECX
+00475152 : JZ 0x00475168
+00475154 : MOV EAX,dword ptr [ECX]
+00475156 : MOV EDX,dword ptr [EAX + 0x8]
+00475159 : CALL EDX
+0047515b : MOV EAX,dword ptr [EBP + 0x8]
+0047515e : POP EBX
+0047515f : MOV dword ptr [EAX],0x0
+00475165 : POP ESI
+00475166 : POP EBP
+00475167 : RET
+00475168 : CALL 0x0063610d
+0047516d : MOV EAX,dword ptr [EBP + 0x8]
+00475170 : ADD ESP,0x4
+00475173 : MOV dword ptr [EAX],0x0
+00475179 : POP EBX
+0047517a : POP ESI
+0047517b : POP EBP
+0047517c : RET

@@ -1,0 +1,131 @@
+🧭 1) Absolute Core-Funktionen (MUSS man haben)
+
+Das sind die wichtigsten Netzwerkfunktionen, die du schon gefunden hast:
+
+🔥 Send / Buffer / Crypto Pipeline
+FUN_006f3840   // AvSocket::SendNormal (len, packet)
+FUN_006f3540   // SendBuffer (Queue / Fragmentation)
+FUN_006f4b40   // AddToSendBuffer
+FUN_006f2dc0   // DoSend (wahrscheinlich WSASend / send)
+FUN_006f4510   // Alternative buffer path
+
+🔥 Client → Server Gateway
+FUN_00a0dd40   // SendToServer (Wrapper vor SendNormal)
+
+
+👉 Diese Funktion ist GOLD, weil hier packet[2]/packet[3] geprüft werden.
+
+🧠 2) Packet Dispatcher / Message Router
+
+Das sind die Funktionen, die bestimmen, was ein Packet bedeutet:
+
+🔥 Incoming packet handling (Client side)
+
+Suche und exportiere:
+
+FUN_006f4590   // TLS Packet Buffer Selector (ThreadLocal)
+FUN_0080fe80
+FUN_0080c690
+FUN_00830340
+FUN_00839b90
+FUN_00842dd0
+FUN_00844270
+FUN_00844350
+FUN_008444f0
+FUN_008449d0
+FUN_00845e70
+FUN_00850b80
+FUN_00850c50
+FUN_00850d50
+FUN_00850e40
+
+
+💡 Warum?
+Diese benutzen alle:
+
+LEA EAX,[TLS + 0x122cb8 + index*0x2000]
+
+
+👉 Das ist der Packet Working Buffer / Message Builder.
+
+🧩 3) Game State / Heartbeat / Keepalive
+🔥 Periodic / heartbeat logic
+FUN_00820070   // Tick / heartbeat sender
+FUN_0081e8e0   // Probably send periodic packets
+
+
+👉 Hier entstehen Packettypen wie:
+
+0x33 0x03
+
+🚪 4) Connection / Login / Handshake
+🔥 OnConnected / Hello / Login
+FUN_00a0d860   // AvaMsgCltSockEvt::OnConnected
+FUN_00b02c80   // AvaCltSockEvt::OnConnected
+FUN_00412920   // Socket attach?
+FUN_00412890   // Session ID?
+FUN_004127f0   // Timestamp / nonce?
+
+
+👉 Hier entstehen:
+
+SPK_HELO_RQ_ASK
+RSA handshake
+
+🧍 5) Character / Zone / Gameplay entry
+🔥 Character selection / zone join
+FUN_008201d0
+FUN_00823100
+FUN_00a2cd00
+FUN_00a2da20
+FUN_00a44630
+
+
+👉 Diese hängen mit:
+
+CharSelect
+
+ZoneEnter
+
+World sync
+zusammen.
+
+🧨 6) Exit / Logout / Disconnect
+🔥 Exit logic
+FUN_00820000   // RequestExitGame
+FUN_00a0cfe0
+FUN_00a0ce50
+FUN_00a0d4b0
+
+
+👉 Hier entstehen Exit-Packete:
+
+0x02 0x0A
+0x02 0x0E
+0x02 0x2B
+
+🧬 7) Packet-Type Detection (MOST IMPORTANT)
+
+Wenn du Packettypen bauen willst, exportiere ALLE Funktionen mit:
+
+Pattern A (Goldmine)
+
+Suche in Ghidra nach:
+
+packet[2]
+packet[3]
+
+
+oder ASM:
+
+CMP byte ptr [?? + 2]
+CMP byte ptr [?? + 3]
+
+
+Die wichtigsten Kandidaten hast du schon:
+
+FUN_00a0dd40
+FUN_00820070
+FUN_00830340
+FUN_00845e70
+FUN_00850e40

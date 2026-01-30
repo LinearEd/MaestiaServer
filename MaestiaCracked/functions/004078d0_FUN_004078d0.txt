@@ -1,0 +1,60 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_004078d0
+ENTRY    : 004078d0
+BODY     : [[004078d0, 004078e9] [004078f0, 00407910]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_004078d0(undefined8 *param_1,undefined8 *param_2)
+
+{
+  undefined8 *puVar1;
+  undefined4 *in_EAX;
+  int unaff_EDI;
+  
+  *in_EAX = param_1;
+  if (param_1 != param_2) {
+    puVar1 = *(undefined8 **)(unaff_EDI + 8);
+    for (; param_2 != puVar1; param_2 = (undefined8 *)((int)param_2 + 0xc)) {
+      *param_1 = *param_2;
+      *(undefined4 *)(param_1 + 1) = *(undefined4 *)(param_2 + 1);
+      param_1 = (undefined8 *)((int)param_1 + 0xc);
+    }
+    *(undefined8 **)(unaff_EDI + 8) = param_1;
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+004078d0 : PUSH EBP
+004078d1 : MOV EBP,ESP
+004078d3 : MOV EDX,dword ptr [EBP + 0x8]
+004078d6 : MOV ECX,dword ptr [EBP + 0xc]
+004078d9 : MOV dword ptr [EAX],EDX
+004078db : CMP EDX,ECX
+004078dd : JZ 0x0040790d
+004078df : PUSH ESI
+004078e0 : MOV ESI,dword ptr [EDI + 0x8]
+004078e3 : CMP ECX,ESI
+004078e5 : JZ 0x00407909
+004078e7 : PUSH EBX
+004078e8 : JMP 0x004078f0
+004078f0 : MOVQ XMM0,qword ptr [ECX]
+004078f4 : MOVQ qword ptr [EDX],XMM0
+004078f8 : MOV EBX,dword ptr [ECX + 0x8]
+004078fb : MOV dword ptr [EDX + 0x8],EBX
+004078fe : ADD ECX,0xc
+00407901 : ADD EDX,0xc
+00407904 : CMP ECX,ESI
+00407906 : JNZ 0x004078f0
+00407908 : POP EBX
+00407909 : MOV dword ptr [EDI + 0x8],EDX
+0040790c : POP ESI
+0040790d : POP EBP
+0040790e : RET 0x8

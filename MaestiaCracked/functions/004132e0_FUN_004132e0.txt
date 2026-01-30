@@ -1,0 +1,92 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_004132e0
+ENTRY    : 004132e0
+BODY     : [[004132e0, 0041334a]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_004132e0(int param_1,uint param_2,undefined2 param_3)
+
+{
+  int iVar1;
+  int in_ECX;
+  uint uVar2;
+  undefined4 *puVar3;
+  
+  if (param_2 != 1) {
+    if (*(uint *)(in_ECX + 0x18) < 8) {
+      iVar1 = in_ECX + 4;
+    }
+    else {
+      iVar1 = *(int *)(in_ECX + 4);
+    }
+    if (param_2 != 0) {
+      puVar3 = (undefined4 *)(iVar1 + param_1 * 2);
+      for (uVar2 = param_2 >> 1; uVar2 != 0; uVar2 = uVar2 - 1) {
+        *puVar3 = CONCAT22(param_3,param_3);
+        puVar3 = puVar3 + 1;
+      }
+      for (uVar2 = (uint)((param_2 & 1) != 0); uVar2 != 0; uVar2 = uVar2 - 1) {
+        *(undefined2 *)puVar3 = param_3;
+        puVar3 = (undefined4 *)((int)puVar3 + 2);
+      }
+    }
+    return;
+  }
+  if (7 < *(uint *)(in_ECX + 0x18)) {
+    *(undefined2 *)(*(int *)(in_ECX + 4) + param_1 * 2) = param_3;
+    return;
+  }
+  *(undefined2 *)(in_ECX + 4 + param_1 * 2) = param_3;
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+004132e0 : PUSH EBP
+004132e1 : MOV EBP,ESP
+004132e3 : MOV EAX,ECX
+004132e5 : MOV ECX,dword ptr [EBP + 0xc]
+004132e8 : CMP ECX,0x1
+004132eb : JNZ 0x00413317
+004132ed : CMP dword ptr [EAX + 0x18],0x8
+004132f1 : JC 0x00413305
+004132f3 : MOV EAX,dword ptr [EAX + 0x4]
+004132f6 : MOV ECX,dword ptr [EBP + 0x8]
+004132f9 : MOV DX,word ptr [EBP + 0x10]
+004132fd : MOV word ptr [EAX + ECX*0x2],DX
+00413301 : POP EBP
+00413302 : RET 0xc
+00413305 : MOV ECX,dword ptr [EBP + 0x8]
+00413308 : MOV DX,word ptr [EBP + 0x10]
+0041330c : ADD EAX,0x4
+0041330f : MOV word ptr [EAX + ECX*0x2],DX
+00413313 : POP EBP
+00413314 : RET 0xc
+00413317 : CMP dword ptr [EAX + 0x18],0x8
+0041331b : JC 0x00413322
+0041331d : MOV EAX,dword ptr [EAX + 0x4]
+00413320 : JMP 0x00413325
+00413322 : ADD EAX,0x4
+00413325 : MOV EDX,dword ptr [EBP + 0x8]
+00413328 : PUSH EDI
+00413329 : LEA EDI,[EAX + EDX*0x2]
+0041332c : TEST ECX,ECX
+0041332e : JBE 0x00413346
+00413330 : MOV EAX,dword ptr [EBP + 0x10]
+00413333 : MOVZX EDX,AX
+00413336 : MOV EAX,EDX
+00413338 : SHL EDX,0x10
+0041333b : OR EAX,EDX
+0041333d : SHR ECX,0x1
+0041333f : STOSD.REP ES:EDI
+00413341 : ADC ECX,ECX
+00413343 : STOSW.REP ES:EDI
+00413346 : POP EDI
+00413347 : POP EBP
+00413348 : RET 0xc

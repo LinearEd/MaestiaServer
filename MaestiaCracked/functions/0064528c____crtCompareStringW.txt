@@ -1,0 +1,111 @@
+PROGRAM  : Maestia.exe
+FUNCTION : ___crtCompareStringW
+ENTRY    : 0064528c
+BODY     : [[0064528c, 00645307]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    ___crtCompareStringW
+   
+   Library: Visual Studio 2008 Release */
+
+int __cdecl
+___crtCompareStringW
+          (LPCWSTR _LocaleName,DWORD _DwCmpFlags,LPCWSTR _LpString1,int _CchCount1,
+          LPCWSTR _LpString2,int _CchCount2)
+
+{
+  int iVar1;
+  wchar_t *extraout_EDX;
+  int unaff_ESI;
+  wchar_t *in_stack_0000001c;
+  _LocaleUpdate local_14 [8];
+  int local_c;
+  char local_8;
+  
+  _LocaleUpdate::_LocaleUpdate(local_14,(localeinfo_struct *)_LocaleName);
+  if (0 < (int)_LpString2) {
+    _LpString2 = (LPCWSTR)wcsncnt(_LpString2,unaff_ESI);
+    in_stack_0000001c = extraout_EDX;
+  }
+  if (0 < (int)in_stack_0000001c) {
+    in_stack_0000001c = (wchar_t *)wcsncnt(in_stack_0000001c,unaff_ESI);
+  }
+  if ((_LpString2 == (wchar_t *)0x0) || (in_stack_0000001c == (wchar_t *)0x0)) {
+    if (_LpString2 == in_stack_0000001c) {
+      iVar1 = 2;
+    }
+    else {
+      iVar1 = (uint)(-1 < (int)_LpString2 - (int)in_stack_0000001c) * 2 + 1;
+    }
+  }
+  else {
+    iVar1 = CompareStringW(_DwCmpFlags,(DWORD)_LpString1,(PCNZWCH)_CchCount1,(int)_LpString2,
+                           (PCNZWCH)_CchCount2,(int)in_stack_0000001c);
+  }
+  if (local_8 != '\0') {
+    *(uint *)(local_c + 0x70) = *(uint *)(local_c + 0x70) & 0xfffffffd;
+  }
+  return iVar1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0064528c : MOV EDI,EDI
+0064528e : PUSH EBP
+0064528f : MOV EBP,ESP
+00645291 : SUB ESP,0x10
+00645294 : PUSH ESI
+00645295 : PUSH dword ptr [EBP + 0x8]
+00645298 : LEA ECX,[EBP + -0x10]
+0064529b : CALL 0x00637880
+006452a0 : MOV ESI,dword ptr [EBP + 0x18]
+006452a3 : MOV EDX,dword ptr [EBP + 0x20]
+006452a6 : TEST ESI,ESI
+006452a8 : JLE 0x006452b6
+006452aa : MOV EAX,dword ptr [EBP + 0x14]
+006452ad : PUSH ESI
+006452ae : CALL 0x0064526c
+006452b3 : POP ECX
+006452b4 : MOV ESI,EAX
+006452b6 : TEST EDX,EDX
+006452b8 : JLE 0x006452c6
+006452ba : MOV EAX,dword ptr [EBP + 0x1c]
+006452bd : PUSH EDX
+006452be : CALL 0x0064526c
+006452c3 : POP ECX
+006452c4 : MOV EDX,EAX
+006452c6 : TEST ESI,ESI
+006452c8 : JZ 0x006452e4
+006452ca : TEST EDX,EDX
+006452cc : JZ 0x006452e4
+006452ce : PUSH EDX
+006452cf : PUSH dword ptr [EBP + 0x1c]
+006452d2 : PUSH ESI
+006452d3 : PUSH dword ptr [EBP + 0x14]
+006452d6 : PUSH dword ptr [EBP + 0x10]
+006452d9 : PUSH dword ptr [EBP + 0xc]
+006452dc : CALL dword ptr [0x00b85284]
+006452e2 : JMP 0x006452f8
+006452e4 : SUB ESI,EDX
+006452e6 : JNZ 0x006452ed
+006452e8 : PUSH 0x2
+006452ea : POP EAX
+006452eb : JMP 0x006452f8
+006452ed : XOR EAX,EAX
+006452ef : TEST ESI,ESI
+006452f1 : SETGE AL
+006452f4 : LEA EAX,[EAX + EAX*0x1 + 0x1]
+006452f8 : CMP byte ptr [EBP + -0x4],0x0
+006452fc : POP ESI
+006452fd : JZ 0x00645306
+006452ff : MOV ECX,dword ptr [EBP + -0x8]
+00645302 : AND dword ptr [ECX + 0x70],0xfffffffd
+00645306 : LEAVE
+00645307 : RET

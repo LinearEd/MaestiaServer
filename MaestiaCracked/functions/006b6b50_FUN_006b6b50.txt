@@ -1,0 +1,59 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_006b6b50
+ENTRY    : 006b6b50
+BODY     : [[006b6b50, 006b6b90]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_006b6b50(void)
+
+{
+  int in_EAX;
+  byte *pbVar1;
+  byte bVar2;
+  ushort *in_ECX;
+  
+  if (*in_ECX < *(ushort *)(in_EAX + 0x2c)) {
+    bVar2 = 0xff;
+    if (*(short *)(in_EAX + 0x12a) != 0) {
+      bVar2 = 0xf7;
+    }
+    if (*(short *)(in_EAX + 300) != 0) {
+      bVar2 = bVar2 & 0xef;
+    }
+    pbVar1 = (byte *)(*(int *)(in_EAX + 0x3c) + (uint)*in_ECX);
+    *pbVar1 = *pbVar1 & bVar2;
+  }
+  else if (*(char *)(in_EAX + 0x231) != '\0') {
+    *(undefined4 *)(in_EAX + 0xc) = 0x86;
+    return;
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006b6b50 : MOVZX EDX,word ptr [ECX]
+006b6b53 : CMP DX,word ptr [EAX + 0x2c]
+006b6b57 : JC 0x006b6b6a
+006b6b59 : CMP byte ptr [EAX + 0x231],0x0
+006b6b60 : JZ 0x006b6b90
+006b6b62 : MOV dword ptr [EAX + 0xc],0x86
+006b6b69 : RET
+006b6b6a : OR CL,0xff
+006b6b6d : CMP word ptr [EAX + 0x12a],0x0
+006b6b75 : JZ 0x006b6b79
+006b6b77 : MOV CL,0xf7
+006b6b79 : CMP word ptr [EAX + 0x12c],0x0
+006b6b81 : JZ 0x006b6b86
+006b6b83 : AND CL,0xef
+006b6b86 : MOV EAX,dword ptr [EAX + 0x3c]
+006b6b89 : MOVZX EDX,DX
+006b6b8c : ADD EAX,EDX
+006b6b8e : AND byte ptr [EAX],CL
+006b6b90 : RET

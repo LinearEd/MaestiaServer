@@ -1,0 +1,96 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00513f20
+ENTRY    : 00513f20
+BODY     : [[00513f20, 00513f91]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined4 FUN_00513f20(undefined4 param_1,int *param_2,int param_3)
+
+{
+  GRefCountNTSImpl *this;
+  int iVar1;
+  undefined4 uVar2;
+  
+  if (param_2 == (int *)0x0) {
+LAB_00513f3c:
+    if (param_3 != 0) {
+      FUN_005134e0(param_3 + 0xc,
+                   "Could not load user image \"%s\" - GFxImageLoader failed or not specified\n",
+                   param_1);
+    }
+    this = (GRefCountNTSImpl *)FUN_00513330();
+    if (this != (GRefCountNTSImpl *)0x0) goto LAB_00513f61;
+  }
+  else {
+    this = (GRefCountNTSImpl *)(**(code **)(*param_2 + 4))(param_1);
+    if (this == (GRefCountNTSImpl *)0x0) goto LAB_00513f3c;
+LAB_00513f61:
+    iVar1 = FUN_00515840(0x1c,0);
+    if (iVar1 != 0) {
+      uVar2 = FUN_00513610(this,1);
+      goto LAB_00513f82;
+    }
+  }
+  uVar2 = 0;
+LAB_00513f82:
+  if (this != (GRefCountNTSImpl *)0x0) {
+    GRefCountNTSImpl::Release(this);
+  }
+  return uVar2;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00513f20 : MOV ECX,dword ptr [ESP + 0x8]
+00513f24 : PUSH ESI
+00513f25 : PUSH EDI
+00513f26 : MOV EDI,dword ptr [ESP + 0xc]
+00513f2a : TEST ECX,ECX
+00513f2c : JZ 0x00513f3c
+00513f2e : MOV EAX,dword ptr [ECX]
+00513f30 : MOV EDX,dword ptr [EAX + 0x4]
+00513f33 : PUSH EDI
+00513f34 : CALL EDX
+00513f36 : MOV ESI,EAX
+00513f38 : TEST ESI,ESI
+00513f3a : JNZ 0x00513f61
+00513f3c : MOV EAX,dword ptr [ESP + 0x14]
+00513f40 : TEST EAX,EAX
+00513f42 : JZ 0x00513f56
+00513f44 : PUSH EDI
+00513f45 : ADD EAX,0xc
+00513f48 : PUSH 0xb87020
+00513f4d : PUSH EAX
+00513f4e : CALL 0x005134e0
+00513f53 : ADD ESP,0xc
+00513f56 : CALL 0x00513330
+00513f5b : MOV ESI,EAX
+00513f5d : TEST ESI,ESI
+00513f5f : JZ 0x00513f80
+00513f61 : MOV ECX,dword ptr [ESP + 0x18]
+00513f65 : PUSH 0x0
+00513f67 : PUSH 0x1c
+00513f69 : CALL 0x00515840
+00513f6e : TEST EAX,EAX
+00513f70 : JZ 0x00513f80
+00513f72 : PUSH 0x1
+00513f74 : PUSH ESI
+00513f75 : MOV ECX,EAX
+00513f77 : CALL 0x00513610
+00513f7c : MOV EDI,EAX
+00513f7e : JMP 0x00513f82
+00513f80 : XOR EDI,EDI
+00513f82 : TEST ESI,ESI
+00513f84 : JZ 0x00513f8d
+00513f86 : MOV ECX,ESI
+00513f88 : CALL 0x004ff7c0
+00513f8d : MOV EAX,EDI
+00513f8f : POP EDI
+00513f90 : POP ESI
+00513f91 : RET

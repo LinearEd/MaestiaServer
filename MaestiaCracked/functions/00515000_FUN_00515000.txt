@@ -1,0 +1,70 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00515000
+ENTRY    : 00515000
+BODY     : [[00515000, 00515050]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+int FUN_00515000(int *param_1,int param_2)
+
+{
+  int iVar1;
+  int iVar2;
+  int *in_ECX;
+  int *piVar3;
+  
+  iVar1 = *in_ECX;
+  piVar3 = (int *)(iVar1 + 8 + param_2 * 0xc);
+  if ((*(int *)(iVar1 + 8 + param_2 * 0xc) != -2) && (iVar2 = param_2, piVar3[1] == param_2)) {
+    while ((piVar3[1] != param_2 || (*(int *)(piVar3[2] + 8) != *param_1))) {
+      iVar2 = *piVar3;
+      if (iVar2 == -1) {
+        return -1;
+      }
+      piVar3 = (int *)(iVar1 + 8 + iVar2 * 0xc);
+    }
+    return iVar2;
+  }
+  return -1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00515000 : MOV EDX,dword ptr [ESP + 0x8]
+00515004 : PUSH ESI
+00515005 : MOV ESI,dword ptr [ECX]
+00515007 : LEA ECX,[EDX + EDX*0x2]
+0051500a : CMP dword ptr [ESI + ECX*0x4 + 0x8],-0x2
+0051500f : LEA ECX,[ESI + ECX*0x4 + 0x8]
+00515013 : MOV EAX,EDX
+00515015 : JZ 0x0051504a
+00515017 : CMP dword ptr [ECX + 0x4],EDX
+0051501a : JNZ 0x0051504a
+0051501c : PUSH EDI
+0051501d : MOV EDI,dword ptr [ESP + 0xc]
+00515021 : PUSH EBX
+00515022 : CMP dword ptr [ECX + 0x4],EDX
+00515025 : JNZ 0x00515031
+00515027 : MOV EBX,dword ptr [ECX + 0x8]
+0051502a : MOV EBX,dword ptr [EBX + 0x8]
+0051502d : CMP EBX,dword ptr [EDI]
+0051502f : JZ 0x00515044
+00515031 : MOV EAX,dword ptr [ECX]
+00515033 : CMP EAX,-0x1
+00515036 : JZ 0x00515041
+00515038 : LEA ECX,[EAX + EAX*0x2]
+0051503b : LEA ECX,[ESI + ECX*0x4 + 0x8]
+0051503f : JMP 0x00515022
+00515041 : OR EAX,0xffffffff
+00515044 : POP EBX
+00515045 : POP EDI
+00515046 : POP ESI
+00515047 : RET 0x8
+0051504a : OR EAX,0xffffffff
+0051504d : POP ESI
+0051504e : RET 0x8

@@ -1,0 +1,166 @@
+PROGRAM  : Maestia.exe
+FUNCTION : Blend
+ENTRY    : 005f83c0
+BODY     : [[005f83c0, 005f8553]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* public: static class GColor __stdcall GColor::Blend(class GColor,class GColor,float) */
+
+undefined1 * GColor::Blend(undefined1 *param_1,uint param_2,uint param_3,float param_4)
+
+{
+  float fVar1;
+  uint uVar2;
+  
+                    /* 0x1f83c0  55  ?Blend@GColor@@SG?AV1@V1@0M@Z */
+  uVar2 = param_3;
+  fVar1 = (float)(param_2 >> 0x10 & 0xff);
+  param_3._0_1_ =
+       (undefined1)(int)ROUND(param_4 * ((float)(param_3 >> 0x10 & 0xff) - fVar1) + fVar1 + 0.5);
+  param_1[2] = (undefined1)param_3;
+  fVar1 = (float)(param_2 >> 8 & 0xff);
+  param_3._0_1_ =
+       (undefined1)(int)ROUND(fVar1 + param_4 * ((float)(uVar2 >> 8 & 0xff) - fVar1) + 0.5);
+  param_1[1] = (undefined1)param_3;
+  param_3._0_1_ =
+       (undefined1)
+       (int)ROUND((float)(param_2 & 0xff) +
+                  param_4 * ((float)(uVar2 & 0xff) - (float)(param_2 & 0xff)) + 0.5);
+  *param_1 = (undefined1)param_3;
+  param_3._0_1_ =
+       (undefined1)
+       (int)ROUND((float)(param_2 >> 0x18) +
+                  ((float)(uVar2 >> 0x18) - (float)(param_2 >> 0x18)) * param_4 + 0.5);
+  param_1[3] = (undefined1)param_3;
+  return param_1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005f83c0 : PUSH ECX
+005f83c1 : MOV ECX,dword ptr [ESP + 0xc]
+005f83c5 : MOV EAX,ECX
+005f83c7 : SHR EAX,0x10
+005f83ca : MOVZX EDX,AL
+005f83cd : MOV dword ptr [ESP + 0xc],EDX
+005f83d1 : MOV EDX,dword ptr [ESP + 0x10]
+005f83d5 : FILD dword ptr [ESP + 0xc]
+005f83d9 : MOV EAX,EDX
+005f83db : SHR EAX,0x10
+005f83de : MOVZX EAX,AL
+005f83e1 : FSTP float ptr [ESP]
+005f83e4 : MOV dword ptr [ESP + 0xc],EAX
+005f83e8 : PUSH ESI
+005f83e9 : FILD dword ptr [ESP + 0x10]
+005f83ed : MOV ESI,dword ptr [ESP + 0xc]
+005f83f1 : FLD float ptr [ESP + 0x4]
+005f83f5 : FLD ST0
+005f83f7 : FSUBP ST2,ST0
+005f83f9 : FLD float ptr [ESP + 0x18]
+005f83fd : FLD ST0
+005f83ff : FMULP ST3
+005f8401 : FXCH ST2
+005f8403 : FADDP
+005f8405 : FSTP float ptr [ESP + 0x10]
+005f8409 : FLD float ptr [ESP + 0x10]
+005f840d : FLD double ptr [0x00cdf120]
+005f8413 : FADD ST1,ST0
+005f8415 : FNSTCW word ptr [ESP + 0x10]
+005f8419 : MOVZX EAX,word ptr [ESP + 0x10]
+005f841e : OR EAX,0xc00
+005f8423 : FXCH
+005f8425 : MOV dword ptr [ESP + 0x14],EAX
+005f8429 : FLDCW word ptr [ESP + 0x14]
+005f842d : FISTP dword ptr [ESP + 0x14]
+005f8431 : MOVZX EAX,byte ptr [ESP + 0x14]
+005f8436 : MOV byte ptr [ESI + 0x2],AL
+005f8439 : MOV EAX,ECX
+005f843b : SHR EAX,0x8
+005f843e : FLDCW word ptr [ESP + 0x10]
+005f8442 : MOVZX EAX,AL
+005f8445 : MOV dword ptr [ESP + 0x10],EAX
+005f8449 : MOV EAX,EDX
+005f844b : SHR EAX,0x8
+005f844e : MOVZX EAX,AL
+005f8451 : FILD dword ptr [ESP + 0x10]
+005f8455 : MOV dword ptr [ESP + 0x10],EAX
+005f8459 : FSTP float ptr [ESP + 0x14]
+005f845d : FILD dword ptr [ESP + 0x10]
+005f8461 : FLD float ptr [ESP + 0x14]
+005f8465 : FLD ST0
+005f8467 : FSUBP ST2,ST0
+005f8469 : FLD ST3
+005f846b : FMULP ST2
+005f846d : FADDP
+005f846f : FSTP float ptr [ESP + 0x10]
+005f8473 : FLD float ptr [ESP + 0x10]
+005f8477 : FADD ST0,ST1
+005f8479 : FNSTCW word ptr [ESP + 0x10]
+005f847d : MOVZX EAX,word ptr [ESP + 0x10]
+005f8482 : OR EAX,0xc00
+005f8487 : MOV dword ptr [ESP + 0x14],EAX
+005f848b : FLDCW word ptr [ESP + 0x14]
+005f848f : FISTP dword ptr [ESP + 0x14]
+005f8493 : MOVZX EAX,byte ptr [ESP + 0x14]
+005f8498 : MOV byte ptr [ESI + 0x1],AL
+005f849b : MOVZX EAX,CL
+005f849e : FLDCW word ptr [ESP + 0x10]
+005f84a2 : MOV dword ptr [ESP + 0x10],EAX
+005f84a6 : MOVZX EAX,DL
+005f84a9 : FILD dword ptr [ESP + 0x10]
+005f84ad : MOV dword ptr [ESP + 0x10],EAX
+005f84b1 : FSTP float ptr [ESP + 0x14]
+005f84b5 : FILD dword ptr [ESP + 0x10]
+005f84b9 : FLD float ptr [ESP + 0x14]
+005f84bd : FLD ST0
+005f84bf : FSUBP ST2,ST0
+005f84c1 : FLD ST3
+005f84c3 : FMULP ST2
+005f84c5 : FADDP
+005f84c7 : FSTP float ptr [ESP + 0x10]
+005f84cb : FLD float ptr [ESP + 0x10]
+005f84cf : FADD ST0,ST1
+005f84d1 : SHR ECX,0x18
+005f84d4 : FNSTCW word ptr [ESP + 0x10]
+005f84d8 : MOVZX EAX,word ptr [ESP + 0x10]
+005f84dd : OR EAX,0xc00
+005f84e2 : MOV dword ptr [ESP + 0x14],EAX
+005f84e6 : SHR EDX,0x18
+005f84e9 : FLDCW word ptr [ESP + 0x14]
+005f84ed : FISTP dword ptr [ESP + 0x14]
+005f84f1 : MOVZX EAX,byte ptr [ESP + 0x14]
+005f84f6 : MOV byte ptr [ESI],AL
+005f84f8 : FLDCW word ptr [ESP + 0x10]
+005f84fc : MOV dword ptr [ESP + 0x10],ECX
+005f8500 : FILD dword ptr [ESP + 0x10]
+005f8504 : MOV dword ptr [ESP + 0x10],EDX
+005f8508 : FSTP float ptr [ESP + 0x14]
+005f850c : FILD dword ptr [ESP + 0x10]
+005f8510 : FLD float ptr [ESP + 0x14]
+005f8514 : FLD ST0
+005f8516 : FSUBP ST2,ST0
+005f8518 : FXCH
+005f851a : FMULP ST3
+005f851c : FADDP ST2,ST0
+005f851e : FXCH
+005f8520 : FSTP float ptr [ESP + 0x10]
+005f8524 : FADD float ptr [ESP + 0x10]
+005f8528 : FNSTCW word ptr [ESP + 0x10]
+005f852c : MOVZX EAX,word ptr [ESP + 0x10]
+005f8531 : OR EAX,0xc00
+005f8536 : MOV dword ptr [ESP + 0x14],EAX
+005f853a : MOV EAX,ESI
+005f853c : FLDCW word ptr [ESP + 0x14]
+005f8540 : FISTP dword ptr [ESP + 0x14]
+005f8544 : MOV CL,byte ptr [ESP + 0x14]
+005f8548 : MOV byte ptr [ESI + 0x3],CL
+005f854b : POP ESI
+005f854c : FLDCW word ptr [ESP + 0xc]
+005f8550 : POP ECX
+005f8551 : RET 0x10

@@ -1,0 +1,190 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00512f50
+ENTRY    : 00512f50
+BODY     : [[00512f50, 00513084]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+int * FUN_00512f50(int *param_1,int *param_2,int param_3,byte param_4,int *param_5)
+
+{
+  int *piVar1;
+  char cVar2;
+  undefined4 uVar3;
+  undefined1 *puStack_18;
+  
+  piVar1 = param_5;
+  if ((param_2 != (int *)0x0) &&
+     (((param_4 & 1) != 0 || (cVar2 = FUN_005a03f0(param_2), cVar2 == '\0')))) {
+    (**(code **)(*param_2 + 4))();
+  }
+  do {
+    if (piVar1 == (int *)0x0) {
+      if ((param_4 & 1) == 0) {
+        if ((param_4 & 2) == 0) {
+          return param_1;
+        }
+        uVar3 = 0x100;
+      }
+      else {
+        uVar3 = 0x200;
+      }
+      cVar2 = FUN_00561b00(uVar3);
+      if (cVar2 != '\0') {
+        return param_1;
+      }
+LAB_0051306a:
+      FUN_00524240();
+      return (int *)0x0;
+    }
+    if ((int *)*piVar1 == param_1) {
+      if (piVar1[1] == 0) {
+        return param_1;
+      }
+      if (*(int *)(param_3 + 0xc) != 0) {
+        FUN_0051b3b0(DAT_00d73250);
+        do {
+          uVar3 = (**(code **)(*(int *)*param_5 + 0x30))();
+          FUN_0051b5d0(uVar3,0xffffffff);
+          FUN_0051b4e0(10);
+          param_5 = (int *)param_5[1];
+        } while (param_5 != (int *)0x0);
+        uVar3 = (**(code **)(*param_1 + 0x30))();
+        FUN_0051b5d0(uVar3,0xffffffff);
+        FUN_0051b4e0(10);
+        if (puStack_18 == (undefined1 *)0x0) {
+          puStack_18 = &DAT_00cca874;
+        }
+        FUN_00500460(*(int *)(param_3 + 0xc) + 0xc,
+                     "Error: Recursive import detected. Import stack:\n%s",puStack_18);
+        FUN_0051b3d0();
+        FUN_00524240();
+        return (int *)0x0;
+      }
+      goto LAB_0051306a;
+    }
+    piVar1 = (int *)piVar1[1];
+  } while( true );
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00512f50 : SUB ESP,0x18
+00512f53 : PUSH EBX
+00512f54 : MOV BL,byte ptr [ESP + 0x2c]
+00512f58 : PUSH EBP
+00512f59 : MOV EBP,dword ptr [ESP + 0x2c]
+00512f5d : PUSH ESI
+00512f5e : MOV ESI,dword ptr [ESP + 0x2c]
+00512f62 : PUSH EDI
+00512f63 : TEST ESI,ESI
+00512f65 : JZ 0x00512f81
+00512f67 : TEST BL,0x1
+00512f6a : JNZ 0x00512f78
+00512f6c : PUSH ESI
+00512f6d : MOV ECX,EBP
+00512f6f : CALL 0x005a03f0
+00512f74 : TEST AL,AL
+00512f76 : JNZ 0x00512f81
+00512f78 : MOV EAX,dword ptr [ESI]
+00512f7a : MOV EDX,dword ptr [EAX + 0x4]
+00512f7d : MOV ECX,ESI
+00512f7f : CALL EDX
+00512f81 : MOV ESI,dword ptr [ESP + 0x3c]
+00512f85 : MOV EDI,dword ptr [ESP + 0x2c]
+00512f89 : MOV EAX,ESI
+00512f8b : TEST ESI,ESI
+00512f8d : JZ 0x00512f9b
+00512f8f : NOP
+00512f90 : CMP dword ptr [EAX],EDI
+00512f92 : JZ 0x00512fae
+00512f94 : MOV EAX,dword ptr [EAX + 0x4]
+00512f97 : TEST EAX,EAX
+00512f99 : JNZ 0x00512f90
+00512f9b : TEST BL,0x1
+00512f9e : JZ 0x00513054
+00512fa4 : PUSH 0x200
+00512fa9 : JMP 0x0051305e
+00512fae : CMP dword ptr [EAX + 0x4],0x0
+00512fb2 : JZ 0x0051307b
+00512fb8 : CMP dword ptr [EBP + 0xc],0x0
+00512fbc : JZ 0x0051306a
+00512fc2 : MOV EAX,[0x00d73250]
+00512fc7 : PUSH EAX
+00512fc8 : LEA ECX,[ESP + 0x14]
+00512fcc : CALL 0x0051b3b0
+00512fd1 : MOV ECX,dword ptr [ESI]
+00512fd3 : MOV EDX,dword ptr [ECX]
+00512fd5 : MOV EAX,dword ptr [EDX + 0x30]
+00512fd8 : CALL EAX
+00512fda : PUSH -0x1
+00512fdc : PUSH EAX
+00512fdd : LEA ECX,[ESP + 0x18]
+00512fe1 : CALL 0x0051b5d0
+00512fe6 : PUSH 0xa
+00512fe8 : LEA ECX,[ESP + 0x14]
+00512fec : CALL 0x0051b4e0
+00512ff1 : MOV ESI,dword ptr [ESI + 0x4]
+00512ff4 : TEST ESI,ESI
+00512ff6 : JNZ 0x00512fd1
+00512ff8 : MOV EDX,dword ptr [EDI]
+00512ffa : MOV EAX,dword ptr [EDX + 0x30]
+00512ffd : MOV ECX,EDI
+00512fff : CALL EAX
+00513001 : PUSH -0x1
+00513003 : PUSH EAX
+00513004 : LEA ECX,[ESP + 0x18]
+00513008 : CALL 0x0051b5d0
+0051300d : PUSH 0xa
+0051300f : LEA ECX,[ESP + 0x14]
+00513013 : CALL 0x0051b4e0
+00513018 : MOV EAX,dword ptr [ESP + 0x10]
+0051301c : TEST EAX,EAX
+0051301e : JNZ 0x00513025
+00513020 : MOV EAX,0xcca874
+00513025 : MOV ECX,dword ptr [EBP + 0xc]
+00513028 : PUSH EAX
+00513029 : ADD ECX,0xc
+0051302c : PUSH 0xb86d7c
+00513031 : PUSH ECX
+00513032 : CALL 0x00500460
+00513037 : ADD ESP,0xc
+0051303a : LEA ECX,[ESP + 0x10]
+0051303e : CALL 0x0051b3d0
+00513043 : MOV ECX,EDI
+00513045 : CALL 0x00524240
+0051304a : POP EDI
+0051304b : POP ESI
+0051304c : POP EBP
+0051304d : XOR EAX,EAX
+0051304f : POP EBX
+00513050 : ADD ESP,0x18
+00513053 : RET
+00513054 : TEST BL,0x2
+00513057 : JZ 0x0051307b
+00513059 : PUSH 0x100
+0051305e : MOV ECX,dword ptr [EDI + 0x1c]
+00513061 : CALL 0x00561b00
+00513066 : TEST AL,AL
+00513068 : JNZ 0x0051307b
+0051306a : MOV ECX,EDI
+0051306c : CALL 0x00524240
+00513071 : POP EDI
+00513072 : POP ESI
+00513073 : POP EBP
+00513074 : XOR EAX,EAX
+00513076 : POP EBX
+00513077 : ADD ESP,0x18
+0051307a : RET
+0051307b : MOV EAX,EDI
+0051307d : POP EDI
+0051307e : POP ESI
+0051307f : POP EBP
+00513080 : POP EBX
+00513081 : ADD ESP,0x18
+00513084 : RET

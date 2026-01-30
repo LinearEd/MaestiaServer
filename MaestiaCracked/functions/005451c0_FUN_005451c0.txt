@@ -1,0 +1,73 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005451c0
+ENTRY    : 005451c0
+BODY     : [[005451c0, 005451fd]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+uint FUN_005451c0(void)
+
+{
+  uint uVar1;
+  uint uVar2;
+  int in_ECX;
+  int iVar3;
+  
+  uVar1 = *(uint *)(*(int *)(in_ECX + 0xc) + 0x10);
+  uVar2 = 0;
+  if (uVar1 != 0) {
+    do {
+      if (uVar2 < uVar1) {
+        iVar3 = *(int *)(*(int *)(*(int *)(in_ECX + 0xc) + 0xc) + uVar2 * 4);
+      }
+      else {
+        iVar3 = 0;
+      }
+      if ((*(ushort *)(*(int *)(iVar3 + 0xc) + 0x16) & 0x600) != 0) {
+        return CONCAT31((int3)(uVar2 >> 8),1);
+      }
+      uVar2 = uVar2 + 1;
+    } while (uVar2 < uVar1);
+  }
+  return uVar2 & 0xffffff00;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005451c0 : MOV EDX,dword ptr [ECX + 0xc]
+005451c3 : PUSH EBX
+005451c4 : PUSH ESI
+005451c5 : MOV ESI,dword ptr [EDX + 0x10]
+005451c8 : XOR EAX,EAX
+005451ca : PUSH EDI
+005451cb : TEST ESI,ESI
+005451cd : JBE 0x005451f2
+005451cf : MOV EDI,ESI
+005451d1 : CMP EAX,EDI
+005451d3 : JNC 0x005451dd
+005451d5 : MOV ECX,dword ptr [EDX + 0xc]
+005451d8 : MOV ECX,dword ptr [ECX + EAX*0x4]
+005451db : JMP 0x005451df
+005451dd : XOR ECX,ECX
+005451df : MOV ECX,dword ptr [ECX + 0xc]
+005451e2 : MOV EBX,0x600
+005451e7 : TEST word ptr [ECX + 0x16],BX
+005451eb : JNZ 0x005451f8
+005451ed : INC EAX
+005451ee : CMP EAX,ESI
+005451f0 : JC 0x005451d1
+005451f2 : POP EDI
+005451f3 : POP ESI
+005451f4 : XOR AL,AL
+005451f6 : POP EBX
+005451f7 : RET
+005451f8 : POP EDI
+005451f9 : POP ESI
+005451fa : MOV AL,0x1
+005451fc : POP EBX
+005451fd : RET

@@ -1,0 +1,90 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00562f60
+ENTRY    : 00562f60
+BODY     : [[00562f60, 00562fb9]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00562f60(uint param_1)
+
+{
+  uint uVar1;
+  undefined4 *puVar2;
+  int *in_ECX;
+  int iVar3;
+  uint uVar4;
+  
+  uVar1 = in_ECX[1];
+  if (param_1 < uVar1) {
+    uVar4 = param_1;
+    if ((uint)in_ECX[2] >> 1 <= param_1) goto LAB_00562f91;
+  }
+  else {
+    if (param_1 < (uint)in_ECX[2]) goto LAB_00562f91;
+    uVar4 = (param_1 >> 2) + param_1;
+  }
+  FUN_00561ce0(in_ECX,uVar4);
+LAB_00562f91:
+  in_ECX[1] = param_1;
+  if (uVar1 < param_1) {
+    puVar2 = (undefined4 *)(*in_ECX + uVar1 * 8);
+    for (iVar3 = param_1 - uVar1; iVar3 != 0; iVar3 = iVar3 + -1) {
+      if (puVar2 != (undefined4 *)0x0) {
+        *puVar2 = 0;
+        puVar2[1] = 0;
+      }
+      puVar2 = puVar2 + 2;
+    }
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00562f60 : PUSH EBX
+00562f61 : PUSH ESI
+00562f62 : MOV ESI,dword ptr [ESP + 0xc]
+00562f66 : PUSH EDI
+00562f67 : MOV EDI,ECX
+00562f69 : MOV EBX,dword ptr [EDI + 0x4]
+00562f6c : CMP ESI,EBX
+00562f6e : JNC 0x00562f7c
+00562f70 : MOV EAX,dword ptr [EDI + 0x8]
+00562f73 : SHR EAX,0x1
+00562f75 : CMP ESI,EAX
+00562f77 : JNC 0x00562f91
+00562f79 : PUSH ESI
+00562f7a : JMP 0x00562f8b
+00562f7c : CMP ESI,dword ptr [EDI + 0x8]
+00562f7f : JC 0x00562f91
+00562f81 : MOV ECX,ESI
+00562f83 : SHR ECX,0x2
+00562f86 : ADD ECX,ESI
+00562f88 : PUSH ECX
+00562f89 : MOV ECX,EDI
+00562f8b : PUSH EDI
+00562f8c : CALL 0x00561ce0
+00562f91 : MOV dword ptr [EDI + 0x4],ESI
+00562f94 : CMP ESI,EBX
+00562f96 : JBE 0x00562fb4
+00562f98 : SUB ESI,EBX
+00562f9a : MOV EDX,dword ptr [EDI]
+00562f9c : LEA EAX,[EDX + EBX*0x8]
+00562f9f : JZ 0x00562fb4
+00562fa1 : XOR ECX,ECX
+00562fa3 : CMP EAX,ECX
+00562fa5 : JZ 0x00562fac
+00562fa7 : MOV dword ptr [EAX],ECX
+00562fa9 : MOV dword ptr [EAX + 0x4],ECX
+00562fac : ADD EAX,0x8
+00562faf : SUB ESI,0x1
+00562fb2 : JNZ 0x00562fa3
+00562fb4 : POP EDI
+00562fb5 : POP ESI
+00562fb6 : POP EBX
+00562fb7 : RET 0x4

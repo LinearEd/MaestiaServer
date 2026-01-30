@@ -1,0 +1,100 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0063b2c8
+ENTRY    : 0063b2c8
+BODY     : [[0063b2c8, 0063b37f]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+uint FUN_0063b2c8(int param_1,uint param_2)
+
+{
+  uint in_EAX;
+  uint uVar1;
+  bool in_ZF;
+  
+  if (in_ZF) {
+    if (((in_EAX & 0xfffff) != 0) || (param_1 != 0)) {
+      uVar1 = FUN_0065740c();
+      goto LAB_0063b361;
+    }
+    param_2 = 0;
+    uVar1 = in_EAX;
+  }
+  else {
+    uVar1 = param_2;
+    if ((((param_2 & 0x7ff00000) == 0) && ((param_2 & 0xfffff) == 0)) && (param_1 == 0)) {
+      uVar1 = 2;
+      goto LAB_0063b361;
+    }
+  }
+  if ((uVar1 & 0x80000000) == 0) {
+    if (DAT_00d7b7d8 != 0) {
+      return param_2;
+    }
+    uVar1 = __math_exit();
+    return uVar1;
+  }
+  uVar1 = 1;
+LAB_0063b361:
+  if (DAT_00d7b7d8 != 0) {
+    return uVar1;
+  }
+  uVar1 = __startOneArgErrorHandling();
+  return uVar1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0063b2c8 : PUSH EDX
+0063b2c9 : FSTCW word ptr [ESP]
+0063b2cd : JZ 0x0063b31b
+0063b2cf : MOV EAX,dword ptr [ESP + 0xc]
+0063b2d3 : CMP word ptr [ESP],0x27f
+0063b2d9 : JZ 0x0063b2e1
+0063b2db : FLDCW word ptr [0x00b9d388]
+0063b2e1 : TEST EAX,0x7ff00000
+0063b2e6 : JZ 0x0063b346
+0063b2e8 : TEST EAX,0x80000000
+0063b2ed : JNZ 0x0063b330
+0063b2ef : FLDLN2
+0063b2f1 : FXCH
+0063b2f3 : FYL2X
+0063b2f5 : CMP dword ptr [0x00d7b7d8],0x0
+0063b2fc : JNZ 0x0065747e
+0063b302 : LEA ECX,[0xd66f90]
+0063b308 : MOV EDX,0x1a
+0063b30d : JMP 0x0065748b
+0063b312 : TEST EAX,0x80000000
+0063b317 : JNZ 0x0063b330
+0063b319 : JMP 0x0063b2ef
+0063b31b : TEST EAX,0xfffff
+0063b320 : JNZ 0x0063b33f
+0063b322 : CMP dword ptr [ESP + 0x8],0x0
+0063b327 : JNZ 0x0063b33f
+0063b329 : AND EAX,0x80000000
+0063b32e : JZ 0x0063b2f5
+0063b330 : FSTP ST0
+0063b332 : FLD extended double ptr [0x00d67fc0]
+0063b338 : MOV EAX,0x1
+0063b33d : JMP 0x0063b361
+0063b33f : CALL 0x0065740c
+0063b344 : JMP 0x0063b361
+0063b346 : TEST EAX,0xfffff
+0063b34b : JNZ 0x0063b312
+0063b34d : CMP dword ptr [ESP + 0x8],0x0
+0063b352 : JNZ 0x0063b312
+0063b354 : FSTP ST0
+0063b356 : FLD extended double ptr [0x00d67f6a]
+0063b35c : MOV EAX,0x2
+0063b361 : CMP dword ptr [0x00d7b7d8],0x0
+0063b368 : JNZ 0x0065747e
+0063b36e : LEA ECX,[0xd66f90]
+0063b374 : MOV EDX,0x1a
+0063b379 : CALL 0x00657587
+0063b37e : POP EDX
+0063b37f : RET

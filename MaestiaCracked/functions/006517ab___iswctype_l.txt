@@ -1,0 +1,96 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __iswctype_l
+ENTRY    : 006517ab
+BODY     : [[006517ab, 00651834]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __iswctype_l
+   
+   Library: Visual Studio 2008 Release */
+
+int __cdecl __iswctype_l(wint_t _C,wctype_t _Type,_locale_t _Locale)
+
+{
+  int iVar1;
+  int local_18 [2];
+  int local_10;
+  char local_c;
+  ushort local_8 [2];
+  
+  if (_C == 0xffff) {
+    local_8[0] = 0;
+  }
+  else if (_C < 0x100) {
+    local_8[0] = *(ushort *)(PTR_DAT_00d673d8 + (uint)_C * 2) & _Type;
+  }
+  else {
+    _LocaleUpdate::_LocaleUpdate((_LocaleUpdate *)local_18,_Locale);
+    iVar1 = ___crtGetStringTypeW
+                      (local_18,1,&_C,1,local_8,*(undefined4 *)(local_18[0] + 4),
+                       *(undefined4 *)(local_18[0] + 0x14));
+    if (iVar1 == 0) {
+      local_8[0] = 0;
+    }
+    if (local_c != '\0') {
+      *(uint *)(local_10 + 0x70) = *(uint *)(local_10 + 0x70) & 0xfffffffd;
+    }
+  }
+  return (uint)(local_8[0] & _Type);
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006517ab : MOV EDI,EDI
+006517ad : PUSH EBP
+006517ae : MOV EBP,ESP
+006517b0 : MOV EAX,0xffff
+006517b5 : SUB ESP,0x14
+006517b8 : CMP word ptr [EBP + 0x8],AX
+006517bc : JNZ 0x006517c4
+006517be : AND dword ptr [EBP + -0x4],0x0
+006517c2 : JMP 0x00651829
+006517c4 : MOV EAX,0x100
+006517c9 : CMP word ptr [EBP + 0x8],AX
+006517cd : JNC 0x006517e9
+006517cf : MOVZX EAX,word ptr [EBP + 0x8]
+006517d3 : MOV ECX,dword ptr [0x00d673d8]
+006517d9 : MOV AX,word ptr [ECX + EAX*0x2]
+006517dd : AND AX,word ptr [EBP + 0xc]
+006517e1 : MOVZX EAX,AX
+006517e4 : MOV dword ptr [EBP + -0x4],EAX
+006517e7 : JMP 0x00651829
+006517e9 : PUSH dword ptr [EBP + 0x10]
+006517ec : LEA ECX,[EBP + -0x14]
+006517ef : CALL 0x00637880
+006517f4 : MOV EAX,dword ptr [EBP + -0x14]
+006517f7 : PUSH dword ptr [EAX + 0x14]
+006517fa : PUSH dword ptr [EAX + 0x4]
+006517fd : LEA EAX,[EBP + -0x4]
+00651800 : PUSH EAX
+00651801 : PUSH 0x1
+00651803 : LEA EAX,[EBP + 0x8]
+00651806 : PUSH EAX
+00651807 : LEA EAX,[EBP + -0x14]
+0065180a : PUSH 0x1
+0065180c : PUSH EAX
+0065180d : CALL 0x006451d7
+00651812 : ADD ESP,0x1c
+00651815 : TEST EAX,EAX
+00651817 : JNZ 0x0065181c
+00651819 : AND dword ptr [EBP + -0x4],EAX
+0065181c : CMP byte ptr [EBP + -0x8],0x0
+00651820 : JZ 0x00651829
+00651822 : MOV EAX,dword ptr [EBP + -0xc]
+00651825 : AND dword ptr [EAX + 0x70],0xfffffffd
+00651829 : MOVZX EAX,word ptr [EBP + -0x4]
+0065182d : MOVZX ECX,word ptr [EBP + 0xc]
+00651831 : AND EAX,ECX
+00651833 : LEAVE
+00651834 : RET

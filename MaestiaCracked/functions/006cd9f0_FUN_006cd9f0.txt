@@ -1,0 +1,127 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_006cd9f0
+ENTRY    : 006cd9f0
+BODY     : [[006cd9f0, 006cdaf3]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_006cd9f0(int param_1,int param_2,int param_3)
+
+{
+  undefined4 uVar1;
+  int local_8;
+  
+  if ((param_1 != 0) && (param_2 != 0)) {
+    if ((*(short *)(param_2 + 0x14) == 0) || (0x100 < *(ushort *)(param_2 + 0x14))) {
+      FUN_006c24c0(param_1,"Invalid palette size, hIST allocation skipped.");
+    }
+    else {
+      FUN_006ccba0(param_1,param_2,8,0);
+      uVar1 = FUN_006cef50(param_1,0x200);
+      *(undefined4 *)(param_1 + 500) = uVar1;
+      if (*(int *)(param_1 + 500) == 0) {
+        FUN_006c24c0(param_1,"Insufficient memory for hIST chunk data.");
+      }
+      else {
+        for (local_8 = 0; local_8 < (int)(uint)*(ushort *)(param_2 + 0x14); local_8 = local_8 + 1) {
+          *(undefined2 *)(*(int *)(param_1 + 500) + local_8 * 2) =
+               *(undefined2 *)(param_3 + local_8 * 2);
+        }
+        *(undefined4 *)(param_2 + 0x7c) = *(undefined4 *)(param_1 + 500);
+        *(uint *)(param_2 + 8) = *(uint *)(param_2 + 8) | 0x40;
+        *(uint *)(param_2 + 0xb8) = *(uint *)(param_2 + 0xb8) | 8;
+      }
+    }
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006cd9f0 : PUSH EBP
+006cd9f1 : MOV EBP,ESP
+006cd9f3 : PUSH ECX
+006cd9f4 : PUSH ESI
+006cd9f5 : CMP dword ptr [EBP + 0x8],0x0
+006cd9f9 : JZ 0x006cda01
+006cd9fb : CMP dword ptr [EBP + 0xc],0x0
+006cd9ff : JNZ 0x006cda06
+006cda01 : JMP 0x006cdaef
+006cda06 : MOV EAX,dword ptr [EBP + 0xc]
+006cda09 : MOVZX ECX,word ptr [EAX + 0x14]
+006cda0d : TEST ECX,ECX
+006cda0f : JLE 0x006cda1f
+006cda11 : MOV EDX,dword ptr [EBP + 0xc]
+006cda14 : MOVZX EAX,word ptr [EDX + 0x14]
+006cda18 : CMP EAX,0x100
+006cda1d : JLE 0x006cda35
+006cda1f : PUSH 0xbedc24
+006cda24 : MOV ECX,dword ptr [EBP + 0x8]
+006cda27 : PUSH ECX
+006cda28 : CALL 0x006c24c0
+006cda2d : ADD ESP,0x8
+006cda30 : JMP 0x006cdaef
+006cda35 : PUSH 0x0
+006cda37 : PUSH 0x8
+006cda39 : MOV EDX,dword ptr [EBP + 0xc]
+006cda3c : PUSH EDX
+006cda3d : MOV EAX,dword ptr [EBP + 0x8]
+006cda40 : PUSH EAX
+006cda41 : CALL 0x006ccba0
+006cda46 : ADD ESP,0x10
+006cda49 : PUSH 0x200
+006cda4e : MOV ECX,dword ptr [EBP + 0x8]
+006cda51 : PUSH ECX
+006cda52 : CALL 0x006cef50
+006cda57 : ADD ESP,0x8
+006cda5a : MOV EDX,dword ptr [EBP + 0x8]
+006cda5d : MOV dword ptr [EDX + 0x1f4],EAX
+006cda63 : MOV EAX,dword ptr [EBP + 0x8]
+006cda66 : CMP dword ptr [EAX + 0x1f4],0x0
+006cda6d : JNZ 0x006cda82
+006cda6f : PUSH 0xbedbf8
+006cda74 : MOV ECX,dword ptr [EBP + 0x8]
+006cda77 : PUSH ECX
+006cda78 : CALL 0x006c24c0
+006cda7d : ADD ESP,0x8
+006cda80 : JMP 0x006cdaef
+006cda82 : MOV dword ptr [EBP + -0x4],0x0
+006cda89 : JMP 0x006cda94
+006cda8b : MOV EDX,dword ptr [EBP + -0x4]
+006cda8e : ADD EDX,0x1
+006cda91 : MOV dword ptr [EBP + -0x4],EDX
+006cda94 : MOV EAX,dword ptr [EBP + 0xc]
+006cda97 : MOVZX ECX,word ptr [EAX + 0x14]
+006cda9b : CMP dword ptr [EBP + -0x4],ECX
+006cda9e : JGE 0x006cdabc
+006cdaa0 : MOV EDX,dword ptr [EBP + 0x8]
+006cdaa3 : MOV EAX,dword ptr [EDX + 0x1f4]
+006cdaa9 : MOV ECX,dword ptr [EBP + -0x4]
+006cdaac : MOV EDX,dword ptr [EBP + -0x4]
+006cdaaf : MOV ESI,dword ptr [EBP + 0x10]
+006cdab2 : MOV DX,word ptr [ESI + EDX*0x2]
+006cdab6 : MOV word ptr [EAX + ECX*0x2],DX
+006cdaba : JMP 0x006cda8b
+006cdabc : MOV EAX,dword ptr [EBP + 0xc]
+006cdabf : MOV ECX,dword ptr [EBP + 0x8]
+006cdac2 : MOV EDX,dword ptr [ECX + 0x1f4]
+006cdac8 : MOV dword ptr [EAX + 0x7c],EDX
+006cdacb : MOV EAX,dword ptr [EBP + 0xc]
+006cdace : MOV ECX,dword ptr [EAX + 0x8]
+006cdad1 : OR ECX,0x40
+006cdad4 : MOV EDX,dword ptr [EBP + 0xc]
+006cdad7 : MOV dword ptr [EDX + 0x8],ECX
+006cdada : MOV EAX,dword ptr [EBP + 0xc]
+006cdadd : MOV ECX,dword ptr [EAX + 0xb8]
+006cdae3 : OR ECX,0x8
+006cdae6 : MOV EDX,dword ptr [EBP + 0xc]
+006cdae9 : MOV dword ptr [EDX + 0xb8],ECX
+006cdaef : POP ESI
+006cdaf0 : MOV ESP,EBP
+006cdaf2 : POP EBP
+006cdaf3 : RET

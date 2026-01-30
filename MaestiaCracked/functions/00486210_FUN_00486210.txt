@@ -1,0 +1,117 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00486210
+ENTRY    : 00486210
+BODY     : [[00486210, 00486295]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00486210(int param_1,int param_2)
+
+{
+  float *pfVar1;
+  float fVar2;
+  int in_EAX;
+  int iVar3;
+  int iVar4;
+  int iVar5;
+  bool bVar6;
+  
+  iVar3 = 2;
+  iVar5 = 0;
+  bVar6 = in_EAX == 2;
+  iVar4 = iVar5;
+  if (2 < in_EAX) {
+    do {
+      fVar2 = *(float *)(*(int *)(param_1 + iVar3 * 4) + 4);
+      pfVar1 = (float *)(*(int *)(param_1 + -4 + iVar3 * 4) + 4);
+      iVar4 = iVar3;
+      if (*pfVar1 <= fVar2 && fVar2 != *pfVar1) {
+        iVar4 = iVar3 + -1;
+      }
+      *(undefined4 *)(param_1 + iVar5 * 4) = *(undefined4 *)(param_1 + iVar4 * 4);
+      iVar3 = iVar4 * 2 + 2;
+      bVar6 = iVar3 == in_EAX;
+      iVar5 = iVar4;
+    } while (iVar3 < in_EAX);
+  }
+  if (bVar6) {
+    *(undefined4 *)(param_1 + iVar4 * 4) = *(undefined4 *)(param_1 + -4 + in_EAX * 4);
+    iVar4 = in_EAX + -1;
+  }
+  if (0 < iVar4) {
+    fVar2 = *(float *)(param_2 + 4);
+    do {
+      iVar5 = (iVar4 + -1) / 2;
+      iVar3 = *(int *)(param_1 + iVar5 * 4);
+      if (*(float *)(iVar3 + 4) <= fVar2) break;
+      *(int *)(param_1 + iVar4 * 4) = iVar3;
+      iVar4 = iVar5;
+    } while (0 < iVar5);
+  }
+  *(int *)(param_1 + iVar4 * 4) = param_2;
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00486210 : PUSH EBP
+00486211 : MOV EBP,ESP
+00486213 : PUSH ESI
+00486214 : MOV ESI,EAX
+00486216 : MOV EAX,0x2
+0048621b : XOR ECX,ECX
+0048621d : CMP EAX,ESI
+0048621f : JGE 0x0048624b
+00486221 : PUSH EBX
+00486222 : PUSH EDI
+00486223 : MOV EDX,dword ptr [EBP + 0x8]
+00486226 : MOV EDI,dword ptr [EDX + EAX*0x4]
+00486229 : MOV EBX,dword ptr [EDX + EAX*0x4 + -0x4]
+0048622d : MOVSS XMM0,dword ptr [EDI + 0x4]
+00486232 : COMISS XMM0,dword ptr [EBX + 0x4]
+00486236 : JBE 0x00486239
+00486238 : DEC EAX
+00486239 : MOV EDI,dword ptr [EDX + EAX*0x4]
+0048623c : MOV dword ptr [EDX + ECX*0x4],EDI
+0048623f : MOV ECX,EAX
+00486241 : LEA EAX,[EAX + EAX*0x1 + 0x2]
+00486245 : CMP EAX,ESI
+00486247 : JL 0x00486223
+00486249 : POP EDI
+0048624a : POP EBX
+0048624b : JNZ 0x0048625a
+0048624d : MOV EAX,dword ptr [EBP + 0x8]
+00486250 : MOV EDX,dword ptr [EAX + ESI*0x4 + -0x4]
+00486254 : MOV dword ptr [EAX + ECX*0x4],EDX
+00486257 : LEA ECX,[ESI + -0x1]
+0048625a : MOV ESI,dword ptr [EBP + 0x8]
+0048625d : LEA EAX,[ECX + -0x1]
+00486260 : CDQ
+00486261 : SUB EAX,EDX
+00486263 : SAR EAX,0x1
+00486265 : TEST ECX,ECX
+00486267 : JLE 0x0048628d
+00486269 : MOV EDX,dword ptr [EBP + 0xc]
+0048626c : MOVSS XMM0,dword ptr [EDX + 0x4]
+00486271 : MOV EDX,dword ptr [ESI + EAX*0x4]
+00486274 : MOVSS XMM1,dword ptr [EDX + 0x4]
+00486279 : COMISS XMM1,XMM0
+0048627c : JBE 0x0048628d
+0048627e : MOV dword ptr [ESI + ECX*0x4],EDX
+00486281 : MOV ECX,EAX
+00486283 : DEC EAX
+00486284 : CDQ
+00486285 : SUB EAX,EDX
+00486287 : SAR EAX,0x1
+00486289 : TEST ECX,ECX
+0048628b : JG 0x00486271
+0048628d : MOV EAX,dword ptr [EBP + 0xc]
+00486290 : MOV dword ptr [ESI + ECX*0x4],EAX
+00486293 : POP ESI
+00486294 : POP EBP
+00486295 : RET

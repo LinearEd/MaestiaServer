@@ -1,0 +1,44 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_008a99c0
+ENTRY    : 008a99c0
+BODY     : [[008a99c0, 008a99e5]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_008a99c0(void)
+
+{
+  uint *puVar1;
+  int in_EAX;
+  uint in_ECX;
+  
+  puVar1 = (uint *)(in_EAX + 0x3c + (uint)*(ushort *)(in_EAX + 0x6c) * 4);
+  if ((*(uint *)(in_EAX + 0x3c + (uint)*(ushort *)(in_EAX + 0x6c) * 4) & in_ECX) == in_ECX) {
+    *puVar1 = *puVar1 & ~in_ECX;
+    FUN_008a96b0();
+    return;
+  }
+  *puVar1 = *puVar1 | in_ECX;
+  FUN_008a96b0();
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+008a99c0 : MOVZX EDX,word ptr [EAX + 0x6c]
+008a99c4 : MOV EDX,dword ptr [EAX + EDX*0x4 + 0x3c]
+008a99c8 : AND EDX,ECX
+008a99ca : CMP EDX,ECX
+008a99cc : MOVZX EDX,word ptr [EAX + 0x6c]
+008a99d0 : LEA EDX,[EAX + EDX*0x4 + 0x3c]
+008a99d4 : JNZ 0x008a99df
+008a99d6 : NOT ECX
+008a99d8 : AND dword ptr [EDX],ECX
+008a99da : JMP 0x008a96b0
+008a99df : OR dword ptr [EDX],ECX
+008a99e1 : JMP 0x008a96b0

@@ -1,0 +1,63 @@
+PROGRAM  : Maestia.exe
+FUNCTION : TryAcquire
+ENTRY    : 005179e0
+BODY     : [[005179e0, 00517a19]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* public: virtual bool __thiscall GSemaphore::TryAcquire(void) */
+
+bool __thiscall GSemaphore::TryAcquire(GSemaphore *this)
+
+{
+  GMutex *this_00;
+  
+                    /* 0x1179e0  161  ?TryAcquire@GSemaphore@@UAE_NXZ */
+  if (*(int *)(this + 4) < 1) {
+    return false;
+  }
+  this_00 = (GMutex *)(this + 0xc);
+  GMutex::Lock(this_00);
+  if (*(int *)(this + 8) + 1 <= *(int *)(this + 4)) {
+    *(int *)(this + 8) = *(int *)(this + 8) + 1;
+    GMutex::Unlock(this_00);
+    return true;
+  }
+  GMutex::Unlock(this_00);
+  return false;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005179e0 : PUSH ESI
+005179e1 : MOV ESI,ECX
+005179e3 : CMP dword ptr [ESI + 0x4],0x1
+005179e7 : JGE 0x005179ed
+005179e9 : XOR AL,AL
+005179eb : POP ESI
+005179ec : RET
+005179ed : PUSH EDI
+005179ee : LEA EDI,[ESI + 0xc]
+005179f1 : MOV ECX,EDI
+005179f3 : CALL 0x005162b0
+005179f8 : MOV EAX,dword ptr [ESI + 0x8]
+005179fb : INC EAX
+005179fc : CMP EAX,dword ptr [ESI + 0x4]
+005179ff : MOV ECX,EDI
+00517a01 : JG 0x00517a10
+00517a03 : INC dword ptr [ESI + 0x8]
+00517a06 : CALL 0x005170a0
+00517a0b : POP EDI
+00517a0c : MOV AL,0x1
+00517a0e : POP ESI
+00517a0f : RET
+00517a10 : CALL 0x005170a0
+00517a15 : POP EDI
+00517a16 : XOR AL,AL
+00517a18 : POP ESI
+00517a19 : RET

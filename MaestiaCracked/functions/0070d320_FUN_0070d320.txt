@@ -1,0 +1,93 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0070d320
+ENTRY    : 0070d320
+BODY     : [[0070d320, 0070d384]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_0070d320(undefined2 *param_1)
+
+{
+  short sVar1;
+  uint uVar2;
+  short *psVar3;
+  int in_ECX;
+  short *psVar4;
+  int iVar5;
+  
+  uVar2 = *(uint *)(in_ECX + 0x20);
+  if (uVar2 <= *(uint *)(in_ECX + 0x24)) {
+    *param_1 = 0;
+    return;
+  }
+  psVar4 = (short *)(*(int *)(in_ECX + 0x1c) + *(uint *)(in_ECX + 0x24));
+  psVar3 = psVar4;
+  do {
+    sVar1 = *psVar3;
+    psVar3 = psVar3 + 1;
+  } while (sVar1 != 0);
+  *(int *)(in_ECX + 0x24) = *(int *)(in_ECX + 0x24) + ((int)psVar3 - (int)(psVar4 + 1) >> 1) * 2 + 2
+  ;
+  if (uVar2 < *(uint *)(in_ECX + 0x24)) {
+    *(uint *)(in_ECX + 0x24) = uVar2;
+  }
+  iVar5 = (int)param_1 - (int)psVar4;
+  do {
+    sVar1 = *psVar4;
+    *(short *)(iVar5 + (int)psVar4) = sVar1;
+    psVar4 = psVar4 + 1;
+  } while (sVar1 != 0);
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0070d320 : PUSH EBP
+0070d321 : MOV EBP,ESP
+0070d323 : MOV EAX,dword ptr [ECX + 0x24]
+0070d326 : PUSH EBX
+0070d327 : MOV EBX,dword ptr [ECX + 0x20]
+0070d32a : CMP EAX,EBX
+0070d32c : JC 0x0070d33b
+0070d32e : MOV ECX,dword ptr [EBP + 0x8]
+0070d331 : XOR EAX,EAX
+0070d333 : MOV word ptr [ECX],AX
+0070d336 : POP EBX
+0070d337 : POP EBP
+0070d338 : RET 0x4
+0070d33b : MOV EDX,dword ptr [ECX + 0x1c]
+0070d33e : ADD EDX,EAX
+0070d340 : PUSH ESI
+0070d341 : MOV EAX,EDX
+0070d343 : LEA ESI,[EAX + 0x2]
+0070d346 : PUSH EDI
+0070d347 : MOV DI,word ptr [EAX]
+0070d34a : ADD EAX,0x2
+0070d34d : TEST DI,DI
+0070d350 : JNZ 0x0070d347
+0070d352 : SUB EAX,ESI
+0070d354 : SAR EAX,0x1
+0070d356 : LEA EAX,[EAX + EAX*0x1 + 0x2]
+0070d35a : ADD dword ptr [ECX + 0x24],EAX
+0070d35d : POP EDI
+0070d35e : CMP dword ptr [ECX + 0x24],EBX
+0070d361 : JBE 0x0070d366
+0070d363 : MOV dword ptr [ECX + 0x24],EBX
+0070d366 : MOV ESI,dword ptr [EBP + 0x8]
+0070d369 : MOV EAX,EDX
+0070d36b : SUB ESI,EDX
+0070d36d : LEA ECX,[ECX]
+0070d370 : MOVZX ECX,word ptr [EAX]
+0070d373 : MOV word ptr [ESI + EAX*0x1],CX
+0070d377 : ADD EAX,0x2
+0070d37a : TEST CX,CX
+0070d37d : JNZ 0x0070d370
+0070d37f : POP ESI
+0070d380 : POP EBX
+0070d381 : POP EBP
+0070d382 : RET 0x4

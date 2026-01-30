@@ -1,0 +1,101 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00403ac0
+ENTRY    : 00403ac0
+BODY     : [[00403ac0, 00403b35]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+uint FUN_00403ac0(byte *param_1,byte *param_2,uint param_3)
+
+{
+  int iVar1;
+  
+  for (; 3 < param_3; param_3 = param_3 - 4) {
+    if (*(int *)param_1 != *(int *)param_2) goto LAB_00403aeb;
+    param_2 = param_2 + 4;
+    param_1 = param_1 + 4;
+  }
+  if (param_3 == 0) {
+    return 0;
+  }
+LAB_00403aeb:
+  iVar1 = (uint)*param_1 - (uint)*param_2;
+  if (iVar1 == 0) {
+    if (param_3 < 2) {
+      return 0;
+    }
+    iVar1 = (uint)param_1[1] - (uint)param_2[1];
+    if (iVar1 == 0) {
+      if (param_3 < 3) {
+        return 0;
+      }
+      iVar1 = (uint)param_1[2] - (uint)param_2[2];
+      if (iVar1 == 0) {
+        if (param_3 < 4) {
+          return 0;
+        }
+        iVar1 = (uint)param_1[3] - (uint)param_2[3];
+      }
+    }
+  }
+  return iVar1 >> 0x1f | 1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00403ac0 : PUSH EBP
+00403ac1 : MOV EBP,ESP
+00403ac3 : MOV ECX,dword ptr [EBP + 0xc]
+00403ac6 : MOV EDX,dword ptr [EBP + 0x8]
+00403ac9 : PUSH ESI
+00403aca : MOV ESI,dword ptr [EBP + 0x10]
+00403acd : PUSH EDI
+00403ace : CMP ESI,0x4
+00403ad1 : JC 0x00403ae7
+00403ad3 : MOV EAX,dword ptr [EDX]
+00403ad5 : CMP EAX,dword ptr [ECX]
+00403ad7 : JNZ 0x00403aeb
+00403ad9 : SUB ESI,0x4
+00403adc : ADD ECX,0x4
+00403adf : ADD EDX,0x4
+00403ae2 : CMP ESI,0x4
+00403ae5 : JNC 0x00403ad3
+00403ae7 : TEST ESI,ESI
+00403ae9 : JZ 0x00403b30
+00403aeb : MOVZX EAX,byte ptr [EDX]
+00403aee : MOVZX EDI,byte ptr [ECX]
+00403af1 : SUB EAX,EDI
+00403af3 : JNZ 0x00403b26
+00403af5 : CMP ESI,0x1
+00403af8 : JBE 0x00403b30
+00403afa : MOVZX EAX,byte ptr [EDX + 0x1]
+00403afe : MOVZX EDI,byte ptr [ECX + 0x1]
+00403b02 : SUB EAX,EDI
+00403b04 : JNZ 0x00403b26
+00403b06 : CMP ESI,0x2
+00403b09 : JBE 0x00403b30
+00403b0b : MOVZX EAX,byte ptr [EDX + 0x2]
+00403b0f : MOVZX EDI,byte ptr [ECX + 0x2]
+00403b13 : SUB EAX,EDI
+00403b15 : JNZ 0x00403b26
+00403b17 : CMP ESI,0x3
+00403b1a : JBE 0x00403b30
+00403b1c : MOVZX EAX,byte ptr [EDX + 0x3]
+00403b20 : MOVZX ECX,byte ptr [ECX + 0x3]
+00403b24 : SUB EAX,ECX
+00403b26 : SAR EAX,0x1f
+00403b29 : POP EDI
+00403b2a : OR EAX,0x1
+00403b2d : POP ESI
+00403b2e : POP EBP
+00403b2f : RET
+00403b30 : POP EDI
+00403b31 : XOR EAX,EAX
+00403b33 : POP ESI
+00403b34 : POP EBP
+00403b35 : RET

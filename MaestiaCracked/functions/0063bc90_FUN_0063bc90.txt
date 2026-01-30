@@ -1,0 +1,158 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0063bc90
+ENTRY    : 0063bc90
+BODY     : [[0063bc90, 0063bdb0]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+float10 FUN_0063bc90(double param_1,undefined2 param_2)
+
+{
+  uint uVar1;
+  uint uVar2;
+  int iVar3;
+  ushort in_FPUControlWord;
+  float10 fVar4;
+  double dVar5;
+  ulonglong uVar6;
+  undefined4 uVar7;
+  undefined8 uVar8;
+  
+  if ((DAT_01728c20 != 0) && ((MXCSR & 0x1f80) == 0x1f80 && (in_FPUControlWord & 0x7f) == 0x7f)) {
+    uVar2 = (uint)((ulonglong)param_1 >> 0x20);
+    uVar1 = uVar2 >> 0x14;
+    uVar6 = (ulonglong)(0x433 - (uVar2 >> 0x14 & 0x7ff));
+    if ((uVar1 & 0x800) == 0) {
+      if (uVar1 < 0x3ff) {
+        return (float10)0;
+      }
+      if (uVar1 < 0x433) {
+        return (float10)(double)(((ulonglong)param_1 >> uVar6) << uVar6);
+      }
+    }
+    else {
+      dVar5 = (double)(((ulonglong)param_1 >> uVar6) << uVar6);
+      if (uVar1 < 0xbff) {
+        return (float10)(double)((-(ulonglong)(param_1 < -0.0) | (ulonglong)DAT_00b96370) &
+                                0xbff0000000000000);
+      }
+      if (uVar1 < 0xc33) {
+        return (float10)(dVar5 - (double)(-(ulonglong)(param_1 < dVar5) & 0x3ff0000000000000));
+      }
+    }
+    if (NAN(param_1)) {
+      ___libm_error_support(&param_1,&param_1,&param_1,0x3ed);
+    }
+    return (float10)(double)CONCAT26(param_1._6_2_,param_1._0_6_);
+  }
+  uVar2 = __ctrlfp(DAT_00d68158,0xffff);
+  if ((param_1._6_2_ & 0x7ff0) == 0x7ff0) {
+    iVar3 = __sptype();
+    if (0 < iVar3) {
+      if (iVar3 < 3) {
+        __ctrlfp(uVar2,0xffff);
+        return (float10)(double)CONCAT26(param_1._6_2_,param_1._0_6_);
+      }
+      if (iVar3 == 3) {
+        fVar4 = (float10)__handle_qnan1();
+        return fVar4;
+      }
+    }
+    dVar5 = (double)CONCAT26(param_1._6_2_,param_1._0_6_) + 1.0;
+    uVar8 = CONCAT26(param_1._6_2_,param_1._0_6_);
+    uVar7 = 8;
+  }
+  else {
+    fVar4 = (float10)__frnd((int)param_1._0_6_,(int)(CONCAT26(param_1._6_2_,param_1._0_6_) >> 0x20))
+    ;
+    dVar5 = (double)fVar4;
+    if (((double)CONCAT26(param_1._6_2_,param_1._0_6_) == dVar5) || ((uVar2 & 0x20) != 0)) {
+      __ctrlfp(uVar2,0xffff);
+      return (float10)dVar5;
+    }
+    uVar8 = CONCAT26(param_1._6_2_,param_1._0_6_);
+    uVar7 = 0x10;
+  }
+  fVar4 = (float10)__except1(uVar7,0xb,uVar8,dVar5,uVar2);
+                    /* WARNING: Read-only address (ram,0x00b96370) is written */
+  return fVar4;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0063bc90 : CMP dword ptr [0x01728c20],0x0
+0063bc97 : JZ 0x00658ab0
+0063bc9d : SUB ESP,0x8
+0063bca0 : STMXCSR dword ptr [ESP + 0x4]
+0063bca5 : MOV EAX,dword ptr [ESP + 0x4]
+0063bca9 : AND EAX,0x1f80
+0063bcae : CMP EAX,0x1f80
+0063bcb3 : JNZ 0x0063bcc4
+0063bcb5 : FNSTCW word ptr [ESP]
+0063bcb8 : MOV AX,word ptr [ESP]
+0063bcbc : AND AX,0x7f
+0063bcc0 : CMP AX,0x7f
+0063bcc4 : LEA ESP,[ESP + 0x8]
+0063bcc8 : JNZ 0x00658ab0
+0063bcce : JMP 0x0063bcd0
+0063bcd0 : MOVQ XMM0,qword ptr [ESP + 0x4]
+0063bcd6 : MOVAPD XMM2,xmmword ptr [0x00b96350]
+0063bcde : MOVAPD XMM1,XMM0
+0063bce2 : MOVAPD XMM7,XMM0
+0063bce6 : PSRLQ XMM0,0x34
+0063bceb : MOVD EAX,XMM0
+0063bcef : ANDPD XMM0,xmmword ptr [0x00b96380]
+0063bcf7 : PSUBD XMM2,XMM0
+0063bcfb : PSRLQ XMM1,XMM2
+0063bcff : TEST EAX,0x800
+0063bd04 : JNZ 0x0063bd52
+0063bd06 : CMP EAX,0x3ff
+0063bd0b : JL 0x0063bd8a
+0063bd0d : PSLLQ XMM1,XMM2
+0063bd11 : CMP EAX,0x432
+0063bd16 : JG 0x0063bd23
+0063bd18 : MOVQ qword ptr [ESP + 0x4],XMM1
+0063bd1e : FLD double ptr [ESP + 0x4]
+0063bd22 : RET
+0063bd23 : UCOMISD XMM7,XMM7
+0063bd27 : JNP 0x0063bd4d
+0063bd29 : MOV EDX,0x3ed
+0063bd2e : SUB ESP,0x10
+0063bd31 : MOV dword ptr [ESP + 0xc],EDX
+0063bd35 : MOV EDX,ESP
+0063bd37 : ADD EDX,0x14
+0063bd3a : MOV dword ptr [ESP + 0x8],EDX
+0063bd3e : MOV dword ptr [ESP + 0x4],EDX
+0063bd42 : MOV dword ptr [ESP],EDX
+0063bd45 : CALL 0x00652a86
+0063bd4a : ADD ESP,0x10
+0063bd4d : FLD double ptr [ESP + 0x4]
+0063bd51 : RET
+0063bd52 : MOVQ XMM0,qword ptr [ESP + 0x4]
+0063bd58 : PSLLQ XMM1,XMM2
+0063bd5c : MOVAPD XMM3,XMM0
+0063bd60 : CMPLTPD XMM0,XMM1
+0063bd65 : CMP EAX,0xbff
+0063bd6a : JL 0x0063bd8d
+0063bd6c : CMP EAX,0xc32
+0063bd71 : JG 0x0063bd23
+0063bd73 : ANDPD XMM0,xmmword ptr [0x00b96340]
+0063bd7b : SUBSD XMM1,XMM0
+0063bd7f : MOVQ qword ptr [ESP + 0x4],XMM1
+0063bd85 : FLD double ptr [ESP + 0x4]
+0063bd89 : RET
+0063bd8a : FLDZ
+0063bd8c : RET
+0063bd8d : CMPLTPD XMM3,xmmword ptr [0x00b96370]
+0063bd96 : ORPD XMM3,xmmword ptr [0x00b96370]
+0063bd9e : ANDPD XMM3,xmmword ptr [0x00b96360]
+0063bda6 : MOVQ qword ptr [ESP + 0x4],XMM3
+0063bdac : FLD double ptr [ESP + 0x4]
+0063bdb0 : RET

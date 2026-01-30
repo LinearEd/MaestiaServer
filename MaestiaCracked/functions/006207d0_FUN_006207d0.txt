@@ -1,0 +1,111 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_006207d0
+ENTRY    : 006207d0
+BODY     : [[006207d0, 006208e1]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_006207d0(int param_1,undefined4 *param_2,float *param_3)
+
+{
+  int iVar1;
+  float fVar2;
+  float fVar3;
+  float fVar4;
+  double dVar5;
+  
+  *param_2 = 0;
+  param_2[1] = 0;
+  param_2[2] = 0;
+  iVar1 = _rand();
+  fVar2 = (float)(iVar1 % 100) * 0.06283186;
+  iVar1 = _rand();
+  fVar3 = (float)(iVar1 % 100) * *(float *)(*(int *)(param_1 + 0x164) + 0xe0) * 0.01;
+  dVar5 = (double)fVar2;
+  FUN_0063ed62();
+  fVar4 = (float)dVar5 * fVar3;
+  *param_3 = fVar4;
+  param_3[1] = 10.0;
+  dVar5 = (double)fVar2;
+  FUN_0063ef0d();
+  fVar3 = (float)dVar5 * fVar3;
+  fVar2 = SQRT(fVar3 * fVar3 + fVar4 * fVar4 + 100.0);
+  param_3[2] = fVar3;
+  if (fVar2 != 0.0) {
+    fVar2 = 1.0 / fVar2;
+    *param_3 = fVar4 * fVar2;
+    param_3[1] = fVar2 * 10.0;
+    param_3[2] = fVar3 * fVar2;
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006207d0 : PUSH ECX
+006207d1 : MOV EAX,dword ptr [ESP + 0xc]
+006207d5 : XORPS XMM0,XMM0
+006207d8 : PUSH ESI
+006207d9 : MOVSS dword ptr [EAX],XMM0
+006207dd : MOVSS dword ptr [EAX + 0x4],XMM0
+006207e2 : MOVSS dword ptr [EAX + 0x8],XMM0
+006207e7 : CALL 0x00635d2f
+006207ec : CDQ
+006207ed : MOV ECX,0x64
+006207f2 : IDIV ECX
+006207f4 : CVTSI2SS XMM0,EDX
+006207f8 : MULSS XMM0,dword ptr [0x00b958dc]
+00620800 : MOVSS dword ptr [ESP + 0x10],XMM0
+00620806 : CALL 0x00635d2f
+0062080b : CDQ
+0062080c : MOV ECX,0x64
+00620811 : IDIV ECX
+00620813 : CVTSI2SS XMM0,EDX
+00620817 : MOV EDX,dword ptr [ESP + 0xc]
+0062081b : MOV EAX,dword ptr [EDX + 0x164]
+00620821 : MULSS XMM0,dword ptr [EAX + 0xe0]
+00620829 : MULSS XMM0,dword ptr [0x00cdf23c]
+00620831 : MOVSS dword ptr [ESP + 0xc],XMM0
+00620837 : CVTSS2SD XMM0,dword ptr [ESP + 0x10]
+0062083d : CALL 0x0063ed62
+00620842 : MOV ESI,dword ptr [ESP + 0x14]
+00620846 : CVTSD2SS XMM0,XMM0
+0062084a : MULSS XMM0,dword ptr [ESP + 0xc]
+00620850 : MOVSS dword ptr [ESP + 0x4],XMM0
+00620856 : MOVSS dword ptr [ESI],XMM0
+0062085a : MOVSS XMM0,dword ptr [0x00b8f298]
+00620862 : MOVSS dword ptr [ESI + 0x4],XMM0
+00620867 : CVTSS2SD XMM0,dword ptr [ESP + 0x10]
+0062086d : CALL 0x0063ef0d
+00620872 : MOVSS XMM2,dword ptr [ESP + 0x4]
+00620878 : CVTSD2SS XMM0,XMM0
+0062087c : MULSS XMM0,dword ptr [ESP + 0xc]
+00620882 : MOVAPS XMM1,XMM0
+00620885 : MULSS XMM1,XMM0
+00620889 : MOVAPS XMM3,XMM2
+0062088c : MULSS XMM3,XMM2
+00620890 : ADDSS XMM1,XMM3
+00620894 : ADDSS XMM1,dword ptr [0x00cdf230]
+0062089c : SQRTSS XMM3,XMM1
+006208a0 : UCOMISS XMM3,dword ptr [0x00b9b0b4]
+006208a7 : LAHF
+006208a8 : MOVSS dword ptr [ESI + 0x8],XMM0
+006208ad : TEST AH,0x44
+006208b0 : JNP 0x006208df
+006208b2 : MOVSS XMM1,dword ptr [0x00b86060]
+006208ba : DIVSS XMM1,XMM3
+006208be : MULSS XMM2,XMM1
+006208c2 : MOVSS dword ptr [ESI],XMM2
+006208c6 : MOVAPS XMM2,XMM1
+006208c9 : MULSS XMM2,dword ptr [0x00b8f298]
+006208d1 : MULSS XMM0,XMM1
+006208d5 : MOVSS dword ptr [ESI + 0x4],XMM2
+006208da : MOVSS dword ptr [ESI + 0x8],XMM0
+006208df : POP ESI
+006208e0 : POP ECX
+006208e1 : RET

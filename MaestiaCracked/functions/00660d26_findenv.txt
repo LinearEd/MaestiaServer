@@ -1,0 +1,73 @@
+PROGRAM  : Maestia.exe
+FUNCTION : findenv
+ENTRY    : 00660d26
+BODY     : [[00660d26, 00660d77]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    _findenv
+   
+   Library: Visual Studio 2008 Release */
+
+int __cdecl findenv(uchar *param_1)
+
+{
+  int iVar1;
+  int *piVar2;
+  size_t unaff_EDI;
+  
+  piVar2 = DAT_00d7b7a0;
+  while( true ) {
+    if ((uchar *)*piVar2 == (uchar *)0x0) {
+      return -((int)piVar2 - (int)DAT_00d7b7a0 >> 2);
+    }
+    iVar1 = __mbsnbicoll(param_1,(uchar *)*piVar2,unaff_EDI);
+    if ((iVar1 == 0) &&
+       ((*(char *)(unaff_EDI + *piVar2) == '=' || (*(char *)(unaff_EDI + *piVar2) == '\0')))) break;
+    piVar2 = piVar2 + 1;
+  }
+  return (int)piVar2 - (int)DAT_00d7b7a0 >> 2;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00660d26 : MOV EDI,EDI
+00660d28 : PUSH EBP
+00660d29 : MOV EBP,ESP
+00660d2b : PUSH ESI
+00660d2c : MOV ESI,dword ptr [0x00d7b7a0]
+00660d32 : JMP 0x00660d55
+00660d34 : PUSH EDI
+00660d35 : PUSH EAX
+00660d36 : PUSH dword ptr [EBP + 0x8]
+00660d39 : CALL 0x00660208
+00660d3e : ADD ESP,0xc
+00660d41 : TEST EAX,EAX
+00660d43 : JNZ 0x00660d52
+00660d45 : MOV EAX,dword ptr [ESI]
+00660d47 : MOV AL,byte ptr [EDI + EAX*0x1]
+00660d4a : CMP AL,0x3d
+00660d4c : JZ 0x00660d6b
+00660d4e : TEST AL,AL
+00660d50 : JZ 0x00660d6b
+00660d52 : ADD ESI,0x4
+00660d55 : MOV EAX,dword ptr [ESI]
+00660d57 : TEST EAX,EAX
+00660d59 : JNZ 0x00660d34
+00660d5b : MOV EAX,ESI
+00660d5d : SUB EAX,dword ptr [0x00d7b7a0]
+00660d63 : SAR EAX,0x2
+00660d66 : NEG EAX
+00660d68 : POP ESI
+00660d69 : POP EBP
+00660d6a : RET
+00660d6b : MOV EAX,ESI
+00660d6d : SUB EAX,dword ptr [0x00d7b7a0]
+00660d73 : SAR EAX,0x2
+00660d76 : JMP 0x00660d68

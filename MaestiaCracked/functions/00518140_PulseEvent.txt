@@ -1,0 +1,91 @@
+PROGRAM  : Maestia.exe
+FUNCTION : PulseEvent
+ENTRY    : 00518140
+BODY     : [[00518140, 005181ad]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* public: void __thiscall GEvent::PulseEvent(void) */
+
+void __thiscall GEvent::PulseEvent(GEvent *this)
+
+{
+  HandlerArray *Addend;
+  LONG LVar1;
+  HandlerArray *this_00;
+  
+                    /* 0x118140  128  ?PulseEvent@GEvent@@QAEXXZ */
+  GMutex::Lock((GMutex *)(this + 0x14));
+  this[0x10] = (GEvent)0x1;
+  this[0x11] = (GEvent)0x1;
+  GWaitCondition::Notify((GWaitCondition *)(this + 0x28));
+  Addend = *(HandlerArray **)(this + 8);
+  this_00 = (HandlerArray *)0x0;
+  if (Addend != (HandlerArray *)0x0) {
+    InterlockedExchangeAdd((LONG *)Addend,1);
+    this_00 = Addend;
+  }
+  GMutex::Unlock((GMutex *)(this + 0x14));
+  if (this_00 != (HandlerArray *)0x0) {
+    GWaitable::HandlerArray::CallWaitHandlers(this_00);
+    LVar1 = InterlockedExchangeAdd((LONG *)this_00,-1);
+    if (LVar1 == 1) {
+      FUN_005a20f0();
+      FUN_00515cf0(*(undefined4 *)(this_00 + 4));
+      FUN_00515cf0(this_00);
+    }
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00518140 : PUSH EBX
+00518141 : PUSH EBP
+00518142 : PUSH ESI
+00518143 : MOV ESI,ECX
+00518145 : LEA EBP,[ESI + 0x14]
+00518148 : PUSH EDI
+00518149 : MOV ECX,EBP
+0051814b : CALL 0x005162b0
+00518150 : MOV byte ptr [ESI + 0x10],0x1
+00518154 : LEA ECX,[ESI + 0x28]
+00518157 : MOV byte ptr [ESI + 0x11],0x1
+0051815b : CALL 0x00516450
+00518160 : MOV ESI,dword ptr [ESI + 0x8]
+00518163 : MOV EBX,dword ptr [0x00b851cc]
+00518169 : XOR EDI,EDI
+0051816b : TEST ESI,ESI
+0051816d : JZ 0x00518176
+0051816f : PUSH 0x1
+00518171 : PUSH ESI
+00518172 : CALL EBX
+00518174 : MOV EDI,ESI
+00518176 : MOV ECX,EBP
+00518178 : CALL 0x005170a0
+0051817d : TEST EDI,EDI
+0051817f : JZ 0x005181a9
+00518181 : MOV ECX,EDI
+00518183 : CALL 0x00517e90
+00518188 : PUSH -0x1
+0051818a : PUSH EDI
+0051818b : CALL EBX
+0051818d : SUB EAX,0x1
+00518190 : JNZ 0x005181a9
+00518192 : LEA ECX,[EDI + 0x10]
+00518195 : CALL 0x005a20f0
+0051819a : MOV EAX,dword ptr [EDI + 0x4]
+0051819d : PUSH EAX
+0051819e : CALL 0x00515cf0
+005181a3 : PUSH EDI
+005181a4 : CALL 0x00515cf0
+005181a9 : POP EDI
+005181aa : POP ESI
+005181ab : POP EBP
+005181ac : POP EBX
+005181ad : RET

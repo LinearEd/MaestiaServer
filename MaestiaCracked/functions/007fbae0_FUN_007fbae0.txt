@@ -1,0 +1,127 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_007fbae0
+ENTRY    : 007fbae0
+BODY     : [[007fbae0, 007fbbaa]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+bool FUN_007fbae0(void)
+
+{
+  int in_EAX;
+  BOOL BVar1;
+  LONG LVar2;
+  DWORD local_10;
+  LPOVERLAPPED local_c;
+  code *local_8;
+  
+  local_10 = 0;
+  BVar1 = GetQueuedCompletionStatus
+                    (*(HANDLE *)(in_EAX + 0x4b4),&local_10,(PULONG_PTR)&local_8,&local_c,1);
+  if ((BVar1 != 0) && (local_10 != 0)) {
+    if (local_10 == 1) {
+      if ((local_8 != (code *)0x0) && (local_c != (LPOVERLAPPED)0x0)) {
+        (**(code **)(*(int *)local_8 + 0x84))
+                  (*(undefined4 *)(local_8 + 0x174),local_c,*(undefined4 *)(local_8 + 0x178));
+      }
+    }
+    else if (local_10 == 2) {
+      if ((local_8 != (code *)0x0) && (local_c != (LPOVERLAPPED)0x0)) {
+        FUN_00785b20(*(undefined4 *)(local_8 + 0x168),local_c,*(undefined4 *)(local_8 + 0x16c));
+      }
+    }
+    else if ((local_10 == 3) && (local_8 != (code *)0x0)) {
+      (*local_8)(local_c);
+    }
+    LVar2 = InterlockedDecrement((LONG *)(in_EAX + 0x4fc));
+    return LVar2 == 0;
+  }
+  return true;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+007fbae0 : PUSH EBP
+007fbae1 : MOV EBP,ESP
+007fbae3 : SUB ESP,0xc
+007fbae6 : PUSH ESI
+007fbae7 : PUSH EDI
+007fbae8 : PUSH 0x1
+007fbaea : MOV ESI,EAX
+007fbaec : LEA EAX,[EBP + -0x8]
+007fbaef : PUSH EAX
+007fbaf0 : MOV EAX,dword ptr [ESI + 0x4b4]
+007fbaf6 : LEA ECX,[EBP + -0x4]
+007fbaf9 : PUSH ECX
+007fbafa : LEA EDX,[EBP + -0xc]
+007fbafd : PUSH EDX
+007fbafe : PUSH EAX
+007fbaff : MOV dword ptr [EBP + -0xc],0x0
+007fbb06 : CALL dword ptr [0x00b8537c]
+007fbb0c : TEST EAX,EAX
+007fbb0e : JZ 0x007fbba0
+007fbb14 : MOV EAX,dword ptr [EBP + -0xc]
+007fbb17 : TEST EAX,EAX
+007fbb19 : JZ 0x007fbba0
+007fbb1f : CMP EAX,0x1
+007fbb22 : JNZ 0x007fbb4d
+007fbb24 : MOV ECX,dword ptr [EBP + -0x4]
+007fbb27 : TEST ECX,ECX
+007fbb29 : JZ 0x007fbb88
+007fbb2b : MOV EAX,dword ptr [EBP + -0x8]
+007fbb2e : TEST EAX,EAX
+007fbb30 : JZ 0x007fbb88
+007fbb32 : MOV EDI,dword ptr [ECX + 0x178]
+007fbb38 : MOV EDX,dword ptr [ECX]
+007fbb3a : MOV EDX,dword ptr [EDX + 0x84]
+007fbb40 : PUSH EDI
+007fbb41 : PUSH EAX
+007fbb42 : MOV EAX,dword ptr [ECX + 0x174]
+007fbb48 : PUSH EAX
+007fbb49 : CALL EDX
+007fbb4b : JMP 0x007fbb88
+007fbb4d : CMP EAX,0x2
+007fbb50 : JNZ 0x007fbb76
+007fbb52 : MOV ECX,dword ptr [EBP + -0x4]
+007fbb55 : TEST ECX,ECX
+007fbb57 : JZ 0x007fbb88
+007fbb59 : MOV EAX,dword ptr [EBP + -0x8]
+007fbb5c : TEST EAX,EAX
+007fbb5e : JZ 0x007fbb88
+007fbb60 : MOV EDX,dword ptr [ECX + 0x16c]
+007fbb66 : PUSH EDX
+007fbb67 : PUSH EAX
+007fbb68 : MOV EAX,dword ptr [ECX + 0x168]
+007fbb6e : PUSH EAX
+007fbb6f : CALL 0x00785b20
+007fbb74 : JMP 0x007fbb88
+007fbb76 : CMP EAX,0x3
+007fbb79 : JNZ 0x007fbb88
+007fbb7b : MOV EAX,dword ptr [EBP + -0x4]
+007fbb7e : TEST EAX,EAX
+007fbb80 : JZ 0x007fbb88
+007fbb82 : MOV ECX,dword ptr [EBP + -0x8]
+007fbb85 : PUSH ECX
+007fbb86 : CALL EAX
+007fbb88 : ADD ESI,0x4fc
+007fbb8e : PUSH ESI
+007fbb8f : CALL dword ptr [0x00b851b0]
+007fbb95 : NEG EAX
+007fbb97 : SBB EAX,EAX
+007fbb99 : INC EAX
+007fbb9a : POP EDI
+007fbb9b : POP ESI
+007fbb9c : MOV ESP,EBP
+007fbb9e : POP EBP
+007fbb9f : RET
+007fbba0 : POP EDI
+007fbba1 : MOV EAX,0x1
+007fbba6 : POP ESI
+007fbba7 : MOV ESP,EBP
+007fbba9 : POP EBP
+007fbbaa : RET

@@ -1,0 +1,90 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0058abb0
+ENTRY    : 0058abb0
+BODY     : [[0058abb0, 0058abfc] [0058ac00, 0058ac28]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_0058abb0(undefined4 param_1)
+
+{
+  int *piVar1;
+  int iVar2;
+  int in_ECX;
+  uint uVar3;
+  
+  iVar2 = *(int *)(in_ECX + 0x1ac);
+  if ((iVar2 != 0) && (uVar3 = 0, *(int *)(iVar2 + 0xc) != 0)) {
+    do {
+      piVar1 = *(int **)(*(int *)(*(int *)(iVar2 + 8) + uVar3 * 4) + 8);
+      if (piVar1 != (int *)0x0) {
+        (**(code **)(*piVar1 + 0x10))(param_1);
+      }
+      iVar2 = *(int *)(in_ECX + 0x1ac);
+      uVar3 = uVar3 + 1;
+    } while (uVar3 < *(uint *)(iVar2 + 0xc));
+  }
+  uVar3 = 0;
+  if (*(int *)(in_ECX + 0xac) != 0) {
+    do {
+      piVar1 = *(int **)(*(int *)(in_ECX + 0xa8) + uVar3 * 4);
+      if ((*(byte *)((int)piVar1 + 0x66) & 0x80) != 0) {
+        (**(code **)(*piVar1 + 0xdc))(param_1);
+      }
+      uVar3 = uVar3 + 1;
+    } while (uVar3 < *(uint *)(in_ECX + 0xac));
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0058abb0 : PUSH EBP
+0058abb1 : MOV EBP,dword ptr [ESP + 0x8]
+0058abb5 : PUSH ESI
+0058abb6 : PUSH EDI
+0058abb7 : MOV EDI,ECX
+0058abb9 : MOV EAX,dword ptr [EDI + 0x1ac]
+0058abbf : TEST EAX,EAX
+0058abc1 : JZ 0x0058abf1
+0058abc3 : XOR ESI,ESI
+0058abc5 : CMP dword ptr [EAX + 0xc],ESI
+0058abc8 : JBE 0x0058abf1
+0058abca : LEA EBX,[EBX]
+0058abd0 : MOV EAX,dword ptr [EAX + 0x8]
+0058abd3 : MOV EAX,dword ptr [EAX + ESI*0x4]
+0058abd6 : MOV ECX,dword ptr [EAX + 0x8]
+0058abd9 : TEST ECX,ECX
+0058abdb : JZ 0x0058abe5
+0058abdd : MOV EDX,dword ptr [ECX]
+0058abdf : MOV EAX,dword ptr [EDX + 0x10]
+0058abe2 : PUSH EBP
+0058abe3 : CALL EAX
+0058abe5 : MOV EAX,dword ptr [EDI + 0x1ac]
+0058abeb : INC ESI
+0058abec : CMP ESI,dword ptr [EAX + 0xc]
+0058abef : JC 0x0058abd0
+0058abf1 : XOR ESI,ESI
+0058abf3 : CMP dword ptr [EDI + 0xac],ESI
+0058abf9 : JBE 0x0058ac23
+0058abfb : JMP 0x0058ac00
+0058ac00 : MOV ECX,dword ptr [EDI + 0xa8]
+0058ac06 : MOV ECX,dword ptr [ECX + ESI*0x4]
+0058ac09 : TEST byte ptr [ECX + 0x66],0x80
+0058ac0d : JZ 0x0058ac1a
+0058ac0f : MOV EDX,dword ptr [ECX]
+0058ac11 : MOV EAX,dword ptr [EDX + 0xdc]
+0058ac17 : PUSH EBP
+0058ac18 : CALL EAX
+0058ac1a : INC ESI
+0058ac1b : CMP ESI,dword ptr [EDI + 0xac]
+0058ac21 : JC 0x0058ac00
+0058ac23 : POP EDI
+0058ac24 : POP ESI
+0058ac25 : POP EBP
+0058ac26 : RET 0x4

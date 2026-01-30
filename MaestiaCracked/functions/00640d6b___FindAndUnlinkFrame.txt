@@ -1,0 +1,76 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __FindAndUnlinkFrame
+ENTRY    : 00640d6b
+BODY     : [[00640d6b, 00640dbc]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __FindAndUnlinkFrame
+   
+   Library: Visual Studio 2008 Release */
+
+void __FindAndUnlinkFrame(void *param_1)
+
+{
+  void *pvVar1;
+  _ptiddata p_Var2;
+  void *pvVar3;
+  
+  p_Var2 = __getptd();
+  if (param_1 == p_Var2->_pFrameInfoChain) {
+    p_Var2 = __getptd();
+    p_Var2->_pFrameInfoChain = *(void **)((int)param_1 + 4);
+  }
+  else {
+    p_Var2 = __getptd();
+    pvVar1 = p_Var2->_pFrameInfoChain;
+    do {
+      pvVar3 = pvVar1;
+      if (*(int *)((int)pvVar3 + 4) == 0) {
+        _inconsistency();
+        return;
+      }
+      pvVar1 = *(void **)((int)pvVar3 + 4);
+    } while (param_1 != *(void **)((int)pvVar3 + 4));
+    *(undefined4 *)((int)pvVar3 + 4) = *(undefined4 *)((int)param_1 + 4);
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00640d6b : MOV EDI,EDI
+00640d6d : PUSH EBP
+00640d6e : MOV EBP,ESP
+00640d70 : PUSH ESI
+00640d71 : CALL 0x006458f6
+00640d76 : MOV ESI,dword ptr [EBP + 0x8]
+00640d79 : CMP ESI,dword ptr [EAX + 0x98]
+00640d7f : JNZ 0x00640d92
+00640d81 : CALL 0x006458f6
+00640d86 : MOV ECX,dword ptr [ESI + 0x4]
+00640d89 : MOV dword ptr [EAX + 0x98],ECX
+00640d8f : POP ESI
+00640d90 : POP EBP
+00640d91 : RET
+00640d92 : CALL 0x006458f6
+00640d97 : MOV EAX,dword ptr [EAX + 0x98]
+00640d9d : JMP 0x00640da8
+00640d9f : MOV ECX,dword ptr [EAX + 0x4]
+00640da2 : CMP ESI,ECX
+00640da4 : JZ 0x00640db5
+00640da6 : MOV EAX,ECX
+00640da8 : CMP dword ptr [EAX + 0x4],0x0
+00640dac : JNZ 0x00640d9f
+00640dae : POP ESI
+00640daf : POP EBP
+00640db0 : JMP 0x0064c7d9
+00640db5 : MOV ECX,dword ptr [ESI + 0x4]
+00640db8 : MOV dword ptr [EAX + 0x4],ECX
+00640dbb : JMP 0x00640d8f

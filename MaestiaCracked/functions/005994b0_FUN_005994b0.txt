@@ -1,0 +1,148 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005994b0
+ENTRY    : 005994b0
+BODY     : [[005994b0, 00599576]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+uint FUN_005994b0(float param_1)
+
+{
+  int *piVar1;
+  int iVar2;
+  float fVar3;
+  uint uVar4;
+  int *in_ECX;
+  uint uVar6;
+  uint local_c;
+  undefined2 uVar5;
+  
+  uVar4 = in_ECX[5];
+  if (uVar4 < (uint)in_ECX[1]) {
+    piVar1 = *(int **)(*in_ECX + uVar4 * 4);
+    iVar2 = *piVar1;
+    uVar4 = 0;
+    if (iVar2 < 0) {
+      uVar6 = (uint)*(ushort *)(piVar1 + 5);
+    }
+    else {
+      uVar6 = piVar1[5];
+    }
+    if (uVar6 != 0) {
+      if (iVar2 < 0) {
+        uVar6 = (uint)*(ushort *)((int)piVar1 + 0x16);
+      }
+      else {
+        uVar6 = piVar1[6];
+      }
+      if (uVar6 != 0) {
+        if (iVar2 < 0) {
+          uVar6 = (uint)*(ushort *)((int)piVar1 + 0x16);
+        }
+        else {
+          uVar6 = piVar1[6];
+        }
+        fVar3 = ((float)in_ECX[9] - (float)in_ECX[7]) + 20.0;
+        if (iVar2 < 0) {
+          uVar4 = piVar1[4];
+          local_c = uVar4;
+        }
+        else {
+          local_c = piVar1[4];
+        }
+        param_1 = (float)(int)local_c + param_1;
+        uVar5 = (undefined2)(uVar4 >> 0x10);
+        uVar4 = CONCAT22(uVar5,(ushort)(fVar3 < param_1) << 8 |
+                               (ushort)(NAN(fVar3) || NAN(param_1)) << 10 |
+                               (ushort)(fVar3 == param_1) << 0xe);
+        if (fVar3 >= param_1) {
+          param_1 = (float)(int)uVar6 + param_1;
+          uVar4 = CONCAT22(uVar5,(ushort)(fVar3 < param_1) << 8 |
+                                 (ushort)(NAN(fVar3) || NAN(param_1)) << 10 |
+                                 (ushort)(fVar3 == param_1) << 0xe);
+          if (fVar3 < param_1) {
+            return CONCAT31((int3)(uVar4 >> 8),1);
+          }
+        }
+      }
+    }
+  }
+  return uVar4 & 0xffffff00;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005994b0 : MOV EAX,dword ptr [ECX + 0x14]
+005994b3 : SUB ESP,0xc
+005994b6 : PUSH ESI
+005994b7 : CMP EAX,dword ptr [ECX + 0x4]
+005994ba : JNC 0x0059956e
+005994c0 : MOV EDX,dword ptr [ECX]
+005994c2 : MOV EDX,dword ptr [EDX + EAX*0x4]
+005994c5 : MOV EAX,dword ptr [EDX]
+005994c7 : SHR EAX,0x1f
+005994ca : AND AL,0x1
+005994cc : JZ 0x005994d4
+005994ce : MOVZX ESI,word ptr [EDX + 0x14]
+005994d2 : JMP 0x005994d7
+005994d4 : MOV ESI,dword ptr [EDX + 0x14]
+005994d7 : TEST ESI,ESI
+005994d9 : JZ 0x0059956e
+005994df : TEST AL,AL
+005994e1 : JZ 0x005994e9
+005994e3 : MOVZX ESI,word ptr [EDX + 0x16]
+005994e7 : JMP 0x005994ec
+005994e9 : MOV ESI,dword ptr [EDX + 0x18]
+005994ec : TEST ESI,ESI
+005994ee : JZ 0x0059956e
+005994f0 : TEST AL,AL
+005994f2 : JZ 0x005994fa
+005994f4 : MOVZX ESI,word ptr [EDX + 0x16]
+005994f8 : JMP 0x005994fd
+005994fa : MOV ESI,dword ptr [EDX + 0x18]
+005994fd : MOV dword ptr [ESP + 0x4],ESI
+00599501 : FILD dword ptr [ESP + 0x4]
+00599505 : FSTP float ptr [ESP + 0xc]
+00599509 : FLD float ptr [ECX + 0x24]
+0059950c : FSUB float ptr [ECX + 0x1c]
+0059950f : FSTP float ptr [ESP + 0x4]
+00599513 : FLD float ptr [ESP + 0x4]
+00599517 : FADD double ptr [0x00b86058]
+0059951d : FSTP float ptr [ESP + 0x8]
+00599521 : TEST AL,AL
+00599523 : JZ 0x0059952e
+00599525 : MOV EAX,dword ptr [EDX + 0x10]
+00599528 : MOV dword ptr [ESP + 0x4],EAX
+0059952c : JMP 0x00599535
+0059952e : MOV ECX,dword ptr [EDX + 0x10]
+00599531 : MOV dword ptr [ESP + 0x4],ECX
+00599535 : FILD dword ptr [ESP + 0x4]
+00599539 : FADD float ptr [ESP + 0x14]
+0059953d : FSTP float ptr [ESP + 0x14]
+00599541 : FLD float ptr [ESP + 0x14]
+00599545 : FLD float ptr [ESP + 0x8]
+00599549 : FCOM
+0059954b : FNSTSW AX
+0059954d : TEST AH,0x1
+00599550 : JNZ 0x0059956a
+00599552 : FLD float ptr [ESP + 0xc]
+00599556 : FADDP ST2,ST0
+00599558 : FCOMPP
+0059955a : FNSTSW AX
+0059955c : TEST AH,0x5
+0059955f : JP 0x0059956e
+00599561 : MOV AL,0x1
+00599563 : POP ESI
+00599564 : ADD ESP,0xc
+00599567 : RET 0x4
+0059956a : FSTP ST1
+0059956c : FSTP ST0
+0059956e : XOR AL,AL
+00599570 : POP ESI
+00599571 : ADD ESP,0xc
+00599574 : RET 0x4

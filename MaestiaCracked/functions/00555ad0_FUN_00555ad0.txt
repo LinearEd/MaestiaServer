@@ -1,0 +1,99 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00555ad0
+ENTRY    : 00555ad0
+BODY     : [[00555ad0, 00555b5f]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00555ad0(uint *param_1,uint *param_2,uint *param_3)
+
+{
+  byte bVar1;
+  byte *pbVar2;
+  ushort *puVar3;
+  uint *puVar4;
+  int in_ECX;
+  
+  pbVar2 = *(byte **)(in_ECX + 4);
+  bVar1 = *pbVar2;
+  if (((bVar1 & 1) == 0) && ((bVar1 & 6) != 2)) {
+    if ((bVar1 & 7) != 0) {
+      if ((bVar1 & 6) == 4) {
+        puVar3 = (ushort *)((uint)(pbVar2 + 2) & 0xfffffffe);
+        *param_1 = (uint)*puVar3;
+        *param_2 = (uint)puVar3[1];
+        *param_3 = (uint)puVar3[2];
+        return;
+      }
+      puVar4 = (uint *)((uint)(pbVar2 + 4) & 0xfffffffc);
+      *param_1 = *puVar4;
+      *param_2 = puVar4[1];
+      *param_3 = puVar4[2];
+      return;
+    }
+  }
+  else {
+    *param_1 = (uint)pbVar2[1];
+    *param_2 = (uint)pbVar2[2];
+    *param_3 = (uint)pbVar2[3];
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00555ad0 : MOV EAX,dword ptr [ECX + 0x4]
+00555ad3 : MOV CL,byte ptr [EAX]
+00555ad5 : TEST CL,0x1
+00555ad8 : JNZ 0x00555b3d
+00555ada : MOV DL,CL
+00555adc : AND DL,0x6
+00555adf : CMP DL,0x2
+00555ae2 : JZ 0x00555b3d
+00555ae4 : TEST CL,0x7
+00555ae7 : JZ 0x00555b5d
+00555ae9 : CMP DL,0x4
+00555aec : JNZ 0x00555b17
+00555aee : MOV EDX,dword ptr [ESP + 0x4]
+00555af2 : ADD EAX,0x2
+00555af5 : AND EAX,0xfffffffe
+00555af8 : MOVZX ECX,word ptr [EAX]
+00555afb : MOV dword ptr [EDX],ECX
+00555afd : MOVZX ECX,word ptr [EAX + 0x2]
+00555b01 : MOV EDX,dword ptr [ESP + 0x8]
+00555b05 : ADD EAX,0x2
+00555b08 : MOV dword ptr [EDX],ECX
+00555b0a : MOVZX EAX,word ptr [EAX + 0x2]
+00555b0e : MOV ECX,dword ptr [ESP + 0xc]
+00555b12 : MOV dword ptr [ECX],EAX
+00555b14 : RET 0xc
+00555b17 : MOV ECX,dword ptr [ESP + 0x4]
+00555b1b : ADD EAX,0x4
+00555b1e : AND EAX,0xfffffffc
+00555b21 : MOV EDX,dword ptr [EAX]
+00555b23 : MOV dword ptr [ECX],EDX
+00555b25 : MOV EDX,dword ptr [EAX + 0x4]
+00555b28 : MOV ECX,dword ptr [ESP + 0x8]
+00555b2c : ADD EAX,0x4
+00555b2f : MOV dword ptr [ECX],EDX
+00555b31 : MOV EDX,dword ptr [EAX + 0x4]
+00555b34 : MOV EAX,dword ptr [ESP + 0xc]
+00555b38 : MOV dword ptr [EAX],EDX
+00555b3a : RET 0xc
+00555b3d : MOVZX ECX,byte ptr [EAX + 0x1]
+00555b41 : MOV EDX,dword ptr [ESP + 0x4]
+00555b45 : INC EAX
+00555b46 : MOV dword ptr [EDX],ECX
+00555b48 : MOVZX ECX,byte ptr [EAX + 0x1]
+00555b4c : MOV EDX,dword ptr [ESP + 0x8]
+00555b50 : INC EAX
+00555b51 : MOV dword ptr [EDX],ECX
+00555b53 : MOVZX EAX,byte ptr [EAX + 0x1]
+00555b57 : MOV ECX,dword ptr [ESP + 0xc]
+00555b5b : MOV dword ptr [ECX],EAX
+00555b5d : RET 0xc

@@ -1,0 +1,72 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_008770a0
+ENTRY    : 008770a0
+BODY     : [[008770a0, 00877106]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+uint FUN_008770a0(void)
+
+{
+  int iVar1;
+  float fVar2;
+  uint in_EAX;
+  DWORD DVar3;
+  int unaff_ESI;
+  undefined4 local_10;
+  
+  if (DAT_0172491c == 0) {
+    return in_EAX & 0xffffff00;
+  }
+  DVar3 = timeGetTime();
+  iVar1 = *(int *)(unaff_ESI + 0xdc);
+  fVar2 = (float)iVar1;
+  if (iVar1 < 0) {
+    fVar2 = fVar2 + 4.2949673e+09;
+  }
+  local_10 = (int)(longlong)ROUND(fVar2 * *(float *)(unaff_ESI + 0xe8));
+  return CONCAT31((int3)((uint)(local_10 + iVar1) >> 8),
+                  (uint)(local_10 + iVar1) <= DVar3 - *(int *)(unaff_ESI + 0xd8));
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+008770a0 : PUSH EBP
+008770a1 : MOV EBP,ESP
+008770a3 : SUB ESP,0xc
+008770a6 : CMP dword ptr [0x0172491c],0x0
+008770ad : JNZ 0x008770b5
+008770af : XOR AL,AL
+008770b1 : MOV ESP,EBP
+008770b3 : POP EBP
+008770b4 : RET
+008770b5 : CALL dword ptr [0x00b85598]
+008770bb : MOV EDX,dword ptr [ESI + 0xdc]
+008770c1 : MOV ECX,EAX
+008770c3 : MOV EAX,EDX
+008770c5 : MOV dword ptr [EBP + -0x8],EAX
+008770c8 : FILD dword ptr [EBP + -0x8]
+008770cb : TEST EAX,EAX
+008770cd : JGE 0x008770d5
+008770cf : FADD float ptr [0x00cdf0e0]
+008770d5 : FMUL float ptr [ESI + 0xe8]
+008770db : SUB ECX,dword ptr [ESI + 0xd8]
+008770e1 : FNSTCW word ptr [EBP + -0x2]
+008770e4 : MOVZX EAX,word ptr [EBP + -0x2]
+008770e8 : OR EAX,0xc00
+008770ed : MOV dword ptr [EBP + -0x8],EAX
+008770f0 : FLDCW word ptr [EBP + -0x8]
+008770f3 : FISTP qword ptr [EBP + -0xc]
+008770f6 : MOV EAX,dword ptr [EBP + -0xc]
+008770f9 : ADD EAX,EDX
+008770fb : CMP ECX,EAX
+008770fd : FLDCW word ptr [EBP + -0x2]
+00877100 : SETNC AL
+00877103 : MOV ESP,EBP
+00877105 : POP EBP
+00877106 : RET

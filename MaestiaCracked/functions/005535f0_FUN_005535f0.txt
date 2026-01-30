@@ -1,0 +1,75 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005535f0
+ENTRY    : 005535f0
+BODY     : [[005535f0, 00553648]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+uint FUN_005535f0(uint param_1,uint param_2,uint param_3)
+
+{
+  uint in_EAX;
+  int in_ECX;
+  int iVar1;
+  
+  if (((param_3 < param_2) && (iVar1 = *(int *)(in_ECX + 4), iVar1 != 0)) &&
+     (in_EAX = param_1, (int)((param_1 - iVar1) + -8) < *(int *)(iVar1 + 4))) {
+    iVar1 = *(int *)(iVar1 + 4) - ((param_1 - iVar1) + -8);
+    in_EAX = iVar1 - param_2;
+    if (in_EAX == *(ushort *)(in_ECX + 8)) {
+      param_3 = iVar1 - param_3;
+      if (0xffff < param_3) {
+        return in_EAX & 0xffffff00;
+      }
+      *(short *)(in_ECX + 8) = (short)param_3;
+      return in_EAX & 0xffffff00;
+    }
+  }
+  return in_EAX & 0xffffff00;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005535f0 : PUSH ESI
+005535f1 : MOV ESI,dword ptr [ESP + 0xc]
+005535f5 : PUSH EDI
+005535f6 : MOV EDI,dword ptr [ESP + 0x14]
+005535fa : CMP EDI,ESI
+005535fc : JNC 0x00553642
+005535fe : MOV EDX,dword ptr [ECX + 0x4]
+00553601 : TEST EDX,EDX
+00553603 : JZ 0x00553642
+00553605 : MOV EAX,dword ptr [ESP + 0xc]
+00553609 : PUSH EBX
+0055360a : MOV EBX,EAX
+0055360c : SUB EBX,EDX
+0055360e : SUB EBX,0x8
+00553611 : CMP EBX,dword ptr [EDX + 0x4]
+00553614 : POP EBX
+00553615 : JGE 0x00553642
+00553617 : SUB EAX,EDX
+00553619 : MOV EDX,dword ptr [EDX + 0x4]
+0055361c : SUB EAX,0x8
+0055361f : SUB EDX,EAX
+00553621 : MOV EAX,EDX
+00553623 : SUB EAX,ESI
+00553625 : MOVZX ESI,word ptr [ECX + 0x8]
+00553629 : CMP EAX,ESI
+0055362b : JNZ 0x00553642
+0055362d : SUB EDX,EDI
+0055362f : XOR AL,AL
+00553631 : CMP EDX,0x10000
+00553637 : JNC 0x00553644
+00553639 : POP EDI
+0055363a : MOV word ptr [ECX + 0x8],DX
+0055363e : POP ESI
+0055363f : RET 0xc
+00553642 : XOR AL,AL
+00553644 : POP EDI
+00553645 : POP ESI
+00553646 : RET 0xc

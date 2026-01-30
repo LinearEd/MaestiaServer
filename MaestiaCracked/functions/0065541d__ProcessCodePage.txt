@@ -1,0 +1,120 @@
+PROGRAM  : Maestia.exe
+FUNCTION : _ProcessCodePage
+ENTRY    : 0065541d
+BODY     : [[0065541d, 006554c0]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    _ProcessCodePage
+   
+   Library: Visual Studio 2008 Release */
+
+void _ProcessCodePage(void)
+
+{
+  int iVar1;
+  CHAR *in_ECX;
+  int unaff_EDI;
+  CHAR local_10 [8];
+  uint local_8;
+  
+  local_8 = DAT_00d66fa0 ^ (uint)&stack0xfffffffc;
+  if (((in_ECX == (char *)0x0) || (*in_ECX == '\0')) || (iVar1 = _strcmp(in_ECX,"ACP"), iVar1 == 0))
+  {
+    iVar1 = GetLocaleInfoA(*(LCID *)(unaff_EDI + 0x1c),0x1004,local_10,8);
+    if (iVar1 == 0) goto LAB_0065547c;
+    iVar1 = _strcmp(local_10,"0");
+    if (iVar1 == 0) {
+      GetACP();
+      goto LAB_0065547c;
+    }
+LAB_00655472:
+    in_ECX = local_10;
+  }
+  else {
+    iVar1 = _strcmp(in_ECX,"OCP");
+    if (iVar1 == 0) {
+      iVar1 = GetLocaleInfoA(*(LCID *)(unaff_EDI + 0x1c),0xb,local_10,8);
+      if (iVar1 == 0) goto LAB_0065547c;
+      goto LAB_00655472;
+    }
+  }
+  _atol(in_ECX);
+LAB_0065547c:
+  __security_check_cookie(local_8 ^ (uint)&stack0xfffffffc);
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0065541d : MOV EDI,EDI
+0065541f : PUSH EBP
+00655420 : MOV EBP,ESP
+00655422 : SUB ESP,0xc
+00655425 : MOV EAX,[0x00d66fa0]
+0065542a : XOR EAX,EBP
+0065542c : MOV dword ptr [EBP + -0x4],EAX
+0065542f : PUSH ESI
+00655430 : MOV ESI,ECX
+00655432 : TEST ESI,ESI
+00655434 : JZ 0x00655489
+00655436 : CMP byte ptr [ESI],0x0
+00655439 : JZ 0x00655489
+0065543b : PUSH 0xb9ca28
+00655440 : PUSH ESI
+00655441 : CALL 0x00645e40
+00655446 : POP ECX
+00655447 : POP ECX
+00655448 : TEST EAX,EAX
+0065544a : JZ 0x00655489
+0065544c : PUSH 0xb9ca24
+00655451 : PUSH ESI
+00655452 : CALL 0x00645e40
+00655457 : POP ECX
+00655458 : POP ECX
+00655459 : TEST EAX,EAX
+0065545b : JNZ 0x00655475
+0065545d : PUSH 0x8
+0065545f : LEA EAX,[EBP + -0xc]
+00655462 : PUSH EAX
+00655463 : PUSH 0xb
+00655465 : PUSH dword ptr [EDI + 0x1c]
+00655468 : CALL dword ptr [0x00b852d4]
+0065546e : TEST EAX,EAX
+00655470 : JZ 0x006554a1
+00655472 : LEA ESI,[EBP + -0xc]
+00655475 : PUSH ESI
+00655476 : CALL 0x00634f16
+0065547b : POP ECX
+0065547c : MOV ECX,dword ptr [EBP + -0x4]
+0065547f : XOR ECX,EBP
+00655481 : POP ESI
+00655482 : CALL 0x00633e6b
+00655487 : LEAVE
+00655488 : RET
+00655489 : PUSH 0x8
+0065548b : LEA EAX,[EBP + -0xc]
+0065548e : PUSH EAX
+0065548f : PUSH 0x1004
+00655494 : PUSH dword ptr [EDI + 0x1c]
+00655497 : CALL dword ptr [0x00b852d4]
+0065549d : TEST EAX,EAX
+0065549f : JNZ 0x006554a5
+006554a1 : XOR EAX,EAX
+006554a3 : JMP 0x0065547c
+006554a5 : LEA EAX,[EBP + -0xc]
+006554a8 : PUSH 0xb8f9b8
+006554ad : PUSH EAX
+006554ae : CALL 0x00645e40
+006554b3 : POP ECX
+006554b4 : POP ECX
+006554b5 : TEST EAX,EAX
+006554b7 : JNZ 0x00655472
+006554b9 : CALL dword ptr [0x00b85194]
+006554bf : JMP 0x0065547c

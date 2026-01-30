@@ -1,0 +1,42 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0063b430
+ENTRY    : 0063b430
+BODY     : [[0063b430, 0063b46e]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_0063b430(void)
+
+{
+  ushort in_FPUControlWord;
+  
+  if ((DAT_01728c20 != 0) && ((MXCSR & 0x1f80) == 0x1f80 && (in_FPUControlWord & 0x7f) == 0x7f)) {
+    FUN_006575e8();
+    return;
+  }
+                    /* WARNING: Subroutine does not return */
+  __fload_withFB();
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0063b430 : CMP dword ptr [0x01728c20],0x0
+0063b437 : JZ 0x0063b4bf
+0063b43d : SUB ESP,0x8
+0063b440 : STMXCSR dword ptr [ESP + 0x4]
+0063b445 : MOV EAX,dword ptr [ESP + 0x4]
+0063b449 : AND EAX,0x1f80
+0063b44e : CMP EAX,0x1f80
+0063b453 : JNZ 0x0063b464
+0063b455 : FNSTCW word ptr [ESP]
+0063b458 : MOV AX,word ptr [ESP]
+0063b45c : AND AX,0x7f
+0063b460 : CMP AX,0x7f
+0063b464 : LEA ESP,[ESP + 0x8]
+0063b468 : JNZ 0x0063b4bf
+0063b46a : JMP 0x006575e8

@@ -1,0 +1,230 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_006960e0
+ENTRY    : 006960e0
+BODY     : [[006960e0, 00696245]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_006960e0(byte *param_1,int param_2,char param_3,int param_4)
+
+{
+  int iVar1;
+  int iVar2;
+  int iVar3;
+  byte bVar4;
+  byte bVar5;
+  int *in_EAX;
+  uint in_ECX;
+  int iVar6;
+  byte bVar7;
+  uint uVar8;
+  byte *pbVar9;
+  byte *pbVar10;
+  int iVar11;
+  int local_10;
+  int local_4;
+  
+  iVar1 = in_EAX[2];
+  uVar8 = 0;
+  iVar6 = in_EAX[3];
+  if (iVar1 < 0) {
+    iVar6 = iVar6 - (*in_EAX + -1) * iVar1;
+  }
+  local_4 = *in_EAX;
+  pbVar9 = (byte *)(((int)in_ECX >> 3) + iVar6 + iVar1 * param_4);
+  local_10 = 0;
+  if (0 < local_4) {
+    bVar7 = (byte)in_ECX & 7;
+    bVar4 = 8 - bVar7;
+    do {
+      iVar6 = param_2;
+      pbVar10 = pbVar9;
+      if (7 < param_2) {
+        iVar3 = param_2 + -8;
+        iVar2 = -uVar8;
+        do {
+          iVar6 = iVar3;
+          iVar11 = iVar2 + 8;
+          if (uVar8 < 8) {
+            bVar5 = *param_1;
+            param_1 = param_1 + 1;
+            uVar8 = uVar8 + 8;
+            local_10 = CONCAT22(local_10._2_2_,
+                                (ushort)local_10 | (ushort)bVar5 << ((byte)(iVar2 + 8) & 0x1f));
+            iVar11 = iVar2;
+          }
+          bVar5 = (byte)((uint)local_10 >> 8);
+          if ((in_ECX & 7) == 0) {
+            *pbVar10 = *pbVar10 | bVar5;
+          }
+          else {
+            *pbVar10 = *pbVar10 | bVar5 >> bVar7;
+            pbVar10[1] = pbVar10[1] | bVar5 << (bVar4 & 0x1f);
+          }
+          local_10 = local_10 << 8;
+          pbVar10 = pbVar10 + 1;
+          uVar8 = uVar8 - 8;
+          iVar3 = iVar6 + -8;
+          iVar2 = iVar11;
+        } while (-1 < iVar6 + -8);
+      }
+      if (0 < iVar6) {
+        if ((int)uVar8 < iVar6) {
+          bVar5 = *param_1;
+          param_1 = param_1 + 1;
+          local_10 = CONCAT22(local_10._2_2_,
+                              (ushort)local_10 | (ushort)bVar5 << (8U - (char)uVar8 & 0x1f));
+          uVar8 = uVar8 + 8;
+        }
+        bVar5 = ~(byte)(0xff >> ((byte)iVar6 & 0x1f)) & (byte)((uint)local_10 >> 8);
+        *pbVar10 = *pbVar10 | bVar5 >> bVar7;
+        if ((int)(uint)bVar4 < iVar6) {
+          pbVar10[1] = pbVar10[1] | bVar5 << (bVar4 & 0x1f);
+        }
+        local_10 = local_10 << ((byte)iVar6 & 0x1f);
+        uVar8 = uVar8 - iVar6;
+      }
+      if (param_3 != '\0') {
+        uVar8 = 0;
+        local_10 = 0;
+      }
+      local_4 = local_4 + -1;
+      pbVar9 = pbVar9 + iVar1;
+    } while (0 < local_4);
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006960e0 : SUB ESP,0x14
+006960e3 : PUSH EBX
+006960e4 : PUSH EBP
+006960e5 : PUSH ESI
+006960e6 : PUSH EDI
+006960e7 : MOV EDI,dword ptr [EAX + 0x8]
+006960ea : XOR EBP,EBP
+006960ec : CMP EDI,EBP
+006960ee : MOV EBX,ECX
+006960f0 : MOV ECX,dword ptr [EAX + 0xc]
+006960f3 : MOV dword ptr [ESP + 0x18],EDI
+006960f7 : JGE 0x00696101
+006960f9 : MOV EDX,dword ptr [EAX]
+006960fb : DEC EDX
+006960fc : IMUL EDX,EDI
+006960ff : SUB ECX,EDX
+00696101 : MOV EAX,dword ptr [EAX]
+00696103 : MOV EDX,EDI
+00696105 : IMUL EDX,dword ptr [ESP + 0x34]
+0069610a : MOV ESI,EBX
+0069610c : SAR ESI,0x3
+0069610f : ADD ESI,ECX
+00696111 : ADD ESI,EDX
+00696113 : CMP EAX,EBP
+00696115 : MOV dword ptr [ESP + 0x1c],ESI
+00696119 : MOV dword ptr [ESP + 0x14],EBP
+0069611d : MOV dword ptr [ESP + 0x20],EAX
+00696121 : JLE 0x0069623e
+00696127 : AND BL,0x7
+0069612a : MOV AL,0x8
+0069612c : SUB AL,BL
+0069612e : MOV byte ptr [ESP + 0x12],BL
+00696132 : MOV byte ptr [ESP + 0x34],AL
+00696136 : MOV EDX,dword ptr [ESP + 0x2c]
+0069613a : CMP EDX,0x8
+0069613d : JL 0x006961ae
+0069613f : MOV EDI,0x8
+00696144 : ADD EDX,-0x8
+00696147 : SUB EDI,EBP
+00696149 : LEA ESP,[ESP]
+00696150 : CMP EBP,0x8
+00696153 : JNC 0x00696171
+00696155 : MOV EAX,dword ptr [ESP + 0x28]
+00696159 : MOVZX AX,byte ptr [EAX]
+0069615d : INC dword ptr [ESP + 0x28]
+00696161 : MOV ECX,EDI
+00696163 : SHL AX,CL
+00696166 : ADD EBP,0x8
+00696169 : OR word ptr [ESP + 0x14],AX
+0069616e : SUB EDI,0x8
+00696171 : MOV EAX,dword ptr [ESP + 0x14]
+00696175 : SHR EAX,0x8
+00696178 : TEST BL,BL
+0069617a : JZ 0x00696194
+0069617c : MOV CL,BL
+0069617e : MOVZX EBX,AL
+00696181 : SHR BL,CL
+00696183 : MOV CL,byte ptr [ESP + 0x34]
+00696187 : SHL AL,CL
+00696189 : OR byte ptr [ESI],BL
+0069618b : MOV BL,byte ptr [ESP + 0x12]
+0069618f : OR byte ptr [ESI + 0x1],AL
+00696192 : JMP 0x00696196
+00696194 : OR byte ptr [ESI],AL
+00696196 : SHL dword ptr [ESP + 0x14],0x8
+0069619b : INC ESI
+0069619c : SUB EBP,0x8
+0069619f : ADD EDI,0x8
+006961a2 : SUB EDX,0x8
+006961a5 : JNS 0x00696150
+006961a7 : MOV EDI,dword ptr [ESP + 0x18]
+006961ab : ADD EDX,0x8
+006961ae : TEST EDX,EDX
+006961b0 : JLE 0x00696216
+006961b2 : CMP EBP,EDX
+006961b4 : JGE 0x006961d5
+006961b6 : MOV EAX,dword ptr [ESP + 0x28]
+006961ba : MOVZX DI,byte ptr [EAX]
+006961be : MOV ECX,0x8
+006961c3 : SUB ECX,EBP
+006961c5 : SHL DI,CL
+006961c8 : INC EAX
+006961c9 : MOV dword ptr [ESP + 0x28],EAX
+006961cd : OR word ptr [ESP + 0x14],DI
+006961d2 : ADD EBP,0x8
+006961d5 : MOV ECX,EDX
+006961d7 : MOV EAX,0xff
+006961dc : SAR EAX,CL
+006961de : MOV ECX,dword ptr [ESP + 0x14]
+006961e2 : SHR ECX,0x8
+006961e5 : NOT AL
+006961e7 : AND AL,CL
+006961e9 : MOV CL,AL
+006961eb : MOV byte ptr [ESP + 0x13],CL
+006961ef : MOV CL,BL
+006961f1 : MOV BL,AL
+006961f3 : SHR BL,CL
+006961f5 : MOVZX ECX,byte ptr [ESP + 0x34]
+006961fa : OR byte ptr [ESI],BL
+006961fc : CMP EDX,ECX
+006961fe : JLE 0x00696205
+00696200 : SHL AL,CL
+00696202 : OR byte ptr [ESI + 0x1],AL
+00696205 : MOV BL,byte ptr [ESP + 0x12]
+00696209 : MOV EDI,dword ptr [ESP + 0x18]
+0069620d : MOV CX,DX
+00696210 : SHL dword ptr [ESP + 0x14],CL
+00696214 : SUB EBP,EDX
+00696216 : CMP byte ptr [ESP + 0x30],0x0
+0069621b : JZ 0x00696223
+0069621d : XOR EBP,EBP
+0069621f : MOV dword ptr [ESP + 0x14],EBP
+00696223 : MOV EAX,dword ptr [ESP + 0x20]
+00696227 : MOV ESI,dword ptr [ESP + 0x1c]
+0069622b : DEC EAX
+0069622c : ADD ESI,EDI
+0069622e : MOV dword ptr [ESP + 0x1c],ESI
+00696232 : MOV dword ptr [ESP + 0x20],EAX
+00696236 : TEST EAX,EAX
+00696238 : JG 0x00696136
+0069623e : POP EDI
+0069623f : POP ESI
+00696240 : POP EBP
+00696241 : POP EBX
+00696242 : ADD ESP,0x14
+00696245 : RET

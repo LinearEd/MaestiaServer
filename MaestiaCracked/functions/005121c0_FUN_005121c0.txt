@@ -1,0 +1,76 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005121c0
+ENTRY    : 005121c0
+BODY     : [[005121c0, 00512218]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_005121c0(void)
+
+{
+  GRefCountImplCore *pGVar1;
+  undefined4 *puVar2;
+  LONG LVar3;
+  GRefCountImplCore *in_ECX;
+  
+  pGVar1 = in_ECX + 8;
+  *(undefined ***)in_ECX = &PTR_FUN_00b86ca0;
+  *(undefined ***)pGVar1 = &PTR_LAB_00b86c94;
+  if (*(int **)(in_ECX + 0xc) != (int *)0x0) {
+    (**(code **)(**(int **)(in_ECX + 0xc) + 0x30))(pGVar1);
+  }
+  puVar2 = *(undefined4 **)(in_ECX + 0xc);
+  if (puVar2 != (undefined4 *)0x0) {
+    LVar3 = InterlockedExchangeAdd(puVar2 + 1,-1);
+    if ((LVar3 == 1) && (puVar2 != (undefined4 *)0x0)) {
+      (**(code **)*puVar2)(1);
+    }
+  }
+  *(undefined ***)pGVar1 = &PTR_LAB_00b86c5c;
+  GRefCountImplCore::~GRefCountImplCore(in_ECX);
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005121c0 : PUSH EBX
+005121c1 : PUSH ESI
+005121c2 : MOV ESI,ECX
+005121c4 : MOV ECX,dword ptr [ESI + 0xc]
+005121c7 : LEA EBX,[ESI + 0x8]
+005121ca : PUSH EDI
+005121cb : MOV dword ptr [ESI],0xb86ca0
+005121d1 : MOV dword ptr [EBX],0xb86c94
+005121d7 : TEST ECX,ECX
+005121d9 : JZ 0x005121e3
+005121db : MOV EAX,dword ptr [ECX]
+005121dd : MOV EDX,dword ptr [EAX + 0x30]
+005121e0 : PUSH EBX
+005121e1 : CALL EDX
+005121e3 : MOV EDI,dword ptr [ESI + 0xc]
+005121e6 : TEST EDI,EDI
+005121e8 : JZ 0x00512209
+005121ea : PUSH -0x1
+005121ec : LEA EAX,[EDI + 0x4]
+005121ef : PUSH EAX
+005121f0 : CALL dword ptr [0x00b851cc]
+005121f6 : SUB EAX,0x1
+005121f9 : JNZ 0x00512209
+005121fb : TEST EDI,EDI
+005121fd : JZ 0x00512209
+005121ff : MOV EDX,dword ptr [EDI]
+00512201 : MOV EAX,dword ptr [EDX]
+00512203 : PUSH 0x1
+00512205 : MOV ECX,EDI
+00512207 : CALL EAX
+00512209 : POP EDI
+0051220a : MOV ECX,ESI
+0051220c : POP ESI
+0051220d : MOV dword ptr [EBX],0xb86c5c
+00512213 : POP EBX
+00512214 : JMP 0x004ff7b0

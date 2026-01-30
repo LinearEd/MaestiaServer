@@ -1,0 +1,56 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005ad8f0
+ENTRY    : 005ad8f0
+BODY     : [[005ad8f0, 005ad91e]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_005ad8f0(int *param_1,char param_2)
+
+{
+  char cVar1;
+  int *in_ECX;
+  uint uVar2;
+  
+  uVar2 = 0;
+  if (in_ECX[1] != 0) {
+    do {
+      cVar1 = *(char *)(*in_ECX + uVar2);
+      if ((cVar1 == '\0') || (cVar1 == param_2)) break;
+      uVar2 = uVar2 + 1;
+    } while (uVar2 < (uint)in_ECX[1]);
+  }
+  *param_1 = *in_ECX;
+  param_1[1] = uVar2;
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005ad8f0 : PUSH ESI
+005ad8f1 : MOV ESI,dword ptr [ECX]
+005ad8f3 : PUSH EDI
+005ad8f4 : MOV EDI,dword ptr [ECX + 0x4]
+005ad8f7 : XOR EDX,EDX
+005ad8f9 : TEST EDI,EDI
+005ad8fb : JBE 0x005ad911
+005ad8fd : MOV CL,byte ptr [ESP + 0x10]
+005ad901 : MOV AL,byte ptr [ESI + EDX*0x1]
+005ad904 : TEST AL,AL
+005ad906 : JZ 0x005ad911
+005ad908 : CMP AL,CL
+005ad90a : JZ 0x005ad911
+005ad90c : INC EDX
+005ad90d : CMP EDX,EDI
+005ad90f : JC 0x005ad901
+005ad911 : MOV EAX,dword ptr [ESP + 0xc]
+005ad915 : POP EDI
+005ad916 : MOV dword ptr [EAX],ESI
+005ad918 : MOV dword ptr [EAX + 0x4],EDX
+005ad91b : POP ESI
+005ad91c : RET 0x8

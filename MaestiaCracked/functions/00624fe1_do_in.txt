@@ -1,0 +1,140 @@
+PROGRAM  : Maestia.exe
+FUNCTION : do_in
+ENTRY    : 00624fe1
+BODY     : [[00624fe1, 00625076]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Multiple Matches With Same Base Name
+    protected: virtual int __thiscall std::codecvt<unsigned short,char,int>::do_in(int &,char const
+   *,char const *,char const * &,unsigned short *,unsigned short *,unsigned short * &)const 
+    protected: virtual int __thiscall std::codecvt<wchar_t,char,int>::do_in(int &,char const *,char
+   const *,char const * &,wchar_t *,wchar_t *,wchar_t * &)const 
+   
+   Library: Visual Studio 2008 Release */
+
+bool do_in(mbstate_t *param_1,int param_2,int param_3,int *param_4,int param_5,wchar_t *param_6,
+          int *param_7)
+
+{
+  int iVar1;
+  size_t sVar2;
+  int in_ECX;
+  bool bVar3;
+  
+  *param_4 = param_2;
+  *param_7 = param_5;
+  iVar1 = *param_4;
+  bVar3 = iVar1 != param_3;
+  do {
+    if (iVar1 == param_3) {
+      return bVar3;
+    }
+    if ((wchar_t *)*param_7 == param_6) {
+      return bVar3;
+    }
+    iVar1 = __Mbrtowc((wchar_t *)*param_7,(char *)*param_4,param_3 - *param_4,param_1,
+                      (_Cvtvec *)(in_ECX + 8));
+    if (iVar1 == -2) {
+      *param_4 = param_3;
+      return bVar3;
+    }
+    if (iVar1 == -1) {
+      return (bool)2;
+    }
+    if (iVar1 == 0) {
+      if (*(short *)*param_7 == 0) {
+        sVar2 = _strlen((char *)*param_4);
+        iVar1 = sVar2 + 1;
+        goto LAB_00625050;
+      }
+    }
+    else {
+LAB_00625050:
+      if (iVar1 == -3) {
+        iVar1 = 0;
+      }
+    }
+    *param_4 = *param_4 + iVar1;
+    *param_7 = *param_7 + 2;
+    bVar3 = false;
+    iVar1 = *param_4;
+  } while( true );
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00624fe1 : MOV EDI,EDI
+00624fe3 : PUSH EBP
+00624fe4 : MOV EBP,ESP
+00624fe6 : PUSH ECX
+00624fe7 : MOV EAX,dword ptr [EBP + 0xc]
+00624fea : PUSH EBX
+00624feb : MOV EBX,dword ptr [EBP + 0x10]
+00624fee : PUSH ESI
+00624fef : MOV ESI,dword ptr [EBP + 0x14]
+00624ff2 : MOV dword ptr [ESI],EAX
+00624ff4 : MOV EAX,dword ptr [EBP + 0x18]
+00624ff7 : PUSH EDI
+00624ff8 : MOV EDI,dword ptr [EBP + 0x20]
+00624ffb : MOV dword ptr [EBP + -0x4],ECX
+00624ffe : XOR ECX,ECX
+00625000 : MOV dword ptr [EDI],EAX
+00625002 : MOV EAX,dword ptr [ESI]
+00625004 : CMP EAX,EBX
+00625006 : SETNZ CL
+00625009 : MOV dword ptr [EBP + 0x14],ECX
+0062500c : CMP EAX,EBX
+0062500e : JZ 0x0062506d
+00625010 : MOV ECX,dword ptr [EDI]
+00625012 : CMP ECX,dword ptr [EBP + 0x1c]
+00625015 : JZ 0x0062506d
+00625017 : MOV EDX,dword ptr [EBP + -0x4]
+0062501a : MOV EAX,dword ptr [ESI]
+0062501c : ADD EDX,0x8
+0062501f : PUSH EDX
+00625020 : PUSH dword ptr [EBP + 0x8]
+00625023 : MOV EDX,EBX
+00625025 : SUB EDX,EAX
+00625027 : PUSH EDX
+00625028 : PUSH EAX
+00625029 : PUSH ECX
+0062502a : CALL 0x0063389a
+0062502f : ADD ESP,0x14
+00625032 : CMP EAX,-0x2
+00625035 : JZ 0x0062506b
+00625037 : CMP EAX,-0x1
+0062503a : JZ 0x00625066
+0062503c : TEST EAX,EAX
+0062503e : JNZ 0x00625050
+00625040 : MOV ECX,dword ptr [EDI]
+00625042 : CMP word ptr [ECX],AX
+00625045 : JNZ 0x00625057
+00625047 : PUSH dword ptr [ESI]
+00625049 : CALL 0x00640960
+0062504e : POP ECX
+0062504f : INC EAX
+00625050 : CMP EAX,-0x3
+00625053 : JNZ 0x00625057
+00625055 : XOR EAX,EAX
+00625057 : ADD dword ptr [ESI],EAX
+00625059 : ADD dword ptr [EDI],0x2
+0062505c : AND dword ptr [EBP + 0x14],0x0
+00625060 : CMP dword ptr [ESI],EBX
+00625062 : JNZ 0x00625010
+00625064 : JMP 0x0062506d
+00625066 : PUSH 0x2
+00625068 : POP EAX
+00625069 : JMP 0x00625070
+0062506b : MOV dword ptr [ESI],EBX
+0062506d : MOV EAX,dword ptr [EBP + 0x14]
+00625070 : POP EDI
+00625071 : POP ESI
+00625072 : POP EBX
+00625073 : LEAVE
+00625074 : RET 0x1c

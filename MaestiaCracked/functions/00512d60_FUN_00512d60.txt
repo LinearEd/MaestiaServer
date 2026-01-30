@@ -1,0 +1,93 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00512d60
+ENTRY    : 00512d60
+BODY     : [[00512d60, 00512dda]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00512d60(void)
+
+{
+  int *piVar1;
+  GRefCountImpl *this;
+  int in_ECX;
+  
+  this = (GRefCountImpl *)(**(code **)(*(int *)(*(int *)(in_ECX + 0x14) + 8) + 0xc))(0x17);
+  if (this == (GRefCountImpl *)0x0) {
+    return;
+  }
+  EnterCriticalSection((LPCRITICAL_SECTION)(in_ECX + 0x24));
+  piVar1 = *(int **)(in_ECX + 0x20);
+  while (piVar1 != (int *)(in_ECX + 0x1c)) {
+    *(int *)(*piVar1 + 4) = piVar1[1];
+    *(int *)piVar1[1] = *piVar1;
+    (**(code **)(*(int *)this + 8))(piVar1[2]);
+    FUN_00515cf0(piVar1);
+    piVar1 = *(int **)(in_ECX + 0x20);
+  }
+  LeaveCriticalSection((LPCRITICAL_SECTION)(in_ECX + 0x24));
+  GRefCountImpl::Release(this);
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00512d60 : PUSH ECX
+00512d61 : PUSH EBX
+00512d62 : PUSH EDI
+00512d63 : MOV EDI,ECX
+00512d65 : MOV ECX,dword ptr [EDI + 0x14]
+00512d68 : MOV EAX,dword ptr [ECX + 0x8]
+00512d6b : MOV EDX,dword ptr [EAX + 0xc]
+00512d6e : ADD ECX,0x8
+00512d71 : PUSH 0x17
+00512d73 : CALL EDX
+00512d75 : MOV EBX,EAX
+00512d77 : TEST EBX,EBX
+00512d79 : JZ 0x00512dd7
+00512d7b : PUSH EBP
+00512d7c : LEA EAX,[EDI + 0x24]
+00512d7f : PUSH ESI
+00512d80 : PUSH EAX
+00512d81 : MOV dword ptr [ESP + 0x14],EAX
+00512d85 : CALL dword ptr [0x00b85118]
+00512d8b : MOV ESI,dword ptr [EDI + 0x20]
+00512d8e : LEA EBP,[EDI + 0x1c]
+00512d91 : CMP ESI,EBP
+00512d93 : JZ 0x00512dbe
+00512d95 : MOV EAX,dword ptr [ESI]
+00512d97 : MOV ECX,dword ptr [ESI + 0x4]
+00512d9a : MOV dword ptr [EAX + 0x4],ECX
+00512d9d : MOV EDX,dword ptr [ESI + 0x4]
+00512da0 : MOV EAX,dword ptr [ESI]
+00512da2 : MOV dword ptr [EDX],EAX
+00512da4 : MOV EDX,dword ptr [EBX]
+00512da6 : MOV EAX,dword ptr [ESI + 0x8]
+00512da9 : MOV EDX,dword ptr [EDX + 0x8]
+00512dac : PUSH EAX
+00512dad : MOV ECX,EBX
+00512daf : CALL EDX
+00512db1 : PUSH ESI
+00512db2 : CALL 0x00515cf0
+00512db7 : MOV ESI,dword ptr [EDI + 0x20]
+00512dba : CMP ESI,EBP
+00512dbc : JNZ 0x00512d95
+00512dbe : MOV EAX,dword ptr [ESP + 0x10]
+00512dc2 : PUSH EAX
+00512dc3 : CALL dword ptr [0x00b8511c]
+00512dc9 : POP ESI
+00512dca : POP EBP
+00512dcb : POP EDI
+00512dcc : MOV ECX,EBX
+00512dce : POP EBX
+00512dcf : ADD ESP,0x4
+00512dd2 : JMP 0x004ff7e0
+00512dd7 : POP EDI
+00512dd8 : POP EBX
+00512dd9 : POP ECX
+00512dda : RET

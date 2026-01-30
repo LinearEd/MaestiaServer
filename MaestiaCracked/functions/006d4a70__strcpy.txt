@@ -1,0 +1,117 @@
+PROGRAM  : Maestia.exe
+FUNCTION : _strcpy
+ENTRY    : 006d4a70
+BODY     : [[006d4a70, 006d4a76] [006d4ae5, 006d4b67]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    _strcpy
+   
+   Library: Visual Studio */
+
+char * __cdecl _strcpy(char *_Dest,char *_Source)
+
+{
+  byte bVar1;
+  uint uVar2;
+  uint uVar3;
+  uint *puVar4;
+  
+  puVar4 = (uint *)_Dest;
+  while (((uint)_Source & 3) != 0) {
+    bVar1 = (byte)*(uint *)_Source;
+    uVar3 = (uint)bVar1;
+    _Source = (char *)((int)_Source + 1);
+    if (bVar1 == 0) goto LAB_006d4b60;
+    *(byte *)puVar4 = bVar1;
+    puVar4 = (uint *)((int)puVar4 + 1);
+  }
+  do {
+    uVar2 = *(uint *)_Source;
+    uVar3 = *(uint *)_Source;
+    _Source = (char *)((int)_Source + 4);
+    if (((uVar2 ^ 0xffffffff ^ uVar2 + 0x7efefeff) & 0x81010100) != 0) {
+      if ((char)uVar3 == '\0') {
+LAB_006d4b60:
+        *(byte *)puVar4 = (byte)uVar3;
+        return _Dest;
+      }
+      if ((char)(uVar3 >> 8) == '\0') {
+        *(short *)puVar4 = (short)uVar3;
+        return _Dest;
+      }
+      if ((uVar3 & 0xff0000) == 0) {
+        *(short *)puVar4 = (short)uVar3;
+        *(byte *)((int)puVar4 + 2) = 0;
+        return _Dest;
+      }
+      if ((uVar3 & 0xff000000) == 0) {
+        *puVar4 = uVar3;
+        return _Dest;
+      }
+    }
+    *puVar4 = uVar3;
+    puVar4 = puVar4 + 1;
+  } while( true );
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006d4a70 : PUSH EDI
+006d4a71 : MOV EDI,dword ptr [ESP + 0x8]
+006d4a75 : JMP 0x006d4ae5
+006d4ae5 : MOV ECX,dword ptr [ESP + 0xc]
+006d4ae9 : TEST ECX,0x3
+006d4aef : JZ 0x006d4b0e
+006d4af1 : MOV DL,byte ptr [ECX]
+006d4af3 : ADD ECX,0x1
+006d4af6 : TEST DL,DL
+006d4af8 : JZ 0x006d4b60
+006d4afa : MOV byte ptr [EDI],DL
+006d4afc : ADD EDI,0x1
+006d4aff : TEST ECX,0x3
+006d4b05 : JNZ 0x006d4af1
+006d4b07 : JMP 0x006d4b0e
+006d4b09 : MOV dword ptr [EDI],EDX
+006d4b0b : ADD EDI,0x4
+006d4b0e : MOV EDX,0x7efefeff
+006d4b13 : MOV EAX,dword ptr [ECX]
+006d4b15 : ADD EDX,EAX
+006d4b17 : XOR EAX,0xffffffff
+006d4b1a : XOR EAX,EDX
+006d4b1c : MOV EDX,dword ptr [ECX]
+006d4b1e : ADD ECX,0x4
+006d4b21 : TEST EAX,0x81010100
+006d4b26 : JZ 0x006d4b09
+006d4b28 : TEST DL,DL
+006d4b2a : JZ 0x006d4b60
+006d4b2c : TEST DH,DH
+006d4b2e : JZ 0x006d4b57
+006d4b30 : TEST EDX,0xff0000
+006d4b36 : JZ 0x006d4b4a
+006d4b38 : TEST EDX,0xff000000
+006d4b3e : JZ 0x006d4b42
+006d4b40 : JMP 0x006d4b09
+006d4b42 : MOV dword ptr [EDI],EDX
+006d4b44 : MOV EAX,dword ptr [ESP + 0x8]
+006d4b48 : POP EDI
+006d4b49 : RET
+006d4b4a : MOV word ptr [EDI],DX
+006d4b4d : MOV EAX,dword ptr [ESP + 0x8]
+006d4b51 : MOV byte ptr [EDI + 0x2],0x0
+006d4b55 : POP EDI
+006d4b56 : RET
+006d4b57 : MOV word ptr [EDI],DX
+006d4b5a : MOV EAX,dword ptr [ESP + 0x8]
+006d4b5e : POP EDI
+006d4b5f : RET
+006d4b60 : MOV byte ptr [EDI],DL
+006d4b62 : MOV EAX,dword ptr [ESP + 0x8]
+006d4b66 : POP EDI
+006d4b67 : RET

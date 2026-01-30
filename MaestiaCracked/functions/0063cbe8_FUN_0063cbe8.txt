@@ -1,0 +1,85 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0063cbe8
+ENTRY    : 0063cbe8
+BODY     : [[0063cbe8, 0063cc45] [0063cc4b, 0063cc69] [0065747e, 0065748a]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+float10 FUN_0063cbe8(int param_1)
+
+{
+  uint in_EAX;
+  bool in_ZF;
+  unkbyte10 in_ST0;
+  float10 fVar1;
+  
+  if (in_ZF) {
+    if (((in_EAX & 0xfffff) != 0) || (param_1 != 0)) {
+      fVar1 = (float10)FUN_0065740c();
+      if (DAT_00d7b7d8 != 0) {
+        return fVar1;
+      }
+      fVar1 = (float10)__startOneArgErrorHandling();
+      return fVar1;
+    }
+    fVar1 = _DAT_00d67fca;
+    if ((in_EAX & 0x80000000) != 0) {
+      fVar1 = -_DAT_00d67fca;
+    }
+  }
+  else {
+    fVar1 = (float10)fpatan(in_ST0,(float10)1);
+  }
+  if (DAT_00d7b7d8 != 0) {
+    return fVar1;
+  }
+  fVar1 = (float10)__math_exit();
+  return fVar1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0063cbe8 : PUSH EDX
+0063cbe9 : FSTCW word ptr [ESP]
+0063cbed : JZ 0x0063cc25
+0063cbef : CMP word ptr [ESP],0x27f
+0063cbf5 : JZ 0x0063cbfd
+0063cbf7 : FLDCW word ptr [0x00b9d388]
+0063cbfd : FLD1
+0063cbff : FPATAN
+0063cc01 : CMP dword ptr [0x00d7b7d8],0x0
+0063cc08 : JNZ 0x0065747e
+0063cc0e : MOV EDX,0xf
+0063cc13 : LEA ECX,[0xd670a0]
+0063cc19 : JMP 0x0065748b
+0063cc1e : CALL 0x0065740c
+0063cc23 : JMP 0x0063cc4b
+0063cc25 : TEST EAX,0xfffff
+0063cc2a : JNZ 0x0063cc1e
+0063cc2c : CMP dword ptr [ESP + 0x8],0x0
+0063cc31 : JNZ 0x0063cc1e
+0063cc33 : FSTP ST0
+0063cc35 : FLD extended double ptr [0x00d67fca]
+0063cc3b : TEST EAX,0x80000000
+0063cc40 : JZ 0x0063cc01
+0063cc42 : FCHS
+0063cc44 : JMP 0x0063cc01
+0063cc4b : CMP dword ptr [0x00d7b7d8],0x0
+0063cc52 : JNZ 0x0065747e
+0063cc58 : MOV EDX,0xf
+0063cc5d : LEA ECX,[0xd670a0]
+0063cc63 : CALL 0x00657587
+0063cc68 : POP EDX
+0063cc69 : RET
+0065747e : CMP word ptr [ESP],0x27f
+00657484 : JZ 0x00657489
+00657486 : FLDCW word ptr [ESP]
+00657489 : POP EDX
+0065748a : RET

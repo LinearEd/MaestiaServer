@@ -1,0 +1,61 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005845f0
+ENTRY    : 005845f0
+BODY     : [[005845f0, 00584621]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined4 FUN_005845f0(undefined4 *param_1)
+
+{
+  char cVar1;
+  undefined4 uVar2;
+  char *pcVar3;
+  
+  pcVar3 = *(char **)*param_1;
+  cVar1 = *pcVar3;
+  do {
+    if (cVar1 == '\0') {
+LAB_00584610:
+      uVar2 = FUN_00634f2c();
+      return uVar2;
+    }
+    if ((cVar1 < '0') || ('9' < cVar1)) {
+      if (*pcVar3 != '\0') {
+        return 0xffffffff;
+      }
+      goto LAB_00584610;
+    }
+    cVar1 = pcVar3[1];
+    pcVar3 = pcVar3 + 1;
+  } while( true );
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005845f0 : MOV EAX,dword ptr [ESP + 0x4]
+005845f4 : MOV ECX,dword ptr [EAX]
+005845f6 : MOV EDX,dword ptr [ECX]
+005845f8 : MOV ECX,EDX
+005845fa : MOV AL,byte ptr [ECX]
+005845fc : TEST AL,AL
+005845fe : JZ 0x00584610
+00584600 : CMP AL,0x30
+00584602 : JL 0x00584619
+00584604 : CMP AL,0x39
+00584606 : JG 0x00584619
+00584608 : MOV AL,byte ptr [ECX + 0x1]
+0058460b : INC ECX
+0058460c : TEST AL,AL
+0058460e : JNZ 0x00584600
+00584610 : MOV dword ptr [ESP + 0x4],EDX
+00584614 : JMP 0x00634f2c
+00584619 : CMP byte ptr [ECX],0x0
+0058461c : JZ 0x00584610
+0058461e : OR EAX,0xffffffff
+00584621 : RET

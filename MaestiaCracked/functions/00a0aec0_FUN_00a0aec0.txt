@@ -1,0 +1,89 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00a0aec0
+ENTRY    : 00a0aec0
+BODY     : [[00a0aec0, 00a0af3f]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+uint FUN_00a0aec0(void)
+
+{
+  HANDLE Process;
+  BOOL BVar1;
+  PROCESS_MEMORY_COUNTERS *ppsmemCounters;
+  DWORD cb;
+  _MEMORYSTATUSEX local_6c;
+  PROCESS_MEMORY_COUNTERS local_2c;
+  
+  cb = 0x28;
+  ppsmemCounters = &local_2c;
+  local_2c.cb = 0x28;
+  Process = GetCurrentProcess();
+  BVar1 = GetProcessMemoryInfo(Process,ppsmemCounters,cb);
+  if (BVar1 == 0) {
+    return 0;
+  }
+  if (DAT_017247d8 == 0 && DAT_017247dc == 0) {
+    _memset(&local_6c,0,0x40);
+    local_6c.dwLength = 0x40;
+    GlobalMemoryStatusEx(&local_6c);
+    DAT_017247d8 = local_6c.ullTotalVirtual._0_4_;
+    DAT_017247dc = local_6c.ullTotalVirtual._4_4_;
+  }
+  return DAT_017247d8 - local_2c.WorkingSetSize >> 0x14 |
+         (DAT_017247dc - (uint)(DAT_017247d8 < local_2c.WorkingSetSize)) * 0x1000;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00a0aec0 : PUSH EBP
+00a0aec1 : MOV EBP,ESP
+00a0aec3 : SUB ESP,0x6c
+00a0aec6 : PUSH ESI
+00a0aec7 : PUSH 0x28
+00a0aec9 : LEA EAX,[EBP + -0x28]
+00a0aecc : PUSH EAX
+00a0aecd : MOV dword ptr [EBP + -0x28],0x28
+00a0aed4 : CALL dword ptr [0x00b85134]
+00a0aeda : PUSH EAX
+00a0aedb : CALL 0x0061146e
+00a0aee0 : TEST EAX,EAX
+00a0aee2 : JNZ 0x00a0aee9
+00a0aee4 : POP ESI
+00a0aee5 : MOV ESP,EBP
+00a0aee7 : POP EBP
+00a0aee8 : RET
+00a0aee9 : MOV EAX,[0x017247d8]
+00a0aeee : MOV ECX,dword ptr [0x017247dc]
+00a0aef4 : MOV EDX,EAX
+00a0aef6 : OR EDX,ECX
+00a0aef8 : JNZ 0x00a0af2b
+00a0aefa : PUSH 0x40
+00a0aefc : PUSH EDX
+00a0aefd : LEA EAX,[EBP + -0x68]
+00a0af00 : PUSH EAX
+00a0af01 : CALL 0x0063b700
+00a0af06 : ADD ESP,0xc
+00a0af09 : LEA ECX,[EBP + -0x68]
+00a0af0c : PUSH ECX
+00a0af0d : MOV dword ptr [EBP + -0x68],0x40
+00a0af14 : CALL dword ptr [0x00b85138]
+00a0af1a : MOV EAX,dword ptr [EBP + -0x40]
+00a0af1d : MOV ECX,dword ptr [EBP + -0x3c]
+00a0af20 : MOV [0x017247d8],EAX
+00a0af25 : MOV dword ptr [0x017247dc],ECX
+00a0af2b : MOV EDX,dword ptr [EBP + -0x1c]
+00a0af2e : XOR ESI,ESI
+00a0af30 : SUB EAX,EDX
+00a0af32 : SBB ECX,ESI
+00a0af34 : SHRD EAX,ECX,0x14
+00a0af38 : SHR ECX,0x14
+00a0af3b : POP ESI
+00a0af3c : MOV ESP,EBP
+00a0af3e : POP EBP
+00a0af3f : RET

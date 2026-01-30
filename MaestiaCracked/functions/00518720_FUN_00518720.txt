@@ -1,0 +1,135 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00518720
+ENTRY    : 00518720
+BODY     : [[00518720, 005187f1]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+GSemaphore * FUN_00518720(byte param_1)
+
+{
+  GSemaphore *pGVar1;
+  int iVar2;
+  LONG *Addend;
+  GSemaphore *pGVar3;
+  LONG LVar4;
+  GSemaphore *in_ECX;
+  GRefCountImplCore *this;
+  
+  if ((param_1 & 2) == 0) {
+    GSemaphore::~GSemaphore(in_ECX);
+    if ((param_1 & 1) != 0) {
+      FUN_00515cf0(in_ECX);
+    }
+  }
+  else {
+    iVar2 = *(int *)(in_ECX + -4);
+    pGVar1 = in_ECX + -4;
+    pGVar3 = in_ECX + iVar2 * 0x30;
+    while (iVar2 = iVar2 + -1, -1 < iVar2) {
+      this = (GRefCountImplCore *)(pGVar3 + -0x30);
+      *(undefined ***)this = &PTR_FUN_00b871b0;
+      *(undefined ***)(pGVar3 + -0x24) = &PTR_LAB_00b8719c;
+      GWaitCondition::~GWaitCondition((GWaitCondition *)(pGVar3 + -4));
+      GMutex::~GMutex((GMutex *)(pGVar3 + -0x18));
+      Addend = *(LONG **)(pGVar3 + -0x28);
+      *(undefined ***)(pGVar3 + -0x24) = &PTR_FUN_00cd40d4;
+      *(undefined ***)this = &PTR_FUN_00b87170;
+      if (((Addend != (LONG *)0x0) && (LVar4 = InterlockedExchangeAdd(Addend,-1), LVar4 == 1)) &&
+         (Addend != (LONG *)0x0)) {
+        FUN_005a20f0();
+        FUN_00515cf0(Addend[1]);
+        FUN_00515cf0(Addend);
+      }
+      GRefCountImplCore::~GRefCountImplCore(this);
+      pGVar3 = (GSemaphore *)this;
+    }
+    in_ECX = pGVar1;
+    if ((param_1 & 1) != 0) {
+      FUN_006f05d0(pGVar1);
+      return pGVar1;
+    }
+  }
+  return in_ECX;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00518720 : PUSH ECX
+00518721 : PUSH EBX
+00518722 : MOV BL,byte ptr [ESP + 0xc]
+00518726 : PUSH EDI
+00518727 : MOV EDI,ECX
+00518729 : TEST BL,0x2
+0051872c : JZ 0x005187da
+00518732 : PUSH EBP
+00518733 : MOV EBP,dword ptr [EDI + -0x4]
+00518736 : LEA EAX,[EDI + -0x4]
+00518739 : PUSH ESI
+0051873a : LEA ESI,[EBP + EBP*0x2]
+0051873e : SHL ESI,0x4
+00518741 : ADD ESI,EDI
+00518743 : SUB EBP,0x1
+00518746 : MOV dword ptr [ESP + 0x10],EAX
+0051874a : JS 0x005187c0
+0051874c : MOV EBX,0xcd40d4
+00518751 : SUB ESI,0x30
+00518754 : LEA EDI,[ESI + 0x18]
+00518757 : LEA ECX,[EDI + 0x14]
+0051875a : MOV dword ptr [ESI],0xb871b0
+00518760 : MOV dword ptr [ESI + 0xc],0xb8719c
+00518767 : CALL 0x00516ba0
+0051876c : MOV ECX,EDI
+0051876e : CALL 0x00516b60
+00518773 : MOV EDI,dword ptr [ESI + 0x8]
+00518776 : MOV dword ptr [ESI + 0xc],EBX
+00518779 : MOV dword ptr [ESI],0xb87170
+0051877f : TEST EDI,EDI
+00518781 : JZ 0x005187ac
+00518783 : PUSH -0x1
+00518785 : PUSH EDI
+00518786 : CALL dword ptr [0x00b851cc]
+0051878c : SUB EAX,0x1
+0051878f : JNZ 0x005187ac
+00518791 : TEST EDI,EDI
+00518793 : JZ 0x005187ac
+00518795 : LEA ECX,[EDI + 0x10]
+00518798 : CALL 0x005a20f0
+0051879d : MOV EAX,dword ptr [EDI + 0x4]
+005187a0 : PUSH EAX
+005187a1 : CALL 0x00515cf0
+005187a6 : PUSH EDI
+005187a7 : CALL 0x00515cf0
+005187ac : MOV ECX,ESI
+005187ae : CALL 0x004ff7b0
+005187b3 : SUB EBP,0x1
+005187b6 : JNS 0x00518751
+005187b8 : MOV EAX,dword ptr [ESP + 0x10]
+005187bc : MOV BL,byte ptr [ESP + 0x18]
+005187c0 : POP ESI
+005187c1 : POP EBP
+005187c2 : TEST BL,0x1
+005187c5 : JZ 0x005187ec
+005187c7 : PUSH EAX
+005187c8 : CALL 0x006f05d0
+005187cd : MOV EAX,dword ptr [ESP + 0xc]
+005187d1 : ADD ESP,0x4
+005187d4 : POP EDI
+005187d5 : POP EBX
+005187d6 : POP ECX
+005187d7 : RET 0x4
+005187da : CALL 0x00518200
+005187df : TEST BL,0x1
+005187e2 : JZ 0x005187ea
+005187e4 : PUSH EDI
+005187e5 : CALL 0x00515cf0
+005187ea : MOV EAX,EDI
+005187ec : POP EDI
+005187ed : POP EBX
+005187ee : POP ECX
+005187ef : RET 0x4

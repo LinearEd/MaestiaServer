@@ -1,0 +1,85 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00570200
+ENTRY    : 00570200
+BODY     : [[00570200, 00570270]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+uint FUN_00570200(undefined4 *param_1,uint param_2)
+
+{
+  int iVar1;
+  uint uVar2;
+  int *in_ECX;
+  uint *puVar3;
+  
+  iVar1 = *in_ECX;
+  puVar3 = (uint *)(iVar1 + 8 + param_2 * 0x1c);
+  if ((*(int *)(iVar1 + 8 + param_2 * 0x1c) != -2) &&
+     (uVar2 = param_2, (*(uint *)(puVar3[1] + 0xc) & *(uint *)(iVar1 + 4)) == param_2)) {
+    while (((*(uint *)(puVar3[1] + 0xc) & *(uint *)(iVar1 + 4)) != param_2 ||
+           (puVar3[1] != *(uint *)*param_1))) {
+      uVar2 = *puVar3;
+      if (uVar2 == 0xffffffff) {
+        return 0xffffffff;
+      }
+      puVar3 = (uint *)(iVar1 + 8 + uVar2 * 0x1c);
+    }
+    return uVar2;
+  }
+  return 0xffffffff;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00570200 : PUSH EBX
+00570201 : PUSH ESI
+00570202 : MOV ESI,dword ptr [ESP + 0x10]
+00570206 : PUSH EDI
+00570207 : MOV EDI,dword ptr [ECX]
+00570209 : LEA ECX,[ESI*0x8 + 0x0]
+00570210 : SUB ECX,ESI
+00570212 : CMP dword ptr [EDI + ECX*0x4 + 0x8],-0x2
+00570217 : LEA ECX,[EDI + ECX*0x4 + 0x8]
+0057021b : MOV EAX,ESI
+0057021d : JZ 0x00570268
+0057021f : MOV EDX,dword ptr [ECX + 0x4]
+00570222 : MOV EBX,dword ptr [EDI + 0x4]
+00570225 : MOV EDX,dword ptr [EDX + 0xc]
+00570228 : AND EDX,EBX
+0057022a : CMP EDX,ESI
+0057022c : JNZ 0x00570268
+0057022e : PUSH EBP
+0057022f : NOP
+00570230 : MOV EDX,dword ptr [ECX + 0x4]
+00570233 : MOV EBP,dword ptr [EDX + 0xc]
+00570236 : AND EBP,EBX
+00570238 : CMP EBP,ESI
+0057023a : JNZ 0x00570248
+0057023c : MOV EBP,dword ptr [ESP + 0x14]
+00570240 : MOV EBP,dword ptr [EBP]
+00570243 : CMP EDX,dword ptr [EBP]
+00570246 : JZ 0x00570261
+00570248 : MOV EAX,dword ptr [ECX]
+0057024a : CMP EAX,-0x1
+0057024d : JZ 0x0057025e
+0057024f : LEA ECX,[EAX*0x8 + 0x0]
+00570256 : SUB ECX,EAX
+00570258 : LEA ECX,[EDI + ECX*0x4 + 0x8]
+0057025c : JMP 0x00570230
+0057025e : OR EAX,0xffffffff
+00570261 : POP EBP
+00570262 : POP EDI
+00570263 : POP ESI
+00570264 : POP EBX
+00570265 : RET 0x8
+00570268 : POP EDI
+00570269 : POP ESI
+0057026a : OR EAX,0xffffffff
+0057026d : POP EBX
+0057026e : RET 0x8

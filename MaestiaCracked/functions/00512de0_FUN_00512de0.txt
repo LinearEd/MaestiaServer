@@ -1,0 +1,182 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00512de0
+ENTRY    : 00512de0
+BODY     : [[00512de0, 00512f24]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+GRefCountImpl * FUN_00512de0(undefined4 *param_1,undefined4 *param_2)
+
+{
+  undefined4 in_EAX;
+  GRefCountImpl *this;
+  undefined4 uVar1;
+  LONG LVar2;
+  uint unaff_EBX;
+  uint local_8;
+  uint local_4;
+  
+  this = (GRefCountImpl *)FUN_005a0320(in_EAX,unaff_EBX);
+  if (this == (GRefCountImpl *)0x0) {
+    uVar1 = FUN_0051c4c0("GFxLoader failed to open \"",in_EAX,&DAT_00b86d78);
+    FUN_0051bc20(uVar1);
+    LVar2 = InterlockedExchangeAdd((LONG *)((local_8 & 0xfffffffc) + 4),-1);
+    if (LVar2 == 1) {
+      FUN_00515cf0(local_8 & 0xfffffffc);
+      return (GRefCountImpl *)0x0;
+    }
+  }
+  else {
+    uVar1 = FUN_00512840(this);
+    *param_1 = uVar1;
+    switch(uVar1) {
+    case 2:
+      if ((unaff_EBX & 0x80000) != 0) {
+        uVar1 = FUN_0051c4c0("Error loading SWF file \"",in_EAX,"\" - GFX file format expected\n");
+        FUN_0051bc20(uVar1);
+        FUN_0045b730();
+        GRefCountImpl::Release(this);
+        return (GRefCountImpl *)0x0;
+      }
+    case 3:
+      *param_2 = 1;
+LAB_00512ec4:
+      GRefCountImpl::AddRef(this);
+      GRefCountImpl::Release(this);
+      return this;
+    case 10:
+    case 0xb:
+    case 0xd:
+    case 0xe:
+      if ((unaff_EBX & 0x10000) != 0) {
+        *param_2 = 2;
+        goto LAB_00512ec4;
+      }
+    }
+    uVar1 = FUN_0051c4c0("Unknown file format at URL \"",in_EAX,&DAT_00b86d78);
+    FUN_0051bc20(uVar1);
+    LVar2 = InterlockedExchangeAdd((LONG *)((local_4 & 0xfffffffc) + 4),-1);
+    if (LVar2 == 1) {
+      FUN_00515cf0(local_4 & 0xfffffffc);
+    }
+    GRefCountImpl::Release(this);
+  }
+  return (GRefCountImpl *)0x0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00512de0 : SUB ESP,0x8
+00512de3 : PUSH EBP
+00512de4 : MOV EBP,dword ptr [ESP + 0x18]
+00512de8 : PUSH ESI
+00512de9 : PUSH EDI
+00512dea : MOV EDI,EAX
+00512dec : PUSH EBX
+00512ded : PUSH EDI
+00512dee : CALL 0x005a0320
+00512df3 : MOV ESI,EAX
+00512df5 : TEST ESI,ESI
+00512df7 : JNZ 0x00512e40
+00512df9 : PUSH 0xb86d78
+00512dfe : PUSH EDI
+00512dff : PUSH 0xb86d5c
+00512e04 : LEA ECX,[ESP + 0x18]
+00512e08 : CALL 0x0051c4c0
+00512e0d : PUSH EAX
+00512e0e : MOV ECX,EBP
+00512e10 : CALL 0x0051bc20
+00512e15 : MOV ESI,dword ptr [ESP + 0xc]
+00512e19 : AND ESI,0xfffffffc
+00512e1c : PUSH -0x1
+00512e1e : LEA EAX,[ESI + 0x4]
+00512e21 : PUSH EAX
+00512e22 : CALL dword ptr [0x00b851cc]
+00512e28 : SUB EAX,0x1
+00512e2b : JNZ 0x00512f1c
+00512e31 : PUSH ESI
+00512e32 : CALL 0x00515cf0
+00512e37 : POP EDI
+00512e38 : POP ESI
+00512e39 : XOR EAX,EAX
+00512e3b : POP EBP
+00512e3c : ADD ESP,0x8
+00512e3f : RET
+00512e40 : PUSH ESI
+00512e41 : CALL 0x00512840
+00512e46 : MOV ECX,dword ptr [ESP + 0x1c]
+00512e4a : MOV dword ptr [ECX],EAX
+00512e4c : ADD EAX,-0x2
+00512e4f : ADD ESP,0x4
+00512e52 : CMP EAX,0xc
+00512e55 : JA 0x00512edb
+00512e5b : MOVZX EDX,byte ptr [EAX + 0x512f38]
+00512e62 : JMP dword ptr [EDX*0x4 + 0x512f28]
+00512e69 : TEST EBX,0x80000
+00512e6f : JZ 0x00512ea6
+00512e71 : PUSH 0xb86d3c
+00512e76 : PUSH EDI
+00512e77 : PUSH 0xb86d20
+00512e7c : LEA ECX,[ESP + 0x18]
+00512e80 : CALL 0x0051c4c0
+00512e85 : PUSH EAX
+00512e86 : MOV ECX,EBP
+00512e88 : CALL 0x0051bc20
+00512e8d : LEA ECX,[ESP + 0xc]
+00512e91 : CALL 0x0045b730
+00512e96 : MOV ECX,ESI
+00512e98 : CALL 0x004ff7e0
+00512e9d : POP EDI
+00512e9e : POP ESI
+00512e9f : XOR EAX,EAX
+00512ea1 : POP EBP
+00512ea2 : ADD ESP,0x8
+00512ea5 : RET
+00512ea6 : MOV EAX,dword ptr [ESP + 0x1c]
+00512eaa : MOV dword ptr [EAX],0x1
+00512eb0 : JMP 0x00512ec4
+00512eb2 : TEST EBX,0x10000
+00512eb8 : JZ 0x00512edb
+00512eba : MOV ECX,dword ptr [ESP + 0x1c]
+00512ebe : MOV dword ptr [ECX],0x2
+00512ec4 : MOV ECX,ESI
+00512ec6 : CALL 0x00523dd0
+00512ecb : MOV ECX,ESI
+00512ecd : CALL 0x004ff7e0
+00512ed2 : POP EDI
+00512ed3 : MOV EAX,ESI
+00512ed5 : POP ESI
+00512ed6 : POP EBP
+00512ed7 : ADD ESP,0x8
+00512eda : RET
+00512edb : PUSH 0xb86d78
+00512ee0 : PUSH EDI
+00512ee1 : PUSH 0xb86d00
+00512ee6 : LEA ECX,[ESP + 0x1c]
+00512eea : CALL 0x0051c4c0
+00512eef : PUSH EAX
+00512ef0 : MOV ECX,EBP
+00512ef2 : CALL 0x0051bc20
+00512ef7 : MOV EDI,dword ptr [ESP + 0x10]
+00512efb : AND EDI,0xfffffffc
+00512efe : PUSH -0x1
+00512f00 : LEA EDX,[EDI + 0x4]
+00512f03 : PUSH EDX
+00512f04 : CALL dword ptr [0x00b851cc]
+00512f0a : SUB EAX,0x1
+00512f0d : JNZ 0x00512f15
+00512f0f : PUSH EDI
+00512f10 : CALL 0x00515cf0
+00512f15 : MOV ECX,ESI
+00512f17 : CALL 0x004ff7e0
+00512f1c : POP EDI
+00512f1d : POP ESI
+00512f1e : XOR EAX,EAX
+00512f20 : POP EBP
+00512f21 : ADD ESP,0x8
+00512f24 : RET

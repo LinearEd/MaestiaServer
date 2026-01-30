@@ -1,0 +1,48 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00753d50
+ENTRY    : 00753d50
+BODY     : [[00753d50, 00753d7d]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+bool FUN_00753d50(void)
+
+{
+  int *in_EAX;
+  int in_ECX;
+  
+  if ((in_EAX[0xf] != 0) && (*(int *)(in_ECX + 4) == *in_EAX)) {
+    if (*(float *)(in_ECX + 0x54) <= (float)in_EAX[0x10] &&
+        (float)in_EAX[0x10] != *(float *)(in_ECX + 0x54)) {
+      return true;
+    }
+    return false;
+  }
+  return *in_EAX < *(int *)(in_ECX + 4);
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00753d50 : CMP dword ptr [EAX + 0x3c],0x0
+00753d54 : JZ 0x00753d71
+00753d56 : MOV EDX,dword ptr [ECX + 0x4]
+00753d59 : CMP EDX,dword ptr [EAX]
+00753d5b : JNZ 0x00753d71
+00753d5d : MOVSS XMM0,dword ptr [EAX + 0x40]
+00753d62 : COMISS XMM0,dword ptr [ECX + 0x54]
+00753d66 : JBE 0x00753d6e
+00753d68 : MOV EAX,0x1
+00753d6d : RET
+00753d6e : XOR EAX,EAX
+00753d70 : RET
+00753d71 : MOV ECX,dword ptr [ECX + 0x4]
+00753d74 : XOR EDX,EDX
+00753d76 : CMP ECX,dword ptr [EAX]
+00753d78 : SETG DL
+00753d7b : MOV EAX,EDX
+00753d7d : RET

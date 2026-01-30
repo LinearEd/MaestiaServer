@@ -1,0 +1,84 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005c2200
+ENTRY    : 005c2200
+BODY     : [[005c2200, 005c226c]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+int FUN_005c2200(int param_1)
+
+{
+  byte *pbVar1;
+  char cVar2;
+  int iVar3;
+  int iVar4;
+  
+  cVar2 = FUN_00526030(0x23);
+  if (cVar2 == '\0') {
+    iVar3 = FUN_00526050(&DAT_00b8fdec,0,0);
+    return iVar3;
+  }
+  if (*(int *)(param_1 + 8) == 0) {
+    iVar3 = 0;
+  }
+  else {
+    iVar3 = *(int *)(param_1 + 8) + -0x10;
+  }
+  iVar3 = *(int *)(iVar3 + 0x38);
+  iVar4 = iVar3 / 1000;
+  pbVar1 = *(byte **)(param_1 + 4);
+  if (4 < *pbVar1) {
+    iVar4 = FUN_00526400();
+  }
+  *pbVar1 = 3;
+  *(double *)(pbVar1 + 4) = (double)(iVar3 % 1000);
+  return iVar4;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005c2200 : SUB ESP,0x8
+005c2203 : PUSH ESI
+005c2204 : MOV ESI,dword ptr [ESP + 0x10]
+005c2208 : PUSH 0x23
+005c220a : MOV ECX,ESI
+005c220c : CALL 0x00526030
+005c2211 : TEST AL,AL
+005c2213 : JNZ 0x005c222a
+005c2215 : PUSH 0x0
+005c2217 : PUSH 0x0
+005c2219 : PUSH 0xb8fdec
+005c221e : MOV ECX,ESI
+005c2220 : CALL 0x00526050
+005c2225 : POP ESI
+005c2226 : ADD ESP,0x8
+005c2229 : RET
+005c222a : MOV EAX,dword ptr [ESI + 0x8]
+005c222d : TEST EAX,EAX
+005c222f : JZ 0x005c2236
+005c2231 : ADD EAX,-0x10
+005c2234 : JMP 0x005c2238
+005c2236 : XOR EAX,EAX
+005c2238 : MOV EAX,dword ptr [EAX + 0x38]
+005c223b : CDQ
+005c223c : MOV ECX,0x3e8
+005c2241 : IDIV ECX
+005c2243 : MOV ESI,dword ptr [ESI + 0x4]
+005c2246 : CMP byte ptr [ESI],0x5
+005c2249 : MOV dword ptr [ESP + 0x4],EDX
+005c224d : FILD dword ptr [ESP + 0x4]
+005c2251 : FSTP double ptr [ESP + 0x4]
+005c2255 : JC 0x005c225e
+005c2257 : MOV ECX,ESI
+005c2259 : CALL 0x00526400
+005c225e : FLD double ptr [ESP + 0x4]
+005c2262 : MOV byte ptr [ESI],0x3
+005c2265 : FSTP double ptr [ESI + 0x4]
+005c2268 : POP ESI
+005c2269 : ADD ESP,0x8
+005c226c : RET

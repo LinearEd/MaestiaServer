@@ -1,0 +1,218 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00546800
+ENTRY    : 00546800
+BODY     : [[00546800, 00546971]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* WARNING: Removing unreachable block (ram,0x00546905) */
+
+int FUN_00546800(uint param_1,float param_2)
+
+{
+  int *piVar1;
+  float fVar2;
+  float fVar3;
+  undefined4 uVar4;
+  int in_ECX;
+  uint uVar5;
+  int iVar6;
+  int iVar7;
+  uint local_5c;
+  uint local_58;
+  int *local_10;
+  GRefCountNTSImpl *local_c;
+  
+  if (*(uint *)(in_ECX + 0x2c) <= param_1) {
+    return -1;
+  }
+  piVar1 = *(int **)(*(int *)(in_ECX + 0x28) + param_1 * 4);
+  fVar2 = (float)*(int *)(in_ECX + 0x50);
+  if (*(int *)(in_ECX + 0x50) < 0) {
+    fVar2 = fVar2 + 4.2949673e+09;
+  }
+  fVar2 = fVar2 + (param_2 - (float)piVar1[3]);
+  param_1 = 0;
+  iVar6 = (int)piVar1 + 0x1e;
+  if (*piVar1 < 0) {
+    uVar5 = (uint)*(byte *)(piVar1 + 7);
+  }
+  else {
+    uVar5 = piVar1[1];
+    iVar6 = (int)piVar1 + 0x2a;
+  }
+  uVar4 = FUN_00599240();
+  FUN_00545960(iVar6,uVar5,uVar4);
+  iVar6 = 0;
+  while( true ) {
+    if ((local_5c == 0) || (local_58 <= local_5c)) goto LAB_0054691d;
+    uVar5 = (uint)*(ushort *)(local_5c + 2);
+    if (((byte)*(ushort *)(local_5c + 6) >> 6 & 1) != 0) {
+      uVar5 = -uVar5;
+    }
+    iVar7 = param_1 + uVar5;
+    fVar3 = (float)iVar7;
+    if (iVar7 < 0) {
+      fVar3 = fVar3 + 4.2949673e+09;
+    }
+    if (fVar2 < fVar3) break;
+    if ((*(ushort *)(local_5c + 6) >> 8 & 1) == 0) {
+      iVar6 = iVar6 + (uint)(*(ushort *)(local_5c + 4) >> 0xc);
+    }
+    FUN_005443b0();
+    param_1 = iVar7;
+  }
+  if ((float)(uVar5 >> 1) < fVar2 - (float)(int)param_1) {
+    iVar6 = iVar6 + (uint)(*(ushort *)(local_5c + 4) >> 0xc);
+  }
+LAB_0054691d:
+  uVar5 = piVar1[2];
+  if ((*piVar1 < 0) && (uVar5 = uVar5 & 0xffffff, uVar5 == 0xffffff)) {
+    uVar5 = 0xffffffff;
+  }
+  if (local_c != (GRefCountNTSImpl *)0x0) {
+    GRefCountNTSImpl::Release(local_c);
+  }
+  if ((local_10 != (int *)0x0) && (*local_10 = *local_10 + -1, *local_10 == 0)) {
+    FUN_00500860();
+    FUN_00515cf0(local_10);
+  }
+  return uVar5 + iVar6;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00546800 : MOV EAX,dword ptr [ESP + 0x4]
+00546804 : SUB ESP,0x60
+00546807 : CMP EAX,dword ptr [ECX + 0x2c]
+0054680a : JC 0x00546815
+0054680c : OR EAX,0xffffffff
+0054680f : ADD ESP,0x60
+00546812 : RET 0x8
+00546815 : MOV EDX,dword ptr [ECX + 0x28]
+00546818 : FLD float ptr [ESP + 0x68]
+0054681c : MOV ECX,dword ptr [ECX + 0x50]
+0054681f : PUSH EBX
+00546820 : MOV EBX,dword ptr [EDX + EAX*0x4]
+00546823 : MOV EDX,dword ptr [EBX + 0xc]
+00546826 : MOV EAX,dword ptr [EBX]
+00546828 : MOV dword ptr [ESP + 0x68],EDX
+0054682c : FISUB dword ptr [ESP + 0x68]
+00546830 : PUSH EBP
+00546831 : SHR EAX,0x1f
+00546834 : PUSH ESI
+00546835 : AND AL,0x1
+00546837 : MOV dword ptr [ESP + 0x70],ECX
+0054683b : FILD dword ptr [ESP + 0x70]
+0054683f : PUSH EDI
+00546840 : TEST ECX,ECX
+00546842 : JGE 0x0054684a
+00546844 : FADD float ptr [0x00cdf0e0]
+0054684a : FADDP
+0054684c : XOR ESI,ESI
+0054684e : MOV dword ptr [ESP + 0x74],ESI
+00546852 : FSTP float ptr [ESP + 0x78]
+00546856 : TEST AL,AL
+00546858 : JZ 0x00546860
+0054685a : MOVZX EBP,byte ptr [EBX + 0x1c]
+0054685e : JMP 0x00546863
+00546860 : MOV EBP,dword ptr [EBX + 0x4]
+00546863 : LEA EDI,[EBX + 0x1e]
+00546866 : TEST AL,AL
+00546868 : JNZ 0x0054686d
+0054686a : LEA EDI,[EBX + 0x2a]
+0054686d : MOV ECX,EBX
+0054686f : CALL 0x00599240
+00546874 : PUSH EAX
+00546875 : PUSH EBP
+00546876 : PUSH EDI
+00546877 : LEA ECX,[ESP + 0x20]
+0054687b : CALL 0x00545960
+00546880 : XOR EBP,EBP
+00546882 : MOV EDI,dword ptr [ESP + 0x14]
+00546886 : TEST EDI,EDI
+00546888 : JZ 0x0054691d
+0054688e : CMP EDI,dword ptr [ESP + 0x18]
+00546892 : JNC 0x0054691d
+00546898 : MOVZX ECX,word ptr [EDI + 0x6]
+0054689c : MOV DL,CL
+0054689e : SHR DL,0x6
+005468a1 : TEST DL,0x1
+005468a4 : MOVZX EDX,word ptr [EDI + 0x2]
+005468a8 : JZ 0x005468ac
+005468aa : NEG EDX
+005468ac : ADD ESI,EDX
+005468ae : MOV EAX,ESI
+005468b0 : MOV dword ptr [ESP + 0x10],EAX
+005468b4 : FILD dword ptr [ESP + 0x10]
+005468b8 : TEST EAX,EAX
+005468ba : JGE 0x005468c2
+005468bc : FADD float ptr [0x00cdf0e0]
+005468c2 : FLD float ptr [ESP + 0x78]
+005468c6 : FCOM
+005468c8 : FNSTSW AX
+005468ca : FSTP ST1
+005468cc : TEST AH,0x5
+005468cf : JNP 0x005468f3
+005468d1 : SHR ECX,0x8
+005468d4 : FSTP ST0
+005468d6 : MOV dword ptr [ESP + 0x74],ESI
+005468da : TEST CL,0x1
+005468dd : JNZ 0x005468e8
+005468df : MOVZX ECX,word ptr [EDI + 0x4]
+005468e3 : SHR ECX,0xc
+005468e6 : ADD EBP,ECX
+005468e8 : LEA ECX,[ESP + 0x14]
+005468ec : CALL 0x005443b0
+005468f1 : JMP 0x00546882
+005468f3 : FISUB dword ptr [ESP + 0x74]
+005468f7 : SHR EDX,0x1
+005468f9 : MOV dword ptr [ESP + 0x74],EDX
+005468fd : FILD dword ptr [ESP + 0x74]
+00546901 : TEST EDX,EDX
+00546903 : JGE 0x0054690b
+00546905 : FADD float ptr [0x00cdf0e0]
+0054690b : FCOMPP
+0054690d : FNSTSW AX
+0054690f : TEST AH,0x5
+00546912 : JP 0x0054691d
+00546914 : MOVZX EDX,word ptr [EDI + 0x4]
+00546918 : SHR EDX,0xc
+0054691b : ADD EBP,EDX
+0054691d : MOV EAX,dword ptr [EBX]
+0054691f : SHR EAX,0x1f
+00546922 : TEST AL,0x1
+00546924 : MOV EAX,dword ptr [EBX + 0x8]
+00546927 : JZ 0x00546938
+00546929 : AND EAX,0xffffff
+0054692e : CMP EAX,0xffffff
+00546933 : JNZ 0x00546938
+00546935 : OR EAX,0xffffffff
+00546938 : MOV ECX,dword ptr [ESP + 0x64]
+0054693c : LEA EDI,[EAX + EBP*0x1]
+0054693f : TEST ECX,ECX
+00546941 : JZ 0x00546948
+00546943 : CALL 0x004ff7c0
+00546948 : MOV EAX,dword ptr [ESP + 0x60]
+0054694c : TEST EAX,EAX
+0054694e : JZ 0x00546966
+00546950 : DEC dword ptr [EAX]
+00546952 : MOV ESI,EAX
+00546954 : CMP dword ptr [ESI],0x0
+00546957 : JNZ 0x00546966
+00546959 : MOV ECX,ESI
+0054695b : CALL 0x00500860
+00546960 : PUSH ESI
+00546961 : CALL 0x00515cf0
+00546966 : MOV EAX,EDI
+00546968 : POP EDI
+00546969 : POP ESI
+0054696a : POP EBP
+0054696b : POP EBX
+0054696c : ADD ESP,0x60
+0054696f : RET 0x8

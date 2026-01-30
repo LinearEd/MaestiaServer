@@ -1,0 +1,89 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00504260
+ENTRY    : 00504260
+BODY     : [[00504260, 005042d1]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00504260(void)
+
+{
+  int *piVar1;
+  uint uVar2;
+  LONG LVar3;
+  GRefCountImplCore *in_ECX;
+  
+  *(undefined ***)in_ECX = &PTR_FUN_00b86530;
+  piVar1 = *(int **)(in_ECX + 0x1c);
+  if ((piVar1 != (int *)0x0) && (*piVar1 = *piVar1 + -1, *piVar1 == 0)) {
+    FUN_00500860();
+    FUN_00515cf0(piVar1);
+  }
+  if (*(GRefCountNTSImpl **)(in_ECX + 0x18) != (GRefCountNTSImpl *)0x0) {
+    GRefCountNTSImpl::Release(*(GRefCountNTSImpl **)(in_ECX + 0x18));
+  }
+  uVar2 = *(uint *)(in_ECX + 0x10);
+  LVar3 = InterlockedExchangeAdd((LONG *)((uVar2 & 0xfffffffc) + 4),-1);
+  if (LVar3 == 1) {
+    FUN_00515cf0(uVar2 & 0xfffffffc);
+  }
+  uVar2 = *(uint *)(in_ECX + 8);
+  LVar3 = InterlockedExchangeAdd((LONG *)((uVar2 & 0xfffffffc) + 4),-1);
+  if (LVar3 == 1) {
+    FUN_00515cf0(uVar2 & 0xfffffffc);
+  }
+  GRefCountImplCore::~GRefCountImplCore(in_ECX);
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00504260 : PUSH ESI
+00504261 : PUSH EDI
+00504262 : MOV EDI,ECX
+00504264 : MOV dword ptr [EDI],0xb86530
+0050426a : MOV ESI,dword ptr [EDI + 0x1c]
+0050426d : TEST ESI,ESI
+0050426f : JZ 0x00504283
+00504271 : ADD dword ptr [ESI],-0x1
+00504274 : JNZ 0x00504283
+00504276 : MOV ECX,ESI
+00504278 : CALL 0x00500860
+0050427d : PUSH ESI
+0050427e : CALL 0x00515cf0
+00504283 : MOV ECX,dword ptr [EDI + 0x18]
+00504286 : TEST ECX,ECX
+00504288 : JZ 0x0050428f
+0050428a : CALL 0x004ff7c0
+0050428f : MOV ESI,dword ptr [EDI + 0x10]
+00504292 : PUSH EBX
+00504293 : MOV EBX,dword ptr [0x00b851cc]
+00504299 : AND ESI,0xfffffffc
+0050429c : PUSH -0x1
+0050429e : LEA EAX,[ESI + 0x4]
+005042a1 : PUSH EAX
+005042a2 : CALL EBX
+005042a4 : SUB EAX,0x1
+005042a7 : JNZ 0x005042af
+005042a9 : PUSH ESI
+005042aa : CALL 0x00515cf0
+005042af : MOV ESI,dword ptr [EDI + 0x8]
+005042b2 : AND ESI,0xfffffffc
+005042b5 : PUSH -0x1
+005042b7 : LEA ECX,[ESI + 0x4]
+005042ba : PUSH ECX
+005042bb : CALL EBX
+005042bd : SUB EAX,0x1
+005042c0 : POP EBX
+005042c1 : JNZ 0x005042c9
+005042c3 : PUSH ESI
+005042c4 : CALL 0x00515cf0
+005042c9 : MOV ECX,EDI
+005042cb : POP EDI
+005042cc : POP ESI
+005042cd : JMP 0x004ff7b0

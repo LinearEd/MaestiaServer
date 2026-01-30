@@ -1,0 +1,77 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0045dfd0
+ENTRY    : 0045dfd0
+BODY     : [[0045dfd0, 0045e00b]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_0045dfd0(void)
+
+{
+  undefined4 uVar1;
+  undefined4 *in_EAX;
+  undefined4 *in_ECX;
+  undefined4 *puVar2;
+  undefined4 *puVar3;
+  
+  if (in_EAX != in_ECX) {
+    puVar2 = in_EAX + 1;
+    puVar3 = in_ECX + 1;
+    do {
+      in_ECX = in_ECX + -2;
+      puVar3 = puVar3 + -2;
+      if (in_EAX == in_ECX) {
+        return;
+      }
+      uVar1 = *in_EAX;
+      *in_EAX = *in_ECX;
+      *in_ECX = uVar1;
+      if (puVar2 != puVar3) {
+        uVar1 = *puVar2;
+        *puVar2 = *puVar3;
+        *puVar3 = uVar1;
+      }
+      in_EAX = in_EAX + 2;
+      puVar2 = puVar2 + 2;
+    } while (in_EAX != in_ECX);
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0045dfd0 : CMP EAX,ECX
+0045dfd2 : JZ 0x0045e00b
+0045dfd4 : PUSH ESI
+0045dfd5 : PUSH EBX
+0045dfd6 : LEA EDX,[EAX + 0x4]
+0045dfd9 : LEA ESI,[ECX + 0x4]
+0045dfdc : PUSH EDI
+0045dfdd : LEA ECX,[ECX]
+0045dfe0 : SUB ECX,0x8
+0045dfe3 : SUB ESI,0x8
+0045dfe6 : CMP EAX,ECX
+0045dfe8 : JZ 0x0045e008
+0045dfea : MOV EBX,dword ptr [ECX]
+0045dfec : MOV EDI,dword ptr [EAX]
+0045dfee : MOV dword ptr [EAX],EBX
+0045dff0 : MOV dword ptr [ECX],EDI
+0045dff2 : CMP EDX,ESI
+0045dff4 : JZ 0x0045dffe
+0045dff6 : MOV EBX,dword ptr [ESI]
+0045dff8 : MOV EDI,dword ptr [EDX]
+0045dffa : MOV dword ptr [EDX],EBX
+0045dffc : MOV dword ptr [ESI],EDI
+0045dffe : ADD EAX,0x8
+0045e001 : ADD EDX,0x8
+0045e004 : CMP EAX,ECX
+0045e006 : JNZ 0x0045dfe0
+0045e008 : POP EDI
+0045e009 : POP EBX
+0045e00a : POP ESI
+0045e00b : RET

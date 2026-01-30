@@ -1,0 +1,147 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __floor_default
+ENTRY    : 00658ab0
+BODY     : [[00658ab0, 00658b84]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __floor_default
+   
+   Library: Visual Studio 2008 Release */
+
+float10 __floor_default(double param_1)
+
+{
+  double dVar1;
+  uint uVar2;
+  int iVar3;
+  float10 fVar4;
+  undefined4 uVar5;
+  
+  uVar2 = __ctrlfp(DAT_00d68158,0xffff);
+  if ((param_1._6_2_ & 0x7ff0) == 0x7ff0) {
+    iVar3 = __sptype();
+    if (0 < iVar3) {
+      if (iVar3 < 3) {
+        __ctrlfp(uVar2,0xffff);
+        return (float10)param_1;
+      }
+      if (iVar3 == 3) {
+        fVar4 = (float10)__handle_qnan1();
+        return fVar4;
+      }
+    }
+    dVar1 = param_1 + 1.0;
+    uVar5 = 8;
+  }
+  else {
+    fVar4 = (float10)__frnd(SUB84(param_1,0),(int)((ulonglong)param_1 >> 0x20));
+    dVar1 = (double)fVar4;
+    if ((param_1 == dVar1) || ((uVar2 & 0x20) != 0)) {
+      __ctrlfp(uVar2,0xffff);
+      return (float10)dVar1;
+    }
+    uVar5 = 0x10;
+  }
+  fVar4 = (float10)__except1(uVar5,0xb,param_1,dVar1,uVar2);
+  return fVar4;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00658ab0 : MOV EDI,EDI
+00658ab2 : PUSH EBP
+00658ab3 : MOV EBP,ESP
+00658ab5 : PUSH ECX
+00658ab6 : PUSH ECX
+00658ab7 : PUSH EBX
+00658ab8 : PUSH ESI
+00658ab9 : MOV ESI,0xffff
+00658abe : PUSH ESI
+00658abf : PUSH dword ptr [0x00d68158]
+00658ac5 : CALL 0x0065e064
+00658aca : FLD double ptr [EBP + 0x8]
+00658acd : POP ECX
+00658ace : POP ECX
+00658acf : MOV ECX,dword ptr [EBP + 0xe]
+00658ad2 : MOV EBX,EAX
+00658ad4 : MOV EAX,0x7ff0
+00658ad9 : AND ECX,EAX
+00658adb : PUSH ECX
+00658adc : PUSH ECX
+00658add : FSTP double ptr [ESP]
+00658ae0 : CMP CX,AX
+00658ae3 : JNZ 0x00658b3a
+00658ae5 : CALL 0x0065df2a
+00658aea : POP ECX
+00658aeb : POP ECX
+00658aec : TEST EAX,EAX
+00658aee : JLE 0x00658b1d
+00658af0 : CMP EAX,0x2
+00658af3 : JLE 0x00658b0f
+00658af5 : CMP EAX,0x3
+00658af8 : JNZ 0x00658b1d
+00658afa : FLD double ptr [EBP + 0x8]
+00658afd : PUSH EBX
+00658afe : PUSH ECX
+00658aff : PUSH ECX
+00658b00 : FSTP double ptr [ESP]
+00658b03 : PUSH 0xb
+00658b05 : CALL 0x0065ddcc
+00658b0a : ADD ESP,0x10
+00658b0d : JMP 0x00658b81
+00658b0f : PUSH ESI
+00658b10 : PUSH EBX
+00658b11 : CALL 0x0065e064
+00658b16 : FLD double ptr [EBP + 0x8]
+00658b19 : POP ECX
+00658b1a : POP ECX
+00658b1b : JMP 0x00658b81
+00658b1d : FLD double ptr [EBP + 0x8]
+00658b20 : PUSH EBX
+00658b21 : FADD double ptr [0x00cdf108]
+00658b27 : SUB ESP,0x10
+00658b2a : FSTP double ptr [ESP + 0x8]
+00658b2e : FLD double ptr [EBP + 0x8]
+00658b31 : FSTP double ptr [ESP]
+00658b34 : PUSH 0xb
+00658b36 : PUSH 0x8
+00658b38 : JMP 0x00658b79
+00658b3a : CALL 0x0065deea
+00658b3f : FSTP double ptr [EBP + -0x8]
+00658b42 : FLD double ptr [EBP + 0x8]
+00658b45 : POP ECX
+00658b46 : FCOMP double ptr [EBP + -0x8]
+00658b49 : POP ECX
+00658b4a : FNSTSW AX
+00658b4c : TEST AH,0x44
+00658b4f : JP 0x00658b5f
+00658b51 : PUSH ESI
+00658b52 : PUSH EBX
+00658b53 : CALL 0x0065e064
+00658b58 : FLD double ptr [EBP + -0x8]
+00658b5b : POP ECX
+00658b5c : POP ECX
+00658b5d : JMP 0x00658b81
+00658b5f : TEST BL,0x20
+00658b62 : JNZ 0x00658b51
+00658b64 : FLD double ptr [EBP + -0x8]
+00658b67 : PUSH EBX
+00658b68 : SUB ESP,0x10
+00658b6b : FSTP double ptr [ESP + 0x8]
+00658b6f : FLD double ptr [EBP + 0x8]
+00658b72 : FSTP double ptr [ESP]
+00658b75 : PUSH 0xb
+00658b77 : PUSH 0x10
+00658b79 : CALL 0x0065de21
+00658b7e : ADD ESP,0x1c
+00658b81 : POP ESI
+00658b82 : POP EBX
+00658b83 : LEAVE
+00658b84 : RET

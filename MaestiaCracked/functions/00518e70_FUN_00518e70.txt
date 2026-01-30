@@ -1,0 +1,92 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00518e70
+ENTRY    : 00518e70
+BODY     : [[00518e70, 00518ee8]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00518e70(uint param_1,uint param_2,undefined4 param_3)
+
+{
+  undefined1 *puVar1;
+  int iVar2;
+  int *in_ECX;
+  
+  if ((param_1 < (uint)in_ECX[1]) && (param_2 < (uint)in_ECX[2])) {
+    if (*in_ECX < 10) {
+      iVar2 = in_ECX[3] * param_2 + in_ECX[4];
+      switch(*in_ECX) {
+      case 1:
+        *(undefined4 *)(iVar2 + param_1 * 4) = param_3;
+        return;
+      case 2:
+        puVar1 = (undefined1 *)(iVar2 + param_1 * 3);
+        *puVar1 = (undefined1)param_3;
+        puVar1[1] = (char)((uint)param_3 >> 8);
+        puVar1[2] = (char)((uint)param_3 >> 0x10);
+        return;
+      case 8:
+        *(undefined1 *)(iVar2 + param_1) = (undefined1)param_3;
+        break;
+      case 9:
+        *(char *)(iVar2 + param_1) = (char)((uint)param_3 >> 0x18);
+        return;
+      }
+    }
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00518e70 : MOV EDX,dword ptr [ESP + 0x4]
+00518e74 : CMP EDX,dword ptr [ECX + 0x4]
+00518e77 : JNC 0x00518ee6
+00518e79 : PUSH EDI
+00518e7a : MOV EDI,dword ptr [ESP + 0xc]
+00518e7e : CMP EDI,dword ptr [ECX + 0x8]
+00518e81 : JNC 0x00518ee5
+00518e83 : PUSH ESI
+00518e84 : MOV ESI,dword ptr [ECX]
+00518e86 : CMP ESI,0xa
+00518e89 : JGE 0x00518ee4
+00518e8b : MOV EAX,dword ptr [ECX + 0xc]
+00518e8e : IMUL EAX,EDI
+00518e91 : ADD EAX,dword ptr [ECX + 0x10]
+00518e94 : LEA ECX,[ESI + -0x1]
+00518e97 : CMP ECX,0x8
+00518e9a : JA 0x00518ee4
+00518e9c : JMP dword ptr [ECX*0x4 + 0x518eec]
+00518ea3 : MOV ECX,dword ptr [ESP + 0x14]
+00518ea7 : POP ESI
+00518ea8 : MOV dword ptr [EAX + EDX*0x4],ECX
+00518eab : POP EDI
+00518eac : RET 0xc
+00518eaf : LEA EAX,[EAX + EDX*0x2]
+00518eb2 : LEA ECX,[EDX + EAX*0x1]
+00518eb5 : MOV EAX,dword ptr [ESP + 0x14]
+00518eb9 : MOV EDX,EAX
+00518ebb : SHR EDX,0x8
+00518ebe : MOV byte ptr [ECX],AL
+00518ec0 : SHR EAX,0x10
+00518ec3 : POP ESI
+00518ec4 : MOV byte ptr [ECX + 0x1],DL
+00518ec7 : MOV byte ptr [ECX + 0x2],AL
+00518eca : POP EDI
+00518ecb : RET 0xc
+00518ece : MOV ECX,dword ptr [ESP + 0x14]
+00518ed2 : SHR ECX,0x18
+00518ed5 : POP ESI
+00518ed6 : MOV byte ptr [EAX + EDX*0x1],CL
+00518ed9 : POP EDI
+00518eda : RET 0xc
+00518edd : MOV CL,byte ptr [ESP + 0x14]
+00518ee1 : MOV byte ptr [EAX + EDX*0x1],CL
+00518ee4 : POP ESI
+00518ee5 : POP EDI
+00518ee6 : RET 0xc

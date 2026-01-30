@@ -1,0 +1,81 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005262a0
+ENTRY    : 005262a0
+BODY     : [[005262a0, 00526302]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_005262a0(void)
+
+{
+  char cVar1;
+  undefined4 *puVar2;
+  char *in_ECX;
+  
+  cVar1 = *in_ECX;
+  if (cVar1 == '\b') {
+    FUN_005684e0();
+    return;
+  }
+  if ((cVar1 == '\x06') && (puVar2 = *(undefined4 **)(in_ECX + 4), puVar2 != (undefined4 *)0x0)) {
+    puVar2[2] = puVar2[2] + 1;
+    if ((puVar2[2] & 0x70000000) != 0) {
+      puVar2[2] = puVar2[2] & 0x8fffffff;
+      (**(code **)*puVar2)(2);
+      return;
+    }
+  }
+  else if (cVar1 == '\t') {
+    puVar2 = *(undefined4 **)(in_ECX + 4);
+    puVar2[2] = puVar2[2] + 1;
+    if ((puVar2[2] & 0x70000000) != 0) {
+      puVar2[2] = puVar2[2] & 0x8fffffff;
+      (**(code **)*puVar2)(2);
+    }
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005262a0 : MOV DL,byte ptr [ECX]
+005262a2 : CMP DL,0x8
+005262a5 : JNZ 0x005262af
+005262a7 : ADD ECX,0x4
+005262aa : JMP 0x005684e0
+005262af : CMP DL,0x6
+005262b2 : JNZ 0x005262dd
+005262b4 : MOV EAX,dword ptr [ECX + 0x4]
+005262b7 : TEST EAX,EAX
+005262b9 : JZ 0x005262dd
+005262bb : INC dword ptr [EAX + 0x8]
+005262be : MOV ECX,dword ptr [EAX + 0x8]
+005262c1 : TEST ECX,0x70000000
+005262c7 : JZ 0x00526302
+005262c9 : MOV EDX,dword ptr [EAX]
+005262cb : AND ECX,0x8fffffff
+005262d1 : MOV dword ptr [EAX + 0x8],ECX
+005262d4 : MOV ECX,EAX
+005262d6 : MOV EAX,dword ptr [EDX]
+005262d8 : PUSH 0x2
+005262da : CALL EAX
+005262dc : RET
+005262dd : CMP DL,0x9
+005262e0 : JNZ 0x00526302
+005262e2 : MOV ECX,dword ptr [ECX + 0x4]
+005262e5 : INC dword ptr [ECX + 0x8]
+005262e8 : MOV EAX,dword ptr [ECX + 0x8]
+005262eb : TEST EAX,0x70000000
+005262f0 : JZ 0x00526302
+005262f2 : MOV EDX,dword ptr [ECX]
+005262f4 : AND EAX,0x8fffffff
+005262f9 : MOV dword ptr [ECX + 0x8],EAX
+005262fc : MOV EAX,dword ptr [EDX]
+005262fe : PUSH 0x2
+00526300 : CALL EAX
+00526302 : RET

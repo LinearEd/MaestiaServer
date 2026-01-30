@@ -1,0 +1,110 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __wsopen_helper
+ENTRY    : 00649920
+BODY     : [[00649920, 006499b8]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* WARNING: Function: __SEH_prolog4 replaced with injection: SEH_prolog4 */
+/* WARNING: Function: __SEH_epilog4 replaced with injection: EH_epilog3 */
+/* Library Function - Single Match
+    __wsopen_helper
+   
+   Library: Visual Studio 2008 Release */
+
+errno_t __cdecl
+__wsopen_helper(wchar_t *_Filename,int _OFlag,int _ShFlag,int _PMode,int *_PFileHandle,int _BSecure)
+
+{
+  int *piVar1;
+  errno_t eVar2;
+  undefined4 local_20 [5];
+  undefined4 uStack_c;
+  undefined *local_8;
+  
+  local_8 = &DAT_00ced098;
+  uStack_c = 0x64992c;
+  local_20[0] = 0;
+  if (((_PFileHandle == (int *)0x0) || (*_PFileHandle = -1, _Filename == (wchar_t *)0x0)) ||
+     ((_BSecure != 0 && ((_PMode & 0xfffffe7fU) != 0)))) {
+    piVar1 = __errno();
+    eVar2 = 0x16;
+    *piVar1 = 0x16;
+    __invalid_parameter(0,0,0,0,0);
+  }
+  else {
+    local_8 = (undefined *)0x0;
+    eVar2 = __tsopen_nolock(local_20,_Filename,_OFlag,_ShFlag,_PMode);
+    local_8 = (undefined *)0xfffffffe;
+    FUN_006499be();
+    if (eVar2 != 0) {
+      *_PFileHandle = -1;
+    }
+  }
+  return eVar2;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00649920 : PUSH 0x14
+00649922 : PUSH 0xced098
+00649927 : CALL 0x0064c228
+0064992c : XOR ESI,ESI
+0064992e : MOV dword ptr [EBP + -0x1c],ESI
+00649931 : XOR EAX,EAX
+00649933 : MOV EDI,dword ptr [EBP + 0x18]
+00649936 : CMP EDI,ESI
+00649938 : SETNZ AL
+0064993b : CMP EAX,ESI
+0064993d : JNZ 0x0064995a
+0064993f : CALL 0x0063ab82
+00649944 : PUSH 0x16
+00649946 : POP EDI
+00649947 : MOV dword ptr [EAX],EDI
+00649949 : PUSH ESI
+0064994a : PUSH ESI
+0064994b : PUSH ESI
+0064994c : PUSH ESI
+0064994d : PUSH ESI
+0064994e : CALL 0x006372b8
+00649953 : ADD ESP,0x14
+00649956 : MOV EAX,EDI
+00649958 : JMP 0x006499b3
+0064995a : OR dword ptr [EDI],0xffffffff
+0064995d : XOR EAX,EAX
+0064995f : CMP dword ptr [EBP + 0x8],ESI
+00649962 : SETNZ AL
+00649965 : CMP EAX,ESI
+00649967 : JZ 0x0064993f
+00649969 : CMP dword ptr [EBP + 0x1c],ESI
+0064996c : JZ 0x0064997d
+0064996e : MOV EAX,dword ptr [EBP + 0x14]
+00649971 : AND EAX,0xfffffe7f
+00649976 : NEG EAX
+00649978 : SBB EAX,EAX
+0064997a : INC EAX
+0064997b : JZ 0x0064993f
+0064997d : MOV dword ptr [EBP + -0x4],ESI
+00649980 : PUSH dword ptr [EBP + 0x14]
+00649983 : PUSH dword ptr [EBP + 0x10]
+00649986 : PUSH dword ptr [EBP + 0xc]
+00649989 : PUSH dword ptr [EBP + 0x8]
+0064998c : LEA EAX,[EBP + -0x1c]
+0064998f : PUSH EAX
+00649990 : MOV EAX,EDI
+00649992 : CALL 0x00649200
+00649997 : ADD ESP,0x14
+0064999a : MOV dword ptr [EBP + -0x20],EAX
+0064999d : MOV dword ptr [EBP + -0x4],0xfffffffe
+006499a4 : CALL 0x006499be
+006499a9 : MOV EAX,dword ptr [EBP + -0x20]
+006499ac : CMP EAX,ESI
+006499ae : JZ 0x006499b3
+006499b0 : OR dword ptr [EDI],0xffffffff
+006499b3 : CALL 0x0064c26d
+006499b8 : RET

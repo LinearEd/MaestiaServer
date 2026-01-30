@@ -1,0 +1,138 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __beginthreadex
+ENTRY    : 00635f44
+BODY     : [[00635f44, 00635ff3]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __beginthreadex
+   
+   Library: Visual Studio 2008 Release */
+
+uintptr_t __cdecl
+__beginthreadex(void *_Security,uint _StackSize,_StartAddress *_StartAddress,void *_ArgList,
+               uint _InitFlag,uint *_ThrdAddr)
+
+{
+  _StartAddress *p_Var1;
+  int *piVar2;
+  _ptiddata _Ptd;
+  _ptiddata p_Var3;
+  _StartAddress **lpThreadId;
+  HANDLE pvVar4;
+  ulong local_8;
+  
+  p_Var1 = _StartAddress;
+  local_8 = 0;
+  if (_StartAddress == (_StartAddress *)0x0) {
+    piVar2 = __errno();
+    *piVar2 = 0x16;
+    __invalid_parameter(0,0,0,0,0);
+  }
+  else {
+    ___set_flsgetvalue();
+    _Ptd = __calloc_crt(1,0x214);
+    if (_Ptd != (_ptiddata)0x0) {
+      p_Var3 = __getptd();
+      __initptd(_Ptd,p_Var3->ptlocinfo);
+      _Ptd->_thandle = 0xffffffff;
+      _Ptd->_initarg = _ArgList;
+      _Ptd->_initaddr = p_Var1;
+      lpThreadId = (_StartAddress **)_ThrdAddr;
+      if (_ThrdAddr == (uint *)0x0) {
+        lpThreadId = &_StartAddress;
+      }
+      pvVar4 = CreateThread(_Security,_StackSize,__threadstartex_4,_Ptd,_InitFlag,
+                            (LPDWORD)lpThreadId);
+      if (pvVar4 != (HANDLE)0x0) {
+        return (uintptr_t)pvVar4;
+      }
+      local_8 = GetLastError();
+    }
+    _free(_Ptd);
+    if (local_8 != 0) {
+      __dosmaperr(local_8);
+    }
+  }
+  return 0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00635f44 : MOV EDI,EDI
+00635f46 : PUSH EBP
+00635f47 : MOV EBP,ESP
+00635f49 : PUSH ECX
+00635f4a : PUSH EBX
+00635f4b : PUSH EDI
+00635f4c : MOV EDI,dword ptr [EBP + 0x10]
+00635f4f : XOR EBX,EBX
+00635f51 : MOV dword ptr [EBP + -0x4],EBX
+00635f54 : CMP EDI,EBX
+00635f56 : JNZ 0x00635f74
+00635f58 : CALL 0x0063ab82
+00635f5d : PUSH EBX
+00635f5e : PUSH EBX
+00635f5f : PUSH EBX
+00635f60 : PUSH EBX
+00635f61 : PUSH EBX
+00635f62 : MOV dword ptr [EAX],0x16
+00635f68 : CALL 0x006372b8
+00635f6d : ADD ESP,0x14
+00635f70 : XOR EAX,EAX
+00635f72 : JMP 0x00635ff0
+00635f74 : PUSH ESI
+00635f75 : CALL 0x00645708
+00635f7a : PUSH 0x214
+00635f7f : PUSH 0x1
+00635f81 : CALL 0x006425a4
+00635f86 : MOV ESI,EAX
+00635f88 : POP ECX
+00635f89 : POP ECX
+00635f8a : CMP ESI,EBX
+00635f8c : JZ 0x00635fd8
+00635f8e : CALL 0x006458f6
+00635f93 : PUSH dword ptr [EAX + 0x6c]
+00635f96 : PUSH ESI
+00635f97 : CALL 0x00645796
+00635f9c : MOV EAX,dword ptr [EBP + 0x14]
+00635f9f : OR dword ptr [ESI + 0x4],0xffffffff
+00635fa3 : MOV dword ptr [ESI + 0x58],EAX
+00635fa6 : MOV EAX,dword ptr [EBP + 0x1c]
+00635fa9 : POP ECX
+00635faa : POP ECX
+00635fab : MOV dword ptr [ESI + 0x54],EDI
+00635fae : CMP EAX,EBX
+00635fb0 : JNZ 0x00635fb5
+00635fb2 : LEA EAX,[EBP + 0x10]
+00635fb5 : PUSH EAX
+00635fb6 : PUSH dword ptr [EBP + 0x18]
+00635fb9 : PUSH ESI
+00635fba : PUSH 0x635ec1
+00635fbf : PUSH dword ptr [EBP + 0xc]
+00635fc2 : PUSH dword ptr [EBP + 0x8]
+00635fc5 : CALL dword ptr [0x00b851c8]
+00635fcb : CMP EAX,EBX
+00635fcd : JNZ 0x00635fef
+00635fcf : CALL dword ptr [0x00b85128]
+00635fd5 : MOV dword ptr [EBP + -0x4],EAX
+00635fd8 : PUSH ESI
+00635fd9 : CALL 0x0063610d
+00635fde : POP ECX
+00635fdf : CMP dword ptr [EBP + -0x4],EBX
+00635fe2 : JZ 0x00635fed
+00635fe4 : PUSH dword ptr [EBP + -0x4]
+00635fe7 : CALL 0x0063aba8
+00635fec : POP ECX
+00635fed : XOR EAX,EAX
+00635fef : POP ESI
+00635ff0 : POP EDI
+00635ff1 : POP EBX
+00635ff2 : LEAVE
+00635ff3 : RET

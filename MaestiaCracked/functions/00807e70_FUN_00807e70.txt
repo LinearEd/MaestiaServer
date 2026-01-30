@@ -1,0 +1,194 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00807e70
+ENTRY    : 00807e70
+BODY     : [[00807e70, 00807fa7]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void * FUN_00807e70(char *param_1,size_t *param_2)
+
+{
+  FILE *_File;
+  size_t _Count;
+  int iVar1;
+  void *_DstBuf;
+  size_t sVar2;
+  int *piVar3;
+  char *pcVar4;
+  
+  *param_2 = 0;
+  _File = _fopen(param_1,"rb");
+  if (_File == (FILE *)0x0) {
+    piVar3 = __errno();
+    pcVar4 = _strerror((char *)*piVar3);
+    FUN_00807d70("Failed to open [%s]: [%s]\n",param_1,pcVar4);
+    return (void *)0x0;
+  }
+  _fseek(_File,0,2);
+  _Count = _ftell(_File);
+  if ((int)_Count < 1) {
+    FUN_00807d70("File [%s] is empty, or ftell() failed",param_1);
+    _fclose(_File);
+    return (void *)0x0;
+  }
+  iVar1 = _fseek(_File,0,0);
+  if (iVar1 < 0) {
+    piVar3 = __errno();
+    pcVar4 = _strerror((char *)*piVar3);
+    FUN_00807d70("fseek() failed to return to the beginning of the file [%s]: [%s]\n",param_1,pcVar4
+                );
+    _fclose(_File);
+    return (void *)0x0;
+  }
+  _DstBuf = (void *)FUN_00471930();
+  sVar2 = _fread(_DstBuf,1,_Count,_File);
+  if (sVar2 == _Count) {
+    *param_2 = _Count;
+    _fclose(_File);
+    return _DstBuf;
+  }
+  FUN_00455c80();
+  piVar3 = __errno();
+  pcVar4 = _strerror((char *)*piVar3);
+  FUN_00807d70("Only read %d of %d bytes from %s: [%s]",sVar2,_Count,param_1,pcVar4);
+  _fclose(_File);
+  return _DstBuf;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00807e70 : PUSH ECX
+00807e71 : MOV EAX,dword ptr [ESP + 0xc]
+00807e75 : PUSH EBX
+00807e76 : PUSH EBP
+00807e77 : MOV EBP,dword ptr [ESP + 0x10]
+00807e7b : PUSH ESI
+00807e7c : PUSH 0xc29230
+00807e81 : XOR ESI,ESI
+00807e83 : PUSH EBP
+00807e84 : MOV dword ptr [EAX],ESI
+00807e86 : CALL 0x00638fa0
+00807e8b : MOV EBX,EAX
+00807e8d : ADD ESP,0x8
+00807e90 : TEST EBX,EBX
+00807e92 : JZ 0x00807f85
+00807e98 : PUSH EDI
+00807e99 : PUSH 0x2
+00807e9b : PUSH ESI
+00807e9c : PUSH EBX
+00807e9d : CALL 0x006377fb
+00807ea2 : PUSH EBX
+00807ea3 : CALL 0x0063751f
+00807ea8 : MOV EDI,EAX
+00807eaa : ADD ESP,0x10
+00807ead : TEST EDI,EDI
+00807eaf : JLE 0x00807f66
+00807eb5 : PUSH ESI
+00807eb6 : PUSH ESI
+00807eb7 : PUSH EBX
+00807eb8 : CALL 0x006377fb
+00807ebd : ADD ESP,0xc
+00807ec0 : TEST EAX,EAX
+00807ec2 : JL 0x00807f39
+00807ec4 : CALL 0x00471930
+00807ec9 : PUSH EBX
+00807eca : PUSH EDI
+00807ecb : MOV ESI,EAX
+00807ecd : PUSH 0x1
+00807ecf : PUSH ESI
+00807ed0 : MOV dword ptr [ESP + 0x20],ESI
+00807ed4 : CALL 0x00638b7b
+00807ed9 : MOV EBP,EAX
+00807edb : ADD ESP,0x10
+00807ede : CMP EBP,EDI
+00807ee0 : JNZ 0x00807ef9
+00807ee2 : MOV ECX,dword ptr [ESP + 0x1c]
+00807ee6 : PUSH EBX
+00807ee7 : MOV dword ptr [ECX],EDI
+00807ee9 : CALL 0x006366db
+00807eee : ADD ESP,0x4
+00807ef1 : POP EDI
+00807ef2 : MOV EAX,ESI
+00807ef4 : POP ESI
+00807ef5 : POP EBP
+00807ef6 : POP EBX
+00807ef7 : POP ECX
+00807ef8 : RET
+00807ef9 : LEA ESI,[ESP + 0x10]
+00807efd : CALL 0x00455c80
+00807f02 : CALL 0x0063ab82
+00807f07 : MOV EDX,dword ptr [EAX]
+00807f09 : PUSH EDX
+00807f0a : CALL 0x0063d84d
+00807f0f : PUSH EAX
+00807f10 : MOV EAX,dword ptr [ESP + 0x20]
+00807f14 : PUSH EAX
+00807f15 : PUSH EDI
+00807f16 : PUSH EBP
+00807f17 : PUSH 0xc29244
+00807f1c : CALL 0x00807d70
+00807f21 : MOV ESI,dword ptr [ESP + 0x28]
+00807f25 : ADD ESP,0x18
+00807f28 : PUSH EBX
+00807f29 : CALL 0x006366db
+00807f2e : ADD ESP,0x4
+00807f31 : POP EDI
+00807f32 : MOV EAX,ESI
+00807f34 : POP ESI
+00807f35 : POP EBP
+00807f36 : POP EBX
+00807f37 : POP ECX
+00807f38 : RET
+00807f39 : CALL 0x0063ab82
+00807f3e : MOV ECX,dword ptr [EAX]
+00807f40 : PUSH ECX
+00807f41 : CALL 0x0063d84d
+00807f46 : PUSH EAX
+00807f47 : PUSH EBP
+00807f48 : PUSH 0xc29270
+00807f4d : CALL 0x00807d70
+00807f52 : ADD ESP,0x10
+00807f55 : PUSH EBX
+00807f56 : CALL 0x006366db
+00807f5b : ADD ESP,0x4
+00807f5e : POP EDI
+00807f5f : MOV EAX,ESI
+00807f61 : POP ESI
+00807f62 : POP EBP
+00807f63 : POP EBX
+00807f64 : POP ECX
+00807f65 : RET
+00807f66 : PUSH EBP
+00807f67 : PUSH 0xc292b4
+00807f6c : CALL 0x00807d70
+00807f71 : ADD ESP,0x8
+00807f74 : PUSH EBX
+00807f75 : CALL 0x006366db
+00807f7a : ADD ESP,0x4
+00807f7d : POP EDI
+00807f7e : MOV EAX,ESI
+00807f80 : POP ESI
+00807f81 : POP EBP
+00807f82 : POP EBX
+00807f83 : POP ECX
+00807f84 : RET
+00807f85 : CALL 0x0063ab82
+00807f8a : MOV EDX,dword ptr [EAX]
+00807f8c : PUSH EDX
+00807f8d : CALL 0x0063d84d
+00807f92 : PUSH EAX
+00807f93 : PUSH EBP
+00807f94 : PUSH 0xc292dc
+00807f99 : CALL 0x00807d70
+00807f9e : ADD ESP,0x10
+00807fa1 : MOV EAX,ESI
+00807fa3 : POP ESI
+00807fa4 : POP EBP
+00807fa5 : POP EBX
+00807fa6 : POP ECX
+00807fa7 : RET

@@ -1,0 +1,54 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_007f1490
+ENTRY    : 007f1490
+BODY     : [[007f1490, 007f14e3]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_007f1490(void)
+
+{
+  int in_EAX;
+  float in_XMM1_Da;
+  float in_XMM2_Da;
+  
+  if ((*(char *)(in_EAX + 0x1e8) == '\0') && (*(char *)(in_EAX + 0x210) == '\0')) {
+    *(float *)(in_EAX + 500) = in_XMM2_Da;
+    *(float *)(in_EAX + 0x1f8) = in_XMM1_Da;
+    if (in_XMM1_Da < *(float *)(in_EAX + 0x1fc)) {
+      *(float *)(in_EAX + 0x1fc) = in_XMM1_Da;
+      *(undefined1 *)(in_EAX + 0x154) = 1;
+      return;
+    }
+    if (*(float *)(in_EAX + 0x1fc) < in_XMM2_Da) {
+      *(float *)(in_EAX + 0x1fc) = in_XMM2_Da;
+    }
+    *(undefined1 *)(in_EAX + 0x154) = 1;
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+007f1490 : CMP byte ptr [EAX + 0x1e8],0x0
+007f1497 : JNZ 0x007f14e3
+007f1499 : CMP byte ptr [EAX + 0x210],0x0
+007f14a0 : JNZ 0x007f14e3
+007f14a2 : MOVSS XMM0,dword ptr [EAX + 0x1fc]
+007f14aa : COMISS XMM0,XMM1
+007f14ad : MOVSS dword ptr [EAX + 0x1f4],XMM2
+007f14b5 : MOVSS dword ptr [EAX + 0x1f8],XMM1
+007f14bd : JBE 0x007f14cf
+007f14bf : MOVSS dword ptr [EAX + 0x1fc],XMM1
+007f14c7 : MOV byte ptr [EAX + 0x154],0x1
+007f14ce : RET
+007f14cf : COMISS XMM2,XMM0
+007f14d2 : JBE 0x007f14dc
+007f14d4 : MOVSS dword ptr [EAX + 0x1fc],XMM2
+007f14dc : MOV byte ptr [EAX + 0x154],0x1
+007f14e3 : RET

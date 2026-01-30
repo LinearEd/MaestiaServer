@@ -1,0 +1,80 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005a87d0
+ENTRY    : 005a87d0
+BODY     : [[005a87d0, 005a8835]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_005a87d0(uint param_1,uint param_2)
+
+{
+  int *piVar1;
+  int in_ECX;
+  int iVar2;
+  
+  iVar2 = *(int *)(DAT_00d7b334 + 4 + (param_1 >> 0x14) * 8);
+  if (iVar2 == 0) {
+    iVar2 = 0;
+  }
+  else {
+    iVar2 = *(int *)(iVar2 + (param_1 >> 0xc & 0xff) * 4);
+  }
+  if (param_2 < 0x10) {
+    param_2 = 0x10;
+  }
+  FUN_005f5b10(iVar2,param_1,param_2 + *(uint *)(in_ECX + 0x14) & ~*(uint *)(in_ECX + 0x14));
+  piVar1 = (int *)(iVar2 + 0x10);
+  *piVar1 = *piVar1 + -1;
+  if (*piVar1 == 0) {
+    FUN_005a86b0(iVar2);
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005a87d0 : MOV EDX,dword ptr [ESP + 0x4]
+005a87d4 : PUSH EBX
+005a87d5 : MOV EAX,EDX
+005a87d7 : SHR EAX,0x14
+005a87da : MOV EBX,ECX
+005a87dc : MOV ECX,dword ptr [0x00d7b334]
+005a87e2 : LEA EAX,[ECX + EAX*0x8 + 0x4]
+005a87e6 : MOV EAX,dword ptr [EAX]
+005a87e8 : PUSH ESI
+005a87e9 : TEST EAX,EAX
+005a87eb : JZ 0x005a87fd
+005a87ed : MOV ECX,EDX
+005a87ef : SHR ECX,0xc
+005a87f2 : AND ECX,0xff
+005a87f8 : MOV ESI,dword ptr [EAX + ECX*0x4]
+005a87fb : JMP 0x005a87ff
+005a87fd : XOR ESI,ESI
+005a87ff : PUSH EDI
+005a8800 : MOV EDI,dword ptr [ESP + 0x14]
+005a8804 : CMP EDI,0x10
+005a8807 : JNC 0x005a880e
+005a8809 : MOV EDI,0x10
+005a880e : MOV EAX,dword ptr [EBX + 0x14]
+005a8811 : LEA ECX,[EBX + 0x10]
+005a8814 : ADD EDI,EAX
+005a8816 : NOT EAX
+005a8818 : AND EDI,EAX
+005a881a : PUSH EDI
+005a881b : PUSH EDX
+005a881c : PUSH ESI
+005a881d : CALL 0x005f5b10
+005a8822 : ADD dword ptr [ESI + 0x10],-0x1
+005a8826 : POP EDI
+005a8827 : JNZ 0x005a8831
+005a8829 : PUSH ESI
+005a882a : MOV ECX,EBX
+005a882c : CALL 0x005a86b0
+005a8831 : POP ESI
+005a8832 : POP EBX
+005a8833 : RET 0x8

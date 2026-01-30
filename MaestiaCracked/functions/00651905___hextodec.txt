@@ -1,0 +1,55 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __hextodec
+ENTRY    : 00651905
+BODY     : [[00651905, 0065193a]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __hextodec
+   
+   Library: Visual Studio 2008 Release */
+
+uint __hextodec(uint param_1)
+
+{
+  int iVar1;
+  
+  if ((param_1 & 0xff00) == 0) {
+    iVar1 = _isdigit(param_1 & 0xff);
+    if (iVar1 != 0) {
+      return param_1 & 0xffff;
+    }
+  }
+  return (param_1 & 0xffdf) - 7;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00651905 : MOV EDI,EDI
+00651907 : PUSH EBP
+00651908 : MOV EBP,ESP
+0065190a : TEST dword ptr [EBP + 0x8],0xff00
+00651911 : PUSH ESI
+00651912 : JNZ 0x0065192e
+00651914 : MOVZX ESI,word ptr [EBP + 0x8]
+00651918 : MOV EAX,ESI
+0065191a : AND EAX,0xff
+0065191f : PUSH EAX
+00651920 : CALL 0x006397a2
+00651925 : POP ECX
+00651926 : TEST EAX,EAX
+00651928 : JZ 0x0065192e
+0065192a : MOV EAX,ESI
+0065192c : JMP 0x00651938
+0065192e : MOVZX EAX,word ptr [EBP + 0x8]
+00651932 : AND EAX,0xffffffdf
+00651935 : SUB EAX,0x7
+00651938 : POP ESI
+00651939 : POP EBP
+0065193a : RET

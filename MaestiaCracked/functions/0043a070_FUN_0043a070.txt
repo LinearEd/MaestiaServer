@@ -1,0 +1,67 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0043a070
+ENTRY    : 0043a070
+BODY     : [[0043a070, 0043a0a7]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined4 FUN_0043a070(void)
+
+{
+  ushort uVar1;
+  ushort *in_EAX;
+  int iVar2;
+  int in_ECX;
+  ushort *puVar3;
+  bool bVar4;
+  
+  puVar3 = (ushort *)(in_ECX + 8);
+  while( true ) {
+    uVar1 = *in_EAX;
+    bVar4 = uVar1 < *puVar3;
+    if (uVar1 != *puVar3) break;
+    if (uVar1 == 0) {
+      return 1;
+    }
+    uVar1 = in_EAX[1];
+    bVar4 = uVar1 < puVar3[1];
+    if (uVar1 != puVar3[1]) break;
+    in_EAX = in_EAX + 2;
+    puVar3 = puVar3 + 2;
+    if (uVar1 == 0) {
+      return 1;
+    }
+  }
+  iVar2 = (1 - (uint)bVar4) - (uint)(bVar4 != 0);
+  return CONCAT31((int3)((uint)iVar2 >> 8),iVar2 == 0);
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0043a070 : ADD ECX,0x8
+0043a073 : MOV DX,word ptr [EAX]
+0043a076 : CMP DX,word ptr [ECX]
+0043a079 : JNZ 0x0043a09d
+0043a07b : TEST DX,DX
+0043a07e : JZ 0x0043a095
+0043a080 : MOV DX,word ptr [EAX + 0x2]
+0043a084 : CMP DX,word ptr [ECX + 0x2]
+0043a088 : JNZ 0x0043a09d
+0043a08a : ADD EAX,0x4
+0043a08d : ADD ECX,0x4
+0043a090 : TEST DX,DX
+0043a093 : JNZ 0x0043a073
+0043a095 : XOR EAX,EAX
+0043a097 : TEST EAX,EAX
+0043a099 : SETZ AL
+0043a09c : RET
+0043a09d : SBB EAX,EAX
+0043a09f : SBB EAX,-0x1
+0043a0a2 : TEST EAX,EAX
+0043a0a4 : SETZ AL
+0043a0a7 : RET

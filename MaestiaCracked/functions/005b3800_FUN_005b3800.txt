@@ -1,0 +1,78 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005b3800
+ENTRY    : 005b3800
+BODY     : [[005b3800, 005b3868]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_005b3800(int param_1)
+
+{
+  byte *pbVar1;
+  float10 fVar2;
+  float10 fVar3;
+  undefined4 uVar4;
+  
+  uVar4 = *(undefined4 *)(param_1 + 0x18);
+  FUN_00526260(0);
+  fVar2 = (float10)FUN_00527730(uVar4);
+  uVar4 = *(undefined4 *)(param_1 + 0x18);
+  FUN_00526260(1);
+  fVar3 = (float10)FUN_00527730(uVar4);
+  if (fVar3 < (float10)(double)fVar2) {
+    fVar3 = (float10)(double)fVar2;
+  }
+  pbVar1 = *(byte **)(param_1 + 4);
+  if (4 < *pbVar1) {
+    FUN_00526400();
+  }
+  *pbVar1 = 3;
+  *(double *)(pbVar1 + 4) = (double)fVar3;
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005b3800 : SUB ESP,0x8
+005b3803 : PUSH ESI
+005b3804 : MOV ESI,dword ptr [ESP + 0x10]
+005b3808 : MOV EAX,dword ptr [ESI + 0x18]
+005b380b : PUSH EAX
+005b380c : PUSH 0x0
+005b380e : MOV ECX,ESI
+005b3810 : CALL 0x00526260
+005b3815 : MOV ECX,EAX
+005b3817 : CALL 0x00527730
+005b381c : FSTP double ptr [ESP + 0x4]
+005b3820 : MOV ECX,dword ptr [ESI + 0x18]
+005b3823 : PUSH ECX
+005b3824 : PUSH 0x1
+005b3826 : MOV ECX,ESI
+005b3828 : CALL 0x00526260
+005b382d : MOV ECX,EAX
+005b382f : CALL 0x00527730
+005b3834 : FLD double ptr [ESP + 0x4]
+005b3838 : FCOM
+005b383a : FNSTSW AX
+005b383c : TEST AH,0x41
+005b383f : JNZ 0x005b3845
+005b3841 : FSTP ST1
+005b3843 : JMP 0x005b3847
+005b3845 : FSTP ST0
+005b3847 : MOV ESI,dword ptr [ESI + 0x4]
+005b384a : FSTP double ptr [ESP + 0x4]
+005b384e : CMP byte ptr [ESI],0x5
+005b3851 : JC 0x005b385a
+005b3853 : MOV ECX,ESI
+005b3855 : CALL 0x00526400
+005b385a : FLD double ptr [ESP + 0x4]
+005b385e : MOV byte ptr [ESI],0x3
+005b3861 : FSTP double ptr [ESI + 0x4]
+005b3864 : POP ESI
+005b3865 : ADD ESP,0x8
+005b3868 : RET

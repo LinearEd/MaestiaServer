@@ -1,0 +1,98 @@
+PROGRAM  : Maestia.exe
+FUNCTION : copy_environ
+ENTRY    : 00660d78
+BODY     : [[00660d78, 00660dd1]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    _copy_environ
+   
+   Library: Visual Studio 2008 Release */
+
+undefined4 * __cdecl copy_environ(void)
+
+{
+  int iVar1;
+  int *in_EAX;
+  undefined4 *puVar2;
+  char *pcVar3;
+  int *piVar4;
+  undefined4 *puVar5;
+  
+  puVar2 = (undefined4 *)0x0;
+  if (in_EAX != (int *)0x0) {
+    iVar1 = *in_EAX;
+    piVar4 = in_EAX;
+    while (iVar1 != 0) {
+      piVar4 = piVar4 + 1;
+      puVar2 = (undefined4 *)((int)puVar2 + 1);
+      iVar1 = *piVar4;
+    }
+    puVar2 = __calloc_crt((int)puVar2 + 1,4);
+    puVar5 = puVar2;
+    if (puVar2 == (undefined4 *)0x0) {
+      __amsg_exit(9);
+    }
+    for (; (char *)*in_EAX != (char *)0x0; in_EAX = in_EAX + 1) {
+      pcVar3 = __strdup((char *)*in_EAX);
+      *puVar5 = pcVar3;
+      puVar5 = puVar5 + 1;
+    }
+    *puVar5 = 0;
+  }
+  return puVar2;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00660d78 : MOV EDI,EDI
+00660d7a : PUSH EBP
+00660d7b : MOV EBP,ESP
+00660d7d : PUSH ECX
+00660d7e : PUSH EDI
+00660d7f : MOV EDI,EAX
+00660d81 : XOR EAX,EAX
+00660d83 : MOV ECX,EDI
+00660d85 : TEST EDI,EDI
+00660d87 : JZ 0x00660dcf
+00660d89 : CMP dword ptr [EDI],EAX
+00660d8b : JZ 0x00660d96
+00660d8d : ADD ECX,0x4
+00660d90 : INC EAX
+00660d91 : CMP dword ptr [ECX],0x0
+00660d94 : JNZ 0x00660d8d
+00660d96 : PUSH ESI
+00660d97 : INC EAX
+00660d98 : PUSH 0x4
+00660d9a : PUSH EAX
+00660d9b : CALL 0x006425a4
+00660da0 : MOV ESI,EAX
+00660da2 : POP ECX
+00660da3 : POP ECX
+00660da4 : MOV dword ptr [EBP + -0x4],ESI
+00660da7 : TEST ESI,ESI
+00660da9 : JNZ 0x00660dc3
+00660dab : PUSH 0x9
+00660dad : CALL 0x00635703
+00660db2 : JMP 0x00660dc2
+00660db4 : PUSH EAX
+00660db5 : CALL 0x0066101d
+00660dba : MOV dword ptr [ESI],EAX
+00660dbc : ADD ESI,0x4
+00660dbf : ADD EDI,0x4
+00660dc2 : POP ECX
+00660dc3 : MOV EAX,dword ptr [EDI]
+00660dc5 : TEST EAX,EAX
+00660dc7 : JNZ 0x00660db4
+00660dc9 : AND dword ptr [ESI],EAX
+00660dcb : MOV EAX,dword ptr [EBP + -0x4]
+00660dce : POP ESI
+00660dcf : POP EDI
+00660dd0 : LEAVE
+00660dd1 : RET

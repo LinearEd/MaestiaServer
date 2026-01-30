@@ -1,0 +1,86 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00503a20
+ENTRY    : 00503a20
+BODY     : [[00503a20, 00503a8a]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00503a20(int param_1,int param_2)
+
+{
+  uint uVar1;
+  LONG LVar2;
+  undefined4 *puVar3;
+  
+  puVar3 = (undefined4 *)(param_1 + -0x2c + param_2 * 0x2c);
+  for (; param_2 != 0; param_2 = param_2 + -1) {
+    uVar1 = puVar3[3];
+    LVar2 = InterlockedExchangeAdd((LONG *)((uVar1 & 0xfffffffc) + 4),-1);
+    if (LVar2 == 1) {
+      FUN_00515cf0(uVar1 & 0xfffffffc);
+    }
+    uVar1 = puVar3[1];
+    LVar2 = InterlockedExchangeAdd((LONG *)((uVar1 & 0xfffffffc) + 4),-1);
+    if (LVar2 == 1) {
+      FUN_00515cf0(uVar1 & 0xfffffffc);
+    }
+    if ((GRefCountNTSImpl *)*puVar3 != (GRefCountNTSImpl *)0x0) {
+      GRefCountNTSImpl::Release((GRefCountNTSImpl *)*puVar3);
+    }
+    puVar3 = puVar3 + -0xb;
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00503a20 : MOV EAX,dword ptr [ESP + 0x8]
+00503a24 : MOV EDX,dword ptr [ESP + 0x4]
+00503a28 : MOV ECX,EAX
+00503a2a : IMUL ECX,ECX,0x2c
+00503a2d : PUSH EDI
+00503a2e : LEA EDI,[EDX + ECX*0x1 + -0x2c]
+00503a32 : TEST EAX,EAX
+00503a34 : JBE 0x00503a89
+00503a36 : PUSH EBX
+00503a37 : MOV EBX,dword ptr [0x00b851cc]
+00503a3d : PUSH EBP
+00503a3e : PUSH ESI
+00503a3f : MOV EBP,EAX
+00503a41 : MOV ESI,dword ptr [EDI + 0xc]
+00503a44 : AND ESI,0xfffffffc
+00503a47 : PUSH -0x1
+00503a49 : LEA EAX,[ESI + 0x4]
+00503a4c : PUSH EAX
+00503a4d : CALL EBX
+00503a4f : SUB EAX,0x1
+00503a52 : JNZ 0x00503a5a
+00503a54 : PUSH ESI
+00503a55 : CALL 0x00515cf0
+00503a5a : MOV ESI,dword ptr [EDI + 0x4]
+00503a5d : AND ESI,0xfffffffc
+00503a60 : PUSH -0x1
+00503a62 : LEA ECX,[ESI + 0x4]
+00503a65 : PUSH ECX
+00503a66 : CALL EBX
+00503a68 : SUB EAX,0x1
+00503a6b : JNZ 0x00503a73
+00503a6d : PUSH ESI
+00503a6e : CALL 0x00515cf0
+00503a73 : MOV ECX,dword ptr [EDI]
+00503a75 : TEST ECX,ECX
+00503a77 : JZ 0x00503a7e
+00503a79 : CALL 0x004ff7c0
+00503a7e : SUB EDI,0x2c
+00503a81 : SUB EBP,0x1
+00503a84 : JNZ 0x00503a41
+00503a86 : POP ESI
+00503a87 : POP EBP
+00503a88 : POP EBX
+00503a89 : POP EDI
+00503a8a : RET

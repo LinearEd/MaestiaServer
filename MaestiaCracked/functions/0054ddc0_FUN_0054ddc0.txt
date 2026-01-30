@@ -1,0 +1,180 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0054ddc0
+ENTRY    : 0054ddc0
+BODY     : [[0054ddc0, 0054dedf]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_0054ddc0(double param_1)
+
+{
+  float fVar1;
+  double dVar2;
+  ushort uVar3;
+  int iVar4;
+  uint uVar5;
+  int in_ECX;
+  
+  dVar2 = *(double *)(in_ECX + 0x40);
+  *(double *)(in_ECX + 0x40) = param_1;
+  if ((~*(byte *)(in_ECX + 0x68) & 1) != 0) {
+    dVar2 = (param_1 - dVar2) + *(double *)(in_ECX + 0x38);
+    if (dVar2 <= 0.5) {
+      *(double *)(in_ECX + 0x38) = dVar2;
+    }
+    else {
+      uVar3 = *(ushort *)(in_ECX + 0x68);
+      if (((byte)uVar3 >> 4 & 1) == 0) {
+        if (((byte)uVar3 >> 3 & 1) == 0) {
+          uVar3 = uVar3 | 8;
+        }
+        else {
+          uVar3 = uVar3 & 0xfff7;
+        }
+        *(ushort *)(in_ECX + 0x68) = uVar3;
+      }
+      *(ushort *)(in_ECX + 0x68) = *(ushort *)(in_ECX + 0x68) & 0xffef;
+      *(undefined8 *)(in_ECX + 0x38) = 0;
+    }
+  }
+  if ((*(byte *)(in_ECX + 0x68) >> 5 & 1) != 0) {
+    fVar1 = *(float *)(in_ECX + 0x50);
+    iVar4 = FUN_0054ad50();
+    if (*(float *)(iVar4 + 4) < fVar1) {
+      fVar1 = *(float *)(in_ECX + 0x50);
+      iVar4 = FUN_0054ad50();
+      if (*(float *)(iVar4 + 0xc) < fVar1 != (*(float *)(iVar4 + 0xc) == fVar1)) {
+        iVar4 = FUN_0054bdc0();
+        uVar5 = FUN_0054ad10();
+        if ((iVar4 + 1U < uVar5) &&
+           (iVar4 = FUN_0054af50(iVar4 + 1U,*(undefined4 *)(in_ECX + 0x50)),
+           iVar4 != *(int *)(in_ECX + 0x18))) {
+          FUN_0054dda0(iVar4);
+        }
+      }
+    }
+    else {
+      iVar4 = *(int *)(*(int *)(in_ECX + 8) + 0x3c);
+      if ((iVar4 != 0) &&
+         (iVar4 = FUN_0054af50(iVar4 + -1,*(undefined4 *)(in_ECX + 0x50)),
+         iVar4 != *(int *)(in_ECX + 0x18))) {
+        FUN_0054d5a0(iVar4,*(byte *)(in_ECX + 0x68) >> 1 & 1);
+        return;
+      }
+    }
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0054ddc0 : FLD double ptr [ESP + 0x4]
+0054ddc4 : PUSH ESI
+0054ddc5 : MOV ESI,ECX
+0054ddc7 : FLD ST0
+0054ddc9 : MOV AL,byte ptr [ESI + 0x68]
+0054ddcc : FSUB double ptr [ESI + 0x40]
+0054ddcf : NOT AL
+0054ddd1 : FXCH
+0054ddd3 : FSTP double ptr [ESI + 0x40]
+0054ddd6 : TEST AL,0x1
+0054ddd8 : JZ 0x0054de29
+0054ddda : FADD double ptr [ESI + 0x38]
+0054dddd : FLD double ptr [0x00cdf120]
+0054dde3 : FCOMP
+0054dde5 : FNSTSW AX
+0054dde7 : TEST AH,0x5
+0054ddea : JP 0x0054de24
+0054ddec : MOVZX EAX,word ptr [ESI + 0x68]
+0054ddf0 : FSTP ST0
+0054ddf2 : MOV CL,AL
+0054ddf4 : SHR CL,0x4
+0054ddf7 : TEST CL,0x1
+0054ddfa : JNZ 0x0054de14
+0054ddfc : MOV DL,AL
+0054ddfe : SHR DL,0x3
+0054de01 : TEST DL,0x1
+0054de04 : JZ 0x0054de0d
+0054de06 : AND EAX,0xfff7
+0054de0b : JMP 0x0054de10
+0054de0d : OR EAX,0x8
+0054de10 : MOV word ptr [ESI + 0x68],AX
+0054de14 : FLDZ
+0054de16 : MOV EAX,0xffef
+0054de1b : AND word ptr [ESI + 0x68],AX
+0054de1f : FSTP double ptr [ESI + 0x38]
+0054de22 : JMP 0x0054de2b
+0054de24 : FSTP double ptr [ESI + 0x38]
+0054de27 : JMP 0x0054de2b
+0054de29 : FSTP ST0
+0054de2b : MOV CL,byte ptr [ESI + 0x68]
+0054de2e : SHR CL,0x5
+0054de31 : TEST CL,0x1
+0054de34 : JZ 0x0054dedc
+0054de3a : FLD float ptr [ESI + 0x50]
+0054de3d : MOV ECX,dword ptr [ESI + 0x8]
+0054de40 : FSTP double ptr [ESP + 0x8]
+0054de44 : CALL 0x0054ad50
+0054de49 : FLD float ptr [EAX + 0x4]
+0054de4c : MOV ECX,dword ptr [ESI + 0x8]
+0054de4f : FCOMP double ptr [ESP + 0x8]
+0054de53 : FNSTSW AX
+0054de55 : TEST AH,0x1
+0054de58 : JNZ 0x0054de8c
+0054de5a : MOV EAX,dword ptr [ECX + 0x3c]
+0054de5d : TEST EAX,EAX
+0054de5f : JBE 0x0054dedc
+0054de61 : FLD float ptr [ESI + 0x50]
+0054de64 : PUSH ECX
+0054de65 : DEC EAX
+0054de66 : FSTP float ptr [ESP]
+0054de69 : PUSH EAX
+0054de6a : CALL 0x0054af50
+0054de6f : CMP EAX,dword ptr [ESI + 0x18]
+0054de72 : JZ 0x0054dedc
+0054de74 : MOV DL,byte ptr [ESI + 0x68]
+0054de77 : SHR DL,0x1
+0054de79 : AND DL,0x1
+0054de7c : MOVZX ECX,DL
+0054de7f : PUSH ECX
+0054de80 : PUSH EAX
+0054de81 : MOV ECX,ESI
+0054de83 : CALL 0x0054d5a0
+0054de88 : POP ESI
+0054de89 : RET 0x8
+0054de8c : FLD float ptr [ESI + 0x50]
+0054de8f : FSTP double ptr [ESP + 0x8]
+0054de93 : CALL 0x0054ad50
+0054de98 : FLD float ptr [EAX + 0xc]
+0054de9b : FCOMP double ptr [ESP + 0x8]
+0054de9f : FNSTSW AX
+0054dea1 : TEST AH,0x41
+0054dea4 : JP 0x0054dedc
+0054dea6 : MOV ECX,dword ptr [ESI + 0x8]
+0054dea9 : PUSH EDI
+0054deaa : CALL 0x0054bdc0
+0054deaf : MOV ECX,dword ptr [ESI + 0x8]
+0054deb2 : MOV EDI,EAX
+0054deb4 : INC EDI
+0054deb5 : CALL 0x0054ad10
+0054deba : CMP EDI,EAX
+0054debc : JNC 0x0054dedb
+0054debe : MOV ECX,dword ptr [ESI + 0x8]
+0054dec1 : FLD float ptr [ESI + 0x50]
+0054dec4 : PUSH ECX
+0054dec5 : FSTP float ptr [ESP]
+0054dec8 : PUSH EDI
+0054dec9 : CALL 0x0054af50
+0054dece : CMP EAX,dword ptr [ESI + 0x18]
+0054ded1 : JZ 0x0054dedb
+0054ded3 : PUSH EAX
+0054ded4 : MOV ECX,ESI
+0054ded6 : CALL 0x0054dda0
+0054dedb : POP EDI
+0054dedc : POP ESI
+0054dedd : RET 0x8

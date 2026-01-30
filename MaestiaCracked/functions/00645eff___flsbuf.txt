@@ -1,0 +1,231 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __flsbuf
+ENTRY    : 00645eff
+BODY     : [[00645eff, 00646062]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __flsbuf
+   
+   Library: Visual Studio 2008 Release */
+
+int __cdecl __flsbuf(int _Ch,FILE *_File)
+
+{
+  char *_Buf;
+  char *pcVar1;
+  FILE *_File_00;
+  int *piVar2;
+  int iVar3;
+  undefined *puVar4;
+  int unaff_EDI;
+  uint uVar5;
+  longlong lVar6;
+  uint local_8;
+  
+  _File_00 = _File;
+  _File = (FILE *)__fileno(_File);
+  uVar5 = _File_00->_flag;
+  if ((uVar5 & 0x82) == 0) {
+    piVar2 = __errno();
+    *piVar2 = 9;
+LAB_00645f25:
+    _File_00->_flag = _File_00->_flag | 0x20;
+    return -1;
+  }
+  if ((uVar5 & 0x40) != 0) {
+    piVar2 = __errno();
+    *piVar2 = 0x22;
+    goto LAB_00645f25;
+  }
+  if ((uVar5 & 1) != 0) {
+    _File_00->_cnt = 0;
+    if ((uVar5 & 0x10) == 0) {
+      _File_00->_flag = uVar5 | 0x20;
+      return -1;
+    }
+    _File_00->_ptr = _File_00->_base;
+    _File_00->_flag = uVar5 & 0xfffffffe;
+  }
+  uVar5 = _File_00->_flag;
+  _File_00->_flag = uVar5 & 0xffffffef | 2;
+  _File_00->_cnt = 0;
+  local_8 = 0;
+  if (((uVar5 & 0x10c) == 0) &&
+     (((iVar3 = FUN_0063d8b9(), _File_00 != (FILE *)(iVar3 + 0x20) &&
+       (iVar3 = FUN_0063d8b9(), _File_00 != (FILE *)(iVar3 + 0x40))) ||
+      (iVar3 = __isatty((int)_File), iVar3 == 0)))) {
+    __getbuf(_File_00);
+  }
+  if ((_File_00->_flag & 0x108U) == 0) {
+    uVar5 = 1;
+    local_8 = __write((int)_File,&_Ch,1);
+  }
+  else {
+    _Buf = _File_00->_base;
+    pcVar1 = _File_00->_ptr;
+    _File_00->_ptr = _Buf + 1;
+    uVar5 = (int)pcVar1 - (int)_Buf;
+    _File_00->_cnt = _File_00->_bufsiz + -1;
+    if ((int)uVar5 < 1) {
+      if ((_File == (FILE *)0xffffffff) || (_File == (FILE *)0xfffffffe)) {
+        puVar4 = &DAT_00d677f0;
+      }
+      else {
+        puVar4 = (undefined *)(((uint)_File & 0x1f) * 0x40 + (&DAT_01728c40)[(int)_File >> 5]);
+      }
+      if (((puVar4[4] & 0x20) != 0) &&
+         (lVar6 = __lseeki64((int)_File,0x200000000,unaff_EDI), lVar6 == -1)) goto LAB_0064604d;
+    }
+    else {
+      local_8 = __write((int)_File,_Buf,uVar5);
+    }
+    *_File_00->_base = (char)_Ch;
+  }
+  if (local_8 == uVar5) {
+    return _Ch & 0xff;
+  }
+LAB_0064604d:
+  _File_00->_flag = _File_00->_flag | 0x20;
+  return -1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00645eff : MOV EDI,EDI
+00645f01 : PUSH EBP
+00645f02 : MOV EBP,ESP
+00645f04 : PUSH ECX
+00645f05 : PUSH ESI
+00645f06 : MOV ESI,dword ptr [EBP + 0xc]
+00645f09 : PUSH ESI
+00645f0a : CALL 0x0064dfc6
+00645f0f : MOV dword ptr [EBP + 0xc],EAX
+00645f12 : MOV EAX,dword ptr [ESI + 0xc]
+00645f15 : POP ECX
+00645f16 : TEST AL,0x82
+00645f18 : JNZ 0x00645f31
+00645f1a : CALL 0x0063ab82
+00645f1f : MOV dword ptr [EAX],0x9
+00645f25 : OR dword ptr [ESI + 0xc],0x20
+00645f29 : OR EAX,0xffffffff
+00645f2c : JMP 0x00646060
+00645f31 : TEST AL,0x40
+00645f33 : JZ 0x00645f42
+00645f35 : CALL 0x0063ab82
+00645f3a : MOV dword ptr [EAX],0x22
+00645f40 : JMP 0x00645f25
+00645f42 : PUSH EBX
+00645f43 : XOR EBX,EBX
+00645f45 : TEST AL,0x1
+00645f47 : JZ 0x00645f5f
+00645f49 : MOV dword ptr [ESI + 0x4],EBX
+00645f4c : TEST AL,0x10
+00645f4e : JZ 0x00645fdb
+00645f54 : MOV ECX,dword ptr [ESI + 0x8]
+00645f57 : AND EAX,0xfffffffe
+00645f5a : MOV dword ptr [ESI],ECX
+00645f5c : MOV dword ptr [ESI + 0xc],EAX
+00645f5f : MOV EAX,dword ptr [ESI + 0xc]
+00645f62 : AND EAX,0xffffffef
+00645f65 : OR EAX,0x2
+00645f68 : MOV dword ptr [ESI + 0xc],EAX
+00645f6b : MOV dword ptr [ESI + 0x4],EBX
+00645f6e : MOV dword ptr [EBP + -0x4],EBX
+00645f71 : TEST EAX,0x10c
+00645f76 : JNZ 0x00645fa4
+00645f78 : CALL 0x0063d8b9
+00645f7d : ADD EAX,0x20
+00645f80 : CMP ESI,EAX
+00645f82 : JZ 0x00645f90
+00645f84 : CALL 0x0063d8b9
+00645f89 : ADD EAX,0x40
+00645f8c : CMP ESI,EAX
+00645f8e : JNZ 0x00645f9d
+00645f90 : PUSH dword ptr [EBP + 0xc]
+00645f93 : CALL 0x0065c8cb
+00645f98 : POP ECX
+00645f99 : TEST EAX,EAX
+00645f9b : JNZ 0x00645fa4
+00645f9d : PUSH ESI
+00645f9e : CALL 0x0065bd15
+00645fa3 : POP ECX
+00645fa4 : TEST dword ptr [ESI + 0xc],0x108
+00645fab : PUSH EDI
+00645fac : JZ 0x00646032
+00645fb2 : MOV EAX,dword ptr [ESI + 0x8]
+00645fb5 : MOV EDI,dword ptr [ESI]
+00645fb7 : LEA ECX,[EAX + 0x1]
+00645fba : MOV dword ptr [ESI],ECX
+00645fbc : MOV ECX,dword ptr [ESI + 0x18]
+00645fbf : SUB EDI,EAX
+00645fc1 : DEC ECX
+00645fc2 : CMP EDI,EBX
+00645fc4 : MOV dword ptr [ESI + 0x4],ECX
+00645fc7 : JLE 0x00645fe6
+00645fc9 : PUSH EDI
+00645fca : PUSH EAX
+00645fcb : PUSH dword ptr [EBP + 0xc]
+00645fce : CALL 0x00650d59
+00645fd3 : ADD ESP,0xc
+00645fd6 : MOV dword ptr [EBP + -0x4],EAX
+00645fd9 : JMP 0x00646028
+00645fdb : OR EAX,0x20
+00645fde : MOV dword ptr [ESI + 0xc],EAX
+00645fe1 : OR EAX,0xffffffff
+00645fe4 : JMP 0x0064605f
+00645fe6 : MOV ECX,dword ptr [EBP + 0xc]
+00645fe9 : CMP ECX,-0x1
+00645fec : JZ 0x00646009
+00645fee : CMP ECX,-0x2
+00645ff1 : JZ 0x00646009
+00645ff3 : MOV EAX,ECX
+00645ff5 : AND EAX,0x1f
+00645ff8 : MOV EDX,ECX
+00645ffa : SAR EDX,0x5
+00645ffd : SHL EAX,0x6
+00646000 : ADD EAX,dword ptr [EDX*0x4 + 0x1728c40]
+00646007 : JMP 0x0064600e
+00646009 : MOV EAX,0xd677f0
+0064600e : TEST byte ptr [EAX + 0x4],0x20
+00646012 : JZ 0x00646028
+00646014 : PUSH 0x2
+00646016 : PUSH EBX
+00646017 : PUSH EBX
+00646018 : PUSH ECX
+00646019 : CALL 0x0065c7b2
+0064601e : AND EAX,EDX
+00646020 : ADD ESP,0x10
+00646023 : CMP EAX,-0x1
+00646026 : JZ 0x0064604d
+00646028 : MOV EAX,dword ptr [ESI + 0x8]
+0064602b : MOV CL,byte ptr [EBP + 0x8]
+0064602e : MOV byte ptr [EAX],CL
+00646030 : JMP 0x00646048
+00646032 : XOR EDI,EDI
+00646034 : INC EDI
+00646035 : PUSH EDI
+00646036 : LEA EAX,[EBP + 0x8]
+00646039 : PUSH EAX
+0064603a : PUSH dword ptr [EBP + 0xc]
+0064603d : CALL 0x00650d59
+00646042 : ADD ESP,0xc
+00646045 : MOV dword ptr [EBP + -0x4],EAX
+00646048 : CMP dword ptr [EBP + -0x4],EDI
+0064604b : JZ 0x00646056
+0064604d : OR dword ptr [ESI + 0xc],0x20
+00646051 : OR EAX,0xffffffff
+00646054 : JMP 0x0064605e
+00646056 : MOV EAX,dword ptr [EBP + 0x8]
+00646059 : AND EAX,0xff
+0064605e : POP EDI
+0064605f : POP EBX
+00646060 : POP ESI
+00646061 : LEAVE
+00646062 : RET

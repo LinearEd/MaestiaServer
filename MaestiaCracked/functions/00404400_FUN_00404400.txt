@@ -1,0 +1,58 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00404400
+ENTRY    : 00404400
+BODY     : [[00404400, 0040443a]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined4 FUN_00404400(undefined4 *param_1)
+
+{
+  undefined4 *puVar1;
+  int in_ECX;
+  ushort unaff_SI;
+  
+  puVar1 = *(undefined4 **)
+            (*(int *)(in_ECX + 0x20) + ((uint)(unaff_SI >> 4) % *(uint *)(in_ECX + 0x24)) * 4);
+  while( true ) {
+    if (puVar1 == (undefined4 *)0x0) {
+      return 0;
+    }
+    if (*(ushort *)(puVar1 + 2) == unaff_SI) break;
+    puVar1 = (undefined4 *)*puVar1;
+  }
+  *param_1 = puVar1[3];
+  return 1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00404400 : PUSH EBP
+00404401 : MOV EBP,ESP
+00404403 : MOVZX EAX,SI
+00404406 : SHR EAX,0x4
+00404409 : XOR EDX,EDX
+0040440b : DIV dword ptr [ECX + 0x24]
+0040440e : MOV EAX,dword ptr [ECX + 0x20]
+00404411 : MOV EDX,dword ptr [EAX + EDX*0x4]
+00404414 : TEST EDX,EDX
+00404416 : JZ 0x00404424
+00404418 : CMP word ptr [EDX + 0x8],SI
+0040441c : JZ 0x0040442a
+0040441e : MOV EDX,dword ptr [EDX]
+00404420 : TEST EDX,EDX
+00404422 : JNZ 0x00404418
+00404424 : XOR EAX,EAX
+00404426 : POP EBP
+00404427 : RET 0x4
+0040442a : MOV ECX,dword ptr [EDX + 0xc]
+0040442d : MOV EDX,dword ptr [EBP + 0x8]
+00404430 : MOV dword ptr [EDX],ECX
+00404432 : MOV EAX,0x1
+00404437 : POP EBP
+00404438 : RET 0x4

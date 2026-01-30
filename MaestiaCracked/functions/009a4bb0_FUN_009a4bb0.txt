@@ -1,0 +1,80 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_009a4bb0
+ENTRY    : 009a4bb0
+BODY     : [[009a4bb0, 009a4bbc] [009a4bc0, 009a4bd9] [009a4be0, 009a4c04]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_009a4bb0(void)
+
+{
+  rsize_t _DstSize;
+  int iVar1;
+  int in_ECX;
+  int *_Dst;
+  int unaff_EDI;
+  
+  _Dst = *(int **)(unaff_EDI + 0x68);
+  if (_Dst != *(int **)(unaff_EDI + 0x6c)) {
+    while (*(int *)*_Dst != in_ECX) {
+      _Dst = _Dst + 1;
+      if (_Dst == *(int **)(unaff_EDI + 0x6c)) {
+        return;
+      }
+    }
+    if ((int *)*_Dst != (int *)0x0) {
+                    /* WARNING: Subroutine does not return */
+      FUN_006f04e0();
+    }
+    iVar1 = *(int *)(unaff_EDI + 0x6c) - (int)(_Dst + 1) >> 2;
+    if (0 < iVar1) {
+      _DstSize = iVar1 * 4;
+      _memmove_s(_Dst,_DstSize,_Dst + 1,_DstSize);
+    }
+    *(int *)(unaff_EDI + 0x6c) = *(int *)(unaff_EDI + 0x6c) + -4;
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+009a4bb0 : MOV EAX,dword ptr [EDI + 0x6c]
+009a4bb3 : PUSH ESI
+009a4bb4 : MOV ESI,dword ptr [EDI + 0x68]
+009a4bb7 : CMP ESI,EAX
+009a4bb9 : JZ 0x009a4c03
+009a4bbb : JMP 0x009a4bc0
+009a4bc0 : MOV EDX,dword ptr [ESI]
+009a4bc2 : CMP dword ptr [EDX],ECX
+009a4bc4 : JZ 0x009a4bcf
+009a4bc6 : ADD ESI,0x4
+009a4bc9 : CMP ESI,EAX
+009a4bcb : JNZ 0x009a4bc0
+009a4bcd : POP ESI
+009a4bce : RET
+009a4bcf : MOV ECX,EDX
+009a4bd1 : TEST ECX,ECX
+009a4bd3 : JZ 0x009a4be0
+009a4bd5 : CALL 0x006f04e0
+009a4be0 : MOV EAX,dword ptr [EDI + 0x6c]
+009a4be3 : LEA ECX,[ESI + 0x4]
+009a4be6 : SUB EAX,ECX
+009a4be8 : SAR EAX,0x2
+009a4beb : TEST EAX,EAX
+009a4bed : JLE 0x009a4bff
+009a4bef : ADD EAX,EAX
+009a4bf1 : ADD EAX,EAX
+009a4bf3 : PUSH EAX
+009a4bf4 : PUSH ECX
+009a4bf5 : PUSH EAX
+009a4bf6 : PUSH ESI
+009a4bf7 : CALL 0x00634101
+009a4bfc : ADD ESP,0x10
+009a4bff : ADD dword ptr [EDI + 0x6c],-0x4
+009a4c03 : POP ESI
+009a4c04 : RET

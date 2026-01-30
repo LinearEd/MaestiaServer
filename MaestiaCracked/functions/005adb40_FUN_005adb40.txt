@@ -1,0 +1,99 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005adb40
+ENTRY    : 005adb40
+BODY     : [[005adb40, 005adbc0]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_005adb40(int param_1,uint param_2,char param_3,uint param_4)
+
+{
+  uint uVar1;
+  int in_ECX;
+  char *pcVar2;
+  int iVar3;
+  char *pcVar4;
+  
+  if (((param_3 == '\0') || (param_4 != 10)) || (iVar3 = 3, (*(byte *)(in_ECX + 5) & 0x7f) == 0)) {
+    iVar3 = 1000;
+  }
+  pcVar2 = "0123456789ABCDEF";
+  if ((*(byte *)(in_ECX + 6) & 1) == 0) {
+    pcVar2 = "0123456789abcdef";
+  }
+  if (param_4 - 2 < 0xf) {
+    do {
+      if (param_1 == *(int *)(in_ECX + 8)) {
+        return;
+      }
+      uVar1 = param_2 / param_4;
+      if (iVar3 == 0) {
+        pcVar4 = (char *)(*(int *)(in_ECX + 8) + -1);
+        *(char **)(in_ECX + 8) = pcVar4;
+        iVar3 = 3;
+        *pcVar4 = (char)(*(char *)(in_ECX + 5) * '\x02') >> 1;
+      }
+      *(int *)(in_ECX + 8) = *(int *)(in_ECX + 8) + -1;
+      iVar3 = iVar3 + -1;
+      **(char **)(in_ECX + 8) = pcVar2[param_2 % param_4 & 0xff];
+      param_2 = uVar1;
+    } while (uVar1 != 0);
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005adb40 : CMP byte ptr [ESP + 0xc],0x0
+005adb45 : MOV EAX,dword ptr [ESP + 0x8]
+005adb49 : PUSH EBP
+005adb4a : PUSH ESI
+005adb4b : JZ 0x005adb5f
+005adb4d : CMP dword ptr [ESP + 0x18],0xa
+005adb52 : JNZ 0x005adb5f
+005adb54 : TEST byte ptr [ECX + 0x5],0x7f
+005adb58 : MOV ESI,0x3
+005adb5d : JNZ 0x005adb64
+005adb5f : MOV ESI,0x3e8
+005adb64 : TEST byte ptr [ECX + 0x6],0x1
+005adb68 : MOV EBP,0xb8ef20
+005adb6d : JNZ 0x005adb74
+005adb6f : MOV EBP,0xb8f4ac
+005adb74 : MOV EDX,dword ptr [ESP + 0x18]
+005adb78 : ADD EDX,-0x2
+005adb7b : CMP EDX,0xe
+005adb7e : JA 0x005adbbc
+005adb80 : PUSH EBX
+005adb81 : PUSH EDI
+005adb82 : MOV EDI,dword ptr [ECX + 0x8]
+005adb85 : CMP dword ptr [ESP + 0x14],EDI
+005adb89 : JZ 0x005adbba
+005adb8b : XOR EDX,EDX
+005adb8d : DIV dword ptr [ESP + 0x20]
+005adb91 : TEST ESI,ESI
+005adb93 : JNZ 0x005adba7
+005adb95 : MOV BL,byte ptr [ECX + 0x5]
+005adb98 : DEC EDI
+005adb99 : ADD BL,BL
+005adb9b : SAR BL,0x1
+005adb9d : MOV dword ptr [ECX + 0x8],EDI
+005adba0 : MOV ESI,0x3
+005adba5 : MOV byte ptr [EDI],BL
+005adba7 : DEC dword ptr [ECX + 0x8]
+005adbaa : MOV EDI,dword ptr [ECX + 0x8]
+005adbad : MOVZX EDX,DL
+005adbb0 : MOV DL,byte ptr [EDX + EBP*0x1]
+005adbb3 : DEC ESI
+005adbb4 : MOV byte ptr [EDI],DL
+005adbb6 : TEST EAX,EAX
+005adbb8 : JNZ 0x005adb82
+005adbba : POP EDI
+005adbbb : POP EBX
+005adbbc : POP ESI
+005adbbd : POP EBP
+005adbbe : RET 0x10

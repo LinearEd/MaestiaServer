@@ -1,0 +1,171 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005ac170
+ENTRY    : 005ac170
+BODY     : [[005ac170, 005ac2b8]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_005ac170(float *param_1,float *param_2)
+
+{
+  float *pfVar1;
+  float fVar2;
+  float fVar3;
+  int in_ECX;
+  
+  fVar2 = *param_1;
+  fVar3 = *param_2;
+  *param_1 = fVar3 * *(float *)(in_ECX + 0x34) + fVar2 * *(float *)(in_ECX + 0x30) +
+             *(float *)(in_ECX + 0x38);
+  fVar3 = fVar3 * *(float *)(in_ECX + 0x40) + *(float *)(in_ECX + 0x3c) * fVar2 +
+          *(float *)(in_ECX + 0x44);
+  *param_2 = fVar3;
+  fVar2 = *param_1;
+  pfVar1 = (float *)(in_ECX + 0x88 +
+                    (uint)(byte)(&UNK_00b8f484)
+                                [(((uint)(fVar3 < *(float *)(in_ECX + 100)) * 2 |
+                                  (uint)(*param_1 < *(float *)(in_ECX + 0x60))) * 2 |
+                                 (uint)(*(float *)(in_ECX + 0x6c) < fVar3)) * 2 |
+                                 (uint)(*(float *)(in_ECX + 0x68) < *param_1)] * 0x18);
+  *param_1 = fVar3 * pfVar1[1] + fVar2 * *pfVar1 + pfVar1[2];
+  fVar3 = fVar3 * pfVar1[4] + pfVar1[3] * fVar2 + pfVar1[5];
+  *param_2 = fVar3;
+  fVar2 = *param_1;
+  *param_1 = fVar3 * *(float *)(in_ECX + 0x74) + fVar2 * *(float *)(in_ECX + 0x70) +
+             *(float *)(in_ECX + 0x78);
+  *param_2 = fVar3 * *(float *)(in_ECX + 0x80) + *(float *)(in_ECX + 0x7c) * fVar2 +
+             *(float *)(in_ECX + 0x84);
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005ac170 : PUSH ECX
+005ac171 : MOV EDX,dword ptr [ESP + 0x8]
+005ac175 : FLD float ptr [EDX]
+005ac177 : PUSH EBX
+005ac178 : FSTP float ptr [ESP + 0x4]
+005ac17c : PUSH EBP
+005ac17d : PUSH ESI
+005ac17e : MOV ESI,dword ptr [ESP + 0x18]
+005ac182 : FLD float ptr [ESI]
+005ac184 : PUSH EDI
+005ac185 : FSTP float ptr [ESP + 0x18]
+005ac189 : FLD float ptr [ECX + 0x34]
+005ac18c : FLD float ptr [ESP + 0x18]
+005ac190 : FLD ST0
+005ac192 : FMULP ST2
+005ac194 : FLD float ptr [ECX + 0x30]
+005ac197 : FLD float ptr [ESP + 0x10]
+005ac19b : FLD ST0
+005ac19d : FMULP ST2
+005ac19f : FXCH ST3
+005ac1a1 : FADDP
+005ac1a3 : FADD float ptr [ECX + 0x38]
+005ac1a6 : FSTP float ptr [EDX]
+005ac1a8 : FMUL float ptr [ECX + 0x40]
+005ac1ab : FLD float ptr [ECX + 0x3c]
+005ac1ae : FMULP ST2
+005ac1b0 : FADDP
+005ac1b2 : FADD float ptr [ECX + 0x44]
+005ac1b5 : FSTP float ptr [ESP + 0x18]
+005ac1b9 : FLD float ptr [ESP + 0x18]
+005ac1bd : FST float ptr [ESI]
+005ac1bf : FLD float ptr [EDX]
+005ac1c1 : FLD float ptr [ECX + 0x68]
+005ac1c4 : FCOMPP
+005ac1c6 : FNSTSW AX
+005ac1c8 : TEST AH,0x5
+005ac1cb : JP 0x005ac1d4
+005ac1cd : MOV EBP,0x1
+005ac1d2 : JMP 0x005ac1d6
+005ac1d4 : XOR EBP,EBP
+005ac1d6 : FLD float ptr [ECX + 0x6c]
+005ac1d9 : FCOMP
+005ac1db : FNSTSW AX
+005ac1dd : TEST AH,0x5
+005ac1e0 : JP 0x005ac1e9
+005ac1e2 : MOV EBX,0x1
+005ac1e7 : JMP 0x005ac1eb
+005ac1e9 : XOR EBX,EBX
+005ac1eb : FLD float ptr [EDX]
+005ac1ed : FLD float ptr [ECX + 0x60]
+005ac1f0 : FCOMPP
+005ac1f2 : FNSTSW AX
+005ac1f4 : TEST AH,0x41
+005ac1f7 : JNZ 0x005ac200
+005ac1f9 : MOV EDI,0x1
+005ac1fe : JMP 0x005ac202
+005ac200 : XOR EDI,EDI
+005ac202 : FLD float ptr [ECX + 0x64]
+005ac205 : FCOMP
+005ac207 : FNSTSW AX
+005ac209 : TEST AH,0x41
+005ac20c : JNZ 0x005ac215
+005ac20e : MOV EAX,0x1
+005ac213 : JMP 0x005ac217
+005ac215 : XOR EAX,EAX
+005ac217 : FLD float ptr [EDX]
+005ac219 : ADD EAX,EAX
+005ac21b : FSTP float ptr [ESP + 0x1c]
+005ac21f : OR EAX,EDI
+005ac221 : ADD EAX,EAX
+005ac223 : FSTP float ptr [ESP + 0x18]
+005ac227 : OR EAX,EBX
+005ac229 : ADD EAX,EAX
+005ac22b : OR EAX,EBP
+005ac22d : MOVZX EAX,byte ptr [EAX + 0xb8f484]
+005ac234 : LEA EAX,[EAX + EAX*0x2]
+005ac237 : LEA EAX,[ECX + EAX*0x8 + 0x88]
+005ac23e : POP EDI
+005ac23f : FLD float ptr [EAX + 0x4]
+005ac242 : FLD float ptr [ESP + 0x14]
+005ac246 : FLD ST0
+005ac248 : FMULP ST2
+005ac24a : FLD float ptr [EAX]
+005ac24c : FLD float ptr [ESP + 0x18]
+005ac250 : FLD ST0
+005ac252 : FMULP ST2
+005ac254 : FXCH ST3
+005ac256 : FADDP
+005ac258 : FADD float ptr [EAX + 0x8]
+005ac25b : FSTP float ptr [EDX]
+005ac25d : FMUL float ptr [EAX + 0x10]
+005ac260 : FLD float ptr [EAX + 0xc]
+005ac263 : FMULP ST2
+005ac265 : FADDP
+005ac267 : FADD float ptr [EAX + 0x14]
+005ac26a : FSTP float ptr [ESP + 0x14]
+005ac26e : FLD float ptr [ESP + 0x14]
+005ac272 : FST float ptr [ESI]
+005ac274 : FLD float ptr [EDX]
+005ac276 : FSTP float ptr [ESP + 0x18]
+005ac27a : FSTP float ptr [ESP + 0x14]
+005ac27e : FLD float ptr [ECX + 0x74]
+005ac281 : FLD float ptr [ESP + 0x14]
+005ac285 : FLD ST0
+005ac287 : FMULP ST2
+005ac289 : FLD float ptr [ECX + 0x70]
+005ac28c : FLD float ptr [ESP + 0x18]
+005ac290 : FLD ST0
+005ac292 : FMULP ST2
+005ac294 : FXCH ST3
+005ac296 : FADDP
+005ac298 : FADD float ptr [ECX + 0x78]
+005ac29b : FSTP float ptr [EDX]
+005ac29d : FMUL float ptr [ECX + 0x80]
+005ac2a3 : FLD float ptr [ECX + 0x7c]
+005ac2a6 : FMULP ST2
+005ac2a8 : FADDP
+005ac2aa : FADD float ptr [ECX + 0x84]
+005ac2b0 : FSTP float ptr [ESI]
+005ac2b2 : POP ESI
+005ac2b3 : POP EBP
+005ac2b4 : POP EBX
+005ac2b5 : POP ECX
+005ac2b6 : RET 0x8

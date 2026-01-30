@@ -1,0 +1,77 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0050b800
+ENTRY    : 0050b800
+BODY     : [[0050b800, 0050b87c]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_0050b800(float param_1)
+
+{
+  float fVar1;
+  int in_ECX;
+  undefined1 local_4;
+  
+  fVar1 = param_1 * 255.0;
+  if (255.0 <= fVar1) {
+    param_1 = 255.0;
+    fVar1 = param_1;
+  }
+  else {
+    param_1 = 0.0;
+    if (fVar1 < 0.0) goto LAB_0050b839;
+  }
+  param_1 = fVar1;
+LAB_0050b839:
+  local_4 = (undefined1)(int)ROUND(param_1);
+  *(undefined1 *)(in_ECX + 299) = local_4;
+  *(undefined1 *)(in_ECX + 0x137) = local_4;
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0050b800 : PUSH ECX
+0050b801 : FLD float ptr [ESP + 0x8]
+0050b805 : FLD double ptr [0x00b86b48]
+0050b80b : FMUL ST1
+0050b80d : FXCH
+0050b80f : FSTP float ptr [ESP + 0x8]
+0050b813 : FLD float ptr [ESP + 0x8]
+0050b817 : FCOM
+0050b819 : FNSTSW AX
+0050b81b : FSTP ST1
+0050b81d : TEST AH,0x5
+0050b820 : JP 0x0050b86f
+0050b822 : FST float ptr [ESP + 0x8]
+0050b826 : FLDZ
+0050b828 : FCOM
+0050b82a : FNSTSW AX
+0050b82c : FSTP ST1
+0050b82e : TEST AH,0x41
+0050b831 : JZ 0x0050b839
+0050b833 : FSTP ST0
+0050b835 : FLD float ptr [ESP + 0x8]
+0050b839 : FSTP float ptr [ESP + 0x8]
+0050b83d : FLD float ptr [ESP + 0x8]
+0050b841 : FNSTCW word ptr [ESP + 0x8]
+0050b845 : MOVZX EAX,word ptr [ESP + 0x8]
+0050b84a : OR EAX,0xc00
+0050b84f : MOV dword ptr [ESP],EAX
+0050b852 : FLDCW word ptr [ESP]
+0050b855 : FISTP dword ptr [ESP]
+0050b858 : MOV AL,byte ptr [ESP]
+0050b85b : MOV byte ptr [ECX + 0x12b],AL
+0050b861 : MOV byte ptr [ECX + 0x137],AL
+0050b867 : FLDCW word ptr [ESP + 0x8]
+0050b86b : POP ECX
+0050b86c : RET 0x4
+0050b86f : FSTP ST0
+0050b871 : FLD float ptr [0x00cdf130]
+0050b877 : FSTP float ptr [ESP + 0x8]
+0050b87b : JMP 0x0050b835

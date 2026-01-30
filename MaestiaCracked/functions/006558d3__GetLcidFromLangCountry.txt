@@ -1,0 +1,84 @@
+PROGRAM  : Maestia.exe
+FUNCTION : _GetLcidFromLangCountry
+ENTRY    : 006558d3
+BODY     : [[006558d3, 00655939]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    _GetLcidFromLangCountry
+   
+   Library: Visual Studio 2008 Release */
+
+void _GetLcidFromLangCountry(void)
+
+{
+  uint uVar1;
+  size_t sVar2;
+  undefined4 uVar3;
+  undefined4 *unaff_ESI;
+  
+  sVar2 = _strlen((char *)*unaff_ESI);
+  unaff_ESI[4] = (uint)(sVar2 == 3);
+  sVar2 = _strlen((char *)unaff_ESI[1]);
+  unaff_ESI[6] = 0;
+  unaff_ESI[5] = (uint)(sVar2 == 3);
+  if (unaff_ESI[4] == 0) {
+    uVar3 = _GetPrimaryLen();
+  }
+  else {
+    uVar3 = 2;
+  }
+  unaff_ESI[3] = uVar3;
+  EnumSystemLocalesA(_LangCountryEnumProc_4,1);
+  uVar1 = unaff_ESI[2];
+  if ((((uVar1 & 0x100) == 0) || ((uVar1 & 0x200) == 0)) || ((uVar1 & 7) == 0)) {
+    unaff_ESI[2] = 0;
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006558d3 : PUSH dword ptr [ESI]
+006558d5 : CALL 0x00640960
+006558da : PUSH dword ptr [ESI + 0x4]
+006558dd : SUB EAX,0x3
+006558e0 : NEG EAX
+006558e2 : SBB EAX,EAX
+006558e4 : INC EAX
+006558e5 : MOV dword ptr [ESI + 0x10],EAX
+006558e8 : CALL 0x00640960
+006558ed : SUB EAX,0x3
+006558f0 : NEG EAX
+006558f2 : SBB EAX,EAX
+006558f4 : AND dword ptr [ESI + 0x18],0x0
+006558f8 : INC EAX
+006558f9 : CMP dword ptr [ESI + 0x10],0x0
+006558fd : POP ECX
+006558fe : POP ECX
+006558ff : MOV dword ptr [ESI + 0x14],EAX
+00655902 : JZ 0x00655909
+00655904 : PUSH 0x2
+00655906 : POP EAX
+00655907 : JMP 0x00655910
+00655909 : MOV EDX,dword ptr [ESI]
+0065590b : CALL 0x00655519
+00655910 : PUSH 0x1
+00655912 : PUSH 0x655640
+00655917 : MOV dword ptr [ESI + 0xc],EAX
+0065591a : CALL dword ptr [0x00b85390]
+00655920 : MOV EAX,dword ptr [ESI + 0x8]
+00655923 : TEST EAX,0x100
+00655928 : JZ 0x00655935
+0065592a : TEST EAX,0x200
+0065592f : JZ 0x00655935
+00655931 : TEST AL,0x7
+00655933 : JNZ 0x00655939
+00655935 : AND dword ptr [ESI + 0x8],0x0
+00655939 : RET

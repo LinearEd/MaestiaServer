@@ -1,0 +1,78 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00840c60
+ENTRY    : 00840c60
+BODY     : [[00840c60, 00840cc1]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00840c60(int param_1,int param_2)
+
+{
+  int iVar1;
+  int iVar2;
+  int iVar3;
+  int unaff_ESI;
+  int *unaff_EDI;
+  
+  iVar3 = 0;
+  iVar2 = *(int *)(unaff_ESI + 0x40) - *(int *)(unaff_ESI + 0x3c) >> 2;
+  if (0 < iVar2) {
+    do {
+      iVar1 = *(int *)(*(int *)(unaff_ESI + 0x3c) + iVar3 * 4);
+      if (*(int *)(iVar1 + 4) == param_1) {
+        if (*(char *)(iVar1 + 1) == '\0') {
+          *unaff_EDI = *unaff_EDI + *(int *)(iVar1 + 8);
+        }
+        else {
+          *unaff_EDI = (int)((float)*(int *)(iVar1 + 8) * 0.01 * (float)param_2 + (float)*unaff_EDI)
+          ;
+        }
+      }
+      iVar3 = iVar3 + 1;
+    } while (iVar3 < iVar2);
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00840c60 : PUSH EBP
+00840c61 : MOV EBP,ESP
+00840c63 : MOV EAX,dword ptr [ESI + 0x40]
+00840c66 : SUB EAX,dword ptr [ESI + 0x3c]
+00840c69 : XOR EDX,EDX
+00840c6b : SAR EAX,0x2
+00840c6e : PUSH EBX
+00840c6f : MOV EBX,dword ptr [EBP + 0x8]
+00840c72 : TEST EAX,EAX
+00840c74 : JLE 0x00840cbd
+00840c76 : MOVSS XMM0,dword ptr [0x00cdf23c]
+00840c7e : MOV EDI,EDI
+00840c80 : MOV ECX,dword ptr [ESI + 0x3c]
+00840c83 : MOV ECX,dword ptr [ECX + EDX*0x4]
+00840c86 : CMP dword ptr [ECX + 0x4],EBX
+00840c89 : JNZ 0x00840cb8
+00840c8b : CMP byte ptr [ECX + 0x1],0x0
+00840c8f : JZ 0x00840cb3
+00840c91 : CVTSI2SS XMM1,dword ptr [ECX + 0x8]
+00840c96 : CVTSI2SS XMM2,dword ptr [EBP + 0xc]
+00840c9b : MULSS XMM1,XMM0
+00840c9f : MULSS XMM1,XMM2
+00840ca3 : CVTSI2SS XMM2,dword ptr [EDI]
+00840ca7 : ADDSS XMM1,XMM2
+00840cab : CVTTSS2SI ECX,XMM1
+00840caf : MOV dword ptr [EDI],ECX
+00840cb1 : JMP 0x00840cb8
+00840cb3 : MOV ECX,dword ptr [ECX + 0x8]
+00840cb6 : ADD dword ptr [EDI],ECX
+00840cb8 : INC EDX
+00840cb9 : CMP EDX,EAX
+00840cbb : JL 0x00840c80
+00840cbd : POP EBX
+00840cbe : POP EBP
+00840cbf : RET 0x8

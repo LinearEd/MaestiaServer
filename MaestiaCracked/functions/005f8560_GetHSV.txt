@@ -1,0 +1,268 @@
+PROGRAM  : Maestia.exe
+FUNCTION : GetHSV
+ENTRY    : 005f8560
+BODY     : [[005f8560, 005f8732]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* public: void __thiscall GColor::GetHSV(float *,float *,float *)const  */
+
+void __thiscall GColor::GetHSV(GColor *this,float *param_1,float *param_2,float *param_3)
+
+{
+  float fVar1;
+  float fVar2;
+  float fVar3;
+  float local_c;
+  float local_8;
+  
+                    /* 0x1f8560  94  ?GetHSV@GColor@@QBEXPAM00@Z */
+  fVar3 = 0.0;
+  fVar1 = fVar3;
+  if (this[2] != (GColor)0x0) {
+    fVar1 = (float)(byte)this[2] / 255.0;
+  }
+  if (this[1] != (GColor)0x0) {
+    fVar3 = (float)(byte)this[1] / 255.0;
+  }
+  fVar2 = 0.0;
+  if (*this != (GColor)0x0) {
+    fVar2 = (float)(byte)*this / 255.0;
+  }
+  local_c = fVar2;
+  if (fVar3 < fVar2) {
+    local_c = fVar3;
+  }
+  local_8 = fVar1;
+  if (local_c <= fVar1) {
+    local_8 = local_c;
+  }
+  local_c = fVar2;
+  if (fVar2 < fVar3) {
+    local_c = fVar3;
+  }
+  if (local_c < fVar1) {
+    local_c = fVar1;
+  }
+  local_8 = local_c - local_8;
+  *param_3 = local_c;
+  if (local_c == 0.0) {
+    *param_2 = 0.0;
+    *param_1 = 0.0;
+    return;
+  }
+  *param_2 = local_8 / local_c;
+  if (local_8 / local_c == 0.0) {
+    *param_1 = 0.0;
+    return;
+  }
+  if (local_c == fVar1) {
+    local_8 = (fVar3 - fVar2) / local_8;
+  }
+  else if (fVar3 == local_c) {
+    local_8 = (fVar2 - fVar1) / local_8 + 2.0;
+  }
+  else {
+    local_8 = (fVar1 - fVar3) / local_8 + 4.0;
+  }
+  *param_1 = local_8;
+  fVar1 = *param_1 / 6.0;
+  *param_1 = fVar1;
+  if (fVar1 < 0.0) {
+    *param_1 = fVar1 + 1.0;
+  }
+  if (*param_1 <= 1.0) {
+    return;
+  }
+  *param_1 = *param_1 - 1.0;
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005f8560 : MOV AL,byte ptr [ECX + 0x2]
+005f8563 : FLD double ptr [0x00b86b48]
+005f8569 : FLDZ
+005f856b : SUB ESP,0xc
+005f856e : TEST AL,AL
+005f8570 : JNZ 0x005f8576
+005f8572 : FLD ST0
+005f8574 : JMP 0x005f8583
+005f8576 : MOVZX EAX,AL
+005f8579 : MOV dword ptr [ESP + 0x4],EAX
+005f857d : FILD dword ptr [ESP + 0x4]
+005f8581 : FDIV ST0,ST2
+005f8583 : MOV AL,byte ptr [ECX + 0x1]
+005f8586 : FSTP float ptr [ESP + 0x8]
+005f858a : TEST AL,AL
+005f858c : JNZ 0x005f8592
+005f858e : FLD ST0
+005f8590 : JMP 0x005f859f
+005f8592 : MOVZX EDX,AL
+005f8595 : MOV dword ptr [ESP + 0x4],EDX
+005f8599 : FILD dword ptr [ESP + 0x4]
+005f859d : FDIV ST0,ST2
+005f859f : MOV CL,byte ptr [ECX]
+005f85a1 : FSTP float ptr [ESP]
+005f85a4 : TEST CL,CL
+005f85a6 : JNZ 0x005f85ac
+005f85a8 : FSTP ST1
+005f85aa : JMP 0x005f85bb
+005f85ac : MOVZX EAX,CL
+005f85af : FSTP ST0
+005f85b1 : MOV dword ptr [ESP + 0x4],EAX
+005f85b5 : FILD dword ptr [ESP + 0x4]
+005f85b9 : FDIVRP
+005f85bb : FSTP float ptr [ESP + 0x4]
+005f85bf : FLD float ptr [ESP]
+005f85c2 : FLD float ptr [ESP + 0x4]
+005f85c6 : FCOM
+005f85c8 : FNSTSW AX
+005f85ca : TEST AH,0x41
+005f85cd : JNZ 0x005f85d6
+005f85cf : FXCH
+005f85d1 : FST float ptr [ESP]
+005f85d4 : JMP 0x005f85db
+005f85d6 : FST float ptr [ESP]
+005f85d9 : FXCH
+005f85db : FLD float ptr [ESP + 0x8]
+005f85df : FLD float ptr [ESP]
+005f85e2 : FCOM
+005f85e4 : FNSTSW AX
+005f85e6 : TEST AH,0x41
+005f85e9 : JNZ 0x005f85f3
+005f85eb : FSTP ST0
+005f85ed : FST float ptr [ESP + 0x4]
+005f85f1 : JMP 0x005f85f7
+005f85f3 : FSTP float ptr [ESP + 0x4]
+005f85f7 : FXCH ST2
+005f85f9 : FCOM
+005f85fb : FNSTSW AX
+005f85fd : TEST AH,0x5
+005f8600 : JP 0x005f8609
+005f8602 : FXCH
+005f8604 : FST float ptr [ESP]
+005f8607 : JMP 0x005f860e
+005f8609 : FST float ptr [ESP]
+005f860c : FXCH
+005f860e : FLD float ptr [ESP]
+005f8611 : FCOM ST3
+005f8613 : FNSTSW AX
+005f8615 : TEST AH,0x5
+005f8618 : JP 0x005f8623
+005f861a : FSTP ST0
+005f861c : FXCH ST2
+005f861e : FST float ptr [ESP]
+005f8621 : JMP 0x005f8628
+005f8623 : FSTP float ptr [ESP]
+005f8626 : FXCH ST2
+005f8628 : FLD float ptr [ESP]
+005f862b : MOV ECX,dword ptr [ESP + 0x18]
+005f862f : FLD ST0
+005f8631 : FSUB float ptr [ESP + 0x4]
+005f8635 : FSTP float ptr [ESP + 0x8]
+005f8639 : FST float ptr [ECX]
+005f863b : FLDZ
+005f863d : FLD ST0
+005f863f : FUCOMP ST2
+005f8641 : FNSTSW AX
+005f8643 : TEST AH,0x44
+005f8646 : JNP 0x005f8711
+005f864c : FLD float ptr [ESP + 0x8]
+005f8650 : MOV EDX,dword ptr [ESP + 0x14]
+005f8654 : FLD ST0
+005f8656 : FDIV ST0,ST3
+005f8658 : FSTP float ptr [ESP + 0x18]
+005f865c : FLD float ptr [ESP + 0x18]
+005f8660 : FST float ptr [EDX]
+005f8662 : FLD ST2
+005f8664 : FUCOMPP
+005f8666 : FNSTSW AX
+005f8668 : TEST AH,0x44
+005f866b : JP 0x005f8683
+005f866d : MOV EAX,dword ptr [ESP + 0x10]
+005f8671 : FSTP ST2
+005f8673 : FSTP ST1
+005f8675 : FSTP ST1
+005f8677 : FSTP ST2
+005f8679 : FSTP ST0
+005f867b : FSTP float ptr [EAX]
+005f867d : ADD ESP,0xc
+005f8680 : RET 0xc
+005f8683 : FLD ST3
+005f8685 : FLD ST3
+005f8687 : FUCOMPP
+005f8689 : FNSTSW AX
+005f868b : TEST AH,0x44
+005f868e : JP 0x005f86a0
+005f8690 : FSTP ST2
+005f8692 : FSTP ST2
+005f8694 : FXCH ST3
+005f8696 : FSUBRP ST2,ST0
+005f8698 : FXCH
+005f869a : FDIVRP ST2,ST0
+005f869c : FXCH
+005f869e : JMP 0x005f86cd
+005f86a0 : FLD ST5
+005f86a2 : FUCOMP ST3
+005f86a4 : FNSTSW AX
+005f86a6 : FSTP ST2
+005f86a8 : TEST AH,0x44
+005f86ab : JP 0x005f86bd
+005f86ad : FSTP ST4
+005f86af : FXCH ST2
+005f86b1 : FSUBRP
+005f86b3 : FDIVRP
+005f86b5 : FADD double ptr [0x00cdf2d0]
+005f86bb : JMP 0x005f86cd
+005f86bd : FSTP ST3
+005f86bf : FXCH
+005f86c1 : FSUBRP ST3,ST0
+005f86c3 : FDIVP ST2,ST0
+005f86c5 : FXCH
+005f86c7 : FADD double ptr [0x00b95650]
+005f86cd : MOV ECX,dword ptr [ESP + 0x10]
+005f86d1 : FSTP float ptr [ECX]
+005f86d3 : FLD float ptr [ECX]
+005f86d5 : FDIV double ptr [0x00b95628]
+005f86db : FSTP float ptr [ESP + 0x10]
+005f86df : FLD float ptr [ESP + 0x10]
+005f86e3 : FST float ptr [ECX]
+005f86e5 : FCOM
+005f86e7 : FNSTSW AX
+005f86e9 : FSTP ST1
+005f86eb : FLD1
+005f86ed : TEST AH,0x5
+005f86f0 : JP 0x005f86fa
+005f86f2 : FADD ST1,ST0
+005f86f4 : FXCH
+005f86f6 : FSTP float ptr [ECX]
+005f86f8 : JMP 0x005f86fc
+005f86fa : FSTP ST1
+005f86fc : FLD1
+005f86fe : FCOMP float ptr [ECX]
+005f8700 : FNSTSW AX
+005f8702 : TEST AH,0x5
+005f8705 : JP 0x005f872b
+005f8707 : FSUBR float ptr [ECX]
+005f8709 : FSTP float ptr [ECX]
+005f870b : ADD ESP,0xc
+005f870e : RET 0xc
+005f8711 : MOV ECX,dword ptr [ESP + 0x14]
+005f8715 : FSTP ST1
+005f8717 : MOV EDX,dword ptr [ESP + 0x10]
+005f871b : FSTP ST1
+005f871d : FSTP ST2
+005f871f : FSTP ST0
+005f8721 : FST float ptr [ECX]
+005f8723 : FSTP float ptr [EDX]
+005f8725 : ADD ESP,0xc
+005f8728 : RET 0xc
+005f872b : FSTP ST0
+005f872d : ADD ESP,0xc
+005f8730 : RET 0xc

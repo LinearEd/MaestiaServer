@@ -1,0 +1,65 @@
+PROGRAM  : Maestia.exe
+FUNCTION : GetAcquireInterface
+ENTRY    : 005170f0
+BODY     : [[005170f0, 0051712a]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* public: virtual class GAcquireInterface * __thiscall GMutex::GetAcquireInterface(void) */
+
+GAcquireInterface * __thiscall GMutex::GetAcquireInterface(GMutex *this)
+
+{
+  undefined4 *puVar1;
+  DWORD DVar2;
+  
+                    /* 0x1170f0  81  ?GetAcquireInterface@GMutex@@UAEPAVGAcquireInterface@@XZ */
+  puVar1 = *(undefined4 **)(this + 0x10);
+  if (puVar1[2] != 0) {
+    if (puVar1[2] != 0) {
+      DVar2 = WaitForSingleObject((HANDLE)*puVar1,0);
+      if (DVar2 != 0) goto LAB_00517125;
+      puVar1[2] = puVar1[2] + 1;
+      FUN_00517030(this);
+    }
+    return (GAcquireInterface *)(puVar1 + 3);
+  }
+LAB_00517125:
+  return (GAcquireInterface *)(this + 0xc);
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005170f0 : PUSH ESI
+005170f1 : PUSH EDI
+005170f2 : MOV EDI,ECX
+005170f4 : MOV ESI,dword ptr [EDI + 0x10]
+005170f7 : MOV EAX,dword ptr [ESI + 0x8]
+005170fa : TEST EAX,EAX
+005170fc : JZ 0x00517125
+005170fe : MOV ECX,dword ptr [ESI + 0x8]
+00517101 : TEST ECX,ECX
+00517103 : JZ 0x0051711f
+00517105 : MOV EDX,dword ptr [ESI]
+00517107 : PUSH 0x0
+00517109 : PUSH EDX
+0051710a : CALL dword ptr [0x00b85100]
+00517110 : TEST EAX,EAX
+00517112 : JNZ 0x00517125
+00517114 : INC dword ptr [ESI + 0x8]
+00517117 : PUSH EDI
+00517118 : MOV ECX,ESI
+0051711a : CALL 0x00517030
+0051711f : POP EDI
+00517120 : LEA EAX,[ESI + 0xc]
+00517123 : POP ESI
+00517124 : RET
+00517125 : LEA EAX,[EDI + 0xc]
+00517128 : POP EDI
+00517129 : POP ESI
+0051712a : RET

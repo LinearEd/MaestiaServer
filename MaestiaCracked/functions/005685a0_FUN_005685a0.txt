@@ -1,0 +1,96 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005685a0
+ENTRY    : 005685a0
+BODY     : [[005685a0, 00568629]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_005685a0(void)
+
+{
+  undefined4 *puVar1;
+  uint uVar2;
+  int *in_ECX;
+  undefined4 uVar3;
+  
+  puVar1 = (undefined4 *)*in_ECX;
+  if ((puVar1 != (undefined4 *)0x0) && (uVar2 = puVar1[2], (uVar2 & 0x70000000) == 0x10000000)) {
+    if ((uVar2 & 0xfffffff) == 0) {
+      uVar2 = uVar2 & 0xafffffff | 0x20000000;
+      uVar3 = 4;
+    }
+    else {
+      uVar2 = uVar2 & 0x8fffffff;
+      uVar3 = 2;
+    }
+    puVar1[2] = uVar2;
+    (**(code **)*puVar1)(uVar3);
+  }
+  puVar1 = (undefined4 *)in_ECX[1];
+  if ((puVar1 != (undefined4 *)0x0) && (uVar2 = puVar1[2], (uVar2 & 0x70000000) == 0x10000000)) {
+    if ((uVar2 & 0xfffffff) != 0) {
+      puVar1[2] = uVar2 & 0x8fffffff;
+      (**(code **)*puVar1)(2);
+      return;
+    }
+    puVar1[2] = uVar2 & 0xafffffff | 0x20000000;
+    (**(code **)*puVar1)(4);
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005685a0 : PUSH ESI
+005685a1 : MOV ESI,ECX
+005685a3 : MOV ECX,dword ptr [ESI]
+005685a5 : TEST ECX,ECX
+005685a7 : JZ 0x005685e1
+005685a9 : MOV EAX,dword ptr [ECX + 0x8]
+005685ac : MOV EDX,EAX
+005685ae : AND EDX,0x70000000
+005685b4 : CMP EDX,0x10000000
+005685ba : JNZ 0x005685e1
+005685bc : TEST EAX,0xfffffff
+005685c1 : JBE 0x005685cc
+005685c3 : AND EAX,0x8fffffff
+005685c8 : PUSH 0x2
+005685ca : JMP 0x005685d8
+005685cc : AND EAX,0xafffffff
+005685d1 : OR EAX,0x20000000
+005685d6 : PUSH 0x4
+005685d8 : MOV dword ptr [ECX + 0x8],EAX
+005685db : MOV EAX,dword ptr [ECX]
+005685dd : MOV EDX,dword ptr [EAX]
+005685df : CALL EDX
+005685e1 : MOV ECX,dword ptr [ESI + 0x4]
+005685e4 : POP ESI
+005685e5 : TEST ECX,ECX
+005685e7 : JZ 0x00568629
+005685e9 : MOV EAX,dword ptr [ECX + 0x8]
+005685ec : MOV EDX,EAX
+005685ee : AND EDX,0x70000000
+005685f4 : CMP EDX,0x10000000
+005685fa : JNZ 0x00568629
+005685fc : TEST EAX,0xfffffff
+00568601 : JBE 0x00568614
+00568603 : AND EAX,0x8fffffff
+00568608 : MOV dword ptr [ECX + 0x8],EAX
+0056860b : MOV EAX,dword ptr [ECX]
+0056860d : MOV EDX,dword ptr [EAX]
+0056860f : PUSH 0x2
+00568611 : CALL EDX
+00568613 : RET
+00568614 : AND EAX,0xafffffff
+00568619 : OR EAX,0x20000000
+0056861e : MOV dword ptr [ECX + 0x8],EAX
+00568621 : MOV EAX,dword ptr [ECX]
+00568623 : MOV EDX,dword ptr [EAX]
+00568625 : PUSH 0x4
+00568627 : CALL EDX
+00568629 : RET

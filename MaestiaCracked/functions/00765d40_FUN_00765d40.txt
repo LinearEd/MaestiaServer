@@ -1,0 +1,175 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00765d40
+ENTRY    : 00765d40
+BODY     : [[00765d40, 00765e88]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00765d40(void *param_1)
+
+{
+  int *piVar1;
+  int iVar2;
+  undefined4 uVar3;
+  int in_ECX;
+  int unaff_EDI;
+  undefined1 local_30 [28];
+  int local_14;
+  void *local_10;
+  undefined1 *puStack_c;
+  
+  puStack_c = &LAB_00b18f0b;
+  local_10 = ExceptionList;
+  ExceptionList = &local_10;
+  if ((*(char *)(in_ECX + 0x3c) != '\0') &&
+     (piVar1 = *(int **)(in_ECX + 0x34), piVar1 != (int *)0x0)) {
+    if (unaff_EDI == 0) {
+      FUN_00406460(L"nVertexCount == 0");
+      if ((int *)*DAT_00da98e8 != (int *)0x0) {
+        (**(code **)(*(int *)*DAT_00da98e8 + 0x14))
+                  (L"AvaLib::AvaFxParticleRender::ReadyParticleVertex",0x13c,local_30);
+      }
+      FUN_00406560();
+      ExceptionList = local_10;
+      return;
+    }
+    local_14 = 0;
+    iVar2 = (**(code **)(*piVar1 + 0x2c))
+                      (piVar1,0,0,&local_14,0,DAT_00d66fa0 ^ (uint)&stack0xfffffffc);
+    if (iVar2 < 0) {
+      uVar3 = FUN_00404750(L"AvaFxParticleRender::ReadyParticleVertex m_pVertexBuffer Lock Failed (%d)"
+                           ,iVar2);
+      if ((int *)*DAT_00da98e8 != (int *)0x0) {
+        (**(code **)(*(int *)*DAT_00da98e8 + 0x14))
+                  (L"AvaLib::AvaFxParticleRender::ReadyParticleVertex",0x146,uVar3);
+      }
+      FUN_00406560();
+      ExceptionList = local_10;
+      return;
+    }
+    _memcpy((void *)(local_14 + *(int *)(in_ECX + 0x38) * 0x18),param_1,unaff_EDI * 0x18);
+    *(int *)(in_ECX + 0x38) = *(int *)(in_ECX + 0x38) + unaff_EDI;
+    (**(code **)(**(int **)(in_ECX + 0x34) + 0x30))(*(int **)(in_ECX + 0x34));
+  }
+  ExceptionList = local_10;
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00765d40 : PUSH EBP
+00765d41 : MOV EBP,ESP
+00765d43 : PUSH -0x1
+00765d45 : PUSH 0xb18f0b
+00765d4a : MOV EAX,FS:[0x0]
+00765d50 : PUSH EAX
+00765d51 : SUB ESP,0x20
+00765d54 : PUSH ESI
+00765d55 : MOV EAX,[0x00d66fa0]
+00765d5a : XOR EAX,EBP
+00765d5c : PUSH EAX
+00765d5d : LEA EAX,[EBP + -0xc]
+00765d60 : MOV FS:[0x0],EAX
+00765d66 : MOV ESI,ECX
+00765d68 : CMP byte ptr [ESI + 0x3c],0x0
+00765d6c : JZ 0x00765e77
+00765d72 : MOV EAX,dword ptr [ESI + 0x34]
+00765d75 : TEST EAX,EAX
+00765d77 : JZ 0x00765e77
+00765d7d : TEST EDI,EDI
+00765d7f : JNZ 0x00765dd2
+00765d81 : PUSH 0xc0c94c
+00765d86 : LEA ECX,[EBP + -0x2c]
+00765d89 : CALL 0x00406460
+00765d8e : MOV dword ptr [EBP + -0x4],EDI
+00765d91 : MOV EAX,[0x00da98e8]
+00765d96 : MOV ECX,dword ptr [EAX]
+00765d98 : TEST ECX,ECX
+00765d9a : JZ 0x00765db1
+00765d9c : MOV EDX,dword ptr [ECX]
+00765d9e : MOV EDX,dword ptr [EDX + 0x14]
+00765da1 : LEA EAX,[EBP + -0x2c]
+00765da4 : PUSH EAX
+00765da5 : PUSH 0x13c
+00765daa : PUSH 0xc0cad0
+00765daf : CALL EDX
+00765db1 : MOV dword ptr [EBP + -0x4],0xffffffff
+00765db8 : LEA ECX,[EBP + -0x2c]
+00765dbb : CALL 0x00406560
+00765dc0 : MOV ECX,dword ptr [EBP + -0xc]
+00765dc3 : MOV dword ptr FS:[0x0],ECX
+00765dca : POP ECX
+00765dcb : POP ESI
+00765dcc : MOV ESP,EBP
+00765dce : POP EBP
+00765dcf : RET 0x4
+00765dd2 : PUSH 0x0
+00765dd4 : LEA EDX,[EBP + -0x10]
+00765dd7 : PUSH EDX
+00765dd8 : PUSH 0x0
+00765dda : MOV dword ptr [EBP + -0x10],0x0
+00765de1 : MOV ECX,dword ptr [EAX]
+00765de3 : PUSH 0x0
+00765de5 : PUSH EAX
+00765de6 : MOV EAX,dword ptr [ECX + 0x2c]
+00765de9 : CALL EAX
+00765deb : TEST EAX,EAX
+00765ded : JGE 0x00765e46
+00765def : PUSH EAX
+00765df0 : PUSH 0xc0cb38
+00765df5 : LEA ESI,[EBP + -0x2c]
+00765df8 : CALL 0x00404750
+00765dfd : ADD ESP,0x8
+00765e00 : MOV dword ptr [EBP + -0x4],0x1
+00765e07 : MOV ECX,dword ptr [0x00da98e8]
+00765e0d : MOV ECX,dword ptr [ECX]
+00765e0f : TEST ECX,ECX
+00765e11 : JZ 0x00765e25
+00765e13 : MOV EDX,dword ptr [ECX]
+00765e15 : PUSH EAX
+00765e16 : MOV EAX,dword ptr [EDX + 0x14]
+00765e19 : PUSH 0x146
+00765e1e : PUSH 0xc0cbf0
+00765e23 : CALL EAX
+00765e25 : MOV dword ptr [EBP + -0x4],0xffffffff
+00765e2c : LEA ECX,[EBP + -0x2c]
+00765e2f : CALL 0x00406560
+00765e34 : MOV ECX,dword ptr [EBP + -0xc]
+00765e37 : MOV dword ptr FS:[0x0],ECX
+00765e3e : POP ECX
+00765e3f : POP ESI
+00765e40 : MOV ESP,EBP
+00765e42 : POP EBP
+00765e43 : RET 0x4
+00765e46 : MOV EAX,dword ptr [ESI + 0x38]
+00765e49 : MOV EDX,dword ptr [EBP + 0x8]
+00765e4c : LEA ECX,[EDI + EDI*0x2]
+00765e4f : ADD ECX,ECX
+00765e51 : ADD ECX,ECX
+00765e53 : ADD ECX,ECX
+00765e55 : PUSH ECX
+00765e56 : MOV ECX,dword ptr [EBP + -0x10]
+00765e59 : PUSH EDX
+00765e5a : LEA EAX,[EAX + EAX*0x2]
+00765e5d : LEA EDX,[ECX + EAX*0x8]
+00765e60 : PUSH EDX
+00765e61 : CALL 0x0063ae40
+00765e66 : ADD dword ptr [ESI + 0x38],EDI
+00765e69 : MOV ESI,dword ptr [ESI + 0x34]
+00765e6c : MOV EAX,dword ptr [ESI]
+00765e6e : MOV ECX,dword ptr [EAX + 0x30]
+00765e71 : ADD ESP,0xc
+00765e74 : PUSH ESI
+00765e75 : CALL ECX
+00765e77 : MOV ECX,dword ptr [EBP + -0xc]
+00765e7a : MOV dword ptr FS:[0x0],ECX
+00765e81 : POP ECX
+00765e82 : POP ESI
+00765e83 : MOV ESP,EBP
+00765e85 : POP EBP
+00765e86 : RET 0x4

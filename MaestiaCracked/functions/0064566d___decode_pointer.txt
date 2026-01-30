@@ -1,0 +1,94 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __decode_pointer
+ENTRY    : 0064566d
+BODY     : [[0064566d, 006456de]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __decode_pointer
+   
+   Library: Visual Studio 2008 Release */
+
+int __decode_pointer(int param_1)
+
+{
+  LPVOID pvVar1;
+  code *pcVar2;
+  int iVar3;
+  HMODULE hModule;
+  FARPROC pFVar4;
+  
+  pvVar1 = TlsGetValue(DAT_00d6755c);
+  if ((pvVar1 != (LPVOID)0x0) && (DAT_00d67558 != -1)) {
+    iVar3 = DAT_00d67558;
+    pcVar2 = TlsGetValue(DAT_00d6755c);
+    iVar3 = (*pcVar2)(iVar3);
+    if (iVar3 != 0) {
+      pFVar4 = *(FARPROC *)(iVar3 + 0x1fc);
+      goto LAB_006456cd;
+    }
+  }
+  hModule = GetModuleHandleW(L"KERNEL32.DLL");
+  if ((hModule == (HMODULE)0x0) &&
+     (hModule = (HMODULE)__crt_waiting_on_module_handle(L"KERNEL32.DLL"), hModule == (HMODULE)0x0))
+  {
+    return param_1;
+  }
+  pFVar4 = GetProcAddress(hModule,"DecodePointer");
+LAB_006456cd:
+  if (pFVar4 != (FARPROC)0x0) {
+    param_1 = (*pFVar4)(param_1);
+  }
+  return param_1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0064566d : MOV EDI,EDI
+0064566f : PUSH EBP
+00645670 : MOV EBP,ESP
+00645672 : PUSH ESI
+00645673 : PUSH dword ptr [0x00d6755c]
+00645679 : MOV ESI,dword ptr [0x00b8527c]
+0064567f : CALL ESI
+00645681 : TEST EAX,EAX
+00645683 : JZ 0x006456a6
+00645685 : MOV EAX,[0x00d67558]
+0064568a : CMP EAX,-0x1
+0064568d : JZ 0x006456a6
+0064568f : PUSH EAX
+00645690 : PUSH dword ptr [0x00d6755c]
+00645696 : CALL ESI
+00645698 : CALL EAX
+0064569a : TEST EAX,EAX
+0064569c : JZ 0x006456a6
+0064569e : MOV EAX,dword ptr [EAX + 0x1fc]
+006456a4 : JMP 0x006456cd
+006456a6 : MOV ESI,0xb9bf84
+006456ab : PUSH ESI
+006456ac : CALL dword ptr [0x00b8517c]
+006456b2 : TEST EAX,EAX
+006456b4 : JNZ 0x006456c1
+006456b6 : PUSH ESI
+006456b7 : CALL 0x006356d3
+006456bc : POP ECX
+006456bd : TEST EAX,EAX
+006456bf : JZ 0x006456d9
+006456c1 : PUSH 0xb9bfa0
+006456c6 : PUSH EAX
+006456c7 : CALL dword ptr [0x00b85160]
+006456cd : TEST EAX,EAX
+006456cf : JZ 0x006456d9
+006456d1 : PUSH dword ptr [EBP + 0x8]
+006456d4 : CALL EAX
+006456d6 : MOV dword ptr [EBP + 0x8],EAX
+006456d9 : MOV EAX,dword ptr [EBP + 0x8]
+006456dc : POP ESI
+006456dd : POP EBP
+006456de : RET

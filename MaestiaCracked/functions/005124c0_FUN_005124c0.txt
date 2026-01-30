@@ -1,0 +1,73 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005124c0
+ENTRY    : 005124c0
+BODY     : [[005124c0, 00512515]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_005124c0(int param_1)
+
+{
+  undefined4 *puVar1;
+  LONG LVar2;
+  int in_ECX;
+  
+  if ((param_1 != *(int *)(in_ECX + 0x10)) && (*(int **)(in_ECX + 0xc) != (int *)0x0)) {
+    (**(code **)(**(int **)(in_ECX + 0xc) + 0x30))(in_ECX + 8);
+    puVar1 = *(undefined4 **)(in_ECX + 0xc);
+    if (puVar1 != (undefined4 *)0x0) {
+      LVar2 = InterlockedExchangeAdd(puVar1 + 1,-1);
+      if ((LVar2 == 1) && (puVar1 != (undefined4 *)0x0)) {
+        (**(code **)*puVar1)(1);
+      }
+    }
+    *(undefined4 *)(in_ECX + 0xc) = 0;
+  }
+  *(int *)(in_ECX + 0x10) = param_1;
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005124c0 : PUSH EBX
+005124c1 : MOV EBX,dword ptr [ESP + 0x8]
+005124c5 : PUSH ESI
+005124c6 : MOV ESI,ECX
+005124c8 : CMP EBX,dword ptr [ESI + 0x10]
+005124cb : JZ 0x0051250e
+005124cd : MOV ECX,dword ptr [ESI + 0xc]
+005124d0 : TEST ECX,ECX
+005124d2 : JZ 0x0051250e
+005124d4 : MOV EDX,dword ptr [ECX]
+005124d6 : PUSH EDI
+005124d7 : LEA EAX,[ESI + 0x8]
+005124da : PUSH EAX
+005124db : MOV EAX,dword ptr [EDX + 0x30]
+005124de : CALL EAX
+005124e0 : MOV EDI,dword ptr [ESI + 0xc]
+005124e3 : TEST EDI,EDI
+005124e5 : JZ 0x00512506
+005124e7 : PUSH -0x1
+005124e9 : LEA ECX,[EDI + 0x4]
+005124ec : PUSH ECX
+005124ed : CALL dword ptr [0x00b851cc]
+005124f3 : SUB EAX,0x1
+005124f6 : JNZ 0x00512506
+005124f8 : TEST EDI,EDI
+005124fa : JZ 0x00512506
+005124fc : MOV EDX,dword ptr [EDI]
+005124fe : MOV EAX,dword ptr [EDX]
+00512500 : PUSH 0x1
+00512502 : MOV ECX,EDI
+00512504 : CALL EAX
+00512506 : MOV dword ptr [ESI + 0xc],0x0
+0051250d : POP EDI
+0051250e : MOV dword ptr [ESI + 0x10],EBX
+00512511 : POP ESI
+00512512 : POP EBX
+00512513 : RET 0x4

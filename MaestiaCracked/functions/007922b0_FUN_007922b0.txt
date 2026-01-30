@@ -1,0 +1,65 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_007922b0
+ENTRY    : 007922b0
+BODY     : [[007922b0, 007922f6]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+DWORD FUN_007922b0(void)
+
+{
+  DWORD dwProcessId;
+  HANDLE Process;
+  BOOL BVar1;
+  PROCESS_MEMORY_COUNTERS local_2c;
+  
+  dwProcessId = GetCurrentProcessId();
+  Process = OpenProcess(0x410,0,dwProcessId);
+  if (Process != (HANDLE)0x0) {
+    BVar1 = GetProcessMemoryInfo(Process,&local_2c,0x28);
+    if (BVar1 != 0) {
+      CloseHandle(Process);
+      return local_2c.PageFaultCount;
+    }
+  }
+  return 0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+007922b0 : PUSH EBP
+007922b1 : MOV EBP,ESP
+007922b3 : SUB ESP,0x2c
+007922b6 : PUSH ESI
+007922b7 : CALL dword ptr [0x00b850e4]
+007922bd : PUSH EAX
+007922be : PUSH 0x0
+007922c0 : PUSH 0x410
+007922c5 : CALL dword ptr [0x00b851ec]
+007922cb : MOV ESI,EAX
+007922cd : TEST ESI,ESI
+007922cf : JZ 0x007922f0
+007922d1 : PUSH 0x28
+007922d3 : LEA EAX,[EBP + -0x28]
+007922d6 : PUSH EAX
+007922d7 : PUSH ESI
+007922d8 : CALL 0x0061146e
+007922dd : TEST EAX,EAX
+007922df : JZ 0x007922f0
+007922e1 : PUSH ESI
+007922e2 : CALL dword ptr [0x00b85104]
+007922e8 : MOV EAX,dword ptr [EBP + -0x24]
+007922eb : POP ESI
+007922ec : MOV ESP,EBP
+007922ee : POP EBP
+007922ef : RET
+007922f0 : XOR EAX,EAX
+007922f2 : POP ESI
+007922f3 : MOV ESP,EBP
+007922f5 : POP EBP
+007922f6 : RET

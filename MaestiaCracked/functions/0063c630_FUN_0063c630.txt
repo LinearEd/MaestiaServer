@@ -1,0 +1,50 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0063c630
+ENTRY    : 0063c630
+BODY     : [[0063c630, 0063c67e]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_0063c630(void)
+
+{
+  ushort in_FPUControlWord;
+  float10 in_ST0;
+  
+  if ((DAT_01728c20 != 0) && ((MXCSR & 0x1f80) == 0x1f80 && (in_FPUControlWord & 0x7f) == 0x7f)) {
+    FUN_006590b0();
+    return;
+  }
+  FUN_00657468((double)in_ST0);
+  FUN_0063c688();
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0063c630 : CMP dword ptr [0x01728c20],0x0
+0063c637 : JZ 0x0063c66b
+0063c639 : SUB ESP,0x8
+0063c63c : STMXCSR dword ptr [ESP + 0x4]
+0063c641 : MOV EAX,dword ptr [ESP + 0x4]
+0063c645 : AND EAX,0x1f80
+0063c64a : CMP EAX,0x1f80
+0063c64f : JNZ 0x0063c660
+0063c651 : FNSTCW word ptr [ESP]
+0063c654 : MOV AX,word ptr [ESP]
+0063c658 : AND AX,0x7f
+0063c65c : CMP AX,0x7f
+0063c660 : LEA ESP,[ESP + 0x8]
+0063c664 : JNZ 0x0063c66b
+0063c666 : JMP 0x006590b0
+0063c66b : SUB ESP,0xc
+0063c66e : FST double ptr [ESP]
+0063c671 : CALL 0x00657468
+0063c676 : CALL 0x0063c688
+0063c67b : ADD ESP,0xc
+0063c67e : RET

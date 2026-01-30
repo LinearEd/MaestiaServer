@@ -1,0 +1,89 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0069df10
+ENTRY    : 0069df10
+BODY     : [[0069df10, 0069df72]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+int FUN_0069df10(void)
+
+{
+  byte *pbVar1;
+  int iVar2;
+  uint uVar3;
+  int *extraout_EDX;
+  
+  FUN_0069dea0();
+  if (0 < extraout_EDX[3]) {
+    return 0;
+  }
+  iVar2 = *extraout_EDX + -1;
+  while (pbVar1 = (byte *)*extraout_EDX, pbVar1 < (byte *)extraout_EDX[2]) {
+    uVar3 = (uint)*pbVar1;
+    *extraout_EDX = (int)(pbVar1 + 1);
+    if ((uVar3 == 0x20) || (uVar3 == 9)) {
+      return iVar2;
+    }
+    if ((uVar3 == 0xd) || (uVar3 == 10)) {
+      extraout_EDX[3] = 2;
+      return iVar2;
+    }
+    if (uVar3 == 0x3b) {
+      extraout_EDX[3] = 1;
+      return iVar2;
+    }
+    if ((uVar3 == 0xffffffff) || (uVar3 == 0x1a)) break;
+  }
+  extraout_EDX[3] = 3;
+  return iVar2;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0069df10 : CALL 0x0069dea0
+0069df15 : CMP dword ptr [EDX + 0xc],0x1
+0069df19 : JL 0x0069df1e
+0069df1b : XOR EAX,EAX
+0069df1d : RET
+0069df1e : MOV EAX,dword ptr [EDX]
+0069df20 : PUSH ESI
+0069df21 : PUSH EDI
+0069df22 : MOV EDI,dword ptr [EDX + 0x8]
+0069df25 : DEC EAX
+0069df26 : MOV ESI,dword ptr [EDX]
+0069df28 : CMP ESI,EDI
+0069df2a : JNC 0x0069df55
+0069df2c : MOVZX ECX,byte ptr [ESI]
+0069df2f : INC ESI
+0069df30 : MOV dword ptr [EDX],ESI
+0069df32 : CMP ECX,0x20
+0069df35 : JZ 0x0069df70
+0069df37 : CMP ECX,0x9
+0069df3a : JZ 0x0069df70
+0069df3c : CMP ECX,0xd
+0069df3f : JZ 0x0069df69
+0069df41 : CMP ECX,0xa
+0069df44 : JZ 0x0069df69
+0069df46 : CMP ECX,0x3b
+0069df49 : JZ 0x0069df5f
+0069df4b : CMP ECX,-0x1
+0069df4e : JZ 0x0069df55
+0069df50 : CMP ECX,0x1a
+0069df53 : JNZ 0x0069df26
+0069df55 : POP EDI
+0069df56 : MOV dword ptr [EDX + 0xc],0x3
+0069df5d : POP ESI
+0069df5e : RET
+0069df5f : POP EDI
+0069df60 : MOV dword ptr [EDX + 0xc],0x1
+0069df67 : POP ESI
+0069df68 : RET
+0069df69 : MOV dword ptr [EDX + 0xc],0x2
+0069df70 : POP EDI
+0069df71 : POP ESI
+0069df72 : RET

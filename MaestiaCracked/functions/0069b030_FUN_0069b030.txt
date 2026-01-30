@@ -1,0 +1,93 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0069b030
+ENTRY    : 0069b030
+BODY     : [[0069b030, 0069b0a5]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_0069b030(uint *param_1)
+
+{
+  int iVar1;
+  undefined4 *puVar2;
+  undefined4 uVar3;
+  uint in_EAX;
+  int iVar4;
+  uint uVar5;
+  
+  iVar1 = param_1[2] + in_EAX * 0x1c;
+  if ((in_EAX < *param_1) && ((*(uint *)(iVar1 + 0x10) & 4) == 0)) {
+    *(uint *)(iVar1 + 0x10) = *(uint *)(iVar1 + 0x10) | 4;
+    puVar2 = (undefined4 *)param_1[4];
+    uVar5 = param_1[1];
+    *(undefined4 *)(iVar1 + 0x14) = 0;
+    for (; uVar5 != 0; uVar5 = uVar5 - 1) {
+      uVar3 = *puVar2;
+      iVar4 = FUN_0069afb0();
+      if (iVar4 != 0) {
+        *(undefined4 *)(iVar1 + 0x14) = uVar3;
+        break;
+      }
+      puVar2 = puVar2 + 1;
+    }
+    if (param_1[1] < *param_1) {
+      *(int *)(param_1[4] + param_1[1] * 4) = iVar1;
+      param_1[1] = param_1[1] + 1;
+    }
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0069b030 : PUSH EBX
+0069b031 : PUSH EBP
+0069b032 : MOV EBP,dword ptr [ESP + 0xc]
+0069b036 : MOV EDX,dword ptr [EBP + 0x8]
+0069b039 : LEA ECX,[EAX*0x8 + 0x0]
+0069b040 : SUB ECX,EAX
+0069b042 : LEA EBX,[EDX + ECX*0x4]
+0069b045 : CMP EAX,dword ptr [EBP]
+0069b048 : JNC 0x0069b0a3
+0069b04a : MOV EAX,dword ptr [EBX + 0x10]
+0069b04d : TEST AL,0x4
+0069b04f : JNZ 0x0069b0a3
+0069b051 : OR EAX,0x4
+0069b054 : MOV dword ptr [EBX + 0x10],EAX
+0069b057 : MOV EAX,dword ptr [EBP + 0x10]
+0069b05a : PUSH EDI
+0069b05b : MOV EDI,dword ptr [EBP + 0x4]
+0069b05e : MOV dword ptr [ESP + 0x10],EAX
+0069b062 : MOV dword ptr [EBX + 0x14],0x0
+0069b069 : TEST EDI,EDI
+0069b06b : JBE 0x0069b091
+0069b06d : PUSH ESI
+0069b06e : MOV EDI,EDI
+0069b070 : MOV ECX,dword ptr [ESP + 0x14]
+0069b074 : MOV ESI,dword ptr [ECX]
+0069b076 : MOV EDX,EBX
+0069b078 : CALL 0x0069afb0
+0069b07d : TEST EAX,EAX
+0069b07f : JNZ 0x0069b08d
+0069b081 : ADD dword ptr [ESP + 0x14],0x4
+0069b086 : DEC EDI
+0069b087 : TEST EDI,EDI
+0069b089 : JA 0x0069b070
+0069b08b : JMP 0x0069b090
+0069b08d : MOV dword ptr [EBX + 0x14],ESI
+0069b090 : POP ESI
+0069b091 : MOV EAX,dword ptr [EBP + 0x4]
+0069b094 : POP EDI
+0069b095 : CMP EAX,dword ptr [EBP]
+0069b098 : JNC 0x0069b0a3
+0069b09a : MOV EDX,dword ptr [EBP + 0x10]
+0069b09d : MOV dword ptr [EDX + EAX*0x4],EBX
+0069b0a0 : INC dword ptr [EBP + 0x4]
+0069b0a3 : POP EBP
+0069b0a4 : POP EBX
+0069b0a5 : RET

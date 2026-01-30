@@ -1,0 +1,83 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0070d230
+ENTRY    : 0070d230
+BODY     : [[0070d230, 0070d29a]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+size_t FUN_0070d230(void *param_1,int param_2,int param_3)
+
+{
+  int iVar1;
+  int in_ECX;
+  size_t _Size;
+  
+  if (*(uint *)(in_ECX + 0x20) <= *(uint *)(in_ECX + 0x24)) {
+    if (DAT_00d8acfc == (int *)0x0) {
+      OutputDebugStringW(L"There is not a memory space it will be able to use ");
+    }
+    else {
+      (**(code **)(*DAT_00d8acfc + 0xc))
+                (DAT_00d8acfc,L"There is not a memory space it will be able to use ");
+    }
+  }
+  _Size = param_2 * param_3;
+  iVar1 = *(int *)(in_ECX + 0x24);
+  if (*(uint *)(in_ECX + 0x20) <= iVar1 + _Size) {
+    _Size = *(uint *)(in_ECX + 0x20) - iVar1;
+  }
+  _memcpy((void *)(*(int *)(in_ECX + 0x1c) + iVar1),param_1,_Size);
+  *(int *)(in_ECX + 0x24) = *(int *)(in_ECX + 0x24) + _Size;
+  return _Size;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0070d230 : PUSH EBP
+0070d231 : MOV EBP,ESP
+0070d233 : PUSH ESI
+0070d234 : PUSH EDI
+0070d235 : MOV EDI,ECX
+0070d237 : MOV EAX,dword ptr [EDI + 0x24]
+0070d23a : CMP EAX,dword ptr [EDI + 0x20]
+0070d23d : JC 0x0070d265
+0070d23f : MOV EAX,[0x00d8acfc]
+0070d244 : TEST EAX,EAX
+0070d246 : JZ 0x0070d25a
+0070d248 : MOV ECX,dword ptr [EAX]
+0070d24a : MOV EDX,dword ptr [ECX + 0xc]
+0070d24d : PUSH 0xbfd7c8
+0070d252 : PUSH EAX
+0070d253 : CALL EDX
+0070d255 : ADD ESP,0x8
+0070d258 : JMP 0x0070d265
+0070d25a : PUSH 0xbfd830
+0070d25f : CALL dword ptr [0x00b8512c]
+0070d265 : MOV ESI,dword ptr [EBP + 0xc]
+0070d268 : IMUL ESI,dword ptr [EBP + 0x10]
+0070d26c : MOV ECX,dword ptr [EDI + 0x24]
+0070d26f : MOV EAX,dword ptr [EDI + 0x20]
+0070d272 : LEA EDX,[ECX + ESI*0x1]
+0070d275 : CMP EDX,EAX
+0070d277 : JC 0x0070d27d
+0070d279 : SUB EAX,ECX
+0070d27b : MOV ESI,EAX
+0070d27d : MOV EAX,dword ptr [EBP + 0x8]
+0070d280 : MOV EDX,dword ptr [EDI + 0x1c]
+0070d283 : PUSH ESI
+0070d284 : PUSH EAX
+0070d285 : ADD EDX,ECX
+0070d287 : PUSH EDX
+0070d288 : CALL 0x0063ae40
+0070d28d : ADD ESP,0xc
+0070d290 : ADD dword ptr [EDI + 0x24],ESI
+0070d293 : POP EDI
+0070d294 : MOV EAX,ESI
+0070d296 : POP ESI
+0070d297 : POP EBP
+0070d298 : RET 0xc

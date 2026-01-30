@@ -1,0 +1,103 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00951080
+ENTRY    : 00951080
+BODY     : [[00951080, 009510a3] [009510aa, 00951106]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* WARNING: Removing unreachable block (ram,0x009510f1) */
+
+void FUN_00951080(int param_1)
+
+{
+  int *piVar1;
+  int *_Dst;
+  rsize_t _DstSize;
+  int iVar2;
+  
+  _Dst = *(int **)(param_1 + 0x3c);
+  piVar1 = *(int **)(param_1 + 0x40);
+  while( true ) {
+    if (_Dst == piVar1) {
+      if (*(int *)(param_1 + 0x3c) != *(int *)(param_1 + 0x40)) {
+        *(int *)(param_1 + 0x40) = *(int *)(param_1 + 0x3c);
+      }
+      return;
+    }
+    if (*_Dst != 0) break;
+    iVar2 = *(int *)(param_1 + 0x40) - (int)(_Dst + 1) >> 2;
+    if (0 < iVar2) {
+      _DstSize = iVar2 * 4;
+      _memmove_s(_Dst,_DstSize,_Dst + 1,_DstSize);
+    }
+    *(int *)(param_1 + 0x40) = *(int *)(param_1 + 0x40) + -4;
+    piVar1 = *(int **)(param_1 + 0x40);
+  }
+  FUN_0044cb00(*_Dst);
+                    /* WARNING: Subroutine does not return */
+  FUN_006f04e0();
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00951080 : PUSH EBP
+00951081 : MOV EBP,ESP
+00951083 : PUSH EBX
+00951084 : MOV EBX,dword ptr [EBP + 0x8]
+00951087 : PUSH ESI
+00951088 : MOV ESI,dword ptr [EBX + 0x3c]
+0095108b : PUSH EDI
+0095108c : CMP ESI,dword ptr [EBX + 0x40]
+0095108f : JZ 0x009510d2
+00951091 : MOV EDI,dword ptr [ESI]
+00951093 : TEST EDI,EDI
+00951095 : JZ 0x009510aa
+00951097 : PUSH EDI
+00951098 : CALL 0x0044cb00
+0095109d : MOV ECX,EDI
+0095109f : CALL 0x006f04e0
+009510aa : MOV EAX,dword ptr [EBX + 0x40]
+009510ad : LEA ECX,[ESI + 0x4]
+009510b0 : SUB EAX,ECX
+009510b2 : SAR EAX,0x2
+009510b5 : TEST EAX,EAX
+009510b7 : JLE 0x009510c9
+009510b9 : ADD EAX,EAX
+009510bb : ADD EAX,EAX
+009510bd : PUSH EAX
+009510be : PUSH ECX
+009510bf : PUSH EAX
+009510c0 : PUSH ESI
+009510c1 : CALL 0x00634101
+009510c6 : ADD ESP,0x10
+009510c9 : ADD dword ptr [EBX + 0x40],-0x4
+009510cd : CMP ESI,dword ptr [EBX + 0x40]
+009510d0 : JNZ 0x00951091
+009510d2 : MOV ECX,dword ptr [EBX + 0x40]
+009510d5 : MOV ESI,dword ptr [EBX + 0x3c]
+009510d8 : CMP ESI,ECX
+009510da : JZ 0x00951100
+009510dc : MOV EAX,ECX
+009510de : SUB EAX,ECX
+009510e0 : SAR EAX,0x2
+009510e3 : LEA EDX,[EAX*0x4 + 0x0]
+009510ea : LEA EDI,[EDX + ESI*0x1]
+009510ed : TEST EAX,EAX
+009510ef : JLE 0x009510fd
+009510f1 : PUSH EDX
+009510f2 : PUSH ECX
+009510f3 : PUSH EDX
+009510f4 : PUSH ESI
+009510f5 : CALL 0x00634101
+009510fa : ADD ESP,0x10
+009510fd : MOV dword ptr [EBX + 0x40],EDI
+00951100 : POP EDI
+00951101 : POP ESI
+00951102 : POP EBX
+00951103 : POP EBP
+00951104 : RET 0x4

@@ -1,0 +1,93 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0051c600
+ENTRY    : 0051c600
+BODY     : [[0051c600, 0051c672]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_0051c600(uint *param_1)
+
+{
+  uint uVar1;
+  undefined4 uVar2;
+  undefined4 *in_ECX;
+  uint uVar3;
+  uint *puVar4;
+  
+  uVar1 = 0;
+  uVar3 = *param_1 & 3;
+  puVar4 = (uint *)(*param_1 & 0xfffffffc);
+  if (uVar3 != 0) {
+    if (uVar3 == 1) {
+      uVar1 = FUN_00515dd0(param_1);
+    }
+    else if (uVar3 == 2) {
+      uVar1 = param_1[1];
+    }
+    if (uVar1 != DAT_00d73250) {
+      uVar1 = *puVar4 & 0x7fffffff;
+      uVar2 = FUN_0051b700(DAT_00d73250,uVar1,*puVar4 & 0x80000000,puVar4 + 2,uVar1);
+      *in_ECX = uVar2;
+      return;
+    }
+  }
+  *in_ECX = puVar4;
+  InterlockedExchangeAdd((LONG *)(puVar4 + 1),1);
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0051c600 : MOV EDX,dword ptr [ESP + 0x4]
+0051c604 : PUSH ESI
+0051c605 : PUSH EDI
+0051c606 : MOV EDI,ECX
+0051c608 : MOV ECX,dword ptr [EDX]
+0051c60a : MOV ESI,ECX
+0051c60c : XOR EAX,EAX
+0051c60e : AND ECX,0x3
+0051c611 : AND ESI,0xfffffffc
+0051c614 : SUB ECX,EAX
+0051c616 : JZ 0x0051c637
+0051c618 : SUB ECX,0x1
+0051c61b : JZ 0x0051c627
+0051c61d : SUB ECX,0x1
+0051c620 : JNZ 0x0051c62d
+0051c622 : MOV EAX,dword ptr [EDX + 0x4]
+0051c625 : JMP 0x0051c62d
+0051c627 : PUSH EDX
+0051c628 : CALL 0x00515dd0
+0051c62d : MOV EDX,dword ptr [0x00d73250]
+0051c633 : CMP EAX,EDX
+0051c635 : JNZ 0x0051c64c
+0051c637 : MOV dword ptr [EDI],ESI
+0051c639 : PUSH 0x1
+0051c63b : ADD ESI,0x4
+0051c63e : PUSH ESI
+0051c63f : CALL dword ptr [0x00b851cc]
+0051c645 : MOV EAX,EDI
+0051c647 : POP EDI
+0051c648 : POP ESI
+0051c649 : RET 0x4
+0051c64c : MOV EAX,dword ptr [ESI]
+0051c64e : MOV ECX,EAX
+0051c650 : AND ECX,0x7fffffff
+0051c656 : PUSH ECX
+0051c657 : ADD ESI,0x8
+0051c65a : PUSH ESI
+0051c65b : AND EAX,0x80000000
+0051c660 : PUSH EAX
+0051c661 : PUSH ECX
+0051c662 : PUSH EDX
+0051c663 : MOV ECX,EDI
+0051c665 : CALL 0x0051b700
+0051c66a : MOV dword ptr [EDI],EAX
+0051c66c : MOV EAX,EDI
+0051c66e : POP EDI
+0051c66f : POP ESI
+0051c670 : RET 0x4

@@ -1,0 +1,86 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005a4760
+ENTRY    : 005a4760
+BODY     : [[005a4760, 005a47cf]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_005a4760(int *param_1)
+
+{
+  LPCRITICAL_SECTION lpCriticalSection;
+  int in_ECX;
+  
+  lpCriticalSection = (LPCRITICAL_SECTION)(in_ECX + 0x9e4);
+  EnterCriticalSection(lpCriticalSection);
+  if (param_1 != (int *)0x0) {
+    if (param_1[3] != in_ECX) {
+      if (param_1[2] != 0) {
+        FUN_005a4510(1);
+      }
+      param_1[2] = 0;
+      LeaveCriticalSection(lpCriticalSection);
+      return;
+    }
+    if (param_1[2] != 0) {
+      FUN_005a4510(1);
+    }
+    *(int *)(*param_1 + 4) = param_1[1];
+    *(int *)param_1[1] = *param_1;
+    *param_1 = *(int *)(in_ECX + 0x30);
+    *(int **)(in_ECX + 0x30) = param_1;
+  }
+  LeaveCriticalSection(lpCriticalSection);
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005a4760 : PUSH EBX
+005a4761 : PUSH ESI
+005a4762 : PUSH EDI
+005a4763 : MOV EDI,ECX
+005a4765 : LEA EBX,[EDI + 0x9e4]
+005a476b : PUSH EBX
+005a476c : CALL dword ptr [0x00b85118]
+005a4772 : MOV ESI,dword ptr [ESP + 0x10]
+005a4776 : TEST ESI,ESI
+005a4778 : JZ 0x005a47c3
+005a477a : MOV ECX,dword ptr [ESI + 0x8]
+005a477d : CMP dword ptr [ESI + 0xc],EDI
+005a4780 : JZ 0x005a47a1
+005a4782 : TEST ECX,ECX
+005a4784 : JZ 0x005a478d
+005a4786 : PUSH 0x1
+005a4788 : CALL 0x005a4510
+005a478d : PUSH EBX
+005a478e : MOV dword ptr [ESI + 0x8],0x0
+005a4795 : CALL dword ptr [0x00b8511c]
+005a479b : POP EDI
+005a479c : POP ESI
+005a479d : POP EBX
+005a479e : RET 0x4
+005a47a1 : TEST ECX,ECX
+005a47a3 : JZ 0x005a47ac
+005a47a5 : PUSH 0x1
+005a47a7 : CALL 0x005a4510
+005a47ac : MOV EAX,dword ptr [ESI]
+005a47ae : MOV ECX,dword ptr [ESI + 0x4]
+005a47b1 : MOV dword ptr [EAX + 0x4],ECX
+005a47b4 : MOV EAX,dword ptr [ESI]
+005a47b6 : MOV EDX,dword ptr [ESI + 0x4]
+005a47b9 : MOV dword ptr [EDX],EAX
+005a47bb : MOV ECX,dword ptr [EDI + 0x30]
+005a47be : MOV dword ptr [ESI],ECX
+005a47c0 : MOV dword ptr [EDI + 0x30],ESI
+005a47c3 : PUSH EBX
+005a47c4 : CALL dword ptr [0x00b8511c]
+005a47ca : POP EDI
+005a47cb : POP ESI
+005a47cc : POP EBX
+005a47cd : RET 0x4

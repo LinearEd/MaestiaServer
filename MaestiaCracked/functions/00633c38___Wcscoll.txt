@@ -1,0 +1,152 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __Wcscoll
+ENTRY    : 00633c38
+BODY     : [[00633c38, 00633ce5]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __Wcscoll
+   
+   Library: Visual Studio 2008 Release */
+
+int __cdecl
+__Wcscoll(wchar_t *param_1,wchar_t *param_2,wchar_t *param_3,wchar_t *param_4,_Collvec *param_5)
+
+{
+  int iVar1;
+  int *piVar2;
+  LPCWSTR pWVar3;
+  DWORD _DwCmpFlags;
+  LPCWSTR _LpString2;
+  LPCWSTR pWVar4;
+  
+  _LpString2 = (LPCWSTR)((int)param_2 - (int)param_1 >> 1);
+  pWVar4 = (LPCWSTR)((int)param_4 - (int)param_3 >> 1);
+  if (param_5 == (_Collvec *)0x0) {
+    iVar1 = ____lc_handle_func();
+    _DwCmpFlags = *(DWORD *)(iVar1 + 4);
+  }
+  else {
+    _DwCmpFlags = param_5->_Page;
+  }
+  if (_DwCmpFlags == 0) {
+    pWVar3 = _LpString2;
+    if ((int)pWVar4 <= (int)_LpString2) {
+      pWVar3 = pWVar4;
+    }
+    for (; 0 < (int)pWVar3; pWVar3 = (LPCWSTR)((int)pWVar3 + -1)) {
+      if (*param_1 != *param_3) {
+        iVar1 = (-(uint)((ushort)*param_1 < (ushort)*param_3) & 0xfffffffe) + 1;
+        goto LAB_00633c8a;
+      }
+      param_1 = param_1 + 1;
+      param_3 = param_3 + 1;
+    }
+    iVar1 = 0;
+LAB_00633c8a:
+    if ((iVar1 == 0) && (_LpString2 != pWVar4)) {
+      iVar1 = (uint)((int)pWVar4 <= (int)_LpString2) * 2 + -1;
+    }
+  }
+  else {
+    ____lc_collate_cp_func();
+    iVar1 = ___crtCompareStringW
+                      ((LPCWSTR)0x0,_DwCmpFlags,(LPCWSTR)0x1000,(int)param_1,_LpString2,(int)param_3
+                      );
+    if (iVar1 == 0) {
+      piVar2 = __errno();
+      *piVar2 = 0x16;
+      iVar1 = 0x7fffffff;
+    }
+    else {
+      iVar1 = iVar1 + -2;
+    }
+  }
+  return iVar1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00633c38 : MOV EDI,EDI
+00633c3a : PUSH EBP
+00633c3b : MOV EBP,ESP
+00633c3d : MOV EAX,dword ptr [EBP + 0x18]
+00633c40 : PUSH EBX
+00633c41 : PUSH ESI
+00633c42 : MOV ESI,dword ptr [EBP + 0xc]
+00633c45 : SUB ESI,dword ptr [EBP + 0x8]
+00633c48 : PUSH EDI
+00633c49 : MOV EDI,dword ptr [EBP + 0x14]
+00633c4c : SUB EDI,dword ptr [EBP + 0x10]
+00633c4f : SAR ESI,0x1
+00633c51 : SAR EDI,0x1
+00633c53 : TEST EAX,EAX
+00633c55 : JNZ 0x00633c61
+00633c57 : CALL 0x00642ac3
+00633c5c : MOV EBX,dword ptr [EAX + 0x4]
+00633c5f : JMP 0x00633c63
+00633c61 : MOV EBX,dword ptr [EAX]
+00633c63 : TEST EBX,EBX
+00633c65 : JNZ 0x00633cab
+00633c67 : CMP ESI,EDI
+00633c69 : MOV EDX,ESI
+00633c6b : JL 0x00633c6f
+00633c6d : MOV EDX,EDI
+00633c6f : MOV ECX,dword ptr [EBP + 0x10]
+00633c72 : MOV EAX,dword ptr [EBP + 0x8]
+00633c75 : JMP 0x00633c84
+00633c77 : MOV BX,word ptr [EAX]
+00633c7a : CMP BX,word ptr [ECX]
+00633c7d : JNZ 0x00633c9d
+00633c7f : INC EAX
+00633c80 : INC EAX
+00633c81 : INC ECX
+00633c82 : INC ECX
+00633c83 : DEC EDX
+00633c84 : TEST EDX,EDX
+00633c86 : JG 0x00633c77
+00633c88 : XOR EAX,EAX
+00633c8a : TEST EAX,EAX
+00633c8c : JNZ 0x00633ce1
+00633c8e : CMP ESI,EDI
+00633c90 : JZ 0x00633ce1
+00633c92 : CMP ESI,EDI
+00633c94 : SETGE AL
+00633c97 : LEA EAX,[EAX + EAX*0x1 + -0x1]
+00633c9b : JMP 0x00633ce1
+00633c9d : MOVZX EAX,word ptr [EAX]
+00633ca0 : CMP AX,word ptr [ECX]
+00633ca3 : SBB EAX,EAX
+00633ca5 : AND EAX,0xfffffffe
+00633ca8 : INC EAX
+00633ca9 : JMP 0x00633c8a
+00633cab : CALL 0x00642a9d
+00633cb0 : PUSH EAX
+00633cb1 : PUSH EDI
+00633cb2 : PUSH dword ptr [EBP + 0x10]
+00633cb5 : PUSH ESI
+00633cb6 : PUSH dword ptr [EBP + 0x8]
+00633cb9 : PUSH 0x1000
+00633cbe : PUSH EBX
+00633cbf : PUSH 0x0
+00633cc1 : CALL 0x0064528c
+00633cc6 : ADD ESP,0x20
+00633cc9 : TEST EAX,EAX
+00633ccb : JNZ 0x00633cdf
+00633ccd : CALL 0x0063ab82
+00633cd2 : MOV dword ptr [EAX],0x16
+00633cd8 : MOV EAX,0x7fffffff
+00633cdd : JMP 0x00633ce1
+00633cdf : DEC EAX
+00633ce0 : DEC EAX
+00633ce1 : POP EDI
+00633ce2 : POP ESI
+00633ce3 : POP EBX
+00633ce4 : POP EBP
+00633ce5 : RET

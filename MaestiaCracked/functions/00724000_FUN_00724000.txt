@@ -1,0 +1,72 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00724000
+ENTRY    : 00724000
+BODY     : [[00724000, 00724064]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00724000(void)
+
+{
+  int iVar1;
+  int in_ECX;
+  int iVar2;
+  
+  iVar2 = *(int *)(in_ECX + 0x5c) - *(int *)(in_ECX + 0x58);
+  iVar1 = iVar2 >> 0x1f;
+  if (iVar2 / 0x18 + iVar1 != iVar1) {
+    *(undefined4 *)(in_ECX + 4) = 1;
+    *(undefined4 *)(in_ECX + 0x90) = 0;
+    *(undefined4 *)(in_ECX + 0x94) = 0;
+    iVar1 = (*(int *)(in_ECX + 0x5c) - *(int *)(in_ECX + 0x58)) / 0x18;
+    if (iVar1 != 0) {
+      iVar2 = 0;
+      do {
+        *(undefined4 *)(*(int *)(in_ECX + 0x58) + 4 + iVar2) = 0;
+        iVar2 = iVar2 + 0x18;
+        iVar1 = iVar1 + -1;
+      } while (iVar1 != 0);
+    }
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00724000 : MOV EDX,dword ptr [ECX + 0x5c]
+00724003 : SUB EDX,dword ptr [ECX + 0x58]
+00724006 : MOV EAX,0x2aaaaaab
+0072400b : IMUL EDX
+0072400d : SAR EDX,0x2
+00724010 : MOV EAX,EDX
+00724012 : SHR EAX,0x1f
+00724015 : ADD EAX,EDX
+00724017 : JZ 0x00724064
+00724019 : XORPS XMM0,XMM0
+0072401c : MOV dword ptr [ECX + 0x4],0x1
+00724023 : MOVSS dword ptr [ECX + 0x90],XMM0
+0072402b : MOVSS dword ptr [ECX + 0x94],XMM0
+00724033 : MOV EDX,dword ptr [ECX + 0x5c]
+00724036 : SUB EDX,dword ptr [ECX + 0x58]
+00724039 : MOV EAX,0x2aaaaaab
+0072403e : IMUL EDX
+00724040 : SAR EDX,0x2
+00724043 : MOV EAX,EDX
+00724045 : SHR EAX,0x1f
+00724048 : ADD EAX,EDX
+0072404a : JZ 0x00724064
+0072404c : XOR EDX,EDX
+0072404e : PUSH EDI
+0072404f : NOP
+00724050 : MOV EDI,dword ptr [ECX + 0x58]
+00724053 : MOV dword ptr [EDI + EDX*0x1 + 0x4],0x0
+0072405b : ADD EDX,0x18
+0072405e : SUB EAX,0x1
+00724061 : JNZ 0x00724050
+00724063 : POP EDI
+00724064 : RET

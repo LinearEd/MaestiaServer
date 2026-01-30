@@ -1,0 +1,139 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00480060
+ENTRY    : 00480060
+BODY     : [[00480060, 0048013e]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00480060(int param_1)
+
+{
+  int in_EAX;
+  int unaff_EDI;
+  
+  if ((in_EAX != *(int *)(unaff_EDI + 0x20)) || (*(int *)(unaff_EDI + 0x24) != param_1)) {
+    if (*(char *)(unaff_EDI + 0x10) != '\0') {
+      if (((*(byte *)(unaff_EDI + 0xc) & 2) != 0) && (*(char *)(unaff_EDI + 0x12) == '\0')) {
+        in_EAX = in_EAX + 0x13;
+      }
+      if (0x25 < in_EAX) {
+        FUN_008018d0(L"GRendererD3DXImpl SetPixelShader(%d)",in_EAX);
+        in_EAX = 1;
+      }
+      (**(code **)(**(int **)(unaff_EDI + 0xf0) + 0x1ac))
+                (*(int **)(unaff_EDI + 0xf0),*(undefined4 *)(unaff_EDI + 0x58 + in_EAX * 4));
+      *(int *)(unaff_EDI + 0x20) = in_EAX;
+      *(int *)(unaff_EDI + 0x24) = param_1;
+      return;
+    }
+    if (in_EAX < 0x26) {
+      if (in_EAX == 0) {
+        FUN_0047ffa0(unaff_EDI);
+        *(undefined4 *)(unaff_EDI + 0x20) = 0;
+        *(int *)(unaff_EDI + 0x24) = param_1;
+        return;
+      }
+    }
+    else {
+      FUN_008018d0(L"GRendererD3DXImpl SetPixelShader(%d)");
+      in_EAX = 1;
+    }
+    if (param_1 == 0) {
+      FUN_0047ffa0(unaff_EDI);
+      *(int *)(unaff_EDI + 0x20) = in_EAX;
+      *(undefined4 *)(unaff_EDI + 0x24) = 0;
+      return;
+    }
+    FUN_0047ffa0(unaff_EDI);
+    *(int *)(unaff_EDI + 0x20) = in_EAX;
+    *(int *)(unaff_EDI + 0x24) = param_1;
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00480060 : PUSH EBP
+00480061 : MOV EBP,ESP
+00480063 : PUSH EBX
+00480064 : MOV EBX,dword ptr [EBP + 0x8]
+00480067 : PUSH ESI
+00480068 : MOV ESI,EAX
+0048006a : CMP ESI,dword ptr [EDI + 0x20]
+0048006d : JNZ 0x00480078
+0048006f : CMP dword ptr [EDI + 0x24],EBX
+00480072 : JZ 0x00480139
+00480078 : CMP byte ptr [EDI + 0x10],0x0
+0048007c : JZ 0x004800cd
+0048007e : TEST byte ptr [EDI + 0xc],0x2
+00480082 : JZ 0x0048008d
+00480084 : CMP byte ptr [EDI + 0x12],0x0
+00480088 : JNZ 0x0048008d
+0048008a : ADD ESI,0x13
+0048008d : CMP ESI,0x26
+00480090 : JL 0x004800ab
+00480092 : PUSH ESI
+00480093 : MOV ESI,dword ptr [0x00da98e8]
+00480099 : PUSH 0xcd75c8
+0048009e : CALL 0x008018d0
+004800a3 : ADD ESP,0x8
+004800a6 : MOV ESI,0x1
+004800ab : MOV EAX,dword ptr [EDI + 0xf0]
+004800b1 : MOV EDX,dword ptr [EDI + ESI*0x4 + 0x58]
+004800b5 : MOV ECX,dword ptr [EAX]
+004800b7 : PUSH EDX
+004800b8 : PUSH EAX
+004800b9 : MOV EAX,dword ptr [ECX + 0x1ac]
+004800bf : CALL EAX
+004800c1 : MOV dword ptr [EDI + 0x20],ESI
+004800c4 : POP ESI
+004800c5 : MOV dword ptr [EDI + 0x24],EBX
+004800c8 : POP EBX
+004800c9 : POP EBP
+004800ca : RET 0x4
+004800cd : CMP ESI,0x26
+004800d0 : JL 0x0048010b
+004800d2 : PUSH ESI
+004800d3 : MOV ESI,dword ptr [0x00da98e8]
+004800d9 : PUSH 0xcd75c8
+004800de : CALL 0x008018d0
+004800e3 : ADD ESP,0x8
+004800e6 : MOV ESI,0x1
+004800eb : TEST EBX,EBX
+004800ed : JNZ 0x00480123
+004800ef : LEA ECX,[ESI + ESI*0x2]
+004800f2 : MOV EAX,dword ptr [ECX*0x4 + 0xd72820]
+004800f9 : PUSH EDI
+004800fa : CALL 0x0047ffa0
+004800ff : MOV dword ptr [EDI + 0x20],ESI
+00480102 : POP ESI
+00480103 : MOV dword ptr [EDI + 0x24],EBX
+00480106 : POP EBX
+00480107 : POP EBP
+00480108 : RET 0x4
+0048010b : TEST ESI,ESI
+0048010d : JNZ 0x004800eb
+0048010f : XOR EAX,EAX
+00480111 : PUSH EDI
+00480112 : CALL 0x0047ffa0
+00480117 : MOV dword ptr [EDI + 0x20],ESI
+0048011a : POP ESI
+0048011b : MOV dword ptr [EDI + 0x24],EBX
+0048011e : POP EBX
+0048011f : POP EBP
+00480120 : RET 0x4
+00480123 : LEA EDX,[ESI + ESI*0x2]
+00480126 : MOV EAX,dword ptr [EDX*0x4 + 0xd72824]
+0048012d : PUSH EDI
+0048012e : CALL 0x0047ffa0
+00480133 : MOV dword ptr [EDI + 0x20],ESI
+00480136 : MOV dword ptr [EDI + 0x24],EBX
+00480139 : POP ESI
+0048013a : POP EBX
+0048013b : POP EBP
+0048013c : RET 0x4

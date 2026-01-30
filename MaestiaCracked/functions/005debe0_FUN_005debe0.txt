@@ -1,0 +1,61 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005debe0
+ENTRY    : 005debe0
+BODY     : [[005debe0, 005dec37]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+float10 FUN_005debe0(int param_1)
+
+{
+  int iVar1;
+  int in_ECX;
+  uint uVar2;
+  float10 fVar3;
+  
+  iVar1 = *(int *)(*(int *)(in_ECX + 8) + 0xc);
+  uVar2 = *(int *)(in_ECX + 0x10) + 2 + param_1 * 8;
+  uVar2 = (int)(short)((ushort)*(byte *)(*(int *)(iVar1 + (uVar2 + 1 >> 0xc) * 4) +
+                                        (uVar2 + 1 & 0xfff)) << 8) |
+          (uint)*(byte *)(*(int *)(iVar1 + (uVar2 >> 0xc) * 4) + (uVar2 & 0xfff));
+  fVar3 = (float10)(int)uVar2;
+  if ((int)uVar2 < 0) {
+    fVar3 = fVar3 + (float10)4.2949673e+09;
+  }
+  return fVar3;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005debe0 : MOV EAX,dword ptr [ECX + 0x10]
+005debe3 : MOV EDX,dword ptr [ESP + 0x4]
+005debe7 : MOV ECX,dword ptr [ECX + 0x8]
+005debea : MOV ECX,dword ptr [ECX + 0xc]
+005debed : LEA EAX,[EAX + EDX*0x8 + 0x2]
+005debf1 : PUSH ESI
+005debf2 : LEA EDX,[EAX + 0x1]
+005debf5 : MOV ESI,EDX
+005debf7 : SHR ESI,0xc
+005debfa : MOV ESI,dword ptr [ECX + ESI*0x4]
+005debfd : AND EDX,0xfff
+005dec03 : MOVZX DX,byte ptr [ESI + EDX*0x1]
+005dec08 : MOV ESI,EAX
+005dec0a : SHR ESI,0xc
+005dec0d : MOV ECX,dword ptr [ECX + ESI*0x4]
+005dec10 : SHL DX,0x8
+005dec14 : AND EAX,0xfff
+005dec19 : MOVZX EAX,byte ptr [ECX + EAX*0x1]
+005dec1d : MOVSX EDX,DX
+005dec20 : OR EDX,EAX
+005dec22 : MOV dword ptr [ESP + 0x8],EDX
+005dec26 : FILD dword ptr [ESP + 0x8]
+005dec2a : TEST EDX,EDX
+005dec2c : JGE 0x005dec34
+005dec2e : FADD float ptr [0x00cdf0e0]
+005dec34 : POP ESI
+005dec35 : RET 0x4

@@ -1,0 +1,67 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __ispunct_l
+ENTRY    : 006398d5
+BODY     : [[006398d5, 00639925]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __ispunct_l
+   
+   Libraries: Visual Studio 2008 Release, Visual Studio 2010 Release */
+
+int __cdecl __ispunct_l(int _C,_locale_t _Locale)
+
+{
+  uint uVar1;
+  localeinfo_struct local_14;
+  int local_c;
+  char local_8;
+  
+  _LocaleUpdate::_LocaleUpdate((_LocaleUpdate *)&local_14,_Locale);
+  if ((int)(local_14.locinfo)->locale_name[3] < 2) {
+    uVar1 = *(ushort *)(local_14.locinfo[1].lc_category[0].locale + _C * 2) & 0x10;
+  }
+  else {
+    uVar1 = __isctype_l(_C,0x10,&local_14);
+  }
+  if (local_8 != '\0') {
+    *(uint *)(local_c + 0x70) = *(uint *)(local_c + 0x70) & 0xfffffffd;
+  }
+  return uVar1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006398d5 : MOV EDI,EDI
+006398d7 : PUSH EBP
+006398d8 : MOV EBP,ESP
+006398da : SUB ESP,0x10
+006398dd : PUSH dword ptr [EBP + 0xc]
+006398e0 : LEA ECX,[EBP + -0x10]
+006398e3 : CALL 0x00637880
+006398e8 : MOV EAX,dword ptr [EBP + -0x10]
+006398eb : CMP dword ptr [EAX + 0xac],0x1
+006398f2 : JLE 0x00639907
+006398f4 : LEA EAX,[EBP + -0x10]
+006398f7 : PUSH EAX
+006398f8 : PUSH 0x10
+006398fa : PUSH dword ptr [EBP + 0x8]
+006398fd : CALL 0x00651518
+00639902 : ADD ESP,0xc
+00639905 : JMP 0x00639917
+00639907 : MOV EAX,dword ptr [EAX + 0xc8]
+0063990d : MOV ECX,dword ptr [EBP + 0x8]
+00639910 : MOVZX EAX,word ptr [EAX + ECX*0x2]
+00639914 : AND EAX,0x10
+00639917 : CMP byte ptr [EBP + -0x4],0x0
+0063991b : JZ 0x00639924
+0063991d : MOV ECX,dword ptr [EBP + -0x8]
+00639920 : AND dword ptr [ECX + 0x70],0xfffffffd
+00639924 : LEAVE
+00639925 : RET

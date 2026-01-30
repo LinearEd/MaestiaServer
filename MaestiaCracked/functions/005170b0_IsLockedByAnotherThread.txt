@@ -1,0 +1,60 @@
+PROGRAM  : Maestia.exe
+FUNCTION : IsLockedByAnotherThread
+ENTRY    : 005170b0
+BODY     : [[005170b0, 005170e1]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* public: bool __thiscall GMutex::IsLockedByAnotherThread(void) */
+
+bool __thiscall GMutex::IsLockedByAnotherThread(GMutex *this)
+
+{
+  undefined4 *puVar1;
+  DWORD DVar2;
+  
+                    /* 0x1170b0  108  ?IsLockedByAnotherThread@GMutex@@QAE_NXZ */
+  puVar1 = *(undefined4 **)(this + 0x10);
+  if (puVar1[2] != 0) {
+    DVar2 = WaitForSingleObject((HANDLE)*puVar1,0);
+    if (DVar2 != 0) {
+      return true;
+    }
+    puVar1[2] = puVar1[2] + 1;
+    FUN_00517030(this);
+  }
+  return false;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005170b0 : PUSH ESI
+005170b1 : PUSH EDI
+005170b2 : MOV EDI,ECX
+005170b4 : MOV ESI,dword ptr [EDI + 0x10]
+005170b7 : MOV EAX,dword ptr [ESI + 0x8]
+005170ba : TEST EAX,EAX
+005170bc : JZ 0x005170d8
+005170be : MOV ECX,dword ptr [ESI]
+005170c0 : PUSH 0x0
+005170c2 : PUSH ECX
+005170c3 : CALL dword ptr [0x00b85100]
+005170c9 : TEST EAX,EAX
+005170cb : JNZ 0x005170dd
+005170cd : INC dword ptr [ESI + 0x8]
+005170d0 : PUSH EDI
+005170d1 : MOV ECX,ESI
+005170d3 : CALL 0x00517030
+005170d8 : POP EDI
+005170d9 : XOR AL,AL
+005170db : POP ESI
+005170dc : RET
+005170dd : POP EDI
+005170de : MOV AL,0x1
+005170e0 : POP ESI
+005170e1 : RET

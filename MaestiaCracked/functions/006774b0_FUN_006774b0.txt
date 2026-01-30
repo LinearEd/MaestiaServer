@@ -1,0 +1,80 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_006774b0
+ENTRY    : 006774b0
+BODY     : [[006774b0, 00677510]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+uint FUN_006774b0(ushort *param_1,uint param_2)
+
+{
+  int iVar1;
+  uint uVar2;
+  int *in_ECX;
+  uint *puVar3;
+  
+  iVar1 = *in_ECX;
+  puVar3 = (uint *)(iVar1 + 8 + param_2 * 0xc);
+  if ((*(int *)(iVar1 + 8 + param_2 * 0xc) != -2) &&
+     (uVar2 = param_2, ((uint)(ushort)puVar3[1] & *(uint *)(iVar1 + 4)) == param_2)) {
+    while ((((uint)(ushort)puVar3[1] & *(uint *)(iVar1 + 4)) != param_2 ||
+           ((ushort)puVar3[1] != *param_1))) {
+      uVar2 = *puVar3;
+      if (uVar2 == 0xffffffff) {
+        return 0xffffffff;
+      }
+      puVar3 = (uint *)(iVar1 + 8 + uVar2 * 0xc);
+    }
+    return uVar2;
+  }
+  return 0xffffffff;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006774b0 : PUSH EBX
+006774b1 : PUSH ESI
+006774b2 : MOV ESI,dword ptr [ESP + 0x10]
+006774b6 : PUSH EDI
+006774b7 : MOV EDI,dword ptr [ECX]
+006774b9 : LEA ECX,[ESI + ESI*0x2]
+006774bc : CMP dword ptr [EDI + ECX*0x4 + 0x8],-0x2
+006774c1 : LEA ECX,[EDI + ECX*0x4 + 0x8]
+006774c5 : MOV EAX,ESI
+006774c7 : JZ 0x00677508
+006774c9 : MOVZX EDX,word ptr [ECX + 0x4]
+006774cd : MOV EBX,dword ptr [EDI + 0x4]
+006774d0 : AND EDX,EBX
+006774d2 : CMP EDX,ESI
+006774d4 : JNZ 0x00677508
+006774d6 : PUSH EBP
+006774d7 : MOVZX EDX,word ptr [ECX + 0x4]
+006774db : MOVZX EBP,DX
+006774de : AND EBP,EBX
+006774e0 : CMP EBP,ESI
+006774e2 : JNZ 0x006774ee
+006774e4 : MOV EBP,dword ptr [ESP + 0x14]
+006774e8 : CMP DX,word ptr [EBP]
+006774ec : JZ 0x00677501
+006774ee : MOV EAX,dword ptr [ECX]
+006774f0 : CMP EAX,-0x1
+006774f3 : JZ 0x006774fe
+006774f5 : LEA ECX,[EAX + EAX*0x2]
+006774f8 : LEA ECX,[EDI + ECX*0x4 + 0x8]
+006774fc : JMP 0x006774d7
+006774fe : OR EAX,0xffffffff
+00677501 : POP EBP
+00677502 : POP EDI
+00677503 : POP ESI
+00677504 : POP EBX
+00677505 : RET 0x8
+00677508 : POP EDI
+00677509 : POP ESI
+0067750a : OR EAX,0xffffffff
+0067750d : POP EBX
+0067750e : RET 0x8

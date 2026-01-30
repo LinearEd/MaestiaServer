@@ -1,0 +1,239 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00539d00
+ENTRY    : 00539d00
+BODY     : [[00539d00, 00539e7d]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+uint FUN_00539d00(int param_1)
+
+{
+  byte bVar1;
+  byte bVar2;
+  byte bVar3;
+  byte bVar4;
+  byte bVar5;
+  int iVar6;
+  byte bVar7;
+  int *in_ECX;
+  byte *pbVar8;
+  int iVar9;
+  uint uVar10;
+  uint uVar11;
+  
+  uVar10 = in_ECX[3] + param_1;
+  uVar11 = (1 << (8U - (char)in_ECX[3] & 0x1f)) - 1;
+  switch(*(undefined1 *)((int)&PTR_DAT_00b8b854 + param_1)) {
+  case 0:
+    return 0;
+  case 1:
+    if (uVar10 < 9) {
+      uVar11 = *(byte *)(in_ECX[2] + *in_ECX) & uVar11;
+      iVar9 = 8;
+    }
+    else {
+LAB_00539d72:
+      pbVar8 = (byte *)(in_ECX[2] + *in_ECX);
+      uVar11 = (*pbVar8 & uVar11) << 8 | (uint)pbVar8[1];
+      in_ECX[2] = in_ECX[2] + 1;
+      iVar9 = 0x10;
+    }
+    break;
+  case 2:
+    if (uVar10 < 0x11) goto LAB_00539d72;
+    iVar9 = in_ECX[2];
+    pbVar8 = (byte *)(*in_ECX + iVar9);
+    uVar11 = ((*(byte *)(*in_ECX + iVar9) & uVar11) << 8 | (uint)pbVar8[1]) << 8;
+LAB_00539dac:
+    uVar11 = uVar11 | pbVar8[2];
+    in_ECX[2] = iVar9 + 2;
+    iVar9 = 0x18;
+    break;
+  case 3:
+    iVar9 = in_ECX[2];
+    pbVar8 = (byte *)(iVar9 + *in_ECX);
+    uVar11 = ((*pbVar8 & uVar11) << 8 | (uint)pbVar8[1]) << 8;
+    if (uVar10 < 0x19) goto LAB_00539dac;
+    goto LAB_00539dfd;
+  case 4:
+    if (0x20 < uVar10) {
+      iVar9 = in_ECX[2];
+      iVar6 = *in_ECX;
+      bVar1 = *(byte *)(iVar6 + iVar9);
+      bVar2 = *(byte *)(iVar6 + 1 + iVar9);
+      bVar3 = *(byte *)(iVar6 + 2 + iVar9);
+      bVar4 = *(byte *)(iVar6 + 3 + iVar9);
+      in_ECX[2] = iVar9 + 4;
+      bVar5 = *(byte *)(iVar9 + 4 + iVar6);
+      bVar7 = (byte)(uVar10 - 0x20);
+      in_ECX[3] = uVar10 - 0x20;
+      return (uint)(bVar5 >> (8 - bVar7 & 0x1f)) |
+             ((((bVar1 & uVar11) << 8 | (uint)bVar2) << 8 | (uint)bVar3) << 8 | (uint)bVar4) <<
+             (bVar7 & 0x1f);
+    }
+    iVar9 = in_ECX[2];
+    pbVar8 = (byte *)(iVar9 + *in_ECX);
+    uVar11 = ((*pbVar8 & uVar11) << 8 | (uint)pbVar8[1]) << 8;
+LAB_00539dfd:
+    uVar11 = (uVar11 | pbVar8[2]) << 8 | (uint)pbVar8[3];
+    in_ECX[2] = iVar9 + 3;
+    iVar9 = 0x20;
+    break;
+  default:
+    uVar11 = 0;
+    goto LAB_00539e6e;
+  }
+  iVar9 = iVar9 - uVar10;
+  if (iVar9 != 0) {
+    in_ECX[3] = 8 - iVar9;
+    return uVar11 >> ((byte)iVar9 & 0x1f);
+  }
+LAB_00539e6e:
+  in_ECX[2] = in_ECX[2] + 1;
+  in_ECX[3] = 0;
+  return uVar11;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00539d00 : MOV EAX,dword ptr [ESP + 0x4]
+00539d04 : PUSH EBX
+00539d05 : MOV EDX,ECX
+00539d07 : MOV EBX,dword ptr [EDX + 0xc]
+00539d0a : PUSH ESI
+00539d0b : PUSH EDI
+00539d0c : MOV ECX,0x8
+00539d11 : SUB ECX,EBX
+00539d13 : MOV EDI,0x1
+00539d18 : SHL EDI,CL
+00539d1a : ADD EBX,EAX
+00539d1c : MOVZX EAX,byte ptr [EAX + 0xb8b854]
+00539d23 : DEC EDI
+00539d24 : CMP EAX,0x4
+00539d27 : JA 0x00539e6c
+00539d2d : JMP dword ptr [EAX*0x4 + 0x539e80]
+00539d34 : POP EDI
+00539d35 : POP ESI
+00539d36 : XOR EAX,EAX
+00539d38 : POP EBX
+00539d39 : RET 0x4
+00539d3c : CMP EBX,0x8
+00539d3f : JA 0x00539d72
+00539d41 : MOV ECX,dword ptr [EDX]
+00539d43 : MOV EAX,dword ptr [EDX + 0x8]
+00539d46 : MOVZX EAX,byte ptr [EAX + ECX*0x1]
+00539d4a : AND EAX,EDI
+00539d4c : MOV ECX,0x8
+00539d51 : SUB ECX,EBX
+00539d53 : TEST ECX,ECX
+00539d55 : JZ 0x00539e6e
+00539d5b : MOV ESI,0x8
+00539d60 : SHR EAX,CL
+00539d62 : SUB ESI,ECX
+00539d64 : POP EDI
+00539d65 : MOV dword ptr [EDX + 0xc],ESI
+00539d68 : POP ESI
+00539d69 : POP EBX
+00539d6a : RET 0x4
+00539d6d : CMP EBX,0x10
+00539d70 : JA 0x00539d93
+00539d72 : MOV ECX,dword ptr [EDX + 0x8]
+00539d75 : MOV EAX,dword ptr [EDX]
+00539d77 : LEA ESI,[ECX + EAX*0x1]
+00539d7a : MOVZX EAX,byte ptr [ESI]
+00539d7d : MOVZX ESI,byte ptr [ESI + 0x1]
+00539d81 : AND EAX,EDI
+00539d83 : SHL EAX,0x8
+00539d86 : OR EAX,ESI
+00539d88 : INC ECX
+00539d89 : MOV dword ptr [EDX + 0x8],ECX
+00539d8c : MOV ECX,0x10
+00539d91 : JMP 0x00539d51
+00539d93 : MOV ESI,dword ptr [EDX + 0x8]
+00539d96 : MOV ECX,dword ptr [EDX]
+00539d98 : MOVZX EAX,byte ptr [ECX + ESI*0x1]
+00539d9c : ADD ECX,ESI
+00539d9e : AND EAX,EDI
+00539da0 : MOVZX EDI,byte ptr [ECX + 0x1]
+00539da4 : SHL EAX,0x8
+00539da7 : OR EAX,EDI
+00539da9 : SHL EAX,0x8
+00539dac : MOVZX ECX,byte ptr [ECX + 0x2]
+00539db0 : OR EAX,ECX
+00539db2 : ADD ESI,0x2
+00539db5 : MOV dword ptr [EDX + 0x8],ESI
+00539db8 : MOV ECX,0x18
+00539dbd : JMP 0x00539d51
+00539dbf : MOV EAX,dword ptr [EDX]
+00539dc1 : MOV ESI,dword ptr [EDX + 0x8]
+00539dc4 : LEA ECX,[ESI + EAX*0x1]
+00539dc7 : MOVZX EAX,byte ptr [ECX]
+00539dca : AND EAX,EDI
+00539dcc : MOVZX EDI,byte ptr [ECX + 0x1]
+00539dd0 : SHL EAX,0x8
+00539dd3 : OR EAX,EDI
+00539dd5 : SHL EAX,0x8
+00539dd8 : CMP EBX,0x18
+00539ddb : JA 0x00539dfd
+00539ddd : JMP 0x00539dac
+00539ddf : CMP EBX,0x20
+00539de2 : JA 0x00539e1c
+00539de4 : MOV EAX,dword ptr [EDX]
+00539de6 : MOV ESI,dword ptr [EDX + 0x8]
+00539de9 : LEA ECX,[ESI + EAX*0x1]
+00539dec : MOVZX EAX,byte ptr [ECX]
+00539def : AND EAX,EDI
+00539df1 : MOVZX EDI,byte ptr [ECX + 0x1]
+00539df5 : SHL EAX,0x8
+00539df8 : OR EAX,EDI
+00539dfa : SHL EAX,0x8
+00539dfd : MOVZX EDI,byte ptr [ECX + 0x2]
+00539e01 : MOVZX ECX,byte ptr [ECX + 0x3]
+00539e05 : OR EAX,EDI
+00539e07 : SHL EAX,0x8
+00539e0a : OR EAX,ECX
+00539e0c : ADD ESI,0x3
+00539e0f : MOV dword ptr [EDX + 0x8],ESI
+00539e12 : MOV ECX,0x20
+00539e17 : JMP 0x00539d51
+00539e1c : MOV EAX,dword ptr [EDX + 0x8]
+00539e1f : MOV ECX,dword ptr [EDX]
+00539e21 : MOVZX ESI,byte ptr [ECX + EAX*0x1]
+00539e25 : AND ESI,EDI
+00539e27 : MOVZX EDI,byte ptr [ECX + EAX*0x1 + 0x1]
+00539e2c : SHL ESI,0x8
+00539e2f : OR ESI,EDI
+00539e31 : MOVZX EDI,byte ptr [ECX + EAX*0x1 + 0x2]
+00539e36 : SHL ESI,0x8
+00539e39 : OR ESI,EDI
+00539e3b : MOVZX EDI,byte ptr [ECX + EAX*0x1 + 0x3]
+00539e40 : SHL ESI,0x8
+00539e43 : OR ESI,EDI
+00539e45 : LEA EDI,[EAX + 0x4]
+00539e48 : MOV dword ptr [EDX + 0x8],EDI
+00539e4b : MOVZX EDI,byte ptr [EDI + ECX*0x1]
+00539e4f : LEA EAX,[EBX + -0x20]
+00539e52 : MOV ECX,0x8
+00539e57 : SUB CL,AL
+00539e59 : SHR EDI,CL
+00539e5b : MOV ECX,EAX
+00539e5d : SHL ESI,CL
+00539e5f : MOV dword ptr [EDX + 0xc],EAX
+00539e62 : OR EDI,ESI
+00539e64 : MOV EAX,EDI
+00539e66 : POP EDI
+00539e67 : POP ESI
+00539e68 : POP EBX
+00539e69 : RET 0x4
+00539e6c : XOR EAX,EAX
+00539e6e : INC dword ptr [EDX + 0x8]
+00539e71 : POP EDI
+00539e72 : POP ESI
+00539e73 : MOV dword ptr [EDX + 0xc],0x0
+00539e7a : POP EBX
+00539e7b : RET 0x4

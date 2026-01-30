@@ -1,0 +1,113 @@
+PROGRAM  : Maestia.exe
+FUNCTION : SetInverse
+ENTRY    : 00522cb0
+BODY     : [[00522cb0, 00522d57]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* public: void __thiscall GMatrix2D::SetInverse(class GMatrix2D const &) */
+
+void __thiscall GMatrix2D::SetInverse(GMatrix2D *this,GMatrix2D *param_1)
+
+{
+  float fVar1;
+  
+                    /* 0x122cb0  147  ?SetInverse@GMatrix2D@@QAEXABV1@@Z */
+  fVar1 = *(float *)param_1 * *(float *)(param_1 + 0x10) -
+          *(float *)(param_1 + 0xc) * *(float *)(param_1 + 4);
+  if (fVar1 == 0.0) {
+    *(undefined4 *)this = 0x3f800000;
+    *(undefined4 *)(this + 0x10) = 0x3f800000;
+    *(undefined4 *)(this + 4) = 0;
+    *(undefined4 *)(this + 8) = 0;
+    *(undefined4 *)(this + 0xc) = 0;
+    *(undefined4 *)(this + 0x14) = 0;
+    *(float *)(this + 8) = -*(float *)(param_1 + 8);
+    *(float *)(this + 0x14) = -*(float *)(param_1 + 0x14);
+    return;
+  }
+  fVar1 = 1.0 / fVar1;
+  *(float *)this = fVar1 * *(float *)(param_1 + 0x10);
+  *(float *)(this + 0x10) = *(float *)param_1 * fVar1;
+  *(float *)(this + 4) = -*(float *)(param_1 + 4) * fVar1;
+  *(float *)(this + 0xc) = -*(float *)(param_1 + 0xc) * fVar1;
+  *(float *)(this + 8) =
+       -(*(float *)(param_1 + 8) * *(float *)this +
+        *(float *)(param_1 + 0x14) * *(float *)(this + 4));
+  *(float *)(this + 0x14) =
+       -(*(float *)(param_1 + 8) * *(float *)(this + 0xc) +
+        *(float *)(param_1 + 0x14) * *(float *)(this + 0x10));
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00522cb0 : MOV EDX,dword ptr [ESP + 0x4]
+00522cb4 : FLD float ptr [EDX]
+00522cb6 : FMUL float ptr [EDX + 0x10]
+00522cb9 : FLD float ptr [EDX + 0xc]
+00522cbc : FMUL float ptr [EDX + 0x4]
+00522cbf : FSUBP
+00522cc1 : FSTP float ptr [ESP + 0x4]
+00522cc5 : FLDZ
+00522cc7 : FLD ST0
+00522cc9 : FLD float ptr [ESP + 0x4]
+00522ccd : FUCOM
+00522ccf : FNSTSW AX
+00522cd1 : FSTP ST1
+00522cd3 : TEST AH,0x44
+00522cd6 : JP 0x00522d00
+00522cd8 : FSTP ST0
+00522cda : FLD1
+00522cdc : FST float ptr [ECX]
+00522cde : FSTP float ptr [ECX + 0x10]
+00522ce1 : FST float ptr [ECX + 0x4]
+00522ce4 : FST float ptr [ECX + 0x8]
+00522ce7 : FST float ptr [ECX + 0xc]
+00522cea : FSTP float ptr [ECX + 0x14]
+00522ced : FLD float ptr [EDX + 0x8]
+00522cf0 : FCHS
+00522cf2 : FSTP float ptr [ECX + 0x8]
+00522cf5 : FLD float ptr [EDX + 0x14]
+00522cf8 : FCHS
+00522cfa : FSTP float ptr [ECX + 0x14]
+00522cfd : RET 0x4
+00522d00 : FSTP ST1
+00522d02 : FLD1
+00522d04 : FDIVRP
+00522d06 : FSTP float ptr [ESP + 0x4]
+00522d0a : FLD float ptr [ESP + 0x4]
+00522d0e : FLD ST0
+00522d10 : FMUL float ptr [EDX + 0x10]
+00522d13 : FSTP float ptr [ECX]
+00522d15 : FLD float ptr [EDX]
+00522d17 : FMUL ST1
+00522d19 : FSTP float ptr [ECX + 0x10]
+00522d1c : FLD float ptr [EDX + 0x4]
+00522d1f : FCHS
+00522d21 : FMUL ST1
+00522d23 : FSTP float ptr [ECX + 0x4]
+00522d26 : FLD float ptr [EDX + 0xc]
+00522d29 : FCHS
+00522d2b : FMULP
+00522d2d : FSTP float ptr [ECX + 0xc]
+00522d30 : FLD float ptr [EDX + 0x14]
+00522d33 : FMUL float ptr [ECX + 0x4]
+00522d36 : FLD float ptr [EDX + 0x8]
+00522d39 : FMUL float ptr [ECX]
+00522d3b : FADDP
+00522d3d : FCHS
+00522d3f : FSTP float ptr [ECX + 0x8]
+00522d42 : FLD float ptr [EDX + 0x14]
+00522d45 : FMUL float ptr [ECX + 0x10]
+00522d48 : FLD float ptr [EDX + 0x8]
+00522d4b : FMUL float ptr [ECX + 0xc]
+00522d4e : FADDP
+00522d50 : FCHS
+00522d52 : FSTP float ptr [ECX + 0x14]
+00522d55 : RET 0x4

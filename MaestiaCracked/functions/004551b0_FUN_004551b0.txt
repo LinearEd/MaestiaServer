@@ -1,0 +1,115 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_004551b0
+ENTRY    : 004551b0
+BODY     : [[004551b0, 00455209] [00455210, 00455256]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+void FUN_004551b0(int *param_1)
+
+{
+  uint *_Memory;
+  uint uVar1;
+  int iVar2;
+  uint uVar3;
+  void *local_10;
+  undefined1 *puStack_c;
+  undefined4 local_8;
+  
+  puStack_c = &LAB_00b7446b;
+  local_10 = ExceptionList;
+  uVar1 = DAT_00d66fa0 ^ (uint)&stack0xfffffffc;
+  ExceptionList = &local_10;
+  iVar2 = *param_1;
+  if ((iVar2 != 0) && (_Memory = (uint *)(iVar2 + -4), _Memory != (uint *)0x0)) {
+    _DAT_00da98cc = _DAT_00da98cc + *_Memory * -0x140 + -4;
+    uVar3 = 0;
+    if (*_Memory != 0) {
+      do {
+        *(undefined ***)(iVar2 + 0x24) = &PTR_FUN_00cd3f48;
+        uVar3 = uVar3 + 1;
+        iVar2 = iVar2 + 0x140;
+      } while (uVar3 < *_Memory);
+    }
+    local_8 = 0xffffffff;
+    if (DAT_00da98c8 == (int *)0x0) {
+      _free(_Memory);
+    }
+    else {
+      (**(code **)(*DAT_00da98c8 + 8))(_Memory,uVar1);
+    }
+    *param_1 = 0;
+  }
+  ExceptionList = local_10;
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+004551b0 : PUSH EBP
+004551b1 : MOV EBP,ESP
+004551b3 : PUSH -0x1
+004551b5 : PUSH 0xb7446b
+004551ba : MOV EAX,FS:[0x0]
+004551c0 : PUSH EAX
+004551c1 : PUSH EBX
+004551c2 : PUSH ESI
+004551c3 : PUSH EDI
+004551c4 : MOV EAX,[0x00d66fa0]
+004551c9 : XOR EAX,EBP
+004551cb : PUSH EAX
+004551cc : LEA EAX,[EBP + -0xc]
+004551cf : MOV FS:[0x0],EAX
+004551d5 : MOV EBX,dword ptr [EBP + 0x8]
+004551d8 : MOV EAX,dword ptr [EBX]
+004551da : TEST EAX,EAX
+004551dc : JZ 0x00455245
+004551de : LEA EDX,[EAX + -0x4]
+004551e1 : TEST EDX,EDX
+004551e3 : JZ 0x00455245
+004551e5 : MOV ESI,dword ptr [EDX]
+004551e7 : LEA ECX,[ESI + ESI*0x4]
+004551ea : SHL ECX,0x6
+004551ed : MOV EDI,0xfffffffc
+004551f2 : SUB EDI,ECX
+004551f4 : ADD dword ptr [0x00da98cc],EDI
+004551fa : XOR ECX,ECX
+004551fc : TEST ESI,ESI
+004551fe : JBE 0x00455223
+00455200 : OR EDI,0xffffffff
+00455203 : MOV ESI,0xcd3f48
+00455208 : JMP 0x00455210
+00455210 : MOV dword ptr [EBP + 0x8],EAX
+00455213 : MOV dword ptr [EBP + -0x4],EDI
+00455216 : MOV dword ptr [EAX + 0x24],ESI
+00455219 : INC ECX
+0045521a : ADD EAX,0x140
+0045521f : CMP ECX,dword ptr [EDX]
+00455221 : JC 0x00455210
+00455223 : MOV ECX,dword ptr [0x00da98c8]
+00455229 : PUSH EDX
+0045522a : TEST ECX,ECX
+0045522c : JZ 0x00455237
+0045522e : MOV EAX,dword ptr [ECX]
+00455230 : MOV EDX,dword ptr [EAX + 0x8]
+00455233 : CALL EDX
+00455235 : JMP 0x0045523f
+00455237 : CALL 0x0063610d
+0045523c : ADD ESP,0x4
+0045523f : MOV dword ptr [EBX],0x0
+00455245 : MOV ECX,dword ptr [EBP + -0xc]
+00455248 : MOV dword ptr FS:[0x0],ECX
+0045524f : POP ECX
+00455250 : POP EDI
+00455251 : POP ESI
+00455252 : POP EBX
+00455253 : MOV ESP,EBP
+00455255 : POP EBP
+00455256 : RET

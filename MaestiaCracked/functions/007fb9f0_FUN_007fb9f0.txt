@@ -1,0 +1,131 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_007fb9f0
+ENTRY    : 007fb9f0
+BODY     : [[007fb9f0, 007fbad0]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_007fb9f0(void)
+
+{
+  int iVar1;
+  int unaff_ESI;
+  DWORD local_10;
+  code *local_c;
+  LPOVERLAPPED local_8;
+  
+  local_10 = 0;
+  iVar1 = GetQueuedCompletionStatus
+                    (*(HANDLE *)(unaff_ESI + 0x4b4),&local_10,(PULONG_PTR)&local_c,&local_8,
+                     0xffffffff);
+  while ((iVar1 != 0 && (local_10 != 0))) {
+    if (local_10 == 1) {
+      if ((local_c != (code *)0x0) && (local_8 != (LPOVERLAPPED)0x0)) {
+        (**(code **)(*(int *)local_c + 0x84))
+                  (*(undefined4 *)(local_c + 0x174),local_8,*(undefined4 *)(local_c + 0x178));
+      }
+    }
+    else if (local_10 == 2) {
+      if ((local_c != (code *)0x0) && (local_8 != (LPOVERLAPPED)0x0)) {
+        FUN_00785b20(*(undefined4 *)(local_c + 0x168),local_8,*(undefined4 *)(local_c + 0x16c));
+      }
+    }
+    else if ((local_10 == 3) && (local_c != (code *)0x0)) {
+      (*local_c)(local_8);
+    }
+    InterlockedDecrement((LONG *)(unaff_ESI + 0x4fc));
+    local_10 = 0;
+    iVar1 = GetQueuedCompletionStatus
+                      (*(HANDLE *)(unaff_ESI + 0x4b4),&local_10,(PULONG_PTR)&local_c,&local_8,
+                       0xffffffff);
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+007fb9f0 : PUSH EBP
+007fb9f1 : MOV EBP,ESP
+007fb9f3 : SUB ESP,0xc
+007fb9f6 : PUSH EBX
+007fb9f7 : PUSH -0x1
+007fb9f9 : LEA EAX,[EBP + -0x4]
+007fb9fc : PUSH EAX
+007fb9fd : MOV EAX,dword ptr [ESI + 0x4b4]
+007fba03 : LEA ECX,[EBP + -0x8]
+007fba06 : PUSH ECX
+007fba07 : LEA EDX,[EBP + -0xc]
+007fba0a : PUSH EDX
+007fba0b : PUSH EAX
+007fba0c : MOV dword ptr [EBP + -0xc],0x0
+007fba13 : CALL dword ptr [0x00b8537c]
+007fba19 : TEST EAX,EAX
+007fba1b : JZ 0x007fbacc
+007fba21 : MOV EAX,dword ptr [EBP + -0xc]
+007fba24 : TEST EAX,EAX
+007fba26 : JZ 0x007fbacc
+007fba2c : CMP EAX,0x1
+007fba2f : JNZ 0x007fba5a
+007fba31 : MOV ECX,dword ptr [EBP + -0x8]
+007fba34 : TEST ECX,ECX
+007fba36 : JZ 0x007fba95
+007fba38 : MOV EAX,dword ptr [EBP + -0x4]
+007fba3b : TEST EAX,EAX
+007fba3d : JZ 0x007fba95
+007fba3f : MOV EBX,dword ptr [ECX + 0x178]
+007fba45 : MOV EDX,dword ptr [ECX]
+007fba47 : MOV EDX,dword ptr [EDX + 0x84]
+007fba4d : PUSH EBX
+007fba4e : PUSH EAX
+007fba4f : MOV EAX,dword ptr [ECX + 0x174]
+007fba55 : PUSH EAX
+007fba56 : CALL EDX
+007fba58 : JMP 0x007fba95
+007fba5a : CMP EAX,0x2
+007fba5d : JNZ 0x007fba83
+007fba5f : MOV ECX,dword ptr [EBP + -0x8]
+007fba62 : TEST ECX,ECX
+007fba64 : JZ 0x007fba95
+007fba66 : MOV EAX,dword ptr [EBP + -0x4]
+007fba69 : TEST EAX,EAX
+007fba6b : JZ 0x007fba95
+007fba6d : MOV EDX,dword ptr [ECX + 0x16c]
+007fba73 : PUSH EDX
+007fba74 : PUSH EAX
+007fba75 : MOV EAX,dword ptr [ECX + 0x168]
+007fba7b : PUSH EAX
+007fba7c : CALL 0x00785b20
+007fba81 : JMP 0x007fba95
+007fba83 : CMP EAX,0x3
+007fba86 : JNZ 0x007fba95
+007fba88 : MOV EAX,dword ptr [EBP + -0x8]
+007fba8b : TEST EAX,EAX
+007fba8d : JZ 0x007fba95
+007fba8f : MOV ECX,dword ptr [EBP + -0x4]
+007fba92 : PUSH ECX
+007fba93 : CALL EAX
+007fba95 : LEA EDX,[ESI + 0x4fc]
+007fba9b : PUSH EDX
+007fba9c : CALL dword ptr [0x00b851b0]
+007fbaa2 : PUSH -0x1
+007fbaa4 : LEA EAX,[EBP + -0x4]
+007fbaa7 : PUSH EAX
+007fbaa8 : MOV EAX,dword ptr [ESI + 0x4b4]
+007fbaae : LEA ECX,[EBP + -0x8]
+007fbab1 : PUSH ECX
+007fbab2 : LEA EDX,[EBP + -0xc]
+007fbab5 : PUSH EDX
+007fbab6 : PUSH EAX
+007fbab7 : MOV dword ptr [EBP + -0xc],0x0
+007fbabe : CALL dword ptr [0x00b8537c]
+007fbac4 : TEST EAX,EAX
+007fbac6 : JNZ 0x007fba21
+007fbacc : POP EBX
+007fbacd : MOV ESP,EBP
+007fbacf : POP EBP
+007fbad0 : RET

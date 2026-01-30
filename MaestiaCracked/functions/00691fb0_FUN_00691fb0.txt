@@ -1,0 +1,82 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00691fb0
+ENTRY    : 00691fb0
+BODY     : [[00691fb0, 00692011]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+int FUN_00691fb0(void)
+
+{
+  int iVar1;
+  undefined1 *puVar2;
+  uint in_EAX;
+  int iVar3;
+  int iVar4;
+  uint uVar5;
+  int unaff_EBX;
+  
+  iVar3 = 0;
+  if (in_EAX < 0x10000) {
+    uVar5 = in_EAX >> 8;
+    iVar1 = unaff_EBX + 0x206;
+    if (uVar5 == 0) {
+      puVar2 = (undefined1 *)(unaff_EBX + 6 + (in_EAX & 0xff) * 2);
+      if (CONCAT11(*puVar2,puVar2[1]) == 0) {
+        return iVar1;
+      }
+    }
+    else {
+      iVar4 = (CONCAT11(*(undefined1 *)(unaff_EBX + 6 + uVar5 * 2),
+                        *(undefined1 *)(unaff_EBX + 7 + uVar5 * 2)) & 0xfffffff8) + iVar1;
+      if (iVar4 != iVar1) {
+        iVar3 = iVar4;
+      }
+    }
+  }
+  return iVar3;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00691fb0 : PUSH ESI
+00691fb1 : MOV ESI,EAX
+00691fb3 : XOR EAX,EAX
+00691fb5 : CMP ESI,0x10000
+00691fbb : JNC 0x00692010
+00691fbd : MOV EDX,ESI
+00691fbf : SHR EDX,0x8
+00691fc2 : PUSH EDI
+00691fc3 : LEA EDI,[EBX + 0x206]
+00691fc9 : TEST EDX,EDX
+00691fcb : JNZ 0x00691ff0
+00691fcd : AND ESI,0xff
+00691fd3 : LEA EDX,[EBX + ESI*0x2 + 0x6]
+00691fd7 : MOVZX SI,byte ptr [EDX]
+00691fdb : MOVZX DX,byte ptr [EDX + 0x1]
+00691fe0 : SHL SI,0x8
+00691fe4 : OR SI,DX
+00691fe7 : MOV ECX,EDI
+00691fe9 : JNZ 0x0069200f
+00691feb : POP EDI
+00691fec : MOV EAX,ECX
+00691fee : POP ESI
+00691fef : RET
+00691ff0 : MOVZX CX,byte ptr [EBX + EDX*0x2 + 0x6]
+00691ff6 : MOVZX EDX,byte ptr [EBX + EDX*0x2 + 0x7]
+00691ffb : SHL CX,0x8
+00691fff : MOVZX ECX,CX
+00692002 : OR ECX,EDX
+00692004 : AND ECX,0xfffffff8
+00692007 : ADD ECX,EDI
+00692009 : CMP ECX,EDI
+0069200b : JZ 0x0069200f
+0069200d : MOV EAX,ECX
+0069200f : POP EDI
+00692010 : POP ESI
+00692011 : RET

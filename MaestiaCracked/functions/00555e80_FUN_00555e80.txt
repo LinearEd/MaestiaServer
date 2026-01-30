@@ -1,0 +1,81 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00555e80
+ENTRY    : 00555e80
+BODY     : [[00555e80, 00555ed9]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00555e80(void)
+
+{
+  int iVar1;
+  int iVar2;
+  int *piVar3;
+  int in_ECX;
+  
+  if (*(uint *)(in_ECX + 0x18) < *(uint *)(in_ECX + 0x1c)) {
+    if ((**(byte **)(in_ECX + 4) & 7) == 0) {
+      *(byte **)(in_ECX + 4) = *(byte **)(in_ECX + 4) + 1;
+    }
+    else {
+      FUN_00555bc0();
+    }
+    *(int *)(in_ECX + 0x18) = *(int *)(in_ECX + 0x18) + 1;
+    piVar3 = (int *)(*(int *)(in_ECX + 8) - (uint)*(ushort *)(in_ECX + 0x14));
+    if (piVar3[1] <= (*(int *)(in_ECX + 4) - (int)piVar3) + -8) {
+      iVar2 = *piVar3;
+      if (iVar2 == 0) {
+        *(undefined4 *)(in_ECX + 4) = 0;
+        return;
+      }
+      iVar1 = iVar2 + 8;
+      *(int *)(in_ECX + 4) = iVar1;
+      *(int *)(in_ECX + 8) = iVar1;
+      *(short *)(in_ECX + 0x14) = (short)iVar1 - (short)iVar2;
+    }
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00555e80 : PUSH ESI
+00555e81 : MOV ESI,ECX
+00555e83 : MOV EAX,dword ptr [ESI + 0x18]
+00555e86 : CMP EAX,dword ptr [ESI + 0x1c]
+00555e89 : JNC 0x00555ecf
+00555e8b : MOV EAX,dword ptr [ESI + 0x4]
+00555e8e : TEST byte ptr [EAX],0x7
+00555e91 : JNZ 0x00555e99
+00555e93 : INC EAX
+00555e94 : MOV dword ptr [ESI + 0x4],EAX
+00555e97 : JMP 0x00555e9e
+00555e99 : CALL 0x00555bc0
+00555e9e : MOVZX ECX,word ptr [ESI + 0x14]
+00555ea2 : MOV EAX,dword ptr [ESI + 0x8]
+00555ea5 : MOV EDX,dword ptr [ESI + 0x4]
+00555ea8 : INC dword ptr [ESI + 0x18]
+00555eab : SUB EAX,ECX
+00555ead : SUB EDX,EAX
+00555eaf : SUB EDX,0x8
+00555eb2 : CMP EDX,dword ptr [EAX + 0x4]
+00555eb5 : JL 0x00555ecf
+00555eb7 : MOV EAX,dword ptr [EAX]
+00555eb9 : TEST EAX,EAX
+00555ebb : JZ 0x00555ed1
+00555ebd : LEA ECX,[EAX + 0x8]
+00555ec0 : MOV dword ptr [ESI + 0x4],ECX
+00555ec3 : MOV EDX,ECX
+00555ec5 : SUB CX,AX
+00555ec8 : MOV dword ptr [ESI + 0x8],EDX
+00555ecb : MOV word ptr [ESI + 0x14],CX
+00555ecf : POP ESI
+00555ed0 : RET
+00555ed1 : MOV dword ptr [ESI + 0x4],0x0
+00555ed8 : POP ESI
+00555ed9 : RET

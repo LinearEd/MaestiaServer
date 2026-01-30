@@ -1,0 +1,132 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00911840
+ENTRY    : 00911840
+BODY     : [[00911840, 0091194d]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00911840(int param_1,ushort param_2)
+
+{
+  int *piVar1;
+  int iVar2;
+  char *pcVar3;
+  undefined *puVar4;
+  
+  if (DAT_00d6ab0f == '\0') {
+    return;
+  }
+  if ((DAT_00d7c550 == 0) || (piVar1 = *(int **)(DAT_00d7c550 + 0x38), piVar1 == (int *)0x0)) {
+    piVar1 = *(int **)(*DAT_00da9894 + 0x114);
+    if (piVar1 == (int *)0x0) goto LAB_009118ab;
+    puVar4 = &DAT_00c66b90;
+    pcVar3 = "SetFXSoundValue";
+  }
+  else {
+    puVar4 = &DAT_00c66b6c;
+    pcVar3 = "mc_settingpage.SetFXSoundValue";
+  }
+  (**(code **)(*piVar1 + 4))(piVar1,pcVar3,puVar4,param_2);
+LAB_009118ab:
+  iVar2 = (int)((float)param_2 * 35.0 - 3500.0);
+  FUN_007bc5c0((float)(iVar2 + 1000));
+  if (DAT_00d6ab0f != '\0') {
+    if (iVar2 == -0xdac) {
+      iVar2 = 0;
+    }
+    else {
+      iVar2 = iVar2 + 5000;
+    }
+    FUN_007bc5c0((float)iVar2 * 0.0002);
+  }
+  if ((param_2 != (ushort)(int)*(float *)(param_1 + 0x40)) && (DAT_00d6ab0f != '\0')) {
+    FUN_008a04b0();
+  }
+  *(float *)(param_1 + 0x40) = (float)param_2;
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00911840 : PUSH EBP
+00911841 : MOV EBP,ESP
+00911843 : SUB ESP,0xc
+00911846 : CMP byte ptr [0x00d6ab0f],0x0
+0091184d : MOV EAX,dword ptr [EBP + 0x8]
+00911850 : PUSH EBX
+00911851 : MOV BX,word ptr [EBP + 0xc]
+00911855 : PUSH ESI
+00911856 : PUSH EDI
+00911857 : MOV dword ptr [EBP + -0x4],EAX
+0091185a : JZ 0x00911945
+00911860 : MOV EAX,[0x00d7c550]
+00911865 : TEST EAX,EAX
+00911867 : JZ 0x00911880
+00911869 : MOV EAX,dword ptr [EAX + 0x38]
+0091186c : TEST EAX,EAX
+0091186e : JZ 0x00911880
+00911870 : MOVZX EDX,BX
+00911873 : PUSH EDX
+00911874 : PUSH 0xc66b6c
+00911879 : PUSH 0xc66b70
+0091187e : JMP 0x009118a0
+00911880 : MOV ECX,dword ptr [0x00da9894]
+00911886 : MOV EDX,dword ptr [ECX]
+00911888 : MOV EAX,dword ptr [EDX + 0x114]
+0091188e : TEST EAX,EAX
+00911890 : JZ 0x009118ab
+00911892 : MOVZX EDX,BX
+00911895 : PUSH EDX
+00911896 : PUSH 0xc66b90
+0091189b : PUSH 0xc66b94
+009118a0 : MOV ECX,dword ptr [EAX]
+009118a2 : PUSH EAX
+009118a3 : MOV EAX,dword ptr [ECX + 0x4]
+009118a6 : CALL EAX
+009118a8 : ADD ESP,0x10
+009118ab : MOV ESI,dword ptr [0x01725208]
+009118b1 : MOVZX ECX,BX
+009118b4 : CVTSI2SS XMM0,ECX
+009118b8 : MOVSS dword ptr [EBP + -0x8],XMM0
+009118bd : MULSS XMM0,dword ptr [0x00cdf284]
+009118c5 : SUBSS XMM0,dword ptr [0x00cdf280]
+009118cd : CVTTSS2SI EDI,XMM0
+009118d1 : LEA EDX,[EDI + 0x3e8]
+009118d7 : PUSH ECX
+009118d8 : CVTSI2SS XMM0,EDX
+009118dc : MOVSS dword ptr [ESP],XMM0
+009118e1 : CALL 0x007bc5c0
+009118e6 : CMP byte ptr [0x00d6ab0f],0x0
+009118ed : JZ 0x0091191e
+009118ef : CMP EDI,0xfffff254
+009118f5 : JNZ 0x009118fb
+009118f7 : XOR EAX,EAX
+009118f9 : JMP 0x00911901
+009118fb : LEA EAX,[EDI + 0x1388]
+00911901 : MOV ESI,dword ptr [0x01725208]
+00911907 : CVTSI2SS XMM0,EAX
+0091190b : MULSS XMM0,dword ptr [0x00cdf498]
+00911913 : PUSH ECX
+00911914 : MOVSS dword ptr [ESP],XMM0
+00911919 : CALL 0x007bc5c0
+0091191e : MOV ESI,dword ptr [EBP + -0x4]
+00911921 : CVTTSS2SI EAX,dword ptr [ESI + 0x40]
+00911926 : ADD ESI,0x40
+00911929 : CMP BX,AX
+0091192c : JZ 0x0091193c
+0091192e : CMP byte ptr [0x00d6ab0f],0x0
+00911935 : JZ 0x0091193c
+00911937 : CALL 0x008a04b0
+0091193c : MOVSS XMM0,dword ptr [EBP + -0x8]
+00911941 : MOVSS dword ptr [ESI],XMM0
+00911945 : POP EDI
+00911946 : POP ESI
+00911947 : POP EBX
+00911948 : MOV ESP,EBP
+0091194a : POP EBP
+0091194b : RET 0x8

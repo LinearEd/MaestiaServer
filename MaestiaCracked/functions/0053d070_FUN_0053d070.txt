@@ -1,0 +1,85 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0053d070
+ENTRY    : 0053d070
+BODY     : [[0053d070, 0053d0d3]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_0053d070(int param_1)
+
+{
+  int *piVar1;
+  int iVar2;
+  uint uVar3;
+  uint uVar4;
+  int in_ECX;
+  
+  for (; param_1 != 0; param_1 = param_1 + -1) {
+    iVar2 = *(int *)(in_ECX + 0x18);
+    if ((iVar2 == 0) || (*(uint *)(iVar2 + 4) <= *(uint *)(in_ECX + 0x1c))) {
+      *(undefined4 *)(in_ECX + 0x1c) = *(undefined4 *)(iVar2 + 4);
+    }
+    else {
+      uVar4 = *(uint *)(in_ECX + 0x1c) + 1;
+      *(uint *)(in_ECX + 0x1c) = uVar4;
+      uVar3 = *(uint *)(in_ECX + 0x14);
+      if ((((-1 < (int)uVar3) && (uVar3 < (uint)(*(int **)(in_ECX + 0x10))[1])) &&
+          (piVar1 = (int *)(**(int **)(in_ECX + 0x10) + uVar3 * 0xc),
+          (uint)(piVar1[1] + *piVar1) <= uVar4)) &&
+         (*(int *)(in_ECX + 0x14) < *(int *)(*(int *)(in_ECX + 0x10) + 4))) {
+        *(int *)(in_ECX + 0x14) = *(int *)(in_ECX + 0x14) + 1;
+      }
+    }
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0053d070 : MOV EAX,dword ptr [ESP + 0x4]
+0053d074 : TEST EAX,EAX
+0053d076 : JBE 0x0053d0d1
+0053d078 : PUSH ESI
+0053d079 : PUSH EDI
+0053d07a : MOV ESI,EAX
+0053d07c : LEA ESP,[ESP]
+0053d080 : MOV EDX,dword ptr [ECX + 0x18]
+0053d083 : TEST EDX,EDX
+0053d085 : JZ 0x0053d0c4
+0053d087 : MOV EAX,dword ptr [ECX + 0x1c]
+0053d08a : CMP EAX,dword ptr [EDX + 0x4]
+0053d08d : JNC 0x0053d0c4
+0053d08f : INC EAX
+0053d090 : MOV dword ptr [ECX + 0x1c],EAX
+0053d093 : MOV EDX,dword ptr [ECX + 0x14]
+0053d096 : TEST EDX,EDX
+0053d098 : JL 0x0053d0ca
+0053d09a : MOV EDI,dword ptr [ECX + 0x10]
+0053d09d : CMP EDX,dword ptr [EDI + 0x4]
+0053d0a0 : JNC 0x0053d0ca
+0053d0a2 : MOV EDI,dword ptr [EDI]
+0053d0a4 : LEA EDX,[EDX + EDX*0x2]
+0053d0a7 : LEA EDX,[EDI + EDX*0x4]
+0053d0aa : MOV EDI,dword ptr [EDX + 0x4]
+0053d0ad : ADD EDI,dword ptr [EDX]
+0053d0af : CMP EAX,EDI
+0053d0b1 : JC 0x0053d0ca
+0053d0b3 : MOV EAX,dword ptr [ECX + 0x14]
+0053d0b6 : MOV EDX,dword ptr [ECX + 0x10]
+0053d0b9 : CMP EAX,dword ptr [EDX + 0x4]
+0053d0bc : JGE 0x0053d0ca
+0053d0be : INC EAX
+0053d0bf : MOV dword ptr [ECX + 0x14],EAX
+0053d0c2 : JMP 0x0053d0ca
+0053d0c4 : MOV EAX,dword ptr [EDX + 0x4]
+0053d0c7 : MOV dword ptr [ECX + 0x1c],EAX
+0053d0ca : SUB ESI,0x1
+0053d0cd : JNZ 0x0053d080
+0053d0cf : POP EDI
+0053d0d0 : POP ESI
+0053d0d1 : RET 0x4

@@ -1,0 +1,70 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_004ce800
+ENTRY    : 004ce800
+BODY     : [[004ce800, 004ce86d]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+uint FUN_004ce800(void)
+
+{
+  byte bVar1;
+  int in_EAX;
+  int *piVar2;
+  int iVar3;
+  
+  if (*(int *)(in_EAX + 0x454) != 0) {
+    return 0xffffffff;
+  }
+  if (*(int *)(in_EAX + 0x414) == 0) {
+    piVar2 = __errno();
+    *piVar2 = 0;
+    iVar3 = FUN_004ce870(*(undefined4 *)(in_EAX + 0x44c));
+    *(int *)(in_EAX + 0x414) = iVar3;
+    if (iVar3 == 0) {
+      *(undefined4 *)(in_EAX + 0x454) = 1;
+      return 0xffffffff;
+    }
+    *(undefined4 *)(in_EAX + 0x410) = *(undefined4 *)(in_EAX + 0x44c);
+  }
+  *(int *)(in_EAX + 0x414) = *(int *)(in_EAX + 0x414) + -1;
+  bVar1 = **(byte **)(in_EAX + 0x410);
+  *(byte **)(in_EAX + 0x410) = *(byte **)(in_EAX + 0x410) + 1;
+  return (uint)bVar1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+004ce800 : PUSH EDI
+004ce801 : MOV EDI,EAX
+004ce803 : CMP dword ptr [EDI + 0x454],0x0
+004ce80a : JNZ 0x004ce845
+004ce80c : CMP dword ptr [EDI + 0x414],0x0
+004ce813 : JNZ 0x004ce856
+004ce815 : CALL 0x0063ab82
+004ce81a : MOV dword ptr [EAX],0x0
+004ce820 : MOV EAX,dword ptr [EDI + 0x44c]
+004ce826 : PUSH EAX
+004ce827 : MOV EAX,0x1000
+004ce82c : CALL 0x004ce870
+004ce831 : MOV dword ptr [EDI + 0x414],EAX
+004ce837 : TEST EAX,EAX
+004ce839 : JNZ 0x004ce84a
+004ce83b : MOV dword ptr [EDI + 0x454],0x1
+004ce845 : OR EAX,0xffffffff
+004ce848 : POP EDI
+004ce849 : RET
+004ce84a : MOV ECX,dword ptr [EDI + 0x44c]
+004ce850 : MOV dword ptr [EDI + 0x410],ECX
+004ce856 : MOV ECX,dword ptr [EDI + 0x410]
+004ce85c : DEC dword ptr [EDI + 0x414]
+004ce862 : MOVZX EAX,byte ptr [ECX]
+004ce865 : INC ECX
+004ce866 : MOV dword ptr [EDI + 0x410],ECX
+004ce86c : POP EDI
+004ce86d : RET

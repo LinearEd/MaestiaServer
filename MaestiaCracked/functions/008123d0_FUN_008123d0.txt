@@ -1,0 +1,94 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_008123d0
+ENTRY    : 008123d0
+BODY     : [[008123d0, 00812447]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+uint FUN_008123d0(void)
+
+{
+  ushort uVar1;
+  uint in_EAX;
+  int iVar2;
+  uint uVar3;
+  int in_EDX;
+  
+  uVar3 = 0;
+  if (*(uint *)(in_EDX + 0x14) != 0) {
+    do {
+      if (*(uint *)(in_EDX + 0x18) < 8) {
+        iVar2 = in_EDX + 4;
+      }
+      else {
+        iVar2 = *(int *)(in_EDX + 4);
+      }
+      uVar1 = *(ushort *)(iVar2 + uVar3 * 2);
+      in_EAX = (uint)uVar1;
+      if ((0xfe < uVar1) &&
+         ((((0xabff < uVar1 && (uVar1 < 0xd7b0)) || ((0x10ff < uVar1 && (uVar1 < 0x1200)))) ||
+          ((0x312f < uVar1 && (uVar1 < 0x3190)))))) {
+        return CONCAT31((uint3)(byte)(uVar1 >> 8),1);
+      }
+      uVar3 = uVar3 + 1;
+    } while (uVar3 < *(uint *)(in_EDX + 0x14));
+  }
+  return in_EAX & 0xffffff00;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+008123d0 : PUSH EBX
+008123d1 : PUSH ESI
+008123d2 : MOV ESI,dword ptr [EDX + 0x14]
+008123d5 : XOR ECX,ECX
+008123d7 : PUSH EDI
+008123d8 : TEST ESI,ESI
+008123da : JBE 0x0081243c
+008123dc : MOV EDI,dword ptr [EDX + 0x18]
+008123df : NOP
+008123e0 : CMP EDI,0x8
+008123e3 : JC 0x008123ea
+008123e5 : MOV EAX,dword ptr [EDX + 0x4]
+008123e8 : JMP 0x008123ed
+008123ea : LEA EAX,[EDX + 0x4]
+008123ed : MOVZX EAX,word ptr [EAX + ECX*0x2]
+008123f1 : MOV EBX,0xff
+008123f6 : CMP AX,BX
+008123f9 : JC 0x00812437
+008123fb : MOV EBX,0xac00
+00812400 : CMP AX,BX
+00812403 : JC 0x0081240f
+00812405 : MOV EBX,0xd7af
+0081240a : CMP AX,BX
+0081240d : JBE 0x00812442
+0081240f : MOV EBX,0x1100
+00812414 : CMP AX,BX
+00812417 : JC 0x00812423
+00812419 : MOV EBX,0x11ff
+0081241e : CMP AX,BX
+00812421 : JBE 0x00812442
+00812423 : MOV EBX,0x3130
+00812428 : CMP AX,BX
+0081242b : JC 0x00812437
+0081242d : MOV EBX,0x318f
+00812432 : CMP AX,BX
+00812435 : JBE 0x00812442
+00812437 : INC ECX
+00812438 : CMP ECX,ESI
+0081243a : JC 0x008123e0
+0081243c : POP EDI
+0081243d : POP ESI
+0081243e : XOR AL,AL
+00812440 : POP EBX
+00812441 : RET
+00812442 : POP EDI
+00812443 : POP ESI
+00812444 : MOV AL,0x1
+00812446 : POP EBX
+00812447 : RET

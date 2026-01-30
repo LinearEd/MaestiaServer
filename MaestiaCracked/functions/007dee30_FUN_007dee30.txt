@@ -1,0 +1,94 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_007dee30
+ENTRY    : 007dee30
+BODY     : [[007dee30, 007deeea]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_007dee30(void)
+
+{
+  float fVar1;
+  int iVar2;
+  int unaff_ESI;
+  float *unaff_EDI;
+  float10 fVar3;
+  float fVar4;
+  float fVar5;
+  float fVar6;
+  
+  *(float *)(unaff_ESI + 0xc0) = *unaff_EDI;
+  *(float *)(unaff_ESI + 0xc4) = unaff_EDI[1];
+  *(float *)(unaff_ESI + 200) = unaff_EDI[2];
+  fVar1 = *unaff_EDI;
+  iVar2 = *(int *)(unaff_ESI + 0x9c);
+  fVar5 = unaff_EDI[1] - *(float *)(unaff_ESI + 0xd0);
+  fVar6 = unaff_EDI[2] - *(float *)(unaff_ESI + 0xd4);
+  fVar4 = fVar1 - *(float *)(unaff_ESI + 0xcc);
+  if (iVar2 != 0) {
+    fVar3 = (float10)FUN_0040f460(fVar6 * fVar6 + fVar4 * fVar4 + fVar5 * fVar5);
+    if ((float10)*(float *)(iVar2 + 0x228) < fVar3) {
+      *(float *)(unaff_ESI + 0xcc) = fVar1;
+      *(float *)(unaff_ESI + 0xd0) = unaff_EDI[1];
+      *(float *)(unaff_ESI + 0xd4) = unaff_EDI[2];
+      *(undefined4 *)(unaff_ESI + 0xa8) = 1;
+    }
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+007dee30 : PUSH EBP
+007dee31 : MOV EBP,ESP
+007dee33 : PUSH ECX
+007dee34 : FLD float ptr [EDI]
+007dee36 : PUSH EBX
+007dee37 : FSTP float ptr [ESI + 0xc0]
+007dee3d : FLD float ptr [EDI + 0x4]
+007dee40 : FSTP float ptr [ESI + 0xc4]
+007dee46 : FLD float ptr [EDI + 0x8]
+007dee49 : FSTP float ptr [ESI + 0xc8]
+007dee4f : MOVSS XMM0,dword ptr [EDI]
+007dee53 : MOV EBX,dword ptr [ESI + 0x9c]
+007dee59 : MOVSS XMM1,dword ptr [EDI + 0x4]
+007dee5e : MOVSS XMM2,dword ptr [EDI + 0x8]
+007dee63 : SUBSS XMM1,dword ptr [ESI + 0xd0]
+007dee6b : SUBSS XMM2,dword ptr [ESI + 0xd4]
+007dee73 : MOVSS dword ptr [EBP + -0x4],XMM0
+007dee78 : SUBSS XMM0,dword ptr [ESI + 0xcc]
+007dee80 : TEST EBX,EBX
+007dee82 : JZ 0x007deee6
+007dee84 : MOVAPS XMM3,XMM2
+007dee87 : MULSS XMM3,XMM2
+007dee8b : MOVAPS XMM2,XMM0
+007dee8e : MULSS XMM2,XMM0
+007dee92 : MOVAPS XMM0,XMM1
+007dee95 : ADDSS XMM3,XMM2
+007dee99 : MULSS XMM0,XMM1
+007dee9d : PUSH ECX
+007dee9e : ADDSS XMM3,XMM0
+007deea2 : MOVSS dword ptr [ESP],XMM3
+007deea7 : CALL 0x0040f460
+007deeac : FLD float ptr [EBX + 0x228]
+007deeb2 : FXCH
+007deeb4 : ADD ESP,0x4
+007deeb7 : FCOMIP ST0,ST1
+007deeb9 : FSTP ST0
+007deebb : JBE 0x007deee6
+007deebd : MOVSS XMM0,dword ptr [EBP + -0x4]
+007deec2 : MOVSS dword ptr [ESI + 0xcc],XMM0
+007deeca : FLD float ptr [EDI + 0x4]
+007deecd : FSTP float ptr [ESI + 0xd0]
+007deed3 : FLD float ptr [EDI + 0x8]
+007deed6 : FSTP float ptr [ESI + 0xd4]
+007deedc : MOV dword ptr [ESI + 0xa8],0x1
+007deee6 : POP EBX
+007deee7 : MOV ESP,EBP
+007deee9 : POP EBP
+007deeea : RET

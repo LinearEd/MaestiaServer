@@ -15,6 +15,9 @@ namespace DevServer.Handlers
         // Character storage loaded from database
         private static List<DPKUZ_USER_RS_CHARLIST_DATA> _characters = new List<DPKUZ_USER_RS_CHARLIST_DATA>();
         private static int _nextCharacterKey;
+        
+        // Track if NPCs have been spawned for this session
+        private static bool _npcsSpawned = false;
 
         public static void Initialize()
         {
@@ -1681,6 +1684,39 @@ namespace DevServer.Handlers
             };
 
             packetSender.SendPacket(userRsStartGame);
+            Log.WriteInfo("[Zone] Sent DPKUZ_USER_RS_START_GAME.");
+        }
+
+        private static void SpawnTestNpcs(Client packetSender)
+        {
+            // Spawn NPCs near player spawn point (2300, 2300) 
+            // NPC IDs found from StringTable: 31=Clan Leader, 112=Store Merchant, 366=Faction Leader, 27, 29
+            var testNpcs = new[]
+            {
+                new { UniqueId = 1001, TemplateId = 31, PosX = 2350, PosY = 2300, PosZ = 0, Rotation = 180, NpcType = 1 }, // Clan Leader (Quest)
+                new { UniqueId = 1002, TemplateId = 112, PosX = 2380, PosY = 2300, PosZ = 0, Rotation = 180, NpcType = 0 }, // Store Merchant
+                new { UniqueId = 1003, TemplateId = 366, PosX = 2300, PosY = 2350, PosZ = 0, Rotation = 270, NpcType = 1 }, // Faction Leader (Quest)
+                new { UniqueId = 1004, TemplateId = 27, PosX = 2250, PosY = 2300, PosZ = 0, Rotation = 0, NpcType = 1 }, // NPC 27 (Quest)
+                new { UniqueId = 1005, TemplateId = 29, PosX = 2300, PosY = 2250, PosZ = 0, Rotation = 90, NpcType = 0 }, // NPC 29 (Skill Merchant)
+            };
+
+            foreach (var npc in testNpcs)
+            {
+                var npcPacket = new DPKUL_CHAR_RS_NPC
+                {
+                    NpcUniqueId = npc.UniqueId,
+                    NpcTemplateId = npc.TemplateId,
+                    PositionX = npc.PosX,
+                    PositionY = npc.PosY,
+                    PositionZ = npc.PosZ,
+                    Rotation = (short)npc.Rotation,
+                    NpcType = (byte)npc.NpcType
+                };
+                packetSender.SendPacket(npcPacket);
+                Log.WriteInfo("[Zone] Sent NPC spawn: ID={0}, Template={1}, Pos=({2},{3},{4})", 
+                    npc.UniqueId, npc.TemplateId, npc.PosX, npc.PosY, npc.PosZ);
+            }
+            Log.WriteInfo("[Zone] Spawned {0} test NPCs total.", testNpcs.Length);
         }
 
         [Packet(HandlerType.Zone, PacketType.DPKUZ_USER_RQ_CHARSEL)]
@@ -1688,6 +1724,9 @@ namespace DevServer.Handlers
         {
             if (!(clientPacket is DPKUZ_USER_RQ_CHARSEL userRqCharSel))
                 return;
+
+            // Reset NPC spawn flag for new character session
+            _npcsSpawned = false;
 
             using (var rsa = new RSACryptoServiceProvider())
             {
@@ -1780,8 +1819,11 @@ namespace DevServer.Handlers
         [Packet(HandlerType.Zone, PacketType.SPK_UNKNOWN_67_32)]
         public static void SPK_UNKNOWN_67_32_Handler(Packet clientPacket, Client packetSender)
         {
-            // Client sends this after START_PERMISSION - just acknowledge it silently
+            // Client sends this after START_PERMISSION - this indicates the client is ready for game data
             Log.WriteInfo("[Zone] Received SPK_UNKNOWN_67_32 - acknowledged.");
+            
+            // Spawn NPCs now that the client is ready
+            SpawnTestNpcs(packetSender);
         }
 
         [Packet(HandlerType.Zone, PacketType.DPKUL_CHAR_RQ_UNKNOWN)]
@@ -1795,6 +1837,13 @@ namespace DevServer.Handlers
             };
 
             packetSender.SendPacket(CHarRsUnknown);
+            
+            // Spawn NPCs on first DPKUL_CHAR_RQ_UNKNOWN (player is in game)
+            if (!_npcsSpawned)
+            {
+                _npcsSpawned = true;
+                SpawnTestNpcs(packetSender);
+            }
         }
 
         [Packet(HandlerType.Zone, PacketType.DPKUL_CHAR_RQ_UNKNOWN_133)]

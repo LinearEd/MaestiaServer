@@ -1,0 +1,41 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00599240
+ENTRY    : 00599240
+BODY     : [[00599240, 00599269]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+uint FUN_00599240(void)
+
+{
+  int *in_ECX;
+  
+  if (*in_ECX < 0) {
+    return (int)in_ECX + (uint)*(byte *)(in_ECX + 7) * 8 + 0x21 & 0xfffffffc;
+  }
+  return (int)in_ECX + in_ECX[1] * 8 + 0x2d & 0xfffffffc;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00599240 : MOV EAX,dword ptr [ECX]
+00599242 : SHR EAX,0x1f
+00599245 : AND AL,0x1
+00599247 : LEA EDX,[ECX + 0x1e]
+0059924a : JNZ 0x0059924f
+0059924c : LEA EDX,[ECX + 0x2a]
+0059924f : TEST AL,AL
+00599251 : JZ 0x0059925f
+00599253 : MOVZX ECX,byte ptr [ECX + 0x1c]
+00599257 : LEA EAX,[EDX + ECX*0x8 + 0x3]
+0059925b : AND EAX,0xfffffffc
+0059925e : RET
+0059925f : MOV ECX,dword ptr [ECX + 0x4]
+00599262 : LEA EAX,[EDX + ECX*0x8 + 0x3]
+00599266 : AND EAX,0xfffffffc
+00599269 : RET

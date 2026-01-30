@@ -1,0 +1,59 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_009a6b20
+ENTRY    : 009a6b20
+BODY     : [[009a6b20, 009a6b52]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_009a6b20(void)
+
+{
+  code *UNRECOVERED_JUMPTABLE;
+  DWORD DVar1;
+  int *in_ECX;
+  
+  if (in_ECX[0x1e] != 0) {
+    DVar1 = GetTickCount();
+    if ((uint)in_ECX[0x1e] < DVar1) {
+      if ((code *)in_ECX[0x18] != (code *)0x0) {
+        (*(code *)in_ECX[0x18])(8);
+      }
+      UNRECOVERED_JUMPTABLE = *(code **)(*in_ECX + 0x20);
+      in_ECX[0x1e] = 0;
+                    /* WARNING: Could not recover jumptable at 0x009a6b4f. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      (*UNRECOVERED_JUMPTABLE)();
+      return;
+    }
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+009a6b20 : PUSH ESI
+009a6b21 : MOV ESI,ECX
+009a6b23 : CMP dword ptr [ESI + 0x78],0x0
+009a6b27 : JZ 0x009a6b51
+009a6b29 : CALL dword ptr [0x00b850d8]
+009a6b2f : CMP EAX,dword ptr [ESI + 0x78]
+009a6b32 : JBE 0x009a6b51
+009a6b34 : MOV EAX,dword ptr [ESI + 0x60]
+009a6b37 : TEST EAX,EAX
+009a6b39 : JZ 0x009a6b40
+009a6b3b : PUSH ESI
+009a6b3c : PUSH 0x8
+009a6b3e : CALL EAX
+009a6b40 : MOV EAX,dword ptr [ESI]
+009a6b42 : MOV EDX,dword ptr [EAX + 0x20]
+009a6b45 : MOV dword ptr [ESI + 0x78],0x0
+009a6b4c : MOV ECX,ESI
+009a6b4e : POP ESI
+009a6b4f : JMP EDX
+009a6b51 : POP ESI
+009a6b52 : RET

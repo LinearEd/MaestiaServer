@@ -1,0 +1,81 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __Getdateorder
+ENTRY    : 00633ab7
+BODY     : [[00633ab7, 00633b01]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __Getdateorder
+   
+   Library: Visual Studio 2008 Release */
+
+int __cdecl __Getdateorder(void)
+
+{
+  int iVar1;
+  LCTYPE LCType;
+  char *lpLCData;
+  int cchData;
+  char local_8 [4];
+  
+  local_8[0] = '\0';
+  local_8[1] = '\0';
+  local_8[2] = '\0';
+  local_8[3] = '\0';
+  cchData = 2;
+  lpLCData = local_8;
+  LCType = 0x22;
+  iVar1 = ____lc_handle_func();
+  GetLocaleInfoA(*(LCID *)(iVar1 + 0x14),LCType,lpLCData,cchData);
+  if (local_8[0] == '0') {
+    return 2;
+  }
+  if (local_8[0] == '1') {
+    return 1;
+  }
+  return (local_8[0] != '2') - 1 & 3;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00633ab7 : MOV EDI,EDI
+00633ab9 : PUSH EBP
+00633aba : MOV EBP,ESP
+00633abc : PUSH ECX
+00633abd : PUSH EDI
+00633abe : XOR EAX,EAX
+00633ac0 : MOV byte ptr [EBP + -0x4],0x0
+00633ac4 : LEA EDI,[EBP + -0x3]
+00633ac7 : STOSB ES:EDI
+00633ac8 : PUSH 0x2
+00633aca : LEA EAX,[EBP + -0x4]
+00633acd : PUSH EAX
+00633ace : PUSH 0x22
+00633ad0 : CALL 0x00642ac3
+00633ad5 : PUSH dword ptr [EAX + 0x14]
+00633ad8 : CALL dword ptr [0x00b852d4]
+00633ade : CMP byte ptr [EBP + -0x4],0x30
+00633ae2 : POP EDI
+00633ae3 : JNZ 0x00633aea
+00633ae5 : PUSH 0x2
+00633ae7 : POP EAX
+00633ae8 : LEAVE
+00633ae9 : RET
+00633aea : XOR EAX,EAX
+00633aec : CMP byte ptr [EBP + -0x4],0x31
+00633af0 : JNZ 0x00633af5
+00633af2 : INC EAX
+00633af3 : LEAVE
+00633af4 : RET
+00633af5 : CMP byte ptr [EBP + -0x4],0x32
+00633af9 : SETNZ AL
+00633afc : DEC EAX
+00633afd : AND EAX,0x3
+00633b00 : LEAVE
+00633b01 : RET

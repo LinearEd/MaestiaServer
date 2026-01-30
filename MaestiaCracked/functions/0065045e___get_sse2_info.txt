@@ -1,0 +1,107 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __get_sse2_info
+ENTRY    : 0065045e
+BODY     : [[0065045e, 006504bf]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* WARNING: Removing unreachable block (ram,0x0065049b) */
+/* WARNING: Removing unreachable block (ram,0x00650488) */
+/* Library Function - Single Match
+    __get_sse2_info
+   
+   Libraries: Visual Studio 2005 Release, Visual Studio 2008 Release */
+
+undefined4 __get_sse2_info(void)
+
+{
+  uint uVar1;
+  int iVar2;
+  undefined4 uVar3;
+  byte in_AF;
+  byte in_TF;
+  byte in_IF;
+  byte in_NT;
+  byte in_AC;
+  byte in_VIF;
+  byte in_VIP;
+  byte in_ID;
+  uint uVar4;
+  undefined4 local_8;
+  
+  local_8 = 0;
+  uVar4 = (uint)(in_NT & 1) * 0x4000 | (uint)(in_IF & 1) * 0x200 | (uint)(in_TF & 1) * 0x100 | 0x40
+          | (uint)(in_AF & 1) * 0x10 | 4 | (uint)(in_ID & 1) * 0x200000 |
+          (uint)(in_VIP & 1) * 0x100000 | (uint)(in_VIF & 1) * 0x80000 | (uint)(in_AC & 1) * 0x40000
+  ;
+  uVar1 = uVar4 ^ 0x200000;
+  if (((uint)((uVar1 & 0x4000) != 0) * 0x4000 | (uint)((uVar1 & 0x200) != 0) * 0x200 |
+       (uint)((uVar1 & 0x100) != 0) * 0x100 | (uint)((uVar1 & 0x40) != 0) * 0x40 |
+       (uint)((uVar1 & 0x10) != 0) * 0x10 | (uint)((uVar1 & 4) != 0) * 4 |
+       (uint)((uVar1 & 0x200000) != 0) * 0x200000 | (uint)((uVar1 & 0x40000) != 0) * 0x40000) !=
+      uVar4) {
+    cpuid_basic_info(0);
+    iVar2 = cpuid_Version_info(1);
+    local_8 = *(uint *)(iVar2 + 8);
+  }
+  if (((local_8 & 0x4000000) == 0) || (iVar2 = FUN_0065040e(), iVar2 == 0)) {
+    uVar3 = 0;
+  }
+  else {
+    uVar3 = 1;
+  }
+  return uVar3;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0065045e : MOV EDI,EDI
+00650460 : PUSH EBP
+00650461 : MOV EBP,ESP
+00650463 : SUB ESP,0x18
+00650466 : XOR EAX,EAX
+00650468 : PUSH EBX
+00650469 : MOV dword ptr [EBP + -0x4],EAX
+0065046c : MOV dword ptr [EBP + -0xc],EAX
+0065046f : MOV dword ptr [EBP + -0x8],EAX
+00650472 : PUSH EBX
+00650473 : PUSHFD
+00650474 : POP EAX
+00650475 : MOV ECX,EAX
+00650477 : XOR EAX,0x200000
+0065047c : PUSH EAX
+0065047d : POPFD
+0065047e : PUSHFD
+0065047f : POP EDX
+00650480 : SUB EDX,ECX
+00650482 : JZ 0x006504a3
+00650484 : PUSH ECX
+00650485 : POPFD
+00650486 : XOR EAX,EAX
+00650488 : CPUID
+0065048a : MOV dword ptr [EBP + -0xc],EAX
+0065048d : MOV dword ptr [EBP + -0x18],EBX
+00650490 : MOV dword ptr [EBP + -0x14],EDX
+00650493 : MOV dword ptr [EBP + -0x10],ECX
+00650496 : MOV EAX,0x1
+0065049b : CPUID
+0065049d : MOV dword ptr [EBP + -0x4],EDX
+006504a0 : MOV dword ptr [EBP + -0x8],EAX
+006504a3 : POP EBX
+006504a4 : TEST dword ptr [EBP + -0x4],0x4000000
+006504ab : JZ 0x006504bb
+006504ad : CALL 0x0065040e
+006504b2 : TEST EAX,EAX
+006504b4 : JZ 0x006504bb
+006504b6 : XOR EAX,EAX
+006504b8 : INC EAX
+006504b9 : JMP 0x006504bd
+006504bb : XOR EAX,EAX
+006504bd : POP EBX
+006504be : LEAVE
+006504bf : RET

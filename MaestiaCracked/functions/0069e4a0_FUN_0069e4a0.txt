@@ -1,0 +1,97 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0069e4a0
+ENTRY    : 0069e4a0
+BODY     : [[0069e4a0, 0069e518]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+uint FUN_0069e4a0(int *param_1,int param_2,uint param_3,ushort *param_4)
+
+{
+  int iVar1;
+  byte *in_EAX;
+  uint uVar2;
+  ushort uVar3;
+  uint uVar4;
+  uint uVar5;
+  int iVar6;
+  
+  iVar1 = *param_1;
+  uVar3 = *param_4;
+  uVar4 = (uint)uVar3;
+  if ((uint)(param_2 - iVar1) < param_3) {
+    param_3 = param_2 - iVar1;
+  }
+  uVar5 = 0;
+  if (param_3 != 0) {
+    iVar6 = iVar1 - (int)in_EAX;
+    uVar2 = param_3;
+    do {
+      uVar5 = (in_EAX[iVar6] + uVar4) * -0x3193 + 0x58bf;
+      *in_EAX = (byte)(uVar4 >> 8) ^ in_EAX[iVar6];
+      uVar4 = uVar5 & 0xffff;
+      uVar3 = (ushort)uVar5;
+      in_EAX = in_EAX + 1;
+      uVar2 = uVar2 - 1;
+      uVar5 = param_3;
+    } while (uVar2 != 0);
+  }
+  *param_1 = iVar1 + param_3;
+  *param_4 = uVar3;
+  return uVar5;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0069e4a0 : MOV ECX,dword ptr [ESP + 0x4]
+0069e4a4 : PUSH EBX
+0069e4a5 : MOV EBX,dword ptr [ECX]
+0069e4a7 : PUSH EBP
+0069e4a8 : MOV EBP,dword ptr [ESP + 0x14]
+0069e4ac : PUSH ESI
+0069e4ad : MOV ESI,EAX
+0069e4af : MOV EAX,dword ptr [ESP + 0x1c]
+0069e4b3 : MOVZX EDX,word ptr [EAX]
+0069e4b6 : MOV EAX,dword ptr [ESP + 0x14]
+0069e4ba : SUB EAX,EBX
+0069e4bc : MOV dword ptr [ESP + 0x18],EBX
+0069e4c0 : CMP EBP,EAX
+0069e4c2 : JBE 0x0069e4c6
+0069e4c4 : MOV EBP,EAX
+0069e4c6 : XOR EAX,EAX
+0069e4c8 : TEST EBP,EBP
+0069e4ca : JBE 0x0069e506
+0069e4cc : SUB EBX,ESI
+0069e4ce : MOV EAX,EBP
+0069e4d0 : MOV dword ptr [ESP + 0x14],EBP
+0069e4d4 : PUSH EDI
+0069e4d5 : MOVZX EDI,byte ptr [EBX + ESI*0x1]
+0069e4d9 : MOV ECX,EDX
+0069e4db : SHR ECX,0x8
+0069e4de : XOR ECX,EDI
+0069e4e0 : ADD EDI,EDX
+0069e4e2 : IMUL EDI,EDI,0x3193
+0069e4e8 : MOV EDX,0x58bf
+0069e4ed : SUB EDX,EDI
+0069e4ef : MOV byte ptr [ESI],CL
+0069e4f1 : AND EDX,0xffff
+0069e4f7 : INC ESI
+0069e4f8 : SUB EAX,0x1
+0069e4fb : JNZ 0x0069e4d5
+0069e4fd : MOV EBX,dword ptr [ESP + 0x1c]
+0069e501 : MOV EAX,dword ptr [ESP + 0x18]
+0069e505 : POP EDI
+0069e506 : MOV ECX,dword ptr [ESP + 0x10]
+0069e50a : ADD EBX,EBP
+0069e50c : MOV dword ptr [ECX],EBX
+0069e50e : MOV ECX,dword ptr [ESP + 0x1c]
+0069e512 : POP ESI
+0069e513 : POP EBP
+0069e514 : MOV word ptr [ECX],DX
+0069e517 : POP EBX
+0069e518 : RET

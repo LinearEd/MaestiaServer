@@ -1,0 +1,119 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_004d3400
+ENTRY    : 004d3400
+BODY     : [[004d3400, 004d3489]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_004d3400(undefined4 param_1,undefined1 *param_2,char *param_3,uint param_4)
+
+{
+  char *pcVar1;
+  byte *pbVar2;
+  
+  *param_2 = 0x25;
+  pcVar1 = param_2 + 1;
+  if ((param_4 & 0x20) != 0) {
+    *pcVar1 = '+';
+    pcVar1 = param_2 + 2;
+  }
+  if ((param_4 & 8) != 0) {
+    *pcVar1 = '#';
+    pcVar1 = pcVar1 + 1;
+  }
+  if (*param_3 == 'L') {
+    *pcVar1 = 'I';
+    pcVar1[1] = '6';
+    pcVar1 = pcVar1 + 2;
+    *pcVar1 = '4';
+  }
+  else {
+    *pcVar1 = *param_3;
+  }
+  pbVar2 = (byte *)(pcVar1 + 1);
+  if ((param_4 & 0xe00) == 0x400) {
+    *pbVar2 = 0x6f;
+    pcVar1[2] = '\0';
+    return;
+  }
+  if ((param_4 & 0xe00) != 0x800) {
+    *pbVar2 = param_3[1];
+    pcVar1[2] = '\0';
+    return;
+  }
+  *pbVar2 = ~((char)param_4 * '\b') & 0x20U | 0x58;
+  pcVar1[2] = '\0';
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+004d3400 : PUSH EBP
+004d3401 : MOV EBP,ESP
+004d3403 : MOV EAX,dword ptr [EBP + 0xc]
+004d3406 : MOV EDX,dword ptr [EBP + 0x14]
+004d3409 : MOV byte ptr [EAX],0x25
+004d340c : LEA ECX,[EAX + 0x1]
+004d340f : TEST DL,0x20
+004d3412 : JZ 0x004d3418
+004d3414 : MOV byte ptr [ECX],0x2b
+004d3417 : INC ECX
+004d3418 : TEST DL,0x8
+004d341b : JZ 0x004d3421
+004d341d : MOV byte ptr [ECX],0x23
+004d3420 : INC ECX
+004d3421 : PUSH EBX
+004d3422 : PUSH ESI
+004d3423 : PUSH EDI
+004d3424 : MOV EDI,dword ptr [EBP + 0x10]
+004d3427 : MOV BL,byte ptr [EDI]
+004d3429 : CMP BL,0x4c
+004d342c : JZ 0x004d3432
+004d342e : MOV byte ptr [ECX],BL
+004d3430 : JMP 0x004d343d
+004d3432 : MOV byte ptr [ECX],0x49
+004d3435 : INC ECX
+004d3436 : MOV byte ptr [ECX],0x36
+004d3439 : INC ECX
+004d343a : MOV byte ptr [ECX],0x34
+004d343d : MOV ESI,EDX
+004d343f : AND ESI,0xe00
+004d3445 : INC ECX
+004d3446 : CMP ESI,0x400
+004d344c : JNZ 0x004d345b
+004d344e : POP EDI
+004d344f : MOV DL,0x6f
+004d3451 : POP ESI
+004d3452 : MOV byte ptr [ECX],DL
+004d3454 : MOV byte ptr [ECX + 0x1],0x0
+004d3458 : POP EBX
+004d3459 : POP EBP
+004d345a : RET
+004d345b : CMP ESI,0x800
+004d3461 : JZ 0x004d3471
+004d3463 : MOV DL,byte ptr [EDI + 0x1]
+004d3466 : POP EDI
+004d3467 : POP ESI
+004d3468 : MOV byte ptr [ECX],DL
+004d346a : MOV byte ptr [ECX + 0x1],0x0
+004d346e : POP EBX
+004d346f : POP EBP
+004d3470 : RET
+004d3471 : ADD DL,DL
+004d3473 : ADD DL,DL
+004d3475 : ADD DL,DL
+004d3477 : NOT DL
+004d3479 : AND DL,0x20
+004d347c : POP EDI
+004d347d : OR DL,0x58
+004d3480 : POP ESI
+004d3481 : MOV byte ptr [ECX],DL
+004d3483 : MOV byte ptr [ECX + 0x1],0x0
+004d3487 : POP EBX
+004d3488 : POP EBP
+004d3489 : RET

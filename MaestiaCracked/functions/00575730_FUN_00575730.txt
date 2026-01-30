@@ -1,0 +1,103 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00575730
+ENTRY    : 00575730
+BODY     : [[00575730, 005757b5]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00575730(int param_1)
+
+{
+  int *piVar1;
+  GRefCountNTSImpl *this;
+  int *piVar2;
+  void *_Dst;
+  int in_ECX;
+  uint uVar3;
+  
+  uVar3 = 0;
+  if (*(uint *)(in_ECX + 0xa90) != 0) {
+    piVar2 = *(int **)(in_ECX + 0xa8c);
+    piVar1 = (int *)(in_ECX + 0xa8c);
+    while (*piVar2 != param_1) {
+      uVar3 = uVar3 + 1;
+      piVar2 = piVar2 + 1;
+      if (*(uint *)(in_ECX + 0xa90) <= uVar3) {
+        return;
+      }
+    }
+    if (*(int *)(in_ECX + 0xa90) == 1) {
+      FUN_0058ee50(piVar1,0);
+      return;
+    }
+    this = *(GRefCountNTSImpl **)(*piVar1 + uVar3 * 4);
+    if (this != (GRefCountNTSImpl *)0x0) {
+      GRefCountNTSImpl::Release(this);
+    }
+    _Dst = (void *)(*piVar1 + uVar3 * 4);
+    _memcpy(_Dst,(void *)((int)_Dst + 4),(*(int *)(in_ECX + 0xa90) - uVar3) * 4 - 4);
+    *(int *)(in_ECX + 0xa90) = *(int *)(in_ECX + 0xa90) + -1;
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00575730 : MOV EDX,dword ptr [ECX + 0xa90]
+00575736 : PUSH ESI
+00575737 : XOR ESI,ESI
+00575739 : TEST EDX,EDX
+0057573b : JBE 0x005757b2
+0057573d : MOV EAX,dword ptr [ECX + 0xa8c]
+00575743 : PUSH EDI
+00575744 : LEA EDI,[ECX + 0xa8c]
+0057574a : MOV ECX,dword ptr [ESP + 0xc]
+0057574e : MOV EDI,EDI
+00575750 : CMP dword ptr [EAX],ECX
+00575752 : JZ 0x00575761
+00575754 : INC ESI
+00575755 : ADD EAX,0x4
+00575758 : CMP ESI,EDX
+0057575a : JC 0x00575750
+0057575c : POP EDI
+0057575d : POP ESI
+0057575e : RET 0x4
+00575761 : CMP dword ptr [EDI + 0x4],0x1
+00575765 : JNZ 0x00575776
+00575767 : PUSH 0x0
+00575769 : PUSH EDI
+0057576a : MOV ECX,EDI
+0057576c : CALL 0x0058ee50
+00575771 : POP EDI
+00575772 : POP ESI
+00575773 : RET 0x4
+00575776 : MOV EAX,dword ptr [EDI]
+00575778 : PUSH EBX
+00575779 : LEA EBX,[ESI*0x4 + 0x0]
+00575780 : ADD EAX,EBX
+00575782 : MOV EAX,dword ptr [EAX]
+00575784 : TEST EAX,EAX
+00575786 : JZ 0x0057578f
+00575788 : MOV ECX,EAX
+0057578a : CALL 0x004ff7c0
+0057578f : MOV ECX,dword ptr [EDI + 0x4]
+00575792 : MOV EAX,dword ptr [EDI]
+00575794 : SUB ECX,ESI
+00575796 : ADD EAX,EBX
+00575798 : LEA EDX,[ECX*0x4 + 0xfffffffc]
+0057579f : PUSH EDX
+005757a0 : LEA ECX,[EAX + 0x4]
+005757a3 : PUSH ECX
+005757a4 : PUSH EAX
+005757a5 : CALL 0x0063ae40
+005757aa : ADD ESP,0xc
+005757ad : DEC dword ptr [EDI + 0x4]
+005757b0 : POP EBX
+005757b1 : POP EDI
+005757b2 : POP ESI
+005757b3 : RET 0x4

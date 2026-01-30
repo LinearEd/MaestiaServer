@@ -1,0 +1,74 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00544f10
+ENTRY    : 00544f10
+BODY     : [[00544f10, 00544f8e]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+float10 FUN_00544f10(void)
+
+{
+  int *in_ECX;
+  float local_8;
+  
+  if (in_ECX[0x32] == 0) {
+    return (float10)0;
+  }
+  local_8 = (float)*(ushort *)(in_ECX[0x32] + 0x26) / 20.0;
+  if (*(float *)(in_ECX[0x34] + 0x10) != 1.0) {
+    local_8 = *(float *)(in_ECX[0x34] + 0x10) * local_8;
+  }
+  if ((*(byte *)(*in_ECX + 0x143) & 4) != 0) {
+    return (float10)(((float)*(ushort *)(*in_ECX + 0x13e) / 20.0) * local_8);
+  }
+  return (float10)local_8;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00544f10 : MOV EAX,dword ptr [ECX + 0xc8]
+00544f16 : SUB ESP,0x8
+00544f19 : TEST EAX,EAX
+00544f1b : JNZ 0x00544f23
+00544f1d : FLDZ
+00544f1f : ADD ESP,0x8
+00544f22 : RET
+00544f23 : MOVZX EAX,word ptr [EAX + 0x26]
+00544f27 : MOV dword ptr [ESP],EAX
+00544f2a : MOV EDX,dword ptr [ECX + 0xd0]
+00544f30 : FILD dword ptr [ESP]
+00544f33 : FLD double ptr [0x00b86058]
+00544f39 : FDIV ST1,ST0
+00544f3b : FXCH
+00544f3d : FSTP float ptr [ESP]
+00544f40 : FLD1
+00544f42 : FCOMP float ptr [EDX + 0x10]
+00544f45 : FNSTSW AX
+00544f47 : TEST AH,0x44
+00544f4a : JNP 0x00544f55
+00544f4c : FLD float ptr [EDX + 0x10]
+00544f4f : FMUL float ptr [ESP]
+00544f52 : FSTP float ptr [ESP]
+00544f55 : MOV ECX,dword ptr [ECX]
+00544f57 : TEST byte ptr [ECX + 0x143],0x4
+00544f5e : JZ 0x00544f86
+00544f60 : MOVZX ECX,word ptr [ECX + 0x13e]
+00544f67 : MOV dword ptr [ESP + 0x4],ECX
+00544f6b : FILD dword ptr [ESP + 0x4]
+00544f6f : FDIVRP
+00544f71 : FSTP float ptr [ESP + 0x4]
+00544f75 : FLD float ptr [ESP + 0x4]
+00544f79 : FMUL float ptr [ESP]
+00544f7c : FSTP float ptr [ESP]
+00544f7f : FLD float ptr [ESP]
+00544f82 : ADD ESP,0x8
+00544f85 : RET
+00544f86 : FSTP ST0
+00544f88 : FLD float ptr [ESP]
+00544f8b : ADD ESP,0x8
+00544f8e : RET

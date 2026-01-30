@@ -1,0 +1,107 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00721080
+ENTRY    : 00721080
+BODY     : [[00721080, 00721128]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+char FUN_00721080(undefined4 param_1)
+
+{
+  int iVar1;
+  int *in_ECX;
+  
+  if ((char)in_ECX[4] == '\0') {
+    return '\x01';
+  }
+  iVar1 = in_ECX[1];
+  if (iVar1 == 0) {
+    iVar1 = FUN_004ca080(param_1,in_ECX[0x24]);
+    if (iVar1 == 4) {
+      (**(code **)(*in_ECX + 4))();
+      if (*(char *)((int)in_ECX + 0x12) != '\0') {
+        return ' ';
+      }
+      if (*(char *)((int)in_ECX + 0x13) != '\0') {
+        return '@';
+      }
+      in_ECX[1] = 3;
+      return '\b';
+    }
+  }
+  else if ((iVar1 != 1) && (iVar1 != 2)) {
+    return (iVar1 != 4) * '\b' + '\b';
+  }
+  return '\x10';
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00721080 : PUSH EBP
+00721081 : MOV EBP,ESP
+00721083 : PUSH ESI
+00721084 : MOV ESI,ECX
+00721086 : CMP byte ptr [ESI + 0x10],0x0
+0072108a : JNZ 0x00721096
+0072108c : MOV EAX,0x1
+00721091 : POP ESI
+00721092 : POP EBP
+00721093 : RET 0x4
+00721096 : MOV EAX,dword ptr [ESI + 0x4]
+00721099 : TEST EAX,EAX
+0072109b : JZ 0x007210bd
+0072109d : CMP EAX,0x1
+007210a0 : JZ 0x0072111f
+007210a2 : CMP EAX,0x2
+007210a5 : JZ 0x0072111f
+007210a7 : XOR ECX,ECX
+007210a9 : CMP EAX,0x4
+007210ac : SETNZ CL
+007210af : POP ESI
+007210b0 : LEA ECX,[ECX*0x8 + 0x8]
+007210b7 : MOV EAX,ECX
+007210b9 : POP EBP
+007210ba : RET 0x4
+007210bd : MOV ECX,dword ptr [ESI + 0x94]
+007210c3 : FLD float ptr [EBP + 0x8]
+007210c6 : MOV EDX,dword ptr [ESI + 0x90]
+007210cc : TEST ECX,ECX
+007210ce : PUSH EDX
+007210cf : LEA EAX,[ESI + 0x54]
+007210d2 : PUSH ECX
+007210d3 : CMOVNZ EAX,ECX
+007210d6 : FSTP float ptr [ESP]
+007210d9 : MOV ECX,ESI
+007210db : CALL 0x004ca080
+007210e0 : CMP EAX,0x4
+007210e3 : JNZ 0x0072111f
+007210e5 : MOV EAX,dword ptr [ESI]
+007210e7 : MOV EDX,dword ptr [EAX + 0x4]
+007210ea : MOV ECX,ESI
+007210ec : CALL EDX
+007210ee : CMP byte ptr [ESI + 0x12],0x0
+007210f2 : JZ 0x007210fe
+007210f4 : MOV EAX,0x20
+007210f9 : POP ESI
+007210fa : POP EBP
+007210fb : RET 0x4
+007210fe : CMP byte ptr [ESI + 0x13],0x0
+00721102 : JZ 0x0072110e
+00721104 : MOV EAX,0x40
+00721109 : POP ESI
+0072110a : POP EBP
+0072110b : RET 0x4
+0072110e : MOV dword ptr [ESI + 0x4],0x3
+00721115 : MOV EAX,0x8
+0072111a : POP ESI
+0072111b : POP EBP
+0072111c : RET 0x4
+0072111f : MOV EAX,0x10
+00721124 : POP ESI
+00721125 : POP EBP
+00721126 : RET 0x4

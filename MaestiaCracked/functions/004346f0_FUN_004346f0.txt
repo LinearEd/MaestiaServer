@@ -1,0 +1,67 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_004346f0
+ENTRY    : 004346f0
+BODY     : [[004346f0, 00434743]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_004346f0(void)
+
+{
+  wchar_t wVar1;
+  wchar_t *_Dest;
+  wchar_t *in_ECX;
+  ushort *unaff_ESI;
+  
+  _Dest = (wchar_t *)(unaff_ESI + 2);
+  *unaff_ESI = 0;
+  *(undefined1 *)(unaff_ESI + 1) = 0x46;
+  *(undefined1 *)((int)unaff_ESI + 3) = 0x10;
+  _wcsncpy(_Dest,in_ECX,0x27);
+  unaff_ESI[0x29] = 0;
+  do {
+    wVar1 = *_Dest;
+    _Dest = _Dest + 1;
+  } while (wVar1 != L'\0');
+  *unaff_ESI = *unaff_ESI ^
+               ((short)((int)_Dest - (int)(unaff_ESI + 3) >> 1) * 2 + 6U ^ *unaff_ESI) & 0x1fff;
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+004346f0 : PUSH EDI
+004346f1 : PUSH 0x27
+004346f3 : PUSH ECX
+004346f4 : XOR EAX,EAX
+004346f6 : LEA EDI,[ESI + 0x4]
+004346f9 : PUSH EDI
+004346fa : MOV word ptr [ESI],AX
+004346fd : MOV byte ptr [ESI + 0x2],0x46
+00434701 : MOV byte ptr [ESI + 0x3],0x10
+00434705 : CALL 0x00634e39
+0043470a : ADD ESP,0xc
+0043470d : XOR EDX,EDX
+0043470f : MOV EAX,EDI
+00434711 : MOV word ptr [EDI + 0x4e],DX
+00434715 : LEA EDX,[EAX + 0x2]
+00434718 : POP EDI
+00434719 : LEA ESP,[ESP]
+00434720 : MOV CX,word ptr [EAX]
+00434723 : ADD EAX,0x2
+00434726 : TEST CX,CX
+00434729 : JNZ 0x00434720
+0043472b : SUB EAX,EDX
+0043472d : SAR EAX,0x1
+0043472f : LEA EAX,[EAX + EAX*0x1 + 0x6]
+00434733 : XOR AX,word ptr [ESI]
+00434736 : MOV ECX,0x1fff
+0043473b : AND AX,CX
+0043473e : XOR word ptr [ESI],AX
+00434741 : MOV EAX,ESI
+00434743 : RET

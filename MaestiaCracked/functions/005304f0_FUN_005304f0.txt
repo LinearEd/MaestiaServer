@@ -1,0 +1,87 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005304f0
+ENTRY    : 005304f0
+BODY     : [[005304f0, 00530555]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined4 FUN_005304f0(int param_1,int *param_2,int param_3)
+
+{
+  int iVar1;
+  int iVar2;
+  int in_ECX;
+  
+  if (*(byte *)(param_1 + 4) < 7) {
+    iVar2 = FUN_0052f5c0(param_2);
+  }
+  else {
+    iVar2 = *(int *)(in_ECX + 0x27c);
+    if (iVar2 == 0) {
+      return 0;
+    }
+    iVar1 = FUN_0052b070(param_2,*(uint *)(*param_2 + 0xc) & *(uint *)(iVar2 + 4));
+    if (iVar1 < 0) {
+      return 0;
+    }
+    iVar2 = iVar2 + 0xc + iVar1 * 0x14;
+    if (iVar2 == 0) {
+      return 0;
+    }
+    iVar2 = iVar2 + 4;
+  }
+  if (iVar2 == 0) {
+    return 0;
+  }
+  if (param_3 != 0) {
+    FUN_00568a50(iVar2);
+  }
+  return 1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005304f0 : MOV EAX,dword ptr [ESP + 0x4]
+005304f4 : ADD ECX,0x27c
+005304fa : CMP byte ptr [EAX + 0x4],0x6
+005304fe : PUSH ESI
+005304ff : JBE 0x0053052e
+00530501 : MOV ESI,dword ptr [ECX]
+00530503 : TEST ESI,ESI
+00530505 : JZ 0x0053053c
+00530507 : MOV EAX,dword ptr [ESP + 0xc]
+0053050b : MOV EDX,dword ptr [EAX]
+0053050d : MOV EDX,dword ptr [EDX + 0xc]
+00530510 : AND EDX,dword ptr [ESI + 0x4]
+00530513 : PUSH EDX
+00530514 : PUSH EAX
+00530515 : CALL 0x0052b070
+0053051a : TEST EAX,EAX
+0053051c : JL 0x0053053c
+0053051e : LEA EAX,[EAX + EAX*0x4]
+00530521 : LEA EAX,[ESI + EAX*0x4 + 0xc]
+00530525 : TEST EAX,EAX
+00530527 : JZ 0x0053053c
+00530529 : ADD EAX,0x4
+0053052c : JMP 0x00530538
+0053052e : MOV EDX,dword ptr [ESP + 0xc]
+00530532 : PUSH EDX
+00530533 : CALL 0x0052f5c0
+00530538 : TEST EAX,EAX
+0053053a : JNZ 0x00530542
+0053053c : XOR AL,AL
+0053053e : POP ESI
+0053053f : RET 0xc
+00530542 : MOV ECX,dword ptr [ESP + 0x10]
+00530546 : TEST ECX,ECX
+00530548 : JZ 0x00530550
+0053054a : PUSH EAX
+0053054b : CALL 0x00568a50
+00530550 : MOV AL,0x1
+00530552 : POP ESI
+00530553 : RET 0xc

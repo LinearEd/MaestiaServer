@@ -1,0 +1,228 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00996f80
+ENTRY    : 00996f80
+BODY     : [[00996f80, 00997104]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00996f80(int param_1)
+
+{
+  int iVar1;
+  ulonglong uVar2;
+  char cVar3;
+  uint uVar4;
+  undefined4 uVar5;
+  uint8_t *packet;
+  int in_ECX;
+  int in_EDX;
+  undefined4 uVar6;
+  undefined1 local_2c [24];
+  uint local_14;
+  void *local_10;
+  undefined1 *puStack_c;
+  undefined4 local_8;
+  
+  local_8 = 0xffffffff;
+  puStack_c = &LAB_00b60a88;
+  local_10 = ExceptionList;
+  uVar4 = DAT_00d66fa0 ^ (uint)&stack0xfffffffc;
+  ExceptionList = &local_10;
+  if (*(char *)(in_ECX + 0x32) == '\0') {
+    uVar6 = 0xffffffff;
+    if (param_1 == 0) {
+      if (in_EDX == 0) {
+        uVar5 = FUN_00995d80(in_ECX);
+        *(undefined4 *)(in_ECX + 0x38) = uVar5;
+      }
+      else {
+        *(int *)(in_ECX + 0x38) = in_EDX;
+      }
+    }
+    else {
+      *(undefined4 *)(in_ECX + 0x38) = *(undefined4 *)(param_1 + 0x10);
+      uVar6 = *(undefined4 *)(param_1 + 0xc);
+    }
+    if (*(int *)(in_ECX + 0x38) == 0) {
+      FUN_00406460(L"[AvaGuiGachaBox::OnReqGachBoxOpen] GachaBox Item Proto is INVALID. FAIL.");
+      local_8 = 0;
+      if ((int *)*DAT_00da98e8 != (int *)0x0) {
+        (**(code **)(*(int *)*DAT_00da98e8 + 0x14))
+                  (L"AvaGuiGachaBox::OnReqGachBoxOpen",0x289,local_2c);
+      }
+      local_8 = 0xffffffff;
+      if (local_14 < 8) {
+        ExceptionList = local_10;
+        return;
+      }
+                    /* WARNING: Subroutine does not return */
+      FUN_006f04e0();
+    }
+    iVar1 = *DAT_00da9894;
+    if ((((iVar1 != 0) && (*(int *)(iVar1 + 300) != 0)) &&
+        (*(int *)(*(int *)(iVar1 + 300) + 0x1c) != 0)) &&
+       (cVar3 = FUN_0096b420(uVar4), cVar3 == '\x01')) {
+      ExceptionList = local_10;
+      return;
+    }
+    FUN_00996a20(in_ECX);
+    iVar1 = *(int *)ThreadLocalStoragePointer;
+    uVar2 = (ulonglong)(*(byte *)(iVar1 + 0x18) + 1) % 3;
+    packet = (uint8_t *)((int)uVar2 * 0x2000 + 0x122cb8 + iVar1);
+    *(char *)(iVar1 + 0x18) = (char)uVar2;
+    if (packet == (uint8_t *)0x0) {
+      packet = (uint8_t *)0x0;
+    }
+    else {
+      packet[0] = '\0';
+      packet[1] = '\0';
+      packet[2] = '6';
+      packet[3] = 0xfd;
+      *(undefined4 *)(packet + 4) = uVar6;
+    }
+    local_8 = 0xffffffff;
+    if ((*(int *)(DAT_017247d4 + 4) != 0) && (*(char *)(DAT_017247d4 + 8) != '\0')) {
+      FUN_00a0dd40(*(int *)(DAT_017247d4 + 4),8,packet);
+    }
+  }
+  ExceptionList = local_10;
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00996f80 : PUSH EBP
+00996f81 : MOV EBP,ESP
+00996f83 : PUSH -0x1
+00996f85 : PUSH 0xb60a88
+00996f8a : MOV EAX,FS:[0x0]
+00996f90 : PUSH EAX
+00996f91 : SUB ESP,0x20
+00996f94 : PUSH EBX
+00996f95 : PUSH ESI
+00996f96 : PUSH EDI
+00996f97 : MOV EAX,[0x00d66fa0]
+00996f9c : XOR EAX,EBP
+00996f9e : PUSH EAX
+00996f9f : LEA EAX,[EBP + -0xc]
+00996fa2 : MOV FS:[0x0],EAX
+00996fa8 : MOV EAX,dword ptr [EBP + 0x8]
+00996fab : MOV ESI,ECX
+00996fad : MOV CL,byte ptr [ESI + 0x32]
+00996fb0 : TEST CL,CL
+00996fb2 : JNZ 0x009970f1
+00996fb8 : OR EBX,0xffffffff
+00996fbb : TEST EAX,EAX
+00996fbd : JZ 0x00996fca
+00996fbf : MOV ECX,dword ptr [EAX + 0x10]
+00996fc2 : MOV dword ptr [ESI + 0x38],ECX
+00996fc5 : MOV EBX,dword ptr [EAX + 0xc]
+00996fc8 : JMP 0x00996fdc
+00996fca : TEST EDX,EDX
+00996fcc : JZ 0x00996fd3
+00996fce : MOV dword ptr [ESI + 0x38],EDX
+00996fd1 : JMP 0x00996fdc
+00996fd3 : PUSH ESI
+00996fd4 : CALL 0x00995d80
+00996fd9 : MOV dword ptr [ESI + 0x38],EAX
+00996fdc : MOV EDI,dword ptr [ESI + 0x38]
+00996fdf : TEST EDI,EDI
+00996fe1 : JNZ 0x0099704e
+00996fe3 : PUSH 0xc867c0
+00996fe8 : LEA ECX,[EBP + -0x28]
+00996feb : CALL 0x00406460
+00996ff0 : XOR ESI,ESI
+00996ff2 : MOV dword ptr [EBP + -0x4],ESI
+00996ff5 : MOV EAX,[0x00da98e8]
+00996ffa : MOV ECX,dword ptr [EAX]
+00996ffc : CMP ECX,ESI
+00996ffe : JZ 0x00997015
+00997000 : MOV EDX,dword ptr [ECX]
+00997002 : MOV EDX,dword ptr [EDX + 0x14]
+00997005 : LEA EAX,[EBP + -0x28]
+00997008 : PUSH EAX
+00997009 : PUSH 0x289
+0099700e : PUSH 0xc86858
+00997013 : CALL EDX
+00997015 : MOV dword ptr [EBP + -0x4],0xffffffff
+0099701c : CMP dword ptr [EBP + -0x10],0x8
+00997020 : JC 0x0099702a
+00997022 : MOV ECX,dword ptr [EBP + -0x24]
+00997025 : CALL 0x006f04e0
+0099702a : XOR EAX,EAX
+0099702c : MOV dword ptr [EBP + -0x10],0x7
+00997033 : MOV dword ptr [EBP + -0x14],ESI
+00997036 : MOV word ptr [EBP + -0x24],AX
+0099703a : MOV ECX,dword ptr [EBP + -0xc]
+0099703d : MOV dword ptr FS:[0x0],ECX
+00997044 : POP ECX
+00997045 : POP EDI
+00997046 : POP ESI
+00997047 : POP EBX
+00997048 : MOV ESP,EBP
+0099704a : POP EBP
+0099704b : RET 0x4
+0099704e : MOV ECX,dword ptr [0x00da9894]
+00997054 : MOV EAX,dword ptr [ECX]
+00997056 : TEST EAX,EAX
+00997058 : JZ 0x0099707d
+0099705a : CMP dword ptr [EAX + 0x12c],0x0
+00997061 : JZ 0x0099707d
+00997063 : MOV ECX,dword ptr [EAX + 0x12c]
+00997069 : CMP dword ptr [ECX + 0x1c],0x0
+0099706d : JZ 0x0099707d
+0099706f : MOV EAX,ECX
+00997071 : MOV EDX,dword ptr [EAX + 0x1c]
+00997074 : CALL 0x0096b420
+00997079 : CMP AL,0x1
+0099707b : JZ 0x009970f1
+0099707d : PUSH ESI
+0099707e : MOV ECX,EDI
+00997080 : CALL 0x00996a20
+00997085 : MOV EDX,dword ptr FS:[0x2c]
+0099708c : MOV ECX,dword ptr [EDX]
+0099708e : MOVZX EAX,byte ptr [ECX + 0x18]
+00997092 : INC EAX
+00997093 : CDQ
+00997094 : MOV ESI,0x3
+00997099 : IDIV ESI
+0099709b : MOVZX EAX,DL
+0099709e : SHL EAX,0xd
+009970a1 : LEA EAX,[EAX + ECX*0x1 + 0x122cb8]
+009970a8 : MOV byte ptr [ECX + 0x18],DL
+009970ab : MOV dword ptr [EBP + 0x8],EAX
+009970ae : MOV dword ptr [EBP + -0x4],0x1
+009970b5 : TEST EAX,EAX
+009970b7 : JZ 0x009970cb
+009970b9 : XOR ECX,ECX
+009970bb : MOV word ptr [EAX],CX
+009970be : MOV byte ptr [EAX + 0x2],0x36
+009970c2 : MOV byte ptr [EAX + 0x3],0xfd
+009970c6 : MOV dword ptr [EAX + 0x4],EBX
+009970c9 : JMP 0x009970cd
+009970cb : XOR EAX,EAX
+009970cd : MOV dword ptr [EBP + -0x4],0xffffffff
+009970d4 : MOV EDX,dword ptr [0x017247d4]
+009970da : MOV ECX,dword ptr [EDX + 0x4]
+009970dd : TEST ECX,ECX
+009970df : JZ 0x009970f1
+009970e1 : CMP byte ptr [EDX + 0x8],0x0
+009970e5 : JZ 0x009970f1
+009970e7 : PUSH 0x8
+009970e9 : PUSH ECX
+009970ea : MOV EDI,EAX
+009970ec : CALL 0x00a0dd40
+009970f1 : MOV ECX,dword ptr [EBP + -0xc]
+009970f4 : MOV dword ptr FS:[0x0],ECX
+009970fb : POP ECX
+009970fc : POP EDI
+009970fd : POP ESI
+009970fe : POP EBX
+009970ff : MOV ESP,EBP
+00997101 : POP EBP
+00997102 : RET 0x4

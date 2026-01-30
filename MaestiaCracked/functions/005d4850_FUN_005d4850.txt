@@ -1,0 +1,56 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005d4850
+ENTRY    : 005d4850
+BODY     : [[005d4850, 005d48c0]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+ushort FUN_005d4850(void)
+
+{
+  undefined2 in_FPUControlWord;
+  undefined1 uVar1;
+  float10 fVar2;
+  undefined1 uStack00000008;
+  
+  uVar1 = (undefined1)((ushort)in_FPUControlWord >> 8);
+  fVar2 = (float10)FUN_0063cd40();
+  fVar2 = (float10)FUN_0063bc90((double)((float)fVar2 * 255.0 + 0.5));
+  uStack00000008 = (undefined1)(int)ROUND(fVar2);
+  return CONCAT11(uVar1,uStack00000008) | 0xc00;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005d4850 : MOVZX EAX,word ptr [ESP + 0x4]
+005d4855 : MOV dword ptr [ESP + 0x4],EAX
+005d4859 : FILD dword ptr [ESP + 0x4]
+005d485d : FDIV double ptr [0x00b8d220]
+005d4863 : FSTP float ptr [ESP + 0x4]
+005d4867 : FLD float ptr [ESP + 0x4]
+005d486b : FLD float ptr [ESP + 0x8]
+005d486f : CALL 0x0063cd40
+005d4874 : FSTP float ptr [ESP + 0x4]
+005d4878 : FLD float ptr [ESP + 0x4]
+005d487c : SUB ESP,0x8
+005d487f : FMUL double ptr [0x00b86b48]
+005d4885 : FADD double ptr [0x00cdf120]
+005d488b : FSTP float ptr [ESP + 0xc]
+005d488f : FLD float ptr [ESP + 0xc]
+005d4893 : FSTP double ptr [ESP]
+005d4896 : CALL 0x0063bc90
+005d489b : FNSTCW word ptr [ESP + 0xc]
+005d489f : ADD ESP,0x8
+005d48a2 : MOVZX EAX,word ptr [ESP + 0x4]
+005d48a7 : OR EAX,0xc00
+005d48ac : MOV dword ptr [ESP + 0x8],EAX
+005d48b0 : FLDCW word ptr [ESP + 0x8]
+005d48b4 : FISTP dword ptr [ESP + 0x8]
+005d48b8 : MOV AL,byte ptr [ESP + 0x8]
+005d48bc : FLDCW word ptr [ESP + 0x4]
+005d48c0 : RET

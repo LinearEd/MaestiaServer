@@ -1,0 +1,130 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00682d40
+ENTRY    : 00682d40
+BODY     : [[00682d40, 00682e1b]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00682d40(void)
+
+{
+  HIMC pHVar1;
+  UINT UVar2;
+  int iVar3;
+  uint *puVar4;
+  LONG LVar5;
+  int in_ECX;
+  uint local_20;
+  tagINPUT local_1c;
+  
+  pHVar1 = ImmGetContext(*(HWND *)(in_ECX + 0x14));
+  ImmNotifyIME(pHVar1,0x15,4,0);
+  ImmNotifyIME(pHVar1,0x11,0,0);
+  FUN_00685140();
+  if ((*(int *)(in_ECX + 0x5c) == 6) || (*(int *)(in_ECX + 0x5c) == 5)) {
+    local_1c.type = 1;
+    local_1c.field1_0x4.ki.wVk = 0x1b;
+    UVar2 = MapVirtualKeyW(0x1b,0);
+    local_1c.field1_0x4.ki.wScan = (WORD)UVar2;
+    SendInput(1,&local_1c,0x1c);
+  }
+  **(undefined2 **)(in_ECX + 0x20) = 0;
+  iVar3 = FUN_0051b1a0();
+  if (iVar3 != 0) {
+    puVar4 = (uint *)FUN_0051c6e0(&local_20,".RemoveInputWindow");
+    FUN_00678eb0(*(undefined4 *)(in_ECX + 4),(*puVar4 & 0xfffffffc) + 8,0);
+    LVar5 = InterlockedExchangeAdd((LONG *)((local_20 & 0xfffffffc) + 4),-1);
+    if (LVar5 == 1) {
+      FUN_00515cf0(local_20 & 0xfffffffc);
+    }
+  }
+  ImmReleaseContext(*(HWND *)(in_ECX + 0x14),pHVar1);
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00682d40 : SUB ESP,0x20
+00682d43 : PUSH EBX
+00682d44 : PUSH ESI
+00682d45 : MOV ESI,ECX
+00682d47 : MOV EAX,dword ptr [ESI + 0x14]
+00682d4a : PUSH EDI
+00682d4b : PUSH EAX
+00682d4c : CALL 0x00611450
+00682d51 : PUSH 0x0
+00682d53 : PUSH 0x4
+00682d55 : MOV EBX,EAX
+00682d57 : PUSH 0x15
+00682d59 : PUSH EBX
+00682d5a : CALL 0x00685b7e
+00682d5f : PUSH 0x0
+00682d61 : PUSH 0x0
+00682d63 : PUSH 0x11
+00682d65 : PUSH EBX
+00682d66 : CALL 0x00685b7e
+00682d6b : MOV ECX,dword ptr [ESI + 0x78]
+00682d6e : CALL 0x00685140
+00682d73 : MOV EAX,dword ptr [ESI + 0x5c]
+00682d76 : CMP EAX,0x6
+00682d79 : JZ 0x00682d80
+00682d7b : CMP EAX,0x5
+00682d7e : JNZ 0x00682daf
+00682d80 : MOV ECX,0x1b
+00682d85 : PUSH 0x0
+00682d87 : PUSH ECX
+00682d88 : MOV dword ptr [ESP + 0x18],0x1
+00682d90 : MOV word ptr [ESP + 0x1c],CX
+00682d95 : CALL dword ptr [0x00b85458]
+00682d9b : PUSH 0x1c
+00682d9d : LEA EDX,[ESP + 0x14]
+00682da1 : PUSH EDX
+00682da2 : PUSH 0x1
+00682da4 : MOV word ptr [ESP + 0x22],AX
+00682da9 : CALL dword ptr [0x00b854b8]
+00682daf : MOV EAX,dword ptr [ESI + 0x20]
+00682db2 : XOR ECX,ECX
+00682db4 : MOV word ptr [EAX],CX
+00682db7 : LEA EDI,[ESI + 0x8]
+00682dba : MOV ECX,EDI
+00682dbc : CALL 0x0051b1a0
+00682dc1 : TEST EAX,EAX
+00682dc3 : JBE 0x00682e0b
+00682dc5 : PUSH 0xbd7f88
+00682dca : LEA EDX,[ESP + 0x10]
+00682dce : PUSH EDX
+00682dcf : MOV ECX,EDI
+00682dd1 : CALL 0x0051c6e0
+00682dd6 : MOV EAX,dword ptr [EAX]
+00682dd8 : MOV ECX,dword ptr [ESI + 0x4]
+00682ddb : AND EAX,0xfffffffc
+00682dde : PUSH 0x0
+00682de0 : ADD EAX,0x8
+00682de3 : PUSH EAX
+00682de4 : PUSH ECX
+00682de5 : CALL 0x00678eb0
+00682dea : MOV EDI,dword ptr [ESP + 0x18]
+00682dee : ADD ESP,0xc
+00682df1 : AND EDI,0xfffffffc
+00682df4 : PUSH -0x1
+00682df6 : LEA EDX,[EDI + 0x4]
+00682df9 : PUSH EDX
+00682dfa : CALL dword ptr [0x00b851cc]
+00682e00 : SUB EAX,0x1
+00682e03 : JNZ 0x00682e0b
+00682e05 : PUSH EDI
+00682e06 : CALL 0x00515cf0
+00682e0b : MOV EAX,dword ptr [ESI + 0x14]
+00682e0e : PUSH EBX
+00682e0f : PUSH EAX
+00682e10 : CALL 0x00611462
+00682e15 : POP EDI
+00682e16 : POP ESI
+00682e17 : POP EBX
+00682e18 : ADD ESP,0x20
+00682e1b : RET

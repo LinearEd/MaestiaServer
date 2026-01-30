@@ -1,0 +1,110 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_006f2dc0
+ENTRY    : 006f2dc0
+BODY     : [[006f2dc0, 006f2e82]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined4 FUN_006f2dc0(void)
+
+{
+  int in_EAX;
+  int iVar1;
+  undefined4 local_8;
+  
+  if (*(int *)(in_EAX + 0x23f0) == 0) {
+    return 0;
+  }
+  *(int *)(in_EAX + 0xfd4) = *(int *)(*(int *)(in_EAX + 0x23f0) + 0x2008) - *(int *)(in_EAX + 0xfdc)
+  ;
+  *(undefined4 *)(in_EAX + 0xfcc) = 0x760916;
+  *(undefined4 *)(in_EAX + 0xfc8) = 0;
+  *(undefined4 *)(in_EAX + 0xfb8) = 0;
+  *(undefined4 *)(in_EAX + 0xfbc) = 0;
+  *(undefined4 *)(in_EAX + 0xfc0) = 0;
+  *(undefined4 *)(in_EAX + 0xfc4) = 0;
+  *(int *)(in_EAX + 0xfd8) = *(int *)(in_EAX + 0xfdc) + 4 + *(int *)(in_EAX + 0x23f0);
+  local_8 = 0;
+  iVar1 = WSASend(*(undefined4 *)(in_EAX + 0xee0),in_EAX + 0xfd4,1,&local_8,0,
+                  (undefined4 *)(in_EAX + 0xfb8),0);
+  if ((iVar1 != 0) && (iVar1 = WSAGetLastError(), iVar1 != 0x3e5)) {
+    if (iVar1 == 0x2746) {
+      InterlockedCompareExchange((LONG *)(in_EAX + 0xecc),0xe5,0xff);
+    }
+    FUN_006ee470(L"[ERROR]AvSocket::DoSend() nLastError = %d\n",iVar1);
+    return 0;
+  }
+  return 1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006f2dc0 : PUSH EBP
+006f2dc1 : MOV EBP,ESP
+006f2dc3 : PUSH ECX
+006f2dc4 : PUSH ESI
+006f2dc5 : PUSH EDI
+006f2dc6 : MOV ESI,EAX
+006f2dc8 : XOR EDI,EDI
+006f2dca : CMP dword ptr [ESI + 0x23f0],EDI
+006f2dd0 : JZ 0x006f2e70
+006f2dd6 : MOV EAX,dword ptr [ESI + 0x23f0]
+006f2ddc : MOV ECX,dword ptr [EAX + 0x2008]
+006f2de2 : MOV EDX,dword ptr [ESI + 0xfdc]
+006f2de8 : SUB ECX,EDX
+006f2dea : PUSH EDI
+006f2deb : LEA EDX,[EDX + EAX*0x1 + 0x4]
+006f2def : LEA EAX,[ESI + 0xfb8]
+006f2df5 : PUSH EAX
+006f2df6 : MOV dword ptr [EAX + 0x1c],ECX
+006f2df9 : PUSH EDI
+006f2dfa : MOV dword ptr [EAX + 0x14],0x760916
+006f2e01 : MOV dword ptr [EAX + 0x10],EDI
+006f2e04 : MOV dword ptr [EAX],EDI
+006f2e06 : MOV dword ptr [EAX + 0x4],EDI
+006f2e09 : MOV dword ptr [EAX + 0x8],EDI
+006f2e0c : MOV dword ptr [EAX + 0xc],EDI
+006f2e0f : MOV dword ptr [EAX + 0x20],EDX
+006f2e12 : MOV EDX,dword ptr [ESI + 0xee0]
+006f2e18 : LEA EAX,[EBP + -0x4]
+006f2e1b : PUSH EAX
+006f2e1c : PUSH 0x1
+006f2e1e : LEA ECX,[ESI + 0xfd4]
+006f2e24 : PUSH ECX
+006f2e25 : PUSH EDX
+006f2e26 : MOV dword ptr [EBP + -0x4],EDI
+006f2e29 : CALL dword ptr [0x00b855d4]
+006f2e2f : TEST EAX,EAX
+006f2e31 : JZ 0x006f2e78
+006f2e33 : CALL dword ptr [0x00b855c8]
+006f2e39 : MOV EDI,EAX
+006f2e3b : CMP EDI,0x3e5
+006f2e41 : JZ 0x006f2e78
+006f2e43 : CMP EDI,0x2746
+006f2e49 : JNZ 0x006f2e62
+006f2e4b : PUSH 0xff
+006f2e50 : PUSH 0xe5
+006f2e55 : ADD ESI,0xecc
+006f2e5b : PUSH ESI
+006f2e5c : CALL dword ptr [0x00b85228]
+006f2e62 : PUSH EDI
+006f2e63 : PUSH 0xbf68d0
+006f2e68 : CALL 0x006ee470
+006f2e6d : ADD ESP,0x8
+006f2e70 : POP EDI
+006f2e71 : XOR EAX,EAX
+006f2e73 : POP ESI
+006f2e74 : MOV ESP,EBP
+006f2e76 : POP EBP
+006f2e77 : RET
+006f2e78 : POP EDI
+006f2e79 : MOV EAX,0x1
+006f2e7e : POP ESI
+006f2e7f : MOV ESP,EBP
+006f2e81 : POP EBP
+006f2e82 : RET

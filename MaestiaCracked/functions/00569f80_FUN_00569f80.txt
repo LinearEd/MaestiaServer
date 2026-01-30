@@ -1,0 +1,101 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00569f80
+ENTRY    : 00569f80
+BODY     : [[00569f80, 0056a006]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00569f80(int *param_1,uint param_2)
+
+{
+  GRefCountImpl *this;
+  int in_ECX;
+  bool bVar1;
+  int *piVar2;
+  int local_8 [2];
+  
+  bVar1 = false;
+  local_8[0] = 0;
+  EnterCriticalSection((LPCRITICAL_SECTION)(in_ECX + 0xc));
+  if (param_2 < *(uint *)(in_ECX + 4)) {
+    this = *(GRefCountImpl **)(*(int *)(in_ECX + 8) + param_2 * 8);
+    piVar2 = (int *)(*(int *)(in_ECX + 8) + param_2 * 8);
+    if (this != (GRefCountImpl *)0x0) {
+      GRefCountImpl::AddRef(this);
+    }
+  }
+  else {
+    bVar1 = true;
+    local_8[0] = 0;
+    local_8[1] = 0;
+    piVar2 = local_8;
+  }
+  if (*param_1 != 0) {
+    FUN_00524240();
+  }
+  *param_1 = *piVar2;
+  param_1[1] = piVar2[1];
+  if ((bVar1) && (local_8[0] != 0)) {
+    FUN_00524240();
+  }
+  LeaveCriticalSection((LPCRITICAL_SECTION)(in_ECX + 0xc));
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00569f80 : SUB ESP,0x8
+00569f83 : PUSH EBX
+00569f84 : PUSH EBP
+00569f85 : PUSH ESI
+00569f86 : MOV ESI,ECX
+00569f88 : PUSH EDI
+00569f89 : LEA EBP,[ESI + 0xc]
+00569f8c : XOR EBX,EBX
+00569f8e : PUSH EBP
+00569f8f : XOR EDI,EDI
+00569f91 : MOV dword ptr [ESP + 0x14],EBX
+00569f95 : CALL dword ptr [0x00b85118]
+00569f9b : MOV ECX,dword ptr [ESI + 0x4]
+00569f9e : MOV EAX,dword ptr [ESP + 0x20]
+00569fa2 : CMP EAX,ECX
+00569fa4 : JNC 0x00569ff4
+00569fa6 : MOV EDX,dword ptr [ESI + 0x8]
+00569fa9 : MOV ECX,dword ptr [EDX + EAX*0x8]
+00569fac : LEA ESI,[EDX + EAX*0x8]
+00569faf : CMP ECX,EDI
+00569fb1 : JZ 0x00569fb8
+00569fb3 : CALL 0x00523dd0
+00569fb8 : MOV EDI,dword ptr [ESP + 0x1c]
+00569fbc : MOV ECX,dword ptr [EDI]
+00569fbe : TEST ECX,ECX
+00569fc0 : JZ 0x00569fc7
+00569fc2 : CALL 0x00524240
+00569fc7 : MOV EAX,dword ptr [ESI]
+00569fc9 : MOV dword ptr [EDI],EAX
+00569fcb : MOV ECX,dword ptr [ESI + 0x4]
+00569fce : MOV dword ptr [EDI + 0x4],ECX
+00569fd1 : TEST BL,0x1
+00569fd4 : JZ 0x00569fe3
+00569fd6 : MOV ECX,dword ptr [ESP + 0x10]
+00569fda : TEST ECX,ECX
+00569fdc : JZ 0x00569fe3
+00569fde : CALL 0x00524240
+00569fe3 : PUSH EBP
+00569fe4 : CALL dword ptr [0x00b8511c]
+00569fea : POP EDI
+00569feb : POP ESI
+00569fec : POP EBP
+00569fed : POP EBX
+00569fee : ADD ESP,0x8
+00569ff1 : RET 0x8
+00569ff4 : MOV EBX,0x1
+00569ff9 : MOV dword ptr [ESP + 0x10],EDI
+00569ffd : MOV dword ptr [ESP + 0x14],EDI
+0056a001 : LEA ESI,[ESP + 0x10]
+0056a005 : JMP 0x00569fb8

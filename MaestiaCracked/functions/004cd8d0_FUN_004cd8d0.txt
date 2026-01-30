@@ -1,0 +1,83 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_004cd8d0
+ENTRY    : 004cd8d0
+BODY     : [[004cd8d0, 004cd923]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+uint FUN_004cd8d0(int param_1)
+
+{
+  undefined8 *puVar1;
+  undefined8 *puVar2;
+  int in_ECX;
+  int iVar3;
+  undefined8 *puVar4;
+  
+  puVar1 = *(undefined8 **)(in_ECX + 0x5c);
+  iVar3 = 0;
+  puVar4 = *(undefined8 **)(in_ECX + 0x58);
+  while( true ) {
+    if (puVar4 == puVar1) {
+      return (uint)puVar4 & 0xffffff00;
+    }
+    puVar2 = (undefined8 *)((int)puVar4 + 0xc);
+    if (param_1 == iVar3) break;
+    iVar3 = iVar3 + 1;
+    puVar4 = puVar2;
+  }
+  for (; puVar2 != puVar1; puVar2 = (undefined8 *)((int)puVar2 + 0xc)) {
+    *puVar4 = *puVar2;
+    *(undefined4 *)(puVar4 + 1) = *(undefined4 *)(puVar2 + 1);
+    puVar4 = (undefined8 *)((int)puVar4 + 0xc);
+  }
+  *(int *)(in_ECX + 0x5c) = *(int *)(in_ECX + 0x5c) + -0xc;
+  return CONCAT31((int3)((uint)puVar2 >> 8),1);
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+004cd8d0 : PUSH EBP
+004cd8d1 : MOV EBP,ESP
+004cd8d3 : MOV EAX,dword ptr [ECX + 0x58]
+004cd8d6 : PUSH ESI
+004cd8d7 : MOV ESI,dword ptr [ECX + 0x5c]
+004cd8da : XOR EDX,EDX
+004cd8dc : PUSH EDI
+004cd8dd : CMP EAX,ESI
+004cd8df : JZ 0x004cd8f0
+004cd8e1 : MOV EDI,dword ptr [EBP + 0x8]
+004cd8e4 : ADD EAX,0xc
+004cd8e7 : CMP EDI,EDX
+004cd8e9 : JZ 0x004cd8f8
+004cd8eb : INC EDX
+004cd8ec : CMP EAX,ESI
+004cd8ee : JNZ 0x004cd8e4
+004cd8f0 : POP EDI
+004cd8f1 : XOR AL,AL
+004cd8f3 : POP ESI
+004cd8f4 : POP EBP
+004cd8f5 : RET 0x4
+004cd8f8 : CMP EAX,ESI
+004cd8fa : JZ 0x004cd918
+004cd8fc : LEA EDX,[EAX + -0xc]
+004cd8ff : NOP
+004cd900 : MOVQ XMM0,qword ptr [EAX]
+004cd904 : MOVQ qword ptr [EDX],XMM0
+004cd908 : MOV EDI,dword ptr [EAX + 0x8]
+004cd90b : MOV dword ptr [EDX + 0x8],EDI
+004cd90e : ADD EAX,0xc
+004cd911 : ADD EDX,0xc
+004cd914 : CMP EAX,ESI
+004cd916 : JNZ 0x004cd900
+004cd918 : ADD dword ptr [ECX + 0x5c],-0xc
+004cd91c : POP EDI
+004cd91d : MOV AL,0x1
+004cd91f : POP ESI
+004cd920 : POP EBP
+004cd921 : RET 0x4

@@ -1,0 +1,93 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00540230
+ENTRY    : 00540230
+BODY     : [[00540230, 005402a1]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00540230(int param_1,int param_2)
+
+{
+  int iVar1;
+  int iVar2;
+  int *piVar3;
+  undefined4 *puVar4;
+  
+  piVar3 = (int *)(param_1 + -4 + param_2 * 4);
+  for (; param_2 != 0; param_2 = param_2 + -1) {
+    iVar1 = *piVar3;
+    if (iVar1 != 0) {
+      iVar2 = *(int *)(iVar1 + 0x14);
+      if (iVar2 != 0) {
+        puVar4 = (undefined4 *)(*(int *)(iVar1 + 0x10) + iVar2 * 0xc + -4);
+        do {
+          if ((GRefCountImpl *)*puVar4 != (GRefCountImpl *)0x0) {
+            GRefCountImpl::Release((GRefCountImpl *)*puVar4);
+          }
+          puVar4 = puVar4 + -3;
+          iVar2 = iVar2 + -1;
+        } while (iVar2 != 0);
+      }
+      FUN_00515cf0(*(undefined4 *)(iVar1 + 0x10));
+      if (*(GRefCountNTSImpl **)(iVar1 + 0xc) != (GRefCountNTSImpl *)0x0) {
+        GRefCountNTSImpl::Release(*(GRefCountNTSImpl **)(iVar1 + 0xc));
+      }
+      FUN_00515cf0(iVar1);
+    }
+    piVar3 = piVar3 + -1;
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00540230 : MOV EAX,dword ptr [ESP + 0x8]
+00540234 : MOV ECX,dword ptr [ESP + 0x4]
+00540238 : PUSH EBP
+00540239 : LEA EBP,[ECX + EAX*0x4 + -0x4]
+0054023d : TEST EAX,EAX
+0054023f : JBE 0x005402a0
+00540241 : PUSH EBX
+00540242 : PUSH ESI
+00540243 : MOV dword ptr [ESP + 0x14],EAX
+00540247 : PUSH EDI
+00540248 : MOV EDI,dword ptr [EBP]
+0054024b : TEST EDI,EDI
+0054024d : JZ 0x00540293
+0054024f : MOV EAX,dword ptr [EDI + 0x14]
+00540252 : MOV ECX,dword ptr [EDI + 0x10]
+00540255 : LEA EDX,[EAX + EAX*0x2]
+00540258 : LEA ECX,[ECX + EDX*0x4 + -0xc]
+0054025c : TEST EAX,EAX
+0054025e : JBE 0x00540278
+00540260 : LEA ESI,[ECX + 0x8]
+00540263 : MOV EBX,EAX
+00540265 : MOV ECX,dword ptr [ESI]
+00540267 : TEST ECX,ECX
+00540269 : JZ 0x00540270
+0054026b : CALL 0x004ff7e0
+00540270 : SUB ESI,0xc
+00540273 : SUB EBX,0x1
+00540276 : JNZ 0x00540265
+00540278 : MOV EDX,dword ptr [EDI + 0x10]
+0054027b : PUSH EDX
+0054027c : CALL 0x00515cf0
+00540281 : MOV ECX,dword ptr [EDI + 0xc]
+00540284 : TEST ECX,ECX
+00540286 : JZ 0x0054028d
+00540288 : CALL 0x004ff7c0
+0054028d : PUSH EDI
+0054028e : CALL 0x00515cf0
+00540293 : SUB EBP,0x4
+00540296 : SUB dword ptr [ESP + 0x18],0x1
+0054029b : JNZ 0x00540248
+0054029d : POP EDI
+0054029e : POP ESI
+0054029f : POP EBX
+005402a0 : POP EBP
+005402a1 : RET

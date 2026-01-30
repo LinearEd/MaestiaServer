@@ -1,0 +1,112 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00481880
+ENTRY    : 00481880
+BODY     : [[00481880, 00481923]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00481880(void)
+
+{
+  uint uVar1;
+  int iVar2;
+  int in_ECX;
+  int *piVar3;
+  int local_8;
+  
+  if (*(int *)(in_ECX + 0x218) == 0) {
+    return;
+  }
+  iVar2 = *(int *)(in_ECX + 0x218) + -1;
+  local_8 = 0;
+  if (-1 < iVar2) {
+    piVar3 = (int *)(*(int *)(in_ECX + 0x214) + iVar2 * 4);
+    do {
+      if (2 < *piVar3) {
+        local_8 = *(int *)(*(int *)(in_ECX + 0x214) + iVar2 * 4);
+        break;
+      }
+      iVar2 = iVar2 + -1;
+      piVar3 = piVar3 + -1;
+    } while (-1 < iVar2);
+  }
+  uVar1 = *(uint *)(in_ECX + 0x218) - 1;
+  if (uVar1 < *(uint *)(in_ECX + 0x218)) {
+    if (*(uint *)(in_ECX + 0x21c) >> 1 <= uVar1) goto LAB_004818f9;
+  }
+  else if (uVar1 < *(uint *)(in_ECX + 0x21c)) goto LAB_004818f9;
+  FUN_00483d90(in_ECX + 0x214);
+LAB_004818f9:
+  *(uint *)(in_ECX + 0x218) = uVar1;
+  if ((local_8 != *(int *)(in_ECX + 0x210)) &&
+     (*(int *)(in_ECX + 0x210) = local_8, *(int *)(in_ECX + 0xf0) != 0)) {
+    FUN_00481620();
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00481880 : PUSH EBP
+00481881 : MOV EBP,ESP
+00481883 : PUSH ECX
+00481884 : PUSH EBX
+00481885 : MOV EBX,ECX
+00481887 : MOV EAX,dword ptr [EBX + 0x218]
+0048188d : TEST EAX,EAX
+0048188f : JZ 0x0048191f
+00481895 : ADD EAX,-0x1
+00481898 : MOV dword ptr [EBP + -0x4],0x0
+0048189f : JS 0x004818c5
+004818a1 : MOV EDX,dword ptr [EBX + 0x214]
+004818a7 : LEA ECX,[EDX + EAX*0x4]
+004818aa : LEA EBX,[EBX]
+004818b0 : CMP dword ptr [ECX],0x2
+004818b3 : JG 0x004818bf
+004818b5 : DEC EAX
+004818b6 : SUB ECX,0x4
+004818b9 : TEST EAX,EAX
+004818bb : JGE 0x004818b0
+004818bd : JMP 0x004818c5
+004818bf : MOV EAX,dword ptr [EDX + EAX*0x4]
+004818c2 : MOV dword ptr [EBP + -0x4],EAX
+004818c5 : MOV EAX,dword ptr [EBX + 0x218]
+004818cb : PUSH ESI
+004818cc : PUSH EDI
+004818cd : LEA EDI,[EBX + 0x214]
+004818d3 : LEA ESI,[EAX + -0x1]
+004818d6 : CMP ESI,EAX
+004818d8 : JNC 0x004818e7
+004818da : MOV ECX,dword ptr [EDI + 0x8]
+004818dd : SHR ECX,0x1
+004818df : CMP ESI,ECX
+004818e1 : JNC 0x004818f9
+004818e3 : MOV EAX,ESI
+004818e5 : JMP 0x004818f3
+004818e7 : CMP ESI,dword ptr [EDI + 0x8]
+004818ea : JC 0x004818f9
+004818ec : MOV EAX,ESI
+004818ee : SHR EAX,0x2
+004818f1 : ADD EAX,ESI
+004818f3 : PUSH EDI
+004818f4 : CALL 0x00483d90
+004818f9 : MOV EAX,dword ptr [EBP + -0x4]
+004818fc : MOV dword ptr [EDI + 0x4],ESI
+004818ff : POP EDI
+00481900 : POP ESI
+00481901 : CMP EAX,dword ptr [EBX + 0x210]
+00481907 : JZ 0x0048191f
+00481909 : CMP dword ptr [EBX + 0xf0],0x0
+00481910 : MOV dword ptr [EBX + 0x210],EAX
+00481916 : JZ 0x0048191f
+00481918 : MOV ECX,EBX
+0048191a : CALL 0x00481620
+0048191f : POP EBX
+00481920 : MOV ESP,EBP
+00481922 : POP EBP
+00481923 : RET

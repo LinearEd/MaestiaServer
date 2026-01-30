@@ -1,0 +1,160 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FindHandlerForForeignException
+ENTRY    : 00643264
+BODY     : [[00643264, 00643357]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    void __cdecl FindHandlerForForeignException(struct EHExceptionRecord *,struct EHRegistrationNode
+   *,struct _CONTEXT *,void *,struct _s_FuncInfo const *,int,int,struct EHRegistrationNode *)
+   
+   Library: Visual Studio 2008 Release */
+
+void __cdecl
+FindHandlerForForeignException
+          (EHExceptionRecord *param_1,EHRegistrationNode *param_2,_CONTEXT *param_3,void *param_4,
+          _s_FuncInfo *param_5,int param_6,int param_7,EHRegistrationNode *param_8)
+
+{
+  TypeDescriptor *pTVar1;
+  _ptiddata p_Var2;
+  void *pvVar3;
+  int iVar4;
+  _s_TryBlockMapEntry *p_Var5;
+  _s_TryBlockMapEntry *unaff_EBX;
+  EHRegistrationNode *unaff_ESI;
+  int unaff_EDI;
+  uint extraout_var;
+  uint uVar6;
+  uint local_8;
+  
+  if (*(int *)param_1 != -0x7ffffffd) {
+    p_Var2 = __getptd();
+    uVar6 = extraout_var;
+    if (p_Var2->_translator != (void *)0x0) {
+      p_Var2 = __getptd();
+      pvVar3 = (void *)__encoded_null();
+      if (((p_Var2->_translator != pvVar3) && (*(int *)param_1 != -0x1fbcb0b3)) &&
+         (iVar4 = _CallSETranslator(param_1,param_2,param_3,param_4,param_5,param_7,param_8),
+         iVar4 != 0)) {
+        return;
+      }
+    }
+    if (param_5->nTryBlocks == 0) {
+      _inconsistency();
+    }
+    p_Var5 = _GetRangeOfTrysToCheck(param_5,param_7,param_6,&local_8,(uint *)&stack0xfffffff4);
+    if (local_8 < uVar6) {
+      do {
+        if ((p_Var5->tryLow <= param_6) && (param_6 <= p_Var5->tryHigh)) {
+          pTVar1 = p_Var5->pHandlerArray[p_Var5->nCatches + -1].pType;
+          if (((pTVar1 == (TypeDescriptor *)0x0) || (*(char *)&pTVar1[1].pVFTable == '\0')) &&
+             ((p_Var5->pHandlerArray[p_Var5->nCatches + -1].adjectives & 0x40) == 0)) {
+            CatchIt(param_1,(EHRegistrationNode *)param_3,param_4,param_5,(_s_FuncInfo *)0x0,
+                    (_s_HandlerType *)param_7,(_s_CatchableType *)param_8,unaff_EBX,unaff_EDI,
+                    unaff_ESI,(uchar)uVar6);
+          }
+        }
+        local_8 = local_8 + 1;
+        p_Var5 = p_Var5 + 1;
+      } while (local_8 < uVar6);
+    }
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00643264 : MOV EDI,EDI
+00643266 : PUSH EBP
+00643267 : MOV EBP,ESP
+00643269 : PUSH ECX
+0064326a : PUSH ECX
+0064326b : PUSH ESI
+0064326c : MOV ESI,dword ptr [EBP + 0x8]
+0064326f : CMP dword ptr [ESI],0x80000003
+00643275 : JZ 0x00643355
+0064327b : PUSH EDI
+0064327c : CALL 0x006458f6
+00643281 : CMP dword ptr [EAX + 0x80],0x0
+00643288 : JZ 0x006432c9
+0064328a : CALL 0x006458f6
+0064328f : LEA EDI,[EAX + 0x80]
+00643295 : CALL 0x00645664
+0064329a : CMP dword ptr [EDI],EAX
+0064329c : JZ 0x006432c9
+0064329e : CMP dword ptr [ESI],0xe0434f4d
+006432a4 : JZ 0x006432c9
+006432a6 : PUSH dword ptr [EBP + 0x24]
+006432a9 : PUSH dword ptr [EBP + 0x20]
+006432ac : PUSH dword ptr [EBP + 0x18]
+006432af : PUSH dword ptr [EBP + 0x14]
+006432b2 : PUSH dword ptr [EBP + 0x10]
+006432b5 : PUSH dword ptr [EBP + 0xc]
+006432b8 : PUSH ESI
+006432b9 : CALL 0x00640b2d
+006432be : ADD ESP,0x1c
+006432c1 : TEST EAX,EAX
+006432c3 : JNZ 0x00643354
+006432c9 : MOV EDI,dword ptr [EBP + 0x18]
+006432cc : CMP dword ptr [EDI + 0xc],0x0
+006432d0 : JNZ 0x006432d7
+006432d2 : CALL 0x0064c7d9
+006432d7 : MOV ESI,dword ptr [EBP + 0x1c]
+006432da : LEA EAX,[EBP + -0x8]
+006432dd : PUSH EAX
+006432de : LEA EAX,[EBP + -0x4]
+006432e1 : PUSH EAX
+006432e2 : PUSH ESI
+006432e3 : PUSH dword ptr [EBP + 0x20]
+006432e6 : PUSH EDI
+006432e7 : CALL 0x00640ca3
+006432ec : MOV EDI,EAX
+006432ee : MOV EAX,dword ptr [EBP + -0x4]
+006432f1 : ADD ESP,0x14
+006432f4 : CMP EAX,dword ptr [EBP + -0x8]
+006432f7 : JNC 0x00643354
+006432f9 : PUSH EBX
+006432fa : CMP ESI,dword ptr [EDI]
+006432fc : JL 0x00643345
+006432fe : CMP ESI,dword ptr [EDI + 0x4]
+00643301 : JG 0x00643345
+00643303 : MOV EAX,dword ptr [EDI + 0xc]
+00643306 : MOV ECX,dword ptr [EDI + 0x10]
+00643309 : SHL EAX,0x4
+0064330c : ADD EAX,ECX
+0064330e : MOV ECX,dword ptr [EAX + -0xc]
+00643311 : TEST ECX,ECX
+00643313 : JZ 0x0064331b
+00643315 : CMP byte ptr [ECX + 0x8],0x0
+00643319 : JNZ 0x00643345
+0064331b : LEA EBX,[EAX + -0x10]
+0064331e : TEST byte ptr [EBX],0x40
+00643321 : JNZ 0x00643345
+00643323 : PUSH dword ptr [EBP + 0x24]
+00643326 : MOV ESI,dword ptr [EBP + 0xc]
+00643329 : PUSH dword ptr [EBP + 0x20]
+0064332c : PUSH 0x0
+0064332e : PUSH dword ptr [EBP + 0x18]
+00643331 : PUSH dword ptr [EBP + 0x14]
+00643334 : PUSH dword ptr [EBP + 0x10]
+00643337 : PUSH dword ptr [EBP + 0x8]
+0064333a : CALL 0x006431f6
+0064333f : MOV ESI,dword ptr [EBP + 0x1c]
+00643342 : ADD ESP,0x1c
+00643345 : INC dword ptr [EBP + -0x4]
+00643348 : MOV EAX,dword ptr [EBP + -0x4]
+0064334b : ADD EDI,0x14
+0064334e : CMP EAX,dword ptr [EBP + -0x8]
+00643351 : JC 0x006432fa
+00643353 : POP EBX
+00643354 : POP EDI
+00643355 : POP ESI
+00643356 : LEAVE
+00643357 : RET

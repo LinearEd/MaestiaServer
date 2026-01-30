@@ -1,0 +1,73 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00799710
+ENTRY    : 00799710
+BODY     : [[00799710, 0079975b]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00799710(undefined4 param_1)
+
+{
+  int iVar1;
+  undefined4 *puVar2;
+  uint uVar3;
+  int in_ECX;
+  
+  iVar1 = *(int *)(in_ECX + 0x3c0);
+  if (iVar1 == 0) {
+    uVar3 = 0;
+  }
+  else {
+    uVar3 = *(int *)(in_ECX + 0x3c8) - iVar1 >> 2;
+  }
+  puVar2 = *(undefined4 **)(in_ECX + 0x3c4);
+  if ((uint)((int)puVar2 - iVar1 >> 2) < uVar3) {
+    *puVar2 = param_1;
+    *(undefined4 **)(in_ECX + 0x3c4) = puVar2 + 1;
+    return;
+  }
+  FUN_0042fe80(in_ECX + 0x3bc,puVar2,&param_1);
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00799710 : PUSH EBP
+00799711 : MOV EBP,ESP
+00799713 : ADD ECX,0x3bc
+00799719 : PUSH ESI
+0079971a : MOV ESI,dword ptr [ECX + 0x4]
+0079971d : PUSH EDI
+0079971e : TEST ESI,ESI
+00799720 : JNZ 0x00799726
+00799722 : XOR EAX,EAX
+00799724 : JMP 0x0079972e
+00799726 : MOV EAX,dword ptr [ECX + 0xc]
+00799729 : SUB EAX,ESI
+0079972b : SAR EAX,0x2
+0079972e : MOV EDX,dword ptr [ECX + 0x8]
+00799731 : MOV EDI,EDX
+00799733 : SUB EDI,ESI
+00799735 : SAR EDI,0x2
+00799738 : CMP EDI,EAX
+0079973a : POP EDI
+0079973b : POP ESI
+0079973c : JNC 0x0079974d
+0079973e : MOV EAX,dword ptr [EBP + 0x8]
+00799741 : MOV dword ptr [EDX],EAX
+00799743 : ADD EDX,0x4
+00799746 : MOV dword ptr [ECX + 0x8],EDX
+00799749 : POP EBP
+0079974a : RET 0x4
+0079974d : LEA EAX,[EBP + 0x8]
+00799750 : PUSH EAX
+00799751 : PUSH EDX
+00799752 : PUSH ECX
+00799753 : CALL 0x0042fe80
+00799758 : POP EBP
+00799759 : RET 0x4

@@ -1,0 +1,74 @@
+PROGRAM  : Maestia.exe
+FUNCTION : ~GSemaphore
+ENTRY    : 00518200
+BODY     : [[00518200, 00518266]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* public: virtual __thiscall GSemaphore::~GSemaphore(void) */
+
+void __thiscall GSemaphore::~GSemaphore(GSemaphore *this)
+
+{
+  LONG *Addend;
+  LONG LVar1;
+  
+                    /* 0x118200  32  ??1GSemaphore@@UAE@XZ */
+  *(undefined ***)this = &PTR_FUN_00b871b0;
+  *(undefined ***)(this + 0xc) = &PTR_LAB_00b8719c;
+  GWaitCondition::~GWaitCondition((GWaitCondition *)(this + 0x2c));
+  GMutex::~GMutex((GMutex *)(this + 0x18));
+  Addend = *(LONG **)(this + 8);
+  *(undefined ***)(this + 0xc) = &PTR_FUN_00cd40d4;
+  *(undefined ***)this = &PTR_FUN_00b87170;
+  if (Addend != (LONG *)0x0) {
+    LVar1 = InterlockedExchangeAdd(Addend,-1);
+    if ((LVar1 == 1) && (Addend != (LONG *)0x0)) {
+      FUN_005a20f0();
+      FUN_00515cf0(Addend[1]);
+      FUN_00515cf0(Addend);
+    }
+  }
+  GRefCountImplCore::~GRefCountImplCore((GRefCountImplCore *)this);
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00518200 : PUSH ESI
+00518201 : MOV ESI,ECX
+00518203 : PUSH EDI
+00518204 : LEA ECX,[ESI + 0x2c]
+00518207 : MOV dword ptr [ESI],0xb871b0
+0051820d : MOV dword ptr [ESI + 0xc],0xb8719c
+00518214 : CALL 0x00516ba0
+00518219 : LEA ECX,[ESI + 0x18]
+0051821c : CALL 0x00516b60
+00518221 : MOV EDI,dword ptr [ESI + 0x8]
+00518224 : MOV dword ptr [ESI + 0xc],0xcd40d4
+0051822b : MOV dword ptr [ESI],0xb87170
+00518231 : TEST EDI,EDI
+00518233 : JZ 0x0051825e
+00518235 : PUSH -0x1
+00518237 : PUSH EDI
+00518238 : CALL dword ptr [0x00b851cc]
+0051823e : SUB EAX,0x1
+00518241 : JNZ 0x0051825e
+00518243 : TEST EDI,EDI
+00518245 : JZ 0x0051825e
+00518247 : LEA ECX,[EDI + 0x10]
+0051824a : CALL 0x005a20f0
+0051824f : MOV EAX,dword ptr [EDI + 0x4]
+00518252 : PUSH EAX
+00518253 : CALL 0x00515cf0
+00518258 : PUSH EDI
+00518259 : CALL 0x00515cf0
+0051825e : POP EDI
+0051825f : MOV ECX,ESI
+00518261 : POP ESI
+00518262 : JMP 0x004ff7b0

@@ -1,0 +1,84 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00992520
+ENTRY    : 00992520
+BODY     : [[00992520, 00992586]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined4 FUN_00992520(ushort param_1,ushort param_2)
+
+{
+  int iVar1;
+  int iVar2;
+  int in_ECX;
+  wchar_t *pwVar3;
+  
+  if (*(char *)(in_ECX + 8) == '\0') {
+    pwVar3 = L"AvaGuiGridWindow::FindItem Non Initialized !!!";
+  }
+  else {
+    iVar1 = *(int *)(in_ECX + 0x3c);
+    iVar2 = (uint)param_2 * *(int *)(iVar1 + 0xc) + (uint)param_1;
+    if (*(int *)(iVar1 + 8) * *(int *)(iVar1 + 0xc) <= iVar2) {
+      return 0;
+    }
+    if (iVar2 < 0) {
+      return 0;
+    }
+    iVar1 = *(int *)(*(int *)(iVar1 + 0x10) + iVar2 * 4);
+    if (iVar1 == 0) {
+      return 0;
+    }
+    if (*(int *)(iVar1 + 4) == 0x12345666) {
+      return *(undefined4 *)(iVar1 + 8);
+    }
+    pwVar3 = L"AvaGuiGridWindow::FindItem Invalid Pointer !!!";
+  }
+  FUN_008018d0(pwVar3);
+  return 0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00992520 : PUSH EBP
+00992521 : MOV EBP,ESP
+00992523 : CMP byte ptr [ECX + 0x8],0x0
+00992527 : PUSH ESI
+00992528 : JNZ 0x00992544
+0099252a : PUSH 0xc857d0
+0099252f : MOV ESI,dword ptr [0x00da98e8]
+00992535 : CALL 0x008018d0
+0099253a : ADD ESP,0x4
+0099253d : XOR EAX,EAX
+0099253f : POP ESI
+00992540 : POP EBP
+00992541 : RET 0x8
+00992544 : MOV ECX,dword ptr [ECX + 0x3c]
+00992547 : MOVZX EAX,word ptr [EBP + 0xc]
+0099254b : MOV EDX,dword ptr [ECX + 0xc]
+0099254e : MOVZX ESI,word ptr [EBP + 0x8]
+00992552 : IMUL EAX,EDX
+00992555 : ADD EAX,ESI
+00992557 : MOV ESI,dword ptr [ECX + 0x8]
+0099255a : IMUL ESI,EDX
+0099255d : CMP EAX,ESI
+0099255f : JGE 0x0099253d
+00992561 : TEST EAX,EAX
+00992563 : JL 0x0099253d
+00992565 : MOV ECX,dword ptr [ECX + 0x10]
+00992568 : MOV EAX,dword ptr [ECX + EAX*0x4]
+0099256b : TEST EAX,EAX
+0099256d : JZ 0x0099253d
+0099256f : CMP dword ptr [EAX + 0x4],0x12345666
+00992576 : JZ 0x0099257f
+00992578 : PUSH 0xc85830
+0099257d : JMP 0x0099252f
+0099257f : MOV EAX,dword ptr [EAX + 0x8]
+00992582 : POP ESI
+00992583 : POP EBP
+00992584 : RET 0x8

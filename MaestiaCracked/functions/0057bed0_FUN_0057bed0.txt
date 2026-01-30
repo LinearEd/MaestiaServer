@@ -1,0 +1,58 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0057bed0
+ENTRY    : 0057bed0
+BODY     : [[0057bed0, 0057bf18]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+bool FUN_0057bed0(ushort param_1)
+
+{
+  uint uVar1;
+  bool bVar2;
+  
+  uVar1 = (uint)*(ushort *)(&DAT_00b879a8 + (uint)(param_1 >> 8) * 2);
+  if (uVar1 == 0) {
+    return false;
+  }
+  bVar2 = true;
+  if (uVar1 != 1) {
+    bVar2 = (1 << ((byte)param_1 & 0xf) &
+            (uint)*(ushort *)(&DAT_00b879a8 + ((param_1 >> 4 & 0xf) + uVar1) * 2)) != 0;
+  }
+  return bVar2;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0057bed0 : MOVZX EDX,word ptr [ESP + 0x4]
+0057bed5 : MOV EAX,EDX
+0057bed7 : SHR EAX,0x8
+0057beda : PUSH ESI
+0057bedb : MOVZX ESI,word ptr [EAX*0x2 + 0xb879a8]
+0057bee3 : TEST ESI,ESI
+0057bee5 : JNZ 0x0057beed
+0057bee7 : XOR EAX,EAX
+0057bee9 : POP ESI
+0057beea : RET 0x4
+0057beed : MOV EAX,0x1
+0057bef2 : CMP ESI,EAX
+0057bef4 : JZ 0x0057bf15
+0057bef6 : MOV ECX,EDX
+0057bef8 : SHR EDX,0x4
+0057befb : AND ECX,0xf
+0057befe : AND EDX,0xf
+0057bf01 : SHL EAX,CL
+0057bf03 : ADD EDX,ESI
+0057bf05 : MOVZX ECX,word ptr [EDX*0x2 + 0xb879a8]
+0057bf0d : AND EAX,ECX
+0057bf0f : NEG EAX
+0057bf11 : SBB EAX,EAX
+0057bf13 : NEG EAX
+0057bf15 : POP ESI
+0057bf16 : RET 0x4

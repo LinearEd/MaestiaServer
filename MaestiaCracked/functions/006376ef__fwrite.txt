@@ -1,0 +1,81 @@
+PROGRAM  : Maestia.exe
+FUNCTION : _fwrite
+ENTRY    : 006376ef
+BODY     : [[006376ef, 00637766]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* WARNING: Function: __SEH_prolog4 replaced with injection: SEH_prolog4 */
+/* WARNING: Function: __SEH_epilog4 replaced with injection: EH_epilog3 */
+/* Library Function - Single Match
+    _fwrite
+   
+   Library: Visual Studio 2008 Release */
+
+size_t __cdecl _fwrite(void *_Str,size_t _Size,size_t _Count,FILE *_File)
+
+{
+  int *piVar1;
+  size_t sVar2;
+  
+  if ((_Size != 0) && (_Count != 0)) {
+    if (_File != (FILE *)0x0) {
+      __lock_file(_File);
+      sVar2 = __fwrite_nolock(_Str,_Size,_Count,_File);
+      FUN_00637767();
+      return sVar2;
+    }
+    piVar1 = __errno();
+    *piVar1 = 0x16;
+    __invalid_parameter(0,0,0,0,0);
+  }
+  return 0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006376ef : PUSH 0xc
+006376f1 : PUSH 0xcecbf8
+006376f6 : CALL 0x0064c228
+006376fb : XOR ESI,ESI
+006376fd : CMP dword ptr [EBP + 0xc],ESI
+00637700 : JZ 0x0063772b
+00637702 : CMP dword ptr [EBP + 0x10],ESI
+00637705 : JZ 0x0063772b
+00637707 : XOR EAX,EAX
+00637709 : CMP dword ptr [EBP + 0x14],ESI
+0063770c : SETNZ AL
+0063770f : CMP EAX,ESI
+00637711 : JNZ 0x00637733
+00637713 : CALL 0x0063ab82
+00637718 : MOV dword ptr [EAX],0x16
+0063771e : PUSH ESI
+0063771f : PUSH ESI
+00637720 : PUSH ESI
+00637721 : PUSH ESI
+00637722 : PUSH ESI
+00637723 : CALL 0x006372b8
+00637728 : ADD ESP,0x14
+0063772b : XOR EAX,EAX
+0063772d : CALL 0x0064c26d
+00637732 : RET
+00637733 : PUSH dword ptr [EBP + 0x14]
+00637736 : CALL 0x0063d990
+0063773b : POP ECX
+0063773c : MOV dword ptr [EBP + -0x4],ESI
+0063773f : PUSH dword ptr [EBP + 0x14]
+00637742 : PUSH dword ptr [EBP + 0x10]
+00637745 : PUSH dword ptr [EBP + 0xc]
+00637748 : PUSH dword ptr [EBP + 0x8]
+0063774b : CALL 0x0063758d
+00637750 : ADD ESP,0x10
+00637753 : MOV dword ptr [EBP + -0x1c],EAX
+00637756 : MOV dword ptr [EBP + -0x4],0xfffffffe
+0063775d : CALL 0x00637767
+00637762 : MOV EAX,dword ptr [EBP + -0x1c]
+00637765 : JMP 0x0063772d

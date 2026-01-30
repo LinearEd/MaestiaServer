@@ -1,0 +1,109 @@
+PROGRAM  : Maestia.exe
+FUNCTION : _CountryEnumProc@4
+ENTRY    : 00655534
+BODY     : [[00655534, 006555cb]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    _CountryEnumProc@4
+   
+   Library: Visual Studio 2008 Release */
+
+void _CountryEnumProc_4(void)
+
+{
+  int *piVar1;
+  _ptiddata p_Var2;
+  LCID Locale;
+  int iVar3;
+  CHAR local_80 [120];
+  uint local_8;
+  
+  local_8 = DAT_00d66fa0 ^ (uint)&stack0xfffffffc;
+  p_Var2 = __getptd();
+  Locale = _LcidFromHexString();
+  iVar3 = GetLocaleInfoA(Locale,(-(uint)((p_Var2->_setloc_data).bAbbrevCountry != 0) & 0xfffff005) +
+                                0x1002,local_80,0x78);
+  if (iVar3 == 0) {
+    (p_Var2->_setloc_data).iLocState = 0;
+  }
+  else {
+    iVar3 = __stricmp((char *)(p_Var2->_setloc_data).pchCountry,local_80);
+    if ((iVar3 == 0) && (iVar3 = _TestDefaultCountry(Locale), iVar3 != 0)) {
+      piVar1 = &(p_Var2->_setloc_data).iLocState;
+      *piVar1 = *piVar1 | 4;
+      *(LCID *)(p_Var2->_setloc_data)._cachein = Locale;
+      (p_Var2->_setloc_data)._cachecp = Locale;
+    }
+  }
+  __security_check_cookie(local_8 ^ (uint)&stack0xfffffffc);
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00655534 : MOV EDI,EDI
+00655536 : PUSH EBP
+00655537 : MOV EBP,ESP
+00655539 : SUB ESP,0x7c
+0065553c : MOV EAX,[0x00d66fa0]
+00655541 : XOR EAX,EBP
+00655543 : MOV dword ptr [EBP + -0x4],EAX
+00655546 : PUSH ESI
+00655547 : PUSH EDI
+00655548 : MOV EDI,dword ptr [EBP + 0x8]
+0065554b : CALL 0x006458f6
+00655550 : MOV ESI,EAX
+00655552 : MOV EDX,EDI
+00655554 : ADD ESI,0x9c
+0065555a : CALL 0x006554e5
+0065555f : MOV EDI,EAX
+00655561 : PUSH 0x78
+00655563 : LEA EAX,[EBP + -0x7c]
+00655566 : PUSH EAX
+00655567 : MOV EAX,dword ptr [ESI + 0x14]
+0065556a : NEG EAX
+0065556c : SBB EAX,EAX
+0065556e : AND EAX,0xfffff005
+00655573 : ADD EAX,0x1002
+00655578 : PUSH EAX
+00655579 : PUSH EDI
+0065557a : CALL dword ptr [0x00b852d4]
+00655580 : TEST EAX,EAX
+00655582 : JNZ 0x0065558a
+00655584 : AND dword ptr [ESI + 0x8],EAX
+00655587 : INC EAX
+00655588 : JMP 0x006555bc
+0065558a : LEA EAX,[EBP + -0x7c]
+0065558d : PUSH EAX
+0065558e : PUSH dword ptr [ESI + 0x4]
+00655591 : CALL 0x0063b8b9
+00655596 : POP ECX
+00655597 : POP ECX
+00655598 : TEST EAX,EAX
+0065559a : JNZ 0x006555b1
+0065559c : PUSH EDI
+0065559d : CALL 0x006554c1
+006555a2 : POP ECX
+006555a3 : TEST EAX,EAX
+006555a5 : JZ 0x006555b1
+006555a7 : OR dword ptr [ESI + 0x8],0x4
+006555ab : MOV dword ptr [ESI + 0x1c],EDI
+006555ae : MOV dword ptr [ESI + 0x18],EDI
+006555b1 : MOV EAX,dword ptr [ESI + 0x8]
+006555b4 : SHR EAX,0x2
+006555b7 : NOT EAX
+006555b9 : AND EAX,0x1
+006555bc : MOV ECX,dword ptr [EBP + -0x4]
+006555bf : POP EDI
+006555c0 : XOR ECX,EBP
+006555c2 : POP ESI
+006555c3 : CALL 0x00633e6b
+006555c8 : LEAVE
+006555c9 : RET 0x4

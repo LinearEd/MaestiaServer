@@ -1,0 +1,104 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00686550
+ENTRY    : 00686550
+BODY     : [[00686550, 0068656c] [00686570, 006865cf]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined4 FUN_00686550(void)
+
+{
+  int *piVar1;
+  int iVar2;
+  int *piVar3;
+  int *piVar4;
+  int unaff_EBX;
+  
+  piVar1 = *(int **)(unaff_EBX + 0x28);
+  if (piVar1 == (int *)0x0) {
+    return 0x26;
+  }
+  piVar3 = piVar1 + *(int *)(unaff_EBX + 0x24) + -1;
+  piVar4 = piVar3;
+  while( true ) {
+    if (piVar4 < piVar1) {
+      while( true ) {
+        if (piVar3 < piVar1) {
+          return 0x26;
+        }
+        if (*(int *)(*piVar3 + 4) == 0x756e6963) break;
+        piVar3 = piVar3 + -1;
+      }
+      *(int *)(unaff_EBX + 0x5c) = *piVar3;
+      return 0;
+    }
+    iVar2 = *piVar4;
+    if ((*(int *)(iVar2 + 4) == 0x756e6963) &&
+       (((*(short *)(iVar2 + 8) == 3 && (*(short *)(iVar2 + 10) == 10)) ||
+        ((*(short *)(iVar2 + 8) == 0 && (*(short *)(iVar2 + 10) == 4)))))) break;
+    piVar4 = piVar4 + -1;
+  }
+  *(int *)(unaff_EBX + 0x5c) = iVar2;
+  return 0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00686550 : PUSH ESI
+00686551 : MOV ESI,dword ptr [EBX + 0x28]
+00686554 : TEST ESI,ESI
+00686556 : JNZ 0x0068655d
+00686558 : LEA EAX,[ESI + 0x26]
+0068655b : POP ESI
+0068655c : RET
+0068655d : MOV EAX,dword ptr [EBX + 0x24]
+00686560 : LEA EAX,[ESI + EAX*0x4 + -0x4]
+00686564 : MOV EDX,EAX
+00686566 : PUSH EDI
+00686567 : CMP EDX,ESI
+00686569 : JC 0x0068659f
+0068656b : JMP 0x00686570
+00686570 : MOV ECX,dword ptr [EDX]
+00686572 : CMP dword ptr [ECX + 0x4],0x756e6963
+00686579 : JNZ 0x00686598
+0068657b : MOVZX EDI,word ptr [ECX + 0x8]
+0068657f : CMP DI,0x3
+00686583 : JNZ 0x0068658c
+00686585 : CMP word ptr [ECX + 0xa],0xa
+0068658a : JZ 0x006865be
+0068658c : TEST DI,DI
+0068658f : JNZ 0x00686598
+00686591 : CMP word ptr [ECX + 0xa],0x4
+00686596 : JZ 0x006865be
+00686598 : SUB EDX,0x4
+0068659b : CMP EDX,ESI
+0068659d : JNC 0x00686570
+0068659f : CMP EAX,ESI
+006865a1 : JC 0x006865b6
+006865a3 : MOV ECX,0x756e6963
+006865a8 : MOV EDX,dword ptr [EAX]
+006865aa : CMP dword ptr [EDX + 0x4],ECX
+006865ad : JZ 0x006865c6
+006865af : SUB EAX,0x4
+006865b2 : CMP EAX,ESI
+006865b4 : JNC 0x006865a8
+006865b6 : POP EDI
+006865b7 : MOV EAX,0x26
+006865bc : POP ESI
+006865bd : RET
+006865be : POP EDI
+006865bf : MOV dword ptr [EBX + 0x5c],ECX
+006865c2 : XOR EAX,EAX
+006865c4 : POP ESI
+006865c5 : RET
+006865c6 : MOV EAX,EDX
+006865c8 : POP EDI
+006865c9 : MOV dword ptr [EBX + 0x5c],EAX
+006865cc : XOR EAX,EAX
+006865ce : POP ESI
+006865cf : RET

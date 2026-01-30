@@ -1,0 +1,84 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005f75d0
+ENTRY    : 005f75d0
+BODY     : [[005f75d0, 005f763a]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+long FUN_005f75d0(void)
+
+{
+  long lVar1;
+  int *piVar2;
+  int in_ECX;
+  
+  lVar1 = _ftell(*(FILE **)(in_ECX + 0x10));
+  if (lVar1 < 0) {
+    piVar2 = __errno();
+    if (*piVar2 == 2) {
+      *(undefined4 *)(in_ECX + 0x18) = 0x1001;
+      return lVar1;
+    }
+    piVar2 = __errno();
+    if (*piVar2 != 0xd) {
+      piVar2 = __errno();
+      if (*piVar2 != 1) {
+        piVar2 = __errno();
+        *(uint *)(in_ECX + 0x18) = (*piVar2 == 0x1c) + 0x1003;
+        return lVar1;
+      }
+    }
+    *(undefined4 *)(in_ECX + 0x18) = 0x1002;
+  }
+  return lVar1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005f75d0 : PUSH ESI
+005f75d1 : PUSH EDI
+005f75d2 : MOV EDI,ECX
+005f75d4 : MOV EAX,dword ptr [EDI + 0x10]
+005f75d7 : PUSH EAX
+005f75d8 : CALL 0x0063751f
+005f75dd : MOV ESI,EAX
+005f75df : ADD ESP,0x4
+005f75e2 : TEST ESI,ESI
+005f75e4 : JGE 0x005f7638
+005f75e6 : CALL 0x0063ab82
+005f75eb : CMP dword ptr [EAX],0x2
+005f75ee : JNZ 0x005f75fd
+005f75f0 : MOV EAX,0x1001
+005f75f5 : MOV dword ptr [EDI + 0x18],EAX
+005f75f8 : POP EDI
+005f75f9 : MOV EAX,ESI
+005f75fb : POP ESI
+005f75fc : RET
+005f75fd : CALL 0x0063ab82
+005f7602 : CMP dword ptr [EAX],0xd
+005f7605 : JZ 0x005f762e
+005f7607 : CALL 0x0063ab82
+005f760c : CMP dword ptr [EAX],0x1
+005f760f : JZ 0x005f762e
+005f7611 : CALL 0x0063ab82
+005f7616 : XOR ECX,ECX
+005f7618 : CMP dword ptr [EAX],0x1c
+005f761b : SETZ CL
+005f761e : ADD ECX,0x1003
+005f7624 : MOV EAX,ECX
+005f7626 : MOV dword ptr [EDI + 0x18],EAX
+005f7629 : POP EDI
+005f762a : MOV EAX,ESI
+005f762c : POP ESI
+005f762d : RET
+005f762e : MOV EAX,0x1002
+005f7633 : MOV dword ptr [EDI + 0x18],EAX
+005f7636 : MOV EAX,ESI
+005f7638 : POP EDI
+005f7639 : POP ESI
+005f763a : RET

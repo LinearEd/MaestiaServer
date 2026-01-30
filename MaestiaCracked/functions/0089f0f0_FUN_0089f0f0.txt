@@ -1,0 +1,226 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0089f0f0
+ENTRY    : 0089f0f0
+BODY     : [[0089f0f0, 0089f269]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void * FUN_0089f0f0(char *param_1,int param_2)
+
+{
+  byte bVar1;
+  longlong lVar2;
+  ushort uVar3;
+  void *pvVar4;
+  int iVar5;
+  int iVar6;
+  int iVar7;
+  
+  if ((*param_1 == -1) && (param_1[1] == -2)) {
+    iVar6 = (param_2 + -2) / 2;
+    lVar2 = (ulonglong)(iVar6 + 1) * 2;
+    pvVar4 = (void *)FUN_006f0760(-(uint)((int)((ulonglong)lVar2 >> 0x20) != 0) | (uint)lVar2,"",0,
+                                  (DAT_01725270 >> 3 & 1) == 0);
+    _memcpy(pvVar4,param_1 + 2,param_2 - 2);
+    *(undefined2 *)((int)pvVar4 + iVar6 * 2) = 0;
+    return pvVar4;
+  }
+  if (((*param_1 == -0x11) && (param_1[1] == -0x45)) && (param_1[2] == -0x41)) {
+    iVar6 = 3;
+  }
+  else {
+    iVar6 = 0;
+  }
+  iVar7 = 0;
+  iVar5 = iVar6;
+  while (iVar5 < param_2) {
+    if (param_1[iVar5] < '\0') {
+      iVar5 = iVar5 + ((param_1[iVar5] & 0xe0U) != 0xc0) + 2;
+    }
+    else {
+      iVar5 = iVar5 + 1;
+    }
+    iVar7 = iVar7 + 1;
+  }
+  lVar2 = (ulonglong)(iVar7 + 1) * 2;
+  pvVar4 = (void *)FUN_006f0760(-(uint)((int)((ulonglong)lVar2 >> 0x20) != 0) | (uint)lVar2,"",0,
+                                (DAT_01725270 >> 3 & 1) == 0);
+  iVar7 = 0;
+  while (iVar6 < param_2) {
+    bVar1 = param_1[iVar6];
+    if ((char)bVar1 < '\0') {
+      if ((bVar1 & 0xe0) == 0xc0) {
+        uVar3 = (ushort)(param_1[iVar6 + 1] & 0x3f) | (ushort)(bVar1 & 0x1f) << 6;
+        iVar6 = iVar6 + 2;
+      }
+      else {
+        uVar3 = ((ushort)(param_1[iVar6 + 1] & 0x3f) | (ushort)bVar1 << 6) << 6 |
+                (ushort)(param_1[iVar6 + 2] & 0x3f);
+        iVar6 = iVar6 + 3;
+      }
+    }
+    else {
+      uVar3 = (ushort)bVar1;
+      iVar6 = iVar6 + 1;
+    }
+    *(ushort *)((int)pvVar4 + iVar7 * 2) = uVar3;
+    iVar7 = iVar7 + 1;
+  }
+  *(undefined2 *)((int)pvVar4 + iVar7 * 2) = 0;
+  return pvVar4;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0089f0f0 : PUSH EBP
+0089f0f1 : MOV EBP,ESP
+0089f0f3 : PUSH EBX
+0089f0f4 : MOV EBX,dword ptr [EBP + 0x8]
+0089f0f7 : MOV AL,byte ptr [EBX]
+0089f0f9 : PUSH ESI
+0089f0fa : PUSH EDI
+0089f0fb : CMP AL,0xff
+0089f0fd : JNZ 0x0089f16b
+0089f0ff : CMP byte ptr [EBX + 0x1],0xfe
+0089f103 : JNZ 0x0089f16b
+0089f105 : MOV EAX,dword ptr [EBP + 0xc]
+0089f108 : MOV ECX,dword ptr [0x01725270]
+0089f10e : ADD EAX,-0x2
+0089f111 : CDQ
+0089f112 : SUB EAX,EDX
+0089f114 : SHR ECX,0x3
+0089f117 : AND ECX,0x1
+0089f11a : MOV ESI,EAX
+0089f11c : XOR EAX,EAX
+0089f11e : SAR ESI,0x1
+0089f120 : TEST ECX,ECX
+0089f122 : SETZ AL
+0089f125 : XOR ECX,ECX
+0089f127 : MOV EDX,0x2
+0089f12c : PUSH EAX
+0089f12d : LEA EAX,[ESI + 0x1]
+0089f130 : MUL EDX
+0089f132 : SETO CL
+0089f135 : PUSH 0x0
+0089f137 : PUSH 0xbf1a4b
+0089f13c : NEG ECX
+0089f13e : OR ECX,EAX
+0089f140 : PUSH ECX
+0089f141 : CALL 0x006f0760
+0089f146 : MOV EDI,EAX
+0089f148 : MOV EAX,dword ptr [EBP + 0xc]
+0089f14b : ADD EAX,-0x2
+0089f14e : PUSH EAX
+0089f14f : ADD EBX,0x2
+0089f152 : PUSH EBX
+0089f153 : PUSH EDI
+0089f154 : CALL 0x0063ae40
+0089f159 : ADD ESP,0x1c
+0089f15c : XOR ECX,ECX
+0089f15e : MOV word ptr [EDI + ESI*0x2],CX
+0089f162 : MOV EAX,EDI
+0089f164 : POP EDI
+0089f165 : POP ESI
+0089f166 : POP EBX
+0089f167 : POP EBP
+0089f168 : RET 0x8
+0089f16b : CMP AL,0xef
+0089f16d : JNZ 0x0089f182
+0089f16f : CMP byte ptr [EBX + 0x1],0xbb
+0089f173 : JNZ 0x0089f182
+0089f175 : CMP byte ptr [EBX + 0x2],0xbf
+0089f179 : JNZ 0x0089f182
+0089f17b : MOV EDI,0x3
+0089f180 : JMP 0x0089f184
+0089f182 : XOR EDI,EDI
+0089f184 : XOR ESI,ESI
+0089f186 : CMP EDI,dword ptr [EBP + 0xc]
+0089f189 : MOV ECX,EDI
+0089f18b : JGE 0x0089f1ae
+0089f18d : LEA ECX,[ECX]
+0089f190 : MOV AL,byte ptr [ECX + EBX*0x1]
+0089f193 : TEST AL,AL
+0089f195 : JNS 0x0089f1a7
+0089f197 : XOR EDX,EDX
+0089f199 : AND AL,0xe0
+0089f19b : CMP AL,0xc0
+0089f19d : SETNZ DL
+0089f1a0 : ADD EDX,0x2
+0089f1a3 : ADD ECX,EDX
+0089f1a5 : JMP 0x0089f1a8
+0089f1a7 : INC ECX
+0089f1a8 : INC ESI
+0089f1a9 : CMP ECX,dword ptr [EBP + 0xc]
+0089f1ac : JL 0x0089f190
+0089f1ae : MOV EAX,[0x01725270]
+0089f1b3 : SHR EAX,0x3
+0089f1b6 : AND EAX,0x1
+0089f1b9 : MOV ECX,0x0
+0089f1be : SETZ CL
+0089f1c1 : LEA EAX,[ESI + 0x1]
+0089f1c4 : MOV EDX,0x2
+0089f1c9 : PUSH ECX
+0089f1ca : XOR ECX,ECX
+0089f1cc : MUL EDX
+0089f1ce : SETO CL
+0089f1d1 : PUSH 0x0
+0089f1d3 : PUSH 0xbf1a4b
+0089f1d8 : NEG ECX
+0089f1da : OR ECX,EAX
+0089f1dc : PUSH ECX
+0089f1dd : CALL 0x006f0760
+0089f1e2 : ADD ESP,0x10
+0089f1e5 : XOR ESI,ESI
+0089f1e7 : CMP EDI,dword ptr [EBP + 0xc]
+0089f1ea : MOV dword ptr [EBP + 0x8],EAX
+0089f1ed : MOV ECX,EDI
+0089f1ef : JGE 0x0089f25d
+0089f1f1 : MOV DL,byte ptr [ECX + EBX*0x1]
+0089f1f4 : TEST DL,DL
+0089f1f6 : JNS 0x0089f24b
+0089f1f8 : MOV AL,DL
+0089f1fa : AND AL,0xe0
+0089f1fc : CMP AL,0xc0
+0089f1fe : MOV AL,byte ptr [ECX + EBX*0x1 + 0x1]
+0089f202 : JNZ 0x0089f220
+0089f204 : AND DL,0x1f
+0089f207 : AND AL,0x3f
+0089f209 : MOVZX DX,DL
+0089f20d : MOVZX AX,AL
+0089f211 : SHL DX,0x6
+0089f215 : OR AX,DX
+0089f218 : ADD ECX,0x2
+0089f21b : MOVZX EDX,AX
+0089f21e : JMP 0x0089f250
+0089f220 : AND AL,0x3f
+0089f222 : MOVZX DX,DL
+0089f226 : SHL DX,0x6
+0089f22a : MOVZX AX,AL
+0089f22e : OR AX,DX
+0089f231 : MOV DL,byte ptr [ECX + EBX*0x1 + 0x2]
+0089f235 : AND DL,0x3f
+0089f238 : MOVZX DX,DL
+0089f23c : SHL AX,0x6
+0089f240 : OR AX,DX
+0089f243 : ADD ECX,0x3
+0089f246 : MOVZX EDX,AX
+0089f249 : JMP 0x0089f250
+0089f24b : MOVZX DX,DL
+0089f24f : INC ECX
+0089f250 : MOV EAX,dword ptr [EBP + 0x8]
+0089f253 : MOV word ptr [EAX + ESI*0x2],DX
+0089f257 : INC ESI
+0089f258 : CMP ECX,dword ptr [EBP + 0xc]
+0089f25b : JL 0x0089f1f1
+0089f25d : XOR ECX,ECX
+0089f25f : POP EDI
+0089f260 : MOV word ptr [EAX + ESI*0x2],CX
+0089f264 : POP ESI
+0089f265 : POP EBX
+0089f266 : POP EBP
+0089f267 : RET 0x8

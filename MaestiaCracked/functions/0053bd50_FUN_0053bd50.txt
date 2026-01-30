@@ -1,0 +1,110 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0053bd50
+ENTRY    : 0053bd50
+BODY     : [[0053bd50, 0053bdcd]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined4 FUN_0053bd50(uint *param_1,ushort *param_2,uint param_3)
+
+{
+  int iVar1;
+  uint uVar2;
+  uint uVar3;
+  uint uVar4;
+  
+  if (param_3 == 0) {
+    return 0;
+  }
+  uVar4 = 0;
+  uVar3 = 0;
+  if (param_3 != 0) {
+    do {
+      iVar1 = _isxdigit((uint)*param_2);
+      if (iVar1 == 0) {
+        return 0;
+      }
+      uVar4 = uVar4 << 4;
+      uVar2 = FUN_0051cb70(*param_2);
+      if ((ushort)((short)uVar2 - 0x30U) < 10) {
+        uVar2 = uVar2 & 0xf;
+LAB_0053bdb0:
+        uVar4 = uVar4 | uVar2;
+      }
+      else if ((ushort)((short)uVar2 - 0x61U) < 6) {
+        uVar2 = ((uVar2 & 0xffff) - 1 & 0xf) + 10;
+        goto LAB_0053bdb0;
+      }
+      uVar3 = uVar3 + 1;
+      param_2 = param_2 + 1;
+    } while (uVar3 < param_3);
+  }
+  *param_1 = uVar4;
+  return 1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0053bd50 : PUSH EBP
+0053bd51 : MOV EBP,dword ptr [ESP + 0x10]
+0053bd55 : TEST EBP,EBP
+0053bd57 : JNZ 0x0053bd5d
+0053bd59 : XOR AL,AL
+0053bd5b : POP EBP
+0053bd5c : RET
+0053bd5d : PUSH EBX
+0053bd5e : PUSH ESI
+0053bd5f : XOR ESI,ESI
+0053bd61 : XOR EBX,EBX
+0053bd63 : PUSH EDI
+0053bd64 : MOV EDI,dword ptr [ESP + 0x18]
+0053bd68 : TEST EBP,EBP
+0053bd6a : JBE 0x0053bdba
+0053bd6c : LEA ESP,[ESP]
+0053bd70 : MOVZX EAX,word ptr [EDI]
+0053bd73 : PUSH EAX
+0053bd74 : CALL 0x00639826
+0053bd79 : ADD ESP,0x4
+0053bd7c : TEST EAX,EAX
+0053bd7e : JZ 0x0053bdc7
+0053bd80 : MOVZX EAX,word ptr [EDI]
+0053bd83 : PUSH EAX
+0053bd84 : SHL ESI,0x4
+0053bd87 : CALL 0x0051cb70
+0053bd8c : MOVZX EAX,AX
+0053bd8f : LEA ECX,[EAX + -0x30]
+0053bd92 : ADD ESP,0x4
+0053bd95 : CMP CX,0x9
+0053bd99 : JA 0x0053bda0
+0053bd9b : AND EAX,0xf
+0053bd9e : JMP 0x0053bdb0
+0053bda0 : LEA EDX,[EAX + -0x61]
+0053bda3 : CMP DX,0x5
+0053bda7 : JA 0x0053bdb2
+0053bda9 : DEC EAX
+0053bdaa : AND EAX,0xf
+0053bdad : ADD EAX,0xa
+0053bdb0 : OR ESI,EAX
+0053bdb2 : INC EBX
+0053bdb3 : ADD EDI,0x2
+0053bdb6 : CMP EBX,EBP
+0053bdb8 : JC 0x0053bd70
+0053bdba : MOV EAX,dword ptr [ESP + 0x14]
+0053bdbe : POP EDI
+0053bdbf : MOV dword ptr [EAX],ESI
+0053bdc1 : POP ESI
+0053bdc2 : POP EBX
+0053bdc3 : MOV AL,0x1
+0053bdc5 : POP EBP
+0053bdc6 : RET
+0053bdc7 : POP EDI
+0053bdc8 : POP ESI
+0053bdc9 : POP EBX
+0053bdca : XOR AL,AL
+0053bdcc : POP EBP
+0053bdcd : RET

@@ -1,0 +1,92 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00566b90
+ENTRY    : 00566b90
+BODY     : [[00566b90, 00566c20]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00566b90(uint param_1,GRefCountImpl *param_2)
+
+{
+  int in_ECX;
+  int iVar1;
+  int local_10;
+  GRefCountImpl *local_c;
+  undefined4 *local_8;
+  int *local_4;
+  
+  iVar1 = 0;
+  if (*(int *)(in_ECX + 0x74) < 2) {
+    EnterCriticalSection((LPCRITICAL_SECTION)(in_ECX + 0xac));
+    iVar1 = in_ECX;
+  }
+  local_10 = 0;
+  local_c = param_2;
+  if (param_2 != (GRefCountImpl *)0x0) {
+    GRefCountImpl::AddRef(param_2);
+  }
+  local_4 = &local_10;
+  local_8 = &param_1;
+  FUN_00564f30(in_ECX + 0xc4,&local_8,param_1 >> 8 ^ param_1);
+  if ((local_10 == 0) && (local_c != (GRefCountImpl *)0x0)) {
+    FUN_00524240();
+  }
+  if (iVar1 != 0) {
+    LeaveCriticalSection((LPCRITICAL_SECTION)(iVar1 + 0xac));
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00566b90 : SUB ESP,0x10
+00566b93 : PUSH ESI
+00566b94 : PUSH EDI
+00566b95 : MOV ESI,ECX
+00566b97 : XOR EDI,EDI
+00566b99 : CMP dword ptr [ESI + 0x74],0x2
+00566b9d : JGE 0x00566bae
+00566b9f : LEA EAX,[ESI + 0xac]
+00566ba5 : PUSH EAX
+00566ba6 : MOV EDI,ESI
+00566ba8 : CALL dword ptr [0x00b85118]
+00566bae : MOV ECX,dword ptr [ESP + 0x20]
+00566bb2 : MOV dword ptr [ESP + 0x8],0x0
+00566bba : MOV dword ptr [ESP + 0xc],ECX
+00566bbe : TEST ECX,ECX
+00566bc0 : JZ 0x00566bc7
+00566bc2 : CALL 0x00523dd0
+00566bc7 : LEA EAX,[ESP + 0x8]
+00566bcb : MOV dword ptr [ESP + 0x14],EAX
+00566bcf : MOV EAX,dword ptr [ESP + 0x1c]
+00566bd3 : LEA EDX,[ESP + 0x1c]
+00566bd7 : MOV dword ptr [ESP + 0x10],EDX
+00566bdb : MOV EDX,EAX
+00566bdd : SHR EDX,0x8
+00566be0 : XOR EDX,EAX
+00566be2 : PUSH EDX
+00566be3 : LEA EAX,[ESP + 0x14]
+00566be7 : LEA ECX,[ESI + 0xc4]
+00566bed : PUSH EAX
+00566bee : PUSH ECX
+00566bef : CALL 0x00564f30
+00566bf4 : CMP dword ptr [ESP + 0x8],0x0
+00566bf9 : JNZ 0x00566c08
+00566bfb : MOV ECX,dword ptr [ESP + 0xc]
+00566bff : TEST ECX,ECX
+00566c01 : JZ 0x00566c08
+00566c03 : CALL 0x00524240
+00566c08 : TEST EDI,EDI
+00566c0a : JZ 0x00566c19
+00566c0c : ADD EDI,0xac
+00566c12 : PUSH EDI
+00566c13 : CALL dword ptr [0x00b8511c]
+00566c19 : POP EDI
+00566c1a : POP ESI
+00566c1b : ADD ESP,0x10
+00566c1e : RET 0x8

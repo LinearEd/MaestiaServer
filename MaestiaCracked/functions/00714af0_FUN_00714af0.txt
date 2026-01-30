@@ -1,0 +1,74 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00714af0
+ENTRY    : 00714af0
+BODY     : [[00714af0, 00714b47]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined4 FUN_00714af0(void)
+
+{
+  rsize_t _DstSize;
+  int *_Dst;
+  int in_EAX;
+  int iVar1;
+  
+  _Dst = DAT_017244a8;
+  if (in_EAX != 0) {
+    for (; _Dst != DAT_017244ac; _Dst = _Dst + 1) {
+      if (in_EAX == *_Dst) {
+        iVar1 = (int)DAT_017244ac - (int)(_Dst + 1) >> 2;
+        if (0 < iVar1) {
+          _DstSize = iVar1 * 4;
+          _memmove_s(_Dst,_DstSize,_Dst + 1,_DstSize);
+        }
+        DAT_017244ac = DAT_017244ac + -1;
+        return 1;
+      }
+    }
+  }
+  return 0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00714af0 : PUSH ESI
+00714af1 : TEST EAX,EAX
+00714af3 : JZ 0x00714b10
+00714af5 : MOV ECX,dword ptr [0x017244a8]
+00714afb : MOV ESI,dword ptr [0x017244ac]
+00714b01 : CMP ECX,ESI
+00714b03 : JZ 0x00714b10
+00714b05 : CMP EAX,dword ptr [ECX]
+00714b07 : JZ 0x00714b14
+00714b09 : ADD ECX,0x4
+00714b0c : CMP ECX,ESI
+00714b0e : JNZ 0x00714b05
+00714b10 : XOR EAX,EAX
+00714b12 : POP ESI
+00714b13 : RET
+00714b14 : LEA EDX,[ECX + 0x4]
+00714b17 : MOV EAX,ESI
+00714b19 : SUB EAX,EDX
+00714b1b : SAR EAX,0x2
+00714b1e : TEST EAX,EAX
+00714b20 : JLE 0x00714b38
+00714b22 : ADD EAX,EAX
+00714b24 : ADD EAX,EAX
+00714b26 : PUSH EAX
+00714b27 : PUSH EDX
+00714b28 : PUSH EAX
+00714b29 : PUSH ECX
+00714b2a : CALL 0x00634101
+00714b2f : MOV ESI,dword ptr [0x017244ac]
+00714b35 : ADD ESP,0x10
+00714b38 : SUB ESI,0x4
+00714b3b : MOV dword ptr [0x017244ac],ESI
+00714b41 : MOV EAX,0x1
+00714b46 : POP ESI
+00714b47 : RET

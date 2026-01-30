@@ -1,0 +1,113 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00b02da0
+ENTRY    : 00b02da0
+BODY     : [[00b02da0, 00b02e6a]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined4 FUN_00b02da0(char *param_1,u_short param_2)
+
+{
+  u_short uVar1;
+  ulong uVar2;
+  int iVar3;
+  int in_ECX;
+  
+  FUN_008018d0(L"[AvaCltSockEvt::ConnectToLoginServer]");
+  FUN_00412920(0);
+  iVar3 = *(int *)(in_ECX + 8);
+  if (*(int *)(iVar3 + 0xef4) == 0) {
+    _strcpy_s((char *)(iVar3 + 0xef8),0x40,"login client");
+    if (*(int *)(iVar3 + 0xed8) == 0) {
+      FUN_006ee470(L"[ERROR][AvSocket::StartAsClient] First Call Init Functions\n");
+    }
+    else {
+      uVar1 = htons(param_2);
+      *(u_short *)(iVar3 + 0xee6) = uVar1;
+      uVar2 = inet_addr(param_1);
+      *(ulong *)(iVar3 + 0xee8) = uVar2;
+      iVar3 = FUN_006f42f0();
+      if (iVar3 != 0) goto LAB_00b02e4a;
+    }
+    FUN_008018d0(L"[AvaCltSockEvt::ConnectToLoginServer] Open login socket Failed (%S:%d)",param_1,
+                 param_2);
+    return 0;
+  }
+LAB_00b02e4a:
+  FUN_008018d0(L"[AvaCltSockEvt::ConnectToLoginServer] Open login socket success! (%S:%d)",param_1,
+               param_2);
+  return 1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00b02da0 : PUSH EBP
+00b02da1 : MOV EBP,ESP
+00b02da3 : PUSH EBX
+00b02da4 : PUSH ESI
+00b02da5 : MOV ESI,dword ptr [0x00da98e8]
+00b02dab : PUSH EDI
+00b02dac : PUSH 0xcac8f8
+00b02db1 : MOV EDI,ECX
+00b02db3 : CALL 0x008018d0
+00b02db8 : MOV ESI,dword ptr [EDI + 0x4]
+00b02dbb : ADD ESP,0x4
+00b02dbe : PUSH 0x0
+00b02dc0 : CALL 0x00412920
+00b02dc5 : MOV ESI,dword ptr [EDI + 0x8]
+00b02dc8 : CMP dword ptr [ESI + 0xef4],0x0
+00b02dcf : MOV EDI,dword ptr [EBP + 0x8]
+00b02dd2 : MOV EBX,dword ptr [EBP + 0xc]
+00b02dd5 : JNZ 0x00b02e4a
+00b02dd7 : PUSH 0xcac944
+00b02ddc : LEA EAX,[ESI + 0xef8]
+00b02de2 : PUSH 0x40
+00b02de4 : PUSH EAX
+00b02de5 : CALL 0x00638300
+00b02dea : ADD ESP,0xc
+00b02ded : CMP dword ptr [ESI + 0xed8],0x0
+00b02df4 : JNZ 0x00b02e05
+00b02df6 : PUSH 0xbf7478
+00b02dfb : CALL 0x006ee470
+00b02e00 : ADD ESP,0x4
+00b02e03 : JMP 0x00b02e29
+00b02e05 : PUSH EBX
+00b02e06 : CALL dword ptr [0x00b855c0]
+00b02e0c : PUSH EDI
+00b02e0d : MOV word ptr [ESI + 0xee6],AX
+00b02e14 : CALL dword ptr [0x00b855ac]
+00b02e1a : MOV dword ptr [ESI + 0xee8],EAX
+00b02e20 : CALL 0x006f42f0
+00b02e25 : TEST EAX,EAX
+00b02e27 : JNZ 0x00b02e4a
+00b02e29 : MOV ESI,dword ptr [0x00da98e8]
+00b02e2f : MOVZX ECX,BX
+00b02e32 : PUSH ECX
+00b02e33 : PUSH EDI
+00b02e34 : PUSH 0xcac958
+00b02e39 : CALL 0x008018d0
+00b02e3e : ADD ESP,0xc
+00b02e41 : POP EDI
+00b02e42 : POP ESI
+00b02e43 : XOR AL,AL
+00b02e45 : POP EBX
+00b02e46 : POP EBP
+00b02e47 : RET 0x8
+00b02e4a : MOV ESI,dword ptr [0x00da98e8]
+00b02e50 : MOVZX EDX,BX
+00b02e53 : PUSH EDX
+00b02e54 : PUSH EDI
+00b02e55 : PUSH 0xcac9e8
+00b02e5a : CALL 0x008018d0
+00b02e5f : ADD ESP,0xc
+00b02e62 : POP EDI
+00b02e63 : POP ESI
+00b02e64 : MOV AL,0x1
+00b02e66 : POP EBX
+00b02e67 : POP EBP
+00b02e68 : RET 0x8

@@ -1,0 +1,132 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FID_conflict:assign
+ENTRY    : 00626b9c
+BODY     : [[00626b9c, 00626c30]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Multiple Matches With Different Base Names
+    public: class std::basic_string<unsigned short,struct std::char_traits<unsigned short>,class
+   std::allocator<unsigned short> > & __thiscall std::basic_string<unsigned short,struct
+   std::char_traits<unsigned short>,class std::allocator<unsigned short> >::assign(class
+   std::basic_string<unsigned short,struct std::char_traits<unsigned short>,class
+   std::allocator<unsigned short> > const &,unsigned int,unsigned int)
+    public: class std::basic_string<wchar_t,struct std::char_traits<wchar_t>,class
+   std::allocator<wchar_t> > & __thiscall std::basic_string<wchar_t,struct
+   std::char_traits<wchar_t>,class std::allocator<wchar_t> >::assign(class
+   std::basic_string<wchar_t,struct std::char_traits<wchar_t>,class std::allocator<wchar_t> > const
+   &,unsigned int,unsigned int)
+   
+   Library: Visual Studio 2008 Release */
+
+void FID_conflict_assign(int param_1,uint param_2,uint param_3)
+
+{
+  char cVar1;
+  int iVar2;
+  int in_ECX;
+  uint uVar3;
+  
+  if (*(uint *)(param_1 + 0x14) < param_2) {
+    FUN_00622f07();
+  }
+  uVar3 = *(int *)(param_1 + 0x14) - param_2;
+  if (param_3 < uVar3) {
+    uVar3 = param_3;
+  }
+  if (in_ECX == param_1) {
+    FID_conflict_erase(uVar3 + param_2,0xffffffff);
+    FID_conflict_erase(0,param_2);
+  }
+  else {
+    cVar1 = FID_conflict__Grow(uVar3,0);
+    if (cVar1 != '\0') {
+      if (*(uint *)(param_1 + 0x18) < 8) {
+        param_1 = param_1 + 4;
+      }
+      else {
+        param_1 = *(int *)(param_1 + 4);
+      }
+      if (*(uint *)(in_ECX + 0x18) < 8) {
+        iVar2 = in_ECX + 4;
+      }
+      else {
+        iVar2 = *(int *)(in_ECX + 4);
+      }
+      copy_s<>(iVar2,*(uint *)(in_ECX + 0x18),param_1 + param_2 * 2,uVar3);
+      FID_conflict__Eos(uVar3);
+    }
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00626b9c : MOV EDI,EDI
+00626b9e : PUSH EBP
+00626b9f : MOV EBP,ESP
+00626ba1 : MOV EAX,dword ptr [EBP + 0xc]
+00626ba4 : PUSH EBX
+00626ba5 : PUSH ESI
+00626ba6 : PUSH EDI
+00626ba7 : MOV EDI,dword ptr [EBP + 0x8]
+00626baa : MOV EBX,ECX
+00626bac : CMP dword ptr [EDI + 0x14],EAX
+00626baf : JNC 0x00626bb6
+00626bb1 : CALL 0x00622f07
+00626bb6 : MOV ESI,dword ptr [EDI + 0x14]
+00626bb9 : MOV EAX,dword ptr [EBP + 0xc]
+00626bbc : SUB ESI,EAX
+00626bbe : CMP dword ptr [EBP + 0x10],ESI
+00626bc1 : JNC 0x00626bc6
+00626bc3 : MOV ESI,dword ptr [EBP + 0x10]
+00626bc6 : MOV ECX,EBX
+00626bc8 : CMP EBX,EDI
+00626bca : JNZ 0x00626be4
+00626bcc : PUSH -0x1
+00626bce : ADD ESI,EAX
+00626bd0 : PUSH ESI
+00626bd1 : CALL 0x0062661d
+00626bd6 : PUSH dword ptr [EBP + 0xc]
+00626bd9 : MOV ECX,EBX
+00626bdb : PUSH 0x0
+00626bdd : CALL 0x0062661d
+00626be2 : JMP 0x00626c28
+00626be4 : PUSH 0x0
+00626be6 : PUSH ESI
+00626be7 : CALL 0x006269f9
+00626bec : TEST AL,AL
+00626bee : JZ 0x00626c28
+00626bf0 : CMP dword ptr [EDI + 0x18],0x8
+00626bf4 : JC 0x00626bfb
+00626bf6 : MOV EDI,dword ptr [EDI + 0x4]
+00626bf9 : JMP 0x00626bfe
+00626bfb : ADD EDI,0x4
+00626bfe : MOV ECX,dword ptr [EBX + 0x18]
+00626c01 : CMP ECX,0x8
+00626c04 : JC 0x00626c0b
+00626c06 : MOV EAX,dword ptr [EBX + 0x4]
+00626c09 : JMP 0x00626c0e
+00626c0b : LEA EAX,[EBX + 0x4]
+00626c0e : MOV EDX,dword ptr [EBP + 0xc]
+00626c11 : PUSH ESI
+00626c12 : LEA EDX,[EDI + EDX*0x2]
+00626c15 : PUSH EDX
+00626c16 : PUSH ECX
+00626c17 : PUSH EAX
+00626c18 : CALL 0x0062634c
+00626c1d : ADD ESP,0x10
+00626c20 : PUSH ESI
+00626c21 : MOV ECX,EBX
+00626c23 : CALL 0x006262b6
+00626c28 : POP EDI
+00626c29 : POP ESI
+00626c2a : MOV EAX,EBX
+00626c2c : POP EBX
+00626c2d : POP EBP
+00626c2e : RET 0xc

@@ -1,0 +1,75 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_007931b0
+ENTRY    : 007931b0
+BODY     : [[007931b0, 00793229]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_007931b0(void)
+
+{
+  float *pfVar1;
+  int in_ECX;
+  int extraout_ECX;
+  int extraout_ECX_00;
+  float fVar2;
+  float fVar3;
+  float fVar4;
+  
+  if (*(int *)(in_ECX + 0x58) != 0) {
+    FUN_00793060();
+    in_ECX = extraout_ECX;
+  }
+  if (*(int *)(in_ECX + 0x5c) != 0) {
+    FUN_00793130();
+    in_ECX = extraout_ECX_00;
+  }
+  if ((*(char *)(in_ECX + 0x98) != '\0') &&
+     (pfVar1 = *(float **)(in_ECX + 0x58), pfVar1 != (float *)0x0)) {
+    fVar4 = pfVar1[2] - *(float *)(in_ECX + 0x68);
+    fVar3 = pfVar1[1] - *(float *)(in_ECX + 100);
+    fVar2 = *pfVar1 - *(float *)(in_ECX + 0x60);
+    *(float *)(in_ECX + 0x94) = fVar4 * fVar4 + fVar3 * fVar3 + fVar2 * fVar2;
+    *(undefined1 *)(in_ECX + 0x98) = 0;
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+007931b0 : MOV EDX,dword ptr [ECX + 0x58]
+007931b3 : TEST EDX,EDX
+007931b5 : JZ 0x007931bc
+007931b7 : CALL 0x00793060
+007931bc : MOV EDX,dword ptr [ECX + 0x5c]
+007931bf : TEST EDX,EDX
+007931c1 : JZ 0x007931c8
+007931c3 : CALL 0x00793130
+007931c8 : CMP byte ptr [ECX + 0x98],0x0
+007931cf : JZ 0x00793221
+007931d1 : MOV EAX,dword ptr [ECX + 0x58]
+007931d4 : TEST EAX,EAX
+007931d6 : JZ 0x00793221
+007931d8 : MOVSS XMM2,dword ptr [EAX + 0x8]
+007931dd : SUBSS XMM2,dword ptr [ECX + 0x68]
+007931e2 : MOVSS XMM1,dword ptr [EAX + 0x4]
+007931e7 : SUBSS XMM1,dword ptr [ECX + 0x64]
+007931ec : MOVSS XMM0,dword ptr [EAX]
+007931f0 : SUBSS XMM0,dword ptr [ECX + 0x60]
+007931f5 : MOVAPS XMM3,XMM2
+007931f8 : MULSS XMM3,XMM2
+007931fc : MOVAPS XMM2,XMM1
+007931ff : MULSS XMM2,XMM1
+00793203 : MOVAPS XMM1,XMM0
+00793206 : ADDSS XMM3,XMM2
+0079320a : MULSS XMM1,XMM0
+0079320e : ADDSS XMM3,XMM1
+00793212 : MOVSS dword ptr [ECX + 0x94],XMM3
+0079321a : MOV byte ptr [ECX + 0x98],0x0
+00793221 : MOVSS XMM0,dword ptr [ECX + 0x94]
+00793229 : RET

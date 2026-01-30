@@ -1,0 +1,203 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __ftime64_s
+ENTRY    : 0063cf8a
+BODY     : [[0063cf8a, 0063cfed] [0063cff1, 0063d0ff]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+/* Library Function - Single Match
+    __ftime64_s
+   
+   Library: Visual Studio 2008 Release */
+
+void __ftime64_s(undefined8 *param_1)
+
+{
+  longlong lVar1;
+  undefined2 uVar2;
+  int *piVar3;
+  errno_t eVar4;
+  DWORD DVar5;
+  DWORD DVar6;
+  DWORD DVar7;
+  longlong lVar8;
+  undefined8 uVar9;
+  _FILETIME local_c0;
+  long local_b8;
+  _TIME_ZONE_INFORMATION local_b4;
+  uint local_8;
+  
+  local_8 = DAT_00d66fa0 ^ (uint)&stack0xfffffffc;
+  local_b8 = 0;
+  if (param_1 == (undefined8 *)0x0) {
+    piVar3 = __errno();
+    *piVar3 = 0x16;
+    __invalid_parameter(0,0,0,0,0);
+  }
+  else {
+    ___tzset();
+    eVar4 = __get_timezone(&local_b8);
+    if (eVar4 != 0) {
+                    /* WARNING: Subroutine does not return */
+      __invoke_watson((wchar_t *)0x0,(wchar_t *)0x0,(wchar_t *)0x0,0,0);
+    }
+    *(short *)((int)param_1 + 10) = (short)(local_b8 / 0x3c);
+    GetSystemTimeAsFileTime(&local_c0);
+    DVar7 = local_c0.dwHighDateTime;
+    DVar6 = local_c0.dwLowDateTime;
+    lVar8 = __aulldiv(local_c0.dwLowDateTime,local_c0.dwHighDateTime,600000000,0);
+    lVar1 = CONCAT44(DAT_00d7b7ec,DAT_00d7b7e8);
+    if (lVar8 != lVar1) {
+      DVar5 = GetTimeZoneInformation(&local_b4);
+      DVar6 = local_c0.dwLowDateTime;
+      DVar7 = local_c0.dwHighDateTime;
+      lVar1 = lVar8;
+      if (DVar5 == 0xffffffff) {
+        _DAT_00d670bc = 0xffffffff;
+      }
+      else if (((DVar5 == 2) && (local_b4.DaylightDate.wMonth != 0)) && (local_b4.DaylightBias != 0)
+              ) {
+        _DAT_00d670bc = 1;
+      }
+      else {
+        _DAT_00d670bc = 0;
+      }
+    }
+    DAT_00d7b7ec = (undefined4)((ulonglong)lVar1 >> 0x20);
+    DAT_00d7b7e8 = (undefined4)lVar1;
+    *(undefined2 *)((int)param_1 + 0xc) = DAT_00d670bc;
+    uVar9 = __aulldiv(DVar6,DVar7,10000,0);
+    uVar2 = __aullrem(uVar9,1000,0);
+    *(undefined2 *)(param_1 + 1) = uVar2;
+    uVar9 = __aulldiv(DVar6 + 0x2ac18000,DVar7 + 0xfe624e21 + (uint)(0xd53e7fff < DVar6),
+                      FUN_00989680,0);
+    *param_1 = uVar9;
+  }
+  __security_check_cookie(local_8 ^ (uint)&stack0xfffffffc);
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0063cf8a : MOV EDI,EDI
+0063cf8c : PUSH EBP
+0063cf8d : MOV EBP,ESP
+0063cf8f : SUB ESP,0xc4
+0063cf95 : MOV EAX,[0x00d66fa0]
+0063cf9a : XOR EAX,EBP
+0063cf9c : MOV dword ptr [EBP + -0x4],EAX
+0063cf9f : PUSH ESI
+0063cfa0 : MOV ESI,dword ptr [EBP + 0x8]
+0063cfa3 : PUSH EDI
+0063cfa4 : XOR EDI,EDI
+0063cfa6 : MOV dword ptr [EBP + 0xffffff4c],EDI
+0063cfac : CMP ESI,EDI
+0063cfae : JNZ 0x0063cfce
+0063cfb0 : CALL 0x0063ab82
+0063cfb5 : PUSH 0x16
+0063cfb7 : POP ESI
+0063cfb8 : PUSH EDI
+0063cfb9 : PUSH EDI
+0063cfba : PUSH EDI
+0063cfbb : PUSH EDI
+0063cfbc : PUSH EDI
+0063cfbd : MOV dword ptr [EAX],ESI
+0063cfbf : CALL 0x006372b8
+0063cfc4 : ADD ESP,0x14
+0063cfc7 : MOV EAX,ESI
+0063cfc9 : JMP 0x0063d0f2
+0063cfce : CALL 0x0064a80d
+0063cfd3 : LEA EAX,[EBP + 0xffffff4c]
+0063cfd9 : PUSH EAX
+0063cfda : CALL 0x0064a90f
+0063cfdf : POP ECX
+0063cfe0 : TEST EAX,EAX
+0063cfe2 : JZ 0x0063cff1
+0063cfe4 : PUSH EDI
+0063cfe5 : PUSH EDI
+0063cfe6 : PUSH EDI
+0063cfe7 : PUSH EDI
+0063cfe8 : PUSH EDI
+0063cfe9 : CALL 0x00637169
+0063cff1 : MOV EAX,dword ptr [EBP + 0xffffff4c]
+0063cff7 : PUSH EBX
+0063cff8 : PUSH 0x3c
+0063cffa : CDQ
+0063cffb : POP ECX
+0063cffc : IDIV ECX
+0063cffe : MOV word ptr [ESI + 0xa],AX
+0063d002 : LEA EAX,[EBP + 0xffffff44]
+0063d008 : PUSH EAX
+0063d009 : CALL dword ptr [0x00b85180]
+0063d00f : MOV EBX,dword ptr [EBP + 0xffffff44]
+0063d015 : PUSH EDI
+0063d016 : MOV EDI,dword ptr [EBP + 0xffffff48]
+0063d01c : PUSH 0x23c34600
+0063d021 : PUSH EDI
+0063d022 : PUSH EBX
+0063d023 : CALL 0x0063c250
+0063d028 : MOV dword ptr [EBP + 0xffffff3c],EAX
+0063d02e : MOV dword ptr [EBP + 0xffffff40],EDX
+0063d034 : CMP EAX,dword ptr [0x00d7b7e8]
+0063d03a : JNZ 0x0063d044
+0063d03c : CMP EDX,dword ptr [0x00d7b7ec]
+0063d042 : JZ 0x0063d0a6
+0063d044 : LEA EAX,[EBP + 0xffffff50]
+0063d04a : PUSH EAX
+0063d04b : CALL dword ptr [0x00b85260]
+0063d051 : CMP EAX,-0x1
+0063d054 : JZ 0x0063d07d
+0063d056 : CMP EAX,0x2
+0063d059 : JNZ 0x0063d074
+0063d05b : CMP word ptr [EBP + -0x16],0x0
+0063d060 : JZ 0x0063d074
+0063d062 : CMP dword ptr [EBP + -0x8],0x0
+0063d066 : JZ 0x0063d074
+0063d068 : MOV dword ptr [0x00d670bc],0x1
+0063d072 : JMP 0x0063d084
+0063d074 : AND dword ptr [0x00d670bc],0x0
+0063d07b : JMP 0x0063d084
+0063d07d : OR dword ptr [0x00d670bc],0xffffffff
+0063d084 : MOV EAX,dword ptr [EBP + 0xffffff3c]
+0063d08a : MOV EDI,dword ptr [EBP + 0xffffff48]
+0063d090 : MOV EBX,dword ptr [EBP + 0xffffff44]
+0063d096 : MOV [0x00d7b7e8],EAX
+0063d09b : MOV EAX,dword ptr [EBP + 0xffffff40]
+0063d0a1 : MOV [0x00d7b7ec],EAX
+0063d0a6 : MOV AX,[0x00d670bc]
+0063d0ac : PUSH 0x0
+0063d0ae : PUSH 0x2710
+0063d0b3 : PUSH EDI
+0063d0b4 : PUSH EBX
+0063d0b5 : MOV word ptr [ESI + 0xc],AX
+0063d0b9 : CALL 0x0063c250
+0063d0be : PUSH 0x0
+0063d0c0 : PUSH 0x3e8
+0063d0c5 : PUSH EDX
+0063d0c6 : PUSH EAX
+0063d0c7 : CALL 0x0065b0b0
+0063d0cc : PUSH 0x0
+0063d0ce : ADD EBX,0x2ac18000
+0063d0d4 : PUSH 0x989680
+0063d0d9 : ADC EDI,0xfe624e21
+0063d0df : PUSH EDI
+0063d0e0 : PUSH EBX
+0063d0e1 : MOV word ptr [ESI + 0x8],AX
+0063d0e5 : CALL 0x0063c250
+0063d0ea : MOV dword ptr [ESI],EAX
+0063d0ec : MOV dword ptr [ESI + 0x4],EDX
+0063d0ef : XOR EAX,EAX
+0063d0f1 : POP EBX
+0063d0f2 : MOV ECX,dword ptr [EBP + -0x4]
+0063d0f5 : POP EDI
+0063d0f6 : XOR ECX,EBP
+0063d0f8 : POP ESI
+0063d0f9 : CALL 0x00633e6b
+0063d0fe : LEAVE
+0063d0ff : RET

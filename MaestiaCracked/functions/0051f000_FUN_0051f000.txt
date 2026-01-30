@@ -1,0 +1,87 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0051f000
+ENTRY    : 0051f000
+BODY     : [[0051f000, 0051f065]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+int FUN_0051f000(undefined4 *param_1,int param_2)
+
+{
+  int iVar1;
+  int iVar2;
+  int *in_ECX;
+  int *piVar3;
+  
+  iVar1 = *in_ECX;
+  piVar3 = (int *)(iVar1 + 8 + param_2 * 0x24);
+  if ((*(int *)(iVar1 + 8 + param_2 * 0x24) == -2) || (iVar2 = param_2, piVar3[1] != param_2)) {
+    return -1;
+  }
+  do {
+    if (piVar3[1] == param_2) {
+      if (piVar3[2] == *(uint *)*param_1) {
+        if ((piVar3[2] & 0x20000U) == 0) {
+          return iVar2;
+        }
+        if ((short)piVar3[4] == (short)((uint *)*param_1)[2]) {
+          return iVar2;
+        }
+      }
+    }
+    iVar2 = *piVar3;
+    if (iVar2 == -1) {
+      return -1;
+    }
+    piVar3 = (int *)(iVar1 + 8 + iVar2 * 0x24);
+  } while( true );
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0051f000 : PUSH EBX
+0051f001 : MOV EBX,dword ptr [ECX]
+0051f003 : PUSH EDI
+0051f004 : MOV EDI,dword ptr [ESP + 0x10]
+0051f008 : LEA ECX,[EDI + EDI*0x8]
+0051f00b : CMP dword ptr [EBX + ECX*0x4 + 0x8],-0x2
+0051f010 : LEA ECX,[EBX + ECX*0x4 + 0x8]
+0051f014 : MOV EAX,EDI
+0051f016 : JZ 0x0051f05e
+0051f018 : CMP dword ptr [ECX + 0x4],EDI
+0051f01b : JNZ 0x0051f05e
+0051f01d : PUSH EBP
+0051f01e : MOV EBP,dword ptr [ESP + 0x10]
+0051f022 : PUSH ESI
+0051f023 : CMP dword ptr [ECX + 0x4],EDI
+0051f026 : JNZ 0x0051f044
+0051f028 : MOV ESI,dword ptr [EBP]
+0051f02b : MOV EDX,dword ptr [ECX + 0x8]
+0051f02e : CMP EDX,dword ptr [ESI]
+0051f030 : JNZ 0x0051f044
+0051f032 : TEST EDX,0x20000
+0051f038 : JZ 0x0051f057
+0051f03a : MOV DX,word ptr [ECX + 0x10]
+0051f03e : CMP DX,word ptr [ESI + 0x8]
+0051f042 : JZ 0x0051f057
+0051f044 : MOV EAX,dword ptr [ECX]
+0051f046 : CMP EAX,-0x1
+0051f049 : JZ 0x0051f054
+0051f04b : LEA ECX,[EAX + EAX*0x8]
+0051f04e : LEA ECX,[EBX + ECX*0x4 + 0x8]
+0051f052 : JMP 0x0051f023
+0051f054 : OR EAX,0xffffffff
+0051f057 : POP ESI
+0051f058 : POP EBP
+0051f059 : POP EDI
+0051f05a : POP EBX
+0051f05b : RET 0x8
+0051f05e : POP EDI
+0051f05f : OR EAX,0xffffffff
+0051f062 : POP EBX
+0051f063 : RET 0x8

@@ -1,0 +1,45 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005040e0
+ENTRY    : 005040e0
+BODY     : [[005040e0, 005040ec] [005040f0, 00504109]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+uint FUN_005040e0(uint param_1)
+
+{
+  byte *pbVar1;
+  uint uVar2;
+  int in_ECX;
+  int iVar3;
+  
+  iVar3 = 4;
+  uVar2 = 0x1505;
+  do {
+    pbVar1 = (byte *)(in_ECX + 3 + iVar3);
+    iVar3 = iVar3 + -1;
+    uVar2 = uVar2 * 0x1003f + (uint)*pbVar1;
+  } while (iVar3 != 0);
+  return uVar2 & param_1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005040e0 : MOV EDX,0x4
+005040e5 : MOV EAX,0x1505
+005040ea : PUSH ESI
+005040eb : JMP 0x005040f0
+005040f0 : MOVZX ESI,byte ptr [ECX + EDX*0x1 + 0x3]
+005040f5 : IMUL EAX,EAX,0x1003f
+005040fb : DEC EDX
+005040fc : ADD EAX,ESI
+005040fe : TEST EDX,EDX
+00504100 : JA 0x005040f0
+00504102 : AND EAX,dword ptr [ESP + 0x8]
+00504106 : POP ESI
+00504107 : RET 0x4

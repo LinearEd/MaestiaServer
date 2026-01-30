@@ -1,0 +1,58 @@
+PROGRAM  : Maestia.exe
+FUNCTION : Resume
+ENTRY    : 00516e20
+BODY     : [[00516e20, 00516e53]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* public: bool __thiscall GThread::Resume(void) */
+
+bool __thiscall GThread::Resume(GThread *this)
+
+{
+  LONG LVar1;
+  DWORD DVar2;
+  
+                    /* 0x116e20  136  ?Resume@GThread@@QAE_NXZ */
+  if ((*(uint *)(this + 0x18) & 1) != 0) {
+    LVar1 = InterlockedExchangeAdd((LONG *)(this + 0x1c),-1);
+    if (0 < LVar1) {
+      if ((LVar1 == 1) && (DVar2 = ResumeThread(*(HANDLE *)(this + 0x2c)), DVar2 == 0xffffffff)) {
+        return false;
+      }
+      return true;
+    }
+  }
+  return false;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00516e20 : PUSH ESI
+00516e21 : MOV ESI,ECX
+00516e23 : MOV EAX,dword ptr [ESI + 0x18]
+00516e26 : TEST AL,0x1
+00516e28 : JZ 0x00516e50
+00516e2a : PUSH -0x1
+00516e2c : LEA ECX,[ESI + 0x1c]
+00516e2f : PUSH ECX
+00516e30 : CALL dword ptr [0x00b851cc]
+00516e36 : CMP EAX,0x1
+00516e39 : JL 0x00516e50
+00516e3b : JNZ 0x00516e4c
+00516e3d : MOV EDX,dword ptr [ESI + 0x2c]
+00516e40 : PUSH EDX
+00516e41 : CALL dword ptr [0x00b851e4]
+00516e47 : CMP EAX,-0x1
+00516e4a : JZ 0x00516e50
+00516e4c : MOV AL,0x1
+00516e4e : POP ESI
+00516e4f : RET
+00516e50 : XOR AL,AL
+00516e52 : POP ESI
+00516e53 : RET

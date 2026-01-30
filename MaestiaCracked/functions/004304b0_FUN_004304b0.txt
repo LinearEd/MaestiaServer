@@ -1,0 +1,70 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_004304b0
+ENTRY    : 004304b0
+BODY     : [[004304b0, 004304f7]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+size_t FUN_004304b0(void *param_1,int param_2,int param_3)
+
+{
+  uint uVar1;
+  uint uVar2;
+  int in_ECX;
+  size_t _Size;
+  
+  uVar1 = *(uint *)(in_ECX + 0x24);
+  uVar2 = *(uint *)(in_ECX + 0x20);
+  if (uVar2 <= uVar1) {
+    return 0;
+  }
+  _Size = param_2 * param_3;
+  if (uVar2 <= _Size + uVar1) {
+    _Size = uVar2 - uVar1;
+  }
+  _memcpy(param_1,(void *)(*(int *)(in_ECX + 0x1c) + uVar1),_Size);
+  *(int *)(in_ECX + 0x24) = *(int *)(in_ECX + 0x24) + _Size;
+  return _Size;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+004304b0 : PUSH EBP
+004304b1 : MOV EBP,ESP
+004304b3 : PUSH EDI
+004304b4 : MOV EDI,ECX
+004304b6 : MOV ECX,dword ptr [EDI + 0x24]
+004304b9 : MOV EAX,dword ptr [EDI + 0x20]
+004304bc : CMP ECX,EAX
+004304be : JC 0x004304c7
+004304c0 : XOR EAX,EAX
+004304c2 : POP EDI
+004304c3 : POP EBP
+004304c4 : RET 0xc
+004304c7 : PUSH ESI
+004304c8 : MOV ESI,dword ptr [EBP + 0xc]
+004304cb : IMUL ESI,dword ptr [EBP + 0x10]
+004304cf : LEA EDX,[ESI + ECX*0x1]
+004304d2 : CMP EDX,EAX
+004304d4 : JC 0x004304da
+004304d6 : SUB EAX,ECX
+004304d8 : MOV ESI,EAX
+004304da : MOV EAX,dword ptr [EDI + 0x1c]
+004304dd : ADD EAX,ECX
+004304df : MOV ECX,dword ptr [EBP + 0x8]
+004304e2 : PUSH ESI
+004304e3 : PUSH EAX
+004304e4 : PUSH ECX
+004304e5 : CALL 0x0063ae40
+004304ea : ADD ESP,0xc
+004304ed : ADD dword ptr [EDI + 0x24],ESI
+004304f0 : MOV EAX,ESI
+004304f2 : POP ESI
+004304f3 : POP EDI
+004304f4 : POP EBP
+004304f5 : RET 0xc

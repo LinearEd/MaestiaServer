@@ -1,0 +1,174 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_006ebd00
+ENTRY    : 006ebd00
+BODY     : [[006ebd00, 006ebe33]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined1 FUN_006ebd00(int param_1,int param_2)
+
+{
+  char cVar1;
+  undefined4 in_ECX;
+  char *pcVar2;
+  undefined1 local_21;
+  undefined **local_20;
+  undefined4 local_1c;
+  int local_18;
+  undefined4 local_14;
+  undefined1 local_10;
+  void *local_c;
+  undefined1 *puStack_8;
+  undefined4 local_4;
+  
+  local_4 = 0xffffffff;
+  puStack_8 = &LAB_00b4f2f6;
+  local_c = ExceptionList;
+  ExceptionList = &local_c;
+  local_21 = 0;
+  if (((param_1 == 0) || (param_2 == 0)) || (param_1 == param_2)) {
+    pcVar2 = "CForest::ChangeTree, NULL CTree pointer passed in";
+  }
+  else {
+    cVar1 = FUN_006e9bb0(DAT_00d66fa0 ^ (uint)&stack0xffffffc8);
+    if (cVar1 == '\0') {
+      pcVar2 = "CForest::ChangeTree, old tree pointer was not registered with CForest::RegisterTree"
+      ;
+    }
+    else {
+      cVar1 = FUN_006e9bb0();
+      if ((cVar1 != '\0') || (cVar1 = FUN_006eb000(in_ECX,param_2), cVar1 != '\0')) {
+        local_20 = &PTR_FUN_00cd4100;
+        local_1c = 0;
+        local_18 = 0;
+        local_14 = 0;
+        local_10 = 0;
+        local_4 = 0;
+        cVar1 = FUN_006ea4f0(param_1,&local_20);
+        if ((cVar1 != '\0') &&
+           ((local_18 == 0 || (cVar1 = FUN_006ebab0(in_ECX,local_1c,local_18), cVar1 != '\0')))) {
+          local_21 = 1;
+        }
+        cVar1 = FUN_006eba20(in_ECX,param_1);
+        if (cVar1 == '\0') {
+          FUN_00807d70("CForest::ChangeTree, failed to unregister old tree");
+          local_21 = 0;
+        }
+        local_4 = 0xffffffff;
+        FUN_00454f80();
+        ExceptionList = local_c;
+        return local_21;
+      }
+      pcVar2 = "CForest::ChangeTree, failed to register new tree";
+    }
+  }
+  FUN_00807d70(pcVar2);
+  ExceptionList = local_c;
+  return 0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006ebd00 : PUSH -0x1
+006ebd02 : PUSH 0xb4f2f6
+006ebd07 : MOV EAX,FS:[0x0]
+006ebd0d : PUSH EAX
+006ebd0e : SUB ESP,0x1c
+006ebd11 : PUSH EBX
+006ebd12 : PUSH EBP
+006ebd13 : PUSH ESI
+006ebd14 : PUSH EDI
+006ebd15 : MOV EAX,[0x00d66fa0]
+006ebd1a : XOR EAX,ESP
+006ebd1c : PUSH EAX
+006ebd1d : LEA EAX,[ESP + 0x30]
+006ebd21 : MOV FS:[0x0],EAX
+006ebd27 : MOV ESI,ECX
+006ebd29 : MOV EBX,dword ptr [ESP + 0x40]
+006ebd2d : MOV byte ptr [ESP + 0x1b],0x0
+006ebd32 : TEST EBX,EBX
+006ebd34 : JZ 0x006ebe0d
+006ebd3a : MOV EBP,dword ptr [ESP + 0x44]
+006ebd3e : TEST EBP,EBP
+006ebd40 : JZ 0x006ebe0d
+006ebd46 : CMP EBX,EBP
+006ebd48 : JZ 0x006ebe0d
+006ebd4e : MOV EDI,EBX
+006ebd50 : MOV EDX,ESI
+006ebd52 : CALL 0x006e9bb0
+006ebd57 : TEST AL,AL
+006ebd59 : JZ 0x006ebe06
+006ebd5f : MOV EDI,EBP
+006ebd61 : MOV EDX,ESI
+006ebd63 : CALL 0x006e9bb0
+006ebd68 : TEST AL,AL
+006ebd6a : JNZ 0x006ebd7b
+006ebd6c : PUSH EBP
+006ebd6d : PUSH ESI
+006ebd6e : CALL 0x006eb000
+006ebd73 : TEST AL,AL
+006ebd75 : JZ 0x006ebdff
+006ebd7b : XOR EDI,EDI
+006ebd7d : MOV dword ptr [ESP + 0x1c],0xcd4100
+006ebd85 : MOV dword ptr [ESP + 0x20],EDI
+006ebd89 : MOV dword ptr [ESP + 0x24],EDI
+006ebd8d : MOV dword ptr [ESP + 0x28],EDI
+006ebd91 : MOV byte ptr [ESP + 0x2c],0x0
+006ebd96 : MOV dword ptr [ESP + 0x38],EDI
+006ebd9a : LEA EAX,[ESP + 0x1c]
+006ebd9e : PUSH EAX
+006ebd9f : PUSH EBX
+006ebda0 : MOV ECX,ESI
+006ebda2 : CALL 0x006ea4f0
+006ebda7 : TEST AL,AL
+006ebda9 : JZ 0x006ebdca
+006ebdab : MOV EAX,dword ptr [ESP + 0x24]
+006ebdaf : CMP EAX,EDI
+006ebdb1 : JZ 0x006ebdc5
+006ebdb3 : MOV ECX,dword ptr [ESP + 0x20]
+006ebdb7 : PUSH EAX
+006ebdb8 : PUSH ECX
+006ebdb9 : PUSH ESI
+006ebdba : MOV ECX,EBP
+006ebdbc : CALL 0x006ebab0
+006ebdc1 : TEST AL,AL
+006ebdc3 : JZ 0x006ebdca
+006ebdc5 : MOV byte ptr [ESP + 0x1b],0x1
+006ebdca : PUSH EBX
+006ebdcb : PUSH ESI
+006ebdcc : CALL 0x006eba20
+006ebdd1 : TEST AL,AL
+006ebdd3 : JNZ 0x006ebde6
+006ebdd5 : PUSH 0xbf1cf4
+006ebdda : CALL 0x00807d70
+006ebddf : ADD ESP,0x4
+006ebde2 : XOR BL,BL
+006ebde4 : JMP 0x006ebdea
+006ebde6 : MOV BL,byte ptr [ESP + 0x1b]
+006ebdea : MOV dword ptr [ESP + 0x38],0xffffffff
+006ebdf2 : LEA ECX,[ESP + 0x1c]
+006ebdf6 : CALL 0x00454f80
+006ebdfb : MOV AL,BL
+006ebdfd : JMP 0x006ebe1e
+006ebdff : PUSH 0xbf1d28
+006ebe04 : JMP 0x006ebe12
+006ebe06 : PUSH 0xbf1d90
+006ebe0b : JMP 0x006ebe12
+006ebe0d : PUSH 0xbf1d5c
+006ebe12 : CALL 0x00807d70
+006ebe17 : MOV AL,byte ptr [ESP + 0x1f]
+006ebe1b : ADD ESP,0x4
+006ebe1e : MOV ECX,dword ptr [ESP + 0x30]
+006ebe22 : MOV dword ptr FS:[0x0],ECX
+006ebe29 : POP ECX
+006ebe2a : POP EDI
+006ebe2b : POP ESI
+006ebe2c : POP EBP
+006ebe2d : POP EBX
+006ebe2e : ADD ESP,0x28
+006ebe31 : RET 0x8

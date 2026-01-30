@@ -1,0 +1,76 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_009309b0
+ENTRY    : 009309b0
+BODY     : [[009309b0, 00930a10]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_009309b0(int param_1)
+
+{
+  short in_AX;
+  int in_EDX;
+  
+  if (in_EDX != 0) {
+    if (in_AX == *(short *)(param_1 + 0x5c)) {
+      (**(code **)(**(int **)(param_1 + 0x48) + 0x70))();
+      return;
+    }
+    if ((ushort)(in_AX - 1U) < 3) {
+      (**(code **)(**(int **)(param_1 + 0x4c + (uint)(ushort)(in_AX - 1U) * 4) + 0x70))();
+      return;
+    }
+    FUN_008018d0(L"[CRITICAL] AvaGuiQuickSlot::InsertItem (%d)",in_AX);
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+009309b0 : PUSH EBP
+009309b1 : MOV EBP,ESP
+009309b3 : MOV ECX,dword ptr [EBP + 0x8]
+009309b6 : TEST EDX,EDX
+009309b8 : JZ 0x00930a0d
+009309ba : PUSH ESI
+009309bb : CMP AX,word ptr [ECX + 0x5c]
+009309bf : JNZ 0x009309d3
+009309c1 : MOV ECX,dword ptr [ECX + 0x48]
+009309c4 : MOV ESI,dword ptr [ECX]
+009309c6 : PUSH EAX
+009309c7 : MOV EAX,dword ptr [ESI + 0x70]
+009309ca : PUSH EDI
+009309cb : PUSH EDX
+009309cc : CALL EAX
+009309ce : POP ESI
+009309cf : POP EBP
+009309d0 : RET 0x4
+009309d3 : LEA ESI,[EAX + -0x1]
+009309d6 : MOVZX ESI,SI
+009309d9 : CMP SI,0x3
+009309dd : JNC 0x009309f5
+009309df : MOVZX ESI,SI
+009309e2 : MOV ECX,dword ptr [ECX + ESI*0x4 + 0x4c]
+009309e6 : MOV ESI,dword ptr [ECX]
+009309e8 : PUSH EAX
+009309e9 : PUSH EDI
+009309ea : PUSH EDX
+009309eb : MOV EDX,dword ptr [ESI + 0x70]
+009309ee : CALL EDX
+009309f0 : POP ESI
+009309f1 : POP EBP
+009309f2 : RET 0x4
+009309f5 : MOV ESI,dword ptr [0x00da98e8]
+009309fb : MOVZX EAX,AX
+009309fe : PUSH EAX
+009309ff : PUSH 0xc6de30
+00930a04 : CALL 0x008018d0
+00930a09 : ADD ESP,0x8
+00930a0c : POP ESI
+00930a0d : POP EBP
+00930a0e : RET 0x4

@@ -1,0 +1,61 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __validdrive
+ENTRY    : 006600e1
+BODY     : [[006600e1, 00660119]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __validdrive
+   
+   Library: Visual Studio 2008 Release */
+
+int __cdecl __validdrive(uint param_1)
+
+{
+  char cVar1;
+  UINT UVar2;
+  
+  if (param_1 != 0) {
+    cVar1 = (char)param_1;
+    param_1 = (uint)CONCAT12(0x5c,CONCAT11(0x3a,cVar1 + '@'));
+    UVar2 = GetDriveTypeA((LPCSTR)&param_1);
+    if ((UVar2 == 0) || (UVar2 == 1)) {
+      return 0;
+    }
+  }
+  return 1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006600e1 : MOV EDI,EDI
+006600e3 : PUSH EBP
+006600e4 : MOV EBP,ESP
+006600e6 : MOV EAX,dword ptr [EBP + 0x8]
+006600e9 : TEST EAX,EAX
+006600eb : JNZ 0x006600f2
+006600ed : XOR EAX,EAX
+006600ef : INC EAX
+006600f0 : POP EBP
+006600f1 : RET
+006600f2 : ADD AL,0x40
+006600f4 : MOV byte ptr [EBP + 0x8],AL
+006600f7 : LEA EAX,[EBP + 0x8]
+006600fa : PUSH EAX
+006600fb : MOV byte ptr [EBP + 0x9],0x3a
+006600ff : MOV byte ptr [EBP + 0xa],0x5c
+00660103 : MOV byte ptr [EBP + 0xb],0x0
+00660107 : CALL dword ptr [0x00b85368]
+0066010d : TEST EAX,EAX
+0066010f : JZ 0x00660116
+00660111 : CMP EAX,0x1
+00660114 : JNZ 0x006600ed
+00660116 : XOR EAX,EAX
+00660118 : POP EBP
+00660119 : RET

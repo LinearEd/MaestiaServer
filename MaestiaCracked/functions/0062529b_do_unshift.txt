@@ -1,0 +1,114 @@
+PROGRAM  : Maestia.exe
+FUNCTION : do_unshift
+ENTRY    : 0062529b
+BODY     : [[0062529b, 00625330]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Multiple Matches With Same Base Name
+    protected: virtual int __thiscall std::codecvt<unsigned short,char,int>::do_unshift(int &,char
+   *,char *,char * &)const 
+    protected: virtual int __thiscall std::codecvt<wchar_t,char,int>::do_unshift(int &,char *,char
+   *,char * &)const 
+   
+   Library: Visual Studio 2008 Release */
+
+void do_unshift(mbstate_t *param_1,int param_2,int param_3,int *param_4)
+
+{
+  mbstate_t mVar1;
+  int iVar2;
+  int in_ECX;
+  rsize_t _DstSize;
+  rsize_t _MaxCount;
+  char local_10 [8];
+  uint local_8;
+  
+  local_8 = DAT_00d66fa0 ^ (uint)&stack0xfffffffc;
+  *param_4 = param_2;
+  mVar1 = *param_1;
+  iVar2 = __Wcrtomb(local_10,L'\0',param_1,(_Cvtvec *)(in_ECX + 8));
+  if (0 < iVar2) {
+    _MaxCount = iVar2 - 1;
+    _DstSize = param_3 - *param_4;
+    if ((int)_DstSize < (int)_MaxCount) {
+      *param_1 = mVar1;
+    }
+    else if (0 < (int)_MaxCount) {
+      _memcpy_s((void *)*param_4,_DstSize,local_10,_MaxCount);
+      *param_4 = *param_4 + _MaxCount;
+    }
+  }
+  __security_check_cookie(local_8 ^ (uint)&stack0xfffffffc);
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0062529b : MOV EDI,EDI
+0062529d : PUSH EBP
+0062529e : MOV EBP,ESP
+006252a0 : SUB ESP,0x18
+006252a3 : MOV EAX,[0x00d66fa0]
+006252a8 : XOR EAX,EBP
+006252aa : MOV dword ptr [EBP + -0x4],EAX
+006252ad : AND dword ptr [EBP + -0x10],0x0
+006252b1 : PUSH EBX
+006252b2 : PUSH ESI
+006252b3 : MOV ESI,dword ptr [EBP + 0x14]
+006252b6 : MOV EAX,ECX
+006252b8 : MOV ECX,dword ptr [EBP + 0x10]
+006252bb : PUSH EDI
+006252bc : MOV EDI,dword ptr [EBP + 0x8]
+006252bf : ADD EAX,0x8
+006252c2 : PUSH EAX
+006252c3 : MOV dword ptr [EBP + -0x14],ECX
+006252c6 : MOV ECX,dword ptr [EBP + 0xc]
+006252c9 : PUSH EDI
+006252ca : MOV dword ptr [ESI],ECX
+006252cc : MOV ECX,dword ptr [EDI]
+006252ce : LEA EAX,[EBP + -0xc]
+006252d1 : PUSH 0x0
+006252d3 : PUSH EAX
+006252d4 : MOV dword ptr [EBP + -0x18],ECX
+006252d7 : CALL 0x006249de
+006252dc : MOV EBX,EAX
+006252de : ADD ESP,0x10
+006252e1 : TEST EBX,EBX
+006252e3 : JG 0x006252ee
+006252e5 : MOV dword ptr [EBP + -0x10],0x2
+006252ec : JMP 0x0062531d
+006252ee : MOV EAX,dword ptr [ESI]
+006252f0 : MOV ECX,dword ptr [EBP + -0x14]
+006252f3 : DEC EBX
+006252f4 : SUB ECX,EAX
+006252f6 : CMP ECX,EBX
+006252f8 : JGE 0x00625308
+006252fa : MOV EAX,dword ptr [EBP + -0x18]
+006252fd : MOV dword ptr [EDI],EAX
+006252ff : MOV dword ptr [EBP + -0x10],0x1
+00625306 : JMP 0x0062531d
+00625308 : TEST EBX,EBX
+0062530a : JLE 0x0062531d
+0062530c : PUSH EBX
+0062530d : LEA EDX,[EBP + -0xc]
+00625310 : PUSH EDX
+00625311 : PUSH ECX
+00625312 : PUSH EAX
+00625313 : CALL 0x00633ea4
+00625318 : ADD ESP,0x10
+0062531b : ADD dword ptr [ESI],EBX
+0062531d : MOV ECX,dword ptr [EBP + -0x4]
+00625320 : MOV EAX,dword ptr [EBP + -0x10]
+00625323 : POP EDI
+00625324 : POP ESI
+00625325 : XOR ECX,EBP
+00625327 : POP EBX
+00625328 : CALL 0x00633e6b
+0062532d : LEAVE
+0062532e : RET 0x10

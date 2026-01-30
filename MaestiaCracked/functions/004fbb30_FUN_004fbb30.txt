@@ -1,0 +1,80 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_004fbb30
+ENTRY    : 004fbb30
+BODY     : [[004fbb30, 004fbb7b]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_004fbb30(void)
+
+{
+  int *in_EAX;
+  int in_ECX;
+  int iVar1;
+  int iVar2;
+  int iVar3;
+  
+  iVar2 = *(int *)(in_ECX + 4);
+  if (iVar2 == 0) {
+    *in_EAX = 0;
+    in_EAX[1] = 0;
+    return;
+  }
+  do {
+    iVar1 = *(int *)(in_ECX + 0x10) + iVar2;
+    iVar3 = iVar2;
+    while( true ) {
+      if (*(int *)(iVar1 + 0x90) == 0) {
+        in_EAX[1] = in_ECX + 0xc;
+        *in_EAX = iVar3;
+        return;
+      }
+      iVar2 = iRam00000090;
+      if (iVar3 != 0) {
+        iVar2 = *(int *)(*(int *)(in_ECX + 0x10) + iVar3 + 0x90);
+      }
+      if (iVar2 != 0) break;
+      iVar1 = 0;
+      iVar3 = iVar2;
+    }
+  } while( true );
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+004fbb30 : PUSH ESI
+004fbb31 : MOV ESI,ECX
+004fbb33 : MOV EDX,dword ptr [ESI + 0x4]
+004fbb36 : TEST EDX,EDX
+004fbb38 : JNZ 0x004fbb45
+004fbb3a : MOV dword ptr [EAX],EDX
+004fbb3c : MOV dword ptr [EAX + 0x4],EDX
+004fbb3f : POP ESI
+004fbb40 : RET
+004fbb41 : TEST EDX,EDX
+004fbb43 : JZ 0x004fbb4c
+004fbb45 : MOV ECX,dword ptr [ESI + 0x10]
+004fbb48 : ADD ECX,EDX
+004fbb4a : JMP 0x004fbb4e
+004fbb4c : XOR ECX,ECX
+004fbb4e : CMP dword ptr [ECX + 0x90],0x0
+004fbb55 : JZ 0x004fbb72
+004fbb57 : TEST EDX,EDX
+004fbb59 : JZ 0x004fbb68
+004fbb5b : MOV ECX,dword ptr [ESI + 0x10]
+004fbb5e : ADD ECX,EDX
+004fbb60 : MOV EDX,dword ptr [ECX + 0x90]
+004fbb66 : JMP 0x004fbb41
+004fbb68 : XOR ECX,ECX
+004fbb6a : MOV EDX,dword ptr [ECX + 0x90]
+004fbb70 : JMP 0x004fbb41
+004fbb72 : ADD ESI,0xc
+004fbb75 : MOV dword ptr [EAX + 0x4],ESI
+004fbb78 : MOV dword ptr [EAX],EDX
+004fbb7a : POP ESI
+004fbb7b : RET

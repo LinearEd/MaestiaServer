@@ -1,0 +1,141 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00923870
+ENTRY    : 00923870
+BODY     : [[00923870, 00923952]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00923870(void)
+
+{
+  int iVar1;
+  ulonglong uVar2;
+  uint8_t *packet;
+  int in_ECX;
+  byte bVar3;
+  void *local_10;
+  undefined1 *puStack_c;
+  undefined4 local_8;
+  
+  puStack_c = &LAB_00b3f960;
+  local_10 = ExceptionList;
+  ExceptionList = &local_10;
+  if (*(char *)(in_ECX + 0x62) == '\0') {
+    iVar1 = *(int *)ThreadLocalStoragePointer;
+    uVar2 = (ulonglong)(*(byte *)(iVar1 + 0x18) + 1) % 3;
+    packet = (uint8_t *)((int)uVar2 * 0x2000 + 0x122cb8 + iVar1);
+    *(char *)(iVar1 + 0x18) = (char)uVar2;
+    if (packet != (uint8_t *)0x0) {
+      packet[0] = '\0';
+      packet[1] = '\0';
+      packet[2] = '6';
+      packet[3] = 0xb9;
+      goto LAB_0092391e;
+    }
+  }
+  else {
+    iVar1 = *(int *)ThreadLocalStoragePointer;
+    bVar3 = (byte)((ulonglong)(*(byte *)(iVar1 + 0x18) + 1) % 3);
+    *(byte *)(iVar1 + 0x18) = bVar3;
+    packet = (uint8_t *)((uint)bVar3 * 0x2000 + 0x122cb8 + iVar1);
+    if (packet != (uint8_t *)0x0) {
+      packet[0] = '\0';
+      packet[1] = '\0';
+      packet[2] = '6';
+      packet[3] = 0xbd;
+      goto LAB_0092391e;
+    }
+  }
+  packet = (uint8_t *)0x0;
+LAB_0092391e:
+  local_8 = 0xffffffff;
+  if ((*(int *)(DAT_017247d4 + 4) != 0) && (*(char *)(DAT_017247d4 + 8) != '\0')) {
+    FUN_00a0dd40(*(int *)(DAT_017247d4 + 4),4,packet);
+  }
+  ExceptionList = local_10;
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00923870 : PUSH EBP
+00923871 : MOV EBP,ESP
+00923873 : PUSH -0x1
+00923875 : PUSH 0xb3f960
+0092387a : MOV EAX,FS:[0x0]
+00923880 : PUSH EAX
+00923881 : PUSH ECX
+00923882 : PUSH ESI
+00923883 : PUSH EDI
+00923884 : MOV EAX,[0x00d66fa0]
+00923889 : XOR EAX,EBP
+0092388b : PUSH EAX
+0092388c : LEA EAX,[EBP + -0xc]
+0092388f : MOV FS:[0x0],EAX
+00923895 : MOV CL,byte ptr [ECX + 0x62]
+00923898 : MOV ESI,0x3
+0092389d : TEST CL,CL
+0092389f : JZ 0x009238de
+009238a1 : MOV EAX,FS:[0x2c]
+009238a7 : MOV ECX,dword ptr [EAX]
+009238a9 : MOVZX EAX,byte ptr [ECX + 0x18]
+009238ad : INC EAX
+009238ae : CDQ
+009238af : IDIV ESI
+009238b1 : MOV byte ptr [ECX + 0x18],DL
+009238b4 : MOVZX EDX,DL
+009238b7 : SHL EDX,0xd
+009238ba : LEA EAX,[EDX + ECX*0x1 + 0x122cb8]
+009238c1 : MOV dword ptr [EBP + -0x10],EAX
+009238c4 : MOV dword ptr [EBP + -0x4],0x0
+009238cb : TEST EAX,EAX
+009238cd : JZ 0x0092391c
+009238cf : XOR ECX,ECX
+009238d1 : MOV word ptr [EAX],CX
+009238d4 : MOV byte ptr [EAX + 0x2],0x36
+009238d8 : MOV byte ptr [EAX + 0x3],0xbd
+009238dc : JMP 0x0092391e
+009238de : MOV EDX,dword ptr FS:[0x2c]
+009238e5 : MOV ECX,dword ptr [EDX]
+009238e7 : MOVZX EAX,byte ptr [ECX + 0x18]
+009238eb : INC EAX
+009238ec : CDQ
+009238ed : IDIV ESI
+009238ef : MOVZX EAX,DL
+009238f2 : SHL EAX,0xd
+009238f5 : LEA EAX,[EAX + ECX*0x1 + 0x122cb8]
+009238fc : MOV byte ptr [ECX + 0x18],DL
+009238ff : MOV dword ptr [EBP + -0x10],EAX
+00923902 : MOV dword ptr [EBP + -0x4],0x1
+00923909 : TEST EAX,EAX
+0092390b : JZ 0x0092391c
+0092390d : XOR ECX,ECX
+0092390f : MOV word ptr [EAX],CX
+00923912 : MOV byte ptr [EAX + 0x2],0x36
+00923916 : MOV byte ptr [EAX + 0x3],0xb9
+0092391a : JMP 0x0092391e
+0092391c : XOR EAX,EAX
+0092391e : MOV dword ptr [EBP + -0x4],0xffffffff
+00923925 : MOV EDX,dword ptr [0x017247d4]
+0092392b : MOV ECX,dword ptr [EDX + 0x4]
+0092392e : TEST ECX,ECX
+00923930 : JZ 0x00923942
+00923932 : CMP byte ptr [EDX + 0x8],0x0
+00923936 : JZ 0x00923942
+00923938 : PUSH 0x4
+0092393a : PUSH ECX
+0092393b : MOV EDI,EAX
+0092393d : CALL 0x00a0dd40
+00923942 : MOV ECX,dword ptr [EBP + -0xc]
+00923945 : MOV dword ptr FS:[0x0],ECX
+0092394c : POP ECX
+0092394d : POP EDI
+0092394e : POP ESI
+0092394f : MOV ESP,EBP
+00923951 : POP EBP
+00923952 : RET

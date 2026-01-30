@@ -1,0 +1,89 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00a17440
+ENTRY    : 00a17440
+BODY     : [[00a17440, 00a174e5]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* WARNING: Removing unreachable block (ram,0x00a17459) */
+
+void FUN_00a17440(void)
+
+{
+  byte bVar1;
+  int iVar2;
+  int in_EAX;
+  float fVar3;
+  float fVar4;
+  
+  bVar1 = *(byte *)(in_EAX + 0x22b);
+  if (((bVar1 & 3) == 0) || ((bVar1 & 3) == 1)) {
+    fVar3 = *(float *)(in_EAX + 0x230) + *(float *)(in_EAX + 0x22c);
+  }
+  else {
+    fVar3 = *(float *)(in_EAX + 0x22c) - *(float *)(in_EAX + 0x230);
+  }
+  *(byte *)(in_EAX + 0x22b) = bVar1 - 1;
+  if ((byte)(bVar1 - 1) == '\0') {
+    *(undefined1 *)(in_EAX + 0x22a) = 0;
+  }
+  iVar2 = *(int *)(in_EAX + 0x74);
+  if ((*(char *)(iVar2 + 0x1e8) == '\0') && (*(char *)(iVar2 + 0x210) == '\0')) {
+    fVar4 = *(float *)(iVar2 + 500);
+    if ((fVar3 < fVar4) || (fVar4 = *(float *)(iVar2 + 0x1f8), fVar4 < fVar3)) {
+      *(float *)(iVar2 + 0x1fc) = fVar4;
+      *(undefined1 *)(iVar2 + 0x154) = 1;
+      return;
+    }
+    *(float *)(iVar2 + 0x1fc) = fVar3;
+    *(undefined1 *)(iVar2 + 0x154) = 1;
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00a17440 : MOV CL,byte ptr [EAX + 0x22b]
+00a17446 : MOVSS XMM1,dword ptr [EAX + 0x22c]
+00a1744e : MOVZX EDX,CL
+00a17451 : AND EDX,0x80000003
+00a17457 : JNS 0x00a1745e
+00a17459 : DEC EDX
+00a1745a : OR EDX,0xfffffffc
+00a1745d : INC EDX
+00a1745e : MOVZX EDX,DX
+00a17461 : TEST DX,DX
+00a17464 : JZ 0x00a17479
+00a17466 : CMP DX,0x1
+00a1746a : JZ 0x00a17479
+00a1746c : SUBSS XMM1,dword ptr [EAX + 0x230]
+00a17474 : MOVAPS XMM0,XMM1
+00a17477 : JMP 0x00a17485
+00a17479 : MOVSS XMM0,dword ptr [EAX + 0x230]
+00a17481 : ADDSS XMM0,XMM1
+00a17485 : SUB CL,0x1
+00a17488 : MOV byte ptr [EAX + 0x22b],CL
+00a1748e : JNZ 0x00a17497
+00a17490 : MOV byte ptr [EAX + 0x22a],0x0
+00a17497 : MOV EAX,dword ptr [EAX + 0x74]
+00a1749a : CMP byte ptr [EAX + 0x1e8],0x0
+00a174a1 : JNZ 0x00a174e5
+00a174a3 : CMP byte ptr [EAX + 0x210],0x0
+00a174aa : JNZ 0x00a174e5
+00a174ac : MOVSS XMM1,dword ptr [EAX + 0x1f4]
+00a174b4 : COMISS XMM1,XMM0
+00a174b7 : JA 0x00a174c6
+00a174b9 : MOVSS XMM1,dword ptr [EAX + 0x1f8]
+00a174c1 : COMISS XMM0,XMM1
+00a174c4 : JBE 0x00a174d6
+00a174c6 : MOVSS dword ptr [EAX + 0x1fc],XMM1
+00a174ce : MOV byte ptr [EAX + 0x154],0x1
+00a174d5 : RET
+00a174d6 : MOVSS dword ptr [EAX + 0x1fc],XMM0
+00a174de : MOV byte ptr [EAX + 0x154],0x1
+00a174e5 : RET

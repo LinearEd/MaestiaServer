@@ -1,0 +1,91 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00527140
+ENTRY    : 00527140
+BODY     : [[00527140, 005271b4]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+int * FUN_00527140(int *param_1,undefined4 param_2)
+
+{
+  int iVar1;
+  char *in_ECX;
+  
+  if (*in_ECX == '\b') {
+    *(undefined1 *)(param_1 + 2) = 0;
+    iVar1 = *(int *)(in_ECX + 4);
+    *param_1 = iVar1;
+    if (iVar1 != 0) {
+      *(uint *)(iVar1 + 8) = *(int *)(iVar1 + 8) + 1U & 0x8fffffff;
+    }
+    param_1[1] = 0;
+    if (*(int *)(in_ECX + 8) != 0) {
+      FUN_005686c0(*(int *)(in_ECX + 8),in_ECX[0xc] & 1);
+    }
+    return param_1;
+  }
+  if (*in_ECX != '\v') {
+    *(undefined1 *)(param_1 + 2) = 0;
+    *param_1 = 0;
+    param_1[1] = 0;
+    return param_1;
+  }
+  FUN_00526e40(param_1,param_2);
+  return param_1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00527140 : MOV AL,byte ptr [ECX]
+00527142 : PUSH ESI
+00527143 : CMP AL,0x8
+00527145 : JZ 0x00527172
+00527147 : CMP AL,0xb
+00527149 : JZ 0x0052715d
+0052714b : MOV EAX,dword ptr [ESP + 0x8]
+0052714f : XOR EDX,EDX
+00527151 : MOV byte ptr [EAX + 0x8],DL
+00527154 : MOV dword ptr [EAX],EDX
+00527156 : MOV dword ptr [EAX + 0x4],EDX
+00527159 : POP ESI
+0052715a : RET 0x8
+0052715d : MOV EAX,dword ptr [ESP + 0xc]
+00527161 : MOV ESI,dword ptr [ESP + 0x8]
+00527165 : PUSH EAX
+00527166 : PUSH ESI
+00527167 : CALL 0x00526e40
+0052716c : MOV EAX,ESI
+0052716e : POP ESI
+0052716f : RET 0x8
+00527172 : MOV ESI,dword ptr [ESP + 0x8]
+00527176 : XOR EDX,EDX
+00527178 : MOV byte ptr [ESI + 0x8],DL
+0052717b : MOV EAX,dword ptr [ECX + 0x4]
+0052717e : MOV dword ptr [ESI],EAX
+00527180 : CMP EAX,EDX
+00527182 : JZ 0x00527193
+00527184 : PUSH EDI
+00527185 : MOV EDI,dword ptr [EAX + 0x8]
+00527188 : INC EDI
+00527189 : AND EDI,0x8fffffff
+0052718f : MOV dword ptr [EAX + 0x8],EDI
+00527192 : POP EDI
+00527193 : MOV dword ptr [ESI + 0x4],EDX
+00527196 : MOV EAX,dword ptr [ECX + 0x8]
+00527199 : CMP EAX,EDX
+0052719b : JZ 0x005271af
+0052719d : MOV CL,byte ptr [ECX + 0xc]
+005271a0 : AND CL,0x1
+005271a3 : MOVZX EDX,CL
+005271a6 : PUSH EDX
+005271a7 : PUSH EAX
+005271a8 : MOV ECX,ESI
+005271aa : CALL 0x005686c0
+005271af : MOV EAX,ESI
+005271b1 : POP ESI
+005271b2 : RET 0x8

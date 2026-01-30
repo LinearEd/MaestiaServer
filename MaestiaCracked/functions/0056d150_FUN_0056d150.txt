@@ -1,0 +1,89 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0056d150
+ENTRY    : 0056d150
+BODY     : [[0056d150, 0056d1d4]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+int FUN_0056d150(int param_1,int *param_2)
+
+{
+  char cVar1;
+  int iVar2;
+  undefined4 local_28;
+  undefined4 local_24;
+  GPoint<float> local_20 [8];
+  GMatrix2D local_18 [24];
+  
+  FUN_00502100(param_2);
+  iVar2 = FUN_0051b1a0();
+  if ((iVar2 != 0) && (cVar1 = FUN_005020e0(param_2), cVar1 != '\0')) {
+    local_28 = *(undefined4 *)(param_1 + 4);
+    local_24 = *(undefined4 *)(param_1 + 8);
+    GMatrix2D::SetIdentity(local_18);
+    FUN_0051cdf0(local_18);
+    GMatrix2D::TransformByInverse(local_18,local_20,(GPoint<float> *)&local_28);
+    iVar2 = (**(code **)(*param_2 + 0x34))(local_20,1,0);
+    if (iVar2 != 0) {
+      return iVar2;
+    }
+  }
+  return 0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0056d150 : SUB ESP,0x28
+0056d153 : PUSH ESI
+0056d154 : MOV ESI,dword ptr [ESP + 0x34]
+0056d158 : PUSH ESI
+0056d159 : CALL 0x00502100
+0056d15e : ADD ESP,0x4
+0056d161 : MOV ECX,EAX
+0056d163 : CALL 0x0051b1a0
+0056d168 : TEST EAX,EAX
+0056d16a : JZ 0x0056d1ce
+0056d16c : PUSH ESI
+0056d16d : CALL 0x005020e0
+0056d172 : ADD ESP,0x4
+0056d175 : TEST AL,AL
+0056d177 : JZ 0x0056d1ce
+0056d179 : MOV EAX,dword ptr [ESP + 0x30]
+0056d17d : FLD float ptr [EAX + 0x4]
+0056d180 : PUSH EDI
+0056d181 : MOV EDI,dword ptr [ESI + 0x20]
+0056d184 : FSTP float ptr [ESP + 0x8]
+0056d188 : FLD float ptr [EAX + 0x8]
+0056d18b : LEA ECX,[ESP + 0x18]
+0056d18f : FSTP float ptr [ESP + 0xc]
+0056d193 : CALL 0x00522b80
+0056d198 : LEA EAX,[ESP + 0x18]
+0056d19c : PUSH EAX
+0056d19d : MOV ECX,EDI
+0056d19f : CALL 0x0051cdf0
+0056d1a4 : LEA ECX,[ESP + 0x8]
+0056d1a8 : PUSH ECX
+0056d1a9 : LEA EDX,[ESP + 0x14]
+0056d1ad : PUSH EDX
+0056d1ae : LEA ECX,[ESP + 0x20]
+0056d1b2 : CALL 0x00522fa0
+0056d1b7 : MOV EAX,dword ptr [ESI]
+0056d1b9 : MOV EDX,dword ptr [EAX + 0x34]
+0056d1bc : PUSH 0x0
+0056d1be : PUSH 0x1
+0056d1c0 : LEA ECX,[ESP + 0x18]
+0056d1c4 : PUSH ECX
+0056d1c5 : MOV ECX,ESI
+0056d1c7 : CALL EDX
+0056d1c9 : POP EDI
+0056d1ca : TEST EAX,EAX
+0056d1cc : JNZ 0x0056d1d0
+0056d1ce : XOR EAX,EAX
+0056d1d0 : POP ESI
+0056d1d1 : ADD ESP,0x28
+0056d1d4 : RET

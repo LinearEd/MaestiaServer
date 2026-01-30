@@ -1,0 +1,109 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_006f4b40
+ENTRY    : 006f4b40
+BODY     : [[006f4b40, 006f4bf5]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined4 FUN_006f4b40(void *param_1,int param_2,byte *param_3)
+
+{
+  ushort *puVar1;
+  int iVar2;
+  uint uVar3;
+  byte *pbVar4;
+  size_t sVar5;
+  int unaff_ESI;
+  size_t unaff_EDI;
+  
+  iVar2 = *(int *)(unaff_ESI + 0x2008);
+  if (((iVar2 == 0) || (iVar2 + unaff_EDI < 0xc01)) && (iVar2 + unaff_EDI < 0x2001)) {
+    _memcpy((void *)(iVar2 + 4 + unaff_ESI),param_1,unaff_EDI);
+    uVar3 = *(ushort *)(unaff_ESI + 4 + *(int *)(unaff_ESI + 0x2008)) & 0x1fff;
+    if (uVar3 != unaff_EDI) {
+      FUN_006ee470(L"[CRITICAL][AvLargeSendBuffer::Add] nSize of copied packet is different with nLength (%d, %d)\n"
+                   ,uVar3);
+      puVar1 = (ushort *)(unaff_ESI + 4 + *(int *)(unaff_ESI + 0x2008));
+      *puVar1 = *puVar1 ^ (*(ushort *)(unaff_ESI + 4 + *(int *)(unaff_ESI + 0x2008)) ^
+                          (ushort)unaff_EDI) & 0x1fff;
+    }
+    pbVar4 = (byte *)(unaff_ESI + 4 + *(int *)(unaff_ESI + 0x2008));
+    for (sVar5 = unaff_EDI; sVar5 != 0; sVar5 = sVar5 - 1) {
+      *pbVar4 = *pbVar4 ^ *(byte *)((uint)*param_3 + param_2);
+      *param_3 = *param_3 + 1;
+      pbVar4 = pbVar4 + 1;
+    }
+    *(int *)(unaff_ESI + 0x2008) = *(int *)(unaff_ESI + 0x2008) + unaff_EDI;
+    return 1;
+  }
+  return 0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006f4b40 : PUSH EBP
+006f4b41 : MOV EBP,ESP
+006f4b43 : MOV EAX,dword ptr [ESI + 0x2008]
+006f4b49 : PUSH EBX
+006f4b4a : MOV EBX,dword ptr [EBP + 0x10]
+006f4b4d : TEST EAX,EAX
+006f4b4f : JZ 0x006f4b63
+006f4b51 : LEA ECX,[EAX + EDI*0x1]
+006f4b54 : CMP ECX,0xc00
+006f4b5a : JBE 0x006f4b63
+006f4b5c : XOR EAX,EAX
+006f4b5e : POP EBX
+006f4b5f : POP EBP
+006f4b60 : RET 0xc
+006f4b63 : LEA EDX,[EAX + EDI*0x1]
+006f4b66 : CMP EDX,0x2000
+006f4b6c : JA 0x006f4b5c
+006f4b6e : MOV ECX,dword ptr [EBP + 0x8]
+006f4b71 : PUSH EDI
+006f4b72 : PUSH ECX
+006f4b73 : LEA EDX,[EAX + ESI*0x1 + 0x4]
+006f4b77 : PUSH EDX
+006f4b78 : CALL 0x0063ae40
+006f4b7d : MOV EAX,dword ptr [ESI + 0x2008]
+006f4b83 : MOVZX EAX,word ptr [ESI + EAX*0x1 + 0x4]
+006f4b88 : AND EAX,0x1fff
+006f4b8d : ADD ESP,0xc
+006f4b90 : CMP EAX,EDI
+006f4b92 : JZ 0x006f4bc0
+006f4b94 : PUSH EDI
+006f4b95 : PUSH EAX
+006f4b96 : PUSH 0xbf76e0
+006f4b9b : CALL 0x006ee470
+006f4ba0 : MOV ECX,dword ptr [ESI + 0x2008]
+006f4ba6 : MOV DX,word ptr [ESI + ECX*0x1 + 0x4]
+006f4bab : LEA EAX,[ESI + ECX*0x1 + 0x4]
+006f4baf : XOR DX,DI
+006f4bb2 : MOV ECX,0x1fff
+006f4bb7 : AND DX,CX
+006f4bba : ADD ESP,0xc
+006f4bbd : XOR word ptr [EAX],DX
+006f4bc0 : MOV EDX,dword ptr [ESI + 0x2008]
+006f4bc6 : LEA EAX,[ESI + EDX*0x1 + 0x4]
+006f4bca : MOV ECX,EDI
+006f4bcc : TEST EDI,EDI
+006f4bce : JBE 0x006f4be6
+006f4bd0 : MOVZX EDX,byte ptr [EBX]
+006f4bd3 : MOV EBX,dword ptr [EBP + 0xc]
+006f4bd6 : MOV DL,byte ptr [EDX + EBX*0x1]
+006f4bd9 : XOR byte ptr [EAX],DL
+006f4bdb : MOV EBX,dword ptr [EBP + 0x10]
+006f4bde : INC byte ptr [EBX]
+006f4be0 : DEC ECX
+006f4be1 : INC EAX
+006f4be2 : TEST ECX,ECX
+006f4be4 : JA 0x006f4bd0
+006f4be6 : ADD dword ptr [ESI + 0x2008],EDI
+006f4bec : MOV EAX,0x1
+006f4bf1 : POP EBX
+006f4bf2 : POP EBP
+006f4bf3 : RET 0xc

@@ -1,0 +1,146 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0056b7a0
+ENTRY    : 0056b7a0
+BODY     : [[0056b7a0, 0056b7d8] [0056b7e0, 0056b89c]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_0056b7a0(undefined4 param_1,undefined4 param_2)
+
+{
+  int *piVar1;
+  int iVar2;
+  int in_ECX;
+  int *piVar3;
+  
+  if ((*(uint *)(in_ECX + 0xb00) >> 0x13 & 1) == 0) {
+    piVar3 = *(int **)(in_ECX + 0xaf8);
+    while (piVar1 = piVar3, piVar1 != (int *)0x0) {
+      piVar3 = (int *)piVar1[0x1e];
+      if (((~(*(byte *)((int)piVar1 + 0x66) >> 6) & 1) != 0) &&
+         (((char)param_1 != '\0' || (((uint)piVar1[0x23] >> 0x12 & 1) != 0)))) {
+        (**(code **)(*piVar1 + 0x68))(param_1,param_2);
+      }
+    }
+  }
+  else {
+    *(undefined4 *)(in_ECX + 0xaf8) = 0;
+    *(uint *)(in_ECX + 0xb00) = *(uint *)(in_ECX + 0xb00) & 0xfff7ffff;
+    piVar3 = *(int **)(in_ECX + 0xaf4);
+    if (piVar3 != (int *)0x0) {
+      do {
+        piVar3[0x23] = piVar3[0x23] & 0xfff7ffff;
+        piVar1 = (int *)piVar3[0x1c];
+        piVar3[0x1e] = 0;
+        if ((~(*(byte *)((int)piVar3 + 0x66) >> 6) & 1) != 0) {
+          iVar2 = (**(code **)(*piVar3 + 0x104))(0);
+          if (iVar2 == 1) {
+            FUN_0051d5a0(in_ECX);
+          }
+          if (((char)param_1 != '\0') || (((uint)piVar3[0x23] >> 0x12 & 1) != 0)) {
+            (**(code **)(*piVar3 + 0x68))(param_1,param_2);
+          }
+        }
+        piVar3 = piVar1;
+      } while (piVar1 != (int *)0x0);
+      return;
+    }
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0056b7a0 : PUSH EBX
+0056b7a1 : PUSH EBP
+0056b7a2 : MOV EBP,ECX
+0056b7a4 : MOV EAX,dword ptr [EBP + 0xb00]
+0056b7aa : SHR EAX,0x13
+0056b7ad : PUSH ESI
+0056b7ae : TEST AL,0x1
+0056b7b0 : JZ 0x0056b84c
+0056b7b6 : XOR EBX,EBX
+0056b7b8 : MOV dword ptr [EBP + 0xaf8],EBX
+0056b7be : AND dword ptr [EBP + 0xb00],0xfff7ffff
+0056b7c8 : MOV ESI,dword ptr [EBP + 0xaf4]
+0056b7ce : CMP ESI,EBX
+0056b7d0 : JZ 0x0056b897
+0056b7d6 : PUSH EDI
+0056b7d7 : JMP 0x0056b7e0
+0056b7e0 : MOV CL,byte ptr [ESI + 0x66]
+0056b7e3 : AND dword ptr [ESI + 0x8c],0xfff7ffff
+0056b7ed : MOV EDI,dword ptr [ESI + 0x70]
+0056b7f0 : SHR CL,0x6
+0056b7f3 : NOT CL
+0056b7f5 : MOV dword ptr [ESI + 0x78],EBX
+0056b7f8 : TEST CL,0x1
+0056b7fb : JZ 0x0056b83f
+0056b7fd : MOV EDX,dword ptr [ESI]
+0056b7ff : MOV EAX,dword ptr [EDX + 0x104]
+0056b805 : PUSH EBX
+0056b806 : MOV ECX,ESI
+0056b808 : CALL EAX
+0056b80a : CMP EAX,0x1
+0056b80d : JNZ 0x0056b817
+0056b80f : PUSH EBP
+0056b810 : MOV ECX,ESI
+0056b812 : CALL 0x0051d5a0
+0056b817 : MOV EAX,dword ptr [ESP + 0x14]
+0056b81b : TEST AL,AL
+0056b81d : JNZ 0x0056b82d
+0056b81f : MOV ECX,dword ptr [ESI + 0x8c]
+0056b825 : SHR ECX,0x12
+0056b828 : TEST CL,0x1
+0056b82b : JZ 0x0056b83f
+0056b82d : FLD float ptr [ESP + 0x18]
+0056b831 : MOV EDX,dword ptr [ESI]
+0056b833 : PUSH ECX
+0056b834 : FSTP float ptr [ESP]
+0056b837 : PUSH EAX
+0056b838 : MOV EAX,dword ptr [EDX + 0x68]
+0056b83b : MOV ECX,ESI
+0056b83d : CALL EAX
+0056b83f : MOV ESI,EDI
+0056b841 : CMP EDI,EBX
+0056b843 : JNZ 0x0056b7e0
+0056b845 : POP EDI
+0056b846 : POP ESI
+0056b847 : POP EBP
+0056b848 : POP EBX
+0056b849 : RET 0x8
+0056b84c : MOV ECX,dword ptr [EBP + 0xaf8]
+0056b852 : TEST ECX,ECX
+0056b854 : JZ 0x0056b897
+0056b856 : MOV EBX,dword ptr [ESP + 0x10]
+0056b85a : LEA EBX,[EBX]
+0056b860 : MOV DL,byte ptr [ECX + 0x66]
+0056b863 : MOV ESI,dword ptr [ECX + 0x78]
+0056b866 : SHR DL,0x6
+0056b869 : NOT DL
+0056b86b : TEST DL,0x1
+0056b86e : JZ 0x0056b891
+0056b870 : TEST BL,BL
+0056b872 : JNZ 0x0056b881
+0056b874 : MOV EAX,dword ptr [ECX + 0x8c]
+0056b87a : SHR EAX,0x12
+0056b87d : TEST AL,0x1
+0056b87f : JZ 0x0056b891
+0056b881 : MOV EDX,dword ptr [ECX]
+0056b883 : FLD float ptr [ESP + 0x14]
+0056b887 : MOV EAX,dword ptr [EDX + 0x68]
+0056b88a : PUSH ECX
+0056b88b : FSTP float ptr [ESP]
+0056b88e : PUSH EBX
+0056b88f : CALL EAX
+0056b891 : MOV ECX,ESI
+0056b893 : TEST ESI,ESI
+0056b895 : JNZ 0x0056b860
+0056b897 : POP ESI
+0056b898 : POP EBP
+0056b899 : POP EBX
+0056b89a : RET 0x8

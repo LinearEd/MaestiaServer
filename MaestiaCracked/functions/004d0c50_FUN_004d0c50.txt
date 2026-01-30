@@ -1,0 +1,77 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_004d0c50
+ENTRY    : 004d0c50
+BODY     : [[004d0c50, 004d0c99]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_004d0c50(int param_1,int param_2)
+
+{
+  byte *pbVar1;
+  ushort *in_EAX;
+  byte bVar2;
+  int iVar3;
+  int iVar4;
+  int iVar5;
+  
+  iVar5 = 0;
+  if (0 < param_2) {
+    do {
+      iVar3 = 0;
+      *in_EAX = 0;
+      iVar4 = 0;
+      do {
+        pbVar1 = (byte *)(*(int *)(param_1 + 4) + iVar5 * 2 + iVar4);
+        bVar2 = (byte)iVar3;
+        iVar3 = iVar3 + 8;
+        iVar4 = iVar4 + 1;
+        *in_EAX = *in_EAX | (ushort)*pbVar1 << (bVar2 & 0x1f);
+      } while (iVar3 < 0x10);
+      iVar5 = iVar5 + 1;
+      in_EAX = in_EAX + 1;
+    } while (iVar5 < param_2);
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+004d0c50 : PUSH EBP
+004d0c51 : MOV EBP,ESP
+004d0c53 : PUSH EDI
+004d0c54 : XOR EDI,EDI
+004d0c56 : CMP dword ptr [EBP + 0xc],EDI
+004d0c59 : JLE 0x004d0c97
+004d0c5b : PUSH EBX
+004d0c5c : PUSH ESI
+004d0c5d : LEA ECX,[ECX]
+004d0c60 : XOR ECX,ECX
+004d0c62 : MOV word ptr [EAX],CX
+004d0c65 : XOR EDX,EDX
+004d0c67 : LEA ESI,[EDI + EDI*0x1]
+004d0c6a : LEA EBX,[EBX]
+004d0c70 : MOV EBX,dword ptr [EBP + 0x8]
+004d0c73 : MOV EBX,dword ptr [EBX + 0x4]
+004d0c76 : ADD EBX,ESI
+004d0c78 : MOVZX BX,byte ptr [EBX + EDX*0x1]
+004d0c7d : SHL BX,CL
+004d0c80 : ADD ECX,0x8
+004d0c83 : INC EDX
+004d0c84 : OR word ptr [EAX],BX
+004d0c87 : CMP ECX,0x10
+004d0c8a : JL 0x004d0c70
+004d0c8c : INC EDI
+004d0c8d : ADD EAX,0x2
+004d0c90 : CMP EDI,dword ptr [EBP + 0xc]
+004d0c93 : JL 0x004d0c60
+004d0c95 : POP ESI
+004d0c96 : POP EBX
+004d0c97 : POP EDI
+004d0c98 : POP EBP
+004d0c99 : RET

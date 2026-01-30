@@ -1,0 +1,116 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00472d30
+ENTRY    : 00472d30
+BODY     : [[00472d30, 00472dd3]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+byte FUN_00472d30(int param_1)
+
+{
+  undefined1 in_AL;
+  byte bVar1;
+  byte bVar2;
+  byte bVar3;
+  byte bVar4;
+  byte bVar5;
+  undefined4 in_ECX;
+  int unaff_ESI;
+  char *pcVar6;
+  
+  bVar5 = 0;
+  if (*(char *)(unaff_ESI + 0x10f8) != '\0') {
+    FUN_00807d70("CTreeRI::InitGraphics called redundantly");
+    return 1;
+  }
+  *(undefined1 *)(unaff_ESI + 0x1078) = in_AL;
+  if (unaff_ESI == -0x110) {
+    pcVar6 = "CTreeRI::InitGraphics, no geometry present (CCore::DeleteGeometry called too early?";
+  }
+  else {
+    bVar1 = FUN_0046fa70(unaff_ESI,in_ECX);
+    bVar2 = FUN_0046ff10(unaff_ESI);
+    bVar3 = FUN_00470520(unaff_ESI);
+    bVar4 = FUN_00470d80(unaff_ESI);
+    bVar5 = FUN_004729a0(unaff_ESI);
+    bVar5 = bVar1 & bVar2 & bVar3 & bVar4 & bVar5;
+    FUN_008078d0(unaff_ESI,1);
+    *(undefined4 *)(unaff_ESI + 0x10f0) = *(undefined4 *)(param_1 + 0x10);
+    if (bVar5 != 0) goto LAB_00472daf;
+    pcVar6 = "CTreeRI::InitGraphics, failed to initialize material and/or geometry";
+  }
+  FUN_00807d70(pcVar6);
+LAB_00472daf:
+  *(byte *)(unaff_ESI + 0x10f8) = bVar5;
+  return bVar5;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00472d30 : PUSH EBP
+00472d31 : MOV EBP,ESP
+00472d33 : PUSH ECX
+00472d34 : PUSH EBX
+00472d35 : XOR BL,BL
+00472d37 : PUSH EDI
+00472d38 : CMP byte ptr [ESI + 0x10f8],BL
+00472d3e : JNZ 0x00472dbe
+00472d40 : LEA EDI,[ESI + 0x110]
+00472d46 : MOV byte ptr [ESI + 0x1078],AL
+00472d4c : TEST EDI,EDI
+00472d4e : JZ 0x00472da2
+00472d50 : PUSH ECX
+00472d51 : PUSH ESI
+00472d52 : MOV ECX,EDI
+00472d54 : CALL 0x0046fa70
+00472d59 : PUSH ESI
+00472d5a : MOV ECX,EDI
+00472d5c : MOV BL,AL
+00472d5e : CALL 0x0046ff10
+00472d63 : PUSH ESI
+00472d64 : MOV ECX,EDI
+00472d66 : AND BL,AL
+00472d68 : CALL 0x00470520
+00472d6d : PUSH ESI
+00472d6e : MOV ECX,EDI
+00472d70 : AND BL,AL
+00472d72 : CALL 0x00470d80
+00472d77 : PUSH ESI
+00472d78 : MOV ECX,EDI
+00472d7a : AND BL,AL
+00472d7c : CALL 0x004729a0
+00472d81 : PUSH 0x1
+00472d83 : PUSH ESI
+00472d84 : AND BL,AL
+00472d86 : CALL 0x008078d0
+00472d8b : MOV EDX,dword ptr [EBP + 0x8]
+00472d8e : MOV EAX,dword ptr [EDX + 0x10]
+00472d91 : MOV dword ptr [ESI + 0x10f0],EAX
+00472d97 : TEST BL,BL
+00472d99 : JNZ 0x00472daf
+00472d9b : PUSH 0xcd6010
+00472da0 : JMP 0x00472da7
+00472da2 : PUSH 0xcd6058
+00472da7 : CALL 0x00807d70
+00472dac : ADD ESP,0x4
+00472daf : MOV byte ptr [ESI + 0x10f8],BL
+00472db5 : MOV AL,BL
+00472db7 : POP EDI
+00472db8 : POP EBX
+00472db9 : POP ECX
+00472dba : POP EBP
+00472dbb : RET 0x4
+00472dbe : PUSH 0xcd60ac
+00472dc3 : CALL 0x00807d70
+00472dc8 : ADD ESP,0x4
+00472dcb : POP EDI
+00472dcc : MOV AL,0x1
+00472dce : POP EBX
+00472dcf : POP ECX
+00472dd0 : POP EBP
+00472dd1 : RET 0x4

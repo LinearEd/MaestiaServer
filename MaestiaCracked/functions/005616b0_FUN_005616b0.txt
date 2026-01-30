@@ -1,0 +1,71 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005616b0
+ENTRY    : 005616b0
+BODY     : [[005616b0, 0056170b]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_005616b0(uint param_1)
+
+{
+  int iVar1;
+  int in_ECX;
+  GMutex *this;
+  
+  if ((*(int *)(in_ECX + 0x74) < 2) && (*(uint *)(in_ECX + 0x78) <= param_1)) {
+    this = (GMutex *)(*(int *)(in_ECX + 0x84) + 8);
+    GMutex::Lock(this);
+    iVar1 = *(int *)(in_ECX + 0x74);
+    while ((iVar1 < 2 && (*(uint *)(in_ECX + 0x78) <= param_1))) {
+      GWaitCondition::Wait
+                ((GWaitCondition *)(*(int *)(in_ECX + 0x84) + 0x1c),
+                 (GMutex *)(*(int *)(in_ECX + 0x84) + 8),0xffffffff);
+      iVar1 = *(int *)(in_ECX + 0x74);
+    }
+    GMutex::Unlock(this);
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005616b0 : PUSH EBX
+005616b1 : PUSH ESI
+005616b2 : MOV ESI,ECX
+005616b4 : MOV EBX,0x1
+005616b9 : CMP dword ptr [ESI + 0x74],EBX
+005616bc : JG 0x00561707
+005616be : PUSH EBP
+005616bf : MOV EBP,dword ptr [ESP + 0x10]
+005616c3 : CMP dword ptr [ESI + 0x78],EBP
+005616c6 : JA 0x00561706
+005616c8 : PUSH EDI
+005616c9 : MOV EDI,dword ptr [ESI + 0x84]
+005616cf : ADD EDI,0x8
+005616d2 : MOV ECX,EDI
+005616d4 : CALL 0x005162b0
+005616d9 : CMP dword ptr [ESI + 0x74],EBX
+005616dc : JG 0x005616fe
+005616de : MOV EDI,EDI
+005616e0 : CMP dword ptr [ESI + 0x78],EBP
+005616e3 : JA 0x005616fe
+005616e5 : MOV EAX,dword ptr [ESI + 0x84]
+005616eb : LEA ECX,[EAX + 0x8]
+005616ee : PUSH -0x1
+005616f0 : PUSH ECX
+005616f1 : LEA ECX,[EAX + 0x1c]
+005616f4 : CALL 0x00516820
+005616f9 : CMP dword ptr [ESI + 0x74],EBX
+005616fc : JLE 0x005616e0
+005616fe : MOV ECX,EDI
+00561700 : CALL 0x005170a0
+00561705 : POP EDI
+00561706 : POP EBP
+00561707 : POP ESI
+00561708 : POP EBX
+00561709 : RET 0x4

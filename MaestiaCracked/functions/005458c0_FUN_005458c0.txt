@@ -1,0 +1,79 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005458c0
+ENTRY    : 005458c0
+BODY     : [[005458c0, 0054591c]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+uint FUN_005458c0(uint *param_1,uint param_2)
+
+{
+  int iVar1;
+  uint uVar2;
+  int *in_ECX;
+  uint *puVar3;
+  
+  iVar1 = *in_ECX;
+  puVar3 = (uint *)(iVar1 + 8 + param_2 * 0xc);
+  if ((*(int *)(iVar1 + 8 + param_2 * 0xc) != -2) &&
+     (uVar2 = param_2, (puVar3[1] & *(uint *)(iVar1 + 4)) == param_2)) {
+    while (((puVar3[1] & *(uint *)(iVar1 + 4)) != param_2 || (puVar3[1] != *param_1))) {
+      uVar2 = *puVar3;
+      if (uVar2 == 0xffffffff) {
+        return 0xffffffff;
+      }
+      puVar3 = (uint *)(iVar1 + 8 + uVar2 * 0xc);
+    }
+    return uVar2;
+  }
+  return 0xffffffff;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005458c0 : PUSH EBX
+005458c1 : PUSH ESI
+005458c2 : MOV ESI,dword ptr [ESP + 0x10]
+005458c6 : PUSH EDI
+005458c7 : MOV EDI,dword ptr [ECX]
+005458c9 : LEA ECX,[ESI + ESI*0x2]
+005458cc : CMP dword ptr [EDI + ECX*0x4 + 0x8],-0x2
+005458d1 : LEA ECX,[EDI + ECX*0x4 + 0x8]
+005458d5 : MOV EAX,ESI
+005458d7 : JZ 0x00545914
+005458d9 : MOV EBX,dword ptr [EDI + 0x4]
+005458dc : MOV EDX,dword ptr [ECX + 0x4]
+005458df : AND EDX,EBX
+005458e1 : CMP EDX,ESI
+005458e3 : JNZ 0x00545914
+005458e5 : PUSH EBP
+005458e6 : MOV EDX,dword ptr [ECX + 0x4]
+005458e9 : MOV EBP,EDX
+005458eb : AND EBP,EBX
+005458ed : CMP EBP,ESI
+005458ef : JNZ 0x005458fa
+005458f1 : MOV EBP,dword ptr [ESP + 0x14]
+005458f5 : CMP EDX,dword ptr [EBP]
+005458f8 : JZ 0x0054590d
+005458fa : MOV EAX,dword ptr [ECX]
+005458fc : CMP EAX,-0x1
+005458ff : JZ 0x0054590a
+00545901 : LEA ECX,[EAX + EAX*0x2]
+00545904 : LEA ECX,[EDI + ECX*0x4 + 0x8]
+00545908 : JMP 0x005458e6
+0054590a : OR EAX,0xffffffff
+0054590d : POP EBP
+0054590e : POP EDI
+0054590f : POP ESI
+00545910 : POP EBX
+00545911 : RET 0x8
+00545914 : POP EDI
+00545915 : POP ESI
+00545916 : OR EAX,0xffffffff
+00545919 : POP EBX
+0054591a : RET 0x8

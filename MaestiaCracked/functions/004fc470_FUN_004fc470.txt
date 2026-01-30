@@ -1,0 +1,192 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_004fc470
+ENTRY    : 004fc470
+BODY     : [[004fc470, 004fc57d]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+int FUN_004fc470(float *param_1)
+
+{
+  float fVar1;
+  float fVar2;
+  float fVar3;
+  uint uVar4;
+  char cVar5;
+  int in_EAX;
+  uint uVar6;
+  int iVar7;
+  int iVar8;
+  int iVar9;
+  int iVar10;
+  bool bVar11;
+  bool bVar12;
+  
+  uVar4 = *(uint *)(in_EAX + 8);
+  if ((uVar4 == 0) || (cVar5 = FUN_004fa680(), cVar5 != '\0')) {
+    return uVar4 * 0x140 + *(int *)(in_EAX + 4);
+  }
+  iVar9 = *(int *)(in_EAX + 4);
+  uVar6 = uVar4 >> 1;
+  iVar10 = uVar4 * 0x140 + iVar9;
+  if (uVar6 != 0) {
+    fVar1 = *param_1;
+    iVar8 = iVar9;
+    do {
+      fVar2 = *(float *)(uVar6 * 0x140 + iVar8);
+      iVar7 = uVar6 * 0x140 + iVar8;
+      iVar9 = iVar7;
+      if (((fVar1 == fVar2) && (param_1[1] == *(float *)(iVar7 + 4))) &&
+         (param_1[2] == *(float *)(iVar7 + 8))) {
+        if (param_1[3] == *(float *)(iVar7 + 0xc)) {
+          bVar11 = *(byte *)((int)param_1 + 0x22) < *(byte *)(iVar7 + 0x22);
+          goto LAB_004fc567;
+        }
+        if (param_1[3] < *(float *)(iVar7 + 0xc)) goto LAB_004fc56b;
+      }
+      else {
+        if (fVar1 == fVar2) {
+          fVar2 = param_1[1];
+          fVar3 = *(float *)(iVar7 + 4);
+          if (fVar2 == fVar3) {
+            bVar11 = *(float *)(iVar7 + 8) == param_1[2];
+            bVar12 = *(float *)(iVar7 + 8) < param_1[2];
+          }
+          else {
+            bVar11 = fVar3 == fVar2;
+            bVar12 = fVar3 < fVar2;
+          }
+        }
+        else {
+          bVar11 = fVar2 == fVar1;
+          bVar12 = fVar2 < fVar1;
+        }
+        if (bVar12 || bVar11) {
+          bVar11 = false;
+        }
+        else {
+          bVar11 = true;
+        }
+LAB_004fc567:
+        if (bVar11) {
+LAB_004fc56b:
+          iVar9 = iVar8;
+          iVar10 = iVar7;
+        }
+      }
+      uVar6 = (iVar10 - iVar9) / 0x280;
+      iVar8 = iVar9;
+    } while (uVar6 != 0);
+  }
+  return iVar9;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+004fc470 : PUSH EBX
+004fc471 : MOV EBX,dword ptr [ESP + 0x8]
+004fc475 : PUSH ESI
+004fc476 : MOV ESI,EAX
+004fc478 : PUSH EDI
+004fc479 : MOV EDI,dword ptr [ESI + 0x8]
+004fc47c : TEST EDI,EDI
+004fc47e : JZ 0x004fc56f
+004fc484 : MOV ECX,dword ptr [ESI + 0x4]
+004fc487 : MOV EDX,EBX
+004fc489 : CALL 0x004fa680
+004fc48e : TEST AL,AL
+004fc490 : JNZ 0x004fc56f
+004fc496 : MOV ESI,dword ptr [ESI + 0x4]
+004fc499 : MOV ECX,EDI
+004fc49b : LEA EDI,[ECX + ECX*0x4]
+004fc49e : MOV EAX,ECX
+004fc4a0 : SHL EDI,0x6
+004fc4a3 : SHR EAX,0x1
+004fc4a5 : ADD EDI,ESI
+004fc4a7 : TEST EAX,EAX
+004fc4a9 : JBE 0x004fc528
+004fc4af : MOVSS XMM2,dword ptr [EBX]
+004fc4b3 : LEA ECX,[EAX + EAX*0x4]
+004fc4b6 : SHL ECX,0x6
+004fc4b9 : MOVSS XMM0,dword ptr [ECX + ESI*0x1]
+004fc4be : ADD ECX,ESI
+004fc4c0 : UCOMISS XMM2,XMM0
+004fc4c3 : LAHF
+004fc4c4 : TEST AH,0x44
+004fc4c7 : JP 0x004fc530
+004fc4c9 : MOVSS XMM1,dword ptr [EBX + 0x4]
+004fc4ce : UCOMISS XMM1,dword ptr [ECX + 0x4]
+004fc4d2 : LAHF
+004fc4d3 : TEST AH,0x44
+004fc4d6 : JP 0x004fc530
+004fc4d8 : MOVSS XMM1,dword ptr [EBX + 0x8]
+004fc4dd : UCOMISS XMM1,dword ptr [ECX + 0x8]
+004fc4e1 : LAHF
+004fc4e2 : TEST AH,0x44
+004fc4e5 : JP 0x004fc530
+004fc4e7 : MOVSS XMM0,dword ptr [EBX + 0xc]
+004fc4ec : MOVSS XMM1,dword ptr [ECX + 0xc]
+004fc4f1 : UCOMISS XMM0,XMM1
+004fc4f4 : LAHF
+004fc4f5 : TEST AH,0x44
+004fc4f8 : JP 0x004fc505
+004fc4fa : MOV AL,byte ptr [EBX + 0x22]
+004fc4fd : CMP AL,byte ptr [ECX + 0x22]
+004fc500 : SETC AL
+004fc503 : JMP 0x004fc567
+004fc505 : COMISS XMM1,XMM0
+004fc508 : JA 0x004fc56b
+004fc50a : MOV ESI,ECX
+004fc50c : MOV ECX,EDI
+004fc50e : SUB ECX,ESI
+004fc510 : MOV EAX,0x66666667
+004fc515 : IMUL ECX
+004fc517 : SAR EDX,0x7
+004fc51a : MOV EAX,EDX
+004fc51c : SHR EAX,0x1f
+004fc51f : ADD EAX,EDX
+004fc521 : CDQ
+004fc522 : SUB EAX,EDX
+004fc524 : SAR EAX,0x1
+004fc526 : JNZ 0x004fc4b3
+004fc528 : POP EDI
+004fc529 : MOV EAX,ESI
+004fc52b : POP ESI
+004fc52c : POP EBX
+004fc52d : RET 0x4
+004fc530 : UCOMISS XMM2,XMM0
+004fc533 : LAHF
+004fc534 : TEST AH,0x44
+004fc537 : JP 0x004fc55c
+004fc539 : MOVSS XMM0,dword ptr [EBX + 0x4]
+004fc53e : MOVSS XMM1,dword ptr [ECX + 0x4]
+004fc543 : UCOMISS XMM0,XMM1
+004fc546 : LAHF
+004fc547 : TEST AH,0x44
+004fc54a : JP 0x004fc557
+004fc54c : MOVSS XMM0,dword ptr [ECX + 0x8]
+004fc551 : COMISS XMM0,dword ptr [EBX + 0x8]
+004fc555 : JMP 0x004fc55f
+004fc557 : COMISS XMM1,XMM0
+004fc55a : JMP 0x004fc55f
+004fc55c : COMISS XMM0,XMM2
+004fc55f : JBE 0x004fc565
+004fc561 : MOV AL,0x1
+004fc563 : JMP 0x004fc567
+004fc565 : XOR AL,AL
+004fc567 : TEST AL,AL
+004fc569 : JZ 0x004fc50a
+004fc56b : MOV EDI,ECX
+004fc56d : JMP 0x004fc50c
+004fc56f : LEA EAX,[EDI + EDI*0x4]
+004fc572 : SHL EAX,0x6
+004fc575 : ADD EAX,dword ptr [ESI + 0x4]
+004fc578 : POP EDI
+004fc579 : POP ESI
+004fc57a : POP EBX
+004fc57b : RET 0x4

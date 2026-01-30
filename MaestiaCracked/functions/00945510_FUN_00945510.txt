@@ -1,0 +1,86 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00945510
+ENTRY    : 00945510
+BODY     : [[00945510, 0094557f]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+uint FUN_00945510(void)
+
+{
+  char cVar1;
+  int iVar2;
+  DWORD DVar3;
+  uint uVar4;
+  int *unaff_ESI;
+  uint uVar5;
+  
+  if (unaff_ESI != (int *)0x0) {
+    cVar1 = (**(code **)(*unaff_ESI + 0xa0))();
+    if (cVar1 != '\0') {
+      iVar2 = (**(code **)(*unaff_ESI + 0x90))();
+      if (iVar2 != 0) {
+        DVar3 = timeGetTime();
+        iVar2 = (**(code **)(*unaff_ESI + 0x98))();
+        uVar5 = (DVar3 - iVar2) / 1000;
+        iVar2 = (**(code **)(*unaff_ESI + 0x90))();
+        uVar4 = (**(code **)(*unaff_ESI + 0x90))();
+        return -(uint)(uVar5 < uVar4) & iVar2 - uVar5;
+      }
+    }
+  }
+  return 0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00945510 : TEST ESI,ESI
+00945512 : JZ 0x0094557d
+00945514 : MOV EAX,dword ptr [ESI]
+00945516 : MOV EDX,dword ptr [EAX + 0xa0]
+0094551c : MOV ECX,ESI
+0094551e : CALL EDX
+00945520 : TEST AL,AL
+00945522 : JZ 0x0094557d
+00945524 : MOV EAX,dword ptr [ESI]
+00945526 : MOV EDX,dword ptr [EAX + 0x90]
+0094552c : MOV ECX,ESI
+0094552e : CALL EDX
+00945530 : TEST EAX,EAX
+00945532 : JBE 0x0094557d
+00945534 : PUSH EBX
+00945535 : PUSH EDI
+00945536 : CALL dword ptr [0x00b85598]
+0094553c : MOV EDI,EAX
+0094553e : MOV EAX,dword ptr [ESI]
+00945540 : MOV EDX,dword ptr [EAX + 0x98]
+00945546 : MOV ECX,ESI
+00945548 : CALL EDX
+0094554a : SUB EDI,EAX
+0094554c : MOV EAX,0x10624dd3
+00945551 : MUL EDI
+00945553 : MOV EAX,dword ptr [ESI]
+00945555 : MOV EDI,EDX
+00945557 : MOV EDX,dword ptr [EAX + 0x90]
+0094555d : MOV ECX,ESI
+0094555f : SHR EDI,0x6
+00945562 : CALL EDX
+00945564 : MOV EBX,EAX
+00945566 : MOV EAX,dword ptr [ESI]
+00945568 : MOV EDX,dword ptr [EAX + 0x90]
+0094556e : MOV ECX,ESI
+00945570 : SUB EBX,EDI
+00945572 : CALL EDX
+00945574 : CMP EDI,EAX
+00945576 : SBB EAX,EAX
+00945578 : POP EDI
+00945579 : AND EAX,EBX
+0094557b : POP EBX
+0094557c : RET
+0094557d : XOR EAX,EAX
+0094557f : RET

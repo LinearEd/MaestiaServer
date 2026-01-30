@@ -1,0 +1,248 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __NMSG_WRITE
+ENTRY    : 0064540e
+BODY     : [[0064540e, 00645499] [0064549d, 006454dd] [006454e1, 00645520] [00645526, 00645544] [00645548, 00645569] [0064556d, 006455b8]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __NMSG_WRITE
+   
+   Library: Visual Studio 2008 Release */
+
+void __cdecl __NMSG_WRITE(int param_1)
+
+{
+  undefined4 *puVar1;
+  uint uVar2;
+  int iVar3;
+  errno_t eVar4;
+  DWORD DVar5;
+  size_t sVar6;
+  HANDLE hFile;
+  DWORD *lpNumberOfBytesWritten;
+  LPOVERLAPPED lpOverlapped;
+  DWORD local_c;
+  uint local_8;
+  
+  local_8 = 0;
+  do {
+    if (param_1 == (&DAT_00d674a0)[local_8 * 2]) break;
+    local_8 = local_8 + 1;
+  } while (local_8 < 0x17);
+  uVar2 = local_8;
+  if (local_8 < 0x17) {
+    iVar3 = __set_error_mode(3);
+    if ((iVar3 != 1) && ((iVar3 = __set_error_mode(3), iVar3 != 0 || (DAT_00d66f78 != 1)))) {
+      if (param_1 == 0xfc) {
+        return;
+      }
+      eVar4 = _strcpy_s(&DAT_00d7bb38,0x314,"Runtime Error!\n\nProgram: ");
+      if (eVar4 != 0) {
+                    /* WARNING: Subroutine does not return */
+        __invoke_watson((wchar_t *)0x0,(wchar_t *)0x0,(wchar_t *)0x0,0,0);
+      }
+      DAT_00d7bc55 = 0;
+      DVar5 = GetModuleFileNameA((HMODULE)0x0,&DAT_00d7bb51,0x104);
+      if ((DVar5 == 0) &&
+         (eVar4 = _strcpy_s(&DAT_00d7bb51,0x2fb,"<program name unknown>"), eVar4 != 0)) {
+                    /* WARNING: Subroutine does not return */
+        __invoke_watson((wchar_t *)0x0,(wchar_t *)0x0,(wchar_t *)0x0,0,0);
+      }
+      sVar6 = _strlen(&DAT_00d7bb51);
+      if (0x3c < sVar6 + 1) {
+        sVar6 = _strlen(&DAT_00d7bb51);
+        eVar4 = _strncpy_s((char *)(sVar6 + 0xd7bb16),(int)&DAT_00d7be4c - (int)(sVar6 + 0xd7bb16),
+                           "...",3);
+        if (eVar4 != 0) {
+                    /* WARNING: Subroutine does not return */
+          __invoke_watson((wchar_t *)0x0,(wchar_t *)0x0,(wchar_t *)0x0,0,0);
+        }
+      }
+      eVar4 = _strcat_s(&DAT_00d7bb38,0x314,"\n\n");
+      if (eVar4 == 0) {
+        eVar4 = _strcat_s(&DAT_00d7bb38,0x314,*(char **)(local_8 * 8 + 0xd674a4));
+        if (eVar4 == 0) {
+          ___crtMessageBoxA(&DAT_00d7bb38,"Microsoft Visual C++ Runtime Library",0x12010);
+          return;
+        }
+                    /* WARNING: Subroutine does not return */
+        __invoke_watson((wchar_t *)0x0,(wchar_t *)0x0,(wchar_t *)0x0,0,0);
+      }
+                    /* WARNING: Subroutine does not return */
+      __invoke_watson((wchar_t *)0x0,(wchar_t *)0x0,(wchar_t *)0x0,0,0);
+    }
+    hFile = GetStdHandle(0xfffffff4);
+    if ((hFile != (HANDLE)0x0) && (hFile != (HANDLE)0xffffffff)) {
+      lpOverlapped = (LPOVERLAPPED)0x0;
+      lpNumberOfBytesWritten = &local_c;
+      puVar1 = (undefined4 *)(uVar2 * 8 + 0xd674a4);
+      sVar6 = _strlen((char *)*puVar1);
+      WriteFile(hFile,(LPCVOID)*puVar1,sVar6,lpNumberOfBytesWritten,lpOverlapped);
+    }
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0064540e : MOV EDI,EDI
+00645410 : PUSH EBP
+00645411 : MOV EBP,ESP
+00645413 : PUSH ECX
+00645414 : PUSH ECX
+00645415 : PUSH EBX
+00645416 : MOV EBX,dword ptr [EBP + 0x8]
+00645419 : PUSH ESI
+0064541a : PUSH EDI
+0064541b : XOR ESI,ESI
+0064541d : XOR EDI,EDI
+0064541f : MOV dword ptr [EBP + -0x4],EDI
+00645422 : CMP EBX,dword ptr [EDI*0x8 + 0xd674a0]
+00645429 : JZ 0x00645434
+0064542b : INC EDI
+0064542c : MOV dword ptr [EBP + -0x4],EDI
+0064542f : CMP EDI,0x17
+00645432 : JC 0x00645422
+00645434 : CMP EDI,0x17
+00645437 : JNC 0x006455b4
+0064543d : PUSH 0x3
+0064543f : CALL 0x0065bfd3
+00645444 : POP ECX
+00645445 : CMP EAX,0x1
+00645448 : JZ 0x00645582
+0064544e : PUSH 0x3
+00645450 : CALL 0x0065bfd3
+00645455 : POP ECX
+00645456 : TEST EAX,EAX
+00645458 : JNZ 0x00645467
+0064545a : CMP dword ptr [0x00d66f78],0x1
+00645461 : JZ 0x00645582
+00645467 : CMP EBX,0xfc
+0064546d : JZ 0x006455b4
+00645473 : PUSH 0xb9bf58
+00645478 : MOV EBX,0x314
+0064547d : PUSH EBX
+0064547e : MOV EDI,0xd7bb38
+00645483 : PUSH EDI
+00645484 : CALL 0x00638300
+00645489 : ADD ESP,0xc
+0064548c : TEST EAX,EAX
+0064548e : JZ 0x0064549d
+00645490 : PUSH ESI
+00645491 : PUSH ESI
+00645492 : PUSH ESI
+00645493 : PUSH ESI
+00645494 : PUSH ESI
+00645495 : CALL 0x00637169
+0064549d : PUSH 0x104
+006454a2 : MOV ESI,0xd7bb51
+006454a7 : PUSH ESI
+006454a8 : PUSH 0x0
+006454aa : MOV byte ptr [0x00d7bc55],0x0
+006454b1 : CALL dword ptr [0x00b852e0]
+006454b7 : TEST EAX,EAX
+006454b9 : JNZ 0x006454e1
+006454bb : PUSH 0xb9bf40
+006454c0 : PUSH 0x2fb
+006454c5 : PUSH ESI
+006454c6 : CALL 0x00638300
+006454cb : ADD ESP,0xc
+006454ce : TEST EAX,EAX
+006454d0 : JZ 0x006454e1
+006454d2 : XOR EAX,EAX
+006454d4 : PUSH EAX
+006454d5 : PUSH EAX
+006454d6 : PUSH EAX
+006454d7 : PUSH EAX
+006454d8 : PUSH EAX
+006454d9 : CALL 0x00637169
+006454e1 : PUSH ESI
+006454e2 : CALL 0x00640960
+006454e7 : INC EAX
+006454e8 : POP ECX
+006454e9 : CMP EAX,0x3c
+006454ec : JBE 0x00645526
+006454ee : PUSH ESI
+006454ef : CALL 0x00640960
+006454f4 : SUB ESI,0x3b
+006454f7 : ADD EAX,ESI
+006454f9 : PUSH 0x3
+006454fb : MOV ECX,0xd7be4c
+00645500 : PUSH 0xb9bf3c
+00645505 : SUB ECX,EAX
+00645507 : PUSH ECX
+00645508 : PUSH EAX
+00645509 : CALL 0x0063c196
+0064550e : ADD ESP,0x14
+00645511 : TEST EAX,EAX
+00645513 : JZ 0x00645526
+00645515 : XOR ESI,ESI
+00645517 : PUSH ESI
+00645518 : PUSH ESI
+00645519 : PUSH ESI
+0064551a : PUSH ESI
+0064551b : PUSH ESI
+0064551c : CALL 0x00637169
+00645526 : XOR ESI,ESI
+00645528 : PUSH 0xb9bf38
+0064552d : PUSH EBX
+0064552e : PUSH EDI
+0064552f : CALL 0x0063db33
+00645534 : ADD ESP,0xc
+00645537 : TEST EAX,EAX
+00645539 : JZ 0x00645548
+0064553b : PUSH ESI
+0064553c : PUSH ESI
+0064553d : PUSH ESI
+0064553e : PUSH ESI
+0064553f : PUSH ESI
+00645540 : CALL 0x00637169
+00645548 : MOV EAX,dword ptr [EBP + -0x4]
+0064554b : PUSH dword ptr [EAX*0x8 + 0xd674a4]
+00645552 : PUSH EBX
+00645553 : PUSH EDI
+00645554 : CALL 0x0063db33
+00645559 : ADD ESP,0xc
+0064555c : TEST EAX,EAX
+0064555e : JZ 0x0064556d
+00645560 : PUSH ESI
+00645561 : PUSH ESI
+00645562 : PUSH ESI
+00645563 : PUSH ESI
+00645564 : PUSH ESI
+00645565 : CALL 0x00637169
+0064556d : PUSH 0x12010
+00645572 : PUSH 0xb9bf10
+00645577 : PUSH EDI
+00645578 : CALL 0x0065c414
+0064557d : ADD ESP,0xc
+00645580 : JMP 0x006455b4
+00645582 : PUSH -0xc
+00645584 : CALL dword ptr [0x00b85308]
+0064558a : MOV EBX,EAX
+0064558c : CMP EBX,ESI
+0064558e : JZ 0x006455b4
+00645590 : CMP EBX,-0x1
+00645593 : JZ 0x006455b4
+00645595 : PUSH 0x0
+00645597 : LEA EAX,[EBP + -0x8]
+0064559a : PUSH EAX
+0064559b : LEA ESI,[EDI*0x8 + 0xd674a4]
+006455a2 : PUSH dword ptr [ESI]
+006455a4 : CALL 0x00640960
+006455a9 : POP ECX
+006455aa : PUSH EAX
+006455ab : PUSH dword ptr [ESI]
+006455ad : PUSH EBX
+006455ae : CALL dword ptr [0x00b851c0]
+006455b4 : POP EDI
+006455b5 : POP ESI
+006455b6 : POP EBX
+006455b7 : LEAVE
+006455b8 : RET

@@ -1,0 +1,137 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0072df70
+ENTRY    : 0072df70
+BODY     : [[0072df70, 0072e063]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_0072df70(void)
+
+{
+  int *piVar1;
+  uint uVar2;
+  int iVar3;
+  LPCRITICAL_SECTION lpCriticalSection;
+  int unaff_EDI;
+  void *local_10;
+  undefined1 *puStack_c;
+  undefined4 local_8;
+  
+  local_8 = 0xffffffff;
+  puStack_c = &LAB_00b0f9bb;
+  local_10 = ExceptionList;
+  uVar2 = DAT_00d66fa0 ^ (uint)&stack0xfffffffc;
+  ExceptionList = &local_10;
+  EnterCriticalSection((LPCRITICAL_SECTION)(unaff_EDI + 0x1c));
+  local_8 = 0;
+  iVar3 = FUN_0072dd50(uVar2);
+  while (iVar3 != 0) {
+    lpCriticalSection = (LPCRITICAL_SECTION)(unaff_EDI + 0x1c);
+    *(int *)(unaff_EDI + 0x70) = *(int *)(unaff_EDI + 0x70) + 1;
+    local_8 = 0xffffffff;
+    LeaveCriticalSection(lpCriticalSection);
+    FUN_0072dad0();
+    EnterCriticalSection(lpCriticalSection);
+    local_8 = 1;
+    iVar3 = FUN_00664b00(iVar3);
+    if (iVar3 != 0) {
+      SetEvent(*(HANDLE *)(unaff_EDI + 0x6c));
+    }
+    piVar1 = (int *)(unaff_EDI + 0x70);
+    *piVar1 = *piVar1 + -1;
+    if ((*piVar1 == 0) && (*(int *)(unaff_EDI + 0x74) != 0)) {
+      SetEvent(*(HANDLE *)(unaff_EDI + 0x78));
+    }
+    local_8 = 0xffffffff;
+    LeaveCriticalSection(lpCriticalSection);
+    EnterCriticalSection((LPCRITICAL_SECTION)(unaff_EDI + 0x1c));
+    local_8 = 0;
+    iVar3 = FUN_0072dd50();
+  }
+  local_8 = 0xffffffff;
+  LeaveCriticalSection((LPCRITICAL_SECTION)(unaff_EDI + 0x1c));
+  ExceptionList = local_10;
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0072df70 : PUSH EBP
+0072df71 : MOV EBP,ESP
+0072df73 : PUSH -0x1
+0072df75 : PUSH 0xb0f9bb
+0072df7a : MOV EAX,FS:[0x0]
+0072df80 : PUSH EAX
+0072df81 : SUB ESP,0x8
+0072df84 : PUSH EBX
+0072df85 : PUSH ESI
+0072df86 : MOV EAX,[0x00d66fa0]
+0072df8b : XOR EAX,EBP
+0072df8d : PUSH EAX
+0072df8e : LEA EAX,[EBP + -0xc]
+0072df91 : MOV FS:[0x0],EAX
+0072df97 : LEA EBX,[EDI + 0x1c]
+0072df9a : PUSH EBX
+0072df9b : MOV dword ptr [EBP + -0x10],EBX
+0072df9e : CALL dword ptr [0x00b85118]
+0072dfa4 : MOV dword ptr [EBP + -0x4],0x0
+0072dfab : MOV ESI,EDI
+0072dfad : CALL 0x0072dd50
+0072dfb2 : MOV ESI,EAX
+0072dfb4 : TEST ESI,ESI
+0072dfb6 : JZ 0x0072e045
+0072dfbc : LEA ESP,[ESP]
+0072dfc0 : INC dword ptr [EDI + 0x70]
+0072dfc3 : MOV dword ptr [EBP + -0x4],0xffffffff
+0072dfca : PUSH EBX
+0072dfcb : CALL dword ptr [0x00b8511c]
+0072dfd1 : CALL 0x0072dad0
+0072dfd6 : PUSH EBX
+0072dfd7 : MOV dword ptr [EBP + -0x14],EBX
+0072dfda : CALL dword ptr [0x00b85118]
+0072dfe0 : MOV dword ptr [EBP + -0x4],0x1
+0072dfe7 : PUSH ESI
+0072dfe8 : LEA ECX,[EDI + 0x50]
+0072dfeb : CALL 0x00664b00
+0072dff0 : TEST EAX,EAX
+0072dff2 : JZ 0x0072dffe
+0072dff4 : MOV EAX,dword ptr [EDI + 0x6c]
+0072dff7 : PUSH EAX
+0072dff8 : CALL dword ptr [0x00b851e8]
+0072dffe : OR ESI,0xffffffff
+0072e001 : ADD dword ptr [EDI + 0x70],ESI
+0072e004 : JNZ 0x0072e016
+0072e006 : CMP dword ptr [EDI + 0x74],0x0
+0072e00a : JZ 0x0072e016
+0072e00c : MOV ECX,dword ptr [EDI + 0x78]
+0072e00f : PUSH ECX
+0072e010 : CALL dword ptr [0x00b851e8]
+0072e016 : MOV dword ptr [EBP + -0x4],ESI
+0072e019 : PUSH EBX
+0072e01a : CALL dword ptr [0x00b8511c]
+0072e020 : LEA EBX,[EDI + 0x1c]
+0072e023 : PUSH EBX
+0072e024 : MOV dword ptr [EBP + -0x10],EBX
+0072e027 : CALL dword ptr [0x00b85118]
+0072e02d : MOV dword ptr [EBP + -0x4],0x0
+0072e034 : MOV ESI,EDI
+0072e036 : CALL 0x0072dd50
+0072e03b : MOV ESI,EAX
+0072e03d : TEST ESI,ESI
+0072e03f : JNZ 0x0072dfc0
+0072e045 : MOV dword ptr [EBP + -0x4],0xffffffff
+0072e04c : PUSH EBX
+0072e04d : CALL dword ptr [0x00b8511c]
+0072e053 : MOV ECX,dword ptr [EBP + -0xc]
+0072e056 : MOV dword ptr FS:[0x0],ECX
+0072e05d : POP ECX
+0072e05e : POP ESI
+0072e05f : POP EBX
+0072e060 : MOV ESP,EBP
+0072e062 : POP EBP
+0072e063 : RET

@@ -1,0 +1,68 @@
+PROGRAM  : Maestia.exe
+FUNCTION : CanAcquire
+ENTRY    : 00517130
+BODY     : [[00517130, 00517174]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* public: virtual bool __thiscall GMutex::CanAcquire(void) */
+
+bool __thiscall GMutex::CanAcquire(GMutex *this)
+
+{
+  undefined4 *puVar1;
+  DWORD DVar2;
+  
+                    /* 0x117130  61  ?CanAcquire@GMutex@@UAE_NXZ */
+  puVar1 = *(undefined4 **)(this + 4);
+  if (puVar1[2] != 0) {
+    DVar2 = WaitForSingleObject((HANDLE)*puVar1,0);
+    if (DVar2 != 0) {
+      return false;
+    }
+    puVar1[2] = puVar1[2] + 1;
+    FUN_00517030(this + -0xc);
+  }
+  return true;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00517130 : PUSH ESI
+00517131 : MOV ESI,dword ptr [ECX + 0x4]
+00517134 : MOV EAX,dword ptr [ESI + 0x8]
+00517137 : PUSH EDI
+00517138 : LEA EDI,[ECX + -0xc]
+0051713b : TEST EAX,EAX
+0051713d : JZ 0x00517159
+0051713f : MOV ECX,dword ptr [ESI]
+00517141 : PUSH 0x0
+00517143 : PUSH ECX
+00517144 : CALL dword ptr [0x00b85100]
+0051714a : TEST EAX,EAX
+0051714c : JNZ 0x00517167
+0051714e : INC dword ptr [ESI + 0x8]
+00517151 : PUSH EDI
+00517152 : MOV ECX,ESI
+00517154 : CALL 0x00517030
+00517159 : XOR AL,AL
+0051715b : XOR EDX,EDX
+0051715d : TEST AL,AL
+0051715f : SETZ DL
+00517162 : POP EDI
+00517163 : MOV AL,DL
+00517165 : POP ESI
+00517166 : RET
+00517167 : MOV AL,0x1
+00517169 : XOR EDX,EDX
+0051716b : TEST AL,AL
+0051716d : SETZ DL
+00517170 : POP EDI
+00517171 : MOV AL,DL
+00517173 : POP ESI
+00517174 : RET

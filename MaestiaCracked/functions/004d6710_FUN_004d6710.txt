@@ -1,0 +1,91 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_004d6710
+ENTRY    : 004d6710
+BODY     : [[004d6710, 004d6785]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* WARNING: Removing unreachable block (ram,0x004d674b) */
+/* WARNING: Removing unreachable block (ram,0x004d6732) */
+/* WARNING: Removing unreachable block (ram,0x004d6776) */
+
+void FUN_004d6710(byte *param_1)
+
+{
+  byte bVar1;
+  int iVar2;
+  byte bVar3;
+  int in_EDX;
+  int unaff_ESI;
+  
+  bVar1 = *param_1;
+  bVar3 = param_1[1];
+  iVar2 = 0;
+  if (0 < in_EDX) {
+    do {
+      *(byte *)(iVar2 + unaff_ESI) =
+           *(byte *)(iVar2 + unaff_ESI) ^
+           (&DAT_00bfa1f8)[(bVar1 & 0x8000000f) * 0x100 + (uint)bVar3];
+      iVar2 = iVar2 + 1;
+      bVar3 = bVar3 + 1;
+    } while (iVar2 < in_EDX);
+  }
+  *param_1 = bVar1;
+  param_1[1] = bVar3;
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+004d6710 : PUSH EBP
+004d6711 : MOV EBP,ESP
+004d6713 : PUSH ECX
+004d6714 : PUSH EBX
+004d6715 : PUSH EDI
+004d6716 : MOV EDI,dword ptr [EBP + 0x8]
+004d6719 : MOV BL,byte ptr [EDI]
+004d671b : MOV CL,byte ptr [EDI + 0x1]
+004d671e : XOR EAX,EAX
+004d6720 : MOV byte ptr [EBP + -0x1],BL
+004d6723 : TEST EDX,EDX
+004d6725 : JLE 0x004d676a
+004d6727 : MOVZX EDI,BL
+004d672a : AND EDI,0x8000000f
+004d6730 : JNS 0x004d6737
+004d6732 : DEC EDI
+004d6733 : OR EDI,0xfffffff0
+004d6736 : INC EDI
+004d6737 : SHL EDI,0x8
+004d673a : LEA EBX,[EBX]
+004d6740 : MOVZX EBX,CL
+004d6743 : AND EBX,0x800000ff
+004d6749 : JNS 0x004d6753
+004d674b : DEC EBX
+004d674c : OR EBX,0xffffff00
+004d6752 : INC EBX
+004d6753 : MOV BL,byte ptr [EBX + EDI*0x1 + 0xbfa1f8]
+004d675a : XOR byte ptr [EAX + ESI*0x1],BL
+004d675d : INC EAX
+004d675e : INC CL
+004d6760 : CMP EAX,EDX
+004d6762 : JL 0x004d6740
+004d6764 : MOV BL,byte ptr [EBP + -0x1]
+004d6767 : MOV EDI,dword ptr [EBP + 0x8]
+004d676a : MOVZX EAX,CL
+004d676d : AND EAX,0x800000ff
+004d6772 : MOV byte ptr [EDI],BL
+004d6774 : JNS 0x004d677d
+004d6776 : DEC EAX
+004d6777 : OR EAX,0xffffff00
+004d677c : INC EAX
+004d677d : MOV byte ptr [EDI + 0x1],AL
+004d6780 : POP EDI
+004d6781 : POP EBX
+004d6782 : MOV ESP,EBP
+004d6784 : POP EBP
+004d6785 : RET

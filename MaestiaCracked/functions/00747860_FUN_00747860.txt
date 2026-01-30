@@ -1,0 +1,105 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00747860
+ENTRY    : 00747860
+BODY     : [[00747860, 00747921]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined4 FUN_00747860(int param_1)
+
+{
+  undefined4 uVar1;
+  int iVar2;
+  LPCRITICAL_SECTION in_ECX;
+  void *local_10;
+  undefined1 *puStack_c;
+  undefined4 local_8;
+  
+  iVar2 = param_1;
+  local_8 = 0xffffffff;
+  puStack_c = &LAB_00b272b0;
+  local_10 = ExceptionList;
+  ExceptionList = &local_10;
+  EnterCriticalSection(in_ECX);
+  local_8 = 0;
+  *(undefined4 *)(iVar2 + 8) = 1;
+  InterlockedIncrement(&in_ECX[0xd].RecursionCount);
+  *(LONG *)(iVar2 + 0x28) = in_ECX[0xd].RecursionCount;
+  FUN_004c0f80(&param_1);
+  if ((((char)in_ECX[0xf].LockCount != '\0') && (*(int *)(iVar2 + 4) == 1)) &&
+     (*(float *)(iVar2 + 0x94) <= (float)in_ECX[0xe].SpinCount)) {
+    FUN_00747700(iVar2);
+    *(undefined1 *)((int)&in_ECX[0xf].LockCount + 1) = 1;
+  }
+  *(undefined1 *)((int)&in_ECX[0xf].LockCount + 3) = 1;
+  uVar1 = *(undefined4 *)(iVar2 + 0x28);
+  local_8 = 0xffffffff;
+  LeaveCriticalSection(in_ECX);
+  ExceptionList = local_10;
+  return uVar1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00747860 : PUSH EBP
+00747861 : MOV EBP,ESP
+00747863 : PUSH -0x1
+00747865 : PUSH 0xb272b0
+0074786a : MOV EAX,FS:[0x0]
+00747870 : PUSH EAX
+00747871 : SUB ESP,0x8
+00747874 : PUSH EBX
+00747875 : PUSH ESI
+00747876 : PUSH EDI
+00747877 : MOV EAX,[0x00d66fa0]
+0074787c : XOR EAX,EBP
+0074787e : PUSH EAX
+0074787f : LEA EAX,[EBP + -0xc]
+00747882 : MOV FS:[0x0],EAX
+00747888 : MOV EDI,dword ptr [EBP + 0x8]
+0074788b : MOV ESI,ECX
+0074788d : PUSH ESI
+0074788e : MOV dword ptr [EBP + -0x10],ESI
+00747891 : CALL dword ptr [0x00b85118]
+00747897 : MOV dword ptr [EBP + -0x4],0x0
+0074789e : LEA EBX,[ESI + 0x140]
+007478a4 : PUSH EBX
+007478a5 : MOV dword ptr [EDI + 0x8],0x1
+007478ac : CALL dword ptr [0x00b850dc]
+007478b2 : MOV EBX,dword ptr [EBX]
+007478b4 : LEA EAX,[EBP + 0x8]
+007478b7 : PUSH EAX
+007478b8 : LEA EAX,[ESI + 0x18]
+007478bb : MOV dword ptr [EDI + 0x28],EBX
+007478be : CALL 0x004c0f80
+007478c3 : CMP byte ptr [ESI + 0x16c],0x0
+007478ca : JZ 0x007478f4
+007478cc : CMP dword ptr [EDI + 0x4],0x1
+007478d0 : JNZ 0x007478f4
+007478d2 : MOVSS XMM0,dword ptr [EDI + 0x94]
+007478da : MOVSS XMM1,dword ptr [ESI + 0x164]
+007478e2 : COMISS XMM1,XMM0
+007478e5 : JC 0x007478f4
+007478e7 : PUSH EDI
+007478e8 : CALL 0x00747700
+007478ed : MOV byte ptr [ESI + 0x16d],0x1
+007478f4 : MOV byte ptr [ESI + 0x16f],0x1
+007478fb : MOV EDI,dword ptr [EDI + 0x28]
+007478fe : MOV dword ptr [EBP + -0x4],0xffffffff
+00747905 : PUSH ESI
+00747906 : CALL dword ptr [0x00b8511c]
+0074790c : MOV EAX,EDI
+0074790e : MOV ECX,dword ptr [EBP + -0xc]
+00747911 : MOV dword ptr FS:[0x0],ECX
+00747918 : POP ECX
+00747919 : POP EDI
+0074791a : POP ESI
+0074791b : POP EBX
+0074791c : MOV ESP,EBP
+0074791e : POP EBP
+0074791f : RET 0x4

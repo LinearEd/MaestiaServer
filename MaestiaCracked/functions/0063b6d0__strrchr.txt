@@ -1,0 +1,76 @@
+PROGRAM  : Maestia.exe
+FUNCTION : _strrchr
+ENTRY    : 0063b6d0
+BODY     : [[0063b6d0, 0063b6fc]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    _strrchr
+   
+   Library: Visual Studio 2008 Release */
+
+char * __cdecl _strrchr(char *_Str,int _Ch)
+
+{
+  char cVar1;
+  int iVar2;
+  char *pcVar3;
+  char *pcVar4;
+  
+  iVar2 = -1;
+  do {
+    pcVar4 = _Str;
+    if (iVar2 == 0) break;
+    iVar2 = iVar2 + -1;
+    pcVar4 = _Str + 1;
+    cVar1 = *_Str;
+    _Str = pcVar4;
+  } while (cVar1 != '\0');
+  iVar2 = -(iVar2 + 1);
+  pcVar4 = pcVar4 + -1;
+  do {
+    pcVar3 = pcVar4;
+    if (iVar2 == 0) break;
+    iVar2 = iVar2 + -1;
+    pcVar3 = pcVar4 + -1;
+    cVar1 = *pcVar4;
+    pcVar4 = pcVar3;
+  } while ((char)_Ch != cVar1);
+  pcVar3 = pcVar3 + 1;
+  if (*pcVar3 != (char)_Ch) {
+    pcVar3 = (char *)0x0;
+  }
+  return pcVar3;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0063b6d0 : PUSH EBP
+0063b6d1 : MOV EBP,ESP
+0063b6d3 : PUSH EDI
+0063b6d4 : MOV EDI,dword ptr [EBP + 0x8]
+0063b6d7 : XOR EAX,EAX
+0063b6d9 : OR ECX,0xffffffff
+0063b6dc : SCASB.REPNE ES:EDI
+0063b6de : ADD ECX,0x1
+0063b6e1 : NEG ECX
+0063b6e3 : SUB EDI,0x1
+0063b6e6 : MOV AL,byte ptr [EBP + 0xc]
+0063b6e9 : STD
+0063b6ea : SCASB.REPNE ES:EDI
+0063b6ec : ADD EDI,0x1
+0063b6ef : CMP byte ptr [EDI],AL
+0063b6f1 : JZ 0x0063b6f7
+0063b6f3 : XOR EAX,EAX
+0063b6f5 : JMP 0x0063b6f9
+0063b6f7 : MOV EAX,EDI
+0063b6f9 : CLD
+0063b6fa : POP EDI
+0063b6fb : LEAVE
+0063b6fc : RET

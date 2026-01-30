@@ -1,0 +1,102 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_006072d0
+ENTRY    : 006072d0
+BODY     : [[006072d0, 0060735d]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+int FUN_006072d0(int *param_1,int param_2,int param_3,uint *param_4,undefined4 param_5,int param_6)
+
+{
+  int iVar1;
+  uint uVar2;
+  uint uVar3;
+  int iVar4;
+  int iVar5;
+  bool bVar6;
+  
+  if (0 < param_3 - param_2) {
+    iVar5 = param_3 - param_2;
+    do {
+      iVar4 = iVar5 >> 1;
+      uVar3 = *(uint *)(*param_1 + (iVar4 + param_2) * 4);
+      iVar1 = *(int *)(*(int *)(param_6 + 0xc) + (uVar3 >> 10) * 4);
+      uVar3 = uVar3 & 0x3ff;
+      uVar2 = *(uint *)(iVar1 + uVar3 * 0xc);
+      bVar6 = uVar2 < *param_4;
+      if (uVar2 == *param_4) {
+        bVar6 = *(uint *)(iVar1 + uVar3 * 0xc + 4) < param_4[1];
+      }
+      if (bVar6) {
+        param_2 = iVar4 + param_2 + 1;
+        iVar4 = iVar5 + (-1 - iVar4);
+      }
+      iVar5 = iVar4;
+    } while (0 < iVar4);
+  }
+  return param_2;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006072d0 : PUSH ECX
+006072d1 : PUSH EBX
+006072d2 : MOV EBX,dword ptr [ESP + 0x14]
+006072d6 : PUSH EBP
+006072d7 : MOV EBP,dword ptr [ESP + 0x14]
+006072db : SUB EBX,EBP
+006072dd : TEST EBX,EBX
+006072df : JLE 0x00607358
+006072e1 : MOV EAX,dword ptr [ESP + 0x10]
+006072e5 : MOV ECX,dword ptr [EAX]
+006072e7 : MOV EDX,dword ptr [ESP + 0x24]
+006072eb : MOV EAX,dword ptr [EDX + 0xc]
+006072ee : MOV dword ptr [ESP + 0x14],ECX
+006072f2 : MOV ECX,dword ptr [ESP + 0x1c]
+006072f6 : MOV EDX,dword ptr [ECX]
+006072f8 : PUSH ESI
+006072f9 : MOV dword ptr [ESP + 0x1c],EAX
+006072fd : MOV dword ptr [ESP + 0xc],EDX
+00607301 : PUSH EDI
+00607302 : MOV EAX,dword ptr [ESP + 0x1c]
+00607306 : MOV ESI,dword ptr [ESP + 0x20]
+0060730a : MOV EDX,EBX
+0060730c : SAR EDX,0x1
+0060730e : LEA EDI,[EDX + EBP*0x1]
+00607311 : MOV ECX,dword ptr [EAX + EDI*0x4]
+00607314 : MOV EAX,ECX
+00607316 : SHR EAX,0xa
+00607319 : MOV EAX,dword ptr [ESI + EAX*0x4]
+0060731c : AND ECX,0x3ff
+00607322 : LEA ECX,[ECX + ECX*0x2]
+00607325 : MOV ESI,dword ptr [EAX + ECX*0x4]
+00607328 : LEA ECX,[EAX + ECX*0x4]
+0060732b : MOV EAX,dword ptr [ESP + 0x10]
+0060732f : CMP ESI,EAX
+00607331 : JNZ 0x0060733d
+00607333 : MOV ECX,dword ptr [ECX + 0x4]
+00607336 : MOV EAX,dword ptr [ESP + 0x24]
+0060733a : CMP ECX,dword ptr [EAX + 0x4]
+0060733d : SETC AL
+00607340 : TEST AL,AL
+00607342 : JZ 0x00607350
+00607344 : OR ECX,0xffffffff
+00607347 : SUB ECX,EDX
+00607349 : LEA EBP,[EDI + 0x1]
+0060734c : ADD EBX,ECX
+0060734e : JMP 0x00607352
+00607350 : MOV EBX,EDX
+00607352 : TEST EBX,EBX
+00607354 : JG 0x00607302
+00607356 : POP EDI
+00607357 : POP ESI
+00607358 : MOV EAX,EBP
+0060735a : POP EBP
+0060735b : POP EBX
+0060735c : POP ECX
+0060735d : RET

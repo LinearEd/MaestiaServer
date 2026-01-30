@@ -1,0 +1,91 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005ae8a0
+ENTRY    : 005ae8a0
+BODY     : [[005ae8a0, 005ae90e]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+uint FUN_005ae8a0(int param_1,int param_2,undefined1 param_3)
+
+{
+  int *in_EAX;
+  int in_ECX;
+  int iVar1;
+  uint uVar2;
+  int local_4;
+  
+  uVar2 = 0;
+  if (*(uint *)(in_ECX + 0x24) != 0) {
+    iVar1 = 0;
+    do {
+      if (uVar2 < 0x10) {
+        in_EAX = (int *)(iVar1 + 0x34 + in_ECX);
+      }
+      else {
+        in_EAX = (int *)(*(int *)(in_ECX + 0x28) + -0xc0 + iVar1);
+      }
+      if ((*in_EAX == 2) && (in_EAX[1] == param_1)) {
+        local_4 = CONCAT31(local_4._1_3_,param_3);
+        *in_EAX = 2;
+        in_EAX[1] = param_2;
+        in_EAX[2] = local_4;
+        return CONCAT31((int3)((uint)in_EAX >> 8),1);
+      }
+      uVar2 = uVar2 + 1;
+      iVar1 = iVar1 + 0xc;
+    } while (uVar2 < *(uint *)(in_ECX + 0x24));
+  }
+  return (uint)in_EAX & 0xffffff00;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005ae8a0 : SUB ESP,0x8
+005ae8a3 : PUSH EBX
+005ae8a4 : PUSH ESI
+005ae8a5 : PUSH EDI
+005ae8a6 : MOV EDI,dword ptr [ECX + 0x24]
+005ae8a9 : XOR ESI,ESI
+005ae8ab : TEST EDI,EDI
+005ae8ad : JBE 0x005ae8dc
+005ae8af : MOV EBX,dword ptr [ESP + 0x18]
+005ae8b3 : XOR EDX,EDX
+005ae8b5 : CMP ESI,0x10
+005ae8b8 : JNC 0x005ae8c0
+005ae8ba : LEA EAX,[EDX + ECX*0x1 + 0x34]
+005ae8be : JMP 0x005ae8ca
+005ae8c0 : MOV EAX,dword ptr [ECX + 0x28]
+005ae8c3 : LEA EAX,[EAX + EDX*0x1 + 0xffffff40]
+005ae8ca : CMP dword ptr [EAX],0x2
+005ae8cd : JNZ 0x005ae8d4
+005ae8cf : CMP dword ptr [EAX + 0x4],EBX
+005ae8d2 : JZ 0x005ae8e7
+005ae8d4 : INC ESI
+005ae8d5 : ADD EDX,0xc
+005ae8d8 : CMP ESI,EDI
+005ae8da : JC 0x005ae8b5
+005ae8dc : POP EDI
+005ae8dd : POP ESI
+005ae8de : XOR AL,AL
+005ae8e0 : POP EBX
+005ae8e1 : ADD ESP,0x8
+005ae8e4 : RET 0xc
+005ae8e7 : MOV DL,byte ptr [ESP + 0x20]
+005ae8eb : MOV ECX,dword ptr [ESP + 0x1c]
+005ae8ef : MOV byte ptr [ESP + 0x10],DL
+005ae8f3 : MOV ESI,dword ptr [ESP + 0x10]
+005ae8f7 : MOV EDX,0x2
+005ae8fc : MOV dword ptr [EAX],EDX
+005ae8fe : MOV dword ptr [EAX + 0x4],ECX
+005ae901 : POP EDI
+005ae902 : MOV dword ptr [EAX + 0x8],ESI
+005ae905 : POP ESI
+005ae906 : MOV AL,0x1
+005ae908 : POP EBX
+005ae909 : ADD ESP,0x8
+005ae90c : RET 0xc

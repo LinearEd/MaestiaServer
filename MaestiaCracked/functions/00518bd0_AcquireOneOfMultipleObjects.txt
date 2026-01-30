@@ -1,0 +1,189 @@
+PROGRAM  : Maestia.exe
+FUNCTION : AcquireOneOfMultipleObjects
+ENTRY    : 00518bd0
+BODY     : [[00518bd0, 00518cbc] [00518cc0, 00518d18]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* public: static int __cdecl GAcquireInterface::AcquireOneOfMultipleObjects(class GWaitable *
+   *,unsigned int,unsigned int) */
+
+int __cdecl
+GAcquireInterface::AcquireOneOfMultipleObjects(GWaitable **param_1,uint param_2,uint param_3)
+
+{
+  char cVar1;
+  bool bVar2;
+  int iVar3;
+  int iVar4;
+  uint uVar5;
+  int local_44;
+  GEvent local_2c [44];
+  
+                    /* 0x118bd0  50
+                       ?AcquireOneOfMultipleObjects@GAcquireInterface@@SAHPAPAVGWaitable@@II@Z */
+  iVar3 = FUN_00517710(param_1,param_2);
+  if (iVar3 == -1) {
+    if (param_3 == 0) {
+      return -1;
+    }
+    GEvent::GEvent(local_2c,false,false);
+    cVar1 = FUN_00517f20(&LAB_00518b90);
+    if (cVar1 == '\0') {
+      GEvent::~GEvent(local_2c);
+      return 0;
+    }
+    iVar3 = FUN_00517710(param_1,param_2);
+    if (iVar3 != -1) {
+      FUN_00517fe0(&LAB_00518b90);
+      GEvent::~GEvent(local_2c);
+      return iVar3;
+    }
+    local_44 = 0;
+    if (param_3 != 0xffffffff) {
+      local_44 = FUN_005aa2b0();
+    }
+    iVar3 = FUN_00517710(param_1,param_2);
+    if ((iVar3 == -1) && (bVar2 = GEvent::Wait(local_2c,param_3), uVar5 = param_3, bVar2)) {
+      do {
+        iVar3 = FUN_00517710(param_1,param_2);
+        if (iVar3 != -1) break;
+        if (param_3 != 0xffffffff) {
+          iVar4 = FUN_005aa2b0();
+          if (param_3 <= (uint)(iVar4 - local_44)) break;
+          uVar5 = param_3 - (iVar4 - local_44);
+        }
+        bVar2 = GEvent::Wait(local_2c,uVar5);
+      } while (bVar2);
+    }
+    FUN_00517fe0(&LAB_00518b90);
+    GEvent::~GEvent(local_2c);
+  }
+  return iVar3;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00518bd0 : SUB ESP,0x44
+00518bd3 : PUSH EBP
+00518bd4 : MOV EBP,dword ptr [ESP + 0x50]
+00518bd8 : PUSH EDI
+00518bd9 : MOV EDI,dword ptr [ESP + 0x50]
+00518bdd : PUSH EBP
+00518bde : PUSH EDI
+00518bdf : CALL 0x00517710
+00518be4 : ADD ESP,0x8
+00518be7 : CMP EAX,-0x1
+00518bea : JNZ 0x00518d13
+00518bf0 : PUSH ESI
+00518bf1 : MOV ESI,dword ptr [ESP + 0x5c]
+00518bf5 : TEST ESI,ESI
+00518bf7 : JNZ 0x00518c02
+00518bf9 : POP ESI
+00518bfa : POP EDI
+00518bfb : OR EAX,EAX
+00518bfd : POP EBP
+00518bfe : ADD ESP,0x44
+00518c01 : RET
+00518c02 : PUSH 0x0
+00518c04 : PUSH 0x0
+00518c06 : LEA ECX,[ESP + 0x2c]
+00518c0a : CALL 0x00518080
+00518c0f : LEA EAX,[ESP + 0x24]
+00518c13 : PUSH 0x518b90
+00518c18 : LEA ECX,[ESP + 0x18]
+00518c1c : MOV dword ptr [ESP + 0x18],EDI
+00518c20 : MOV dword ptr [ESP + 0x1c],EBP
+00518c24 : MOV dword ptr [ESP + 0x20],EAX
+00518c28 : MOV dword ptr [ESP + 0x24],0x0
+00518c30 : CALL 0x00517f20
+00518c35 : TEST AL,AL
+00518c37 : JNZ 0x00518c4b
+00518c39 : LEA ECX,[ESP + 0x24]
+00518c3d : CALL 0x005180d0
+00518c42 : POP ESI
+00518c43 : POP EDI
+00518c44 : XOR EAX,EAX
+00518c46 : POP EBP
+00518c47 : ADD ESP,0x44
+00518c4a : RET
+00518c4b : PUSH EBX
+00518c4c : PUSH EBP
+00518c4d : PUSH EDI
+00518c4e : CALL 0x00517710
+00518c53 : MOV EBX,EAX
+00518c55 : ADD ESP,0x8
+00518c58 : CMP EBX,-0x1
+00518c5b : JZ 0x00518c7e
+00518c5d : PUSH 0x518b90
+00518c62 : LEA ECX,[ESP + 0x1c]
+00518c66 : CALL 0x00517fe0
+00518c6b : LEA ECX,[ESP + 0x28]
+00518c6f : CALL 0x005180d0
+00518c74 : MOV EAX,EBX
+00518c76 : POP EBX
+00518c77 : POP ESI
+00518c78 : POP EDI
+00518c79 : POP EBP
+00518c7a : ADD ESP,0x44
+00518c7d : RET
+00518c7e : XOR EAX,EAX
+00518c80 : MOV dword ptr [ESP + 0x10],EAX
+00518c84 : MOV dword ptr [ESP + 0x14],EAX
+00518c88 : MOV EBX,ESI
+00518c8a : CMP ESI,-0x1
+00518c8d : JZ 0x00518c9c
+00518c8f : CALL 0x005aa2b0
+00518c94 : MOV dword ptr [ESP + 0x10],EAX
+00518c98 : MOV dword ptr [ESP + 0x14],EDX
+00518c9c : PUSH EBP
+00518c9d : PUSH EDI
+00518c9e : CALL 0x00517710
+00518ca3 : MOV EDI,EAX
+00518ca5 : ADD ESP,0x8
+00518ca8 : CMP EDI,-0x1
+00518cab : JNZ 0x00518cf8
+00518cad : PUSH ESI
+00518cae : LEA ECX,[ESP + 0x2c]
+00518cb2 : CALL 0x00517760
+00518cb7 : TEST AL,AL
+00518cb9 : JZ 0x00518cf8
+00518cbb : JMP 0x00518cc0
+00518cc0 : MOV ECX,dword ptr [ESP + 0x58]
+00518cc4 : PUSH EBP
+00518cc5 : PUSH ECX
+00518cc6 : CALL 0x00517710
+00518ccb : MOV EDI,EAX
+00518ccd : ADD ESP,0x8
+00518cd0 : CMP EDI,-0x1
+00518cd3 : JNZ 0x00518cf8
+00518cd5 : CMP ESI,EAX
+00518cd7 : JZ 0x00518cea
+00518cd9 : CALL 0x005aa2b0
+00518cde : SUB EAX,dword ptr [ESP + 0x10]
+00518ce2 : CMP EAX,ESI
+00518ce4 : JNC 0x00518cf8
+00518ce6 : MOV EBX,ESI
+00518ce8 : SUB EBX,EAX
+00518cea : PUSH EBX
+00518ceb : LEA ECX,[ESP + 0x2c]
+00518cef : CALL 0x00517760
+00518cf4 : TEST AL,AL
+00518cf6 : JNZ 0x00518cc0
+00518cf8 : PUSH 0x518b90
+00518cfd : LEA ECX,[ESP + 0x1c]
+00518d01 : CALL 0x00517fe0
+00518d06 : LEA ECX,[ESP + 0x28]
+00518d0a : CALL 0x005180d0
+00518d0f : POP EBX
+00518d10 : MOV EAX,EDI
+00518d12 : POP ESI
+00518d13 : POP EDI
+00518d14 : POP EBP
+00518d15 : ADD ESP,0x44
+00518d18 : RET

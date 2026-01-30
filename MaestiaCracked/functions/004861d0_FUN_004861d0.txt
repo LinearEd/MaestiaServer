@@ -1,0 +1,65 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_004861d0
+ENTRY    : 004861d0
+BODY     : [[004861d0, 0048620c]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_004861d0(int param_1)
+
+{
+  float fVar1;
+  int iVar2;
+  int iVar3;
+  int in_ECX;
+  int unaff_ESI;
+  
+  if (0 < in_ECX) {
+    fVar1 = *(float *)(unaff_ESI + 4);
+    do {
+      iVar3 = (in_ECX + -1) / 2;
+      iVar2 = *(int *)(param_1 + iVar3 * 4);
+      if (*(float *)(iVar2 + 4) <= fVar1) break;
+      *(int *)(param_1 + in_ECX * 4) = iVar2;
+      in_ECX = iVar3;
+    } while (0 < iVar3);
+  }
+  *(int *)(param_1 + in_ECX * 4) = unaff_ESI;
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+004861d0 : PUSH EBP
+004861d1 : MOV EBP,ESP
+004861d3 : LEA EAX,[ECX + -0x1]
+004861d6 : CDQ
+004861d7 : SUB EAX,EDX
+004861d9 : SAR EAX,0x1
+004861db : PUSH EDI
+004861dc : TEST ECX,ECX
+004861de : JLE 0x00486204
+004861e0 : MOVSS XMM0,dword ptr [ESI + 0x4]
+004861e5 : MOV EDX,dword ptr [EBP + 0x8]
+004861e8 : MOV EDI,dword ptr [EDX + EAX*0x4]
+004861eb : MOVSS XMM1,dword ptr [EDI + 0x4]
+004861f0 : COMISS XMM1,XMM0
+004861f3 : JBE 0x00486207
+004861f5 : MOV dword ptr [EDX + ECX*0x4],EDI
+004861f8 : MOV ECX,EAX
+004861fa : DEC EAX
+004861fb : CDQ
+004861fc : SUB EAX,EDX
+004861fe : SAR EAX,0x1
+00486200 : TEST ECX,ECX
+00486202 : JG 0x004861e5
+00486204 : MOV EDX,dword ptr [EBP + 0x8]
+00486207 : MOV dword ptr [EDX + ECX*0x4],ESI
+0048620a : POP EDI
+0048620b : POP EBP
+0048620c : RET

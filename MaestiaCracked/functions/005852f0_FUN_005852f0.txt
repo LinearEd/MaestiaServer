@@ -1,0 +1,87 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005852f0
+ENTRY    : 005852f0
+BODY     : [[005852f0, 00585348]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_005852f0(int param_1)
+
+{
+  uint uVar1;
+  uint uVar2;
+  int in_ECX;
+  
+  uVar1 = *(uint *)(param_1 + 0x38);
+  if (uVar1 < *(uint *)(in_ECX + 0x38)) {
+    uVar2 = uVar1;
+    if (*(uint *)(in_ECX + 0x3c) >> 1 <= uVar1) goto LAB_00585326;
+  }
+  else {
+    if (uVar1 < *(uint *)(in_ECX + 0x3c)) goto LAB_00585326;
+    uVar2 = (uVar1 >> 2) + uVar1;
+  }
+  FUN_005b5ef0((int *)(in_ECX + 0x34),uVar2);
+LAB_00585326:
+  *(uint *)(in_ECX + 0x38) = uVar1;
+  uVar1 = *(uint *)(in_ECX + 0x38);
+  uVar2 = 0;
+  if (uVar1 != 0) {
+    do {
+      *(undefined4 *)(*(int *)(in_ECX + 0x34) + uVar2 * 4) =
+           *(undefined4 *)(*(int *)(param_1 + 0x34) + uVar2 * 4);
+      uVar2 = uVar2 + 1;
+    } while (uVar2 < uVar1);
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005852f0 : PUSH EBX
+005852f1 : PUSH EBP
+005852f2 : MOV EBP,dword ptr [ESP + 0xc]
+005852f6 : PUSH ESI
+005852f7 : MOV EBX,ECX
+005852f9 : PUSH EDI
+005852fa : MOV EDI,dword ptr [EBP + 0x38]
+005852fd : CMP EDI,dword ptr [EBX + 0x38]
+00585300 : LEA ESI,[EBX + 0x34]
+00585303 : JNC 0x00585311
+00585305 : MOV EAX,dword ptr [ESI + 0x8]
+00585308 : SHR EAX,0x1
+0058530a : CMP EDI,EAX
+0058530c : JNC 0x00585326
+0058530e : PUSH EDI
+0058530f : JMP 0x0058531e
+00585311 : CMP EDI,dword ptr [ESI + 0x8]
+00585314 : JC 0x00585326
+00585316 : MOV ECX,EDI
+00585318 : SHR ECX,0x2
+0058531b : ADD ECX,EDI
+0058531d : PUSH ECX
+0058531e : PUSH ESI
+0058531f : MOV ECX,ESI
+00585321 : CALL 0x005b5ef0
+00585326 : MOV dword ptr [ESI + 0x4],EDI
+00585329 : MOV ECX,dword ptr [EBX + 0x38]
+0058532c : XOR EAX,EAX
+0058532e : TEST ECX,ECX
+00585330 : JBE 0x00585342
+00585332 : MOV EDX,dword ptr [EBP + 0x34]
+00585335 : MOV EDX,dword ptr [EDX + EAX*0x4]
+00585338 : MOV EDI,dword ptr [ESI]
+0058533a : MOV dword ptr [EDI + EAX*0x4],EDX
+0058533d : INC EAX
+0058533e : CMP EAX,ECX
+00585340 : JC 0x00585332
+00585342 : POP EDI
+00585343 : POP ESI
+00585344 : POP EBP
+00585345 : POP EBX
+00585346 : RET 0x4

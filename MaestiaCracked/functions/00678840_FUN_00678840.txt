@@ -1,0 +1,150 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00678840
+ENTRY    : 00678840
+BODY     : [[00678840, 006788b9] [006788c0, 006788e6] [006788f0, 00678929]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00678840(void)
+
+{
+  byte *pbVar1;
+  DWORD nPairs;
+  int iVar2;
+  int in_ECX;
+  int iVar3;
+  int *piVar4;
+  DWORD DVar5;
+  WORD local_1c;
+  WORD local_1a;
+  float local_18;
+  WORD *local_14;
+  float *local_10;
+  LPKERNINGPAIR local_c;
+  undefined4 local_8;
+  undefined4 local_4;
+  
+  local_c = (LPKERNINGPAIR)0x0;
+  local_8 = 0;
+  local_4 = 0;
+  nPairs = GetKerningPairsW(*(HDC *)(*(int *)(in_ECX + 0x1c) + 0xc),0,(LPKERNINGPAIR)0x0);
+  DVar5 = 0;
+  if (nPairs != 0) {
+    FUN_00677130(&local_c,(nPairs >> 2) + nPairs);
+    GetKerningPairsW(*(HDC *)(*(int *)(in_ECX + 0x1c) + 0xc),nPairs,local_c);
+    DVar5 = nPairs;
+  }
+  FUN_005de660();
+  if (DVar5 != 0) {
+    local_14 = &local_1c;
+    local_10 = &local_18;
+    piVar4 = &local_c->iKernAmount;
+    do {
+      local_1c = ((tagKERNINGPAIR *)(piVar4 + -1))->wFirst;
+      local_1a = *(WORD *)((int)piVar4 + -2);
+      iVar2 = 4;
+      iVar3 = 0x1505;
+      local_18 = (float)*piVar4 * *(float *)(in_ECX + 0x5c);
+      do {
+        pbVar1 = &stack0xffffffe3 + iVar2;
+        iVar2 = iVar2 + -1;
+        iVar3 = iVar3 * 0x1003f + (uint)*pbVar1;
+      } while (iVar2 != 0);
+      FUN_00678360(in_ECX + 0x54,&local_14,iVar3);
+      piVar4 = piVar4 + 2;
+      DVar5 = DVar5 - 1;
+    } while (DVar5 != 0);
+  }
+  FUN_00515cf0(local_c);
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00678840 : SUB ESP,0x1c
+00678843 : PUSH EBX
+00678844 : PUSH EBP
+00678845 : MOV EBP,dword ptr [0x00b85064]
+0067884b : PUSH ESI
+0067884c : PUSH EDI
+0067884d : XOR EDI,EDI
+0067884f : MOV EBX,ECX
+00678851 : MOV EAX,dword ptr [EBX + 0x1c]
+00678854 : MOV ECX,dword ptr [EAX + 0xc]
+00678857 : PUSH EDI
+00678858 : PUSH EDI
+00678859 : PUSH ECX
+0067885a : MOV dword ptr [ESP + 0x2c],EDI
+0067885e : MOV dword ptr [ESP + 0x30],EDI
+00678862 : MOV dword ptr [ESP + 0x34],EDI
+00678866 : CALL EBP
+00678868 : MOV ESI,EAX
+0067886a : CMP ESI,EDI
+0067886c : JZ 0x00678893
+0067886e : MOV EDX,ESI
+00678870 : SHR EDX,0x2
+00678873 : ADD EDX,ESI
+00678875 : LEA EAX,[ESP + 0x20]
+00678879 : PUSH EDX
+0067887a : PUSH EAX
+0067887b : MOV ECX,EAX
+0067887d : CALL 0x00677130
+00678882 : MOV ECX,dword ptr [ESP + 0x20]
+00678886 : MOV EDX,dword ptr [EBX + 0x1c]
+00678889 : MOV EAX,dword ptr [EDX + 0xc]
+0067888c : PUSH ECX
+0067888d : PUSH ESI
+0067888e : PUSH EAX
+0067888f : MOV EDI,ESI
+00678891 : CALL EBP
+00678893 : LEA EBP,[EBX + 0x54]
+00678896 : MOV ECX,EBP
+00678898 : CALL 0x005de660
+0067889d : TEST EDI,EDI
+0067889f : JBE 0x00678918
+006788a1 : MOV ESI,dword ptr [ESP + 0x20]
+006788a5 : LEA ECX,[ESP + 0x10]
+006788a9 : LEA EDX,[ESP + 0x14]
+006788ad : MOV dword ptr [ESP + 0x18],ECX
+006788b1 : MOV dword ptr [ESP + 0x1c],EDX
+006788b5 : ADD ESI,0x4
+006788b8 : JMP 0x006788c0
+006788c0 : MOV AX,word ptr [ESI + -0x4]
+006788c4 : MOV word ptr [ESP + 0x10],AX
+006788c9 : MOV CX,word ptr [ESI + -0x2]
+006788cd : MOV word ptr [ESP + 0x12],CX
+006788d2 : FILD dword ptr [ESI]
+006788d4 : MOV EAX,0x4
+006788d9 : MOV ECX,0x1505
+006788de : FMUL float ptr [EBX + 0x5c]
+006788e1 : FSTP float ptr [ESP + 0x14]
+006788e5 : JMP 0x006788f0
+006788f0 : MOVZX EDX,byte ptr [ESP + EAX*0x1 + 0xf]
+006788f5 : IMUL ECX,ECX,0x1003f
+006788fb : DEC EAX
+006788fc : ADD ECX,EDX
+006788fe : TEST EAX,EAX
+00678900 : JA 0x006788f0
+00678902 : PUSH ECX
+00678903 : LEA EAX,[ESP + 0x1c]
+00678907 : PUSH EAX
+00678908 : PUSH EBP
+00678909 : MOV ECX,EBP
+0067890b : CALL 0x00678360
+00678910 : ADD ESI,0x8
+00678913 : SUB EDI,0x1
+00678916 : JNZ 0x006788c0
+00678918 : MOV ECX,dword ptr [ESP + 0x20]
+0067891c : PUSH ECX
+0067891d : CALL 0x00515cf0
+00678922 : POP EDI
+00678923 : POP ESI
+00678924 : POP EBP
+00678925 : POP EBX
+00678926 : ADD ESP,0x1c
+00678929 : RET

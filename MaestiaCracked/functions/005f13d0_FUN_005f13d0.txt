@@ -1,0 +1,97 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005f13d0
+ENTRY    : 005f13d0
+BODY     : [[005f13d0, 005f1458]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_005f13d0(int param_1,int param_2,int param_3,int param_4,uint param_5,float param_6,
+                 int param_7)
+
+{
+  int iVar1;
+  uint uVar2;
+  undefined1 *puVar3;
+  int iVar4;
+  
+  if ((param_6 != 1.0) && (uVar2 = 0, param_5 != 0)) {
+    do {
+      puVar3 = (undefined1 *)
+               ((uVar2 + param_3) * *(int *)(param_1 + 0x14) + param_2 + *(int *)(param_1 + 0x18));
+      for (iVar4 = param_4; iVar4 != 0; iVar4 = iVar4 + -1) {
+        iVar1 = FUN_0063b380();
+        iVar1 = iVar1 + param_7;
+        if (iVar1 < 0) {
+          iVar1 = 0;
+        }
+        else if (0xff < iVar1) {
+          iVar1 = 0xff;
+        }
+        *puVar3 = (char)iVar1;
+        puVar3 = puVar3 + 1;
+      }
+      uVar2 = uVar2 + 1;
+    } while (uVar2 < param_5);
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005f13d0 : FLD1
+005f13d2 : FLD float ptr [ESP + 0x18]
+005f13d6 : FUCOM
+005f13d8 : FNSTSW AX
+005f13da : FSTP ST1
+005f13dc : TEST AH,0x44
+005f13df : JNP 0x005f1454
+005f13e1 : PUSH EBX
+005f13e2 : XOR EBX,EBX
+005f13e4 : CMP dword ptr [ESP + 0x18],EBX
+005f13e8 : JBE 0x005f1453
+005f13ea : FLD double ptr [0x00cdf120]
+005f13f0 : PUSH EBP
+005f13f1 : MOV EBP,dword ptr [ESP + 0xc]
+005f13f5 : PUSH ESI
+005f13f6 : PUSH EDI
+005f13f7 : MOV EAX,dword ptr [ESP + 0x1c]
+005f13fb : MOV EDI,dword ptr [ESP + 0x20]
+005f13ff : LEA ESI,[EBX + EAX*0x1]
+005f1402 : IMUL ESI,dword ptr [EBP + 0x14]
+005f1406 : ADD ESI,dword ptr [ESP + 0x18]
+005f140a : ADD ESI,dword ptr [EBP + 0x18]
+005f140d : TEST EDI,EDI
+005f140f : JBE 0x005f1447
+005f1411 : MOVZX ECX,byte ptr [ESI]
+005f1414 : SUB ECX,dword ptr [ESP + 0x2c]
+005f1418 : MOV dword ptr [ESP + 0x28],ECX
+005f141c : FILD dword ptr [ESP + 0x28]
+005f1420 : FMUL ST2
+005f1422 : FADD ST0,ST1
+005f1424 : CALL 0x0063b380
+005f1429 : ADD EAX,dword ptr [ESP + 0x2c]
+005f142d : JNS 0x005f1433
+005f142f : XOR EAX,EAX
+005f1431 : JMP 0x005f143f
+005f1433 : CMP EAX,0xff
+005f1438 : JLE 0x005f143f
+005f143a : MOV EAX,0xff
+005f143f : MOV byte ptr [ESI],AL
+005f1441 : INC ESI
+005f1442 : SUB EDI,0x1
+005f1445 : JNZ 0x005f1411
+005f1447 : INC EBX
+005f1448 : CMP EBX,dword ptr [ESP + 0x24]
+005f144c : JC 0x005f13f7
+005f144e : POP EDI
+005f144f : FSTP ST1
+005f1451 : POP ESI
+005f1452 : POP EBP
+005f1453 : POP EBX
+005f1454 : FSTP ST0
+005f1456 : RET 0x1c

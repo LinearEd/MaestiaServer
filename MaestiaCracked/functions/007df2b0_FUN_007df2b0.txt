@@ -1,0 +1,91 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_007df2b0
+ENTRY    : 007df2b0
+BODY     : [[007df2b0, 007df32c]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+float10 FUN_007df2b0(void)
+
+{
+  int iVar1;
+  uint uVar2;
+  uint uVar3;
+  int unaff_ESI;
+  float10 fVar4;
+  float fVar5;
+  float local_8;
+  
+  fVar5 = 2.0;
+  uVar2 = *(int *)(unaff_ESI + 0x184) / 2;
+  uVar3 = uVar2;
+  if ((int)uVar2 < 0) {
+    uVar3 = -uVar2;
+  }
+  local_8 = 1.0;
+  while( true ) {
+    if ((uVar3 & 1) != 0) {
+      local_8 = local_8 * fVar5;
+    }
+    uVar3 = uVar3 >> 1;
+    if (uVar3 == 0) break;
+    fVar5 = fVar5 * fVar5;
+  }
+  if ((int)uVar2 < 0) {
+    local_8 = 1.0 / local_8;
+  }
+  iVar1 = *(int *)(unaff_ESI + 0x9c);
+  fVar4 = (float10)*(int *)(iVar1 + 0x58);
+  if (*(int *)(iVar1 + 0x58) < 0) {
+    fVar4 = fVar4 + (float10)4.2949673e+09;
+  }
+  return fVar4 * (float10)*(float *)(iVar1 + 100) * (float10)local_8;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+007df2b0 : PUSH EBP
+007df2b1 : MOV EBP,ESP
+007df2b3 : MOV EAX,dword ptr [ESI + 0x184]
+007df2b9 : MOVSS XMM1,dword ptr [0x00cdf144]
+007df2c1 : CDQ
+007df2c2 : SUB EAX,EDX
+007df2c4 : SUB ESP,0x8
+007df2c7 : SAR EAX,0x1
+007df2c9 : MOV ECX,EAX
+007df2cb : JNS 0x007df2cf
+007df2cd : NEG ECX
+007df2cf : MOVSS XMM2,dword ptr [0x00c10fc4]
+007df2d7 : MOVAPS XMM0,XMM2
+007df2da : LEA EBX,[EBX]
+007df2e0 : TEST CL,0x1
+007df2e3 : JZ 0x007df2e9
+007df2e5 : MULSS XMM0,XMM1
+007df2e9 : SHR ECX,0x1
+007df2eb : JZ 0x007df2f9
+007df2ed : MOVAPS XMM3,XMM1
+007df2f0 : MULSS XMM3,XMM1
+007df2f4 : MOVAPS XMM1,XMM3
+007df2f7 : JMP 0x007df2e0
+007df2f9 : TEST EAX,EAX
+007df2fb : JGE 0x007df308
+007df2fd : DIVSS XMM2,XMM0
+007df301 : MOVSS dword ptr [EBP + -0x4],XMM2
+007df306 : JMP 0x007df30d
+007df308 : MOVSS dword ptr [EBP + -0x4],XMM0
+007df30d : MOV EAX,dword ptr [ESI + 0x9c]
+007df313 : MOV ECX,dword ptr [EAX + 0x58]
+007df316 : FILD dword ptr [EAX + 0x58]
+007df319 : TEST ECX,ECX
+007df31b : JGE 0x007df323
+007df31d : FADD float ptr [0x00cdf0e0]
+007df323 : FMUL float ptr [EAX + 0x64]
+007df326 : FMUL float ptr [EBP + -0x4]
+007df329 : MOV ESP,EBP
+007df32b : POP EBP
+007df32c : RET

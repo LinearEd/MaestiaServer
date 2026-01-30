@@ -1,0 +1,214 @@
+PROGRAM  : Maestia.exe
+FUNCTION : ___lc_strtolc
+ENTRY    : 00639e7a
+BODY     : [[00639e7a, 00639ed2] [00639ed6, 00639f6b] [00639f6f, 00639fa2]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    ___lc_strtolc
+   
+   Library: Visual Studio 2008 Release */
+
+undefined4 ___lc_strtolc(char *param_1,char *param_2)
+
+{
+  char cVar1;
+  errno_t eVar2;
+  uint _MaxCount;
+  char *_Dst;
+  char *_Str;
+  rsize_t _SizeInBytes;
+  
+  _Str = param_2;
+  _memset(param_1,0,0x90);
+  if (*param_2 != '\0') {
+    if ((*param_2 != '.') || (param_2[1] == '\0')) {
+      param_2 = (char *)0x0;
+      _MaxCount = _strcspn(_Str,"_.,");
+      while( true ) {
+        if (_MaxCount == 0) {
+          return 0xffffffff;
+        }
+        cVar1 = _Str[_MaxCount];
+        if (param_2 == (char *)0x0) {
+          if (0x3f < _MaxCount) {
+            return 0xffffffff;
+          }
+          if (cVar1 == '.') {
+            return 0xffffffff;
+          }
+          _SizeInBytes = 0x40;
+          _Dst = param_1;
+        }
+        else if (param_2 == (char *)0x1) {
+          if (0x3f < _MaxCount) {
+            return 0xffffffff;
+          }
+          if (cVar1 == '_') {
+            return 0xffffffff;
+          }
+          _SizeInBytes = 0x40;
+          _Dst = param_1 + 0x40;
+        }
+        else {
+          if (param_2 != (char *)0x2) {
+            return 0xffffffff;
+          }
+          if (0xf < _MaxCount) {
+            return 0xffffffff;
+          }
+          if ((cVar1 != '\0') && (cVar1 != ',')) {
+            return 0xffffffff;
+          }
+          _SizeInBytes = 0x10;
+          _Dst = param_1 + 0x80;
+        }
+        eVar2 = _strncpy_s(_Dst,_SizeInBytes,_Str,_MaxCount);
+        if (eVar2 != 0) {
+                    /* WARNING: Subroutine does not return */
+          __invoke_watson((wchar_t *)0x0,(wchar_t *)0x0,(wchar_t *)0x0,0,0);
+        }
+        if (cVar1 == ',') break;
+        if (cVar1 == '\0') {
+          return 0;
+        }
+        param_2 = (char *)((int)param_2 + 1);
+        _Str = _Str + _MaxCount + 1;
+        _MaxCount = _strcspn(_Str,"_.,");
+      }
+      return 0;
+    }
+    eVar2 = _strncpy_s(param_1 + 0x80,0x10,param_2 + 1,0xf);
+    if (eVar2 != 0) {
+                    /* WARNING: Subroutine does not return */
+      __invoke_watson((wchar_t *)0x0,(wchar_t *)0x0,(wchar_t *)0x0,0,0);
+    }
+    param_1[0x8f] = '\0';
+  }
+  return 0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00639e7a : MOV EDI,EDI
+00639e7c : PUSH EBP
+00639e7d : MOV EBP,ESP
+00639e7f : PUSH EBX
+00639e80 : PUSH ESI
+00639e81 : PUSH EDI
+00639e82 : MOV EDI,dword ptr [EBP + 0x8]
+00639e85 : PUSH 0x90
+00639e8a : XOR EBX,EBX
+00639e8c : PUSH EBX
+00639e8d : PUSH EDI
+00639e8e : CALL 0x0063b700
+00639e93 : MOV ESI,dword ptr [EBP + 0xc]
+00639e96 : MOV AL,byte ptr [ESI]
+00639e98 : ADD ESP,0xc
+00639e9b : TEST AL,AL
+00639e9d : JNZ 0x00639ea6
+00639e9f : XOR EAX,EAX
+00639ea1 : JMP 0x00639f9e
+00639ea6 : CMP AL,0x2e
+00639ea8 : JNZ 0x00639ede
+00639eaa : LEA EAX,[ESI + 0x1]
+00639ead : CMP byte ptr [EAX],BL
+00639eaf : JZ 0x00639ede
+00639eb1 : PUSH 0xf
+00639eb3 : PUSH EAX
+00639eb4 : LEA EAX,[EDI + 0x80]
+00639eba : PUSH 0x10
+00639ebc : PUSH EAX
+00639ebd : CALL 0x0063c196
+00639ec2 : ADD ESP,0x10
+00639ec5 : TEST EAX,EAX
+00639ec7 : JZ 0x00639ed6
+00639ec9 : PUSH EBX
+00639eca : PUSH EBX
+00639ecb : PUSH EBX
+00639ecc : PUSH EBX
+00639ecd : PUSH EBX
+00639ece : CALL 0x00637169
+00639ed6 : MOV byte ptr [EDI + 0x8f],BL
+00639edc : JMP 0x00639e9f
+00639ede : PUSH 0xb96320
+00639ee3 : PUSH ESI
+00639ee4 : MOV dword ptr [EBP + 0xc],EBX
+00639ee7 : CALL 0x0063c150
+00639eec : CMP EAX,EBX
+00639eee : JMP 0x00639f93
+00639ef3 : CMP dword ptr [EBP + 0xc],0x0
+00639ef7 : LEA EDI,[EAX + ESI*0x1]
+00639efa : MOV BL,byte ptr [EDI]
+00639efc : JNZ 0x00639f19
+00639efe : CMP EAX,0x40
+00639f01 : JNC 0x00639f9b
+00639f07 : CMP BL,0x2e
+00639f0a : JZ 0x00639f9b
+00639f10 : PUSH EAX
+00639f11 : PUSH ESI
+00639f12 : PUSH 0x40
+00639f14 : PUSH dword ptr [EBP + 0x8]
+00639f17 : JMP 0x00639f54
+00639f19 : CMP dword ptr [EBP + 0xc],0x1
+00639f1d : JNZ 0x00639f35
+00639f1f : CMP EAX,0x40
+00639f22 : JNC 0x00639f9b
+00639f24 : CMP BL,0x5f
+00639f27 : JZ 0x00639f9b
+00639f29 : PUSH EAX
+00639f2a : MOV EAX,dword ptr [EBP + 0x8]
+00639f2d : PUSH ESI
+00639f2e : PUSH 0x40
+00639f30 : ADD EAX,0x40
+00639f33 : JMP 0x00639f53
+00639f35 : CMP dword ptr [EBP + 0xc],0x2
+00639f39 : JNZ 0x00639f9b
+00639f3b : CMP EAX,0x10
+00639f3e : JNC 0x00639f9b
+00639f40 : TEST BL,BL
+00639f42 : JZ 0x00639f49
+00639f44 : CMP BL,0x2c
+00639f47 : JNZ 0x00639f9b
+00639f49 : PUSH EAX
+00639f4a : MOV EAX,dword ptr [EBP + 0x8]
+00639f4d : PUSH ESI
+00639f4e : PUSH 0x10
+00639f50 : SUB EAX,-0x80
+00639f53 : PUSH EAX
+00639f54 : CALL 0x0063c196
+00639f59 : ADD ESP,0x10
+00639f5c : TEST EAX,EAX
+00639f5e : JZ 0x00639f6f
+00639f60 : XOR EAX,EAX
+00639f62 : PUSH EAX
+00639f63 : PUSH EAX
+00639f64 : PUSH EAX
+00639f65 : PUSH EAX
+00639f66 : PUSH EAX
+00639f67 : CALL 0x00637169
+00639f6f : CMP BL,0x2c
+00639f72 : JZ 0x00639e9f
+00639f78 : TEST BL,BL
+00639f7a : JZ 0x00639e9f
+00639f80 : INC dword ptr [EBP + 0xc]
+00639f83 : LEA ESI,[EDI + 0x1]
+00639f86 : PUSH 0xb96320
+00639f8b : PUSH ESI
+00639f8c : CALL 0x0063c150
+00639f91 : TEST EAX,EAX
+00639f93 : POP ECX
+00639f94 : POP ECX
+00639f95 : JNZ 0x00639ef3
+00639f9b : OR EAX,0xffffffff
+00639f9e : POP EDI
+00639f9f : POP ESI
+00639fa0 : POP EBX
+00639fa1 : POP EBP
+00639fa2 : RET

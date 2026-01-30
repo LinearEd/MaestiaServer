@@ -1,0 +1,58 @@
+PROGRAM  : Maestia.exe
+FUNCTION : write_char
+ENTRY    : 00647943
+BODY     : [[00647943, 00647971]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    _write_char
+   
+   Library: Visual Studio 2008 Release */
+
+void __cdecl write_char(wchar_t param_1)
+
+{
+  wint_t wVar1;
+  FILE *in_EAX;
+  int *unaff_ESI;
+  
+  if (((in_EAX->_flag & 0x40) == 0) || (in_EAX->_base != (char *)0x0)) {
+    wVar1 = __fputwc_nolock(param_1,in_EAX);
+    if (wVar1 == 0xffff) {
+      *unaff_ESI = -1;
+      return;
+    }
+  }
+  *unaff_ESI = *unaff_ESI + 1;
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00647943 : MOV EDI,EDI
+00647945 : PUSH EBP
+00647946 : MOV EBP,ESP
+00647948 : TEST byte ptr [EAX + 0xc],0x40
+0064794c : JZ 0x00647954
+0064794e : CMP dword ptr [EAX + 0x8],0x0
+00647952 : JZ 0x0064796e
+00647954 : PUSH EAX
+00647955 : PUSH dword ptr [EBP + 0x8]
+00647958 : CALL 0x0063e44e
+0064795d : POP ECX
+0064795e : POP ECX
+0064795f : MOV ECX,0xffff
+00647964 : CMP AX,CX
+00647967 : JNZ 0x0064796e
+00647969 : OR dword ptr [ESI],0xffffffff
+0064796c : POP EBP
+0064796d : RET
+0064796e : INC dword ptr [ESI]
+00647970 : POP EBP
+00647971 : RET

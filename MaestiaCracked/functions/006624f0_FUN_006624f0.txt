@@ -1,0 +1,73 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_006624f0
+ENTRY    : 006624f0
+BODY     : [[006624f0, 0066254c]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+LONG FUN_006624f0(int *param_1)
+
+{
+  LONG LVar1;
+  
+  if (param_1[0x11] == 1) {
+    param_1[0x11] = 0;
+  }
+  else {
+    LVar1 = InterlockedDecrement(param_1 + 0x11);
+    if (LVar1 != 0) {
+      return LVar1;
+    }
+  }
+  if ((*(byte *)(param_1 + 1) & 8) != 0) {
+    (**(code **)(*param_1 + 0x38))(param_1,0);
+  }
+  param_1[1] = 0;
+  param_1[2] = 0;
+  param_1[0x10] = 0;
+  (**(code **)(*(int *)(param_1[6] + 0xc) + 0x20))((int *)(param_1[6] + 0xc),param_1);
+  return 0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006624f0 : PUSH ESI
+006624f1 : MOV ESI,dword ptr [ESP + 0x8]
+006624f5 : CMP dword ptr [ESI + 0x44],0x1
+006624f9 : LEA EAX,[ESI + 0x44]
+006624fc : PUSH EDI
+006624fd : JNZ 0x00662505
+006624ff : XOR EDI,EDI
+00662501 : MOV dword ptr [EAX],EDI
+00662503 : JMP 0x00662512
+00662505 : PUSH EAX
+00662506 : CALL dword ptr [0x00b851b0]
+0066250c : MOV EDI,EAX
+0066250e : TEST EDI,EDI
+00662510 : JNZ 0x00662548
+00662512 : TEST byte ptr [ESI + 0x4],0x8
+00662516 : JZ 0x00662522
+00662518 : MOV EAX,dword ptr [ESI]
+0066251a : MOV ECX,dword ptr [EAX + 0x38]
+0066251d : PUSH 0x0
+0066251f : PUSH ESI
+00662520 : CALL ECX
+00662522 : MOV EAX,dword ptr [ESI + 0x18]
+00662525 : ADD EAX,0xc
+00662528 : MOV dword ptr [ESI + 0x4],0x0
+0066252f : MOV dword ptr [ESI + 0x8],0x0
+00662536 : MOV dword ptr [ESI + 0x40],0x0
+0066253d : MOV EDX,dword ptr [EAX]
+0066253f : PUSH ESI
+00662540 : PUSH EAX
+00662541 : MOV EAX,dword ptr [EDX + 0x20]
+00662544 : CALL EAX
+00662546 : MOV EAX,EDI
+00662548 : POP EDI
+00662549 : POP ESI
+0066254a : RET 0x4

@@ -1,0 +1,77 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005aa920
+ENTRY    : 005aa920
+BODY     : [[005aa920, 005aa97a]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+int FUN_005aa920(int param_1,uint param_2)
+
+{
+  int iVar1;
+  int iVar2;
+  int iVar3;
+  uint uVar4;
+  uint uVar5;
+  
+  uVar4 = param_2 & 0x1f;
+  uVar5 = *(uint *)(param_1 + (param_2 >> 5) * 4) | *(uint *)(&DAT_00b952c8 + uVar4 * 4);
+  if (uVar5 != *(uint *)(&DAT_00b952c8 + uVar4 * 4)) {
+    iVar2 = FUN_005aa850(uVar5 >> (sbyte)uVar4);
+    return iVar2;
+  }
+  iVar3 = (param_2 >> 5) + 1;
+  iVar1 = -uVar4;
+  iVar2 = *(int *)(param_1 + iVar3 * 4);
+  while (iVar1 = iVar1 + 0x20, iVar2 == 0) {
+    iVar3 = iVar3 + 1;
+    iVar2 = *(int *)(param_1 + iVar3 * 4);
+  }
+  iVar2 = FUN_005aa850(*(undefined4 *)(param_1 + iVar3 * 4));
+  return iVar2 + iVar1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005aa920 : MOV ECX,dword ptr [ESP + 0x8]
+005aa924 : PUSH ESI
+005aa925 : MOV EAX,ECX
+005aa927 : PUSH EDI
+005aa928 : MOV EDI,dword ptr [ESP + 0xc]
+005aa92c : SHR EAX,0x5
+005aa92f : MOV EDX,dword ptr [EDI + EAX*0x4]
+005aa932 : AND ECX,0x1f
+005aa935 : MOV ESI,dword ptr [ECX*0x4 + 0xb952c8]
+005aa93c : OR EDX,ESI
+005aa93e : CMP EDX,ESI
+005aa940 : JZ 0x005aa950
+005aa942 : SHR EDX,CL
+005aa944 : PUSH EDX
+005aa945 : CALL 0x005aa850
+005aa94a : ADD ESP,0x4
+005aa94d : POP EDI
+005aa94e : POP ESI
+005aa94f : RET
+005aa950 : MOV ESI,0x20
+005aa955 : INC EAX
+005aa956 : SUB ESI,ECX
+005aa958 : CMP dword ptr [EDI + EAX*0x4],0x0
+005aa95c : JNZ 0x005aa96a
+005aa95e : MOV EDI,EDI
+005aa960 : INC EAX
+005aa961 : ADD ESI,0x20
+005aa964 : CMP dword ptr [EDI + EAX*0x4],0x0
+005aa968 : JZ 0x005aa960
+005aa96a : MOV EAX,dword ptr [EDI + EAX*0x4]
+005aa96d : PUSH EAX
+005aa96e : CALL 0x005aa850
+005aa973 : ADD ESP,0x4
+005aa976 : POP EDI
+005aa977 : ADD EAX,ESI
+005aa979 : POP ESI
+005aa97a : RET

@@ -1,0 +1,88 @@
+PROGRAM  : Maestia.exe
+FUNCTION : ___crtLCMapStringW
+ENTRY    : 00645215
+BODY     : [[00645215, 0064526b]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    ___crtLCMapStringW
+   
+   Library: Visual Studio 2008 Release */
+
+int __cdecl
+___crtLCMapStringW(LPCWSTR _LocaleName,DWORD _DWMapFlag,LPCWSTR _LpSrcStr,int _CchSrc,
+                  LPWSTR _LpDestStr,int _CchDest)
+
+{
+  int iVar1;
+  short *psVar2;
+  LPWSTR pWVar3;
+  int in_stack_0000001c;
+  _LocaleUpdate local_14 [8];
+  int local_c;
+  char local_8;
+  
+  _LocaleUpdate::_LocaleUpdate(local_14,(localeinfo_struct *)_LocaleName);
+  psVar2 = (short *)_CchSrc;
+  pWVar3 = _LpDestStr;
+  if (0 < (int)_LpDestStr) {
+    do {
+      pWVar3 = (LPWSTR)((int)pWVar3 + -1);
+      if (*psVar2 == 0) goto LAB_00645244;
+      psVar2 = psVar2 + 1;
+    } while (pWVar3 != (LPWSTR)0x0);
+    pWVar3 = (LPWSTR)0xffffffff;
+LAB_00645244:
+    _LpDestStr = (LPWSTR)((int)_LpDestStr + (-1 - (int)pWVar3));
+  }
+  iVar1 = LCMapStringW(_DWMapFlag,(DWORD)_LpSrcStr,(LPCWSTR)_CchSrc,(int)_LpDestStr,(LPWSTR)_CchDest
+                       ,in_stack_0000001c);
+  if (local_8 != '\0') {
+    *(uint *)(local_c + 0x70) = *(uint *)(local_c + 0x70) & 0xfffffffd;
+  }
+  return iVar1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00645215 : MOV EDI,EDI
+00645217 : PUSH EBP
+00645218 : MOV EBP,ESP
+0064521a : SUB ESP,0x10
+0064521d : PUSH dword ptr [EBP + 0x8]
+00645220 : LEA ECX,[EBP + -0x10]
+00645223 : CALL 0x00637880
+00645228 : MOV EAX,dword ptr [EBP + 0x18]
+0064522b : TEST EAX,EAX
+0064522d : JLE 0x00645247
+0064522f : MOV ECX,dword ptr [EBP + 0x14]
+00645232 : MOV EDX,EAX
+00645234 : DEC EDX
+00645235 : CMP word ptr [ECX],0x0
+00645239 : JZ 0x00645244
+0064523b : INC ECX
+0064523c : INC ECX
+0064523d : TEST EDX,EDX
+0064523f : JNZ 0x00645234
+00645241 : OR EDX,0xffffffff
+00645244 : SUB EAX,EDX
+00645246 : DEC EAX
+00645247 : PUSH dword ptr [EBP + 0x20]
+0064524a : PUSH dword ptr [EBP + 0x1c]
+0064524d : PUSH EAX
+0064524e : PUSH dword ptr [EBP + 0x14]
+00645251 : PUSH dword ptr [EBP + 0x10]
+00645254 : PUSH dword ptr [EBP + 0xc]
+00645257 : CALL dword ptr [0x00b85294]
+0064525d : CMP byte ptr [EBP + -0x4],0x0
+00645261 : JZ 0x0064526a
+00645263 : MOV ECX,dword ptr [EBP + -0x8]
+00645266 : AND dword ptr [ECX + 0x70],0xfffffffd
+0064526a : LEAVE
+0064526b : RET

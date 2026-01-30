@@ -1,0 +1,70 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005a2cc0
+ENTRY    : 005a2cc0
+BODY     : [[005a2cc0, 005a2d1b]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_005a2cc0(void)
+
+{
+  int *piVar1;
+  int iVar2;
+  int in_ECX;
+  
+  EnterCriticalSection((LPCRITICAL_SECTION)(in_ECX + 0x9e4));
+  if (*(char *)(in_ECX + 0x18) != '\0') {
+    piVar1 = (int *)(in_ECX + 0x20);
+    *piVar1 = *piVar1 + -1;
+    if (*piVar1 == 0) {
+      *(undefined4 *)(in_ECX + 0x20) = *(undefined4 *)(in_ECX + 0x1c);
+      for (iVar2 = *(int *)(in_ECX + 0x8fc); iVar2 != in_ECX + 0x8f8; iVar2 = *(int *)(iVar2 + 4)) {
+        *(byte *)(iVar2 + 0xf) = *(byte *)(iVar2 + 0xf) & 0x7f;
+      }
+      FUN_005f1920();
+    }
+  }
+  *(undefined1 *)(in_ECX + 0x19) = 1;
+  *(undefined1 *)(in_ECX + 0x1a) = 1;
+  LeaveCriticalSection((LPCRITICAL_SECTION)(in_ECX + 0x9e4));
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005a2cc0 : PUSH ESI
+005a2cc1 : PUSH EDI
+005a2cc2 : MOV ESI,ECX
+005a2cc4 : LEA EDI,[ESI + 0x9e4]
+005a2cca : PUSH EDI
+005a2ccb : CALL dword ptr [0x00b85118]
+005a2cd1 : CMP byte ptr [ESI + 0x18],0x0
+005a2cd5 : JZ 0x005a2d0a
+005a2cd7 : ADD dword ptr [ESI + 0x20],-0x1
+005a2cdb : JNZ 0x005a2d0a
+005a2cdd : MOV EAX,dword ptr [ESI + 0x1c]
+005a2ce0 : MOV dword ptr [ESI + 0x20],EAX
+005a2ce3 : MOV EAX,dword ptr [ESI + 0x8fc]
+005a2ce9 : LEA ECX,[ESI + 0x8f8]
+005a2cef : CMP EAX,ECX
+005a2cf1 : JZ 0x005a2cff
+005a2cf3 : MOV DL,0x7f
+005a2cf5 : AND byte ptr [EAX + 0xf],DL
+005a2cf8 : MOV EAX,dword ptr [EAX + 0x4]
+005a2cfb : CMP EAX,ECX
+005a2cfd : JNZ 0x005a2cf5
+005a2cff : LEA ECX,[ESI + 0x750]
+005a2d05 : CALL 0x005f1920
+005a2d0a : MOV AL,0x1
+005a2d0c : PUSH EDI
+005a2d0d : MOV byte ptr [ESI + 0x19],AL
+005a2d10 : MOV byte ptr [ESI + 0x1a],AL
+005a2d13 : CALL dword ptr [0x00b8511c]
+005a2d19 : POP EDI
+005a2d1a : POP ESI
+005a2d1b : RET

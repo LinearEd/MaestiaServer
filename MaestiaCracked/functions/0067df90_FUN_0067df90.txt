@@ -1,0 +1,101 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0067df90
+ENTRY    : 0067df90
+BODY     : [[0067df90, 0067e039]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_0067df90(int param_1)
+
+{
+  wchar_t *pwVar1;
+  HIMC pHVar2;
+  UINT UVar3;
+  int in_ECX;
+  tagINPUT local_1c;
+  
+  pwVar1 = *(wchar_t **)(in_ECX + 0x5c);
+  if ((((pwVar1 != (wchar_t *)0x110000) && (pwVar1 != (wchar_t *)0x210000)) &&
+      (pwVar1 != L"xture Failed (%d)")) && (pwVar1 != (wchar_t *)0x60000)) {
+    pHVar2 = ImmGetContext(*(HWND *)(in_ECX + 0x14));
+    ImmNotifyIME(pHVar2,0x12,0,*(int *)(in_ECX + 0x40) + param_1);
+    ImmNotifyIME(pHVar2,0x11,0,0);
+    ImmNotifyIME(pHVar2,0x16,0,*(DWORD *)(in_ECX + 0x40));
+    ImmReleaseContext(*(HWND *)(in_ECX + 0x14),pHVar2);
+    return;
+  }
+  local_1c.field1_0x4.ki.wVk = (short)param_1 + 0x31;
+  local_1c.type = 1;
+  UVar3 = MapVirtualKeyW(param_1 + 0x31,0);
+  local_1c.field1_0x4.ki.wScan = (WORD)UVar3;
+  SendInput(1,&local_1c,0x1c);
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0067df90 : SUB ESP,0x1c
+0067df93 : PUSH EDI
+0067df94 : MOV EDI,ECX
+0067df96 : MOV EAX,dword ptr [EDI + 0x5c]
+0067df99 : CMP EAX,0x110000
+0067df9e : JZ 0x0067dfff
+0067dfa0 : CMP EAX,0x210000
+0067dfa5 : JZ 0x0067dfff
+0067dfa7 : CMP EAX,0xc10000
+0067dfac : JZ 0x0067dfff
+0067dfae : CMP EAX,0x60000
+0067dfb3 : JZ 0x0067dfff
+0067dfb5 : MOV EAX,dword ptr [EDI + 0x14]
+0067dfb8 : PUSH ESI
+0067dfb9 : PUSH EAX
+0067dfba : CALL 0x00611450
+0067dfbf : MOV ECX,dword ptr [EDI + 0x40]
+0067dfc2 : ADD ECX,dword ptr [ESP + 0x28]
+0067dfc6 : MOV ESI,EAX
+0067dfc8 : PUSH ECX
+0067dfc9 : PUSH 0x0
+0067dfcb : PUSH 0x12
+0067dfcd : PUSH ESI
+0067dfce : CALL 0x00685b7e
+0067dfd3 : PUSH 0x0
+0067dfd5 : PUSH 0x0
+0067dfd7 : PUSH 0x11
+0067dfd9 : PUSH ESI
+0067dfda : CALL 0x00685b7e
+0067dfdf : MOV EDX,dword ptr [EDI + 0x40]
+0067dfe2 : PUSH EDX
+0067dfe3 : PUSH 0x0
+0067dfe5 : PUSH 0x16
+0067dfe7 : PUSH ESI
+0067dfe8 : CALL 0x00685b7e
+0067dfed : MOV EAX,dword ptr [EDI + 0x14]
+0067dff0 : PUSH ESI
+0067dff1 : PUSH EAX
+0067dff2 : CALL 0x00611462
+0067dff7 : POP ESI
+0067dff8 : POP EDI
+0067dff9 : ADD ESP,0x1c
+0067dffc : RET 0x4
+0067dfff : MOV EAX,dword ptr [ESP + 0x24]
+0067e003 : LEA ECX,[EAX + 0x31]
+0067e006 : PUSH 0x0
+0067e008 : ADD EAX,0x31
+0067e00b : PUSH EAX
+0067e00c : MOV dword ptr [ESP + 0xc],0x1
+0067e014 : MOV word ptr [ESP + 0x10],CX
+0067e019 : CALL dword ptr [0x00b85458]
+0067e01f : PUSH 0x1c
+0067e021 : LEA EDX,[ESP + 0x8]
+0067e025 : PUSH EDX
+0067e026 : PUSH 0x1
+0067e028 : MOV word ptr [ESP + 0x16],AX
+0067e02d : CALL dword ptr [0x00b854b8]
+0067e033 : POP EDI
+0067e034 : ADD ESP,0x1c
+0067e037 : RET 0x4

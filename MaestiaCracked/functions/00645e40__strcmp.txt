@@ -1,0 +1,144 @@
+PROGRAM  : Maestia.exe
+FUNCTION : _strcmp
+ENTRY    : 00645e40
+BODY     : [[00645e40, 00645e82] [00645e84, 00645ec7]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    _strcmp
+   
+   Library: Visual Studio 2008 Release */
+
+int __cdecl _strcmp(char *_Str1,char *_Str2)
+
+{
+  undefined2 uVar1;
+  undefined4 uVar2;
+  byte bVar3;
+  byte bVar4;
+  bool bVar5;
+  
+  if (((uint)_Str1 & 3) != 0) {
+    if (((uint)_Str1 & 1) != 0) {
+      bVar4 = *_Str1;
+      _Str1 = _Str1 + 1;
+      bVar5 = bVar4 < (byte)*_Str2;
+      if (bVar4 != *_Str2) goto LAB_00645e84;
+      _Str2 = _Str2 + 1;
+      if (bVar4 == 0) {
+        return 0;
+      }
+      if (((uint)_Str1 & 2) == 0) goto LAB_00645e50;
+    }
+    uVar1 = *(undefined2 *)_Str1;
+    _Str1 = _Str1 + 2;
+    bVar4 = (byte)uVar1;
+    bVar5 = bVar4 < (byte)*_Str2;
+    if (bVar4 != *_Str2) goto LAB_00645e84;
+    if (bVar4 == 0) {
+      return 0;
+    }
+    bVar4 = (byte)((ushort)uVar1 >> 8);
+    bVar5 = bVar4 < ((byte *)_Str2)[1];
+    if (bVar4 != ((byte *)_Str2)[1]) goto LAB_00645e84;
+    if (bVar4 == 0) {
+      return 0;
+    }
+    _Str2 = (char *)((byte *)_Str2 + 2);
+  }
+LAB_00645e50:
+  while( true ) {
+    uVar2 = *(undefined4 *)_Str1;
+    bVar4 = (byte)uVar2;
+    bVar5 = bVar4 < (byte)*_Str2;
+    if (bVar4 != *_Str2) break;
+    if (bVar4 == 0) {
+      return 0;
+    }
+    bVar4 = (byte)((uint)uVar2 >> 8);
+    bVar5 = bVar4 < ((byte *)_Str2)[1];
+    if (bVar4 != ((byte *)_Str2)[1]) break;
+    if (bVar4 == 0) {
+      return 0;
+    }
+    bVar4 = (byte)((uint)uVar2 >> 0x10);
+    bVar5 = bVar4 < ((byte *)_Str2)[2];
+    if (bVar4 != ((byte *)_Str2)[2]) break;
+    bVar3 = (byte)((uint)uVar2 >> 0x18);
+    if (bVar4 == 0) {
+      return 0;
+    }
+    bVar5 = bVar3 < ((byte *)_Str2)[3];
+    if (bVar3 != ((byte *)_Str2)[3]) break;
+    _Str2 = (char *)((byte *)_Str2 + 4);
+    _Str1 = _Str1 + 4;
+    if (bVar3 == 0) {
+      return 0;
+    }
+  }
+LAB_00645e84:
+  return (uint)bVar5 * -2 + 1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00645e40 : MOV EDX,dword ptr [ESP + 0x4]
+00645e44 : MOV ECX,dword ptr [ESP + 0x8]
+00645e48 : TEST EDX,0x3
+00645e4e : JNZ 0x00645e8c
+00645e50 : MOV EAX,dword ptr [EDX]
+00645e52 : CMP AL,byte ptr [ECX]
+00645e54 : JNZ 0x00645e84
+00645e56 : OR AL,AL
+00645e58 : JZ 0x00645e80
+00645e5a : CMP AH,byte ptr [ECX + 0x1]
+00645e5d : JNZ 0x00645e84
+00645e5f : OR AH,AH
+00645e61 : JZ 0x00645e80
+00645e63 : SHR EAX,0x10
+00645e66 : CMP AL,byte ptr [ECX + 0x2]
+00645e69 : JNZ 0x00645e84
+00645e6b : OR AL,AL
+00645e6d : JZ 0x00645e80
+00645e6f : CMP AH,byte ptr [ECX + 0x3]
+00645e72 : JNZ 0x00645e84
+00645e74 : ADD ECX,0x4
+00645e77 : ADD EDX,0x4
+00645e7a : OR AH,AH
+00645e7c : JNZ 0x00645e50
+00645e7e : MOV EDI,EDI
+00645e80 : XOR EAX,EAX
+00645e82 : RET
+00645e84 : SBB EAX,EAX
+00645e86 : SHL EAX,0x1
+00645e88 : ADD EAX,0x1
+00645e8b : RET
+00645e8c : TEST EDX,0x1
+00645e92 : JZ 0x00645eac
+00645e94 : MOV AL,byte ptr [EDX]
+00645e96 : ADD EDX,0x1
+00645e99 : CMP AL,byte ptr [ECX]
+00645e9b : JNZ 0x00645e84
+00645e9d : ADD ECX,0x1
+00645ea0 : OR AL,AL
+00645ea2 : JZ 0x00645e80
+00645ea4 : TEST EDX,0x2
+00645eaa : JZ 0x00645e50
+00645eac : MOV AX,word ptr [EDX]
+00645eaf : ADD EDX,0x2
+00645eb2 : CMP AL,byte ptr [ECX]
+00645eb4 : JNZ 0x00645e84
+00645eb6 : OR AL,AL
+00645eb8 : JZ 0x00645e80
+00645eba : CMP AH,byte ptr [ECX + 0x1]
+00645ebd : JNZ 0x00645e84
+00645ebf : OR AH,AH
+00645ec1 : JZ 0x00645e80
+00645ec3 : ADD ECX,0x2
+00645ec6 : JMP 0x00645e50

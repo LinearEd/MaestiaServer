@@ -1,0 +1,177 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __ungetc_nolock
+ENTRY    : 0063e9fd
+BODY     : [[0063e9fd, 0063eaed]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __ungetc_nolock
+   
+   Library: Visual Studio 2008 Release */
+
+int __cdecl __ungetc_nolock(int _Ch,FILE *_File)
+
+{
+  char *pcVar1;
+  uint uVar2;
+  int *piVar3;
+  undefined *puVar4;
+  
+  if ((_File->_flag & 0x40) != 0) {
+LAB_0063ea86:
+    if (_Ch != -1) {
+      uVar2 = _File->_flag;
+      if (((uVar2 & 1) != 0) || (((char)uVar2 < '\0' && ((uVar2 & 2) == 0)))) {
+        if (_File->_base == (char *)0x0) {
+          __getbuf(_File);
+        }
+        if (_File->_ptr == _File->_base) {
+          if (_File->_cnt != 0) {
+            return -1;
+          }
+          _File->_ptr = _File->_ptr + 1;
+        }
+        _File->_ptr = _File->_ptr + -1;
+        pcVar1 = _File->_ptr;
+        if ((_File->_flag & 0x40) == 0) {
+          *pcVar1 = (char)_Ch;
+        }
+        else if (*pcVar1 != (char)_Ch) {
+          _File->_ptr = pcVar1 + 1;
+          return -1;
+        }
+        _File->_cnt = _File->_cnt + 1;
+        _File->_flag = _File->_flag & 0xffffffefU | 1;
+        return _Ch & 0xff;
+      }
+    }
+    return -1;
+  }
+  uVar2 = __fileno(_File);
+  if ((uVar2 == 0xffffffff) || (uVar2 == 0xfffffffe)) {
+    puVar4 = &DAT_00d677f0;
+  }
+  else {
+    puVar4 = (undefined *)((uVar2 & 0x1f) * 0x40 + (&DAT_01728c40)[(int)uVar2 >> 5]);
+  }
+  if ((puVar4[0x24] & 0x7f) == 0) {
+    if ((uVar2 == 0xffffffff) || (uVar2 == 0xfffffffe)) {
+      puVar4 = &DAT_00d677f0;
+    }
+    else {
+      puVar4 = (undefined *)((uVar2 & 0x1f) * 0x40 + (&DAT_01728c40)[(int)uVar2 >> 5]);
+    }
+    if ((puVar4[0x24] & 0x80) == 0) goto LAB_0063ea86;
+  }
+  piVar3 = __errno();
+  *piVar3 = 0x16;
+  __invalid_parameter(0,0,0,0,0);
+  return -1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0063e9fd : MOV EDI,EDI
+0063e9ff : PUSH EBP
+0063ea00 : MOV EBP,ESP
+0063ea02 : PUSH ESI
+0063ea03 : MOV ESI,dword ptr [EBP + 0xc]
+0063ea06 : TEST byte ptr [ESI + 0xc],0x40
+0063ea0a : PUSH EDI
+0063ea0b : JNZ 0x0063ea86
+0063ea0d : PUSH ESI
+0063ea0e : CALL 0x0064dfc6
+0063ea13 : POP ECX
+0063ea14 : MOV EDX,0xd677f0
+0063ea19 : CMP EAX,-0x1
+0063ea1c : JZ 0x0063ea39
+0063ea1e : CMP EAX,-0x2
+0063ea21 : JZ 0x0063ea39
+0063ea23 : MOV ECX,EAX
+0063ea25 : AND ECX,0x1f
+0063ea28 : MOV EDI,EAX
+0063ea2a : SAR EDI,0x5
+0063ea2d : SHL ECX,0x6
+0063ea30 : ADD ECX,dword ptr [EDI*0x4 + 0x1728c40]
+0063ea37 : JMP 0x0063ea3b
+0063ea39 : MOV ECX,EDX
+0063ea3b : TEST byte ptr [ECX + 0x24],0x7f
+0063ea3f : JNZ 0x0063ea67
+0063ea41 : CMP EAX,-0x1
+0063ea44 : JZ 0x0063ea5f
+0063ea46 : CMP EAX,-0x2
+0063ea49 : JZ 0x0063ea5f
+0063ea4b : MOV ECX,EAX
+0063ea4d : AND EAX,0x1f
+0063ea50 : SAR ECX,0x5
+0063ea53 : SHL EAX,0x6
+0063ea56 : ADD EAX,dword ptr [ECX*0x4 + 0x1728c40]
+0063ea5d : JMP 0x0063ea61
+0063ea5f : MOV EAX,EDX
+0063ea61 : TEST byte ptr [EAX + 0x24],0x80
+0063ea65 : JZ 0x0063ea86
+0063ea67 : CALL 0x0063ab82
+0063ea6c : XOR EDI,EDI
+0063ea6e : PUSH EDI
+0063ea6f : PUSH EDI
+0063ea70 : PUSH EDI
+0063ea71 : PUSH EDI
+0063ea72 : PUSH EDI
+0063ea73 : MOV dword ptr [EAX],0x16
+0063ea79 : CALL 0x006372b8
+0063ea7e : ADD ESP,0x14
+0063ea81 : OR EAX,0xffffffff
+0063ea84 : JMP 0x0063ead0
+0063ea86 : PUSH EBX
+0063ea87 : MOV EBX,dword ptr [EBP + 0x8]
+0063ea8a : CMP EBX,-0x1
+0063ea8d : JZ 0x0063eacc
+0063ea8f : MOV EAX,dword ptr [ESI + 0xc]
+0063ea92 : TEST AL,0x1
+0063ea94 : JNZ 0x0063ea9e
+0063ea96 : TEST AL,AL
+0063ea98 : JNS 0x0063eacc
+0063ea9a : TEST AL,0x2
+0063ea9c : JNZ 0x0063eacc
+0063ea9e : XOR EDI,EDI
+0063eaa0 : CMP dword ptr [ESI + 0x8],EDI
+0063eaa3 : JNZ 0x0063eaac
+0063eaa5 : PUSH ESI
+0063eaa6 : CALL 0x0065bd15
+0063eaab : POP ECX
+0063eaac : MOV EAX,dword ptr [ESI]
+0063eaae : CMP EAX,dword ptr [ESI + 0x8]
+0063eab1 : JNZ 0x0063eabb
+0063eab3 : CMP dword ptr [ESI + 0x4],EDI
+0063eab6 : JNZ 0x0063eacc
+0063eab8 : INC EAX
+0063eab9 : MOV dword ptr [ESI],EAX
+0063eabb : DEC dword ptr [ESI]
+0063eabd : TEST byte ptr [ESI + 0xc],0x40
+0063eac1 : MOV EAX,dword ptr [ESI]
+0063eac3 : JZ 0x0063ead4
+0063eac5 : CMP byte ptr [EAX],BL
+0063eac7 : JZ 0x0063ead6
+0063eac9 : INC EAX
+0063eaca : MOV dword ptr [ESI],EAX
+0063eacc : OR EAX,0xffffffff
+0063eacf : POP EBX
+0063ead0 : POP EDI
+0063ead1 : POP ESI
+0063ead2 : POP EBP
+0063ead3 : RET
+0063ead4 : MOV byte ptr [EAX],BL
+0063ead6 : MOV EAX,dword ptr [ESI + 0xc]
+0063ead9 : INC dword ptr [ESI + 0x4]
+0063eadc : AND EAX,0xffffffef
+0063eadf : OR EAX,0x1
+0063eae2 : MOV dword ptr [ESI + 0xc],EAX
+0063eae5 : MOV EAX,EBX
+0063eae7 : AND EAX,0xff
+0063eaec : JMP 0x0063eacf

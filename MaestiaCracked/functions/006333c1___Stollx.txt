@@ -1,0 +1,157 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __Stollx
+ENTRY    : 006333c1
+BODY     : [[006333c1, 00633483]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* WARNING: Removing unreachable block (ram,0x00633446) */
+/* Library Function - Single Match
+    __Stollx
+   
+   Library: Visual Studio 2008 Release */
+
+int __Stollx(byte *param_1,int *param_2,undefined4 param_3,undefined4 *param_4)
+
+{
+  byte bVar1;
+  byte *pbVar2;
+  int iVar3;
+  int *piVar4;
+  byte *pbVar5;
+  ulonglong uVar6;
+  
+  pbVar2 = param_1;
+  piVar4 = param_2;
+  if (param_2 == (int *)0x0) {
+    piVar4 = (int *)&param_1;
+  }
+  bVar1 = *param_1;
+  pbVar5 = param_1;
+  while (iVar3 = _isspace((uint)bVar1), iVar3 != 0) {
+    pbVar5 = pbVar5 + 1;
+    bVar1 = *pbVar5;
+  }
+  bVar1 = *pbVar5;
+  if ((bVar1 == 0x2d) || (bVar1 == 0x2b)) {
+    param_2 = (int *)CONCAT13(bVar1,param_2._0_3_);
+    pbVar5 = pbVar5 + 1;
+  }
+  else {
+    param_2 = (int *)CONCAT13(0x2b,param_2._0_3_);
+  }
+  uVar6 = FUN_00633484(pbVar5,piVar4,param_3,param_4);
+  if (pbVar5 == (byte *)*piVar4) {
+    *piVar4 = (int)pbVar2;
+  }
+  if (((pbVar2 != (byte *)*piVar4) || (uVar6 == 0)) &&
+     ((param_2._3_1_ != '+' || (uVar6 < 0x8000000000000000)))) {
+    if (param_2._3_1_ != '-') {
+      return (int)uVar6;
+    }
+    if (uVar6 < 0x8000000000000001) {
+      return -(int)uVar6;
+    }
+  }
+  piVar4 = __errno();
+  *piVar4 = 0x22;
+  if (param_4 != (undefined4 *)0x0) {
+    *param_4 = 1;
+  }
+  if (param_2._3_1_ == '-') {
+    iVar3 = 0;
+  }
+  else {
+    iVar3 = -1;
+  }
+  return iVar3;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006333c1 : MOV EDI,EDI
+006333c3 : PUSH EBP
+006333c4 : MOV EBP,ESP
+006333c6 : PUSH EBX
+006333c7 : PUSH ESI
+006333c8 : PUSH EDI
+006333c9 : MOV EDI,dword ptr [EBP + 0xc]
+006333cc : TEST EDI,EDI
+006333ce : JNZ 0x006333d3
+006333d0 : LEA EDI,[EBP + 0x8]
+006333d3 : MOV EBX,dword ptr [EBP + 0x8]
+006333d6 : MOVZX EAX,byte ptr [EBX]
+006333d9 : MOV ESI,EBX
+006333db : JMP 0x006333e1
+006333dd : INC ESI
+006333de : MOVZX EAX,byte ptr [ESI]
+006333e1 : PUSH EAX
+006333e2 : CALL 0x006398a7
+006333e7 : POP ECX
+006333e8 : TEST EAX,EAX
+006333ea : JNZ 0x006333dd
+006333ec : MOV AL,byte ptr [ESI]
+006333ee : CMP AL,0x2d
+006333f0 : JZ 0x006333fc
+006333f2 : CMP AL,0x2b
+006333f4 : JZ 0x006333fc
+006333f6 : MOV byte ptr [EBP + 0xf],0x2b
+006333fa : JMP 0x00633400
+006333fc : MOV byte ptr [EBP + 0xf],AL
+006333ff : INC ESI
+00633400 : PUSH dword ptr [EBP + 0x14]
+00633403 : PUSH dword ptr [EBP + 0x10]
+00633406 : PUSH EDI
+00633407 : PUSH ESI
+00633408 : CALL 0x00633484
+0063340d : ADD ESP,0x10
+00633410 : CMP ESI,dword ptr [EDI]
+00633412 : JNZ 0x00633416
+00633414 : MOV dword ptr [EDI],EBX
+00633416 : MOV ESI,0x80000000
+0063341b : CMP EBX,dword ptr [EDI]
+0063341d : JNZ 0x00633425
+0063341f : MOV ECX,EAX
+00633421 : OR ECX,EDX
+00633423 : JNZ 0x0063344a
+00633425 : CMP byte ptr [EBP + 0xf],0x2b
+00633429 : JNZ 0x0063343a
+0063342b : CMP EDX,0x7fffffff
+00633431 : JA 0x0063344a
+00633433 : JC 0x0063343a
+00633435 : CMP EAX,-0x1
+00633438 : JA 0x0063344a
+0063343a : CMP byte ptr [EBP + 0xf],0x2d
+0063343e : JNZ 0x0063347f
+00633440 : CMP EDX,ESI
+00633442 : JC 0x00633478
+00633444 : JA 0x0063344a
+00633446 : TEST EAX,EAX
+00633448 : JBE 0x00633478
+0063344a : CALL 0x0063ab82
+0063344f : MOV dword ptr [EAX],0x22
+00633455 : MOV EAX,dword ptr [EBP + 0x14]
+00633458 : TEST EAX,EAX
+0063345a : JZ 0x00633462
+0063345c : MOV dword ptr [EAX],0x1
+00633462 : CMP byte ptr [EBP + 0xf],0x2d
+00633466 : JNZ 0x0063346e
+00633468 : XOR EAX,EAX
+0063346a : MOV EDX,ESI
+0063346c : JMP 0x0063347f
+0063346e : OR EAX,0xffffffff
+00633471 : MOV EDX,0x7fffffff
+00633476 : JMP 0x0063347f
+00633478 : NEG EAX
+0063347a : ADC EDX,0x0
+0063347d : NEG EDX
+0063347f : POP EDI
+00633480 : POP ESI
+00633481 : POP EBX
+00633482 : POP EBP
+00633483 : RET

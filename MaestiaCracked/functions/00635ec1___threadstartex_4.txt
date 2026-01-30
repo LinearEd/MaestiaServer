@@ -1,0 +1,102 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __threadstartex@4
+ENTRY    : 00635ec1
+BODY     : [[00635ec1, 00635f43]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __threadstartex@4
+   
+   Library: Visual Studio 2008 Release */
+
+void __threadstartex_4(DWORD *param_1)
+
+{
+  code *pcVar1;
+  undefined4 uVar2;
+  int iVar3;
+  DWORD DVar4;
+  BOOL BVar5;
+  DWORD *pDVar6;
+  
+  ___set_flsgetvalue();
+  uVar2 = FUN_00645702();
+  iVar3 = ___fls_getvalue_4(uVar2);
+  if (iVar3 == 0) {
+    pDVar6 = param_1;
+    uVar2 = FUN_00645702(param_1);
+    iVar3 = ___fls_setvalue_8(uVar2,pDVar6);
+    if (iVar3 == 0) {
+      DVar4 = GetLastError();
+                    /* WARNING: Subroutine does not return */
+      ExitThread(DVar4);
+    }
+    DVar4 = GetCurrentThreadId();
+    *param_1 = DVar4;
+  }
+  else {
+    *(DWORD *)(iVar3 + 0x54) = param_1[0x15];
+    *(DWORD *)(iVar3 + 0x58) = param_1[0x16];
+    *(DWORD *)(iVar3 + 4) = param_1[1];
+    __freefls_4(param_1);
+  }
+  BVar5 = __IsNonwritableInCurrentImage((PBYTE)&PTR_FUN_00b96330);
+  if (BVar5 != 0) {
+    FUN_0063b1a5();
+  }
+  __callthreadstartex();
+  pcVar1 = (code *)swi(3);
+  (*pcVar1)();
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00635ec1 : MOV EDI,EDI
+00635ec3 : PUSH EBP
+00635ec4 : MOV EBP,ESP
+00635ec6 : PUSH ESI
+00635ec7 : CALL 0x00645708
+00635ecc : CALL 0x00645702
+00635ed1 : PUSH EAX
+00635ed2 : CALL 0x006456e8
+00635ed7 : TEST EAX,EAX
+00635ed9 : JNZ 0x00635f05
+00635edb : MOV ESI,dword ptr [EBP + 0x8]
+00635ede : PUSH ESI
+00635edf : CALL 0x00645702
+00635ee4 : PUSH EAX
+00635ee5 : CALL 0x0064573c
+00635eea : TEST EAX,EAX
+00635eec : JNZ 0x00635efb
+00635eee : CALL dword ptr [0x00b85128]
+00635ef4 : PUSH EAX
+00635ef5 : CALL dword ptr [0x00b852cc]
+00635efb : CALL dword ptr [0x00b85168]
+00635f01 : MOV dword ptr [ESI],EAX
+00635f03 : JMP 0x00635f20
+00635f05 : MOV ECX,dword ptr [EBP + 0x8]
+00635f08 : MOV EDX,dword ptr [ECX + 0x54]
+00635f0b : MOV dword ptr [EAX + 0x54],EDX
+00635f0e : MOV EDX,dword ptr [ECX + 0x58]
+00635f11 : MOV dword ptr [EAX + 0x58],EDX
+00635f14 : MOV EDX,dword ptr [ECX + 0x4]
+00635f17 : PUSH ECX
+00635f18 : MOV dword ptr [EAX + 0x4],EDX
+00635f1b : CALL 0x00645910
+00635f20 : CMP dword ptr [0x00b96330],0x0
+00635f27 : JZ 0x00635f3e
+00635f29 : PUSH 0xb96330
+00635f2e : CALL 0x0064c6d0
+00635f33 : POP ECX
+00635f34 : TEST EAX,EAX
+00635f36 : JZ 0x00635f3e
+00635f38 : CALL dword ptr [0x00b96330]
+00635f3e : CALL 0x00635e80
+00635f43 : INT3

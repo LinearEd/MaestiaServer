@@ -1,0 +1,106 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005a0320
+ENTRY    : 005a0320
+BODY     : [[005a0320, 005a03b6]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined4 FUN_005a0320(undefined4 param_1,GRefCountImpl *param_2)
+
+{
+  int *piVar1;
+  GRefCountImpl *this;
+  undefined4 uVar2;
+  int in_ECX;
+  undefined4 *puVar3;
+  bool bVar4;
+  
+  piVar1 = *(int **)(*(int *)(in_ECX + 8) + 8);
+  if (piVar1 == (int *)0x0) {
+    if ((*(int *)(in_ECX + 0xc) != 0) && (((uint)param_2 & 0x200000) == 0)) {
+      FUN_00500460(*(int *)(in_ECX + 0xc) + 0xc,
+                   "Error: GFxLoader failed to open \'%s\', GFxFileOpener not installed\n",param_1);
+    }
+    return 0;
+  }
+  bVar4 = ((uint)param_2 & 0x200000) == 0;
+  if (bVar4) {
+    puVar3 = (undefined4 *)(in_ECX + 0xc);
+  }
+  else {
+    param_2 = (GRefCountImpl *)0x0;
+    puVar3 = &param_2;
+  }
+  this = param_2;
+  uVar2 = (**(code **)(*piVar1 + 0xc))(param_1,*puVar3,0x21,0x1b6);
+  if ((!bVar4) && (this != (GRefCountImpl *)0x0)) {
+    GRefCountImpl::Release(this);
+  }
+  return uVar2;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005a0320 : PUSH ECX
+005a0321 : MOV EAX,dword ptr [ECX + 0x8]
+005a0324 : MOV EAX,dword ptr [EAX + 0x8]
+005a0327 : PUSH EBX
+005a0328 : XOR EBX,EBX
+005a032a : MOV dword ptr [ESP + 0x4],EBX
+005a032e : TEST EAX,EAX
+005a0330 : JNZ 0x005a0360
+005a0332 : MOV ECX,dword ptr [ECX + 0xc]
+005a0335 : TEST ECX,ECX
+005a0337 : JZ 0x005a0359
+005a0339 : TEST dword ptr [ESP + 0x10],0x200000
+005a0341 : JNZ 0x005a0359
+005a0343 : MOV EDX,dword ptr [ESP + 0xc]
+005a0347 : PUSH EDX
+005a0348 : ADD ECX,0xc
+005a034b : PUSH 0xb8f098
+005a0350 : PUSH ECX
+005a0351 : CALL 0x00500460
+005a0356 : ADD ESP,0xc
+005a0359 : XOR EAX,EAX
+005a035b : POP EBX
+005a035c : POP ECX
+005a035d : RET 0x8
+005a0360 : TEST dword ptr [ESP + 0x10],0x200000
+005a0368 : PUSH ESI
+005a0369 : PUSH EDI
+005a036a : JZ 0x005a037d
+005a036c : XOR EDI,EDI
+005a036e : MOV EBX,0x1
+005a0373 : MOV dword ptr [ESP + 0x18],EDI
+005a0377 : LEA ECX,[ESP + 0x18]
+005a037b : JMP 0x005a0384
+005a037d : MOV EDI,dword ptr [ESP + 0x18]
+005a0381 : ADD ECX,0xc
+005a0384 : MOV ECX,dword ptr [ECX]
+005a0386 : MOV EDX,dword ptr [EAX]
+005a0388 : MOV EDX,dword ptr [EDX + 0xc]
+005a038b : PUSH 0x1b6
+005a0390 : PUSH 0x21
+005a0392 : PUSH ECX
+005a0393 : MOV ECX,dword ptr [ESP + 0x20]
+005a0397 : PUSH ECX
+005a0398 : MOV ECX,EAX
+005a039a : CALL EDX
+005a039c : MOV ESI,EAX
+005a039e : TEST BL,0x1
+005a03a1 : JZ 0x005a03ae
+005a03a3 : TEST EDI,EDI
+005a03a5 : JZ 0x005a03ae
+005a03a7 : MOV ECX,EDI
+005a03a9 : CALL 0x004ff7e0
+005a03ae : POP EDI
+005a03af : MOV EAX,ESI
+005a03b1 : POP ESI
+005a03b2 : POP EBX
+005a03b3 : POP ECX
+005a03b4 : RET 0x8

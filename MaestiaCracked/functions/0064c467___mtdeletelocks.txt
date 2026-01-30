@@ -1,0 +1,80 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __mtdeletelocks
+ENTRY    : 0064c467
+BODY     : [[0064c467, 0064c4bd]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __mtdeletelocks
+   
+   Libraries: Visual Studio 2005 Release, Visual Studio 2008 Release */
+
+void __cdecl __mtdeletelocks(void)
+
+{
+  LPCRITICAL_SECTION lpCriticalSection;
+  undefined4 *puVar1;
+  
+  puVar1 = &DAT_00d67690;
+  do {
+    lpCriticalSection = (LPCRITICAL_SECTION)*puVar1;
+    if ((lpCriticalSection != (LPCRITICAL_SECTION)0x0) && (puVar1[1] != 1)) {
+      DeleteCriticalSection(lpCriticalSection);
+      _free(lpCriticalSection);
+      *puVar1 = 0;
+    }
+    puVar1 = puVar1 + 2;
+  } while ((int)puVar1 < 0xd677b0);
+  puVar1 = &DAT_00d67690;
+  do {
+    if (((LPCRITICAL_SECTION)*puVar1 != (LPCRITICAL_SECTION)0x0) && (puVar1[1] == 1)) {
+      DeleteCriticalSection((LPCRITICAL_SECTION)*puVar1);
+    }
+    puVar1 = puVar1 + 2;
+  } while ((int)puVar1 < 0xd677b0);
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0064c467 : MOV EDI,EDI
+0064c469 : PUSH EBX
+0064c46a : MOV EBX,dword ptr [0x00b850fc]
+0064c470 : PUSH ESI
+0064c471 : MOV ESI,0xd67690
+0064c476 : PUSH EDI
+0064c477 : MOV EDI,dword ptr [ESI]
+0064c479 : TEST EDI,EDI
+0064c47b : JZ 0x0064c490
+0064c47d : CMP dword ptr [ESI + 0x4],0x1
+0064c481 : JZ 0x0064c490
+0064c483 : PUSH EDI
+0064c484 : CALL EBX
+0064c486 : PUSH EDI
+0064c487 : CALL 0x0063610d
+0064c48c : AND dword ptr [ESI],0x0
+0064c48f : POP ECX
+0064c490 : ADD ESI,0x8
+0064c493 : CMP ESI,0xd677b0
+0064c499 : JL 0x0064c477
+0064c49b : MOV ESI,0xd67690
+0064c4a0 : POP EDI
+0064c4a1 : MOV EAX,dword ptr [ESI]
+0064c4a3 : TEST EAX,EAX
+0064c4a5 : JZ 0x0064c4b0
+0064c4a7 : CMP dword ptr [ESI + 0x4],0x1
+0064c4ab : JNZ 0x0064c4b0
+0064c4ad : PUSH EAX
+0064c4ae : CALL EBX
+0064c4b0 : ADD ESI,0x8
+0064c4b3 : CMP ESI,0xd677b0
+0064c4b9 : JL 0x0064c4a1
+0064c4bb : POP ESI
+0064c4bc : POP EBX
+0064c4bd : RET

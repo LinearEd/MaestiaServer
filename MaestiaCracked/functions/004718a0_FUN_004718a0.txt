@@ -1,0 +1,101 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_004718a0
+ENTRY    : 004718a0
+BODY     : [[004718a0, 004718dc] [004718e0, 00471921]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined4 FUN_004718a0(uint param_1)
+
+{
+  uint uVar1;
+  char cVar2;
+  undefined8 *puVar3;
+  int iVar4;
+  int iVar5;
+  uint uVar6;
+  undefined8 *unaff_ESI;
+  int unaff_EDI;
+  bool bVar7;
+  
+  uVar6 = *(uint *)(unaff_EDI + 0xc);
+  cVar2 = FUN_00471810(unaff_EDI,param_1);
+  bVar7 = cVar2 != '\0';
+  if (bVar7) {
+    uVar6 = param_1;
+  }
+  uVar1 = *(uint *)(unaff_EDI + 8);
+  if (uVar1 < uVar6) {
+    iVar4 = uVar1 * 0x14;
+    iVar5 = uVar6 - uVar1;
+    do {
+      puVar3 = (undefined8 *)(*(int *)(unaff_EDI + 4) + iVar4);
+      *puVar3 = *unaff_ESI;
+      puVar3[1] = unaff_ESI[1];
+      iVar4 = iVar4 + 0x14;
+      iVar5 = iVar5 + -1;
+      *(undefined4 *)(puVar3 + 2) = *(undefined4 *)(unaff_ESI + 2);
+    } while (iVar5 != 0);
+    *(uint *)(unaff_EDI + 8) = uVar6;
+    return CONCAT31((int3)((uint)puVar3 >> 8),bVar7);
+  }
+  *(uint *)(unaff_EDI + 8) = uVar6;
+  return CONCAT31((int3)(uVar1 >> 8),bVar7);
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+004718a0 : PUSH EBP
+004718a1 : MOV EBP,ESP
+004718a3 : SUB ESP,0x8
+004718a6 : MOV EAX,dword ptr [EBP + 0x8]
+004718a9 : PUSH EBX
+004718aa : MOV EBX,dword ptr [EDI + 0xc]
+004718ad : PUSH EAX
+004718ae : PUSH EDI
+004718af : MOV byte ptr [EBP + -0x1],0x0
+004718b3 : MOV dword ptr [EBP + -0x8],EBX
+004718b6 : CALL 0x00471810
+004718bb : TEST AL,AL
+004718bd : JZ 0x004718c9
+004718bf : MOV EBX,dword ptr [EBP + 0x8]
+004718c2 : MOV dword ptr [EBP + -0x8],EBX
+004718c5 : MOV byte ptr [EBP + -0x1],0x1
+004718c9 : MOV EAX,dword ptr [EDI + 0x8]
+004718cc : CMP EAX,EBX
+004718ce : JNC 0x00471915
+004718d0 : LEA ECX,[EAX + EAX*0x4]
+004718d3 : ADD ECX,ECX
+004718d5 : MOV EDX,EBX
+004718d7 : ADD ECX,ECX
+004718d9 : SUB EDX,EAX
+004718db : JMP 0x004718e0
+004718e0 : MOV EAX,dword ptr [EDI + 0x4]
+004718e3 : MOVQ XMM0,qword ptr [ESI]
+004718e7 : ADD EAX,ECX
+004718e9 : MOVQ qword ptr [EAX],XMM0
+004718ed : MOVQ XMM0,qword ptr [ESI + 0x8]
+004718f2 : MOVQ qword ptr [EAX + 0x8],XMM0
+004718f7 : MOV EBX,dword ptr [ESI + 0x10]
+004718fa : ADD ECX,0x14
+004718fd : SUB EDX,0x1
+00471900 : MOV dword ptr [EAX + 0x10],EBX
+00471903 : JNZ 0x004718e0
+00471905 : MOV ECX,dword ptr [EBP + -0x8]
+00471908 : MOV AL,byte ptr [EBP + -0x1]
+0047190b : MOV dword ptr [EDI + 0x8],ECX
+0047190e : POP EBX
+0047190f : MOV ESP,EBP
+00471911 : POP EBP
+00471912 : RET 0x4
+00471915 : MOV AL,byte ptr [EBP + -0x1]
+00471918 : MOV dword ptr [EDI + 0x8],EBX
+0047191b : POP EBX
+0047191c : MOV ESP,EBP
+0047191e : POP EBP
+0047191f : RET 0x4

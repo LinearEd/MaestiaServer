@@ -1,0 +1,63 @@
+PROGRAM  : Maestia.exe
+FUNCTION : ___getgmtimebuf
+ENTRY    : 00645ec8
+BODY     : [[00645ec8, 00645efe]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    ___getgmtimebuf
+   
+   Library: Visual Studio 2008 Release */
+
+tm * __cdecl ___getgmtimebuf(void)
+
+{
+  _ptiddata p_Var1;
+  int *piVar2;
+  void *pvVar3;
+  
+  p_Var1 = __getptd_noexit();
+  if (p_Var1 == (_ptiddata)0x0) {
+LAB_00645ed6:
+    piVar2 = __errno();
+    *piVar2 = 0xc;
+    return (tm *)0x0;
+  }
+  if (p_Var1->_gmtimebuf == (void *)0x0) {
+    pvVar3 = __malloc_crt(0x24);
+    p_Var1->_gmtimebuf = pvVar3;
+    if (pvVar3 == (void *)0x0) goto LAB_00645ed6;
+  }
+  return p_Var1->_gmtimebuf;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00645ec8 : MOV EDI,EDI
+00645eca : PUSH ESI
+00645ecb : CALL 0x0064587d
+00645ed0 : MOV ESI,EAX
+00645ed2 : TEST ESI,ESI
+00645ed4 : JNZ 0x00645ee5
+00645ed6 : CALL 0x0063ab82
+00645edb : MOV dword ptr [EAX],0xc
+00645ee1 : XOR EAX,EAX
+00645ee3 : POP ESI
+00645ee4 : RET
+00645ee5 : CMP dword ptr [ESI + 0x44],0x0
+00645ee9 : JNZ 0x00645efa
+00645eeb : PUSH 0x24
+00645eed : CALL 0x0064255f
+00645ef2 : POP ECX
+00645ef3 : MOV dword ptr [ESI + 0x44],EAX
+00645ef6 : TEST EAX,EAX
+00645ef8 : JZ 0x00645ed6
+00645efa : MOV EAX,dword ptr [ESI + 0x44]
+00645efd : POP ESI
+00645efe : RET

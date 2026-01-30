@@ -1,0 +1,57 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00411820
+ENTRY    : 00411820
+BODY     : [[00411820, 00411866]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00411820(undefined8 *param_1,undefined8 *param_2)
+
+{
+  undefined8 *puVar1;
+  undefined4 *in_EAX;
+  
+  *in_EAX = param_1;
+  puVar1 = DAT_017245d8;
+  if (param_1 != param_2) {
+    for (; puVar1 = param_1, param_2 != DAT_017245d8; param_2 = param_2 + 2) {
+      *param_1 = *param_2;
+      param_1[1] = param_2[1];
+      param_1 = param_1 + 2;
+    }
+  }
+  DAT_017245d8 = puVar1;
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00411820 : PUSH EBP
+00411821 : MOV EBP,ESP
+00411823 : MOV EDX,dword ptr [EBP + 0x8]
+00411826 : MOV ECX,dword ptr [EBP + 0xc]
+00411829 : MOV dword ptr [EAX],EDX
+0041182b : CMP EDX,ECX
+0041182d : JZ 0x00411863
+0041182f : PUSH ESI
+00411830 : MOV ESI,dword ptr [0x017245d8]
+00411836 : CMP ECX,ESI
+00411838 : JZ 0x0041185c
+0041183a : LEA EBX,[EBX]
+00411840 : MOVQ XMM0,qword ptr [ECX]
+00411844 : MOVQ qword ptr [EDX],XMM0
+00411848 : MOVQ XMM0,qword ptr [ECX + 0x8]
+0041184d : MOVQ qword ptr [EDX + 0x8],XMM0
+00411852 : ADD ECX,0x10
+00411855 : ADD EDX,0x10
+00411858 : CMP ECX,ESI
+0041185a : JNZ 0x00411840
+0041185c : MOV dword ptr [0x017245d8],EDX
+00411862 : POP ESI
+00411863 : POP EBP
+00411864 : RET 0x8

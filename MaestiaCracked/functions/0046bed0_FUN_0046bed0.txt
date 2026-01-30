@@ -1,0 +1,73 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0046bed0
+ENTRY    : 0046bed0
+BODY     : [[0046bed0, 0046bf23]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+bool FUN_0046bed0(void)
+
+{
+  int in_EAX;
+  int iVar1;
+  int in_ECX;
+  bool bVar2;
+  
+  bVar2 = false;
+  if ((*(byte *)(in_EAX + 8) & 1) == 0) {
+    *(undefined1 *)(in_ECX + 0x110) = 1;
+    iVar1 = FUN_006ec250();
+    bVar2 = iVar1 != 0;
+    *(int *)(in_ECX + 0x10c) = iVar1;
+    if (!bVar2) {
+      FUN_00807d70("Shader compilation error, %s\n",in_ECX + 0xc);
+      return false;
+    }
+  }
+  else {
+    FUN_00807d70("CShaderLoaderRI::Load, array of defines must have an even number of elements");
+  }
+  return bVar2;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0046bed0 : PUSH EBX
+0046bed1 : PUSH ESI
+0046bed2 : PUSH EDI
+0046bed3 : MOV EDI,EAX
+0046bed5 : MOV AL,0x1
+0046bed7 : XOR BL,BL
+0046bed9 : MOV ESI,ECX
+0046bedb : TEST byte ptr [EDI + 0x8],AL
+0046bede : JNZ 0x0046bf11
+0046bee0 : MOV byte ptr [ESI + 0x110],AL
+0046bee6 : CALL 0x006ec250
+0046beeb : TEST EAX,EAX
+0046beed : SETNZ BL
+0046bef0 : MOV dword ptr [ESI + 0x10c],EAX
+0046bef6 : TEST BL,BL
+0046bef8 : JNZ 0x0046bf1e
+0046befa : ADD ESI,0xc
+0046befd : PUSH ESI
+0046befe : PUSH 0xcd5b18
+0046bf03 : CALL 0x00807d70
+0046bf08 : ADD ESP,0x8
+0046bf0b : POP EDI
+0046bf0c : POP ESI
+0046bf0d : MOV AL,BL
+0046bf0f : POP EBX
+0046bf10 : RET
+0046bf11 : PUSH 0xcd5b38
+0046bf16 : CALL 0x00807d70
+0046bf1b : ADD ESP,0x4
+0046bf1e : POP EDI
+0046bf1f : POP ESI
+0046bf20 : MOV AL,BL
+0046bf22 : POP EBX
+0046bf23 : RET

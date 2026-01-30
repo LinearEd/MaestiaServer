@@ -1,0 +1,76 @@
+PROGRAM  : Maestia.exe
+FUNCTION : SetBufferMode
+ENTRY    : 005ea1d0
+BODY     : [[005ea1d0, 005ea223]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* protected: bool __thiscall GBufferedFile::SetBufferMode(enum GBufferedFile::BufferModeType) */
+
+bool __thiscall GBufferedFile::SetBufferMode(GBufferedFile *this,BufferModeType param_1)
+
+{
+  char cVar1;
+  
+                    /* 0x1ea1d0  139  ?SetBufferMode@GBufferedFile@@IAE_NW4BufferModeType@1@@Z */
+  if (*(int *)(this + 0xc) == 0) {
+    return false;
+  }
+  if (param_1 != *(BufferModeType *)(this + 0x10)) {
+    FlushBuffer(this);
+    if (param_1 == 2) {
+      if (*(int **)(this + 8) == (int *)0x0) {
+        return false;
+      }
+      cVar1 = (**(code **)(**(int **)(this + 8) + 0xc))();
+      if (cVar1 == '\0') {
+        return false;
+      }
+    }
+    *(BufferModeType *)(this + 0x10) = param_1;
+    *(undefined4 *)(this + 0x14) = 0;
+    *(undefined4 *)(this + 0x18) = 0;
+  }
+  return true;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005ea1d0 : PUSH ESI
+005ea1d1 : MOV ESI,ECX
+005ea1d3 : CMP dword ptr [ESI + 0xc],0x0
+005ea1d7 : JNZ 0x005ea1df
+005ea1d9 : XOR AL,AL
+005ea1db : POP ESI
+005ea1dc : RET 0x4
+005ea1df : PUSH EDI
+005ea1e0 : MOV EDI,dword ptr [ESP + 0xc]
+005ea1e4 : CMP EDI,dword ptr [ESI + 0x10]
+005ea1e7 : JZ 0x005ea21d
+005ea1e9 : CALL 0x005e9d20
+005ea1ee : CMP EDI,0x2
+005ea1f1 : JNZ 0x005ea20c
+005ea1f3 : MOV ECX,dword ptr [ESI + 0x8]
+005ea1f6 : TEST ECX,ECX
+005ea1f8 : JZ 0x005ea205
+005ea1fa : MOV EAX,dword ptr [ECX]
+005ea1fc : MOV EDX,dword ptr [EAX + 0xc]
+005ea1ff : CALL EDX
+005ea201 : TEST AL,AL
+005ea203 : JNZ 0x005ea20c
+005ea205 : POP EDI
+005ea206 : XOR AL,AL
+005ea208 : POP ESI
+005ea209 : RET 0x4
+005ea20c : MOV dword ptr [ESI + 0x10],EDI
+005ea20f : MOV dword ptr [ESI + 0x14],0x0
+005ea216 : MOV dword ptr [ESI + 0x18],0x0
+005ea21d : POP EDI
+005ea21e : MOV AL,0x1
+005ea220 : POP ESI
+005ea221 : RET 0x4

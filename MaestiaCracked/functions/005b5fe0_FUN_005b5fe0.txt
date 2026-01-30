@@ -1,0 +1,74 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005b5fe0
+ENTRY    : 005b5fe0
+BODY     : [[005b5fe0, 005b6029]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+GRefCountNTSImpl * FUN_005b5fe0(void)
+
+{
+  int *piVar1;
+  GRefCountNTSImpl *this;
+  int in_ECX;
+  
+  piVar1 = *(int **)(in_ECX + 0x30);
+  if (piVar1 != (int *)0x0) {
+    if (piVar1[1] != 0) {
+      this = (GRefCountNTSImpl *)piVar1[1];
+      if (this != (GRefCountNTSImpl *)0x0) {
+        *(int *)(this + 4) = *(int *)(this + 4) + 1;
+        *(int *)(this + 4) = *(int *)(this + 4) + 1;
+        GRefCountNTSImpl::Release(this);
+        GRefCountNTSImpl::Release(this);
+      }
+      return this;
+    }
+    *piVar1 = *piVar1 + -1;
+    if (*piVar1 == 0) {
+      FUN_00515cf0(piVar1);
+    }
+    *(undefined4 *)(in_ECX + 0x30) = 0;
+  }
+  return (GRefCountNTSImpl *)0x0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005b5fe0 : PUSH ESI
+005b5fe1 : MOV ESI,ECX
+005b5fe3 : MOV EAX,dword ptr [ESI + 0x30]
+005b5fe6 : PUSH EDI
+005b5fe7 : XOR EDI,EDI
+005b5fe9 : CMP EAX,EDI
+005b5feb : JZ 0x005b6025
+005b5fed : CMP dword ptr [EAX + 0x4],EDI
+005b5ff0 : JZ 0x005b6017
+005b5ff2 : MOV ESI,dword ptr [EAX + 0x4]
+005b5ff5 : CMP ESI,EDI
+005b5ff7 : JZ 0x005b6012
+005b5ff9 : MOV EAX,0x1
+005b5ffe : ADD dword ptr [ESI + 0x4],EAX
+005b6001 : ADD dword ptr [ESI + 0x4],EAX
+005b6004 : MOV ECX,ESI
+005b6006 : CALL 0x004ff7c0
+005b600b : MOV ECX,ESI
+005b600d : CALL 0x004ff7c0
+005b6012 : POP EDI
+005b6013 : MOV EAX,ESI
+005b6015 : POP ESI
+005b6016 : RET
+005b6017 : ADD dword ptr [EAX],-0x1
+005b601a : JNZ 0x005b6022
+005b601c : PUSH EAX
+005b601d : CALL 0x00515cf0
+005b6022 : MOV dword ptr [ESI + 0x30],EDI
+005b6025 : MOV EAX,EDI
+005b6027 : POP EDI
+005b6028 : POP ESI
+005b6029 : RET

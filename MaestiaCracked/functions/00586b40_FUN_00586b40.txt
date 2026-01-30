@@ -1,0 +1,123 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00586b40
+ENTRY    : 00586b40
+BODY     : [[00586b40, 00586bd6]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+uint FUN_00586b40(void)
+
+{
+  undefined4 *puVar1;
+  uint uVar2;
+  int in_ECX;
+  uint uVar3;
+  uint uVar4;
+  undefined4 uVar5;
+  
+  FUN_0054f860();
+  uVar2 = *(uint *)(in_ECX + 0x38);
+  uVar3 = 0;
+  if (uVar2 != 0) {
+    do {
+      if (*(int *)(*(int *)(in_ECX + 0x34) + uVar3 * 4) != 0) {
+        FUN_00526390();
+      }
+      uVar3 = uVar3 + 1;
+    } while (uVar3 < uVar2);
+  }
+  FUN_005685a0();
+  FUN_005685a0();
+  uVar2 = *(uint *)(in_ECX + 100);
+  if (uVar2 != 0) {
+    uVar3 = *(uint *)(uVar2 + 4);
+    uVar4 = 0;
+    if (uVar3 != 0) {
+      do {
+        puVar1 = *(undefined4 **)(**(int **)(in_ECX + 100) + uVar4 * 4);
+        uVar2 = **(int **)(in_ECX + 100) + uVar4 * 4;
+        if ((puVar1 != (undefined4 *)0x0) && (uVar2 = puVar1[2], (uVar2 & 0x70000000) == 0x10000000)
+           ) {
+          if ((uVar2 & 0xfffffff) == 0) {
+            uVar2 = uVar2 & 0xafffffff | 0x20000000;
+            uVar5 = 4;
+          }
+          else {
+            uVar2 = uVar2 & 0x8fffffff;
+            uVar5 = 2;
+          }
+          puVar1[2] = uVar2;
+          uVar2 = (**(code **)*puVar1)(uVar5);
+        }
+        uVar4 = uVar4 + 1;
+      } while (uVar4 < uVar3);
+    }
+  }
+  return uVar2;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00586b40 : PUSH EBX
+00586b41 : PUSH ESI
+00586b42 : PUSH EDI
+00586b43 : MOV EDI,ECX
+00586b45 : CALL 0x0054f860
+00586b4a : MOV EBX,dword ptr [EDI + 0x38]
+00586b4d : XOR ESI,ESI
+00586b4f : TEST EBX,EBX
+00586b51 : JBE 0x00586b67
+00586b53 : MOV EAX,dword ptr [EDI + 0x34]
+00586b56 : MOV ECX,dword ptr [EAX + ESI*0x4]
+00586b59 : TEST ECX,ECX
+00586b5b : JZ 0x00586b62
+00586b5d : CALL 0x00526390
+00586b62 : INC ESI
+00586b63 : CMP ESI,EBX
+00586b65 : JC 0x00586b53
+00586b67 : LEA ECX,[EDI + 0x4c]
+00586b6a : CALL 0x005685a0
+00586b6f : LEA ECX,[EDI + 0x58]
+00586b72 : CALL 0x005685a0
+00586b77 : MOV EAX,dword ptr [EDI + 0x64]
+00586b7a : TEST EAX,EAX
+00586b7c : JZ 0x00586bd3
+00586b7e : MOV EBX,dword ptr [EAX + 0x4]
+00586b81 : XOR ESI,ESI
+00586b83 : TEST EBX,EBX
+00586b85 : JBE 0x00586bd3
+00586b87 : MOV ECX,dword ptr [EDI + 0x64]
+00586b8a : MOV EDX,dword ptr [ECX]
+00586b8c : MOV ECX,dword ptr [EDX + ESI*0x4]
+00586b8f : LEA EAX,[EDX + ESI*0x4]
+00586b92 : TEST ECX,ECX
+00586b94 : JZ 0x00586bce
+00586b96 : MOV EAX,dword ptr [ECX + 0x8]
+00586b99 : MOV EDX,EAX
+00586b9b : AND EDX,0x70000000
+00586ba1 : CMP EDX,0x10000000
+00586ba7 : JNZ 0x00586bce
+00586ba9 : TEST EAX,0xfffffff
+00586bae : JBE 0x00586bb9
+00586bb0 : AND EAX,0x8fffffff
+00586bb5 : PUSH 0x2
+00586bb7 : JMP 0x00586bc5
+00586bb9 : AND EAX,0xafffffff
+00586bbe : OR EAX,0x20000000
+00586bc3 : PUSH 0x4
+00586bc5 : MOV dword ptr [ECX + 0x8],EAX
+00586bc8 : MOV EAX,dword ptr [ECX]
+00586bca : MOV EDX,dword ptr [EAX]
+00586bcc : CALL EDX
+00586bce : INC ESI
+00586bcf : CMP ESI,EBX
+00586bd1 : JC 0x00586b87
+00586bd3 : POP EDI
+00586bd4 : POP ESI
+00586bd5 : POP EBX
+00586bd6 : RET

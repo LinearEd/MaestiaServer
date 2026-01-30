@@ -1,0 +1,47 @@
+PROGRAM  : Maestia.exe
+FUNCTION : TryAcquireCommit
+ENTRY    : 00517810
+BODY     : [[00517810, 00517838]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* public: virtual bool __thiscall GEvent::TryAcquireCommit(void) */
+
+bool __thiscall GEvent::TryAcquireCommit(GEvent *this)
+
+{
+                    /* 0x117810  167  ?TryAcquireCommit@GEvent@@UAE_NXZ */
+  GMutex::Lock((GMutex *)(this + 8));
+  if (this[5] != (GEvent)0x0) {
+    this[5] = (GEvent)0x0;
+    this[4] = (GEvent)0x0;
+  }
+  GMutex::Unlock((GMutex *)(this + 8));
+  return true;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00517810 : PUSH ESI
+00517811 : MOV ESI,ECX
+00517813 : PUSH EDI
+00517814 : LEA EDI,[ESI + 0x8]
+00517817 : MOV ECX,EDI
+00517819 : CALL 0x005162b0
+0051781e : MOV AL,byte ptr [ESI + 0x5]
+00517821 : TEST AL,AL
+00517823 : JZ 0x0051782d
+00517825 : XOR AL,AL
+00517827 : MOV byte ptr [ESI + 0x5],AL
+0051782a : MOV byte ptr [ESI + 0x4],AL
+0051782d : MOV ECX,EDI
+0051782f : CALL 0x005170a0
+00517834 : POP EDI
+00517835 : MOV AL,0x1
+00517837 : POP ESI
+00517838 : RET

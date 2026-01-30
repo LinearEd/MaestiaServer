@@ -1,0 +1,159 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00664460
+ENTRY    : 00664460
+BODY     : [[00664460, 0066453b]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined4 FUN_00664460(int param_1)
+
+{
+  int iVar1;
+  uint uVar2;
+  int in_ECX;
+  int *piVar3;
+  int *piVar4;
+  
+  iVar1 = FUN_004bd270(param_1,&DAT_00bef230);
+  if ((iVar1 == 0) && (iVar1 = FUN_004bd270(), iVar1 == 0)) {
+    return 0;
+  }
+  iVar1 = FUN_004bd270(param_1 + 0x10,&DAT_00bef230);
+  if ((iVar1 == 0) && (iVar1 = FUN_004bd270(in_ECX + 0x10,param_1 + 0x10), iVar1 == 0)) {
+    return 0;
+  }
+  iVar1 = FUN_004bd270(param_1 + 0x2c,&DAT_00bef230);
+  if (iVar1 == 0) {
+    iVar1 = FUN_004bd270(in_ECX + 0x2c,param_1 + 0x2c);
+    if (iVar1 == 0) {
+      return 0;
+    }
+    uVar2 = *(uint *)(in_ECX + 0x40);
+    if (uVar2 != *(uint *)(param_1 + 0x40)) {
+      return 0;
+    }
+    if (uVar2 != 0) {
+      piVar3 = *(int **)(param_1 + 0x44);
+      piVar4 = *(int **)(in_ECX + 0x44);
+      for (; 3 < uVar2; uVar2 = uVar2 - 4) {
+        if (*piVar4 != *piVar3) {
+          return 0;
+        }
+        piVar3 = piVar3 + 1;
+        piVar4 = piVar4 + 1;
+      }
+      if (uVar2 != 0) {
+        if ((char)*piVar3 != (char)*piVar4) {
+          return 0;
+        }
+        if (1 < uVar2) {
+          if (*(char *)((int)piVar3 + 1) != *(char *)((int)piVar4 + 1)) {
+            return 0;
+          }
+          if ((2 < uVar2) && (*(char *)((int)piVar3 + 2) != *(char *)((int)piVar4 + 2))) {
+            return 0;
+          }
+        }
+      }
+    }
+  }
+  return 1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00664460 : PUSH ESI
+00664461 : MOV ESI,dword ptr [ESP + 0x8]
+00664465 : PUSH EDI
+00664466 : PUSH 0xbef230
+0066446b : PUSH ESI
+0066446c : MOV EDI,ECX
+0066446e : CALL 0x004bd270
+00664473 : ADD ESP,0x8
+00664476 : TEST EAX,EAX
+00664478 : JNZ 0x0066448d
+0066447a : PUSH ESI
+0066447b : PUSH EDI
+0066447c : CALL 0x004bd270
+00664481 : ADD ESP,0x8
+00664484 : TEST EAX,EAX
+00664486 : JNZ 0x0066448d
+00664488 : POP EDI
+00664489 : POP ESI
+0066448a : RET 0x4
+0066448d : PUSH EBX
+0066448e : LEA EBX,[ESI + 0x10]
+00664491 : PUSH 0xbef230
+00664496 : PUSH EBX
+00664497 : CALL 0x004bd270
+0066449c : ADD ESP,0x8
+0066449f : TEST EAX,EAX
+006644a1 : JNZ 0x006644b4
+006644a3 : LEA EAX,[EDI + 0x10]
+006644a6 : PUSH EBX
+006644a7 : PUSH EAX
+006644a8 : CALL 0x004bd270
+006644ad : ADD ESP,0x8
+006644b0 : TEST EAX,EAX
+006644b2 : JZ 0x00664529
+006644b4 : LEA EBX,[ESI + 0x2c]
+006644b7 : PUSH 0xbef230
+006644bc : PUSH EBX
+006644bd : CALL 0x004bd270
+006644c2 : ADD ESP,0x8
+006644c5 : TEST EAX,EAX
+006644c7 : JNZ 0x00664531
+006644c9 : LEA ECX,[EDI + 0x2c]
+006644cc : PUSH EBX
+006644cd : PUSH ECX
+006644ce : CALL 0x004bd270
+006644d3 : ADD ESP,0x8
+006644d6 : TEST EAX,EAX
+006644d8 : JZ 0x00664529
+006644da : MOV EAX,dword ptr [EDI + 0x40]
+006644dd : CMP EAX,dword ptr [ESI + 0x40]
+006644e0 : JNZ 0x00664529
+006644e2 : TEST EAX,EAX
+006644e4 : JZ 0x00664531
+006644e6 : MOV ECX,dword ptr [ESI + 0x44]
+006644e9 : MOV ESI,dword ptr [EDI + 0x44]
+006644ec : CMP EAX,0x4
+006644ef : JC 0x00664505
+006644f1 : MOV EDX,dword ptr [ESI]
+006644f3 : CMP EDX,dword ptr [ECX]
+006644f5 : JNZ 0x00664529
+006644f7 : SUB EAX,0x4
+006644fa : ADD ECX,0x4
+006644fd : ADD ESI,0x4
+00664500 : CMP EAX,0x4
+00664503 : JNC 0x006644f1
+00664505 : TEST EAX,EAX
+00664507 : JZ 0x00664531
+00664509 : MOV DL,byte ptr [ECX]
+0066450b : CMP DL,byte ptr [ESI]
+0066450d : JNZ 0x00664529
+0066450f : CMP EAX,0x1
+00664512 : JBE 0x00664531
+00664514 : MOV DL,byte ptr [ECX + 0x1]
+00664517 : CMP DL,byte ptr [ESI + 0x1]
+0066451a : JNZ 0x00664529
+0066451c : CMP EAX,0x2
+0066451f : JBE 0x00664531
+00664521 : MOV AL,byte ptr [ECX + 0x2]
+00664524 : CMP AL,byte ptr [ESI + 0x2]
+00664527 : JZ 0x00664531
+00664529 : POP EBX
+0066452a : POP EDI
+0066452b : XOR EAX,EAX
+0066452d : POP ESI
+0066452e : RET 0x4
+00664531 : POP EBX
+00664532 : POP EDI
+00664533 : MOV EAX,0x1
+00664538 : POP ESI
+00664539 : RET 0x4

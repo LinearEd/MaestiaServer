@@ -1,0 +1,81 @@
+PROGRAM  : Maestia.exe
+FUNCTION : _wcspbrk
+ENTRY    : 00649da3
+BODY     : [[00649da3, 00649de5]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    _wcspbrk
+   
+   Library: Visual Studio 2008 Release */
+
+wchar_t * __cdecl _wcspbrk(wchar_t *_Str,wchar_t *_Control)
+
+{
+  wchar_t wVar1;
+  wchar_t *pwVar2;
+  wchar_t wVar3;
+  
+  wVar3 = *_Str;
+  if (wVar3 != L'\0') {
+    wVar1 = *_Control;
+    pwVar2 = _Control;
+    do {
+      while (wVar1 != L'\0') {
+        if (wVar1 == wVar3) {
+          return _Str;
+        }
+        wVar1 = pwVar2[1];
+        pwVar2 = pwVar2 + 1;
+      }
+      _Str = _Str + 1;
+      wVar3 = *_Str;
+      wVar1 = *_Control;
+      pwVar2 = _Control;
+    } while (wVar3 != L'\0');
+  }
+  return (wchar_t *)0x0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00649da3 : MOV EDI,EDI
+00649da5 : PUSH EBP
+00649da6 : MOV EBP,ESP
+00649da8 : MOV EAX,dword ptr [EBP + 0x8]
+00649dab : MOVZX EDX,word ptr [EAX]
+00649dae : PUSH EBX
+00649daf : PUSH ESI
+00649db0 : PUSH EDI
+00649db1 : TEST DX,DX
+00649db4 : JZ 0x00649ddf
+00649db6 : MOV EBX,dword ptr [EBP + 0xc]
+00649db9 : MOVZX EDI,word ptr [EBX]
+00649dbc : MOV ESI,EBX
+00649dbe : TEST DI,DI
+00649dc1 : JZ 0x00649dd5
+00649dc3 : MOVZX ECX,DI
+00649dc6 : CMP CX,DX
+00649dc9 : JZ 0x00649de1
+00649dcb : INC ESI
+00649dcc : INC ESI
+00649dcd : MOVZX ECX,word ptr [ESI]
+00649dd0 : TEST CX,CX
+00649dd3 : JNZ 0x00649dc6
+00649dd5 : INC EAX
+00649dd6 : INC EAX
+00649dd7 : MOVZX EDX,word ptr [EAX]
+00649dda : TEST DX,DX
+00649ddd : JNZ 0x00649dbc
+00649ddf : XOR EAX,EAX
+00649de1 : POP EDI
+00649de2 : POP ESI
+00649de3 : POP EBX
+00649de4 : POP EBP
+00649de5 : RET

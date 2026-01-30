@@ -1,0 +1,104 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_006847c0
+ENTRY    : 006847c0
+BODY     : [[006847c0, 00684868]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_006847c0(GRefCountNTSImpl *param_1)
+
+{
+  char *_Dst;
+  int in_ECX;
+  int iVar1;
+  uint uVar2;
+  
+  if (*(char *)(in_ECX + 8) != '\0') {
+    if (param_1 == (GRefCountNTSImpl *)0x0) {
+      return;
+    }
+    _Dst = (char *)(in_ECX + 0x408);
+    _strcpy_s(_Dst,0x400,(char *)(in_ECX + 8));
+    _strcat_s(_Dst,0x400,".Add");
+    uVar2 = 0;
+    if (*(int *)(in_ECX + 0x80c) != 0) {
+      iVar1 = 0;
+      do {
+        (**(code **)(*(int *)param_1 + 4))
+                  (*(int *)(in_ECX + 0x814) + iVar1,*(int *)(in_ECX + 0x808) + uVar2 * 4);
+        uVar2 = uVar2 + 1;
+        iVar1 = iVar1 + 0x10;
+      } while (uVar2 < *(uint *)(in_ECX + 0x80c));
+    }
+    FUN_00679040(_Dst,*(undefined4 *)(in_ECX + 0x814),*(undefined4 *)(in_ECX + 0x818));
+    *_Dst = '\0';
+  }
+  if (param_1 != (GRefCountNTSImpl *)0x0) {
+    GRefCountNTSImpl::Release(param_1);
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006847c0 : PUSH ESI
+006847c1 : MOV ESI,ECX
+006847c3 : CMP byte ptr [ESI + 0x8],0x0
+006847c7 : LEA EAX,[ESI + 0x8]
+006847ca : JZ 0x00684858
+006847d0 : CMP dword ptr [ESP + 0x8],0x0
+006847d5 : JZ 0x00684865
+006847db : PUSH EBP
+006847dc : PUSH EDI
+006847dd : PUSH EAX
+006847de : LEA EBP,[ESI + 0x408]
+006847e4 : PUSH 0x400
+006847e9 : PUSH EBP
+006847ea : CALL 0x00638300
+006847ef : PUSH 0xbd82bc
+006847f4 : PUSH 0x400
+006847f9 : PUSH EBP
+006847fa : CALL 0x0063db33
+006847ff : XOR EDI,EDI
+00684801 : ADD ESP,0x18
+00684804 : CMP dword ptr [ESI + 0x80c],EDI
+0068480a : JBE 0x0068483b
+0068480c : PUSH EBX
+0068480d : XOR EBX,EBX
+0068480f : NOP
+00684810 : MOV EDX,dword ptr [ESI + 0x808]
+00684816 : MOV ECX,dword ptr [ESP + 0x14]
+0068481a : MOV EAX,dword ptr [ECX]
+0068481c : MOV EAX,dword ptr [EAX + 0x4]
+0068481f : LEA EDX,[EDX + EDI*0x4]
+00684822 : PUSH EDX
+00684823 : MOV EDX,dword ptr [ESI + 0x814]
+00684829 : ADD EDX,EBX
+0068482b : PUSH EDX
+0068482c : CALL EAX
+0068482e : INC EDI
+0068482f : ADD EBX,0x10
+00684832 : CMP EDI,dword ptr [ESI + 0x80c]
+00684838 : JC 0x00684810
+0068483a : POP EBX
+0068483b : MOV ECX,dword ptr [ESI + 0x818]
+00684841 : MOV EDX,dword ptr [ESI + 0x814]
+00684847 : PUSH ECX
+00684848 : MOV ECX,dword ptr [ESI + 0x4]
+0068484b : PUSH EDX
+0068484c : PUSH EBP
+0068484d : CALL 0x00679040
+00684852 : POP EDI
+00684853 : MOV byte ptr [EBP],0x0
+00684857 : POP EBP
+00684858 : MOV ECX,dword ptr [ESP + 0x8]
+0068485c : TEST ECX,ECX
+0068485e : JZ 0x00684865
+00684860 : CALL 0x004ff7c0
+00684865 : POP ESI
+00684866 : RET 0x4

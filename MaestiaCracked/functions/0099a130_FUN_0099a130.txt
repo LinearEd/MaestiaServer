@@ -1,0 +1,92 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0099a130
+ENTRY    : 0099a130
+BODY     : [[0099a130, 0099a18c]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_0099a130(void)
+
+{
+  wchar_t wVar1;
+  wchar_t *pwVar2;
+  int iVar3;
+  wchar_t *pwVar4;
+  int unaff_ESI;
+  int unaff_EDI;
+  bool bVar5;
+  
+  if (*(uint *)(unaff_ESI + 0x18) < 8) {
+    pwVar2 = (wchar_t *)(unaff_ESI + 4);
+  }
+  else {
+    pwVar2 = *(wchar_t **)(unaff_ESI + 4);
+  }
+  pwVar4 = L"FriendList";
+  do {
+    wVar1 = *pwVar2;
+    bVar5 = (ushort)wVar1 < (ushort)*pwVar4;
+    if (wVar1 != *pwVar4) {
+LAB_0099a16c:
+      iVar3 = (1 - (uint)bVar5) - (uint)(bVar5 != 0);
+      goto LAB_0099a171;
+    }
+    if (wVar1 == L'\0') break;
+    wVar1 = pwVar2[1];
+    bVar5 = (ushort)wVar1 < (ushort)pwVar4[1];
+    if (wVar1 != pwVar4[1]) goto LAB_0099a16c;
+    pwVar2 = pwVar2 + 2;
+    pwVar4 = pwVar4 + 2;
+  } while (wVar1 != L'\0');
+  iVar3 = 0;
+LAB_0099a171:
+  if ((iVar3 == 0) && (*(int *)(unaff_EDI + 8) != 0)) {
+    (**(code **)(**(int **)(unaff_EDI + 8) + 0x38))();
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0099a130 : PUSH EBP
+0099a131 : MOV EBP,ESP
+0099a133 : CMP dword ptr [ESI + 0x18],0x8
+0099a137 : JC 0x0099a13e
+0099a139 : MOV EAX,dword ptr [ESI + 0x4]
+0099a13c : JMP 0x0099a141
+0099a13e : LEA EAX,[ESI + 0x4]
+0099a141 : MOV ECX,0xc87f20
+0099a146 : MOV DX,word ptr [EAX]
+0099a149 : CMP DX,word ptr [ECX]
+0099a14c : JNZ 0x0099a16c
+0099a14e : TEST DX,DX
+0099a151 : JZ 0x0099a168
+0099a153 : MOV DX,word ptr [EAX + 0x2]
+0099a157 : CMP DX,word ptr [ECX + 0x2]
+0099a15b : JNZ 0x0099a16c
+0099a15d : ADD EAX,0x4
+0099a160 : ADD ECX,0x4
+0099a163 : TEST DX,DX
+0099a166 : JNZ 0x0099a146
+0099a168 : XOR EAX,EAX
+0099a16a : JMP 0x0099a171
+0099a16c : SBB EAX,EAX
+0099a16e : SBB EAX,-0x1
+0099a171 : TEST EAX,EAX
+0099a173 : JNZ 0x0099a189
+0099a175 : CMP dword ptr [EDI + 0x8],EAX
+0099a178 : JZ 0x0099a189
+0099a17a : MOV ECX,dword ptr [EDI + 0x8]
+0099a17d : MOV EDX,dword ptr [EBP + 0x8]
+0099a180 : MOV EAX,dword ptr [ECX]
+0099a182 : MOV EAX,dword ptr [EAX + 0x38]
+0099a185 : PUSH EDX
+0099a186 : PUSH ESI
+0099a187 : CALL EAX
+0099a189 : POP EBP
+0099a18a : RET 0x4

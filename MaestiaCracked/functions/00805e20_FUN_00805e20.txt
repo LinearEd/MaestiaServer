@@ -1,0 +1,79 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00805e20
+ENTRY    : 00805e20
+BODY     : [[00805e20, 00805ea2]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00805e20(void)
+
+{
+  float fVar1;
+  float fVar2;
+  float fVar3;
+  float *in_ECX;
+  float fVar4;
+  
+  fVar1 = in_ECX[1];
+  fVar2 = *in_ECX;
+  fVar3 = in_ECX[2];
+  fVar4 = SQRT(fVar2 * fVar2 + fVar1 * fVar1 + fVar3 * fVar3);
+  if (fVar4 != 0.0) {
+    fVar4 = 1.0 / fVar4;
+    *in_ECX = fVar4 * fVar2;
+    in_ECX[1] = fVar4 * fVar1;
+    in_ECX[2] = fVar4 * fVar3;
+    return;
+  }
+  *in_ECX = 0.0;
+  in_ECX[1] = 0.0;
+  in_ECX[2] = 0.0;
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00805e20 : PUSH EBP
+00805e21 : MOV EBP,ESP
+00805e23 : AND ESP,0xfffffff8
+00805e26 : MOVSS XMM2,dword ptr [ECX + 0x4]
+00805e2b : MOVSS XMM3,dword ptr [ECX]
+00805e2f : MOVSS XMM1,dword ptr [ECX + 0x8]
+00805e34 : MOVAPS XMM0,XMM3
+00805e37 : MULSS XMM0,XMM3
+00805e3b : MOVAPS XMM4,XMM2
+00805e3e : MULSS XMM4,XMM2
+00805e42 : ADDSS XMM0,XMM4
+00805e46 : MOVAPS XMM4,XMM1
+00805e49 : MULSS XMM4,XMM1
+00805e4d : ADDSS XMM0,XMM4
+00805e51 : SQRTSS XMM4,XMM0
+00805e55 : XORPS XMM0,XMM0
+00805e58 : UCOMISS XMM4,XMM0
+00805e5b : LAHF
+00805e5c : TEST AH,0x44
+00805e5f : JNP 0x00805e91
+00805e61 : MOVSS XMM0,dword ptr [0x00c10fc4]
+00805e69 : DIVSS XMM0,XMM4
+00805e6d : MOVAPS XMM4,XMM0
+00805e70 : MULSS XMM4,XMM3
+00805e74 : MOVAPS XMM3,XMM0
+00805e77 : MULSS XMM3,XMM2
+00805e7b : MULSS XMM0,XMM1
+00805e7f : MOVSS dword ptr [ECX],XMM4
+00805e83 : MOVSS dword ptr [ECX + 0x4],XMM3
+00805e88 : MOVSS dword ptr [ECX + 0x8],XMM0
+00805e8d : MOV ESP,EBP
+00805e8f : POP EBP
+00805e90 : RET
+00805e91 : MOVSS dword ptr [ECX],XMM0
+00805e95 : MOVSS dword ptr [ECX + 0x4],XMM0
+00805e9a : MOVSS dword ptr [ECX + 0x8],XMM0
+00805e9f : MOV ESP,EBP
+00805ea1 : POP EBP
+00805ea2 : RET

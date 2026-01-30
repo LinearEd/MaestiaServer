@@ -1,0 +1,90 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005de9b0
+ENTRY    : 005de9b0
+BODY     : [[005de9b0, 005dea10]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined4 FUN_005de9b0(int param_1)
+
+{
+  byte bVar1;
+  byte *pbVar2;
+  int iVar3;
+  int in_ECX;
+  byte *pbVar4;
+  bool bVar5;
+  
+  pbVar4 = (byte *)((*(uint *)(param_1 + 0xc) & 0xfffffffc) + 8);
+  pbVar2 = (byte *)((*(uint *)(in_ECX + 0xc) & 0xfffffffc) + 8);
+  do {
+    bVar1 = *pbVar2;
+    bVar5 = bVar1 < *pbVar4;
+    if (bVar1 != *pbVar4) {
+LAB_005de9e8:
+      iVar3 = (1 - (uint)bVar5) - (uint)(bVar5 != 0);
+      goto LAB_005de9ed;
+    }
+    if (bVar1 == 0) break;
+    bVar1 = pbVar2[1];
+    bVar5 = bVar1 < pbVar4[1];
+    if (bVar1 != pbVar4[1]) goto LAB_005de9e8;
+    pbVar2 = pbVar2 + 2;
+    pbVar4 = pbVar4 + 2;
+  } while (bVar1 != 0);
+  iVar3 = 0;
+LAB_005de9ed:
+  if (((iVar3 == 0) && (*(int *)(in_ECX + 8) == *(int *)(param_1 + 8))) &&
+     (*(int *)(in_ECX + 0x10) == *(int *)(param_1 + 0x10))) {
+    return 1;
+  }
+  return 0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005de9b0 : MOV EAX,dword ptr [ECX + 0xc]
+005de9b3 : PUSH ESI
+005de9b4 : MOV ESI,dword ptr [ESP + 0x8]
+005de9b8 : MOV EDX,dword ptr [ESI + 0xc]
+005de9bb : AND EDX,0xfffffffc
+005de9be : AND EAX,0xfffffffc
+005de9c1 : ADD EDX,0x8
+005de9c4 : ADD EAX,0x8
+005de9c7 : PUSH EBX
+005de9c8 : MOV BL,byte ptr [EAX]
+005de9ca : CMP BL,byte ptr [EDX]
+005de9cc : JNZ 0x005de9e8
+005de9ce : TEST BL,BL
+005de9d0 : JZ 0x005de9e4
+005de9d2 : MOV BL,byte ptr [EAX + 0x1]
+005de9d5 : CMP BL,byte ptr [EDX + 0x1]
+005de9d8 : JNZ 0x005de9e8
+005de9da : ADD EAX,0x2
+005de9dd : ADD EDX,0x2
+005de9e0 : TEST BL,BL
+005de9e2 : JNZ 0x005de9c8
+005de9e4 : XOR EAX,EAX
+005de9e6 : JMP 0x005de9ed
+005de9e8 : SBB EAX,EAX
+005de9ea : SBB EAX,-0x1
+005de9ed : POP EBX
+005de9ee : TEST EAX,EAX
+005de9f0 : JNZ 0x005dea0b
+005de9f2 : MOV EAX,dword ptr [ECX + 0x8]
+005de9f5 : CMP EAX,dword ptr [ESI + 0x8]
+005de9f8 : JNZ 0x005dea0b
+005de9fa : MOV ECX,dword ptr [ECX + 0x10]
+005de9fd : CMP ECX,dword ptr [ESI + 0x10]
+005dea00 : JNZ 0x005dea0b
+005dea02 : MOV EAX,0x1
+005dea07 : POP ESI
+005dea08 : RET 0x4
+005dea0b : XOR EAX,EAX
+005dea0d : POP ESI
+005dea0e : RET 0x4

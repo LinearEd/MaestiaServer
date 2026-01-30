@@ -1,0 +1,92 @@
+PROGRAM  : Maestia.exe
+FUNCTION : ___TypeMatch
+ENTRY    : 00642b39
+BODY     : [[00642b39, 00642b97]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    ___TypeMatch
+   
+   Library: Visual Studio 2008 Release */
+
+undefined4 ___TypeMatch(byte *param_1,byte *param_2,uint *param_3)
+
+{
+  int iVar1;
+  undefined4 uVar2;
+  
+  iVar1 = *(int *)(param_1 + 4);
+  if ((iVar1 == 0) || (*(char *)(iVar1 + 8) == '\0')) {
+LAB_00642b91:
+    uVar2 = 1;
+  }
+  else {
+    if (iVar1 == *(int *)(param_2 + 4)) {
+LAB_00642b70:
+      if (((((*param_2 & 2) == 0) || ((*param_1 & 8) != 0)) &&
+          (((*param_3 & 1) == 0 || ((*param_1 & 1) != 0)))) &&
+         (((*param_3 & 2) == 0 || ((*param_1 & 2) != 0)))) goto LAB_00642b91;
+    }
+    else {
+      iVar1 = _strcmp((char *)(iVar1 + 8),(char *)(*(int *)(param_2 + 4) + 8));
+      if (iVar1 == 0) goto LAB_00642b70;
+    }
+    uVar2 = 0;
+  }
+  return uVar2;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00642b39 : MOV EDI,EDI
+00642b3b : PUSH EBP
+00642b3c : MOV EBP,ESP
+00642b3e : PUSH ESI
+00642b3f : PUSH EDI
+00642b40 : MOV EDI,dword ptr [EBP + 0x8]
+00642b43 : MOV EAX,dword ptr [EDI + 0x4]
+00642b46 : TEST EAX,EAX
+00642b48 : JZ 0x00642b91
+00642b4a : LEA EDX,[EAX + 0x8]
+00642b4d : CMP byte ptr [EDX],0x0
+00642b50 : JZ 0x00642b91
+00642b52 : MOV ESI,dword ptr [EBP + 0xc]
+00642b55 : MOV ECX,dword ptr [ESI + 0x4]
+00642b58 : CMP EAX,ECX
+00642b5a : JZ 0x00642b70
+00642b5c : ADD ECX,0x8
+00642b5f : PUSH ECX
+00642b60 : PUSH EDX
+00642b61 : CALL 0x00645e40
+00642b66 : POP ECX
+00642b67 : POP ECX
+00642b68 : TEST EAX,EAX
+00642b6a : JZ 0x00642b70
+00642b6c : XOR EAX,EAX
+00642b6e : JMP 0x00642b94
+00642b70 : TEST byte ptr [ESI],0x2
+00642b73 : JZ 0x00642b7a
+00642b75 : TEST byte ptr [EDI],0x8
+00642b78 : JZ 0x00642b6c
+00642b7a : MOV EAX,dword ptr [EBP + 0x10]
+00642b7d : MOV EAX,dword ptr [EAX]
+00642b7f : TEST AL,0x1
+00642b81 : JZ 0x00642b88
+00642b83 : TEST byte ptr [EDI],0x1
+00642b86 : JZ 0x00642b6c
+00642b88 : TEST AL,0x2
+00642b8a : JZ 0x00642b91
+00642b8c : TEST byte ptr [EDI],0x2
+00642b8f : JZ 0x00642b6c
+00642b91 : XOR EAX,EAX
+00642b93 : INC EAX
+00642b94 : POP EDI
+00642b95 : POP ESI
+00642b96 : POP EBP
+00642b97 : RET

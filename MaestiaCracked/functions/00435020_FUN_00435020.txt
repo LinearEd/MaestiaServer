@@ -1,0 +1,191 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00435020
+ENTRY    : 00435020
+BODY     : [[00435020, 004350f9]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+char * FUN_00435020(undefined1 *param_1)
+
+{
+  char *pcVar1;
+  char cVar2;
+  char *in_EAX;
+  char *pcVar3;
+  int iVar4;
+  char *in_ECX;
+  char *pcVar5;
+  size_t _Size;
+  uint _Size_00;
+  
+  pcVar3 = in_EAX;
+  do {
+    cVar2 = *pcVar3;
+    pcVar3 = pcVar3 + 1;
+  } while (cVar2 != '\0');
+  cVar2 = *in_ECX;
+  pcVar3 = pcVar3 + (1 - (int)(in_EAX + 1));
+  while( true ) {
+    if (cVar2 == '\0') {
+      *param_1 = 0;
+      return (char *)0x0;
+    }
+    iVar4 = 0;
+    if ((int)pcVar3 < 1) break;
+    while (cVar2 != in_EAX[iVar4]) {
+      iVar4 = iVar4 + 1;
+      if ((int)pcVar3 <= iVar4) goto LAB_00435052;
+    }
+    cVar2 = in_ECX[1];
+    in_ECX = in_ECX + 1;
+  }
+LAB_00435052:
+  pcVar5 = in_ECX;
+  if (*in_ECX == '\"') {
+    pcVar5 = in_ECX + 1;
+    cVar2 = in_ECX[1];
+    pcVar3 = pcVar5;
+    while ((cVar2 != '\"' && (cVar2 != '\0'))) {
+      pcVar1 = pcVar3 + 1;
+      pcVar3 = pcVar3 + 1;
+      cVar2 = *pcVar1;
+    }
+    _Size = (int)pcVar3 - (int)pcVar5;
+    if (_Size != 0) {
+      _memcpy(param_1,pcVar5,_Size);
+    }
+    param_1[_Size] = 0;
+    return pcVar3 + 1;
+  }
+  do {
+    iVar4 = 0;
+    if (0 < (int)pcVar3) {
+      do {
+        if (*pcVar5 == in_EAX[iVar4]) {
+          _Size_00 = (int)pcVar5 - (int)in_ECX;
+          if (_Size_00 < 0xff) {
+            if (_Size_00 == 0) goto LAB_004350ea;
+          }
+          else {
+            _Size_00 = 0xfe;
+          }
+          _memcpy(param_1,in_ECX,_Size_00);
+LAB_004350ea:
+          param_1[_Size_00] = 0;
+          return pcVar5;
+        }
+        iVar4 = iVar4 + 1;
+      } while (iVar4 < (int)pcVar3);
+    }
+    pcVar5 = pcVar5 + 1;
+  } while( true );
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00435020 : PUSH EBP
+00435021 : MOV EBP,ESP
+00435023 : PUSH ESI
+00435024 : PUSH EDI
+00435025 : MOV EDI,EAX
+00435027 : MOV ESI,ECX
+00435029 : LEA EDX,[EAX + 0x1]
+0043502c : LEA ESP,[ESP]
+00435030 : MOV CL,byte ptr [EAX]
+00435032 : INC EAX
+00435033 : TEST CL,CL
+00435035 : JNZ 0x00435030
+00435037 : MOV CL,byte ptr [ESI]
+00435039 : SUB EAX,EDX
+0043503b : LEA EDX,[EAX + 0x1]
+0043503e : TEST CL,CL
+00435040 : JZ 0x00435099
+00435042 : XOR EAX,EAX
+00435044 : TEST EDX,EDX
+00435046 : JLE 0x00435052
+00435048 : CMP CL,byte ptr [EAX + EDI*0x1]
+0043504b : JZ 0x00435091
+0043504d : INC EAX
+0043504e : CMP EAX,EDX
+00435050 : JL 0x00435048
+00435052 : CMP byte ptr [ESI],0x22
+00435055 : JNZ 0x004350a7
+00435057 : MOV AL,byte ptr [ESI + 0x1]
+0043505a : INC ESI
+0043505b : MOV ECX,ESI
+0043505d : CMP AL,0x22
+0043505f : JZ 0x0043506d
+00435061 : TEST AL,AL
+00435063 : JZ 0x0043506d
+00435065 : MOV AL,byte ptr [ESI + 0x1]
+00435068 : INC ESI
+00435069 : CMP AL,0x22
+0043506b : JNZ 0x00435061
+0043506d : MOV EDI,ESI
+0043506f : SUB EDI,ECX
+00435071 : JZ 0x00435081
+00435073 : PUSH EDI
+00435074 : PUSH ECX
+00435075 : MOV ECX,dword ptr [EBP + 0x8]
+00435078 : PUSH ECX
+00435079 : CALL 0x0063ae40
+0043507e : ADD ESP,0xc
+00435081 : MOV EDX,dword ptr [EBP + 0x8]
+00435084 : MOV byte ptr [EDI + EDX*0x1],0x0
+00435088 : POP EDI
+00435089 : LEA EAX,[ESI + 0x1]
+0043508c : POP ESI
+0043508d : POP EBP
+0043508e : RET 0x4
+00435091 : MOV CL,byte ptr [ESI + 0x1]
+00435094 : INC ESI
+00435095 : TEST CL,CL
+00435097 : JNZ 0x00435042
+00435099 : MOV EAX,dword ptr [EBP + 0x8]
+0043509c : POP EDI
+0043509d : MOV byte ptr [EAX],0x0
+004350a0 : XOR EAX,EAX
+004350a2 : POP ESI
+004350a3 : POP EBP
+004350a4 : RET 0x4
+004350a7 : PUSH EBX
+004350a8 : MOV EBX,ESI
+004350aa : LEA EBX,[EBX]
+004350b0 : MOV CL,byte ptr [ESI]
+004350b2 : XOR EAX,EAX
+004350b4 : TEST EDX,EDX
+004350b6 : JLE 0x004350c2
+004350b8 : CMP CL,byte ptr [EAX + EDI*0x1]
+004350bb : JZ 0x004350c5
+004350bd : INC EAX
+004350be : CMP EAX,EDX
+004350c0 : JL 0x004350b8
+004350c2 : INC ESI
+004350c3 : JMP 0x004350b0
+004350c5 : MOV EDI,ESI
+004350c7 : SUB EDI,EBX
+004350c9 : CMP EDI,0xfe
+004350cf : JBE 0x004350d8
+004350d1 : MOV EDI,0xfe
+004350d6 : JMP 0x004350dc
+004350d8 : TEST EDI,EDI
+004350da : JZ 0x004350ea
+004350dc : MOV EAX,dword ptr [EBP + 0x8]
+004350df : PUSH EDI
+004350e0 : PUSH EBX
+004350e1 : PUSH EAX
+004350e2 : CALL 0x0063ae40
+004350e7 : ADD ESP,0xc
+004350ea : MOV ECX,dword ptr [EBP + 0x8]
+004350ed : POP EBX
+004350ee : MOV byte ptr [EDI + ECX*0x1],0x0
+004350f2 : POP EDI
+004350f3 : MOV EAX,ESI
+004350f5 : POP ESI
+004350f6 : POP EBP
+004350f7 : RET 0x4

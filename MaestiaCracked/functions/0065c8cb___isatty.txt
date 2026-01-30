@@ -1,0 +1,81 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __isatty
+ENTRY    : 0065c8cb
+BODY     : [[0065c8cb, 0065c92e]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __isatty
+   
+   Library: Visual Studio 2008 Release */
+
+int __cdecl __isatty(int _FileHandle)
+
+{
+  int *piVar1;
+  uint uVar2;
+  
+  if (_FileHandle == -2) {
+    piVar1 = __errno();
+    *piVar1 = 9;
+    return 0;
+  }
+  if ((_FileHandle < 0) || (DAT_01728c30 <= (uint)_FileHandle)) {
+    piVar1 = __errno();
+    *piVar1 = 9;
+    __invalid_parameter(0,0,0,0,0);
+    uVar2 = 0;
+  }
+  else {
+    uVar2 = (int)*(char *)((&DAT_01728c40)[_FileHandle >> 5] + 4 + (_FileHandle & 0x1fU) * 0x40) &
+            0x40;
+  }
+  return uVar2;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0065c8cb : MOV EDI,EDI
+0065c8cd : PUSH EBP
+0065c8ce : MOV EBP,ESP
+0065c8d0 : MOV EAX,dword ptr [EBP + 0x8]
+0065c8d3 : CMP EAX,-0x2
+0065c8d6 : JNZ 0x0065c8e7
+0065c8d8 : CALL 0x0063ab82
+0065c8dd : MOV dword ptr [EAX],0x9
+0065c8e3 : XOR EAX,EAX
+0065c8e5 : POP EBP
+0065c8e6 : RET
+0065c8e7 : PUSH ESI
+0065c8e8 : XOR ESI,ESI
+0065c8ea : CMP EAX,ESI
+0065c8ec : JL 0x0065c8f6
+0065c8ee : CMP EAX,dword ptr [0x01728c30]
+0065c8f4 : JC 0x0065c912
+0065c8f6 : CALL 0x0063ab82
+0065c8fb : PUSH ESI
+0065c8fc : PUSH ESI
+0065c8fd : PUSH ESI
+0065c8fe : PUSH ESI
+0065c8ff : PUSH ESI
+0065c900 : MOV dword ptr [EAX],0x9
+0065c906 : CALL 0x006372b8
+0065c90b : ADD ESP,0x14
+0065c90e : XOR EAX,EAX
+0065c910 : JMP 0x0065c92c
+0065c912 : MOV ECX,EAX
+0065c914 : AND EAX,0x1f
+0065c917 : SAR ECX,0x5
+0065c91a : MOV ECX,dword ptr [ECX*0x4 + 0x1728c40]
+0065c921 : SHL EAX,0x6
+0065c924 : MOVSX EAX,byte ptr [ECX + EAX*0x1 + 0x4]
+0065c929 : AND EAX,0x40
+0065c92c : POP ESI
+0065c92d : POP EBP
+0065c92e : RET

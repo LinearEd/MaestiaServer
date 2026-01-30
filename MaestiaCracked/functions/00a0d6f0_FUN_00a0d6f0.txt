@@ -1,0 +1,154 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00a0d6f0
+ENTRY    : 00a0d6f0
+BODY     : [[00a0d6f0, 00a0d815]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined4 FUN_00a0d6f0(int param_1)
+
+{
+  int iVar1;
+  uint uVar2;
+  DWORD DVar3;
+  undefined4 uVar4;
+  byte bVar5;
+  uint8_t *packet;
+  void *local_10;
+  undefined1 *puStack_c;
+  undefined4 local_8;
+  
+  local_8 = 0xffffffff;
+  puStack_c = &LAB_00b709eb;
+  local_10 = ExceptionList;
+  uVar2 = DAT_00d66fa0 ^ (uint)&stack0xfffffffc;
+  if ((*(int *)(param_1 + 4) != 0) && (*(char *)(param_1 + 8) != '\0')) {
+    ExceptionList = &local_10;
+    FUN_008018d0(L"[Clt Net] Request Start Game",uVar2);
+    iVar1 = *(int *)ThreadLocalStoragePointer;
+    bVar5 = (byte)((ulonglong)(*(byte *)(iVar1 + 0x18) + 1) % 3);
+    *(byte *)(iVar1 + 0x18) = bVar5;
+    packet = (uint8_t *)((uint)bVar5 * 0x2000 + 0x122cb8 + iVar1);
+    local_8 = 0;
+    if (packet == (uint8_t *)0x0) {
+      packet = (uint8_t *)0x0;
+    }
+    else {
+      DVar3 = timeGetTime();
+      uVar4 = *(undefined4 *)(*(int *)(DAT_0172491c + 0x17c) + 4);
+      packet[0] = '\0';
+      packet[1] = '\0';
+      packet[2] = '3';
+      packet[3] = '\x19';
+      *(undefined4 *)(packet + 4) = uVar4;
+      *(DWORD *)(packet + 8) = DVar3;
+    }
+    local_8 = 0xffffffff;
+    FUN_00a0dd40(*(int *)(param_1 + 4),0xc,packet);
+    FUN_00a11340(*(undefined4 *)(*(int *)(param_1 + 4) + 100),*(int *)(param_1 + 4),
+                 *(undefined4 *)(*(int *)(DAT_0172491c + 0x17c) + 4));
+    FUN_008018d0(L"[Clt Net] Character Server Sync",uVar2);
+    uVar4 = FUN_00a0d4b0();
+    ExceptionList = local_10;
+    return uVar4;
+  }
+  return 1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00a0d6f0 : PUSH EBP
+00a0d6f1 : MOV EBP,ESP
+00a0d6f3 : PUSH -0x1
+00a0d6f5 : PUSH 0xb709eb
+00a0d6fa : MOV EAX,FS:[0x0]
+00a0d700 : PUSH EAX
+00a0d701 : PUSH EBX
+00a0d702 : PUSH ESI
+00a0d703 : PUSH EDI
+00a0d704 : MOV EAX,[0x00d66fa0]
+00a0d709 : XOR EAX,EBP
+00a0d70b : PUSH EAX
+00a0d70c : LEA EAX,[EBP + -0xc]
+00a0d70f : MOV FS:[0x0],EAX
+00a0d715 : MOV EBX,dword ptr [EBP + 0x8]
+00a0d718 : CMP dword ptr [EBX + 0x4],0x0
+00a0d71c : JZ 0x00a0d7fd
+00a0d722 : CMP byte ptr [EBX + 0x8],0x0
+00a0d726 : JZ 0x00a0d7fd
+00a0d72c : MOV ESI,dword ptr [0x00da98e8]
+00a0d732 : PUSH 0xcac350
+00a0d737 : CALL 0x008018d0
+00a0d73c : MOV EAX,FS:[0x2c]
+00a0d742 : MOV ECX,dword ptr [EAX]
+00a0d744 : MOVZX EAX,byte ptr [ECX + 0x18]
+00a0d748 : INC EAX
+00a0d749 : CDQ
+00a0d74a : MOV ESI,0x3
+00a0d74f : IDIV ESI
+00a0d751 : ADD ESP,0x4
+00a0d754 : MOV byte ptr [ECX + 0x18],DL
+00a0d757 : MOVZX EDX,DL
+00a0d75a : SHL EDX,0xd
+00a0d75d : LEA ESI,[EDX + ECX*0x1 + 0x122cb8]
+00a0d764 : MOV dword ptr [EBP + 0x8],ESI
+00a0d767 : MOV dword ptr [EBP + -0x4],0x0
+00a0d76e : TEST ESI,ESI
+00a0d770 : JZ 0x00a0d79c
+00a0d772 : CALL dword ptr [0x00b85598]
+00a0d778 : MOV ECX,dword ptr [0x0172491c]
+00a0d77e : MOV ECX,dword ptr [ECX + 0x17c]
+00a0d784 : MOV ECX,dword ptr [ECX + 0x4]
+00a0d787 : XOR EDX,EDX
+00a0d789 : MOV word ptr [ESI],DX
+00a0d78c : MOV byte ptr [ESI + 0x2],0x33
+00a0d790 : MOV byte ptr [ESI + 0x3],0x19
+00a0d794 : MOV dword ptr [ESI + 0x4],ECX
+00a0d797 : MOV dword ptr [ESI + 0x8],EAX
+00a0d79a : JMP 0x00a0d79e
+00a0d79c : XOR ESI,ESI
+00a0d79e : MOV dword ptr [EBP + -0x4],0xffffffff
+00a0d7a5 : MOV EAX,dword ptr [EBX + 0x4]
+00a0d7a8 : PUSH 0xc
+00a0d7aa : PUSH EAX
+00a0d7ab : MOV EDI,ESI
+00a0d7ad : CALL 0x00a0dd40
+00a0d7b2 : MOV ECX,dword ptr [0x0172491c]
+00a0d7b8 : MOV EDX,dword ptr [ECX + 0x17c]
+00a0d7be : MOV ECX,dword ptr [EDX + 0x4]
+00a0d7c1 : MOV EAX,dword ptr [EBX + 0x4]
+00a0d7c4 : MOV EDX,dword ptr [EAX + 0x64]
+00a0d7c7 : PUSH ECX
+00a0d7c8 : PUSH EAX
+00a0d7c9 : PUSH EDX
+00a0d7ca : CALL 0x00a11340
+00a0d7cf : MOV ESI,dword ptr [0x00da98e8]
+00a0d7d5 : PUSH 0xcac390
+00a0d7da : CALL 0x008018d0
+00a0d7df : ADD ESP,0x4
+00a0d7e2 : MOV ESI,EBX
+00a0d7e4 : CALL 0x00a0d4b0
+00a0d7e9 : MOV ECX,dword ptr [EBP + -0xc]
+00a0d7ec : MOV dword ptr FS:[0x0],ECX
+00a0d7f3 : POP ECX
+00a0d7f4 : POP EDI
+00a0d7f5 : POP ESI
+00a0d7f6 : POP EBX
+00a0d7f7 : MOV ESP,EBP
+00a0d7f9 : POP EBP
+00a0d7fa : RET 0x4
+00a0d7fd : MOV EAX,0x1
+00a0d802 : MOV ECX,dword ptr [EBP + -0xc]
+00a0d805 : MOV dword ptr FS:[0x0],ECX
+00a0d80c : POP ECX
+00a0d80d : POP EDI
+00a0d80e : POP ESI
+00a0d80f : POP EBX
+00a0d810 : MOV ESP,EBP
+00a0d812 : POP EBP
+00a0d813 : RET 0x4

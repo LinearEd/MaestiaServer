@@ -1,0 +1,76 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0055f000
+ENTRY    : 0055f000
+BODY     : [[0055f000, 0055f049]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_0055f000(void)
+
+{
+  undefined4 *puVar1;
+  GRefCountImpl *this;
+  int *in_ECX;
+  int iVar2;
+  int iVar3;
+  
+  if (*in_ECX != 0) {
+    iVar3 = 0;
+    iVar2 = *(int *)(*in_ECX + 4) + 1;
+    do {
+      puVar1 = (undefined4 *)(iVar3 + 8 + *in_ECX);
+      if (*(int *)(iVar3 + 8 + *in_ECX) != -2) {
+        this = (GRefCountImpl *)puVar1[2];
+        if (this != (GRefCountImpl *)0x0) {
+          GRefCountImpl::Release(this);
+        }
+        *puVar1 = 0xfffffffe;
+      }
+      iVar3 = iVar3 + 0xc;
+      iVar2 = iVar2 + -1;
+    } while (iVar2 != 0);
+    FUN_00515cf0(*in_ECX);
+    *in_ECX = 0;
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0055f000 : PUSH EBX
+0055f001 : MOV EBX,ECX
+0055f003 : MOV EAX,dword ptr [EBX]
+0055f005 : TEST EAX,EAX
+0055f007 : JZ 0x0055f048
+0055f009 : MOV EAX,dword ptr [EAX + 0x4]
+0055f00c : PUSH EBP
+0055f00d : PUSH ESI
+0055f00e : PUSH EDI
+0055f00f : XOR EDI,EDI
+0055f011 : LEA EBP,[EAX + 0x1]
+0055f014 : MOV EAX,dword ptr [EBX]
+0055f016 : CMP dword ptr [EDI + EAX*0x1 + 0x8],-0x2
+0055f01b : LEA ESI,[EDI + EAX*0x1 + 0x8]
+0055f01f : JZ 0x0055f033
+0055f021 : MOV ECX,dword ptr [ESI + 0x8]
+0055f024 : TEST ECX,ECX
+0055f026 : JZ 0x0055f02d
+0055f028 : CALL 0x004ff7e0
+0055f02d : MOV dword ptr [ESI],0xfffffffe
+0055f033 : ADD EDI,0xc
+0055f036 : SUB EBP,0x1
+0055f039 : JNZ 0x0055f014
+0055f03b : MOV ECX,dword ptr [EBX]
+0055f03d : PUSH ECX
+0055f03e : CALL 0x00515cf0
+0055f043 : POP EDI
+0055f044 : POP ESI
+0055f045 : MOV dword ptr [EBX],EBP
+0055f047 : POP EBP
+0055f048 : POP EBX
+0055f049 : RET

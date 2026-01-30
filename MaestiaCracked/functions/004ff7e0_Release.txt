@@ -1,0 +1,46 @@
+PROGRAM  : Maestia.exe
+FUNCTION : Release
+ENTRY    : 004ff7e0
+BODY     : [[004ff7e0, 004ff803]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* public: void __thiscall GRefCountImpl::Release(void) */
+
+void __thiscall GRefCountImpl::Release(GRefCountImpl *this)
+
+{
+  LONG LVar1;
+  
+                    /* 0xff7e0  130  ?Release@GRefCountImpl@@QAEXXZ */
+  LVar1 = InterlockedExchangeAdd((LONG *)(this + 4),-1);
+  if ((LVar1 == 1) && (this != (GRefCountImpl *)0x0)) {
+    (*(code *)**(undefined4 **)this)(1);
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+004ff7e0 : PUSH ESI
+004ff7e1 : MOV ESI,ECX
+004ff7e3 : PUSH -0x1
+004ff7e5 : LEA EAX,[ESI + 0x4]
+004ff7e8 : PUSH EAX
+004ff7e9 : CALL dword ptr [0x00b851cc]
+004ff7ef : SUB EAX,0x1
+004ff7f2 : JNZ 0x004ff802
+004ff7f4 : TEST ESI,ESI
+004ff7f6 : JZ 0x004ff802
+004ff7f8 : MOV EDX,dword ptr [ESI]
+004ff7fa : MOV EAX,dword ptr [EDX]
+004ff7fc : PUSH 0x1
+004ff7fe : MOV ECX,ESI
+004ff800 : CALL EAX
+004ff802 : POP ESI
+004ff803 : RET

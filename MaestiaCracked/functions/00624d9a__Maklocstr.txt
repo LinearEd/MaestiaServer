@@ -1,0 +1,136 @@
+PROGRAM  : Maestia.exe
+FUNCTION : _Maklocstr<>
+ENTRY    : 00624d9a
+BODY     : [[00624d9a, 00624e36]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Multiple Matches With Same Base Name
+    unsigned short * __cdecl std::_Maklocstr<unsigned short>(char const *,unsigned short *,struct
+   _Cvtvec const &)
+    wchar_t * __cdecl std::_Maklocstr<wchar_t>(char const *,wchar_t *,struct _Cvtvec const &)
+   
+   Library: Visual Studio 2008 Release */
+
+wchar_t * _Maklocstr<>(char *param_1,undefined4 param_2,_Cvtvec *param_3)
+
+{
+  size_t sVar1;
+  int iVar2;
+  wchar_t *pwVar3;
+  size_t sVar4;
+  int iVar5;
+  uint uVar6;
+  mbstate_t local_14;
+  mbstate_t local_10;
+  wchar_t *local_c;
+  wchar_t local_8 [2];
+  
+  iVar5 = 0;
+  local_10 = 0;
+  sVar1 = _strlen(param_1);
+  sVar4 = sVar1 + 1;
+  local_c = (wchar_t *)param_1;
+  while ((sVar4 != 0 &&
+         (iVar2 = __Mbrtowc(local_8,(char *)local_c,sVar4,&local_10,param_3), 0 < iVar2))) {
+    local_c = (wchar_t *)((int)local_c + iVar2);
+    sVar4 = sVar4 - iVar2;
+    iVar5 = iVar5 + 1;
+  }
+  uVar6 = iVar5 + 1;
+  pwVar3 = (wchar_t *)
+           FUN_006f0820(-(uint)((int)((ulonglong)uVar6 * 2 >> 0x20) != 0) |
+                        (uint)((ulonglong)uVar6 * 2));
+  local_14 = 0;
+  local_c = pwVar3;
+  while ((uVar6 != 0 && (iVar5 = __Mbrtowc(pwVar3,param_1,sVar1 + 1,&local_14,param_3), 0 < iVar5)))
+  {
+    param_1 = param_1 + iVar5;
+    uVar6 = uVar6 - 1;
+    pwVar3 = pwVar3 + 1;
+  }
+  *pwVar3 = L'\0';
+  return local_c;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00624d9a : MOV EDI,EDI
+00624d9c : PUSH EBP
+00624d9d : MOV EBP,ESP
+00624d9f : SUB ESP,0x10
+00624da2 : PUSH EBX
+00624da3 : PUSH ESI
+00624da4 : PUSH EDI
+00624da5 : PUSH dword ptr [EBP + 0x8]
+00624da8 : XOR EDI,EDI
+00624daa : MOV dword ptr [EBP + -0xc],EDI
+00624dad : CALL 0x00640960
+00624db2 : MOV ESI,EAX
+00624db4 : MOV EAX,dword ptr [EBP + 0x8]
+00624db7 : INC ESI
+00624db8 : POP ECX
+00624db9 : MOV EBX,ESI
+00624dbb : MOV dword ptr [EBP + -0x8],EAX
+00624dbe : JZ 0x00624de5
+00624dc0 : PUSH dword ptr [EBP + 0x10]
+00624dc3 : LEA EAX,[EBP + -0xc]
+00624dc6 : PUSH EAX
+00624dc7 : PUSH EBX
+00624dc8 : PUSH dword ptr [EBP + -0x8]
+00624dcb : LEA EAX,[EBP + -0x4]
+00624dce : PUSH EAX
+00624dcf : CALL 0x0063389a
+00624dd4 : ADD ESP,0x14
+00624dd7 : TEST EAX,EAX
+00624dd9 : JLE 0x00624de5
+00624ddb : ADD dword ptr [EBP + -0x8],EAX
+00624dde : SUB EBX,EAX
+00624de0 : INC EDI
+00624de1 : TEST EBX,EBX
+00624de3 : JA 0x00624dc0
+00624de5 : INC EDI
+00624de6 : XOR ECX,ECX
+00624de8 : PUSH 0x2
+00624dea : POP EDX
+00624deb : MOV EAX,EDI
+00624ded : MUL EDX
+00624def : SETO CL
+00624df2 : NEG ECX
+00624df4 : OR ECX,EAX
+00624df6 : PUSH ECX
+00624df7 : CALL 0x006f0820
+00624dfc : AND dword ptr [EBP + -0x10],0x0
+00624e00 : MOV EBX,EAX
+00624e02 : POP ECX
+00624e03 : MOV dword ptr [EBP + -0x8],EBX
+00624e06 : JMP 0x00624e26
+00624e08 : PUSH dword ptr [EBP + 0x10]
+00624e0b : LEA EAX,[EBP + -0x10]
+00624e0e : PUSH EAX
+00624e0f : PUSH ESI
+00624e10 : PUSH dword ptr [EBP + 0x8]
+00624e13 : PUSH EBX
+00624e14 : CALL 0x0063389a
+00624e19 : ADD ESP,0x14
+00624e1c : TEST EAX,EAX
+00624e1e : JLE 0x00624e2a
+00624e20 : ADD dword ptr [EBP + 0x8],EAX
+00624e23 : DEC EDI
+00624e24 : INC EBX
+00624e25 : INC EBX
+00624e26 : TEST EDI,EDI
+00624e28 : JA 0x00624e08
+00624e2a : POP EDI
+00624e2b : XOR EAX,EAX
+00624e2d : MOV word ptr [EBX],AX
+00624e30 : MOV EAX,dword ptr [EBP + -0x8]
+00624e33 : POP ESI
+00624e34 : POP EBX
+00624e35 : LEAVE
+00624e36 : RET

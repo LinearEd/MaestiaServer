@@ -1,0 +1,81 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00471e30
+ENTRY    : 00471e30
+BODY     : [[00471e30, 00471e78]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+int FUN_00471e30(void)
+
+{
+  int iVar1;
+  int iVar2;
+  uint uVar3;
+  int in_ECX;
+  int iVar4;
+  int *in_EDX;
+  int iVar5;
+  
+  uVar3 = *(uint *)(in_ECX + 8);
+  if ((uVar3 != 0) && (**(int **)(in_ECX + 4) <= *in_EDX)) {
+    iVar5 = *(int *)(in_ECX + 4) + uVar3 * 4;
+    uVar3 = uVar3 >> 1;
+    iVar2 = *(int *)(in_ECX + 4);
+    while (uVar3 != 0) {
+      iVar1 = iVar2 + uVar3 * 4;
+      iVar4 = iVar1;
+      if (*in_EDX < *(int *)(iVar2 + uVar3 * 4)) {
+        iVar4 = iVar2;
+        iVar5 = iVar1;
+      }
+      iVar2 = iVar4;
+      uVar3 = (iVar5 - iVar4 >> 2) - (iVar5 - iVar4 >> 0x1f) >> 1;
+    }
+    return iVar2;
+  }
+  return *(int *)(in_ECX + 4) + uVar3 * 4;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00471e30 : MOV EAX,dword ptr [ECX + 0x8]
+00471e33 : PUSH EDI
+00471e34 : TEST EAX,EAX
+00471e36 : JZ 0x00471e71
+00471e38 : MOV EDI,dword ptr [EDX]
+00471e3a : MOV EDX,dword ptr [ECX + 0x4]
+00471e3d : CMP EDI,dword ptr [EDX]
+00471e3f : JL 0x00471e71
+00471e41 : MOV ECX,dword ptr [ECX + 0x4]
+00471e44 : MOV EDX,EAX
+00471e46 : SHR EAX,0x1
+00471e48 : PUSH ESI
+00471e49 : LEA ESI,[ECX + EDX*0x4]
+00471e4c : JZ 0x00471e6c
+00471e4e : MOV EDI,EDI
+00471e50 : CMP EDI,dword ptr [ECX + EAX*0x4]
+00471e53 : LEA EAX,[ECX + EAX*0x4]
+00471e56 : JGE 0x00471e5c
+00471e58 : MOV ESI,EAX
+00471e5a : JMP 0x00471e5e
+00471e5c : MOV ECX,EAX
+00471e5e : MOV EAX,ESI
+00471e60 : SUB EAX,ECX
+00471e62 : SAR EAX,0x2
+00471e65 : CDQ
+00471e66 : SUB EAX,EDX
+00471e68 : SAR EAX,0x1
+00471e6a : JNZ 0x00471e50
+00471e6c : POP ESI
+00471e6d : MOV EAX,ECX
+00471e6f : POP EDI
+00471e70 : RET
+00471e71 : MOV ECX,dword ptr [ECX + 0x4]
+00471e74 : LEA EAX,[ECX + EAX*0x4]
+00471e77 : POP EDI
+00471e78 : RET

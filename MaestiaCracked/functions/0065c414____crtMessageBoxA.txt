@@ -1,0 +1,211 @@
+PROGRAM  : Maestia.exe
+FUNCTION : ___crtMessageBoxA
+ENTRY    : 0065c414
+BODY     : [[0065c414, 0065c57c]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    ___crtMessageBoxA
+   
+   Library: Visual Studio 2008 Release */
+
+int __cdecl ___crtMessageBoxA(LPCSTR _LpText,LPCSTR _LpCaption,UINT _UType)
+
+{
+  int iVar1;
+  HMODULE hModule;
+  FARPROC pFVar2;
+  code *pcVar3;
+  code *pcVar4;
+  int iVar5;
+  undefined1 local_18 [8];
+  byte local_10;
+  undefined1 local_c [4];
+  int local_8;
+  
+  iVar1 = __encoded_null();
+  local_8 = 0;
+  if (DAT_00d7c310 == 0) {
+    hModule = LoadLibraryA("USER32.DLL");
+    if (hModule == (HMODULE)0x0) {
+      return 0;
+    }
+    pFVar2 = GetProcAddress(hModule,"MessageBoxA");
+    if (pFVar2 == (FARPROC)0x0) {
+      return 0;
+    }
+    DAT_00d7c310 = __encode_pointer(pFVar2);
+    pFVar2 = GetProcAddress(hModule,"GetActiveWindow");
+    DAT_00d7c314 = __encode_pointer(pFVar2);
+    pFVar2 = GetProcAddress(hModule,"GetLastActivePopup");
+    DAT_00d7c318 = __encode_pointer(pFVar2);
+    pFVar2 = GetProcAddress(hModule,"GetUserObjectInformationA");
+    DAT_00d7c320 = __encode_pointer(pFVar2);
+    if (DAT_00d7c320 != 0) {
+      pFVar2 = GetProcAddress(hModule,"GetProcessWindowStation");
+      DAT_00d7c31c = __encode_pointer(pFVar2);
+    }
+  }
+  if ((DAT_00d7c31c != iVar1) && (DAT_00d7c320 != iVar1)) {
+    pcVar3 = (code *)__decode_pointer(DAT_00d7c31c);
+    pcVar4 = (code *)__decode_pointer(DAT_00d7c320);
+    if (((pcVar3 != (code *)0x0) && (pcVar4 != (code *)0x0)) &&
+       (((iVar5 = (*pcVar3)(), iVar5 == 0 ||
+         (iVar5 = (*pcVar4)(iVar5,1,local_18,0xc,local_c), iVar5 == 0)) || ((local_10 & 1) == 0))))
+    {
+      _UType = _UType | 0x200000;
+      goto LAB_0065c556;
+    }
+  }
+  if ((((DAT_00d7c314 != iVar1) &&
+       (pcVar3 = (code *)__decode_pointer(DAT_00d7c314), pcVar3 != (code *)0x0)) &&
+      (local_8 = (*pcVar3)(), local_8 != 0)) &&
+     ((DAT_00d7c318 != iVar1 &&
+      (pcVar3 = (code *)__decode_pointer(DAT_00d7c318), pcVar3 != (code *)0x0)))) {
+    local_8 = (*pcVar3)(local_8);
+  }
+LAB_0065c556:
+  pcVar3 = (code *)__decode_pointer(DAT_00d7c310);
+  if (pcVar3 == (code *)0x0) {
+    return 0;
+  }
+  iVar1 = (*pcVar3)(local_8,_LpText,_LpCaption,_UType);
+  return iVar1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0065c414 : MOV EDI,EDI
+0065c416 : PUSH EBP
+0065c417 : MOV EBP,ESP
+0065c419 : SUB ESP,0x14
+0065c41c : PUSH EBX
+0065c41d : PUSH ESI
+0065c41e : PUSH EDI
+0065c41f : CALL 0x00645664
+0065c424 : AND dword ptr [EBP + -0x4],0x0
+0065c428 : CMP dword ptr [0x00d7c310],0x0
+0065c42f : MOV EBX,EAX
+0065c431 : JNZ 0x0065c4c5
+0065c437 : PUSH 0xba6f4c
+0065c43c : CALL dword ptr [0x00b85250]
+0065c442 : MOV EDI,EAX
+0065c444 : TEST EDI,EDI
+0065c446 : JZ 0x0065c576
+0065c44c : MOV ESI,dword ptr [0x00b85160]
+0065c452 : PUSH 0xba6f40
+0065c457 : PUSH EDI
+0065c458 : CALL ESI
+0065c45a : TEST EAX,EAX
+0065c45c : JZ 0x0065c576
+0065c462 : PUSH EAX
+0065c463 : CALL 0x006455f2
+0065c468 : MOV dword ptr [ESP],0xba6ef0
+0065c46f : PUSH EDI
+0065c470 : MOV [0x00d7c310],EAX
+0065c475 : CALL ESI
+0065c477 : PUSH EAX
+0065c478 : CALL 0x006455f2
+0065c47d : MOV dword ptr [ESP],0xba6edc
+0065c484 : PUSH EDI
+0065c485 : MOV [0x00d7c314],EAX
+0065c48a : CALL ESI
+0065c48c : PUSH EAX
+0065c48d : CALL 0x006455f2
+0065c492 : MOV dword ptr [ESP],0xba6f24
+0065c499 : PUSH EDI
+0065c49a : MOV [0x00d7c318],EAX
+0065c49f : CALL ESI
+0065c4a1 : PUSH EAX
+0065c4a2 : CALL 0x006455f2
+0065c4a7 : POP ECX
+0065c4a8 : MOV [0x00d7c320],EAX
+0065c4ad : TEST EAX,EAX
+0065c4af : JZ 0x0065c4c5
+0065c4b1 : PUSH 0xba6ea8
+0065c4b6 : PUSH EDI
+0065c4b7 : CALL ESI
+0065c4b9 : PUSH EAX
+0065c4ba : CALL 0x006455f2
+0065c4bf : POP ECX
+0065c4c0 : MOV [0x00d7c31c],EAX
+0065c4c5 : MOV EAX,[0x00d7c31c]
+0065c4ca : CMP EAX,EBX
+0065c4cc : JZ 0x0065c51d
+0065c4ce : CMP dword ptr [0x00d7c320],EBX
+0065c4d4 : JZ 0x0065c51d
+0065c4d6 : PUSH EAX
+0065c4d7 : CALL 0x0064566d
+0065c4dc : PUSH dword ptr [0x00d7c320]
+0065c4e2 : MOV ESI,EAX
+0065c4e4 : CALL 0x0064566d
+0065c4e9 : POP ECX
+0065c4ea : POP ECX
+0065c4eb : MOV EDI,EAX
+0065c4ed : TEST ESI,ESI
+0065c4ef : JZ 0x0065c51d
+0065c4f1 : TEST EDI,EDI
+0065c4f3 : JZ 0x0065c51d
+0065c4f5 : CALL ESI
+0065c4f7 : TEST EAX,EAX
+0065c4f9 : JZ 0x0065c514
+0065c4fb : LEA ECX,[EBP + -0x8]
+0065c4fe : PUSH ECX
+0065c4ff : PUSH 0xc
+0065c501 : LEA ECX,[EBP + -0x14]
+0065c504 : PUSH ECX
+0065c505 : PUSH 0x1
+0065c507 : PUSH EAX
+0065c508 : CALL EDI
+0065c50a : TEST EAX,EAX
+0065c50c : JZ 0x0065c514
+0065c50e : TEST byte ptr [EBP + -0xc],0x1
+0065c512 : JNZ 0x0065c51d
+0065c514 : OR dword ptr [EBP + 0x10],0x200000
+0065c51b : JMP 0x0065c556
+0065c51d : MOV EAX,[0x00d7c314]
+0065c522 : CMP EAX,EBX
+0065c524 : JZ 0x0065c556
+0065c526 : PUSH EAX
+0065c527 : CALL 0x0064566d
+0065c52c : POP ECX
+0065c52d : TEST EAX,EAX
+0065c52f : JZ 0x0065c556
+0065c531 : CALL EAX
+0065c533 : MOV dword ptr [EBP + -0x4],EAX
+0065c536 : TEST EAX,EAX
+0065c538 : JZ 0x0065c556
+0065c53a : MOV EAX,[0x00d7c318]
+0065c53f : CMP EAX,EBX
+0065c541 : JZ 0x0065c556
+0065c543 : PUSH EAX
+0065c544 : CALL 0x0064566d
+0065c549 : POP ECX
+0065c54a : TEST EAX,EAX
+0065c54c : JZ 0x0065c556
+0065c54e : PUSH dword ptr [EBP + -0x4]
+0065c551 : CALL EAX
+0065c553 : MOV dword ptr [EBP + -0x4],EAX
+0065c556 : PUSH dword ptr [0x00d7c310]
+0065c55c : CALL 0x0064566d
+0065c561 : POP ECX
+0065c562 : TEST EAX,EAX
+0065c564 : JZ 0x0065c576
+0065c566 : PUSH dword ptr [EBP + 0x10]
+0065c569 : PUSH dword ptr [EBP + 0xc]
+0065c56c : PUSH dword ptr [EBP + 0x8]
+0065c56f : PUSH dword ptr [EBP + -0x4]
+0065c572 : CALL EAX
+0065c574 : JMP 0x0065c578
+0065c576 : XOR EAX,EAX
+0065c578 : POP EDI
+0065c579 : POP ESI
+0065c57a : POP EBX
+0065c57b : LEAVE
+0065c57c : RET

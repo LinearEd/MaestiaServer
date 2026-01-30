@@ -1,0 +1,67 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00515d60
+ENTRY    : 00515d60
+BODY     : [[00515d60, 00515dc0]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined4 FUN_00515d60(uint param_1,undefined4 param_2)
+
+{
+  LPCRITICAL_SECTION lpCriticalSection;
+  int iVar1;
+  undefined4 uVar2;
+  
+  iVar1 = *(int *)(*(int *)(*(int *)(DAT_00d7b334 + 4 + (param_1 >> 0x14) * 8) +
+                           (param_1 >> 0xc & 0xff) * 4) + 0x14);
+  if (*(char *)(iVar1 + 0x60) != '\0') {
+    lpCriticalSection = (LPCRITICAL_SECTION)(iVar1 + 0x48);
+    EnterCriticalSection(lpCriticalSection);
+    uVar2 = FUN_005a9340(param_2);
+    LeaveCriticalSection(lpCriticalSection);
+    return uVar2;
+  }
+  uVar2 = FUN_005a9340(param_2);
+  return uVar2;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00515d60 : MOV EAX,dword ptr [ESP + 0x4]
+00515d64 : MOV EDX,dword ptr [0x00d7b334]
+00515d6a : MOV ECX,EAX
+00515d6c : SHR ECX,0x14
+00515d6f : MOV ECX,dword ptr [EDX + ECX*0x8 + 0x4]
+00515d73 : SHR EAX,0xc
+00515d76 : AND EAX,0xff
+00515d7b : MOV EDX,dword ptr [ECX + EAX*0x4]
+00515d7e : PUSH ESI
+00515d7f : MOV ESI,dword ptr [EDX + 0x14]
+00515d82 : CMP byte ptr [ESI + 0x60],0x0
+00515d86 : JZ 0x00515db0
+00515d88 : PUSH EDI
+00515d89 : LEA EDI,[ESI + 0x48]
+00515d8c : PUSH EDI
+00515d8d : CALL dword ptr [0x00b85118]
+00515d93 : MOV EAX,dword ptr [ESP + 0x10]
+00515d97 : MOV ECX,dword ptr [ESI + 0x64]
+00515d9a : PUSH EAX
+00515d9b : CALL 0x005a9340
+00515da0 : PUSH EDI
+00515da1 : MOV ESI,EAX
+00515da3 : CALL dword ptr [0x00b8511c]
+00515da9 : POP EDI
+00515daa : MOV EAX,ESI
+00515dac : POP ESI
+00515dad : RET 0xc
+00515db0 : MOV ECX,dword ptr [ESP + 0xc]
+00515db4 : PUSH ECX
+00515db5 : MOV ECX,dword ptr [ESI + 0x64]
+00515db8 : CALL 0x005a9340
+00515dbd : POP ESI
+00515dbe : RET 0xc

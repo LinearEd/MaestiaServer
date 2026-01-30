@@ -1,0 +1,63 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00a17380
+ENTRY    : 00a17380
+BODY     : [[00a17380, 00a173e7]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00a17380(void)
+
+{
+  int iVar1;
+  int in_ECX;
+  float in_XMM1_Da;
+  
+  iVar1 = *(int *)(in_ECX + 0x74);
+  if ((*(char *)(iVar1 + 0x1e8) == '\0') && (*(char *)(iVar1 + 0x210) == '\0')) {
+    *(undefined4 *)(iVar1 + 500) = 0x41000000;
+    *(float *)(iVar1 + 0x1f8) = in_XMM1_Da;
+    if (*(float *)(iVar1 + 0x1fc) <= in_XMM1_Da) {
+      if (*(float *)(iVar1 + 0x1fc) < 8.0) {
+        *(undefined4 *)(iVar1 + 0x1fc) = 0x41000000;
+      }
+    }
+    else {
+      *(float *)(iVar1 + 0x1fc) = in_XMM1_Da;
+    }
+    *(undefined1 *)(iVar1 + 0x154) = 1;
+  }
+  if (*(int *)(in_ECX + 0xc) != 0) {
+    *(float *)(*(int *)(in_ECX + 0xc) + 0x2bb4) = in_XMM1_Da;
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00a17380 : MOV EAX,dword ptr [ECX + 0x74]
+00a17383 : CMP byte ptr [EAX + 0x1e8],0x0
+00a1738a : JNZ 0x00a173d8
+00a1738c : CMP byte ptr [EAX + 0x210],0x0
+00a17393 : JNZ 0x00a173d8
+00a17395 : MOVSS XMM0,dword ptr [EAX + 0x1fc]
+00a1739d : COMISS XMM0,XMM1
+00a173a0 : MOVSS XMM2,dword ptr [0x00cdf15c]
+00a173a8 : MOVSS dword ptr [EAX + 0x1f4],XMM2
+00a173b0 : MOVSS dword ptr [EAX + 0x1f8],XMM1
+00a173b8 : JBE 0x00a173c4
+00a173ba : MOVSS dword ptr [EAX + 0x1fc],XMM1
+00a173c2 : JMP 0x00a173d1
+00a173c4 : COMISS XMM2,XMM0
+00a173c7 : JBE 0x00a173d1
+00a173c9 : MOVSS dword ptr [EAX + 0x1fc],XMM2
+00a173d1 : MOV byte ptr [EAX + 0x154],0x1
+00a173d8 : MOV EAX,dword ptr [ECX + 0xc]
+00a173db : TEST EAX,EAX
+00a173dd : JZ 0x00a173e7
+00a173df : MOVSS dword ptr [EAX + 0x2bb4],XMM1
+00a173e7 : RET

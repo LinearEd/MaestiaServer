@@ -1,0 +1,56 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0042c360
+ENTRY    : 0042c360
+BODY     : [[0042c360, 0042c393]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+uint FUN_0042c360(void)
+
+{
+  ushort *puVar1;
+  int in_EAX;
+  uint uVar2;
+  ushort *puVar3;
+  
+  if (*(uint *)(in_EAX + 0x18) < 8) {
+    puVar3 = (ushort *)(in_EAX + 4);
+  }
+  else {
+    puVar3 = *(ushort **)(in_EAX + 4);
+  }
+  puVar1 = puVar3 + *(int *)(in_EAX + 0x14);
+  uVar2 = 0x811c9dc5;
+  for (; puVar3 != puVar1; puVar3 = puVar3 + 1) {
+    uVar2 = uVar2 * 0x1000193 ^ (uint)*puVar3;
+  }
+  return uVar2;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0042c360 : CMP dword ptr [EAX + 0x18],0x8
+0042c364 : JC 0x0042c36b
+0042c366 : MOV ECX,dword ptr [EAX + 0x4]
+0042c369 : JMP 0x0042c36e
+0042c36b : LEA ECX,[EAX + 0x4]
+0042c36e : MOV EDX,dword ptr [EAX + 0x14]
+0042c371 : LEA EDX,[ECX + EDX*0x2]
+0042c374 : MOV EAX,0x811c9dc5
+0042c379 : CMP ECX,EDX
+0042c37b : JZ 0x0042c393
+0042c37d : PUSH ESI
+0042c37e : MOV EDI,EDI
+0042c380 : MOVZX ESI,word ptr [ECX]
+0042c383 : IMUL EAX,EAX,0x1000193
+0042c389 : ADD ECX,0x2
+0042c38c : XOR EAX,ESI
+0042c38e : CMP ECX,EDX
+0042c390 : JNZ 0x0042c380
+0042c392 : POP ESI
+0042c393 : RET

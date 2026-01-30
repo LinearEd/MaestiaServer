@@ -1,0 +1,77 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00597b80
+ENTRY    : 00597b80
+BODY     : [[00597b80, 00597bd1]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined4 * FUN_00597b80(undefined4 *param_1)
+
+{
+  int *piVar1;
+  int in_ECX;
+  GRefCountNTSImpl *this;
+  
+  piVar1 = *(int **)(in_ECX + 0xad8);
+  this = (GRefCountNTSImpl *)0x0;
+  if (piVar1 != (int *)0x0) {
+    if (piVar1[1] == 0) {
+      *piVar1 = *piVar1 + -1;
+      if (*piVar1 == 0) {
+        FUN_00515cf0(piVar1);
+      }
+      *(undefined4 *)(in_ECX + 0xad8) = 0;
+    }
+    else {
+      this = (GRefCountNTSImpl *)piVar1[1];
+      if (this != (GRefCountNTSImpl *)0x0) {
+        *(int *)(this + 4) = *(int *)(this + 4) + 1;
+        *(int *)(this + 4) = *(int *)(this + 4) + 1;
+      }
+    }
+  }
+  *param_1 = this;
+  if (this != (GRefCountNTSImpl *)0x0) {
+    GRefCountNTSImpl::Release(this);
+  }
+  return param_1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00597b80 : PUSH ESI
+00597b81 : PUSH EDI
+00597b82 : MOV EDI,ECX
+00597b84 : MOV EAX,dword ptr [EDI + 0xad8]
+00597b8a : XOR ESI,ESI
+00597b8c : TEST EAX,EAX
+00597b8e : JZ 0x00597ba7
+00597b90 : CMP dword ptr [EAX + 0x4],ESI
+00597b93 : JZ 0x00597bbf
+00597b95 : MOV ESI,dword ptr [EAX + 0x4]
+00597b98 : TEST ESI,ESI
+00597b9a : JZ 0x00597ba7
+00597b9c : MOV EAX,0x1
+00597ba1 : ADD dword ptr [ESI + 0x4],EAX
+00597ba4 : ADD dword ptr [ESI + 0x4],EAX
+00597ba7 : MOV EDI,dword ptr [ESP + 0xc]
+00597bab : MOV dword ptr [EDI],ESI
+00597bad : TEST ESI,ESI
+00597baf : JZ 0x00597bb8
+00597bb1 : MOV ECX,ESI
+00597bb3 : CALL 0x004ff7c0
+00597bb8 : MOV EAX,EDI
+00597bba : POP EDI
+00597bbb : POP ESI
+00597bbc : RET 0x4
+00597bbf : ADD dword ptr [EAX],-0x1
+00597bc2 : JNZ 0x00597bca
+00597bc4 : PUSH EAX
+00597bc5 : CALL 0x00515cf0
+00597bca : MOV dword ptr [EDI + 0xad8],ESI
+00597bd0 : JMP 0x00597ba7

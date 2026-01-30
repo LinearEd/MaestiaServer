@@ -1,0 +1,72 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005035f0
+ENTRY    : 005035f0
+BODY     : [[005035f0, 00503656]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+uint FUN_005035f0(void)
+
+{
+  uint uVar1;
+  undefined4 *in_ECX;
+  
+  uVar1 = in_ECX[2];
+  if (((uVar1 & 0x70000000) == 0x20000000) && (-1 < (int)uVar1)) {
+    in_ECX[2] = uVar1 & 0x8fffffff;
+    (**(code **)*in_ECX)(3);
+    uVar1 = in_ECX[1];
+    if ((in_ECX[2] & 0x70000000) != 0x40000000) {
+      in_ECX[1] = *(undefined4 *)(uVar1 + 0x14);
+      *(undefined4 **)(uVar1 + 0x14) = in_ECX;
+      uVar1 = in_ECX[2] & 0xcfffffff | 0x40000000;
+      in_ECX[2] = uVar1;
+    }
+    return CONCAT31((int3)(uVar1 >> 8),1);
+  }
+  return uVar1 & 0xffffff00;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005035f0 : PUSH ESI
+005035f1 : MOV ESI,ECX
+005035f3 : MOV EAX,dword ptr [ESI + 0x8]
+005035f6 : MOV ECX,EAX
+005035f8 : AND ECX,0x70000000
+005035fe : CMP ECX,0x20000000
+00503604 : JNZ 0x00503653
+00503606 : MOV EDX,EAX
+00503608 : SHR EDX,0x1f
+0050360b : TEST DL,0x1
+0050360e : JNZ 0x00503653
+00503610 : AND EAX,0x8fffffff
+00503615 : MOV dword ptr [ESI + 0x8],EAX
+00503618 : MOV EAX,dword ptr [ESI]
+0050361a : MOV EDX,dword ptr [EAX]
+0050361c : PUSH 0x3
+0050361e : MOV ECX,ESI
+00503620 : CALL EDX
+00503622 : MOV ECX,dword ptr [ESI + 0x8]
+00503625 : MOV EAX,dword ptr [ESI + 0x4]
+00503628 : AND ECX,0x70000000
+0050362e : CMP ECX,0x40000000
+00503634 : JZ 0x0050364f
+00503636 : MOV EDX,dword ptr [EAX + 0x14]
+00503639 : MOV dword ptr [ESI + 0x4],EDX
+0050363c : MOV dword ptr [EAX + 0x14],ESI
+0050363f : MOV EAX,dword ptr [ESI + 0x8]
+00503642 : AND EAX,0xcfffffff
+00503647 : OR EAX,0x40000000
+0050364c : MOV dword ptr [ESI + 0x8],EAX
+0050364f : MOV AL,0x1
+00503651 : POP ESI
+00503652 : RET
+00503653 : XOR AL,AL
+00503655 : POP ESI
+00503656 : RET

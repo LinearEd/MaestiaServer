@@ -1,0 +1,75 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0051dd20
+ENTRY    : 0051dd20
+BODY     : [[0051dd20, 0051dd7f]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined4 FUN_0051dd20(void)
+
+{
+  GRefCountImpl *this;
+  int in_ECX;
+  
+  if ((*(uint *)(in_ECX + 0xb00) >> 1 & 1) != 0) {
+    return *(undefined4 *)(in_ECX + 0x108);
+  }
+  this = (GRefCountImpl *)(**(code **)(*(int *)(in_ECX + 8) + 0xc))(4);
+  if (this != (GRefCountImpl *)0x0) {
+    GRefCountImpl::AddRef(this);
+  }
+  if (*(GRefCountImpl **)(in_ECX + 0x108) != (GRefCountImpl *)0x0) {
+    GRefCountImpl::Release(*(GRefCountImpl **)(in_ECX + 0x108));
+  }
+  *(GRefCountImpl **)(in_ECX + 0x108) = this;
+  if (this != (GRefCountImpl *)0x0) {
+    GRefCountImpl::Release(this);
+    return *(undefined4 *)(in_ECX + 0x108);
+  }
+  return 0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0051dd20 : PUSH EDI
+0051dd21 : MOV EDI,ECX
+0051dd23 : MOV EAX,dword ptr [EDI + 0xb00]
+0051dd29 : SHR EAX,0x1
+0051dd2b : TEST AL,0x1
+0051dd2d : JNZ 0x0051dd78
+0051dd2f : MOV EDX,dword ptr [EDI + 0x8]
+0051dd32 : MOV EAX,dword ptr [EDX + 0xc]
+0051dd35 : LEA ECX,[EDI + 0x8]
+0051dd38 : PUSH ESI
+0051dd39 : PUSH 0x4
+0051dd3b : CALL EAX
+0051dd3d : MOV ESI,EAX
+0051dd3f : TEST ESI,ESI
+0051dd41 : JZ 0x0051dd4a
+0051dd43 : MOV ECX,ESI
+0051dd45 : CALL 0x00523dd0
+0051dd4a : MOV ECX,dword ptr [EDI + 0x108]
+0051dd50 : TEST ECX,ECX
+0051dd52 : JZ 0x0051dd59
+0051dd54 : CALL 0x004ff7e0
+0051dd59 : MOV dword ptr [EDI + 0x108],ESI
+0051dd5f : TEST ESI,ESI
+0051dd61 : JZ 0x0051dd73
+0051dd63 : MOV ECX,ESI
+0051dd65 : CALL 0x004ff7e0
+0051dd6a : MOV EAX,dword ptr [EDI + 0x108]
+0051dd70 : POP ESI
+0051dd71 : POP EDI
+0051dd72 : RET
+0051dd73 : MOV EAX,ESI
+0051dd75 : POP ESI
+0051dd76 : POP EDI
+0051dd77 : RET
+0051dd78 : MOV EAX,dword ptr [EDI + 0x108]
+0051dd7e : POP EDI
+0051dd7f : RET

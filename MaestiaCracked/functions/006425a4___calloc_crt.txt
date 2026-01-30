@@ -1,0 +1,74 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __calloc_crt
+ENTRY    : 006425a4
+BODY     : [[006425a4, 006425ef]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __calloc_crt
+   
+   Library: Visual Studio 2008 Release */
+
+void * __cdecl __calloc_crt(size_t _Count,size_t _Size)
+
+{
+  void *pvVar1;
+  uint dwMilliseconds;
+  
+  dwMilliseconds = 0;
+  while( true ) {
+    pvVar1 = (void *)__calloc_impl(_Count,_Size,0);
+    if (pvVar1 != (void *)0x0) {
+      return pvVar1;
+    }
+    if (DAT_00d7b804 == 0) break;
+    Sleep(dwMilliseconds);
+    dwMilliseconds = dwMilliseconds + 1000;
+    if (DAT_00d7b804 < dwMilliseconds) {
+      dwMilliseconds = 0xffffffff;
+    }
+    if (dwMilliseconds == 0xffffffff) {
+      return (void *)0x0;
+    }
+  }
+  return (void *)0x0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006425a4 : MOV EDI,EDI
+006425a6 : PUSH EBP
+006425a7 : MOV EBP,ESP
+006425a9 : PUSH ESI
+006425aa : PUSH EDI
+006425ab : XOR ESI,ESI
+006425ad : PUSH 0x0
+006425af : PUSH dword ptr [EBP + 0xc]
+006425b2 : PUSH dword ptr [EBP + 0x8]
+006425b5 : CALL 0x0065c06c
+006425ba : MOV EDI,EAX
+006425bc : ADD ESP,0xc
+006425bf : TEST EDI,EDI
+006425c1 : JNZ 0x006425ea
+006425c3 : CMP dword ptr [0x00d7b804],EAX
+006425c9 : JBE 0x006425ea
+006425cb : PUSH ESI
+006425cc : CALL dword ptr [0x00b8510c]
+006425d2 : LEA EAX,[ESI + 0x3e8]
+006425d8 : CMP EAX,dword ptr [0x00d7b804]
+006425de : JBE 0x006425e3
+006425e0 : OR EAX,0xffffffff
+006425e3 : MOV ESI,EAX
+006425e5 : CMP EAX,-0x1
+006425e8 : JNZ 0x006425ad
+006425ea : MOV EAX,EDI
+006425ec : POP EDI
+006425ed : POP ESI
+006425ee : POP EBP
+006425ef : RET

@@ -1,0 +1,53 @@
+PROGRAM  : Maestia.exe
+FUNCTION : _wcschr
+ENTRY    : 0063852c
+BODY     : [[0063852c, 00638551]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    _wcschr
+   
+   Library: Visual Studio 2008 Release */
+
+wchar_t * __cdecl _wcschr(wchar_t *_Str,wchar_t _Ch)
+
+{
+  while( true ) {
+    if (*_Str == L'\0') {
+      if (*_Str != _Ch) {
+        _Str = (wchar_t *)0x0;
+      }
+      return _Str;
+    }
+    if (*_Str == _Ch) break;
+    _Str = _Str + 1;
+  }
+  return _Str;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0063852c : MOV EDI,EDI
+0063852e : PUSH EBP
+0063852f : MOV EBP,ESP
+00638531 : MOV EAX,dword ptr [EBP + 0x8]
+00638534 : MOV DX,word ptr [EBP + 0xc]
+00638538 : JMP 0x00638541
+0063853a : CMP CX,DX
+0063853d : JZ 0x00638550
+0063853f : INC EAX
+00638540 : INC EAX
+00638541 : MOVZX ECX,word ptr [EAX]
+00638544 : TEST CX,CX
+00638547 : JNZ 0x0063853a
+00638549 : CMP word ptr [EAX],DX
+0063854c : JZ 0x00638550
+0063854e : XOR EAX,EAX
+00638550 : POP EBP
+00638551 : RET

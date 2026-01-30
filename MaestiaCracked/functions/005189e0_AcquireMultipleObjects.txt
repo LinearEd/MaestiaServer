@@ -1,0 +1,231 @@
+PROGRAM  : Maestia.exe
+FUNCTION : AcquireMultipleObjects
+ENTRY    : 005189e0
+BODY     : [[005189e0, 00518b82]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* public: static bool __cdecl GAcquireInterface::AcquireMultipleObjects(class GWaitable *
+   *,unsigned int,unsigned int) */
+
+bool __cdecl
+GAcquireInterface::AcquireMultipleObjects(GWaitable **param_1,uint param_2,uint param_3)
+
+{
+  char cVar1;
+  bool bVar2;
+  int iVar3;
+  int iVar4;
+  uint uVar5;
+  bool local_c9;
+  GEvent local_b0 [44];
+  undefined1 *local_84;
+  undefined1 local_80 [128];
+  
+                    /* 0x1189e0  49
+                       ?AcquireMultipleObjects@GAcquireInterface@@SA_NPAPAVGWaitable@@II@Z */
+  FUN_00517640(param_1,param_2);
+  cVar1 = FUN_005176a0(local_84,param_2);
+  if (cVar1 != '\0') {
+    if (local_84 != local_80) {
+      FUN_00515cf0(local_84);
+    }
+    return true;
+  }
+  if (param_3 != 0) {
+    GEvent::GEvent(local_b0,false,false);
+    cVar1 = FUN_00517f20(&LAB_005189a0);
+    if (cVar1 != '\0') {
+      cVar1 = FUN_005176a0(local_84,param_2);
+      if (cVar1 != '\0') {
+        FUN_00517fe0(&LAB_005189a0);
+        GEvent::~GEvent(local_b0);
+        if (local_84 != local_80) {
+          FUN_00515cf0(local_84);
+        }
+        return true;
+      }
+      iVar4 = 0;
+      local_c9 = false;
+      if (param_3 != 0xffffffff) {
+        iVar4 = FUN_005aa2b0();
+      }
+      bVar2 = GEvent::Wait(local_b0,param_3);
+      uVar5 = param_3;
+      if (bVar2) {
+        do {
+          cVar1 = FUN_005176a0(local_84,param_2);
+          if (cVar1 != '\0') {
+            local_c9 = true;
+            break;
+          }
+          if (param_3 != 0xffffffff) {
+            iVar3 = FUN_005aa2b0();
+            if (param_3 <= (uint)(iVar3 - iVar4)) break;
+            uVar5 = param_3 - (iVar3 - iVar4);
+          }
+          bVar2 = GEvent::Wait(local_b0,uVar5);
+        } while (bVar2);
+      }
+      FUN_00517fe0(&LAB_005189a0);
+      GEvent::~GEvent(local_b0);
+      if (local_84 != local_80) {
+        FUN_00515cf0(local_84);
+      }
+      return local_c9;
+    }
+    GEvent::~GEvent(local_b0);
+  }
+  if (local_84 != local_80) {
+    FUN_00515cf0(local_84);
+  }
+  return false;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005189e0 : SUB ESP,0xcc
+005189e6 : PUSH EBX
+005189e7 : MOV EBX,dword ptr [ESP + 0xd8]
+005189ee : PUSH EDI
+005189ef : MOV EDI,dword ptr [ESP + 0xd8]
+005189f6 : PUSH EBX
+005189f7 : PUSH EDI
+005189f8 : LEA ECX,[ESP + 0x58]
+005189fc : CALL 0x00517640
+00518a01 : MOV EAX,dword ptr [ESP + 0x50]
+00518a05 : PUSH EBX
+00518a06 : PUSH EAX
+00518a07 : CALL 0x005176a0
+00518a0c : ADD ESP,0x8
+00518a0f : TEST AL,AL
+00518a11 : JZ 0x00518a30
+00518a13 : MOV EAX,dword ptr [ESP + 0x50]
+00518a17 : LEA ECX,[ESP + 0x54]
+00518a1b : CMP EAX,ECX
+00518a1d : JZ 0x00518a25
+00518a1f : PUSH EAX
+00518a20 : CALL 0x00515cf0
+00518a25 : POP EDI
+00518a26 : MOV AL,0x1
+00518a28 : POP EBX
+00518a29 : ADD ESP,0xcc
+00518a2f : RET
+00518a30 : PUSH ESI
+00518a31 : MOV ESI,dword ptr [ESP + 0xe4]
+00518a38 : TEST ESI,ESI
+00518a3a : JZ 0x00518a7c
+00518a3c : PUSH 0x0
+00518a3e : PUSH 0x0
+00518a40 : LEA ECX,[ESP + 0x30]
+00518a44 : CALL 0x00518080
+00518a49 : MOV ECX,dword ptr [ESP + 0x54]
+00518a4d : LEA EAX,[ESP + 0x28]
+00518a51 : MOV dword ptr [ESP + 0x1c],ECX
+00518a55 : PUSH 0x5189a0
+00518a5a : LEA ECX,[ESP + 0x14]
+00518a5e : MOV dword ptr [ESP + 0x14],EDI
+00518a62 : MOV dword ptr [ESP + 0x18],EBX
+00518a66 : MOV dword ptr [ESP + 0x1c],EAX
+00518a6a : CALL 0x00517f20
+00518a6f : TEST AL,AL
+00518a71 : JNZ 0x00518a9a
+00518a73 : LEA ECX,[ESP + 0x28]
+00518a77 : CALL 0x005180d0
+00518a7c : MOV EAX,dword ptr [ESP + 0x54]
+00518a80 : LEA EDX,[ESP + 0x58]
+00518a84 : CMP EAX,EDX
+00518a86 : JZ 0x00518a8e
+00518a88 : PUSH EAX
+00518a89 : CALL 0x00515cf0
+00518a8e : POP ESI
+00518a8f : POP EDI
+00518a90 : XOR AL,AL
+00518a92 : POP EBX
+00518a93 : ADD ESP,0xcc
+00518a99 : RET
+00518a9a : MOV EAX,dword ptr [ESP + 0x54]
+00518a9e : PUSH EBX
+00518a9f : PUSH EAX
+00518aa0 : CALL 0x005176a0
+00518aa5 : ADD ESP,0x8
+00518aa8 : TEST AL,AL
+00518aaa : JZ 0x00518ae1
+00518aac : PUSH 0x5189a0
+00518ab1 : LEA ECX,[ESP + 0x14]
+00518ab5 : CALL 0x00517fe0
+00518aba : LEA ECX,[ESP + 0x28]
+00518abe : CALL 0x005180d0
+00518ac3 : MOV EAX,dword ptr [ESP + 0x54]
+00518ac7 : LEA ECX,[ESP + 0x58]
+00518acb : CMP EAX,ECX
+00518acd : JZ 0x00518ad5
+00518acf : PUSH EAX
+00518ad0 : CALL 0x00515cf0
+00518ad5 : POP ESI
+00518ad6 : POP EDI
+00518ad7 : MOV AL,0x1
+00518ad9 : POP EBX
+00518ada : ADD ESP,0xcc
+00518ae0 : RET
+00518ae1 : PUSH EBP
+00518ae2 : XOR EBP,EBP
+00518ae4 : MOV byte ptr [ESP + 0x13],0x0
+00518ae9 : MOV dword ptr [ESP + 0x28],EBP
+00518aed : MOV EDI,ESI
+00518aef : CMP ESI,-0x1
+00518af2 : JZ 0x00518aff
+00518af4 : CALL 0x005aa2b0
+00518af9 : MOV EBP,EAX
+00518afb : MOV dword ptr [ESP + 0x28],EDX
+00518aff : PUSH ESI
+00518b00 : LEA ECX,[ESP + 0x30]
+00518b04 : CALL 0x00517760
+00518b09 : TEST AL,AL
+00518b0b : JZ 0x00518b4b
+00518b0d : LEA ECX,[ECX]
+00518b10 : MOV EDX,dword ptr [ESP + 0x58]
+00518b14 : PUSH EBX
+00518b15 : PUSH EDX
+00518b16 : CALL 0x005176a0
+00518b1b : ADD ESP,0x8
+00518b1e : TEST AL,AL
+00518b20 : JNZ 0x00518b46
+00518b22 : CMP ESI,-0x1
+00518b25 : JZ 0x00518b36
+00518b27 : CALL 0x005aa2b0
+00518b2c : SUB EAX,EBP
+00518b2e : CMP EAX,ESI
+00518b30 : JNC 0x00518b4b
+00518b32 : MOV EDI,ESI
+00518b34 : SUB EDI,EAX
+00518b36 : PUSH EDI
+00518b37 : LEA ECX,[ESP + 0x30]
+00518b3b : CALL 0x00517760
+00518b40 : TEST AL,AL
+00518b42 : JNZ 0x00518b10
+00518b44 : JMP 0x00518b4b
+00518b46 : MOV byte ptr [ESP + 0x13],0x1
+00518b4b : PUSH 0x5189a0
+00518b50 : LEA ECX,[ESP + 0x18]
+00518b54 : CALL 0x00517fe0
+00518b59 : LEA ECX,[ESP + 0x2c]
+00518b5d : CALL 0x005180d0
+00518b62 : MOV EAX,dword ptr [ESP + 0x58]
+00518b66 : LEA ECX,[ESP + 0x5c]
+00518b6a : POP EBP
+00518b6b : CMP EAX,ECX
+00518b6d : JZ 0x00518b75
+00518b6f : PUSH EAX
+00518b70 : CALL 0x00515cf0
+00518b75 : MOV AL,byte ptr [ESP + 0xf]
+00518b79 : POP ESI
+00518b7a : POP EDI
+00518b7b : POP EBX
+00518b7c : ADD ESP,0xcc
+00518b82 : RET

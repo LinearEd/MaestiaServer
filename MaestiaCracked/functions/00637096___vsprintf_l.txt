@@ -1,0 +1,100 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __vsprintf_l
+ENTRY    : 00637096
+BODY     : [[00637096, 00637113]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __vsprintf_l
+   
+   Library: Visual Studio 2008 Release */
+
+int __cdecl __vsprintf_l(char *_DstBuf,char *_Format,_locale_t param_3,va_list _ArgList)
+
+{
+  int *piVar1;
+  int iVar2;
+  FILE local_24;
+  
+  if ((_Format == (char *)0x0) || (_DstBuf == (char *)0x0)) {
+    piVar1 = __errno();
+    *piVar1 = 0x16;
+    __invalid_parameter(0,0,0,0,0);
+    iVar2 = -1;
+  }
+  else {
+    local_24._base = _DstBuf;
+    local_24._ptr = _DstBuf;
+    local_24._cnt = 0x7fffffff;
+    local_24._flag = 0x42;
+    iVar2 = __output_l(&local_24,_Format,param_3,_ArgList);
+    local_24._cnt = local_24._cnt + -1;
+    if (local_24._cnt < 0) {
+      __flsbuf(0,&local_24);
+    }
+    else {
+      *local_24._ptr = '\0';
+    }
+  }
+  return iVar2;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00637096 : MOV EDI,EDI
+00637098 : PUSH EBP
+00637099 : MOV EBP,ESP
+0063709b : SUB ESP,0x20
+0063709e : PUSH EBX
+0063709f : XOR EBX,EBX
+006370a1 : CMP dword ptr [EBP + 0xc],EBX
+006370a4 : JNZ 0x006370c3
+006370a6 : CALL 0x0063ab82
+006370ab : PUSH EBX
+006370ac : PUSH EBX
+006370ad : PUSH EBX
+006370ae : PUSH EBX
+006370af : PUSH EBX
+006370b0 : MOV dword ptr [EAX],0x16
+006370b6 : CALL 0x006372b8
+006370bb : ADD ESP,0x14
+006370be : OR EAX,0xffffffff
+006370c1 : JMP 0x00637111
+006370c3 : MOV EAX,dword ptr [EBP + 0x8]
+006370c6 : CMP EAX,EBX
+006370c8 : JZ 0x006370a6
+006370ca : PUSH ESI
+006370cb : PUSH dword ptr [EBP + 0x14]
+006370ce : MOV dword ptr [EBP + -0x18],EAX
+006370d1 : PUSH dword ptr [EBP + 0x10]
+006370d4 : MOV dword ptr [EBP + -0x20],EAX
+006370d7 : PUSH dword ptr [EBP + 0xc]
+006370da : LEA EAX,[EBP + -0x20]
+006370dd : PUSH EAX
+006370de : MOV dword ptr [EBP + -0x1c],0x7fffffff
+006370e5 : MOV dword ptr [EBP + -0x14],0x42
+006370ec : CALL 0x0064a9ad
+006370f1 : ADD ESP,0x10
+006370f4 : DEC dword ptr [EBP + -0x1c]
+006370f7 : MOV ESI,EAX
+006370f9 : JS 0x00637102
+006370fb : MOV EAX,dword ptr [EBP + -0x20]
+006370fe : MOV byte ptr [EAX],BL
+00637100 : JMP 0x0063710e
+00637102 : LEA EAX,[EBP + -0x20]
+00637105 : PUSH EAX
+00637106 : PUSH EBX
+00637107 : CALL 0x00645eff
+0063710c : POP ECX
+0063710d : POP ECX
+0063710e : MOV EAX,ESI
+00637110 : POP ESI
+00637111 : POP EBX
+00637112 : LEAVE
+00637113 : RET

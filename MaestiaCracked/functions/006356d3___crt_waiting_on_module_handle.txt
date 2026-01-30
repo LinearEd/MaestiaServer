@@ -1,0 +1,54 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __crt_waiting_on_module_handle
+ENTRY    : 006356d3
+BODY     : [[006356d3, 00635702]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __crt_waiting_on_module_handle
+   
+   Library: Visual Studio 2008 Release */
+
+void __crt_waiting_on_module_handle(LPCWSTR param_1)
+
+{
+  HMODULE pHVar1;
+  DWORD dwMilliseconds;
+  
+  dwMilliseconds = 1000;
+  do {
+    Sleep(dwMilliseconds);
+    pHVar1 = GetModuleHandleW(param_1);
+    dwMilliseconds = dwMilliseconds + 1000;
+    if (60000 < dwMilliseconds) {
+      return;
+    }
+  } while (pHVar1 == (HMODULE)0x0);
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006356d3 : MOV EDI,EDI
+006356d5 : PUSH EBP
+006356d6 : MOV EBP,ESP
+006356d8 : PUSH EDI
+006356d9 : MOV EDI,0x3e8
+006356de : PUSH EDI
+006356df : CALL dword ptr [0x00b8510c]
+006356e5 : PUSH dword ptr [EBP + 0x8]
+006356e8 : CALL dword ptr [0x00b8517c]
+006356ee : ADD EDI,0x3e8
+006356f4 : CMP EDI,0xea60
+006356fa : JA 0x00635700
+006356fc : TEST EAX,EAX
+006356fe : JZ 0x006356de
+00635700 : POP EDI
+00635701 : POP EBP
+00635702 : RET

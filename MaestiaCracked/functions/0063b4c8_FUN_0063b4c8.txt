@@ -1,0 +1,94 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0063b4c8
+ENTRY    : 0063b4c8
+BODY     : [[0063b4c8, 0063b558]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+ushort FUN_0063b4c8(int param_1)
+
+{
+  ushort uVar1;
+  uint in_EAX;
+  bool in_ZF;
+  ushort in_FPUStatusWord;
+  unkbyte10 in_ST0;
+  float10 fVar2;
+  
+  if (in_ZF) {
+    if (((in_EAX & 0xfffff) == 0) && (param_1 == 0)) {
+      in_FPUStatusWord = 1;
+    }
+    else {
+      in_FPUStatusWord = FUN_0065740c();
+    }
+    if (DAT_00d7b7d8 == 0) {
+      uVar1 = __startOneArgErrorHandling();
+      return uVar1;
+    }
+  }
+  else {
+    fVar2 = (float10)fcos(in_ST0);
+    if ((in_FPUStatusWord & 0x400) != 0) {
+      do {
+        fVar2 = fVar2 - (fVar2 / _DAT_00b9d38a) * _DAT_00b9d38a;
+      } while ((in_FPUStatusWord & 0x400) != 0);
+      fcos(fVar2);
+    }
+    if (DAT_00d7b7d8 == 0) {
+      uVar1 = __math_exit();
+      return uVar1;
+    }
+  }
+  return in_FPUStatusWord;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0063b4c8 : PUSH EDX
+0063b4c9 : FSTCW word ptr [ESP]
+0063b4cd : JZ 0x0063b51f
+0063b4cf : CMP word ptr [ESP],0x27f
+0063b4d5 : JZ 0x0063b4dd
+0063b4d7 : FLDCW word ptr [0x00b9d388]
+0063b4dd : FCOS
+0063b4df : FSTSW AX
+0063b4e2 : SAHF
+0063b4e3 : JP 0x0063b502
+0063b4e5 : CMP dword ptr [0x00d7b7d8],0x0
+0063b4ec : JNZ 0x0065747e
+0063b4f2 : MOV EDX,0x12
+0063b4f7 : LEA ECX,[0xd66fb0]
+0063b4fd : JMP 0x0065748b
+0063b502 : FLD extended double ptr [0x00b9d38a]
+0063b508 : FXCH
+0063b50a : FPREM1
+0063b50c : FSTSW AX
+0063b50f : SAHF
+0063b510 : JP 0x0063b50a
+0063b512 : FSTP ST1
+0063b514 : FCOS
+0063b516 : JMP 0x0063b4e5
+0063b518 : CALL 0x0065740c
+0063b51d : JMP 0x0063b53a
+0063b51f : TEST EAX,0xfffff
+0063b524 : JNZ 0x0063b518
+0063b526 : CMP dword ptr [ESP + 0x8],0x0
+0063b52b : JNZ 0x0063b518
+0063b52d : FSTP ST0
+0063b52f : FLD extended double ptr [0x00d67fc0]
+0063b535 : MOV EAX,0x1
+0063b53a : CMP dword ptr [0x00d7b7d8],0x0
+0063b541 : JNZ 0x0065747e
+0063b547 : MOV EDX,0x12
+0063b54c : LEA ECX,[0xd66fb0]
+0063b552 : CALL 0x00657587
+0063b557 : POP EDX
+0063b558 : RET

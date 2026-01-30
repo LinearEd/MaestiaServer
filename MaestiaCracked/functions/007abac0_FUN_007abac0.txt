@@ -1,0 +1,132 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_007abac0
+ENTRY    : 007abac0
+BODY     : [[007abac0, 007abbc7]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+uint FUN_007abac0(float param_1,float param_2,int param_3,int param_4)
+
+{
+  float fVar1;
+  int iVar2;
+  int iVar3;
+  uint uVar4;
+  int in_ECX;
+  float10 fVar5;
+  float fVar6;
+  float fVar7;
+  int local_14;
+  int local_c;
+  
+  iVar2 = *(int *)(in_ECX + 0x278);
+  if (*(char *)(iVar2 + 0x2ab4) == '\0') {
+    fVar6 = *(float *)(iVar2 + 0xc0);
+    fVar7 = *(float *)(iVar2 + 200);
+  }
+  else {
+    fVar6 = *(float *)(iVar2 + 0xb4);
+    fVar7 = *(float *)(iVar2 + 0xbc);
+  }
+  iVar3 = *(int *)(in_ECX + 0x280);
+  fVar1 = *(float *)(iVar3 + 100);
+  uVar4 = (uint)CONCAT21((short)((uint)iVar2 >> 0x10),
+                         (fVar1 == 0.0) << 6 | NAN(fVar1) << 2 | 2U | fVar1 < 0.0) << 8;
+  if (fVar1 != 0.0) {
+    fVar6 = fVar1 * param_1 - fVar6;
+    fVar7 = fVar1 * param_2 - fVar7;
+    fVar5 = (float10)FUN_0040f460(fVar6 * fVar6 + fVar7 * fVar7);
+    local_14 = (int)(longlong)ROUND(fVar5);
+    fVar6 = (float)local_14;
+    if (local_14 < 0) {
+      fVar6 = fVar6 + 4.2949673e+09;
+    }
+    local_c = (int)(longlong)ROUND(fVar6 / fVar1);
+    uVar4 = (&DAT_00d7d488)[local_c];
+    if ((((int)uVar4 < param_3) || ((int)uVar4 < param_4)) || (fVar6 < *(float *)(iVar3 + 0x21c))) {
+      return CONCAT31((int3)(uVar4 >> 8),1);
+    }
+  }
+  return uVar4 & 0xffffff00;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+007abac0 : PUSH EBP
+007abac1 : MOV EBP,ESP
+007abac3 : MOV EAX,dword ptr [ECX + 0x278]
+007abac9 : SUB ESP,0x10
+007abacc : CMP byte ptr [EAX + 0x2ab4],0x0
+007abad3 : JZ 0x007abae7
+007abad5 : MOVSS XMM2,dword ptr [EAX + 0xb4]
+007abadd : MOVSS XMM3,dword ptr [EAX + 0xbc]
+007abae5 : JMP 0x007abaf7
+007abae7 : MOVSS XMM2,dword ptr [EAX + 0xc0]
+007abaef : MOVSS XMM3,dword ptr [EAX + 0xc8]
+007abaf7 : PUSH ESI
+007abaf8 : MOV ESI,dword ptr [ECX + 0x280]
+007abafe : MOVSS XMM1,dword ptr [ESI + 0x64]
+007abb03 : UCOMISS XMM1,dword ptr [0x00b9b0b4]
+007abb0a : LAHF
+007abb0b : MOVSS dword ptr [EBP + -0x4],XMM1
+007abb10 : TEST AH,0x44
+007abb13 : JP 0x007abb1e
+007abb15 : XOR AL,AL
+007abb17 : POP ESI
+007abb18 : MOV ESP,EBP
+007abb1a : POP EBP
+007abb1b : RET 0x10
+007abb1e : MOVAPS XMM0,XMM1
+007abb21 : MULSS XMM0,dword ptr [EBP + 0x8]
+007abb26 : MULSS XMM1,dword ptr [EBP + 0xc]
+007abb2b : SUBSS XMM0,XMM2
+007abb2f : MOVAPS XMM2,XMM0
+007abb32 : MULSS XMM2,XMM0
+007abb36 : SUBSS XMM1,XMM3
+007abb3a : MOVAPS XMM0,XMM1
+007abb3d : MULSS XMM0,XMM1
+007abb41 : PUSH ECX
+007abb42 : ADDSS XMM2,XMM0
+007abb46 : MOVSS dword ptr [ESP],XMM2
+007abb4b : CALL 0x0040f460
+007abb50 : FNSTCW word ptr [EBP + 0xa]
+007abb53 : MOVZX EAX,word ptr [EBP + 0xa]
+007abb57 : OR EAX,0xc00
+007abb5c : MOV dword ptr [EBP + 0xc],EAX
+007abb5f : ADD ESP,0x4
+007abb62 : FLDCW word ptr [EBP + 0xc]
+007abb65 : FISTP qword ptr [EBP + -0x10]
+007abb68 : MOV EAX,dword ptr [EBP + -0x10]
+007abb6b : FLDCW word ptr [EBP + 0xa]
+007abb6e : FILD dword ptr [EBP + -0x10]
+007abb71 : TEST EAX,EAX
+007abb73 : JGE 0x007abb7b
+007abb75 : FADD float ptr [0x00cdf0e0]
+007abb7b : FST float ptr [EBP + -0xc]
+007abb7e : FDIV float ptr [EBP + -0x4]
+007abb81 : FNSTCW word ptr [EBP + 0xa]
+007abb84 : MOVZX EAX,word ptr [EBP + 0xa]
+007abb88 : OR EAX,0xc00
+007abb8d : MOV dword ptr [EBP + 0xc],EAX
+007abb90 : FLDCW word ptr [EBP + 0xc]
+007abb93 : FISTP qword ptr [EBP + -0x8]
+007abb96 : MOV ECX,dword ptr [EBP + -0x8]
+007abb99 : MOV EAX,dword ptr [ECX*0x4 + 0xd7d488]
+007abba0 : CMP dword ptr [EBP + 0x10],EAX
+007abba3 : FLDCW word ptr [EBP + 0xa]
+007abba6 : JG 0x007abbbf
+007abba8 : CMP dword ptr [EBP + 0x14],EAX
+007abbab : JG 0x007abbbf
+007abbad : MOVSS XMM0,dword ptr [ESI + 0x21c]
+007abbb5 : COMISS XMM0,dword ptr [EBP + -0xc]
+007abbb9 : JBE 0x007abb15
+007abbbf : MOV AL,0x1
+007abbc1 : POP ESI
+007abbc2 : MOV ESP,EBP
+007abbc4 : POP EBP
+007abbc5 : RET 0x10

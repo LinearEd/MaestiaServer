@@ -1,0 +1,50 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005f9640
+ENTRY    : 005f9640
+BODY     : [[005f9640, 005f966f]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+uint FUN_005f9640(void)
+
+{
+  uint uVar1;
+  int in_ECX;
+  int *piVar2;
+  
+  uVar1 = *(uint *)(in_ECX + 0xdc);
+  if (*(uint *)(in_ECX + 0xd8) <= uVar1) {
+    piVar2 = (int *)(*(int *)(in_ECX + 0xcc) + uVar1 * 4);
+    do {
+      if (*piVar2 != 0) {
+        return uVar1;
+      }
+      uVar1 = uVar1 - 1;
+      piVar2 = piVar2 + -1;
+    } while (*(uint *)(in_ECX + 0xd8) <= uVar1);
+  }
+  return 0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005f9640 : MOV EAX,dword ptr [ECX + 0xdc]
+005f9646 : MOV EDX,dword ptr [ECX + 0xd8]
+005f964c : CMP EAX,EDX
+005f964e : JC 0x005f966d
+005f9650 : MOV ECX,dword ptr [ECX + 0xcc]
+005f9656 : LEA ECX,[ECX + EAX*0x4]
+005f9659 : LEA ESP,[ESP]
+005f9660 : CMP dword ptr [ECX],0x0
+005f9663 : JNZ 0x005f966f
+005f9665 : DEC EAX
+005f9666 : SUB ECX,0x4
+005f9669 : CMP EAX,EDX
+005f966b : JNC 0x005f9660
+005f966d : XOR EAX,EAX
+005f966f : RET

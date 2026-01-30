@@ -1,0 +1,68 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0072e4c0
+ENTRY    : 0072e4c0
+BODY     : [[0072e4c0, 0072e514]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+uint FUN_0072e4c0(void)
+
+{
+  HANDLE pvVar1;
+  DWORD DVar2;
+  LPVOID unaff_ESI;
+  DWORD local_8;
+  
+  if (*(int *)((int)unaff_ESI + 0x80) == 0) {
+    ResetEvent(*(HANDLE *)((int)unaff_ESI + 0x7c));
+    pvVar1 = CreateThread((LPSECURITY_ATTRIBUTES)0x0,0,FUN_004c51a0,unaff_ESI,0,&local_8);
+    *(HANDLE *)((int)unaff_ESI + 0x80) = pvVar1;
+    if (pvVar1 == (HANDLE)0x0) {
+      DVar2 = GetLastError();
+      if ((int)DVar2 < 1) {
+        return DVar2;
+      }
+      return DVar2 & 0xffff | 0x80070000;
+    }
+  }
+  return 0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0072e4c0 : PUSH EBP
+0072e4c1 : MOV EBP,ESP
+0072e4c3 : PUSH ECX
+0072e4c4 : CMP dword ptr [ESI + 0x80],0x0
+0072e4cb : JNZ 0x0072e50f
+0072e4cd : MOV EAX,dword ptr [ESI + 0x7c]
+0072e4d0 : PUSH EAX
+0072e4d1 : CALL dword ptr [0x00b851dc]
+0072e4d7 : LEA ECX,[EBP + -0x4]
+0072e4da : PUSH ECX
+0072e4db : PUSH 0x0
+0072e4dd : PUSH ESI
+0072e4de : PUSH 0x4c51a0
+0072e4e3 : PUSH 0x0
+0072e4e5 : PUSH 0x0
+0072e4e7 : CALL dword ptr [0x00b851c8]
+0072e4ed : MOV dword ptr [ESI + 0x80],EAX
+0072e4f3 : TEST EAX,EAX
+0072e4f5 : JNZ 0x0072e50f
+0072e4f7 : CALL dword ptr [0x00b85128]
+0072e4fd : TEST EAX,EAX
+0072e4ff : JLE 0x0072e511
+0072e501 : AND EAX,0xffff
+0072e506 : OR EAX,0x80070000
+0072e50b : MOV ESP,EBP
+0072e50d : POP EBP
+0072e50e : RET
+0072e50f : XOR EAX,EAX
+0072e511 : MOV ESP,EBP
+0072e513 : POP EBP
+0072e514 : RET

@@ -1,0 +1,79 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0070ac20
+ENTRY    : 0070ac20
+BODY     : [[0070ac20, 0070ac73]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_0070ac20(void)
+
+{
+  int in_EAX;
+  LPCWSTR lpOutputString;
+  void *_Str;
+  int unaff_ESI;
+  
+  if (*(FILE **)(in_EAX + 0x20) != (FILE *)0x0) {
+    if (*(uint *)(unaff_ESI + 0x18) < 8) {
+      _Str = (void *)(unaff_ESI + 4);
+    }
+    else {
+      _Str = *(void **)(unaff_ESI + 4);
+    }
+    _fwrite(_Str,2,*(size_t *)(unaff_ESI + 0x14),*(FILE **)(in_EAX + 0x20));
+  }
+  if (*(char *)(in_EAX + 0x5c) != '\0') {
+    if (*(uint *)(unaff_ESI + 0x18) < 8) {
+      lpOutputString = (LPCWSTR)(unaff_ESI + 4);
+    }
+    else {
+      lpOutputString = *(LPCWSTR *)(unaff_ESI + 4);
+    }
+    OutputDebugStringW(lpOutputString);
+  }
+  if (*(char *)(in_EAX + 0x5d) != '\0') {
+    FUN_00704fe0(unaff_ESI);
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0070ac20 : PUSH EDI
+0070ac21 : MOV EDI,EAX
+0070ac23 : MOV EAX,dword ptr [EDI + 0x20]
+0070ac26 : TEST EAX,EAX
+0070ac28 : JZ 0x0070ac48
+0070ac2a : CMP dword ptr [ESI + 0x18],0x8
+0070ac2e : MOV EDX,dword ptr [ESI + 0x14]
+0070ac31 : JC 0x0070ac38
+0070ac33 : MOV ECX,dword ptr [ESI + 0x4]
+0070ac36 : JMP 0x0070ac3b
+0070ac38 : LEA ECX,[ESI + 0x4]
+0070ac3b : PUSH EAX
+0070ac3c : PUSH EDX
+0070ac3d : PUSH 0x2
+0070ac3f : PUSH ECX
+0070ac40 : CALL 0x006376ef
+0070ac45 : ADD ESP,0x10
+0070ac48 : CMP byte ptr [EDI + 0x5c],0x0
+0070ac4c : JZ 0x0070ac63
+0070ac4e : CMP dword ptr [ESI + 0x18],0x8
+0070ac52 : JC 0x0070ac59
+0070ac54 : MOV EAX,dword ptr [ESI + 0x4]
+0070ac57 : JMP 0x0070ac5c
+0070ac59 : LEA EAX,[ESI + 0x4]
+0070ac5c : PUSH EAX
+0070ac5d : CALL dword ptr [0x00b8512c]
+0070ac63 : CMP byte ptr [EDI + 0x5d],0x0
+0070ac67 : JZ 0x0070ac72
+0070ac69 : PUSH ESI
+0070ac6a : ADD EDI,0x60
+0070ac6d : CALL 0x00704fe0
+0070ac72 : POP EDI
+0070ac73 : RET

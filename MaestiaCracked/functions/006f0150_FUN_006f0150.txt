@@ -1,0 +1,141 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_006f0150
+ENTRY    : 006f0150
+BODY     : [[006f0150, 006f022a]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined4 FUN_006f0150(BYTE *param_1,DWORD *param_2)
+
+{
+  BOOL BVar1;
+  DWORD DVar2;
+  HCRYPTPROV hProv;
+  HCRYPTKEY *unaff_ESI;
+  
+  if ((int *)unaff_ESI[1] == (int *)0x0) {
+    FUN_006ee470(L"[ERROR][RsaKey::GetCryptProv] m_pRsaCrypter is null.\n");
+    FUN_006ee470(L"[ERROR][RsaKey::ImportPublicKey] GetCryptProv() is null.\n ");
+    return 0;
+  }
+  if (*(int *)unaff_ESI[1] == 0) {
+    FUN_006ee470(L"[ERROR][RsaKey::ImportPublicKey] GetCryptProv() is null.\n ");
+    return 0;
+  }
+  if (*unaff_ESI != 0) {
+    BVar1 = CryptDestroyKey(*unaff_ESI);
+    if (BVar1 == 0) {
+      DVar2 = GetLastError();
+      FUN_006ee470(L"[ERROR][RsaKey::~RsaKey]Error during CryptDestroyKey. %d\n",DVar2);
+      if (*unaff_ESI != 0) {
+        FUN_006ee470(L"[ERROR][RsaKey::ImportPublicKey] m_hKey is not null.\n ");
+        return 0;
+      }
+    }
+    else {
+      *unaff_ESI = 0;
+    }
+  }
+  if ((HCRYPTPROV *)unaff_ESI[1] == (HCRYPTPROV *)0x0) {
+    FUN_006ee470(L"[ERROR][RsaKey::GetCryptProv] m_pRsaCrypter is null.\n");
+    hProv = 0;
+  }
+  else {
+    hProv = *(HCRYPTPROV *)unaff_ESI[1];
+  }
+  BVar1 = CryptImportKey(hProv,param_1,*param_2,0,0,unaff_ESI);
+  if (BVar1 == 0) {
+    DVar2 = GetLastError();
+    FUN_006ee470(L"[ERROR][RsaKey::ImportPublicKey] CryptImportKey error code %d\n",DVar2);
+    return 0;
+  }
+  return 1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006f0150 : PUSH EBP
+006f0151 : MOV EBP,ESP
+006f0153 : MOV EAX,dword ptr [ESI + 0x4]
+006f0156 : TEST EAX,EAX
+006f0158 : JNZ 0x006f017a
+006f015a : PUSH 0xbf38d0
+006f015f : CALL 0x006ee470
+006f0164 : ADD ESP,0x4
+006f0167 : PUSH 0xbf3768
+006f016c : CALL 0x006ee470
+006f0171 : ADD ESP,0x4
+006f0174 : XOR AL,AL
+006f0176 : POP EBP
+006f0177 : RET 0x8
+006f017a : CMP dword ptr [EAX],0x0
+006f017d : JNZ 0x006f0192
+006f017f : PUSH 0xbf3768
+006f0184 : CALL 0x006ee470
+006f0189 : ADD ESP,0x4
+006f018c : XOR AL,AL
+006f018e : POP EBP
+006f018f : RET 0x8
+006f0192 : MOV EAX,dword ptr [ESI]
+006f0194 : PUSH EDI
+006f0195 : MOV EDI,dword ptr [0x00b85128]
+006f019b : TEST EAX,EAX
+006f019d : JZ 0x006f01d9
+006f019f : PUSH EAX
+006f01a0 : CALL dword ptr [0x00b85018]
+006f01a6 : TEST EAX,EAX
+006f01a8 : JNZ 0x006f01d3
+006f01aa : CALL EDI
+006f01ac : PUSH EAX
+006f01ad : PUSH 0xbf34f0
+006f01b2 : CALL 0x006ee470
+006f01b7 : ADD ESP,0x8
+006f01ba : CMP dword ptr [ESI],0x0
+006f01bd : JZ 0x006f01d9
+006f01bf : PUSH 0xbf37e0
+006f01c4 : CALL 0x006ee470
+006f01c9 : ADD ESP,0x4
+006f01cc : XOR AL,AL
+006f01ce : POP EDI
+006f01cf : POP EBP
+006f01d0 : RET 0x8
+006f01d3 : MOV dword ptr [ESI],0x0
+006f01d9 : MOV EAX,dword ptr [ESI + 0x4]
+006f01dc : TEST EAX,EAX
+006f01de : JNZ 0x006f01f1
+006f01e0 : PUSH 0xbf38d0
+006f01e5 : CALL 0x006ee470
+006f01ea : ADD ESP,0x4
+006f01ed : XOR EAX,EAX
+006f01ef : JMP 0x006f01f3
+006f01f1 : MOV EAX,dword ptr [EAX]
+006f01f3 : MOV ECX,dword ptr [EBP + 0xc]
+006f01f6 : MOV EDX,dword ptr [ECX]
+006f01f8 : MOV ECX,dword ptr [EBP + 0x8]
+006f01fb : PUSH ESI
+006f01fc : PUSH 0x0
+006f01fe : PUSH 0x0
+006f0200 : PUSH EDX
+006f0201 : PUSH ECX
+006f0202 : PUSH EAX
+006f0203 : CALL dword ptr [0x00b8500c]
+006f0209 : TEST EAX,EAX
+006f020b : JNZ 0x006f0224
+006f020d : CALL EDI
+006f020f : PUSH EAX
+006f0210 : PUSH 0xbf3850
+006f0215 : CALL 0x006ee470
+006f021a : ADD ESP,0x8
+006f021d : XOR AL,AL
+006f021f : POP EDI
+006f0220 : POP EBP
+006f0221 : RET 0x8
+006f0224 : MOV AL,0x1
+006f0226 : POP EDI
+006f0227 : POP EBP
+006f0228 : RET 0x8

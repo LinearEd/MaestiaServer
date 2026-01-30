@@ -1,0 +1,114 @@
+PROGRAM  : Maestia.exe
+FUNCTION : Ifmt
+ENTRY    : 006257a2
+BODY     : [[006257a2, 00625818]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Multiple Matches With Same Base Name
+    private: char * __cdecl std::num_put<char,class std::ostreambuf_iterator<char,struct
+   std::char_traits<char> > >::_Ifmt(char *,char const *,int)const 
+    private: char * __cdecl std::num_put<unsigned short,class std::ostreambuf_iterator<unsigned
+   short,struct std::char_traits<unsigned short> > >::_Ifmt(char *,char const *,int)const 
+    private: char * __cdecl std::num_put<wchar_t,class std::ostreambuf_iterator<wchar_t,struct
+   std::char_traits<wchar_t> > >::_Ifmt(char *,char const *,int)const 
+   
+   Library: Visual Studio 2008 Release */
+
+void Ifmt(undefined4 param_1,undefined1 *param_2,char *param_3,uint param_4)
+
+{
+  char *pcVar1;
+  byte bVar2;
+  
+  *param_2 = 0x25;
+  pcVar1 = param_2 + 1;
+  if ((param_4 & 0x20) != 0) {
+    *pcVar1 = '+';
+    pcVar1 = param_2 + 2;
+  }
+  if ((param_4 & 8) != 0) {
+    *pcVar1 = '#';
+    pcVar1 = pcVar1 + 1;
+  }
+  if (*param_3 == 'L') {
+    *pcVar1 = 'I';
+    pcVar1[1] = '6';
+    pcVar1 = pcVar1 + 2;
+    *pcVar1 = '4';
+  }
+  else {
+    *pcVar1 = *param_3;
+  }
+  if ((param_4 & 0xe00) == 0x400) {
+    bVar2 = 0x6f;
+  }
+  else if ((param_4 & 0xe00) == 0x800) {
+    bVar2 = ~((char)param_4 << 3) & 0x20U | 0x58;
+  }
+  else {
+    bVar2 = param_3[1];
+  }
+  pcVar1[1] = bVar2;
+  pcVar1[2] = '\0';
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006257a2 : MOV EDI,EDI
+006257a4 : PUSH EBP
+006257a5 : MOV EBP,ESP
+006257a7 : MOV EAX,dword ptr [EBP + 0xc]
+006257aa : MOV EDX,dword ptr [EBP + 0x14]
+006257ad : MOV byte ptr [EAX],0x25
+006257b0 : LEA ECX,[EAX + 0x1]
+006257b3 : TEST DL,0x20
+006257b6 : JZ 0x006257bc
+006257b8 : MOV byte ptr [ECX],0x2b
+006257bb : INC ECX
+006257bc : TEST DL,0x8
+006257bf : JZ 0x006257c5
+006257c1 : MOV byte ptr [ECX],0x23
+006257c4 : INC ECX
+006257c5 : PUSH EBX
+006257c6 : PUSH ESI
+006257c7 : PUSH EDI
+006257c8 : MOV EDI,dword ptr [EBP + 0x10]
+006257cb : MOV BL,byte ptr [EDI]
+006257cd : CMP BL,0x4c
+006257d0 : JZ 0x006257d6
+006257d2 : MOV byte ptr [ECX],BL
+006257d4 : JMP 0x006257e1
+006257d6 : MOV byte ptr [ECX],0x49
+006257d9 : INC ECX
+006257da : MOV byte ptr [ECX],0x36
+006257dd : INC ECX
+006257de : MOV byte ptr [ECX],0x34
+006257e1 : MOV ESI,EDX
+006257e3 : AND ESI,0xe00
+006257e9 : INC ECX
+006257ea : CMP ESI,0x400
+006257f0 : JNZ 0x006257f6
+006257f2 : MOV DL,0x6f
+006257f4 : JMP 0x0062580e
+006257f6 : CMP ESI,0x800
+006257fc : JZ 0x00625803
+006257fe : MOV DL,byte ptr [EDI + 0x1]
+00625801 : JMP 0x0062580e
+00625803 : SHL DL,0x3
+00625806 : NOT DL
+00625808 : AND DL,0x20
+0062580b : OR DL,0x58
+0062580e : POP EDI
+0062580f : POP ESI
+00625810 : MOV byte ptr [ECX],DL
+00625812 : MOV byte ptr [ECX + 0x1],0x0
+00625816 : POP EBX
+00625817 : POP EBP
+00625818 : RET

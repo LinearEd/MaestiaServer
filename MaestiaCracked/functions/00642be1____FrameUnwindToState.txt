@@ -1,0 +1,106 @@
+PROGRAM  : Maestia.exe
+FUNCTION : ___FrameUnwindToState
+ENTRY    : 00642be1
+BODY     : [[00642be1, 00642c62] [00642c7d, 00642ca0]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* WARNING: Function: __SEH_prolog4 replaced with injection: SEH_prolog4 */
+/* WARNING: Function: __SEH_epilog4 replaced with injection: EH_epilog3 */
+/* Library Function - Single Match
+    ___FrameUnwindToState
+   
+   Library: Visual Studio 2008 Release */
+
+void ___FrameUnwindToState(int param_1,undefined4 param_2,int param_3,int param_4)
+
+{
+  _ptiddata p_Var1;
+  int iVar2;
+  int *piVar3;
+  int iVar4;
+  
+  if (*(int *)(param_3 + 4) < 0x81) {
+    iVar4 = (int)*(char *)(param_1 + 8);
+  }
+  else {
+    iVar4 = *(int *)(param_1 + 8);
+  }
+  p_Var1 = __getptd();
+  p_Var1->_ProcessingThrow = p_Var1->_ProcessingThrow + 1;
+  while (iVar4 != param_4) {
+    if ((iVar4 < 0) || (*(int *)(param_3 + 4) <= iVar4)) {
+      _inconsistency();
+    }
+    iVar2 = iVar4 * 8;
+    piVar3 = (int *)(*(int *)(param_3 + 8) + iVar2);
+    iVar4 = *piVar3;
+    if (piVar3[1] != 0) {
+      *(int *)(param_1 + 8) = iVar4;
+      __CallSettingFrame_12(*(undefined4 *)(*(int *)(param_3 + 8) + 4 + iVar2),param_1,0x103);
+    }
+  }
+  FUN_00642ca7();
+  if (iVar4 != param_4) {
+    _inconsistency();
+  }
+  *(int *)(param_1 + 8) = iVar4;
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00642be1 : PUSH 0x10
+00642be3 : PUSH 0xcecea8
+00642be8 : CALL 0x0064c228
+00642bed : MOV EDI,dword ptr [EBP + 0x10]
+00642bf0 : MOV EBX,dword ptr [EBP + 0x8]
+00642bf3 : CMP dword ptr [EDI + 0x4],0x80
+00642bfa : JG 0x00642c02
+00642bfc : MOVSX ESI,byte ptr [EBX + 0x8]
+00642c00 : JMP 0x00642c05
+00642c02 : MOV ESI,dword ptr [EBX + 0x8]
+00642c05 : MOV dword ptr [EBP + -0x1c],ESI
+00642c08 : CALL 0x006458f6
+00642c0d : ADD EAX,0x90
+00642c12 : INC dword ptr [EAX]
+00642c14 : AND dword ptr [EBP + -0x4],0x0
+00642c18 : CMP ESI,dword ptr [EBP + 0x14]
+00642c1b : JZ 0x00642c82
+00642c1d : CMP ESI,-0x1
+00642c20 : JLE 0x00642c27
+00642c22 : CMP ESI,dword ptr [EDI + 0x4]
+00642c25 : JL 0x00642c2c
+00642c27 : CALL 0x0064c7d9
+00642c2c : MOV EAX,ESI
+00642c2e : SHL EAX,0x3
+00642c31 : MOV ECX,dword ptr [EDI + 0x8]
+00642c34 : ADD ECX,EAX
+00642c36 : MOV ESI,dword ptr [ECX]
+00642c38 : MOV dword ptr [EBP + -0x20],ESI
+00642c3b : MOV dword ptr [EBP + -0x4],0x1
+00642c42 : CMP dword ptr [ECX + 0x4],0x0
+00642c46 : JZ 0x00642c5d
+00642c48 : MOV dword ptr [EBX + 0x8],ESI
+00642c4b : PUSH 0x103
+00642c50 : PUSH EBX
+00642c51 : MOV ECX,dword ptr [EDI + 0x8]
+00642c54 : PUSH dword ptr [ECX + EAX*0x1 + 0x4]
+00642c58 : CALL 0x0065c020
+00642c5d : AND dword ptr [EBP + -0x4],0x0
+00642c61 : JMP 0x00642c7d
+00642c7d : MOV dword ptr [EBP + -0x1c],ESI
+00642c80 : JMP 0x00642c18
+00642c82 : MOV dword ptr [EBP + -0x4],0xfffffffe
+00642c89 : CALL 0x00642ca7
+00642c8e : CMP ESI,dword ptr [EBP + 0x14]
+00642c91 : JZ 0x00642c98
+00642c93 : CALL 0x0064c7d9
+00642c98 : MOV dword ptr [EBX + 0x8],ESI
+00642c9b : CALL 0x0064c26d
+00642ca0 : RET

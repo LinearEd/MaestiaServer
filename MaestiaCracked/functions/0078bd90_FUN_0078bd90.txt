@@ -1,0 +1,52 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0078bd90
+ENTRY    : 0078bd90
+BODY     : [[0078bd90, 0078bdc8]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+bool FUN_0078bd90(void)
+
+{
+  int iVar1;
+  DWORD DVar2;
+  int unaff_EDI;
+  
+  if (*(uint *)(unaff_EDI + 0x34) < 8) {
+    iVar1 = unaff_EDI + 0x20;
+  }
+  else {
+    iVar1 = *(int *)(unaff_EDI + 0x20);
+  }
+  FUN_008018d0(L"[AvaThreadControl::Terminate]: Resume Thread (%s)",iVar1);
+  DVar2 = ResumeThread(*(HANDLE *)(unaff_EDI + 4));
+  return DVar2 != 0xffffffff;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0078bd90 : CMP dword ptr [EDI + 0x34],0x8
+0078bd94 : JC 0x0078bd9b
+0078bd96 : MOV EAX,dword ptr [EDI + 0x20]
+0078bd99 : JMP 0x0078bd9e
+0078bd9b : LEA EAX,[EDI + 0x20]
+0078bd9e : PUSH ESI
+0078bd9f : MOV ESI,dword ptr [0x00da98e8]
+0078bda5 : PUSH EAX
+0078bda6 : PUSH 0xc136a0
+0078bdab : CALL 0x008018d0
+0078bdb0 : MOV EAX,dword ptr [EDI + 0x4]
+0078bdb3 : ADD ESP,0x8
+0078bdb6 : PUSH EAX
+0078bdb7 : CALL dword ptr [0x00b851e4]
+0078bdbd : XOR ECX,ECX
+0078bdbf : CMP EAX,-0x1
+0078bdc2 : SETNZ CL
+0078bdc5 : POP ESI
+0078bdc6 : MOV EAX,ECX
+0078bdc8 : RET

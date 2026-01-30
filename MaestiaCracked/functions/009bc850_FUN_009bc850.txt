@@ -1,0 +1,93 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_009bc850
+ENTRY    : 009bc850
+BODY     : [[009bc850, 009bc879] [009bc880, 009bc8db]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_009bc850(void)
+
+{
+  int *piVar1;
+  int *piVar2;
+  int *piVar3;
+  int unaff_ESI;
+  int unaff_EDI;
+  
+  piVar3 = *(int **)(unaff_ESI + 0x60);
+  piVar1 = *(int **)(unaff_ESI + 100);
+  if (piVar3 != piVar1) {
+    while (piVar2 = piVar3, *piVar3 != unaff_EDI) {
+      piVar3 = piVar3 + 6;
+      if (piVar3 == piVar1) {
+        return;
+      }
+    }
+    while (piVar2 = piVar2 + 6, piVar2 != piVar1) {
+      *(undefined8 *)piVar3 = *(undefined8 *)piVar2;
+      *(undefined8 *)(piVar3 + 2) = *(undefined8 *)(piVar2 + 2);
+      *(undefined8 *)(piVar3 + 4) = *(undefined8 *)(piVar2 + 4);
+      piVar3 = piVar3 + 6;
+    }
+    *(int *)(unaff_ESI + 100) = *(int *)(unaff_ESI + 100) + -0x18;
+    if (((*(char *)(unaff_ESI + 0x32) != '\0') && (*DAT_00da9894 != 0)) &&
+       (piVar3 = *(int **)(*DAT_00da9894 + 0x114), piVar3 != (int *)0x0)) {
+      (**(code **)(*piVar3 + 4))(piVar3,"mc_charpetlist.RemoveRedPetList",&DAT_00c8f840);
+    }
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+009bc850 : MOV EAX,dword ptr [ESI + 0x60]
+009bc853 : MOV ECX,dword ptr [ESI + 0x64]
+009bc856 : CMP EAX,ECX
+009bc858 : JZ 0x009bc8db
+009bc85e : MOV EDI,EDI
+009bc860 : CMP dword ptr [EAX],EDI
+009bc862 : JZ 0x009bc86c
+009bc864 : ADD EAX,0x18
+009bc867 : CMP EAX,ECX
+009bc869 : JNZ 0x009bc860
+009bc86b : RET
+009bc86c : MOV EDX,ECX
+009bc86e : ADD EAX,0x18
+009bc871 : CMP EAX,EDX
+009bc873 : JZ 0x009bc8a6
+009bc875 : LEA ECX,[EAX + -0x18]
+009bc878 : JMP 0x009bc880
+009bc880 : MOVQ XMM0,qword ptr [EAX]
+009bc884 : MOVQ qword ptr [ECX],XMM0
+009bc888 : MOVQ XMM0,qword ptr [EAX + 0x8]
+009bc88d : MOVQ qword ptr [ECX + 0x8],XMM0
+009bc892 : MOVQ XMM0,qword ptr [EAX + 0x10]
+009bc897 : MOVQ qword ptr [ECX + 0x10],XMM0
+009bc89c : ADD EAX,0x18
+009bc89f : ADD ECX,0x18
+009bc8a2 : CMP EAX,EDX
+009bc8a4 : JNZ 0x009bc880
+009bc8a6 : ADD dword ptr [ESI + 0x64],-0x18
+009bc8aa : CMP byte ptr [ESI + 0x32],0x0
+009bc8ae : JZ 0x009bc8db
+009bc8b0 : MOV EAX,[0x00da9894]
+009bc8b5 : MOV EAX,dword ptr [EAX]
+009bc8b7 : TEST EAX,EAX
+009bc8b9 : JZ 0x009bc8db
+009bc8bb : MOV EAX,dword ptr [EAX + 0x114]
+009bc8c1 : TEST EAX,EAX
+009bc8c3 : JZ 0x009bc8db
+009bc8c5 : MOV ECX,dword ptr [EAX]
+009bc8c7 : MOV EDX,dword ptr [ECX + 0x4]
+009bc8ca : PUSH EDI
+009bc8cb : PUSH 0xc8f840
+009bc8d0 : PUSH 0xc8f844
+009bc8d5 : PUSH EAX
+009bc8d6 : CALL EDX
+009bc8d8 : ADD ESP,0x10
+009bc8db : RET

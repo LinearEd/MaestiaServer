@@ -1,0 +1,112 @@
+PROGRAM  : Maestia.exe
+FUNCTION : _strcpy_s
+ENTRY    : 00638300
+BODY     : [[00638300, 00638367]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    _strcpy_s
+   
+   Library: Visual Studio 2008 Release */
+
+errno_t __cdecl _strcpy_s(char *_Dst,rsize_t _SizeInBytes,char *_Src)
+
+{
+  char cVar1;
+  int *piVar2;
+  char *pcVar3;
+  errno_t eVar4;
+  
+  if ((_Dst != (char *)0x0) && (_SizeInBytes != 0)) {
+    pcVar3 = _Dst;
+    if (_Src != (char *)0x0) {
+      do {
+        cVar1 = *_Src;
+        *pcVar3 = cVar1;
+        _Src = _Src + 1;
+        if (cVar1 == '\0') break;
+        _SizeInBytes = _SizeInBytes - 1;
+        pcVar3 = pcVar3 + 1;
+      } while (_SizeInBytes != 0);
+      if (_SizeInBytes != 0) {
+        return 0;
+      }
+      *_Dst = '\0';
+      piVar2 = __errno();
+      eVar4 = 0x22;
+      *piVar2 = 0x22;
+      goto LAB_00638322;
+    }
+    *_Dst = '\0';
+  }
+  piVar2 = __errno();
+  eVar4 = 0x16;
+  *piVar2 = 0x16;
+LAB_00638322:
+  __invalid_parameter(0,0,0,0,0);
+  return eVar4;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00638300 : MOV EDI,EDI
+00638302 : PUSH EBP
+00638303 : MOV EBP,ESP
+00638305 : MOV ECX,dword ptr [EBP + 0x8]
+00638308 : PUSH EBX
+00638309 : XOR EBX,EBX
+0063830b : PUSH ESI
+0063830c : PUSH EDI
+0063830d : CMP ECX,EBX
+0063830f : JZ 0x00638318
+00638311 : MOV EDI,dword ptr [EBP + 0xc]
+00638314 : CMP EDI,EBX
+00638316 : JA 0x00638333
+00638318 : CALL 0x0063ab82
+0063831d : PUSH 0x16
+0063831f : POP ESI
+00638320 : MOV dword ptr [EAX],ESI
+00638322 : PUSH EBX
+00638323 : PUSH EBX
+00638324 : PUSH EBX
+00638325 : PUSH EBX
+00638326 : PUSH EBX
+00638327 : CALL 0x006372b8
+0063832c : ADD ESP,0x14
+0063832f : MOV EAX,ESI
+00638331 : JMP 0x00638363
+00638333 : MOV ESI,dword ptr [EBP + 0x10]
+00638336 : CMP ESI,EBX
+00638338 : JNZ 0x0063833e
+0063833a : MOV byte ptr [ECX],BL
+0063833c : JMP 0x00638318
+0063833e : MOV EDX,ECX
+00638340 : MOV AL,byte ptr [ESI]
+00638342 : MOV byte ptr [EDX],AL
+00638344 : INC EDX
+00638345 : INC ESI
+00638346 : CMP AL,BL
+00638348 : JZ 0x0063834d
+0063834a : DEC EDI
+0063834b : JNZ 0x00638340
+0063834d : CMP EDI,EBX
+0063834f : JNZ 0x00638361
+00638351 : MOV byte ptr [ECX],BL
+00638353 : CALL 0x0063ab82
+00638358 : PUSH 0x22
+0063835a : POP ECX
+0063835b : MOV dword ptr [EAX],ECX
+0063835d : MOV ESI,ECX
+0063835f : JMP 0x00638322
+00638361 : XOR EAX,EAX
+00638363 : POP EDI
+00638364 : POP ESI
+00638365 : POP EBX
+00638366 : POP EBP
+00638367 : RET

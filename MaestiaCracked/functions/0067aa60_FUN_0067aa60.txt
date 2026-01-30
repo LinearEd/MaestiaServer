@@ -1,0 +1,95 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0067aa60
+ENTRY    : 0067aa60
+BODY     : [[0067aa60, 0067aac5]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_0067aa60(undefined4 param_1)
+
+{
+  byte bVar1;
+  byte *pbVar2;
+  int iVar3;
+  int in_ECX;
+  char *pcVar4;
+  bool bVar5;
+  
+  if (*(int *)(in_ECX + 0x1c) != 0) {
+    (**(code **)(**(int **)(in_ECX + 0x1c) + 100))(param_1);
+  }
+  pcVar4 = "Japanese";
+  pbVar2 = (byte *)((*(uint *)(in_ECX + 0x44) & 0xfffffffc) + 8);
+  do {
+    bVar1 = *pbVar2;
+    bVar5 = bVar1 < (byte)*pcVar4;
+    if (bVar1 != *pcVar4) {
+LAB_0067aaa6:
+      iVar3 = (1 - (uint)bVar5) - (uint)(bVar5 != 0);
+      goto LAB_0067aaab;
+    }
+    if (bVar1 == 0) break;
+    bVar1 = pbVar2[1];
+    bVar5 = bVar1 < ((byte *)pcVar4)[1];
+    if (bVar1 != ((byte *)pcVar4)[1]) goto LAB_0067aaa6;
+    pbVar2 = pbVar2 + 2;
+    pcVar4 = (char *)((byte *)pcVar4 + 2);
+  } while (bVar1 != 0);
+  iVar3 = 0;
+LAB_0067aaab:
+  if (iVar3 == 0) {
+                    /* WARNING: Could not recover jumptable at 0x0067aac0. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+    (**(code **)(**(int **)(in_ECX + 0x20) + 0x28))();
+    return;
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0067aa60 : PUSH ESI
+0067aa61 : MOV ESI,ECX
+0067aa63 : CMP dword ptr [ESI + 0x1c],0x0
+0067aa67 : JZ 0x0067aa78
+0067aa69 : MOV ECX,dword ptr [ESI + 0x1c]
+0067aa6c : MOV EAX,dword ptr [ECX]
+0067aa6e : MOV EDX,dword ptr [ESP + 0x8]
+0067aa72 : MOV EAX,dword ptr [EAX + 0x64]
+0067aa75 : PUSH EDX
+0067aa76 : CALL EAX
+0067aa78 : MOV EAX,dword ptr [ESI + 0x44]
+0067aa7b : AND EAX,0xfffffffc
+0067aa7e : MOV ECX,0xbd648c
+0067aa83 : ADD EAX,0x8
+0067aa86 : MOV DL,byte ptr [EAX]
+0067aa88 : CMP DL,byte ptr [ECX]
+0067aa8a : JNZ 0x0067aaa6
+0067aa8c : TEST DL,DL
+0067aa8e : JZ 0x0067aaa2
+0067aa90 : MOV DL,byte ptr [EAX + 0x1]
+0067aa93 : CMP DL,byte ptr [ECX + 0x1]
+0067aa96 : JNZ 0x0067aaa6
+0067aa98 : ADD EAX,0x2
+0067aa9b : ADD ECX,0x2
+0067aa9e : TEST DL,DL
+0067aaa0 : JNZ 0x0067aa86
+0067aaa2 : XOR EAX,EAX
+0067aaa4 : JMP 0x0067aaab
+0067aaa6 : SBB EAX,EAX
+0067aaa8 : SBB EAX,-0x1
+0067aaab : TEST EAX,EAX
+0067aaad : JNZ 0x0067aac2
+0067aaaf : MOV ECX,dword ptr [ESI + 0x20]
+0067aab2 : MOV EDX,dword ptr [ECX]
+0067aab4 : POP ESI
+0067aab5 : MOV dword ptr [ESP + 0x4],0xffffffff
+0067aabd : MOV EAX,dword ptr [EDX + 0x28]
+0067aac0 : JMP EAX
+0067aac2 : POP ESI
+0067aac3 : RET 0x4

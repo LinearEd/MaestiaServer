@@ -1,0 +1,99 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005d71c0
+ENTRY    : 005d71c0
+BODY     : [[005d71c0, 005d7277]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+uint FUN_005d71c0(float param_1,int param_2,byte param_3,uint param_4,uint param_5,uint param_6,
+                 float param_7)
+
+{
+  int iVar1;
+  uint uVar2;
+  int in_ECX;
+  undefined4 local_8;
+  
+  uVar2 = *(uint *)(in_ECX + 8);
+  if (((*(int *)(uVar2 + 0x60) == 0) || (*(int *)(in_ECX + 0x14) == 0)) ||
+     (iVar1 = *(int *)(uVar2 + 0x5c) + -0x18 + *(int *)(uVar2 + 0x60) * 0x18,
+     *(int *)(*(int *)(uVar2 + 0x5c) + -0xc + *(int *)(uVar2 + 0x60) * 0x18) != 0)) {
+    return uVar2 & 0xffffff00;
+  }
+  if (*(int *)(iVar1 + 8) == param_2) {
+    local_8 = (uint)(longlong)ROUND(param_1);
+    if ((((*(ushort *)(iVar1 + 4) == local_8) && ((*(byte *)(iVar1 + 0x10) & 1) == param_3)) &&
+        ((uVar2 = (uint)*(ushort *)(iVar1 + 0x10), (uVar2 & 6) == param_4 &&
+         (((uVar2 & 0xc0) == param_5 && ((uVar2 & 0x30) == param_6)))))) &&
+       (param_7 == *(float *)(iVar1 + 0x14))) {
+      return 1;
+    }
+  }
+  return 0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005d71c0 : MOV EAX,dword ptr [ECX + 0x8]
+005d71c3 : SUB ESP,0x8
+005d71c6 : CMP dword ptr [EAX + 0x60],0x0
+005d71ca : JNZ 0x005d71d4
+005d71cc : XOR AL,AL
+005d71ce : ADD ESP,0x8
+005d71d1 : RET 0x1c
+005d71d4 : CMP dword ptr [ECX + 0x14],0x0
+005d71d8 : JZ 0x005d71cc
+005d71da : MOV ECX,dword ptr [EAX + 0x60]
+005d71dd : MOV EDX,dword ptr [EAX + 0x5c]
+005d71e0 : LEA ECX,[ECX + ECX*0x2]
+005d71e3 : CMP dword ptr [EDX + ECX*0x8 + -0xc],0x0
+005d71e8 : LEA ECX,[EDX + ECX*0x8 + -0x18]
+005d71ec : JNZ 0x005d71cc
+005d71ee : MOV EAX,dword ptr [ECX + 0x8]
+005d71f1 : CMP EAX,dword ptr [ESP + 0x10]
+005d71f5 : JNZ 0x005d7270
+005d71f7 : FLD float ptr [ESP + 0xc]
+005d71fb : MOVZX EDX,word ptr [ECX + 0x4]
+005d71ff : FNSTCW word ptr [ESP + 0x10]
+005d7203 : MOVZX EAX,word ptr [ESP + 0x10]
+005d7208 : OR EAX,0xc00
+005d720d : MOV dword ptr [ESP + 0xc],EAX
+005d7211 : FLDCW word ptr [ESP + 0xc]
+005d7215 : FISTP qword ptr [ESP]
+005d7218 : MOV EAX,dword ptr [ESP]
+005d721b : FLDCW word ptr [ESP + 0x10]
+005d721f : CMP EDX,EAX
+005d7221 : JNZ 0x005d7270
+005d7223 : MOV DL,byte ptr [ECX + 0x10]
+005d7226 : AND DL,0x1
+005d7229 : CMP DL,byte ptr [ESP + 0x14]
+005d722d : JNZ 0x005d7270
+005d722f : MOVZX EAX,word ptr [ECX + 0x10]
+005d7233 : MOV EDX,EAX
+005d7235 : AND EDX,0x6
+005d7238 : CMP EDX,dword ptr [ESP + 0x18]
+005d723c : JNZ 0x005d7270
+005d723e : MOV EDX,EAX
+005d7240 : AND EDX,0xc0
+005d7246 : CMP EDX,dword ptr [ESP + 0x1c]
+005d724a : JNZ 0x005d7270
+005d724c : AND EAX,0x30
+005d724f : CMP EAX,dword ptr [ESP + 0x20]
+005d7253 : JNZ 0x005d7270
+005d7255 : FLD float ptr [ECX + 0x14]
+005d7258 : FLD float ptr [ESP + 0x24]
+005d725c : FUCOMPP
+005d725e : FNSTSW AX
+005d7260 : TEST AH,0x44
+005d7263 : JP 0x005d7270
+005d7265 : MOV EAX,0x1
+005d726a : ADD ESP,0x8
+005d726d : RET 0x1c
+005d7270 : XOR EAX,EAX
+005d7272 : ADD ESP,0x8
+005d7275 : RET 0x1c

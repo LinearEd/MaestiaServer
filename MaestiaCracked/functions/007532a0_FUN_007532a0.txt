@@ -1,0 +1,110 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_007532a0
+ENTRY    : 007532a0
+BODY     : [[007532a0, 0075337d]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_007532a0(void)
+
+{
+  int iVar1;
+  int *piVar2;
+  int iVar3;
+  int in_EAX;
+  DWORD DVar4;
+  
+  if ((*(int *)(in_EAX + 0x1fc) - *(int *)(in_EAX + 0x1f8) & 0xfffffff8U) == 0) {
+    FUN_008018d0(L"[AvaWater::Update]: WaterTextures are empty");
+    return;
+  }
+  DVar4 = GetTickCount();
+  iVar1 = *(int *)(in_EAX + 0x21c);
+  *(DWORD *)(in_EAX + 0x21c) = DVar4;
+  *(int *)(in_EAX + 0x220) = *(int *)(in_EAX + 0x220) + (DVar4 - iVar1);
+  if (*(uint *)(in_EAX + 0x1dc) <= *(uint *)(in_EAX + 0x220)) {
+    *(int *)(in_EAX + 0x210) = *(int *)(in_EAX + 0x210) + 1;
+    *(undefined4 *)(in_EAX + 0x220) = 0;
+    *(undefined4 *)(in_EAX + 0x20c) = 0;
+    if ((uint)(*(int *)(in_EAX + 0x1fc) - *(int *)(in_EAX + 0x1f8) >> 3) <=
+        *(uint *)(in_EAX + 0x210)) {
+      *(undefined4 *)(in_EAX + 0x210) = 0;
+    }
+    piVar2 = *(int **)(in_EAX + 0x218);
+    iVar1 = *(int *)(in_EAX + 0x1f8) + *(int *)(in_EAX + 0x210) * 8;
+    if (piVar2 != *(int **)(*(int *)(in_EAX + 0x1f8) + 4 + *(int *)(in_EAX + 0x210) * 8)) {
+      if (piVar2 != (int *)0x0) {
+        (**(code **)(*piVar2 + 0x30))();
+      }
+      iVar3 = *(int *)(iVar1 + 4);
+      if (iVar3 != 0) {
+        InterlockedIncrement((LONG *)(iVar3 + 0x2c));
+      }
+      *(undefined4 *)(in_EAX + 0x218) = *(undefined4 *)(iVar1 + 4);
+    }
+    *(int *)(in_EAX + 0x20c) = *(int *)(in_EAX + 0x20c) + 1;
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+007532a0 : PUSH ESI
+007532a1 : MOV ESI,EAX
+007532a3 : MOV EAX,dword ptr [ESI + 0x1fc]
+007532a9 : SUB EAX,dword ptr [ESI + 0x1f8]
+007532af : TEST EAX,0xfffffff8
+007532b4 : JNZ 0x007532cb
+007532b6 : MOV ESI,dword ptr [0x00da98e8]
+007532bc : PUSH 0xc0a458
+007532c1 : CALL 0x008018d0
+007532c6 : ADD ESP,0x4
+007532c9 : POP ESI
+007532ca : RET
+007532cb : CALL dword ptr [0x00b850d8]
+007532d1 : MOV ECX,EAX
+007532d3 : SUB ECX,dword ptr [ESI + 0x21c]
+007532d9 : MOV dword ptr [ESI + 0x21c],EAX
+007532df : ADD dword ptr [ESI + 0x220],ECX
+007532e5 : MOV EDX,dword ptr [ESI + 0x220]
+007532eb : CMP EDX,dword ptr [ESI + 0x1dc]
+007532f1 : JC 0x0075337c
+007532f7 : INC dword ptr [ESI + 0x210]
+007532fd : MOV EAX,dword ptr [ESI + 0x210]
+00753303 : MOV dword ptr [ESI + 0x220],0x0
+0075330d : MOV dword ptr [ESI + 0x20c],0x0
+00753317 : MOV ECX,dword ptr [ESI + 0x1fc]
+0075331d : SUB ECX,dword ptr [ESI + 0x1f8]
+00753323 : SAR ECX,0x3
+00753326 : CMP EAX,ECX
+00753328 : JC 0x00753334
+0075332a : MOV dword ptr [ESI + 0x210],0x0
+00753334 : MOV EDX,dword ptr [ESI + 0x210]
+0075333a : MOV EAX,dword ptr [ESI + 0x1f8]
+00753340 : MOV ECX,dword ptr [ESI + 0x218]
+00753346 : CMP ECX,dword ptr [EAX + EDX*0x8 + 0x4]
+0075334a : PUSH EDI
+0075334b : LEA EDI,[EAX + EDX*0x8]
+0075334e : JZ 0x00753375
+00753350 : TEST ECX,ECX
+00753352 : JZ 0x0075335b
+00753354 : MOV EDX,dword ptr [ECX]
+00753356 : MOV EAX,dword ptr [EDX + 0x30]
+00753359 : CALL EAX
+0075335b : MOV EAX,dword ptr [EDI + 0x4]
+0075335e : TEST EAX,EAX
+00753360 : JZ 0x0075336c
+00753362 : ADD EAX,0x2c
+00753365 : PUSH EAX
+00753366 : CALL dword ptr [0x00b850dc]
+0075336c : MOV ECX,dword ptr [EDI + 0x4]
+0075336f : MOV dword ptr [ESI + 0x218],ECX
+00753375 : INC dword ptr [ESI + 0x20c]
+0075337b : POP EDI
+0075337c : POP ESI
+0075337d : RET

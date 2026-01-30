@@ -1,0 +1,87 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005296d0
+ENTRY    : 005296d0
+BODY     : [[005296d0, 0052972f]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+uint FUN_005296d0(uint *param_1)
+
+{
+  uint *puVar1;
+  undefined4 *puVar2;
+  undefined4 uVar3;
+  uint uVar4;
+  int iVar5;
+  
+  puVar2 = (undefined4 *)*param_1;
+  if ((puVar2[3] & 0x4000000) != 0) {
+    return CONCAT31((int3)((uint)puVar2 >> 8),1);
+  }
+  uVar3 = *puVar2;
+  iVar5 = FUN_00638800(uVar3,0x3a);
+  if (iVar5 == 0) {
+    iVar5 = FUN_00638800(uVar3,0x2f);
+    if (iVar5 == 0) {
+      iVar5 = FUN_00638800(uVar3,0x2e);
+      if (iVar5 == 0) {
+        uVar4 = *param_1;
+        puVar1 = (uint *)(uVar4 + 0xc);
+        *puVar1 = *puVar1 | 0x6000000;
+        return uVar4 & 0xffffff00;
+      }
+    }
+  }
+  uVar4 = *param_1;
+  puVar1 = (uint *)(uVar4 + 0xc);
+  *puVar1 = *puVar1 | 0x4000000;
+  return CONCAT31((int3)(uVar4 >> 8),1);
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005296d0 : PUSH EDI
+005296d1 : MOV EDI,dword ptr [ESP + 0x8]
+005296d5 : MOV EAX,dword ptr [EDI]
+005296d7 : TEST dword ptr [EAX + 0xc],0x4000000
+005296de : JZ 0x005296e4
+005296e0 : MOV AL,0x1
+005296e2 : POP EDI
+005296e3 : RET
+005296e4 : PUSH ESI
+005296e5 : MOV ESI,dword ptr [EAX]
+005296e7 : PUSH 0x3a
+005296e9 : PUSH ESI
+005296ea : CALL 0x00638800
+005296ef : ADD ESP,0x8
+005296f2 : TEST EAX,EAX
+005296f4 : JNZ 0x00529722
+005296f6 : PUSH 0x2f
+005296f8 : PUSH ESI
+005296f9 : CALL 0x00638800
+005296fe : ADD ESP,0x8
+00529701 : TEST EAX,EAX
+00529703 : JNZ 0x00529722
+00529705 : PUSH 0x2e
+00529707 : PUSH ESI
+00529708 : CALL 0x00638800
+0052970d : ADD ESP,0x8
+00529710 : TEST EAX,EAX
+00529712 : JNZ 0x00529722
+00529714 : MOV EAX,dword ptr [EDI]
+00529716 : OR dword ptr [EAX + 0xc],0x6000000
+0052971d : POP ESI
+0052971e : XOR AL,AL
+00529720 : POP EDI
+00529721 : RET
+00529722 : MOV EAX,dword ptr [EDI]
+00529724 : OR dword ptr [EAX + 0xc],0x4000000
+0052972b : POP ESI
+0052972c : MOV AL,0x1
+0052972e : POP EDI
+0052972f : RET

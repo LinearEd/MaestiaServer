@@ -1,0 +1,55 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __localtime64
+ENTRY    : 00635226
+BODY     : [[00635226, 0063524c]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __localtime64
+   
+   Library: Visual Studio 2008 Release */
+
+tm * __cdecl __localtime64(__time64_t *_Time)
+
+{
+  tm *_Tm;
+  errno_t eVar1;
+  tm *ptVar2;
+  
+  _Tm = ___getgmtimebuf();
+  ptVar2 = (tm *)0x0;
+  if (_Tm != (tm *)0x0) {
+    eVar1 = __localtime64_s(_Tm,_Time);
+    ptVar2 = (tm *)(~-(uint)(eVar1 != 0) & (uint)_Tm);
+  }
+  return ptVar2;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00635226 : MOV EDI,EDI
+00635228 : PUSH EBP
+00635229 : MOV EBP,ESP
+0063522b : PUSH ESI
+0063522c : CALL 0x00645ec8
+00635231 : MOV ESI,EAX
+00635233 : TEST ESI,ESI
+00635235 : JZ 0x0063524a
+00635237 : PUSH dword ptr [EBP + 0x8]
+0063523a : PUSH ESI
+0063523b : CALL 0x00634f6e
+00635240 : NEG EAX
+00635242 : SBB EAX,EAX
+00635244 : POP ECX
+00635245 : NOT EAX
+00635247 : POP ECX
+00635248 : AND EAX,ESI
+0063524a : POP ESI
+0063524b : POP EBP
+0063524c : RET

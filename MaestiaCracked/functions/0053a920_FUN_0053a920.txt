@@ -1,0 +1,79 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0053a920
+ENTRY    : 0053a920
+BODY     : [[0053a920, 0053a97f]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+byte FUN_0053a920(void)
+
+{
+  byte bVar1;
+  byte bVar2;
+  int in_ECX;
+  
+  if (*(char *)(in_ECX + 0x15) == '\0') {
+    *(undefined1 *)(in_ECX + 0x15) = 0;
+    if (*(int *)(in_ECX + 0x30) - *(int *)(in_ECX + 0x2c) < 1) {
+      FUN_00539fb0(1);
+    }
+    bVar1 = *(byte *)(*(int *)(in_ECX + 0x2c) + *(int *)(in_ECX + 0x3c));
+    *(int *)(in_ECX + 0x2c) = *(int *)(in_ECX + 0x2c) + 1;
+    *(undefined1 *)(in_ECX + 0x15) = 7;
+    *(byte *)(in_ECX + 0x14) = bVar1 & 0x7f;
+    return bVar1 >> 7;
+  }
+  bVar2 = *(char *)(in_ECX + 0x15) - 1;
+  *(byte *)(in_ECX + 0x15) = bVar2;
+  bVar1 = *(byte *)(in_ECX + 0x14);
+  *(byte *)(in_ECX + 0x14) = ('\x01' << (bVar2 & 0x1f)) - 1U & *(byte *)(in_ECX + 0x14);
+  return bVar1 >> (bVar2 & 0x1f);
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0053a920 : PUSH ESI
+0053a921 : MOV ESI,ECX
+0053a923 : MOV AL,byte ptr [ESI + 0x15]
+0053a926 : TEST AL,AL
+0053a928 : JNZ 0x0053a95e
+0053a92a : MOV byte ptr [ESI + 0x15],AL
+0053a92d : MOV EAX,dword ptr [ESI + 0x30]
+0053a930 : SUB EAX,dword ptr [ESI + 0x2c]
+0053a933 : CMP EAX,0x1
+0053a936 : JGE 0x0053a93f
+0053a938 : PUSH 0x1
+0053a93a : CALL 0x00539fb0
+0053a93f : MOV EAX,dword ptr [ESI + 0x2c]
+0053a942 : MOV ECX,dword ptr [ESI + 0x3c]
+0053a945 : MOV CL,byte ptr [EAX + ECX*0x1]
+0053a948 : INC EAX
+0053a949 : MOV dword ptr [ESI + 0x2c],EAX
+0053a94c : MOVZX EAX,CL
+0053a94f : SHR EAX,0x7
+0053a952 : AND CL,0x7f
+0053a955 : MOV byte ptr [ESI + 0x15],0x7
+0053a959 : MOV byte ptr [ESI + 0x14],CL
+0053a95c : POP ESI
+0053a95d : RET
+0053a95e : DEC AL
+0053a960 : MOVZX EDX,AL
+0053a963 : MOV byte ptr [ESI + 0x15],AL
+0053a966 : MOVZX EAX,byte ptr [ESI + 0x14]
+0053a96a : PUSH EBX
+0053a96b : MOV CL,DL
+0053a96d : SHR EAX,CL
+0053a96f : MOV BL,0x1
+0053a971 : MOV ECX,EDX
+0053a973 : SHL BL,CL
+0053a975 : DEC BL
+0053a977 : AND BL,byte ptr [ESI + 0x14]
+0053a97a : MOV byte ptr [ESI + 0x14],BL
+0053a97d : POP EBX
+0053a97e : POP ESI
+0053a97f : RET

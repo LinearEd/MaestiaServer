@@ -1,0 +1,150 @@
+PROGRAM  : Maestia.exe
+FUNCTION : _malloc
+ENTRY    : 00636043
+BODY     : [[00636043, 0063610c]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    _malloc
+   
+   Library: Visual Studio 2008 Release */
+
+void * __cdecl _malloc(size_t _Size)
+
+{
+  LPVOID pvVar1;
+  int iVar2;
+  int *piVar3;
+  size_t sVar4;
+  uint dwBytes;
+  
+  if (_Size < 0xffffffe1) {
+    do {
+      if (DAT_00d7c09c == (HANDLE)0x0) {
+        __FF_MSGBANNER();
+        __NMSG_WRITE(0x1e);
+        ___crtExitProcess(0xff);
+      }
+      if (DAT_01728d40 == 1) {
+        dwBytes = _Size;
+        if (_Size == 0) {
+          dwBytes = 1;
+        }
+LAB_006360b2:
+        pvVar1 = HeapAlloc(DAT_00d7c09c,0,dwBytes);
+      }
+      else if ((DAT_01728d40 != 3) || (pvVar1 = (LPVOID)_V6_HeapAlloc(_Size), pvVar1 == (LPVOID)0x0)
+              ) {
+        sVar4 = _Size;
+        if (_Size == 0) {
+          sVar4 = 1;
+        }
+        dwBytes = sVar4 + 0xf & 0xfffffff0;
+        goto LAB_006360b2;
+      }
+      if (pvVar1 != (LPVOID)0x0) {
+        return pvVar1;
+      }
+      if (DAT_00d7c0a0 == 0) {
+        piVar3 = __errno();
+        *piVar3 = 0xc;
+        break;
+      }
+      iVar2 = __callnewh(_Size);
+    } while (iVar2 != 0);
+    piVar3 = __errno();
+    *piVar3 = 0xc;
+  }
+  else {
+    __callnewh(_Size);
+    piVar3 = __errno();
+    *piVar3 = 0xc;
+  }
+  return (void *)0x0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00636043 : MOV EDI,EDI
+00636045 : PUSH EBP
+00636046 : MOV EBP,ESP
+00636048 : PUSH ESI
+00636049 : MOV ESI,dword ptr [EBP + 0x8]
+0063604c : CMP ESI,-0x20
+0063604f : JA 0x006360f6
+00636055 : PUSH EBX
+00636056 : PUSH EDI
+00636057 : MOV EDI,dword ptr [0x00b852c8]
+0063605d : CMP dword ptr [0x00d7c09c],0x0
+00636064 : JNZ 0x0063607e
+00636066 : CALL 0x006455b9
+0063606b : PUSH 0x1e
+0063606d : CALL 0x0064540e
+00636072 : PUSH 0xff
+00636077 : CALL 0x00635757
+0063607c : POP ECX
+0063607d : POP ECX
+0063607e : MOV EAX,[0x01728d40]
+00636083 : CMP EAX,0x1
+00636086 : JNZ 0x00636096
+00636088 : TEST ESI,ESI
+0063608a : JZ 0x00636090
+0063608c : MOV EAX,ESI
+0063608e : JMP 0x00636093
+00636090 : XOR EAX,EAX
+00636092 : INC EAX
+00636093 : PUSH EAX
+00636094 : JMP 0x006360b2
+00636096 : CMP EAX,0x3
+00636099 : JNZ 0x006360a6
+0063609b : PUSH ESI
+0063609c : CALL 0x00635ff4
+006360a1 : POP ECX
+006360a2 : TEST EAX,EAX
+006360a4 : JNZ 0x006360bc
+006360a6 : TEST ESI,ESI
+006360a8 : JNZ 0x006360ab
+006360aa : INC ESI
+006360ab : ADD ESI,0xf
+006360ae : AND ESI,0xfffffff0
+006360b1 : PUSH ESI
+006360b2 : PUSH 0x0
+006360b4 : PUSH dword ptr [0x00d7c09c]
+006360ba : CALL EDI
+006360bc : MOV EBX,EAX
+006360be : TEST EBX,EBX
+006360c0 : JNZ 0x006360f0
+006360c2 : PUSH 0xc
+006360c4 : POP ESI
+006360c5 : CMP dword ptr [0x00d7c0a0],EAX
+006360cb : JZ 0x006360e2
+006360cd : PUSH dword ptr [EBP + 0x8]
+006360d0 : CALL 0x0063fe60
+006360d5 : POP ECX
+006360d6 : TEST EAX,EAX
+006360d8 : JZ 0x006360e9
+006360da : MOV ESI,dword ptr [EBP + 0x8]
+006360dd : JMP 0x0063605d
+006360e2 : CALL 0x0063ab82
+006360e7 : MOV dword ptr [EAX],ESI
+006360e9 : CALL 0x0063ab82
+006360ee : MOV dword ptr [EAX],ESI
+006360f0 : POP EDI
+006360f1 : MOV EAX,EBX
+006360f3 : POP EBX
+006360f4 : JMP 0x0063610a
+006360f6 : PUSH ESI
+006360f7 : CALL 0x0063fe60
+006360fc : POP ECX
+006360fd : CALL 0x0063ab82
+00636102 : MOV dword ptr [EAX],0xc
+00636108 : XOR EAX,EAX
+0063610a : POP ESI
+0063610b : POP EBP
+0063610c : RET

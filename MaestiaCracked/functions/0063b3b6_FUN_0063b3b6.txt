@@ -1,0 +1,77 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0063b3b6
+ENTRY    : 0063b3b6
+BODY     : [[0063b3b6, 0063b42a]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+ulonglong FUN_0063b3b6(void)
+
+{
+  ulonglong uVar1;
+  uint uVar2;
+  float fVar3;
+  float10 in_ST0;
+  undefined4 local_20;
+  undefined4 uStack_1c;
+  
+  uVar1 = (ulonglong)ROUND(in_ST0);
+  local_20 = (uint)uVar1;
+  uStack_1c = (float)(uVar1 >> 0x20);
+  fVar3 = (float)in_ST0;
+  if ((local_20 != 0) || (fVar3 = uStack_1c, (uVar1 & 0x7fffffff00000000) != 0)) {
+    if ((int)fVar3 < 0) {
+      uVar1 = uVar1 + (0x80000000 < (uint)-(float)(in_ST0 - (float10)(longlong)uVar1));
+    }
+    else {
+      uVar2 = (uint)(0x80000000 < (uint)(float)(in_ST0 - (float10)(longlong)uVar1));
+      uVar1 = CONCAT44((int)uStack_1c - (uint)(local_20 < uVar2),local_20 - uVar2);
+    }
+  }
+  return uVar1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0063b3b6 : PUSH EBP
+0063b3b7 : MOV EBP,ESP
+0063b3b9 : SUB ESP,0x20
+0063b3bc : AND ESP,0xfffffff0
+0063b3bf : FLD ST0
+0063b3c1 : FST float ptr [ESP + 0x18]
+0063b3c5 : FISTP qword ptr [ESP + 0x10]
+0063b3c9 : FILD qword ptr [ESP + 0x10]
+0063b3cd : MOV EDX,dword ptr [ESP + 0x18]
+0063b3d1 : MOV EAX,dword ptr [ESP + 0x10]
+0063b3d5 : TEST EAX,EAX
+0063b3d7 : JZ 0x0063b415
+0063b3d9 : FSUBP
+0063b3db : TEST EDX,EDX
+0063b3dd : JNS 0x0063b3fd
+0063b3df : FSTP float ptr [ESP]
+0063b3e2 : MOV ECX,dword ptr [ESP]
+0063b3e5 : XOR ECX,0x80000000
+0063b3eb : ADD ECX,0x7fffffff
+0063b3f1 : ADC EAX,0x0
+0063b3f4 : MOV EDX,dword ptr [ESP + 0x14]
+0063b3f8 : ADC EDX,0x0
+0063b3fb : JMP 0x0063b429
+0063b3fd : FSTP float ptr [ESP]
+0063b400 : MOV ECX,dword ptr [ESP]
+0063b403 : ADD ECX,0x7fffffff
+0063b409 : SBB EAX,0x0
+0063b40c : MOV EDX,dword ptr [ESP + 0x14]
+0063b410 : SBB EDX,0x0
+0063b413 : JMP 0x0063b429
+0063b415 : MOV EDX,dword ptr [ESP + 0x14]
+0063b419 : TEST EDX,0x7fffffff
+0063b41f : JNZ 0x0063b3d9
+0063b421 : FSTP float ptr [ESP + 0x18]
+0063b425 : FSTP float ptr [ESP + 0x18]
+0063b429 : LEAVE
+0063b42a : RET

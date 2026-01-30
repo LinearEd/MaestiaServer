@@ -1,0 +1,339 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00467940
+ENTRY    : 00467940
+BODY     : [[00467940, 00467bbe]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+byte FUN_00467940(int param_1,int param_2,undefined4 param_3,int param_4,undefined4 param_5)
+
+{
+  uint uVar1;
+  char cVar2;
+  byte bVar3;
+  int iVar4;
+  int iVar5;
+  int iVar6;
+  int iVar7;
+  int in_ECX;
+  int *piVar8;
+  byte bVar9;
+  bool bVar10;
+  int *local_8;
+  
+  bVar9 = 1;
+  if (in_ECX == 0) {
+    local_8 = (int *)0x0;
+  }
+  else {
+    local_8 = (int *)(in_ECX + 0x1a4);
+  }
+  if (*(int *)(param_2 + 0x30) != 0) {
+    cVar2 = FUN_0046af50(param_1,param_1 + 0x1118,param_4,param_5);
+    if (cVar2 == '\0') {
+      FUN_00807d70("CGrassRI::Render, BeginRender() failed");
+      return 0;
+    }
+    bVar10 = true;
+    if (local_8 != (int *)0x0) {
+      local_8[1] = local_8[1] + 1;
+    }
+    iVar4 = 0;
+    if (0 < *(int *)(param_2 + 0x30)) {
+      piVar8 = *(int **)(param_2 + 0x2c);
+      do {
+        if (*(int *)(*piVar8 + 0x38) != 0) {
+          iVar4 = (**(code **)(*DAT_01720efc + 0x15c))
+                            (DAT_01720efc,*(undefined4 *)(*(int *)(*piVar8 + 0x38) + 8));
+          bVar10 = iVar4 == 0;
+          break;
+        }
+        iVar4 = iVar4 + 1;
+        piVar8 = piVar8 + 1;
+      } while (iVar4 < *(int *)(param_2 + 0x30));
+    }
+    iVar4 = (**(code **)(*DAT_01720efc + 0x1a0))(DAT_01720efc,*(undefined4 *)(param_1 + 0x1a04));
+    bVar9 = bVar10 & iVar4 == 0;
+    param_4 = 0;
+    if (0 < *(int *)(param_2 + 0x30)) {
+      do {
+        iVar4 = *(int *)(*(int *)(param_2 + 0x2c) + param_4 * 4);
+        if ((iVar4 != 0) && (iVar5 = *(int *)(iVar4 + 0x38), iVar5 != 0)) {
+          iVar5 = (**(code **)(*DAT_01720efc + 400))
+                            (DAT_01720efc,0,*(undefined4 *)(iVar5 + 0xc),0,
+                             *(undefined4 *)(iVar5 + 0x38));
+          if (iVar5 == 0) {
+            iVar5 = *(int *)(iVar4 + 0x3c);
+            uVar1 = iVar5 * 6;
+            if (*(uint *)(param_1 + 0x1a50) < uVar1) {
+              FUN_00807d70("CGrassRI::Render(), exceeded preset limit of %d grass blades per cell, now %d; use CGrass::SetHint() to adjust"
+                           ,*(uint *)(param_1 + 0x1a50) / 6,*(undefined4 *)(iVar4 + 0x3c));
+              iVar6 = (**(code **)(*DAT_01720efc + 0x1a0))(DAT_01720efc,0);
+              bVar3 = FUN_0046b1b0(param_1);
+              iVar7 = (**(code **)(*DAT_01720efc + 0x1a0))
+                                (DAT_01720efc,*(undefined4 *)(param_1 + 0x1a04));
+              bVar9 = bVar9 & bVar3 & iVar6 == 0 & iVar7 == 0;
+            }
+            if (uVar1 != 0) {
+              bVar3 = FUN_0046c640(0,0,iVar5 * 4);
+              bVar9 = bVar9 & bVar3;
+            }
+            if (local_8 != (int *)0x0) {
+              local_8[3] = local_8[3] + 1;
+              local_8[2] = local_8[2] + 1;
+              local_8[4] = local_8[4] + *(int *)(iVar4 + 0x3c) * 2;
+            }
+            iVar4 = (**(code **)(*DAT_01720efc + 400))(DAT_01720efc,0,0,0,0);
+            bVar9 = bVar9 & iVar4 == 0;
+          }
+          else {
+            FUN_00807d70("CGrassRI::Render, BindVertexBuffer() failed");
+            bVar9 = 0;
+          }
+        }
+        param_4 = param_4 + 1;
+      } while (param_4 < *(int *)(param_2 + 0x30));
+    }
+    (**(code **)(*DAT_01720efc + 0x170))(DAT_01720efc,0);
+    (**(code **)(*DAT_01720efc + 0x1ac))(DAT_01720efc,0);
+    iVar4 = (**(code **)(*DAT_01720efc + 0x1a0))(DAT_01720efc,0);
+    bVar9 = bVar9 & iVar4 == 0;
+    if ((bVar9 != 0) && (local_8 != (int *)0x0)) {
+      *local_8 = *local_8 + 1;
+    }
+  }
+  return bVar9;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00467940 : PUSH EBP
+00467941 : MOV EBP,ESP
+00467943 : SUB ESP,0x8
+00467946 : PUSH EBX
+00467947 : PUSH ESI
+00467948 : PUSH EDI
+00467949 : MOV AL,0x1
+0046794b : TEST ECX,ECX
+0046794d : JZ 0x0046795a
+0046794f : LEA EDI,[ECX + 0x1a4]
+00467955 : MOV dword ptr [EBP + -0x4],EDI
+00467958 : JMP 0x00467964
+0046795a : MOV dword ptr [EBP + -0x4],0x0
+00467961 : MOV EDI,dword ptr [EBP + -0x4]
+00467964 : MOV ESI,dword ptr [EBP + 0xc]
+00467967 : CMP dword ptr [ESI + 0x30],0x0
+0046796b : JZ 0x00467b9e
+00467971 : MOV EAX,dword ptr [EBP + 0x18]
+00467974 : MOV ECX,dword ptr [EBP + 0x14]
+00467977 : PUSH EAX
+00467978 : MOV EAX,dword ptr [EBP + 0x8]
+0046797b : PUSH ECX
+0046797c : LEA EDX,[EAX + 0x1118]
+00467982 : PUSH EDX
+00467983 : PUSH EAX
+00467984 : MOV EAX,dword ptr [EBP + 0x10]
+00467987 : CALL 0x0046af50
+0046798c : TEST AL,AL
+0046798e : JZ 0x00467ba7
+00467994 : MOV BL,0x1
+00467996 : TEST EDI,EDI
+00467998 : JZ 0x0046799d
+0046799a : INC dword ptr [EDI + 0x4]
+0046799d : MOV EDI,dword ptr [ESI + 0x30]
+004679a0 : XOR EAX,EAX
+004679a2 : TEST EDI,EDI
+004679a4 : JLE 0x004679df
+004679a6 : MOV ECX,dword ptr [ESI + 0x2c]
+004679a9 : LEA ESP,[ESP]
+004679b0 : MOV EDX,dword ptr [ECX]
+004679b2 : MOV EDX,dword ptr [EDX + 0x38]
+004679b5 : TEST EDX,EDX
+004679b7 : JNZ 0x004679c3
+004679b9 : INC EAX
+004679ba : ADD ECX,0x4
+004679bd : CMP EAX,EDI
+004679bf : JL 0x004679b0
+004679c1 : JMP 0x004679df
+004679c3 : MOV EAX,[0x01720efc]
+004679c8 : MOV EDX,dword ptr [EDX + 0x8]
+004679cb : MOV ECX,dword ptr [EAX]
+004679cd : PUSH EDX
+004679ce : PUSH EAX
+004679cf : MOV EAX,dword ptr [ECX + 0x15c]
+004679d5 : CALL EAX
+004679d7 : TEST EAX,EAX
+004679d9 : SETZ BL
+004679dc : AND BL,0x1
+004679df : MOV EAX,[0x01720efc]
+004679e4 : MOV EDX,dword ptr [EBP + 0x8]
+004679e7 : MOV EDX,dword ptr [EDX + 0x1a04]
+004679ed : MOV ECX,dword ptr [EAX]
+004679ef : PUSH EDX
+004679f0 : PUSH EAX
+004679f1 : MOV EAX,dword ptr [ECX + 0x1a0]
+004679f7 : CALL EAX
+004679f9 : TEST EAX,EAX
+004679fb : SETZ CL
+004679fe : XOR EDI,EDI
+00467a00 : AND BL,CL
+00467a02 : CMP dword ptr [ESI + 0x30],EDI
+00467a05 : MOV dword ptr [EBP + 0x14],EDI
+00467a08 : JLE 0x00467b51
+00467a0e : JMP 0x00467a12
+00467a10 : MOV ESI,EDX
+00467a12 : MOV EDX,dword ptr [ESI + 0x2c]
+00467a15 : MOV ESI,dword ptr [EDX + EDI*0x4]
+00467a18 : TEST ESI,ESI
+00467a1a : JZ 0x00467b41
+00467a20 : MOV EAX,dword ptr [ESI + 0x38]
+00467a23 : TEST EAX,EAX
+00467a25 : JZ 0x00467b41
+00467a2b : MOV ECX,dword ptr [EAX + 0x38]
+00467a2e : MOV EAX,dword ptr [EAX + 0xc]
+00467a31 : MOV dword ptr [EBP + 0x18],ECX
+00467a34 : PUSH dword ptr [EBP + 0x18]
+00467a37 : MOV ECX,dword ptr [0x01720efc]
+00467a3d : MOV EDX,dword ptr [ECX]
+00467a3f : PUSH 0x0
+00467a41 : PUSH EAX
+00467a42 : PUSH 0x0
+00467a44 : PUSH ECX
+00467a45 : MOV ECX,dword ptr [EDX + 0x190]
+00467a4b : CALL ECX
+00467a4d : TEST EAX,EAX
+00467a4f : JNZ 0x00467b32
+00467a55 : MOV EDI,dword ptr [ESI + 0x3c]
+00467a58 : MOV EAX,dword ptr [EBP + 0x8]
+00467a5b : MOV ECX,dword ptr [EAX + 0x1a50]
+00467a61 : LEA EDX,[EDI*0x4 + 0x0]
+00467a68 : LEA EDI,[EDI + EDI*0x2]
+00467a6b : ADD EDI,EDI
+00467a6d : MOV dword ptr [EBP + 0x10],EDX
+00467a70 : CMP EDI,ECX
+00467a72 : JBE 0x00467ada
+00467a74 : MOV EDX,dword ptr [ESI + 0x3c]
+00467a77 : PUSH EDX
+00467a78 : MOV EAX,0xaaaaaaab
+00467a7d : MUL ECX
+00467a7f : SHR EDX,0x2
+00467a82 : PUSH EDX
+00467a83 : PUSH 0xcd5158
+00467a88 : CALL 0x00807d70
+00467a8d : MOV EAX,[0x01720efc]
+00467a92 : MOV ECX,dword ptr [EAX]
+00467a94 : MOV EDX,dword ptr [ECX + 0x1a0]
+00467a9a : ADD ESP,0xc
+00467a9d : PUSH 0x0
+00467a9f : PUSH EAX
+00467aa0 : CALL EDX
+00467aa2 : MOV ECX,dword ptr [ESI + 0x3c]
+00467aa5 : TEST EAX,EAX
+00467aa7 : MOV EAX,dword ptr [EBP + 0x8]
+00467aaa : PUSH EAX
+00467aab : SETZ byte ptr [EBP + 0x1b]
+00467aaf : CALL 0x0046b1b0
+00467ab4 : AND AL,byte ptr [EBP + 0x1b]
+00467ab7 : MOV EDX,dword ptr [EBP + 0x8]
+00467aba : MOV EDX,dword ptr [EDX + 0x1a04]
+00467ac0 : AND BL,AL
+00467ac2 : MOV EAX,[0x01720efc]
+00467ac7 : MOV ECX,dword ptr [EAX]
+00467ac9 : PUSH EDX
+00467aca : PUSH EAX
+00467acb : MOV EAX,dword ptr [ECX + 0x1a0]
+00467ad1 : CALL EAX
+00467ad3 : TEST EAX,EAX
+00467ad5 : SETZ CL
+00467ad8 : AND BL,CL
+00467ada : TEST EDI,EDI
+00467adc : JBE 0x00467af4
+00467ade : MOV EDX,dword ptr [EBP + 0x10]
+00467ae1 : PUSH EDX
+00467ae2 : PUSH 0x0
+00467ae4 : PUSH 0x0
+00467ae6 : MOV ECX,EDI
+00467ae8 : MOV EAX,0x6
+00467aed : CALL 0x0046c640
+00467af2 : AND BL,AL
+00467af4 : MOV EAX,dword ptr [EBP + -0x4]
+00467af7 : TEST EAX,EAX
+00467af9 : JZ 0x00467b0e
+00467afb : MOV ECX,0x1
+00467b00 : ADD dword ptr [EAX + 0xc],ECX
+00467b03 : ADD dword ptr [EAX + 0x8],ECX
+00467b06 : MOV ECX,dword ptr [ESI + 0x3c]
+00467b09 : ADD ECX,ECX
+00467b0b : ADD dword ptr [EAX + 0x10],ECX
+00467b0e : MOV EAX,[0x01720efc]
+00467b13 : MOV EDX,dword ptr [EAX]
+00467b15 : PUSH 0x0
+00467b17 : PUSH 0x0
+00467b19 : PUSH 0x0
+00467b1b : PUSH 0x0
+00467b1d : PUSH EAX
+00467b1e : MOV EAX,dword ptr [EDX + 0x190]
+00467b24 : CALL EAX
+00467b26 : MOV EDI,dword ptr [EBP + 0x14]
+00467b29 : TEST EAX,EAX
+00467b2b : SETZ CL
+00467b2e : AND BL,CL
+00467b30 : JMP 0x00467b41
+00467b32 : PUSH 0xcd51c8
+00467b37 : CALL 0x00807d70
+00467b3c : ADD ESP,0x4
+00467b3f : XOR BL,BL
+00467b41 : MOV EDX,dword ptr [EBP + 0xc]
+00467b44 : INC EDI
+00467b45 : CMP EDI,dword ptr [EDX + 0x30]
+00467b48 : MOV dword ptr [EBP + 0x14],EDI
+00467b4b : JL 0x00467a10
+00467b51 : MOV EAX,[0x01720efc]
+00467b56 : MOV ECX,dword ptr [EAX]
+00467b58 : MOV EDX,dword ptr [ECX + 0x170]
+00467b5e : PUSH 0x0
+00467b60 : PUSH EAX
+00467b61 : CALL EDX
+00467b63 : MOV EAX,[0x01720efc]
+00467b68 : MOV ECX,dword ptr [EAX]
+00467b6a : MOV EDX,dword ptr [ECX + 0x1ac]
+00467b70 : PUSH 0x0
+00467b72 : PUSH EAX
+00467b73 : CALL EDX
+00467b75 : MOV EAX,[0x01720efc]
+00467b7a : MOV ECX,dword ptr [EAX]
+00467b7c : MOV EDX,dword ptr [ECX + 0x1a0]
+00467b82 : PUSH 0x0
+00467b84 : PUSH EAX
+00467b85 : AND BL,0x1
+00467b88 : CALL EDX
+00467b8a : TEST EAX,EAX
+00467b8c : SETZ AL
+00467b8f : AND BL,AL
+00467b91 : JZ 0x00467b9c
+00467b93 : MOV EAX,dword ptr [EBP + -0x4]
+00467b96 : TEST EAX,EAX
+00467b98 : JZ 0x00467b9c
+00467b9a : INC dword ptr [EAX]
+00467b9c : MOV AL,BL
+00467b9e : POP EDI
+00467b9f : POP ESI
+00467ba0 : POP EBX
+00467ba1 : MOV ESP,EBP
+00467ba3 : POP EBP
+00467ba4 : RET 0x14
+00467ba7 : PUSH 0xcd51f4
+00467bac : CALL 0x00807d70
+00467bb1 : ADD ESP,0x4
+00467bb4 : POP EDI
+00467bb5 : POP ESI
+00467bb6 : XOR AL,AL
+00467bb8 : POP EBX
+00467bb9 : MOV ESP,EBP
+00467bbb : POP EBP
+00467bbc : RET 0x14

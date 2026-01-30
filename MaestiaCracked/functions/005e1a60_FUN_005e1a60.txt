@@ -1,0 +1,87 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005e1a60
+ENTRY    : 005e1a60
+BODY     : [[005e1a60, 005e1ad7]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_005e1a60(void)
+
+{
+  float fVar1;
+  uint in_EAX;
+  float *unaff_ESI;
+  int unaff_EDI;
+  
+  if ((in_EAX == 0xffffffff) || (*(uint *)(unaff_EDI + 0x34) <= in_EAX)) {
+    *unaff_ESI = 0.0;
+    unaff_ESI[1] = 0.0;
+    unaff_ESI[2] = 512.0;
+    unaff_ESI[3] = 1024.0;
+  }
+  else {
+    FUN_005e0e80(in_EAX,unaff_ESI);
+  }
+  fVar1 = (float)*(int *)(unaff_EDI + 0x54);
+  if (*(int *)(unaff_EDI + 0x54) < 0) {
+    fVar1 = fVar1 + 4.2949673e+09;
+  }
+  *unaff_ESI = (*unaff_ESI * 1024.0) / fVar1;
+  unaff_ESI[1] = (unaff_ESI[1] * 1024.0) / fVar1;
+  unaff_ESI[2] = (unaff_ESI[2] * 1024.0) / fVar1;
+  unaff_ESI[3] = (unaff_ESI[3] * 1024.0) / fVar1;
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005e1a60 : PUSH ECX
+005e1a61 : CMP EAX,-0x1
+005e1a64 : JZ 0x005e1a77
+005e1a66 : CMP EAX,dword ptr [EDI + 0x34]
+005e1a69 : JNC 0x005e1a77
+005e1a6b : PUSH ESI
+005e1a6c : PUSH EAX
+005e1a6d : LEA ECX,[EDI + 0x28]
+005e1a70 : CALL 0x005e0e80
+005e1a75 : JMP 0x005e1a90
+005e1a77 : FLDZ
+005e1a79 : FST float ptr [ESI]
+005e1a7b : FSTP float ptr [ESI + 0x4]
+005e1a7e : FLD float ptr [0x00cdf2a0]
+005e1a84 : FSTP float ptr [ESI + 0x8]
+005e1a87 : FLD float ptr [0x00cdf810]
+005e1a8d : FSTP float ptr [ESI + 0xc]
+005e1a90 : MOV EAX,dword ptr [EDI + 0x54]
+005e1a93 : FILD dword ptr [EDI + 0x54]
+005e1a96 : TEST EAX,EAX
+005e1a98 : JGE 0x005e1aa0
+005e1a9a : FADD float ptr [0x00cdf0e0]
+005e1aa0 : FSTP float ptr [ESP]
+005e1aa3 : MOV EAX,ESI
+005e1aa5 : FLD float ptr [ESI]
+005e1aa7 : FLD double ptr [0x00b8d8c8]
+005e1aad : FMUL ST1
+005e1aaf : FLD float ptr [ESP]
+005e1ab2 : FLD ST0
+005e1ab4 : FDIVP ST3,ST0
+005e1ab6 : FXCH ST2
+005e1ab8 : FSTP float ptr [ESI]
+005e1aba : FLD float ptr [ESI + 0x4]
+005e1abd : FMUL ST1
+005e1abf : FDIV ST0,ST2
+005e1ac1 : FSTP float ptr [ESI + 0x4]
+005e1ac4 : FLD float ptr [ESI + 0x8]
+005e1ac7 : FMUL ST1
+005e1ac9 : FDIV ST0,ST2
+005e1acb : FSTP float ptr [ESI + 0x8]
+005e1ace : FMUL float ptr [ESI + 0xc]
+005e1ad1 : FDIVRP
+005e1ad3 : FSTP float ptr [ESI + 0xc]
+005e1ad6 : POP ECX
+005e1ad7 : RET

@@ -1,0 +1,196 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00a21820
+ENTRY    : 00a21820
+BODY     : [[00a21820, 00a21965]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00a21820(void)
+
+{
+  undefined4 *puVar1;
+  int *piVar2;
+  undefined4 *puVar3;
+  char cVar4;
+  uint uVar5;
+  int in_ECX;
+  undefined1 local_38 [4];
+  undefined2 local_34;
+  undefined4 local_24;
+  uint local_20;
+  int local_1c;
+  LPCRITICAL_SECTION local_18;
+  undefined4 *local_14;
+  void *local_10;
+  undefined1 *puStack_c;
+  int local_8;
+  
+  local_8 = 0xffffffff;
+  puStack_c = &LAB_00b264b4;
+  local_10 = ExceptionList;
+  uVar5 = DAT_00d66fa0 ^ (uint)&stack0xfffffffc;
+  ExceptionList = &local_10;
+  if (in_ECX == 0) {
+    local_1c = 0;
+  }
+  else {
+    local_1c = in_ECX + 0x18;
+  }
+  local_18 = (LPCRITICAL_SECTION)(local_1c + 4);
+  EnterCriticalSection(local_18);
+  local_8 = 0;
+  puVar1 = *(undefined4 **)(in_ECX + 0xcc);
+  *(undefined1 *)(in_ECX + 0x339) = 1;
+  puVar3 = (undefined4 *)*puVar1;
+  do {
+    local_14 = puVar3;
+    if (puVar3 == puVar1) {
+      local_8 = 0xffffffff;
+      LeaveCriticalSection(local_18);
+      ExceptionList = local_10;
+      return;
+    }
+    piVar2 = (int *)puVar3[4];
+    if (piVar2 == (int *)0x0) {
+      FUN_008018d0(L"[AvaGameZone::UpdateNonPlayer] ni->second is NULL");
+    }
+    else if (piVar2[0x50] == 0x12345679) {
+      cVar4 = (**(code **)(*piVar2 + 0x200))();
+      if (cVar4 == '\0') {
+        (**(code **)(*(int *)puVar3[4] + 0x248))();
+      }
+    }
+    else {
+      local_20 = 7;
+      local_24 = 0;
+      local_34 = 0;
+      FUN_00406360(L"dangling UpdateNonPlayer",0x18);
+      local_8._0_1_ = 1;
+      if ((int *)*DAT_00da98e8 != (int *)0x0) {
+        (**(code **)(*(int *)*DAT_00da98e8 + 0x14))
+                  (L"AvaGameZone::UpdateNonPlayer",0xeb0,local_38,uVar5);
+      }
+      local_8 = (uint)local_8._1_3_ << 8;
+      if (7 < local_20) {
+                    /* WARNING: Subroutine does not return */
+        FUN_006f04e0();
+      }
+      local_20 = 7;
+      local_24 = 0;
+      local_34 = 0;
+    }
+    FUN_00416210();
+    puVar3 = local_14;
+  } while( true );
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00a21820 : PUSH EBP
+00a21821 : MOV EBP,ESP
+00a21823 : PUSH -0x1
+00a21825 : PUSH 0xb264b4
+00a2182a : MOV EAX,FS:[0x0]
+00a21830 : PUSH EAX
+00a21831 : SUB ESP,0x28
+00a21834 : PUSH EBX
+00a21835 : PUSH ESI
+00a21836 : PUSH EDI
+00a21837 : MOV EAX,[0x00d66fa0]
+00a2183c : XOR EAX,EBP
+00a2183e : PUSH EAX
+00a2183f : LEA EAX,[EBP + -0xc]
+00a21842 : MOV FS:[0x0],EAX
+00a21848 : MOV ESI,ECX
+00a2184a : XOR EBX,EBX
+00a2184c : CMP ESI,EBX
+00a2184e : JZ 0x00a21855
+00a21850 : LEA EAX,[ESI + 0x18]
+00a21853 : JMP 0x00a21857
+00a21855 : XOR EAX,EAX
+00a21857 : MOV dword ptr [EBP + -0x18],EAX
+00a2185a : ADD EAX,0x4
+00a2185d : PUSH EAX
+00a2185e : MOV dword ptr [EBP + -0x14],EAX
+00a21861 : CALL dword ptr [0x00b85118]
+00a21867 : MOV dword ptr [EBP + -0x4],EBX
+00a2186a : MOV EDI,dword ptr [ESI + 0xcc]
+00a21870 : MOV byte ptr [ESI + 0x339],0x1
+00a21877 : MOV EAX,dword ptr [EDI]
+00a21879 : MOV ESI,EAX
+00a2187b : MOV dword ptr [EBP + -0x10],ESI
+00a2187e : CMP EAX,EDI
+00a21880 : JZ 0x00a21943
+00a21886 : MOV ECX,dword ptr [ESI + 0x10]
+00a21889 : CMP ECX,EBX
+00a2188b : JNZ 0x00a218a5
+00a2188d : MOV ESI,dword ptr [0x00da98e8]
+00a21893 : PUSH 0xcc0300
+00a21898 : CALL 0x008018d0
+00a2189d : ADD ESP,0x4
+00a218a0 : JMP 0x00a21930
+00a218a5 : CMP dword ptr [ECX + 0x140],0x12345679
+00a218af : JNZ 0x00a218ce
+00a218b1 : MOV EAX,dword ptr [ECX]
+00a218b3 : MOV EDX,dword ptr [EAX + 0x200]
+00a218b9 : CALL EDX
+00a218bb : TEST AL,AL
+00a218bd : JNZ 0x00a21930
+00a218bf : MOV ECX,dword ptr [ESI + 0x10]
+00a218c2 : MOV EAX,dword ptr [ECX]
+00a218c4 : MOV EDX,dword ptr [EAX + 0x248]
+00a218ca : CALL EDX
+00a218cc : JMP 0x00a21930
+00a218ce : PUSH 0x18
+00a218d0 : XOR EAX,EAX
+00a218d2 : MOV ESI,0x7
+00a218d7 : PUSH 0xcc0364
+00a218dc : LEA ECX,[EBP + -0x34]
+00a218df : MOV dword ptr [EBP + -0x1c],ESI
+00a218e2 : MOV dword ptr [EBP + -0x20],EBX
+00a218e5 : MOV word ptr [EBP + -0x30],AX
+00a218e9 : CALL 0x00406360
+00a218ee : MOV byte ptr [EBP + -0x4],0x1
+00a218f2 : MOV ECX,dword ptr [0x00da98e8]
+00a218f8 : MOV ECX,dword ptr [ECX]
+00a218fa : CMP ECX,EBX
+00a218fc : JZ 0x00a21913
+00a218fe : MOV EDX,dword ptr [ECX]
+00a21900 : MOV EDX,dword ptr [EDX + 0x14]
+00a21903 : LEA EAX,[EBP + -0x34]
+00a21906 : PUSH EAX
+00a21907 : PUSH 0xeb0
+00a2190c : PUSH 0xcc0398
+00a21911 : CALL EDX
+00a21913 : MOV byte ptr [EBP + -0x4],BL
+00a21916 : CMP dword ptr [EBP + -0x1c],0x8
+00a2191a : JC 0x00a21924
+00a2191c : MOV ECX,dword ptr [EBP + -0x30]
+00a2191f : CALL 0x006f04e0
+00a21924 : XOR EAX,EAX
+00a21926 : MOV dword ptr [EBP + -0x1c],ESI
+00a21929 : MOV dword ptr [EBP + -0x20],EBX
+00a2192c : MOV word ptr [EBP + -0x30],AX
+00a21930 : LEA EDX,[EBP + -0x10]
+00a21933 : CALL 0x00416210
+00a21938 : MOV ESI,dword ptr [EBP + -0x10]
+00a2193b : CMP ESI,EDI
+00a2193d : JNZ 0x00a21886
+00a21943 : MOV dword ptr [EBP + -0x4],0xffffffff
+00a2194a : MOV ECX,dword ptr [EBP + -0x14]
+00a2194d : PUSH ECX
+00a2194e : CALL dword ptr [0x00b8511c]
+00a21954 : MOV ECX,dword ptr [EBP + -0xc]
+00a21957 : MOV dword ptr FS:[0x0],ECX
+00a2195e : POP ECX
+00a2195f : POP EDI
+00a21960 : POP ESI
+00a21961 : POP EBX
+00a21962 : MOV ESP,EBP
+00a21964 : POP EBP
+00a21965 : RET

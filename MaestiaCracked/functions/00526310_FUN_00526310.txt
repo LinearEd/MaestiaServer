@@ -1,0 +1,87 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00526310
+ENTRY    : 00526310
+BODY     : [[00526310, 0052638e]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00526310(void)
+
+{
+  char cVar1;
+  undefined4 *puVar2;
+  char *in_ECX;
+  
+  cVar1 = *in_ECX;
+  if (cVar1 == '\b') {
+    FUN_00568530();
+    return;
+  }
+  if ((cVar1 == '\x06') && (puVar2 = *(undefined4 **)(in_ECX + 4), puVar2 != (undefined4 *)0x0)) {
+    puVar2[2] = puVar2[2] + -1;
+    if ((puVar2[2] & 0x70000000) != 0x10000000) {
+      puVar2[2] = puVar2[2] & 0x9fffffff | 0x10000000;
+      (**(code **)*puVar2)(1);
+      return;
+    }
+  }
+  else if (cVar1 == '\t') {
+    puVar2 = *(undefined4 **)(in_ECX + 4);
+    puVar2[2] = puVar2[2] + -1;
+    if ((puVar2[2] & 0x70000000) != 0x10000000) {
+      puVar2[2] = puVar2[2] & 0x9fffffff | 0x10000000;
+      (**(code **)*puVar2)(1);
+    }
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00526310 : MOV DL,byte ptr [ECX]
+00526312 : CMP DL,0x8
+00526315 : JNZ 0x0052631f
+00526317 : ADD ECX,0x4
+0052631a : JMP 0x00568530
+0052631f : CMP DL,0x6
+00526322 : JNZ 0x0052635b
+00526324 : MOV EAX,dword ptr [ECX + 0x4]
+00526327 : TEST EAX,EAX
+00526329 : JZ 0x0052635b
+0052632b : DEC dword ptr [EAX + 0x8]
+0052632e : MOV ECX,dword ptr [EAX + 0x8]
+00526331 : MOV EDX,ECX
+00526333 : AND EDX,0x70000000
+00526339 : CMP EDX,0x10000000
+0052633f : JZ 0x0052638e
+00526341 : MOV EDX,dword ptr [EAX]
+00526343 : AND ECX,0x9fffffff
+00526349 : OR ECX,0x10000000
+0052634f : MOV dword ptr [EAX + 0x8],ECX
+00526352 : MOV ECX,EAX
+00526354 : MOV EAX,dword ptr [EDX]
+00526356 : PUSH 0x1
+00526358 : CALL EAX
+0052635a : RET
+0052635b : CMP DL,0x9
+0052635e : JNZ 0x0052638e
+00526360 : MOV ECX,dword ptr [ECX + 0x4]
+00526363 : DEC dword ptr [ECX + 0x8]
+00526366 : MOV EAX,dword ptr [ECX + 0x8]
+00526369 : MOV EDX,EAX
+0052636b : AND EDX,0x70000000
+00526371 : CMP EDX,0x10000000
+00526377 : JZ 0x0052638e
+00526379 : AND EAX,0x9fffffff
+0052637e : OR EAX,0x10000000
+00526383 : MOV dword ptr [ECX + 0x8],EAX
+00526386 : MOV EAX,dword ptr [ECX]
+00526388 : MOV EDX,dword ptr [EAX]
+0052638a : PUSH 0x1
+0052638c : CALL EDX
+0052638e : RET

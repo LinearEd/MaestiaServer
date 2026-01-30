@@ -1,0 +1,123 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0081c150
+ENTRY    : 0081c150
+BODY     : [[0081c150, 0081c22b]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_0081c150(int param_1)
+
+{
+  POINT pt;
+  uint in_EAX;
+  BOOL BVar1;
+  tagPOINT local_20;
+  RECT local_18;
+  
+  if (((DAT_017251ac != 0) && (*(int *)(DAT_017251ac + 0x178) != 0)) &&
+     (*(int *)(DAT_017251ac + 0x170) != 0)) {
+    local_18.left = 0;
+    local_18.top = 0;
+    local_18.right = *(LONG *)(*(int *)(DAT_017251ac + 0x178) + 0x20);
+    local_18.bottom = *(LONG *)(*(int *)(DAT_017251ac + 0x178) + 0x24);
+    GetCursorPos(&local_20);
+    ScreenToClient(*(HWND *)(DAT_017251ac + 0x170),&local_20);
+    pt.y = local_20.y;
+    pt.x = local_20.x;
+    BVar1 = PtInRect(&local_18,pt);
+    if (BVar1 == 0) {
+      return;
+    }
+  }
+  if (DAT_00da9853 == 0) {
+    if ((DAT_00da93ec == 0) || (*(char *)(DAT_00da93ec + 0x3a9) == '\0')) {
+      if (DAT_00da93f8 != 0) {
+        in_EAX = 1;
+      }
+    }
+    else {
+      in_EAX = 9;
+    }
+  }
+  else {
+    in_EAX = (uint)DAT_00da9853;
+  }
+  if (DAT_017251d0 != 0) {
+    FUN_007cb100(DAT_017251d0,in_EAX);
+  }
+  *(uint *)(param_1 + 0x2fc) = in_EAX;
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0081c150 : PUSH EBP
+0081c151 : MOV EBP,ESP
+0081c153 : AND ESP,0xfffffff8
+0081c156 : SUB ESP,0x1c
+0081c159 : PUSH ESI
+0081c15a : MOV ESI,EAX
+0081c15c : MOV EAX,[0x017251ac]
+0081c161 : TEST EAX,EAX
+0081c163 : JZ 0x0081c1d7
+0081c165 : CMP dword ptr [EAX + 0x178],0x0
+0081c16c : JZ 0x0081c1d7
+0081c16e : CMP dword ptr [EAX + 0x170],0x0
+0081c175 : JZ 0x0081c1d7
+0081c177 : MOV EAX,dword ptr [EAX + 0x178]
+0081c17d : MOV dword ptr [ESP + 0x10],0x0
+0081c185 : MOV dword ptr [ESP + 0x14],0x0
+0081c18d : MOV ECX,dword ptr [EAX + 0x20]
+0081c190 : MOV dword ptr [ESP + 0x18],ECX
+0081c194 : MOV EDX,dword ptr [EAX + 0x24]
+0081c197 : LEA EAX,[ESP + 0x8]
+0081c19b : PUSH EAX
+0081c19c : MOV dword ptr [ESP + 0x20],EDX
+0081c1a0 : CALL dword ptr [0x00b8544c]
+0081c1a6 : MOV EDX,dword ptr [0x017251ac]
+0081c1ac : MOV EAX,dword ptr [EDX + 0x170]
+0081c1b2 : LEA ECX,[ESP + 0x8]
+0081c1b6 : PUSH ECX
+0081c1b7 : PUSH EAX
+0081c1b8 : CALL dword ptr [0x00b85494]
+0081c1be : MOV ECX,dword ptr [ESP + 0xc]
+0081c1c2 : MOV EDX,dword ptr [ESP + 0x8]
+0081c1c6 : PUSH ECX
+0081c1c7 : PUSH EDX
+0081c1c8 : LEA EAX,[ESP + 0x18]
+0081c1cc : PUSH EAX
+0081c1cd : CALL dword ptr [0x00b85498]
+0081c1d3 : TEST EAX,EAX
+0081c1d5 : JZ 0x0081c225
+0081c1d7 : MOV AL,[0x00da9853]
+0081c1dc : TEST AL,AL
+0081c1de : JZ 0x0081c1e5
+0081c1e0 : MOVZX ESI,AL
+0081c1e3 : JMP 0x0081c20c
+0081c1e5 : MOV EAX,[0x00da93ec]
+0081c1ea : TEST EAX,EAX
+0081c1ec : JZ 0x0081c1fe
+0081c1ee : CMP byte ptr [EAX + 0x3a9],0x0
+0081c1f5 : JZ 0x0081c1fe
+0081c1f7 : MOV ESI,0x9
+0081c1fc : JMP 0x0081c20c
+0081c1fe : CMP dword ptr [0x00da93f8],0x0
+0081c205 : JZ 0x0081c20c
+0081c207 : MOV ESI,0x1
+0081c20c : MOV EAX,[0x017251d0]
+0081c211 : TEST EAX,EAX
+0081c213 : JZ 0x0081c21c
+0081c215 : PUSH ESI
+0081c216 : PUSH EAX
+0081c217 : CALL 0x007cb100
+0081c21c : MOV ECX,dword ptr [EBP + 0x8]
+0081c21f : MOV dword ptr [ECX + 0x2fc],ESI
+0081c225 : POP ESI
+0081c226 : MOV ESP,EBP
+0081c228 : POP EBP
+0081c229 : RET 0x4

@@ -1,0 +1,163 @@
+PROGRAM  : Maestia.exe
+FUNCTION : do_out
+ENTRY    : 006251a7
+BODY     : [[006251a7, 0062529a]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    protected: virtual int __thiscall std::codecvt<unsigned short,char,int>::do_out(int &,unsigned
+   short const *,unsigned short const *,unsigned short const * &,char *,char *,char * &)const 
+   
+   Library: Visual Studio 2008 Release */
+
+int __thiscall
+std::codecvt<unsigned_short,char,int>::do_out
+          (codecvt<unsigned_short,char,int> *this,int *param_1,ushort *param_2,ushort *param_3,
+          ushort **param_4,char *param_5,char *param_6,char **param_7)
+
+{
+  ushort *puVar1;
+  char *pcVar2;
+  int iVar3;
+  rsize_t _MaxCount;
+  rsize_t _DstSize;
+  char local_10 [8];
+  uint local_8;
+  
+  local_8 = DAT_00d66fa0 ^ (uint)&stack0xfffffffc;
+  *param_4 = param_2;
+  *param_7 = param_5;
+  puVar1 = *param_4;
+  do {
+    if ((puVar1 == param_3) || (pcVar2 = *param_7, pcVar2 == param_6)) goto LAB_0062528a;
+    if ((int)param_6 - (int)pcVar2 < 5) {
+      iVar3 = *param_1;
+      _MaxCount = __Wcrtomb(local_10,**param_4,param_1,(_Cvtvec *)(this + 8));
+      if ((int)_MaxCount < 0) goto LAB_0062528a;
+      _DstSize = (int)param_6 - (int)*param_7;
+      if ((int)_DstSize < (int)_MaxCount) {
+        *param_1 = iVar3;
+LAB_0062528a:
+        iVar3 = __security_check_cookie(local_8 ^ (uint)&stack0xfffffffc);
+        return iVar3;
+      }
+      _memcpy_s(*param_7,_DstSize,local_10,_MaxCount);
+      *param_4 = *param_4 + 1;
+      *param_7 = *param_7 + _MaxCount;
+    }
+    else {
+      iVar3 = __Wcrtomb(pcVar2,**param_4,param_1,(_Cvtvec *)(this + 8));
+      if (iVar3 < 0) goto LAB_0062528a;
+      *param_4 = *param_4 + 1;
+      *param_7 = *param_7 + iVar3;
+    }
+    puVar1 = *param_4;
+  } while( true );
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006251a7 : MOV EDI,EDI
+006251a9 : PUSH EBP
+006251aa : MOV EBP,ESP
+006251ac : SUB ESP,0x20
+006251af : MOV EAX,[0x00d66fa0]
+006251b4 : XOR EAX,EBP
+006251b6 : MOV dword ptr [EBP + -0x4],EAX
+006251b9 : MOV EAX,dword ptr [EBP + 0x1c]
+006251bc : PUSH EBX
+006251bd : MOV EBX,dword ptr [EBP + 0x8]
+006251c0 : MOV dword ptr [EBP + -0x14],EAX
+006251c3 : MOV EAX,dword ptr [EBP + 0xc]
+006251c6 : PUSH ESI
+006251c7 : MOV ESI,dword ptr [EBP + 0x14]
+006251ca : MOV dword ptr [ESI],EAX
+006251cc : MOV EAX,dword ptr [EBP + 0x18]
+006251cf : PUSH EDI
+006251d0 : MOV EDI,dword ptr [EBP + 0x20]
+006251d3 : XOR EDX,EDX
+006251d5 : MOV dword ptr [EDI],EAX
+006251d7 : MOV EAX,dword ptr [ESI]
+006251d9 : CMP EAX,dword ptr [EBP + 0x10]
+006251dc : MOV dword ptr [EBP + -0x20],ECX
+006251df : SETNZ DL
+006251e2 : MOV dword ptr [EBP + -0x18],EBX
+006251e5 : MOV dword ptr [EBP + -0x10],EDX
+006251e8 : CMP EAX,dword ptr [EBP + 0x10]
+006251eb : JZ 0x00625287
+006251f1 : JMP 0x006251f6
+006251f3 : MOV ECX,dword ptr [EBP + -0x20]
+006251f6 : MOV EAX,dword ptr [EDI]
+006251f8 : CMP EAX,dword ptr [EBP + -0x14]
+006251fb : JZ 0x00625287
+00625201 : MOV EDX,dword ptr [EBP + -0x14]
+00625204 : ADD ECX,0x8
+00625207 : SUB EDX,EAX
+00625209 : CMP EDX,0x5
+0062520c : PUSH ECX
+0062520d : PUSH EBX
+0062520e : JL 0x0062522a
+00625210 : MOV ECX,dword ptr [ESI]
+00625212 : MOVZX ECX,word ptr [ECX]
+00625215 : PUSH ECX
+00625216 : PUSH EAX
+00625217 : CALL 0x006249de
+0062521c : ADD ESP,0x10
+0062521f : TEST EAX,EAX
+00625221 : JL 0x0062527a
+00625223 : ADD dword ptr [ESI],0x2
+00625226 : ADD dword ptr [EDI],EAX
+00625228 : JMP 0x00625269
+0062522a : MOV EAX,dword ptr [EBX]
+0062522c : MOV dword ptr [EBP + -0x1c],EAX
+0062522f : MOV EAX,dword ptr [ESI]
+00625231 : MOVZX EAX,word ptr [EAX]
+00625234 : PUSH EAX
+00625235 : LEA EAX,[EBP + -0xc]
+00625238 : PUSH EAX
+00625239 : CALL 0x006249de
+0062523e : MOV EBX,EAX
+00625240 : ADD ESP,0x10
+00625243 : TEST EBX,EBX
+00625245 : JL 0x0062527a
+00625247 : MOV EAX,dword ptr [EDI]
+00625249 : MOV ECX,dword ptr [EBP + -0x14]
+0062524c : SUB ECX,EAX
+0062524e : CMP ECX,EBX
+00625250 : JL 0x0062527f
+00625252 : PUSH EBX
+00625253 : LEA EDX,[EBP + -0xc]
+00625256 : PUSH EDX
+00625257 : PUSH ECX
+00625258 : PUSH EAX
+00625259 : CALL 0x00633ea4
+0062525e : ADD dword ptr [ESI],0x2
+00625261 : ADD ESP,0x10
+00625264 : ADD dword ptr [EDI],EBX
+00625266 : MOV EBX,dword ptr [EBP + -0x18]
+00625269 : MOV EAX,dword ptr [EBP + 0x10]
+0062526c : AND dword ptr [EBP + -0x10],0x0
+00625270 : CMP dword ptr [ESI],EAX
+00625272 : JNZ 0x006251f3
+00625278 : JMP 0x00625287
+0062527a : PUSH 0x2
+0062527c : POP EAX
+0062527d : JMP 0x0062528a
+0062527f : MOV EAX,dword ptr [EBP + -0x1c]
+00625282 : MOV ECX,dword ptr [EBP + -0x18]
+00625285 : MOV dword ptr [ECX],EAX
+00625287 : MOV EAX,dword ptr [EBP + -0x10]
+0062528a : MOV ECX,dword ptr [EBP + -0x4]
+0062528d : POP EDI
+0062528e : POP ESI
+0062528f : XOR ECX,EBP
+00625291 : POP EBX
+00625292 : CALL 0x00633e6b
+00625297 : LEAVE
+00625298 : RET 0x1c

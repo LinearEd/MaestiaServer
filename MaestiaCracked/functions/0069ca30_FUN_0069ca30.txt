@@ -1,0 +1,99 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0069ca30
+ENTRY    : 0069ca30
+BODY     : [[0069ca30, 0069ca34] [0069ca40, 0069ca9a]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_0069ca30(undefined4 param_1,int param_2)
+
+{
+  byte bVar1;
+  byte *pbVar2;
+  int iVar3;
+  byte *pbVar4;
+  int unaff_EBX;
+  uint uVar5;
+  byte *unaff_EDI;
+  bool bVar6;
+  
+  uVar5 = 0;
+  do {
+    pbVar2 = (byte *)("Delta" + (&DAT_00be8770)[uVar5]);
+    pbVar4 = unaff_EDI;
+    do {
+      bVar1 = *pbVar2;
+      bVar6 = bVar1 < *pbVar4;
+      if (bVar1 != *pbVar4) {
+LAB_0069ca70:
+        iVar3 = (1 - (uint)bVar6) - (uint)(bVar6 != 0);
+        goto LAB_0069ca75;
+      }
+      if (bVar1 == 0) break;
+      bVar1 = pbVar2[1];
+      bVar6 = bVar1 < pbVar4[1];
+      if (bVar1 != pbVar4[1]) goto LAB_0069ca70;
+      pbVar2 = pbVar2 + 2;
+      pbVar4 = pbVar4 + 2;
+    } while (bVar1 != 0);
+    iVar3 = 0;
+LAB_0069ca75:
+    if (iVar3 == 0) {
+      if (*(int *)(unaff_EBX + uVar5 * 4) == 0) {
+        *(undefined4 *)(unaff_EBX + uVar5 * 4) = 1;
+        *(undefined4 *)(param_2 + uVar5 * 4) = param_1;
+      }
+      return;
+    }
+    uVar5 = uVar5 + 1;
+    if (7 < uVar5) {
+      return;
+    }
+  } while( true );
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0069ca30 : PUSH ESI
+0069ca31 : XOR ESI,ESI
+0069ca33 : JMP 0x0069ca40
+0069ca40 : MOV EAX,dword ptr [ESI*0x4 + 0xbe8770]
+0069ca47 : MOV ECX,EDI
+0069ca49 : ADD EAX,0xbda9fc
+0069ca4e : MOV EDI,EDI
+0069ca50 : MOV DL,byte ptr [EAX]
+0069ca52 : CMP DL,byte ptr [ECX]
+0069ca54 : JNZ 0x0069ca70
+0069ca56 : TEST DL,DL
+0069ca58 : JZ 0x0069ca6c
+0069ca5a : MOV DL,byte ptr [EAX + 0x1]
+0069ca5d : CMP DL,byte ptr [ECX + 0x1]
+0069ca60 : JNZ 0x0069ca70
+0069ca62 : ADD EAX,0x2
+0069ca65 : ADD ECX,0x2
+0069ca68 : TEST DL,DL
+0069ca6a : JNZ 0x0069ca50
+0069ca6c : XOR EAX,EAX
+0069ca6e : JMP 0x0069ca75
+0069ca70 : SBB EAX,EAX
+0069ca72 : SBB EAX,-0x1
+0069ca75 : TEST EAX,EAX
+0069ca77 : JZ 0x0069ca81
+0069ca79 : INC ESI
+0069ca7a : CMP ESI,0x8
+0069ca7d : JC 0x0069ca40
+0069ca7f : POP ESI
+0069ca80 : RET
+0069ca81 : CMP dword ptr [EBX + ESI*0x4],0x0
+0069ca85 : JNZ 0x0069ca99
+0069ca87 : MOV EAX,dword ptr [ESP + 0xc]
+0069ca8b : MOV ECX,dword ptr [ESP + 0x8]
+0069ca8f : MOV dword ptr [EBX + ESI*0x4],0x1
+0069ca96 : MOV dword ptr [EAX + ESI*0x4],ECX
+0069ca99 : POP ESI
+0069ca9a : RET

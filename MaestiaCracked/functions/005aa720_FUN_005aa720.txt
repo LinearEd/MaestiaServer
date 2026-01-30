@@ -1,0 +1,85 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005aa720
+ENTRY    : 005aa720
+BODY     : [[005aa720, 005aa77f]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_005aa720(int param_1,uint param_2,int param_3)
+
+{
+  uint *puVar1;
+  uint uVar2;
+  int iVar3;
+  uint uVar4;
+  uint uVar5;
+  undefined4 *puVar6;
+  
+  uVar5 = (param_2 - 1) + param_3;
+  uVar2 = param_2 >> 5;
+  uVar4 = uVar5 >> 5;
+  uVar5 = uVar5 & 0x1f;
+  if (uVar4 <= uVar2) {
+    puVar1 = (uint *)(param_1 + uVar2 * 4);
+    *puVar1 = *puVar1 | *(uint *)(&DAT_00b951c8 + (param_2 & 0x1f) * 4) &
+                        *(uint *)(&DAT_00b95248 + uVar5 * 4);
+    return;
+  }
+  puVar1 = (uint *)(param_1 + uVar2 * 4);
+  *puVar1 = *puVar1 | *(uint *)(&DAT_00b951c8 + (param_2 & 0x1f) * 4);
+  uVar2 = uVar2 + 1;
+  if (uVar2 < uVar4) {
+    puVar6 = (undefined4 *)(param_1 + uVar2 * 4);
+    for (iVar3 = uVar4 - uVar2; iVar3 != 0; iVar3 = iVar3 + -1) {
+      *puVar6 = 0xffffffff;
+      puVar6 = puVar6 + 1;
+    }
+  }
+  puVar1 = (uint *)(param_1 + uVar4 * 4);
+  *puVar1 = *puVar1 | *(uint *)(&DAT_00b95248 + uVar5 * 4);
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005aa720 : MOV ECX,dword ptr [ESP + 0x8]
+005aa724 : MOV EDX,dword ptr [ESP + 0xc]
+005aa728 : PUSH ESI
+005aa729 : LEA ESI,[ECX + EDX*0x1 + -0x1]
+005aa72d : MOV EAX,ECX
+005aa72f : MOV EDX,ESI
+005aa731 : SHR EAX,0x5
+005aa734 : SHR EDX,0x5
+005aa737 : AND ECX,0x1f
+005aa73a : MOV ECX,dword ptr [ECX*0x4 + 0xb951c8]
+005aa741 : AND ESI,0x1f
+005aa744 : CMP EDX,EAX
+005aa746 : JBE 0x005aa770
+005aa748 : PUSH EBX
+005aa749 : MOV EBX,dword ptr [ESP + 0xc]
+005aa74d : OR dword ptr [EBX + EAX*0x4],ECX
+005aa750 : INC EAX
+005aa751 : CMP EAX,EDX
+005aa753 : JNC 0x005aa763
+005aa755 : PUSH EDI
+005aa756 : MOV ECX,EDX
+005aa758 : LEA EDI,[EBX + EAX*0x4]
+005aa75b : SUB ECX,EAX
+005aa75d : OR EAX,0xffffffff
+005aa760 : STOSD.REP ES:EDI
+005aa762 : POP EDI
+005aa763 : MOV EAX,dword ptr [ESI*0x4 + 0xb95248]
+005aa76a : OR dword ptr [EBX + EDX*0x4],EAX
+005aa76d : POP EBX
+005aa76e : POP ESI
+005aa76f : RET
+005aa770 : AND ECX,dword ptr [ESI*0x4 + 0xb95248]
+005aa777 : MOV EDX,dword ptr [ESP + 0x8]
+005aa77b : OR dword ptr [EDX + EAX*0x4],ECX
+005aa77e : POP ESI
+005aa77f : RET

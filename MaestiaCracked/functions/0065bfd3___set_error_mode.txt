@@ -1,0 +1,71 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __set_error_mode
+ENTRY    : 0065bfd3
+BODY     : [[0065bfd3, 0065c01d]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __set_error_mode
+   
+   Library: Visual Studio 2008 Release */
+
+int __cdecl __set_error_mode(int _Mode)
+
+{
+  int *piVar1;
+  int iVar2;
+  
+  if (-1 < _Mode) {
+    if (_Mode < 3) {
+      iVar2 = DAT_00d7b7d4;
+      DAT_00d7b7d4 = _Mode;
+      return iVar2;
+    }
+    if (_Mode == 3) {
+      return DAT_00d7b7d4;
+    }
+  }
+  piVar1 = __errno();
+  *piVar1 = 0x16;
+  __invalid_parameter(0,0,0,0,0);
+  return -1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0065bfd3 : MOV EDI,EDI
+0065bfd5 : PUSH EBP
+0065bfd6 : MOV EBP,ESP
+0065bfd8 : MOV ECX,dword ptr [EBP + 0x8]
+0065bfdb : PUSH ESI
+0065bfdc : XOR ESI,ESI
+0065bfde : CMP ECX,ESI
+0065bfe0 : JL 0x0065c000
+0065bfe2 : CMP ECX,0x2
+0065bfe5 : JLE 0x0065bff3
+0065bfe7 : CMP ECX,0x3
+0065bfea : JNZ 0x0065c000
+0065bfec : MOV EAX,[0x00d7b7d4]
+0065bff1 : JMP 0x0065c01b
+0065bff3 : MOV EAX,[0x00d7b7d4]
+0065bff8 : MOV dword ptr [0x00d7b7d4],ECX
+0065bffe : JMP 0x0065c01b
+0065c000 : CALL 0x0063ab82
+0065c005 : PUSH ESI
+0065c006 : PUSH ESI
+0065c007 : PUSH ESI
+0065c008 : PUSH ESI
+0065c009 : PUSH ESI
+0065c00a : MOV dword ptr [EAX],0x16
+0065c010 : CALL 0x006372b8
+0065c015 : ADD ESP,0x14
+0065c018 : OR EAX,0xffffffff
+0065c01b : POP ESI
+0065c01c : POP EBP
+0065c01d : RET

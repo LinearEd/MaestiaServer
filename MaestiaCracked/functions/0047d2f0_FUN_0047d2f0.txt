@@ -1,0 +1,97 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0047d2f0
+ENTRY    : 0047d2f0
+BODY     : [[0047d2f0, 0047d363]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_0047d2f0(void)
+
+{
+  HANDLE hThread;
+  uint uVar1;
+  uint uVar2;
+  uint *unaff_ESI;
+  _FILETIME *lpCreationTime;
+  _FILETIME *lpExitTime;
+  LPFILETIME lpKernelTime;
+  LPFILETIME lpUserTime;
+  _FILETIME local_14;
+  _FILETIME local_c;
+  
+  lpKernelTime = (LPFILETIME)(unaff_ESI + 10);
+  lpExitTime = &local_c;
+  lpCreationTime = &local_14;
+  lpUserTime = (LPFILETIME)(unaff_ESI + 0xc);
+  hThread = GetCurrentThread();
+  GetThreadTimes(hThread,lpCreationTime,lpExitTime,lpKernelTime,lpUserTime);
+  QueryPerformanceCounter((LARGE_INTEGER *)(unaff_ESI + 4));
+  uVar1 = (((LARGE_INTEGER *)(unaff_ESI + 4))->s).LowPart;
+  local_c.dwLowDateTime = uVar1 - unaff_ESI[2];
+  local_c.dwHighDateTime = (unaff_ESI[5] - unaff_ESI[3]) - (uint)(uVar1 < unaff_ESI[2]);
+  uVar1 = FUN_0063b380();
+  unaff_ESI[0xe] = uVar1;
+  unaff_ESI[0xf] = (int)uVar1 >> 0x1f;
+  uVar2 = ((unaff_ESI[10] - unaff_ESI[8]) - unaff_ESI[6]) +
+          ((LPFILETIME)(unaff_ESI + 0xc))->dwLowDateTime;
+  uVar1 = *unaff_ESI;
+  *unaff_ESI = *unaff_ESI + uVar2;
+  unaff_ESI[0x10] = uVar2;
+  unaff_ESI[0x11] = (int)uVar2 >> 0x1f;
+  unaff_ESI[1] = unaff_ESI[1] + ((int)uVar2 >> 0x1f) + (uint)CARRY4(uVar1,uVar2);
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0047d2f0 : PUSH EBP
+0047d2f1 : MOV EBP,ESP
+0047d2f3 : SUB ESP,0x10
+0047d2f6 : PUSH EBX
+0047d2f7 : PUSH EDI
+0047d2f8 : LEA EBX,[ESI + 0x30]
+0047d2fb : PUSH EBX
+0047d2fc : LEA EAX,[ESI + 0x28]
+0047d2ff : PUSH EAX
+0047d300 : LEA EAX,[EBP + -0x8]
+0047d303 : PUSH EAX
+0047d304 : LEA ECX,[EBP + -0x10]
+0047d307 : PUSH ECX
+0047d308 : CALL dword ptr [0x00b8518c]
+0047d30e : PUSH EAX
+0047d30f : CALL dword ptr [0x00b85320]
+0047d315 : LEA EDI,[ESI + 0x10]
+0047d318 : PUSH EDI
+0047d319 : CALL dword ptr [0x00b85258]
+0047d31f : MOV EDX,dword ptr [EDI]
+0047d321 : SUB EDX,dword ptr [ESI + 0x8]
+0047d324 : MOV EAX,dword ptr [EDI + 0x4]
+0047d327 : SBB EAX,dword ptr [ESI + 0xc]
+0047d32a : MOV dword ptr [EBP + -0x8],EDX
+0047d32d : MOV dword ptr [EBP + -0x4],EAX
+0047d330 : FILD qword ptr [EBP + -0x8]
+0047d333 : FMUL float ptr [0x01724934]
+0047d339 : CALL 0x0063b380
+0047d33e : CDQ
+0047d33f : MOV dword ptr [ESI + 0x38],EAX
+0047d342 : MOV EAX,dword ptr [ESI + 0x28]
+0047d345 : SUB EAX,dword ptr [ESI + 0x20]
+0047d348 : MOV dword ptr [ESI + 0x3c],EDX
+0047d34b : SUB EAX,dword ptr [ESI + 0x18]
+0047d34e : POP EDI
+0047d34f : ADD EAX,dword ptr [EBX]
+0047d351 : POP EBX
+0047d352 : CDQ
+0047d353 : MOV ECX,EAX
+0047d355 : ADD dword ptr [ESI],ECX
+0047d357 : MOV dword ptr [ESI + 0x40],EAX
+0047d35a : MOV dword ptr [ESI + 0x44],EDX
+0047d35d : ADC dword ptr [ESI + 0x4],EDX
+0047d360 : MOV ESP,EBP
+0047d362 : POP EBP
+0047d363 : RET

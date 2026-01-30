@@ -1,0 +1,77 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_007e0800
+ENTRY    : 007e0800
+BODY     : [[007e0800, 007e0862]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_007e0800(void)
+
+{
+  int iVar1;
+  uint uVar2;
+  uint uVar3;
+  uint uVar4;
+  int unaff_EDI;
+  
+  uVar3 = 0;
+  if (*(int *)(unaff_EDI + 0x16c) != 0) {
+    do {
+      uVar2 = *(uint *)(unaff_EDI + 0x170);
+      uVar4 = 0;
+      if (uVar2 != 0) {
+        do {
+          iVar1 = *(int *)((uVar2 * uVar3 + uVar4) * 0x2df8 + *(int *)(unaff_EDI + 0x88) + 0x424);
+          if ((iVar1 != 0) && (*(int *)(iVar1 + 0x98) != 0)) {
+            FUN_00785220();
+          }
+          uVar2 = *(uint *)(unaff_EDI + 0x170);
+          uVar4 = uVar4 + 1;
+        } while (uVar4 < uVar2);
+      }
+      uVar3 = uVar3 + 1;
+    } while (uVar3 < *(uint *)(unaff_EDI + 0x16c));
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+007e0800 : PUSH EBX
+007e0801 : XOR EBX,EBX
+007e0803 : CMP dword ptr [EDI + 0x16c],EBX
+007e0809 : JBE 0x007e0861
+007e080b : PUSH ESI
+007e080c : LEA ESP,[ESP]
+007e0810 : MOV EAX,dword ptr [EDI + 0x170]
+007e0816 : XOR ESI,ESI
+007e0818 : TEST EAX,EAX
+007e081a : JBE 0x007e0857
+007e081c : LEA ESP,[ESP]
+007e0820 : IMUL EAX,EBX
+007e0823 : ADD EAX,ESI
+007e0825 : IMUL EAX,EAX,0x2df8
+007e082b : ADD EAX,dword ptr [EDI + 0x88]
+007e0831 : MOV EAX,dword ptr [EAX + 0x424]
+007e0837 : TEST EAX,EAX
+007e0839 : JZ 0x007e084c
+007e083b : MOV EAX,dword ptr [EAX + 0x98]
+007e0841 : TEST EAX,EAX
+007e0843 : JZ 0x007e084c
+007e0845 : MOV ECX,EAX
+007e0847 : CALL 0x00785220
+007e084c : MOV EAX,dword ptr [EDI + 0x170]
+007e0852 : INC ESI
+007e0853 : CMP ESI,EAX
+007e0855 : JC 0x007e0820
+007e0857 : INC EBX
+007e0858 : CMP EBX,dword ptr [EDI + 0x16c]
+007e085e : JC 0x007e0810
+007e0860 : POP ESI
+007e0861 : POP EBX
+007e0862 : RET

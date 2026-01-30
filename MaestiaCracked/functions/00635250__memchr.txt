@@ -1,0 +1,158 @@
+PROGRAM  : Maestia.exe
+FUNCTION : _memchr
+ENTRY    : 00635250
+BODY     : [[00635250, 006352fc]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    _memchr
+   
+   Library: Visual Studio 2008 Release */
+
+void * __cdecl _memchr(void *_Buf,int _Val,size_t _MaxCount)
+
+{
+  uint uVar1;
+  uint uVar2;
+  int iVar3;
+  uint *puVar4;
+  char cVar5;
+  uint uVar6;
+  bool bVar7;
+  
+  if (_MaxCount == 0) {
+    return (void *)0x0;
+  }
+  uVar6 = _Val & 0xff;
+  while (((uint)_Buf & 3) != 0) {
+    uVar2 = *(uint *)_Buf;
+    _Buf = (void *)((int)_Buf + 1);
+    if ((char)uVar2 == (char)_Val) goto LAB_006352e6;
+    _MaxCount = _MaxCount - 1;
+    if (_MaxCount == 0) {
+      return (void *)0x0;
+    }
+  }
+  uVar2 = _MaxCount - 4;
+  if (3 < _MaxCount) {
+    uVar6 = uVar6 * 0x1010101;
+    puVar4 = _Buf;
+    do {
+      _Buf = puVar4 + 1;
+      if (((*puVar4 ^ uVar6 ^ 0xffffffff ^ (*puVar4 ^ uVar6) + 0x7efefeff) & 0x81010100) != 0) {
+        uVar1 = *puVar4;
+        cVar5 = (char)uVar6;
+        if ((char)uVar1 == cVar5) {
+          return puVar4;
+        }
+        if ((char)(uVar1 >> 8) == cVar5) {
+          return (char *)((int)puVar4 + 1);
+        }
+        if ((char)(uVar1 >> 0x10) == cVar5) {
+          return (char *)((int)puVar4 + 2);
+        }
+        if ((char)(uVar1 >> 0x18) == cVar5) goto LAB_006352e6;
+      }
+      bVar7 = 3 < uVar2;
+      uVar2 = uVar2 - 4;
+      puVar4 = _Buf;
+    } while (bVar7);
+  }
+  iVar3 = uVar2 + 4;
+  while( true ) {
+    if (iVar3 == 0) {
+      return (void *)0x0;
+    }
+    uVar2 = *(uint *)_Buf;
+    _Buf = (void *)((int)_Buf + 1);
+    if ((char)uVar2 == (char)uVar6) break;
+    iVar3 = iVar3 + -1;
+  }
+LAB_006352e6:
+  return (char *)((int)_Buf + -1);
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00635250 : MOV EAX,dword ptr [ESP + 0xc]
+00635254 : PUSH EBX
+00635255 : TEST EAX,EAX
+00635257 : JZ 0x006352ab
+00635259 : MOV EDX,dword ptr [ESP + 0x8]
+0063525d : XOR EBX,EBX
+0063525f : MOV BL,byte ptr [ESP + 0xc]
+00635263 : TEST EDX,0x3
+00635269 : JZ 0x00635281
+0063526b : MOV CL,byte ptr [EDX]
+0063526d : ADD EDX,0x1
+00635270 : XOR CL,BL
+00635272 : JZ 0x006352e6
+00635274 : SUB EAX,0x1
+00635277 : JZ 0x006352ab
+00635279 : TEST EDX,0x3
+0063527f : JNZ 0x0063526b
+00635281 : SUB EAX,0x4
+00635284 : JC 0x00635298
+00635286 : PUSH EDI
+00635287 : MOV EDI,EBX
+00635289 : SHL EBX,0x8
+0063528c : ADD EBX,EDI
+0063528e : MOV EDI,EBX
+00635290 : SHL EBX,0x10
+00635293 : ADD EBX,EDI
+00635295 : JMP 0x006352b2
+00635297 : POP EDI
+00635298 : ADD EAX,0x4
+0063529b : JZ 0x006352ab
+0063529d : MOV CL,byte ptr [EDX]
+0063529f : ADD EDX,0x1
+006352a2 : XOR CL,BL
+006352a4 : JZ 0x006352e6
+006352a6 : SUB EAX,0x1
+006352a9 : JNZ 0x0063529d
+006352ab : POP EBX
+006352ac : RET
+006352ad : SUB EAX,0x4
+006352b0 : JC 0x00635297
+006352b2 : MOV ECX,dword ptr [EDX]
+006352b4 : XOR ECX,EBX
+006352b6 : MOV EDI,0x7efefeff
+006352bb : ADD EDI,ECX
+006352bd : XOR ECX,0xffffffff
+006352c0 : XOR ECX,EDI
+006352c2 : ADD EDX,0x4
+006352c5 : AND ECX,0x81010100
+006352cb : JZ 0x006352ad
+006352cd : MOV ECX,dword ptr [EDX + -0x4]
+006352d0 : XOR CL,BL
+006352d2 : JZ 0x006352f7
+006352d4 : XOR CH,BL
+006352d6 : JZ 0x006352f1
+006352d8 : SHR ECX,0x10
+006352db : XOR CL,BL
+006352dd : JZ 0x006352eb
+006352df : XOR CH,BL
+006352e1 : JZ 0x006352e5
+006352e3 : JMP 0x006352ad
+006352e5 : POP EDI
+006352e6 : LEA EAX,[EDX + -0x1]
+006352e9 : POP EBX
+006352ea : RET
+006352eb : LEA EAX,[EDX + -0x2]
+006352ee : POP EDI
+006352ef : POP EBX
+006352f0 : RET
+006352f1 : LEA EAX,[EDX + -0x3]
+006352f4 : POP EDI
+006352f5 : POP EBX
+006352f6 : RET
+006352f7 : LEA EAX,[EDX + -0x4]
+006352fa : POP EDI
+006352fb : POP EBX
+006352fc : RET

@@ -1,0 +1,65 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00599270
+ENTRY    : 00599270
+BODY     : [[00599270, 005992ae]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined1 FUN_00599270(void)
+
+{
+  int iVar1;
+  int *in_ECX;
+  uint uVar2;
+  
+  if (*in_ECX < 0) {
+    uVar2 = (uint)*(byte *)(in_ECX + 7);
+  }
+  else {
+    uVar2 = in_ECX[1];
+  }
+  if (uVar2 == 0) {
+    return 0;
+  }
+  iVar1 = (int)in_ECX + 0x1e;
+  if (-1 < *in_ECX) {
+    iVar1 = (int)in_ECX + 0x2a;
+  }
+  if (((*(byte *)(iVar1 + -1 + uVar2 * 8) & 1) != 0) &&
+     ((*(ushort *)(iVar1 + -4 + uVar2 * 8) & 0xf000) != 0)) {
+    return 1;
+  }
+  return 0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00599270 : MOV EAX,dword ptr [ECX]
+00599272 : SHR EAX,0x1f
+00599275 : AND AL,0x1
+00599277 : JZ 0x0059927f
+00599279 : MOVZX EDX,byte ptr [ECX + 0x1c]
+0059927d : JMP 0x00599282
+0059927f : MOV EDX,dword ptr [ECX + 0x4]
+00599282 : TEST EDX,EDX
+00599284 : JBE 0x005992ac
+00599286 : TEST AL,AL
+00599288 : LEA EAX,[ECX + 0x1e]
+0059928b : JNZ 0x00599290
+0059928d : LEA EAX,[ECX + 0x2a]
+00599290 : TEST byte ptr [EAX + EDX*0x8 + -0x1],0x1
+00599295 : JZ 0x005992a9
+00599297 : MOV ECX,0xf000
+0059929c : TEST word ptr [EAX + EDX*0x8 + -0x4],CX
+005992a1 : JZ 0x005992a9
+005992a3 : MOV EAX,0x1
+005992a8 : RET
+005992a9 : XOR EAX,EAX
+005992ab : RET
+005992ac : XOR AL,AL
+005992ae : RET

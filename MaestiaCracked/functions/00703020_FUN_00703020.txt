@@ -1,0 +1,102 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00703020
+ENTRY    : 00703020
+BODY     : [[00703020, 007030b8]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00703020(void)
+
+{
+  uint uVar1;
+  int iVar2;
+  int local_10;
+  int local_c;
+  undefined1 local_8 [4];
+  
+  if (DAT_01724848 != 0) {
+    local_10 = -(uint)(*(int *)(DAT_01724848 + 0x28) != 0);
+    while (local_10 != 0) {
+      local_c = 0;
+      FUN_00404160(&local_10,local_8,&local_c);
+      if (local_c == 0) {
+        return;
+      }
+      uVar1 = *(uint *)(local_c + 0x88);
+      iVar2 = 0;
+      do {
+        if ((((&DAT_00da9cb8)[iVar2] == 0) || ((uVar1 >> ((byte)iVar2 & 0x1f) & 1) == 0)) &&
+           ((uVar1 >> ((byte)iVar2 & 0x1f) & 1) != 0)) {
+          (&DAT_00da9cb8)[iVar2] =
+               CONCAT22(*(undefined2 *)(local_c + 4),*(undefined2 *)(local_c + 6));
+        }
+        iVar2 = iVar2 + 1;
+      } while (iVar2 < 0x20);
+    }
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00703020 : PUSH EBP
+00703021 : MOV EBP,ESP
+00703023 : MOV ECX,dword ptr [0x01724848]
+00703029 : SUB ESP,0xc
+0070302c : TEST ECX,ECX
+0070302e : JZ 0x007030b5
+00703034 : MOV EAX,dword ptr [ECX + 0x28]
+00703037 : NEG EAX
+00703039 : SBB EAX,EAX
+0070303b : MOV dword ptr [EBP + -0xc],EAX
+0070303e : JZ 0x007030b5
+00703040 : PUSH ESI
+00703041 : PUSH EDI
+00703042 : JMP 0x0070304a
+00703044 : MOV ECX,dword ptr [0x01724848]
+0070304a : LEA EAX,[EBP + -0x8]
+0070304d : PUSH EAX
+0070304e : LEA EDX,[EBP + -0x4]
+00703051 : PUSH EDX
+00703052 : LEA EAX,[EBP + -0xc]
+00703055 : PUSH EAX
+00703056 : MOV EAX,ECX
+00703058 : MOV dword ptr [EBP + -0x8],0x0
+0070305f : CALL 0x00404160
+00703064 : MOV EDI,dword ptr [EBP + -0x8]
+00703067 : TEST EDI,EDI
+00703069 : JZ 0x007030b3
+0070306b : MOV ESI,dword ptr [EDI + 0x88]
+00703071 : XOR EAX,EAX
+00703073 : CMP dword ptr [EAX*0x4 + 0xda9cb8],0x0
+0070307b : JZ 0x00703088
+0070307d : MOV EDX,ESI
+0070307f : MOV CL,AL
+00703081 : SHR EDX,CL
+00703083 : TEST DL,0x1
+00703086 : JNZ 0x007030a7
+00703088 : MOV EDX,ESI
+0070308a : MOV CL,AL
+0070308c : SHR EDX,CL
+0070308e : TEST DL,0x1
+00703091 : JZ 0x007030a7
+00703093 : MOVZX ECX,word ptr [EDI + 0x4]
+00703097 : MOVZX EDX,word ptr [EDI + 0x6]
+0070309b : SHL ECX,0x10
+0070309e : OR ECX,EDX
+007030a0 : MOV dword ptr [EAX*0x4 + 0xda9cb8],ECX
+007030a7 : INC EAX
+007030a8 : CMP EAX,0x20
+007030ab : JL 0x00703073
+007030ad : CMP dword ptr [EBP + -0xc],0x0
+007030b1 : JNZ 0x00703044
+007030b3 : POP EDI
+007030b4 : POP ESI
+007030b5 : MOV ESP,EBP
+007030b7 : POP EBP
+007030b8 : RET

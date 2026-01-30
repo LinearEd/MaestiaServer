@@ -1,0 +1,81 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __Getctype
+ENTRY    : 00624b88
+BODY     : [[00624b88, 00624be7]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __Getctype
+   
+   Libraries: Visual Studio 2008 Release, Visual Studio 2010 Release */
+
+_Ctypevec * __cdecl __Getctype(_Ctypevec *__return_storage_ptr__)
+
+{
+  int iVar1;
+  short *psVar2;
+  void *pvVar3;
+  ushort *puVar4;
+  size_t _Size;
+  
+  iVar1 = ____lc_handle_func();
+  __return_storage_ptr__->_Page = *(uint *)(iVar1 + 4);
+  psVar2 = (short *)____lc_codepage_func();
+  __return_storage_ptr__->_Table = psVar2;
+  pvVar3 = __calloc_crt(0x100,2);
+  __return_storage_ptr__->_Delfl = (int)pvVar3;
+  if (pvVar3 == (void *)0x0) {
+    puVar4 = ___pctype_func();
+    __return_storage_ptr__->_LocaleName = (wchar_t *)0x0;
+    __return_storage_ptr__->_Delfl = (int)puVar4;
+  }
+  else {
+    _Size = 0x200;
+    puVar4 = ___pctype_func();
+    _memcpy((void *)__return_storage_ptr__->_Delfl,puVar4,_Size);
+    __return_storage_ptr__->_LocaleName = (wchar_t *)0x1;
+  }
+  return __return_storage_ptr__;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00624b88 : MOV EDI,EDI
+00624b8a : PUSH EBP
+00624b8b : MOV EBP,ESP
+00624b8d : PUSH ESI
+00624b8e : CALL 0x00642ac3
+00624b93 : MOV EAX,dword ptr [EAX + 0x4]
+00624b96 : MOV ESI,dword ptr [EBP + 0x8]
+00624b99 : MOV dword ptr [ESI],EAX
+00624b9b : CALL 0x00642a77
+00624ba0 : PUSH 0x2
+00624ba2 : PUSH 0x100
+00624ba7 : MOV dword ptr [ESI + 0x4],EAX
+00624baa : CALL 0x006425a4
+00624baf : POP ECX
+00624bb0 : POP ECX
+00624bb1 : MOV dword ptr [ESI + 0x8],EAX
+00624bb4 : TEST EAX,EAX
+00624bb6 : JZ 0x00624bd7
+00624bb8 : PUSH 0x200
+00624bbd : CALL 0x00643b8c
+00624bc2 : PUSH EAX
+00624bc3 : PUSH dword ptr [ESI + 0x8]
+00624bc6 : CALL 0x0063ae40
+00624bcb : ADD ESP,0xc
+00624bce : MOV dword ptr [ESI + 0xc],0x1
+00624bd5 : JMP 0x00624be3
+00624bd7 : CALL 0x00643b8c
+00624bdc : AND dword ptr [ESI + 0xc],0x0
+00624be0 : MOV dword ptr [ESI + 0x8],EAX
+00624be3 : MOV EAX,ESI
+00624be5 : POP ESI
+00624be6 : POP EBP
+00624be7 : RET

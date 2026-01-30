@@ -1,0 +1,226 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_006069b0
+ENTRY    : 006069b0
+BODY     : [[006069b0, 00606bc0]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_006069b0(float *param_1,int param_2,int param_3,float *param_4)
+
+{
+  float *pfVar1;
+  float *pfVar2;
+  float fVar3;
+  float fVar4;
+  float fVar5;
+  int iVar6;
+  float fVar7;
+  float fVar8;
+  uint uVar9;
+  int in_ECX;
+  
+  uVar9 = *(uint *)(param_2 + 0xc + (&DAT_00b9575c)[param_3] * 4);
+  pfVar1 = (float *)(*(int *)(*(int *)(in_ECX + 0xc) + (uVar9 >> 8) * 4) + (uVar9 & 0xff) * 0xc);
+  uVar9 = *(uint *)(param_2 + 0xc + *(int *)(&DAT_00b95760 + param_3 * 4) * 4);
+  iVar6 = *(int *)(*(int *)(in_ECX + 0xc) + (uVar9 >> 8) * 4);
+  uVar9 = uVar9 & 0xff;
+  pfVar2 = (float *)(iVar6 + uVar9 * 0xc);
+  if (-0.1 <= (pfVar1[1] - param_4[1]) * (*(float *)(iVar6 + uVar9 * 0xc) - *pfVar1) -
+              (*pfVar1 - *param_4) * (pfVar2[1] - pfVar1[1])) {
+    fVar3 = *param_1;
+    fVar4 = param_1[1];
+    fVar8 = pfVar2[1] - pfVar1[1];
+    fVar7 = *pfVar2 - *pfVar1;
+    fVar5 = fVar8 * (*param_4 - fVar3) - fVar7 * (param_4[1] - fVar4);
+    if ((ABS(*param_1 - *param_4) + ABS(param_1[1] - param_4[1]) + ABS(*pfVar1 - *pfVar2) +
+        ABS(pfVar1[1] - pfVar2[1])) * 0.01 <= ABS(fVar5)) {
+      fVar5 = ((fVar4 - pfVar1[1]) * fVar7 - (fVar3 - *pfVar1) * fVar8) / fVar5;
+      fVar3 = fVar5 * (*param_4 - fVar3) + fVar3;
+      fVar4 = fVar5 * (param_4[1] - fVar4) + fVar4;
+      fVar5 = param_1[1];
+      *param_4 = fVar3 + (*param_1 - fVar3) * 0.25;
+      param_4[1] = (fVar5 - fVar4) * 0.25 + fVar4;
+      return;
+    }
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006069b0 : SUB ESP,0x18
+006069b3 : MOV EDX,dword ptr [ECX + 0xc]
+006069b6 : PUSH ESI
+006069b7 : MOV ESI,dword ptr [ESP + 0x28]
+006069bb : MOV EAX,dword ptr [ESI*0x4 + 0xb9575c]
+006069c2 : PUSH EDI
+006069c3 : MOV EDI,dword ptr [ESP + 0x28]
+006069c7 : MOV EAX,dword ptr [EDI + EAX*0x4 + 0xc]
+006069cb : MOV ECX,EAX
+006069cd : AND EAX,0xff
+006069d2 : LEA EAX,[EAX + EAX*0x2]
+006069d5 : SHR ECX,0x8
+006069d8 : MOV ECX,dword ptr [EDX + ECX*0x4]
+006069db : LEA ECX,[ECX + EAX*0x4]
+006069de : MOV EAX,dword ptr [ESI*0x4 + 0xb95760]
+006069e5 : MOV EAX,dword ptr [EDI + EAX*0x4 + 0xc]
+006069e9 : MOV ESI,EAX
+006069eb : SHR ESI,0x8
+006069ee : MOV EDX,dword ptr [EDX + ESI*0x4]
+006069f1 : MOV ESI,dword ptr [ESP + 0x30]
+006069f5 : AND EAX,0xff
+006069fa : LEA EAX,[EAX + EAX*0x2]
+006069fd : FLD float ptr [EDX + EAX*0x4]
+00606a00 : LEA EDX,[EDX + EAX*0x4]
+00606a03 : FSUB float ptr [ECX]
+00606a05 : FLD float ptr [ECX + 0x4]
+00606a08 : FSUB float ptr [ESI + 0x4]
+00606a0b : FMULP
+00606a0d : FLD float ptr [EDX + 0x4]
+00606a10 : FSUB float ptr [ECX + 0x4]
+00606a13 : FLD float ptr [ECX]
+00606a15 : FSUB float ptr [ESI]
+00606a17 : FMULP
+00606a19 : FSUBP
+00606a1b : FSTP float ptr [ESP + 0x2c]
+00606a1f : FLD float ptr [ESP + 0x2c]
+00606a23 : FCOMP double ptr [0x00b95770]
+00606a29 : FNSTSW AX
+00606a2b : TEST AH,0x5
+00606a2e : JNP 0x00606bb9
+00606a34 : MOV EDI,dword ptr [ESP + 0x24]
+00606a38 : FLD float ptr [EDI]
+00606a3a : FSTP float ptr [ESP + 0x24]
+00606a3e : FLD float ptr [EDI + 0x4]
+00606a41 : FSTP float ptr [ESP + 0x10]
+00606a45 : FLD float ptr [ESI]
+00606a47 : FSTP float ptr [ESP + 0x30]
+00606a4b : FLD float ptr [ESI + 0x4]
+00606a4e : FSTP float ptr [ESP + 0xc]
+00606a52 : FLD float ptr [ECX]
+00606a54 : FSTP float ptr [ESP + 0x28]
+00606a58 : FLD float ptr [ECX + 0x4]
+00606a5b : FSTP float ptr [ESP + 0x2c]
+00606a5f : FLD float ptr [EDX]
+00606a61 : FSTP float ptr [ESP + 0x18]
+00606a65 : FLD float ptr [EDX + 0x4]
+00606a68 : FSTP float ptr [ESP + 0x8]
+00606a6c : FLD float ptr [ESP + 0x30]
+00606a70 : FLD float ptr [ESP + 0x24]
+00606a74 : FLD ST0
+00606a76 : FSUBP ST2,ST0
+00606a78 : FLD float ptr [ESP + 0x8]
+00606a7c : FSUB float ptr [ESP + 0x2c]
+00606a80 : FLD float ptr [ESP + 0xc]
+00606a84 : FLD float ptr [ESP + 0x10]
+00606a88 : FLD ST0
+00606a8a : FSUBP ST2,ST0
+00606a8c : FXCH
+00606a8e : FST double ptr [ESP + 0x10]
+00606a92 : FLD float ptr [ESP + 0x18]
+00606a96 : FSUB float ptr [ESP + 0x28]
+00606a9a : FST double ptr [ESP + 0x18]
+00606a9e : FLD ST3
+00606aa0 : FMUL ST6
+00606aa2 : FXCH
+00606aa4 : FMULP ST2
+00606aa6 : FSUBRP
+00606aa8 : FSTP float ptr [ESP + 0x30]
+00606aac : FLD float ptr [ESP + 0x30]
+00606ab0 : FABS
+00606ab2 : FSTP float ptr [ESP + 0x24]
+00606ab6 : FLD float ptr [ESP + 0x24]
+00606aba : FLD float ptr [EDI]
+00606abc : FSUB float ptr [ESI]
+00606abe : FSTP float ptr [ESP + 0x24]
+00606ac2 : FLD float ptr [ESP + 0x24]
+00606ac6 : FABS
+00606ac8 : FSTP float ptr [ESP + 0x24]
+00606acc : FLD float ptr [ESP + 0x24]
+00606ad0 : FLD float ptr [EDI + 0x4]
+00606ad3 : FSUB float ptr [ESI + 0x4]
+00606ad6 : FSTP float ptr [ESP + 0x24]
+00606ada : FLD float ptr [ESP + 0x24]
+00606ade : FABS
+00606ae0 : FSTP float ptr [ESP + 0x24]
+00606ae4 : FADD float ptr [ESP + 0x24]
+00606ae8 : FLD float ptr [ECX]
+00606aea : FSUB float ptr [EDX]
+00606aec : FSTP float ptr [ESP + 0x24]
+00606af0 : FLD float ptr [ESP + 0x24]
+00606af4 : FABS
+00606af6 : FSTP float ptr [ESP + 0x24]
+00606afa : FADD float ptr [ESP + 0x24]
+00606afe : FLD float ptr [ECX + 0x4]
+00606b01 : FSUB float ptr [EDX + 0x4]
+00606b04 : FSTP float ptr [ESP + 0x24]
+00606b08 : FLD float ptr [ESP + 0x24]
+00606b0c : FABS
+00606b0e : FSTP float ptr [ESP + 0x24]
+00606b12 : FADD float ptr [ESP + 0x24]
+00606b16 : FMUL double ptr [0x00b93800]
+00606b1c : FSTP float ptr [ESP + 0x24]
+00606b20 : FLD float ptr [ESP + 0x24]
+00606b24 : FCOMPP
+00606b26 : FNSTSW AX
+00606b28 : TEST AH,0x41
+00606b2b : JZ 0x00606bb1
+00606b31 : FLD ST0
+00606b33 : FSUB float ptr [ESP + 0x2c]
+00606b37 : FMUL double ptr [ESP + 0x18]
+00606b3b : FLD ST3
+00606b3d : FSUB float ptr [ESP + 0x28]
+00606b41 : FMULP ST3
+00606b43 : FSUBRP ST2,ST0
+00606b45 : FXCH
+00606b47 : FSTP float ptr [ESP + 0x2c]
+00606b4b : FLD float ptr [ESP + 0x2c]
+00606b4f : FDIV float ptr [ESP + 0x30]
+00606b53 : FSTP float ptr [ESP + 0x2c]
+00606b57 : FLD float ptr [ESP + 0x2c]
+00606b5b : FLD ST0
+00606b5d : FMULP ST4
+00606b5f : FXCH ST3
+00606b61 : FADDP ST2,ST0
+00606b63 : FXCH
+00606b65 : FSTP float ptr [ESP + 0x28]
+00606b69 : FXCH
+00606b6b : FMUL double ptr [ESP + 0x10]
+00606b6f : FADDP
+00606b71 : FSTP float ptr [ESP + 0x2c]
+00606b75 : FLD float ptr [EDI + 0x4]
+00606b78 : FLD float ptr [ESP + 0x2c]
+00606b7c : FLD ST0
+00606b7e : FSUBP ST2,ST0
+00606b80 : FLD double ptr [0x00cdf848]
+00606b86 : FMUL ST2
+00606b88 : FXCH ST2
+00606b8a : FADDP
+00606b8c : FSTP float ptr [ESP + 0x2c]
+00606b90 : FLD float ptr [EDI]
+00606b92 : POP EDI
+00606b93 : FLD float ptr [ESP + 0x24]
+00606b97 : FLD ST0
+00606b99 : FSUBP ST2,ST0
+00606b9b : FXCH
+00606b9d : FMULP ST2
+00606b9f : FADDP
+00606ba1 : FSTP float ptr [ESI]
+00606ba3 : FLD float ptr [ESP + 0x28]
+00606ba7 : FSTP float ptr [ESI + 0x4]
+00606baa : POP ESI
+00606bab : ADD ESP,0x18
+00606bae : RET 0x14
+00606bb1 : FSTP ST2
+00606bb3 : FSTP ST1
+00606bb5 : FSTP ST1
+00606bb7 : FSTP ST0
+00606bb9 : POP EDI
+00606bba : POP ESI
+00606bbb : ADD ESP,0x18
+00606bbe : RET 0x14

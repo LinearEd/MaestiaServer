@@ -1,0 +1,132 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00844270
+ENTRY    : 00844270
+BODY     : [[00844270, 00844348]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00844270(void)
+
+{
+  undefined2 uVar1;
+  int iVar2;
+  undefined4 uVar3;
+  DWORD DVar4;
+  uint8_t *packet;
+  int in_ECX;
+  byte bVar5;
+  void *local_10;
+  undefined1 *puStack_c;
+  undefined4 local_8;
+  
+  local_8 = 0xffffffff;
+  puStack_c = &LAB_00b3d9b7;
+  local_10 = ExceptionList;
+  ExceptionList = &local_10;
+  if ((*(int *)(in_ECX + 8) == 3) && (*(int *)(in_ECX + 0x44) != 0)) {
+    DVar4 = timeGetTime();
+    if (*(uint *)(in_ECX + 0x48) < DVar4 - *(int *)(in_ECX + 0x38)) {
+      iVar2 = *(int *)ThreadLocalStoragePointer;
+      bVar5 = *(byte *)(iVar2 + 0x18);
+      *(undefined4 *)(in_ECX + 8) = 2;
+      bVar5 = (byte)((ulonglong)(bVar5 + 1) % 3);
+      *(byte *)(iVar2 + 0x18) = bVar5;
+      packet = (uint8_t *)((uint)bVar5 * 0x2000 + 0x122cb8 + iVar2);
+      if (packet == (uint8_t *)0x0) {
+        packet = (uint8_t *)0x0;
+      }
+      else {
+        uVar1 = *(undefined2 *)(in_ECX + 0x20);
+        uVar3 = *(undefined4 *)(in_ECX + 0x18);
+        packet[0] = '\0';
+        packet[1] = '\0';
+        packet[2] = '>';
+        packet[3] = '\x04';
+        *(undefined4 *)(packet + 4) = uVar3;
+        *(undefined2 *)(packet + 8) = uVar1;
+      }
+      local_8 = 0xffffffff;
+      if ((*(int *)(DAT_017247d4 + 4) != 0) && (*(char *)(DAT_017247d4 + 8) != '\0')) {
+        FUN_00a0dd40(*(int *)(DAT_017247d4 + 4),10,packet);
+      }
+    }
+  }
+  ExceptionList = local_10;
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00844270 : PUSH EBP
+00844271 : MOV EBP,ESP
+00844273 : PUSH -0x1
+00844275 : PUSH 0xb3d9b7
+0084427a : MOV EAX,FS:[0x0]
+00844280 : PUSH EAX
+00844281 : SUB ESP,0x8
+00844284 : PUSH ESI
+00844285 : PUSH EDI
+00844286 : MOV EAX,[0x00d66fa0]
+0084428b : XOR EAX,EBP
+0084428d : PUSH EAX
+0084428e : LEA EAX,[EBP + -0xc]
+00844291 : MOV FS:[0x0],EAX
+00844297 : MOV ESI,ECX
+00844299 : CMP dword ptr [ESI + 0x8],0x3
+0084429d : JNZ 0x00844338
+008442a3 : CMP dword ptr [ESI + 0x44],0x0
+008442a7 : JZ 0x00844338
+008442ad : CALL dword ptr [0x00b85598]
+008442b3 : SUB EAX,dword ptr [ESI + 0x38]
+008442b6 : CMP EAX,dword ptr [ESI + 0x48]
+008442b9 : JBE 0x00844338
+008442bb : MOV EAX,FS:[0x2c]
+008442c1 : MOV ECX,dword ptr [EAX]
+008442c3 : MOVZX EAX,byte ptr [ECX + 0x18]
+008442c7 : INC EAX
+008442c8 : CDQ
+008442c9 : MOV EDI,0x3
+008442ce : IDIV EDI
+008442d0 : MOV dword ptr [ESI + 0x8],0x2
+008442d7 : MOV byte ptr [ECX + 0x18],DL
+008442da : MOVZX EDX,DL
+008442dd : SHL EDX,0xd
+008442e0 : LEA EAX,[EDX + ECX*0x1 + 0x122cb8]
+008442e7 : MOV dword ptr [EBP + -0x10],EAX
+008442ea : MOV dword ptr [EBP + -0x4],0x0
+008442f1 : TEST EAX,EAX
+008442f3 : JZ 0x00844312
+008442f5 : MOVZX ECX,word ptr [ESI + 0x20]
+008442f9 : MOV ESI,dword ptr [ESI + 0x18]
+008442fc : XOR EDX,EDX
+008442fe : MOV word ptr [EAX],DX
+00844301 : MOV byte ptr [EAX + 0x2],0x3e
+00844305 : MOV byte ptr [EAX + 0x3],0x4
+00844309 : MOV dword ptr [EAX + 0x4],ESI
+0084430c : MOV word ptr [EAX + 0x8],CX
+00844310 : JMP 0x00844314
+00844312 : XOR EAX,EAX
+00844314 : MOV dword ptr [EBP + -0x4],0xffffffff
+0084431b : MOV EDX,dword ptr [0x017247d4]
+00844321 : MOV ECX,dword ptr [EDX + 0x4]
+00844324 : TEST ECX,ECX
+00844326 : JZ 0x00844338
+00844328 : CMP byte ptr [EDX + 0x8],0x0
+0084432c : JZ 0x00844338
+0084432e : PUSH 0xa
+00844330 : PUSH ECX
+00844331 : MOV EDI,EAX
+00844333 : CALL 0x00a0dd40
+00844338 : MOV ECX,dword ptr [EBP + -0xc]
+0084433b : MOV dword ptr FS:[0x0],ECX
+00844342 : POP ECX
+00844343 : POP EDI
+00844344 : POP ESI
+00844345 : MOV ESP,EBP
+00844347 : POP EBP
+00844348 : RET

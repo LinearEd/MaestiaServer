@@ -1,0 +1,59 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_006a0330
+ENTRY    : 006a0330
+BODY     : [[006a0330, 006a036f]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_006a0330(void)
+
+{
+  int in_EAX;
+  uint uVar1;
+  byte *in_EDX;
+  
+  while (in_EAX = in_EAX + -1, -1 < in_EAX) {
+    uVar1 = *in_EDX >> 1 & 0x55 | (*in_EDX & 0x55) * 2;
+    uVar1 = uVar1 >> 2 & 0x33 | (uVar1 & 0x33) * 4;
+    *in_EDX = (byte)(uVar1 >> 4) | (char)uVar1 << 4;
+    in_EDX = in_EDX + 1;
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006a0330 : PUSH ESI
+006a0331 : MOV ESI,EAX
+006a0333 : SUB ESI,0x1
+006a0336 : JS 0x006a036e
+006a0338 : MOVZX ECX,byte ptr [EDX]
+006a033b : MOV EAX,ECX
+006a033d : SHR EAX,0x1
+006a033f : AND EAX,0x55
+006a0342 : AND ECX,0x55
+006a0345 : ADD ECX,ECX
+006a0347 : OR EAX,ECX
+006a0349 : MOV ECX,EAX
+006a034b : AND EAX,0x33
+006a034e : ADD EAX,EAX
+006a0350 : SHR ECX,0x2
+006a0353 : ADD EAX,EAX
+006a0355 : AND ECX,0x33
+006a0358 : OR ECX,EAX
+006a035a : MOV EAX,ECX
+006a035c : SHR EAX,0x4
+006a035f : AND AL,0xf
+006a0361 : SHL CL,0x4
+006a0364 : OR AL,CL
+006a0366 : MOV byte ptr [EDX],AL
+006a0368 : INC EDX
+006a0369 : SUB ESI,0x1
+006a036c : JNS 0x006a0338
+006a036e : POP ESI
+006a036f : RET

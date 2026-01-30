@@ -1,0 +1,154 @@
+PROGRAM  : Maestia.exe
+FUNCTION : _strtok
+ENTRY    : 0063872d
+BODY     : [[0063872d, 006387ed]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    _strtok
+   
+   Libraries: Visual Studio 2005 Release, Visual Studio 2008 Release */
+
+char * __cdecl _strtok(char *_Str,char *_Delim)
+
+{
+  byte bVar1;
+  _ptiddata p_Var2;
+  char *pcVar3;
+  int iVar4;
+  byte *pbVar5;
+  byte local_28 [32];
+  uint local_8;
+  
+  local_8 = DAT_00d66fa0 ^ (uint)&stack0xfffffffc;
+  p_Var2 = __getptd();
+  pbVar5 = local_28;
+  for (iVar4 = 8; iVar4 != 0; iVar4 = iVar4 + -1) {
+    pbVar5[0] = 0;
+    pbVar5[1] = 0;
+    pbVar5[2] = 0;
+    pbVar5[3] = 0;
+    pbVar5 = pbVar5 + 4;
+  }
+  do {
+    bVar1 = *_Delim;
+    local_28[bVar1 >> 3] = local_28[bVar1 >> 3] | '\x01' << (bVar1 & 7);
+    _Delim = (char *)((byte *)_Delim + 1);
+  } while (bVar1 != 0);
+  if (_Str == (char *)0x0) {
+    _Str = p_Var2->_token;
+  }
+  for (; (bVar1 = *_Str, (local_28[bVar1 >> 3] & (byte)(1 << (bVar1 & 7))) != 0 && (bVar1 != 0));
+      _Str = (char *)((byte *)_Str + 1)) {
+  }
+  do {
+    if (*_Str == 0) {
+LAB_006387cf:
+      p_Var2->_token = _Str;
+      pcVar3 = (char *)__security_check_cookie(local_8 ^ (uint)&stack0xfffffffc);
+      return pcVar3;
+    }
+    if ((local_28[(byte)*_Str >> 3] & (byte)(1 << (*_Str & 7U))) != 0) {
+      *_Str = 0;
+      _Str = (char *)((byte *)_Str + 1);
+      goto LAB_006387cf;
+    }
+    _Str = (char *)((byte *)_Str + 1);
+  } while( true );
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0063872d : MOV EDI,EDI
+0063872f : PUSH EBP
+00638730 : MOV EBP,ESP
+00638732 : SUB ESP,0x2c
+00638735 : MOV EAX,[0x00d66fa0]
+0063873a : XOR EAX,EBP
+0063873c : MOV dword ptr [EBP + -0x4],EAX
+0063873f : MOV EAX,dword ptr [EBP + 0x8]
+00638742 : PUSH EBX
+00638743 : PUSH ESI
+00638744 : MOV ESI,dword ptr [EBP + 0xc]
+00638747 : PUSH EDI
+00638748 : MOV dword ptr [EBP + -0x2c],EAX
+0063874b : CALL 0x006458f6
+00638750 : PUSH 0x8
+00638752 : POP ECX
+00638753 : MOV dword ptr [EBP + -0x28],EAX
+00638756 : XOR EAX,EAX
+00638758 : LEA EDI,[EBP + -0x24]
+0063875b : PUSH 0x7
+0063875d : STOSD.REP ES:EDI
+0063875f : POP EDI
+00638760 : MOV DL,byte ptr [ESI]
+00638762 : MOVZX ECX,DL
+00638765 : MOV EAX,ECX
+00638767 : AND ECX,EDI
+00638769 : MOV BL,0x1
+0063876b : SHL BL,CL
+0063876d : SHR EAX,0x3
+00638770 : LEA EAX,[EBP + EAX*0x1 + -0x24]
+00638774 : OR byte ptr [EAX],BL
+00638776 : INC ESI
+00638777 : TEST DL,DL
+00638779 : JNZ 0x00638760
+0063877b : MOV EDX,dword ptr [EBP + -0x2c]
+0063877e : TEST EDX,EDX
+00638780 : JNZ 0x0063878f
+00638782 : MOV EAX,dword ptr [EBP + -0x28]
+00638785 : MOV EDX,dword ptr [EAX + 0x18]
+00638788 : JMP 0x0063878f
+0063878a : TEST AL,AL
+0063878c : JZ 0x006387a8
+0063878e : INC EDX
+0063878f : MOV AL,byte ptr [EDX]
+00638791 : MOVZX ESI,AL
+00638794 : XOR EBX,EBX
+00638796 : MOV ECX,ESI
+00638798 : AND ECX,EDI
+0063879a : INC EBX
+0063879b : SHL EBX,CL
+0063879d : SHR ESI,0x3
+006387a0 : MOV CL,byte ptr [EBP + ESI*0x1 + -0x24]
+006387a4 : TEST CL,BL
+006387a6 : JNZ 0x0063878a
+006387a8 : MOV EBX,EDX
+006387aa : JMP 0x006387c4
+006387ac : MOVZX ESI,byte ptr [EDX]
+006387af : XOR EAX,EAX
+006387b1 : MOV ECX,ESI
+006387b3 : AND ECX,EDI
+006387b5 : INC EAX
+006387b6 : SHL EAX,CL
+006387b8 : SHR ESI,0x3
+006387bb : MOV CL,byte ptr [EBP + ESI*0x1 + -0x24]
+006387bf : TEST CL,AL
+006387c1 : JNZ 0x006387cb
+006387c3 : INC EDX
+006387c4 : CMP byte ptr [EDX],0x0
+006387c7 : JNZ 0x006387ac
+006387c9 : JMP 0x006387cf
+006387cb : MOV byte ptr [EDX],0x0
+006387ce : INC EDX
+006387cf : MOV EAX,dword ptr [EBP + -0x28]
+006387d2 : MOV ECX,dword ptr [EBP + -0x4]
+006387d5 : MOV dword ptr [EAX + 0x18],EDX
+006387d8 : MOV EAX,EBX
+006387da : SUB EAX,EDX
+006387dc : NEG EAX
+006387de : SBB EAX,EAX
+006387e0 : POP EDI
+006387e1 : AND EAX,EBX
+006387e3 : POP ESI
+006387e4 : XOR ECX,EBP
+006387e6 : POP EBX
+006387e7 : CALL 0x00633e6b
+006387ec : LEAVE
+006387ed : RET

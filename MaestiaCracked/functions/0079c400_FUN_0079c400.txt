@@ -1,0 +1,66 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0079c400
+ENTRY    : 0079c400
+BODY     : [[0079c400, 0079c46f]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_0079c400(float param_1)
+
+{
+  int iVar1;
+  short sVar2;
+  int in_EAX;
+  int in_EDX;
+  
+  iVar1 = in_EAX * 0x30 + in_EDX;
+  sVar2 = *(short *)(iVar1 + 0xb4);
+  if ((((sVar2 == 0x3c) || (sVar2 == 0x3d)) || (sVar2 == 0x3e)) || (sVar2 == 0x3f)) {
+    param_1 = 0.033333335;
+  }
+  else {
+    param_1 = 1.0 / param_1;
+  }
+  *(float *)(in_EDX + 0x138) = param_1;
+  if (*(int *)(iVar1 + 0xac) != 0) {
+    *(float *)(iVar1 + 0x94) =
+         (float)*(ushort *)(*(int *)(iVar1 + 0xac) + 0x3c) * *(float *)(in_EDX + 0x138);
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0079c400 : PUSH EBP
+0079c401 : MOV EBP,ESP
+0079c403 : LEA EAX,[EAX + EAX*0x2]
+0079c406 : SHL EAX,0x4
+0079c409 : LEA ECX,[EAX + EDX*0x1]
+0079c40c : MOVZX EAX,word ptr [ECX + 0xb4]
+0079c413 : CMP AX,0x3c
+0079c417 : JZ 0x0079c43a
+0079c419 : CMP AX,0x3d
+0079c41d : JZ 0x0079c43a
+0079c41f : CMP AX,0x3e
+0079c423 : JZ 0x0079c43a
+0079c425 : CMP AX,0x3f
+0079c429 : JZ 0x0079c43a
+0079c42b : MOVSS XMM0,dword ptr [0x00c10fc4]
+0079c433 : DIVSS XMM0,dword ptr [EBP + 0x8]
+0079c438 : JMP 0x0079c442
+0079c43a : MOVSS XMM0,dword ptr [0x00cdf27c]
+0079c442 : MOVSS dword ptr [EDX + 0x138],XMM0
+0079c44a : MOV EAX,dword ptr [ECX + 0xac]
+0079c450 : TEST EAX,EAX
+0079c452 : JZ 0x0079c46c
+0079c454 : MOVZX EAX,word ptr [EAX + 0x3c]
+0079c458 : CVTSI2SS XMM0,EAX
+0079c45c : MULSS XMM0,dword ptr [EDX + 0x138]
+0079c464 : MOVSS dword ptr [ECX + 0x94],XMM0
+0079c46c : POP EBP
+0079c46d : RET 0x4

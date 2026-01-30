@@ -1,0 +1,123 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0051bb60
+ENTRY    : 0051bb60
+BODY     : [[0051bb60, 0051bc11]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_0051bb60(int param_1)
+
+{
+  uint uVar1;
+  int iVar2;
+  LONG LVar3;
+  uint *in_ECX;
+  int *piVar4;
+  
+  uVar1 = *in_ECX;
+  if (param_1 == 0) {
+    iVar2 = 0;
+  }
+  else {
+    iVar2 = FUN_0051aeb0(param_1,0xffffffff);
+  }
+  if (((*in_ECX & 3) != 0) && ((*in_ECX & 3) == 1)) {
+    FUN_00515dd0(in_ECX);
+  }
+  if (iVar2 == 0) {
+    InterlockedExchangeAdd((LONG *)&DAT_00d65134,1);
+    piVar4 = (int *)&DAT_00d65130;
+  }
+  else {
+    piVar4 = (int *)FUN_00515840(iVar2 + 0xc,0);
+    *(undefined1 *)((int)piVar4 + iVar2 + 8) = 0;
+    *piVar4 = iVar2;
+    piVar4[1] = 1;
+  }
+  FUN_0051af70(piVar4 + 2,param_1,0xffffffff);
+  *in_ECX = *in_ECX & 3 | (uint)piVar4;
+  LVar3 = InterlockedExchangeAdd((LONG *)((uVar1 & 0xfffffffc) + 4),-1);
+  if (LVar3 == 1) {
+    FUN_00515cf0(uVar1 & 0xfffffffc);
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0051bb60 : MOV EAX,dword ptr [ESP + 0x4]
+0051bb64 : PUSH EBP
+0051bb65 : PUSH ESI
+0051bb66 : PUSH EDI
+0051bb67 : MOV EDI,ECX
+0051bb69 : MOV EBP,dword ptr [EDI]
+0051bb6b : AND EBP,0xfffffffc
+0051bb6e : TEST EAX,EAX
+0051bb70 : JZ 0x0051bb7e
+0051bb72 : PUSH -0x1
+0051bb74 : PUSH EAX
+0051bb75 : CALL 0x0051aeb0
+0051bb7a : MOV ESI,EAX
+0051bb7c : JMP 0x0051bb80
+0051bb7e : XOR ESI,ESI
+0051bb80 : MOV EDX,dword ptr [EDI]
+0051bb82 : XOR EAX,EAX
+0051bb84 : AND EDX,0x3
+0051bb87 : SUB EDX,EAX
+0051bb89 : JZ 0x0051bba2
+0051bb8b : SUB EDX,0x1
+0051bb8e : JZ 0x0051bb9a
+0051bb90 : SUB EDX,0x1
+0051bb93 : JNZ 0x0051bba7
+0051bb95 : MOV EAX,dword ptr [EDI + 0x4]
+0051bb98 : JMP 0x0051bba7
+0051bb9a : PUSH EDI
+0051bb9b : CALL 0x00515dd0
+0051bba0 : JMP 0x0051bba7
+0051bba2 : MOV EAX,[0x00d73250]
+0051bba7 : PUSH EBX
+0051bba8 : MOV EBX,dword ptr [0x00b851cc]
+0051bbae : TEST ESI,ESI
+0051bbb0 : JNZ 0x0051bbc2
+0051bbb2 : PUSH 0x1
+0051bbb4 : PUSH 0xd65134
+0051bbb9 : CALL EBX
+0051bbbb : MOV ESI,0xd65130
+0051bbc0 : JMP 0x0051bbdf
+0051bbc2 : PUSH 0x0
+0051bbc4 : LEA ECX,[ESI + 0xc]
+0051bbc7 : PUSH ECX
+0051bbc8 : MOV ECX,EAX
+0051bbca : CALL 0x00515840
+0051bbcf : MOV byte ptr [EAX + ESI*0x1 + 0x8],0x0
+0051bbd4 : MOV dword ptr [EAX],ESI
+0051bbd6 : MOV dword ptr [EAX + 0x4],0x1
+0051bbdd : MOV ESI,EAX
+0051bbdf : MOV EDX,dword ptr [ESP + 0x14]
+0051bbe3 : PUSH -0x1
+0051bbe5 : PUSH EDX
+0051bbe6 : LEA EAX,[ESI + 0x8]
+0051bbe9 : PUSH EAX
+0051bbea : CALL 0x0051af70
+0051bbef : MOV EAX,dword ptr [EDI]
+0051bbf1 : AND EAX,0x3
+0051bbf4 : PUSH -0x1
+0051bbf6 : LEA ECX,[EBP + 0x4]
+0051bbf9 : OR EAX,ESI
+0051bbfb : PUSH ECX
+0051bbfc : MOV dword ptr [EDI],EAX
+0051bbfe : CALL EBX
+0051bc00 : SUB EAX,0x1
+0051bc03 : POP EBX
+0051bc04 : JNZ 0x0051bc0c
+0051bc06 : PUSH EBP
+0051bc07 : CALL 0x00515cf0
+0051bc0c : POP EDI
+0051bc0d : POP ESI
+0051bc0e : POP EBP
+0051bc0f : RET 0x4

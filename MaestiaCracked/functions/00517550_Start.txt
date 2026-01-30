@@ -1,0 +1,132 @@
+PROGRAM  : Maestia.exe
+FUNCTION : Start
+ENTRY    : 00517550
+BODY     : [[00517550, 00517608]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* public: virtual bool __thiscall GThread::Start(enum GThread::ThreadState) */
+
+bool __thiscall GThread::Start(GThread *this,ThreadState param_1)
+
+{
+  bool bVar1;
+  uintptr_t uVar2;
+  
+                    /* 0x117550  151  ?Start@GThread@@UAE_NW4ThreadState@1@@Z */
+  if (param_1 == 0) {
+    return false;
+  }
+  if (((0 < *(int *)(this + 0x1c)) || ((*(uint *)(this + 0x18) & 1) != 0)) &&
+     (bVar1 = GWaitable::Wait((GWaitable *)this,0xffffffff), !bVar1)) {
+    return false;
+  }
+  if (*(HANDLE *)(this + 0x2c) != (HANDLE)0x0) {
+    CloseHandle(*(HANDLE *)(this + 0x2c));
+    *(undefined4 *)(this + 0x2c) = 0;
+  }
+  GRefCountImpl::AddRef((GRefCountImpl *)this);
+  FUN_00517390(this);
+  *(undefined4 *)(this + 0x30) = 0;
+  InterlockedExchange((LONG *)(this + 0x1c),0);
+  InterlockedExchange((LONG *)(this + 0x18),-(uint)(param_1 != 1) & 8);
+  uVar2 = __beginthreadex((void *)0x0,*(uint *)(this + 0x20),FUN_005174c0,this,0,(uint *)0x0);
+  *(uintptr_t *)(this + 0x2c) = uVar2;
+  if (uVar2 == 0) {
+    InterlockedExchange((LONG *)(this + 0x18),0);
+    GRefCountImpl::Release((GRefCountImpl *)this);
+    FUN_00517410(this);
+    return false;
+  }
+  return true;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00517550 : PUSH EBP
+00517551 : PUSH ESI
+00517552 : PUSH EDI
+00517553 : MOV EDI,dword ptr [ESP + 0x10]
+00517557 : XOR EBP,EBP
+00517559 : MOV ESI,ECX
+0051755b : CMP EDI,EBP
+0051755d : JNZ 0x00517567
+0051755f : POP EDI
+00517560 : POP ESI
+00517561 : XOR AL,AL
+00517563 : POP EBP
+00517564 : RET 0x4
+00517567 : MOV EAX,dword ptr [ESI + 0x1c]
+0051756a : PUSH EBX
+0051756b : LEA EBX,[ESI + 0x1c]
+0051756e : TEST EAX,EAX
+00517570 : JG 0x0051757a
+00517572 : MOV ECX,dword ptr [ESI + 0x18]
+00517575 : TEST CL,0x1
+00517578 : JZ 0x00517587
+0051757a : PUSH -0x1
+0051757c : MOV ECX,ESI
+0051757e : CALL 0x00518880
+00517583 : TEST AL,AL
+00517585 : JZ 0x005175f7
+00517587 : MOV EAX,dword ptr [ESI + 0x2c]
+0051758a : CMP EAX,EBP
+0051758c : JZ 0x00517598
+0051758e : PUSH EAX
+0051758f : CALL dword ptr [0x00b85104]
+00517595 : MOV dword ptr [ESI + 0x2c],EBP
+00517598 : MOV ECX,ESI
+0051759a : CALL 0x00523dd0
+0051759f : PUSH ESI
+005175a0 : CALL 0x00517390
+005175a5 : ADD ESP,0x4
+005175a8 : PUSH EBP
+005175a9 : PUSH EBX
+005175aa : MOV EBX,dword ptr [0x00b85108]
+005175b0 : MOV dword ptr [ESI + 0x30],EBP
+005175b3 : CALL EBX
+005175b5 : DEC EDI
+005175b6 : NEG EDI
+005175b8 : SBB EDI,EDI
+005175ba : AND EDI,0x8
+005175bd : PUSH EDI
+005175be : LEA EBP,[ESI + 0x18]
+005175c1 : PUSH EBP
+005175c2 : CALL EBX
+005175c4 : MOV EDX,dword ptr [ESI + 0x20]
+005175c7 : PUSH 0x0
+005175c9 : PUSH 0x0
+005175cb : PUSH ESI
+005175cc : PUSH 0x5174c0
+005175d1 : PUSH EDX
+005175d2 : PUSH 0x0
+005175d4 : CALL 0x00635f44
+005175d9 : ADD ESP,0x18
+005175dc : MOV dword ptr [ESI + 0x2c],EAX
+005175df : TEST EAX,EAX
+005175e1 : JNZ 0x00517600
+005175e3 : PUSH EAX
+005175e4 : PUSH EBP
+005175e5 : CALL EBX
+005175e7 : MOV ECX,ESI
+005175e9 : CALL 0x004ff7e0
+005175ee : PUSH ESI
+005175ef : CALL 0x00517410
+005175f4 : ADD ESP,0x4
+005175f7 : POP EBX
+005175f8 : POP EDI
+005175f9 : POP ESI
+005175fa : XOR AL,AL
+005175fc : POP EBP
+005175fd : RET 0x4
+00517600 : POP EBX
+00517601 : POP EDI
+00517602 : POP ESI
+00517603 : MOV AL,0x1
+00517605 : POP EBP
+00517606 : RET 0x4

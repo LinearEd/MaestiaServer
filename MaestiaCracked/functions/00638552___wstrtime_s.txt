@@ -1,0 +1,131 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __wstrtime_s
+ENTRY    : 00638552
+BODY     : [[00638552, 00638606]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __wstrtime_s
+   
+   Library: Visual Studio 2008 Release */
+
+errno_t __cdecl __wstrtime_s(wchar_t *_Buf,size_t _SizeInWords)
+
+{
+  int *piVar1;
+  int iVar2;
+  _SYSTEMTIME local_14;
+  
+  if ((_Buf == (wchar_t *)0x0) || (_SizeInWords == 0)) {
+    piVar1 = __errno();
+    iVar2 = 0x16;
+  }
+  else {
+    *_Buf = L'\0';
+    if (8 < _SizeInWords) {
+      GetLocalTime(&local_14);
+      _Buf[5] = L':';
+      _Buf[2] = L':';
+      _Buf[8] = L'\0';
+      *_Buf = local_14.wHour / 10 + L'0';
+      _Buf[1] = local_14.wHour % 10 + L'0';
+      _Buf[3] = local_14.wMinute / 10 + L'0';
+      _Buf[4] = local_14.wMinute % 10 + L'0';
+      _Buf[6] = local_14.wSecond / 10 + L'0';
+      _Buf[7] = local_14.wSecond % 10 + L'0';
+      return 0;
+    }
+    piVar1 = __errno();
+    iVar2 = 0x22;
+  }
+  *piVar1 = iVar2;
+  __invalid_parameter(0,0,0,0,0);
+  return iVar2;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00638552 : MOV EDI,EDI
+00638554 : PUSH EBP
+00638555 : MOV EBP,ESP
+00638557 : SUB ESP,0x10
+0063855a : PUSH ESI
+0063855b : MOV ESI,dword ptr [EBP + 0x8]
+0063855e : PUSH EDI
+0063855f : XOR EDI,EDI
+00638561 : CMP ESI,EDI
+00638563 : JZ 0x0063856a
+00638565 : CMP dword ptr [EBP + 0xc],EDI
+00638568 : JA 0x00638587
+0063856a : CALL 0x0063ab82
+0063856f : PUSH 0x16
+00638571 : POP ECX
+00638572 : PUSH EDI
+00638573 : PUSH EDI
+00638574 : PUSH EDI
+00638575 : PUSH EDI
+00638576 : PUSH EDI
+00638577 : MOV ESI,ECX
+00638579 : MOV dword ptr [EAX],ECX
+0063857b : CALL 0x006372b8
+00638580 : ADD ESP,0x14
+00638583 : MOV EAX,ESI
+00638585 : JMP 0x00638603
+00638587 : XOR EAX,EAX
+00638589 : CMP dword ptr [EBP + 0xc],0x9
+0063858d : MOV word ptr [ESI],AX
+00638590 : JNC 0x0063859b
+00638592 : CALL 0x0063ab82
+00638597 : PUSH 0x22
+00638599 : JMP 0x00638571
+0063859b : PUSH EBX
+0063859c : LEA EAX,[EBP + -0x10]
+0063859f : PUSH EAX
+006385a0 : CALL dword ptr [0x00b85154]
+006385a6 : MOVZX EAX,word ptr [EBP + -0x8]
+006385aa : PUSH 0x3a
+006385ac : POP EDX
+006385ad : MOV word ptr [ESI + 0xa],DX
+006385b1 : MOV word ptr [ESI + 0x4],DX
+006385b5 : XOR EDX,EDX
+006385b7 : MOV word ptr [ESI + 0x10],DX
+006385bb : CDQ
+006385bc : PUSH 0xa
+006385be : POP EBX
+006385bf : IDIV EBX
+006385c1 : MOVZX ECX,word ptr [EBP + -0x6]
+006385c5 : PUSH EBX
+006385c6 : MOVZX EDI,word ptr [EBP + -0x4]
+006385ca : ADD EAX,0x30
+006385cd : MOV word ptr [ESI],AX
+006385d0 : ADD EDX,0x30
+006385d3 : MOV word ptr [ESI + 0x2],DX
+006385d7 : MOV EAX,ECX
+006385d9 : CDQ
+006385da : POP ECX
+006385db : IDIV ECX
+006385dd : PUSH EBX
+006385de : POP ECX
+006385df : POP EBX
+006385e0 : ADD EAX,0x30
+006385e3 : MOV word ptr [ESI + 0x6],AX
+006385e7 : ADD EDX,0x30
+006385ea : MOV word ptr [ESI + 0x8],DX
+006385ee : MOV EAX,EDI
+006385f0 : CDQ
+006385f1 : IDIV ECX
+006385f3 : ADD EAX,0x30
+006385f6 : ADD EDX,0x30
+006385f9 : MOV word ptr [ESI + 0xc],AX
+006385fd : MOV word ptr [ESI + 0xe],DX
+00638601 : XOR EAX,EAX
+00638603 : POP EDI
+00638604 : POP ESI
+00638605 : LEAVE
+00638606 : RET

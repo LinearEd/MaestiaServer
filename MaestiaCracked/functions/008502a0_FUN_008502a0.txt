@@ -1,0 +1,95 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_008502a0
+ENTRY    : 008502a0
+BODY     : [[008502a0, 0085033d]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_008502a0(float param_1)
+
+{
+  int iVar1;
+  int *unaff_ESI;
+  float fVar2;
+  
+  if ((unaff_ESI[0x62a] == 0) || (*(char *)(unaff_ESI[0x62a] + 0x20) == '\0')) {
+    fVar2 = (float)unaff_ESI[0x684];
+  }
+  else {
+    fVar2 = (float)unaff_ESI[0x689];
+  }
+  if (fVar2 < param_1) {
+    param_1 = fVar2;
+  }
+  iVar1 = unaff_ESI[0xfa];
+  if (iVar1 != 0) {
+    param_1 = ((float)unaff_ESI[0x67f] - *(float *)(iVar1 + 0x6c)) + param_1;
+    if (param_1 < 0.0) {
+      param_1 = 0.0;
+    }
+    *(undefined1 *)(iVar1 + 0x5d) = 1;
+    *(undefined1 *)(iVar1 + 0x134) = 1;
+    *(undefined1 *)(iVar1 + 0x5c) = 1;
+    *(float *)(iVar1 + 0xf0) = param_1;
+    if (*(int **)(iVar1 + 0x2c) != (int *)0x0) {
+      (**(code **)(**(int **)(iVar1 + 0x2c) + 0x60))(iVar1);
+    }
+    (**(code **)(*unaff_ESI + 0x488))(param_1);
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+008502a0 : PUSH EBP
+008502a1 : MOV EBP,ESP
+008502a3 : MOV EAX,dword ptr [ESI + 0x18a8]
+008502a9 : TEST EAX,EAX
+008502ab : JZ 0x008502bd
+008502ad : CMP byte ptr [EAX + 0x20],0x0
+008502b1 : JZ 0x008502bd
+008502b3 : MOVSS XMM0,dword ptr [ESI + 0x1a24]
+008502bb : JMP 0x008502c5
+008502bd : MOVSS XMM0,dword ptr [ESI + 0x1a10]
+008502c5 : MOVSS XMM1,dword ptr [EBP + 0x8]
+008502ca : COMISS XMM1,XMM0
+008502cd : JBE 0x008502d2
+008502cf : MOVAPS XMM1,XMM0
+008502d2 : MOV EAX,dword ptr [ESI + 0x3e8]
+008502d8 : TEST EAX,EAX
+008502da : JZ 0x0085033a
+008502dc : MOVSS XMM0,dword ptr [ESI + 0x19fc]
+008502e4 : SUBSS XMM0,dword ptr [EAX + 0x6c]
+008502e9 : ADDSS XMM0,XMM1
+008502ed : XORPS XMM1,XMM1
+008502f0 : COMISS XMM1,XMM0
+008502f3 : MOVSS dword ptr [EBP + 0x8],XMM0
+008502f8 : JBE 0x00850302
+008502fa : MOVAPS XMM0,XMM1
+008502fd : MOVSS dword ptr [EBP + 0x8],XMM0
+00850302 : MOV CL,0x1
+00850304 : MOV byte ptr [EAX + 0x5d],CL
+00850307 : MOV byte ptr [EAX + 0x134],CL
+0085030d : MOV byte ptr [EAX + 0x5c],CL
+00850310 : MOV ECX,dword ptr [EAX + 0x2c]
+00850313 : MOVSS dword ptr [EAX + 0xf0],XMM0
+0085031b : TEST ECX,ECX
+0085031d : JZ 0x00850327
+0085031f : MOV EDX,dword ptr [ECX]
+00850321 : PUSH EAX
+00850322 : MOV EAX,dword ptr [EDX + 0x60]
+00850325 : CALL EAX
+00850327 : MOV EDX,dword ptr [ESI]
+00850329 : FLD float ptr [EBP + 0x8]
+0085032c : MOV EAX,dword ptr [EDX + 0x488]
+00850332 : PUSH ECX
+00850333 : MOV ECX,ESI
+00850335 : FSTP float ptr [ESP]
+00850338 : CALL EAX
+0085033a : POP EBP
+0085033b : RET 0x4

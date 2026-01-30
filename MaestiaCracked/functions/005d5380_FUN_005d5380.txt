@@ -1,0 +1,88 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005d5380
+ENTRY    : 005d5380
+BODY     : [[005d5380, 005d53fb]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_005d5380(byte param_1,GRefCountImpl *param_2,undefined4 *param_3)
+
+{
+  byte bVar1;
+  byte *in_ECX;
+  
+  bVar1 = *in_ECX >> 4 & 1;
+  if ((bVar1 == 0) || (param_2 != *(GRefCountImpl **)(in_ECX + 4))) {
+    if ((bVar1 != 0) && (*(GRefCountImpl **)(in_ECX + 4) != (GRefCountImpl *)0x0)) {
+      GRefCountImpl::Release(*(GRefCountImpl **)(in_ECX + 4));
+    }
+    *in_ECX = param_1;
+    *(GRefCountImpl **)(in_ECX + 4) = param_2;
+    if (param_2 != (GRefCountImpl *)0x0) {
+      GRefCountImpl::AddRef(param_2);
+    }
+  }
+  *(undefined4 *)(in_ECX + 0x10) = *param_3;
+  *(undefined4 *)(in_ECX + 0x14) = param_3[1];
+  *(undefined4 *)(in_ECX + 0x18) = param_3[2];
+  *(undefined4 *)(in_ECX + 0x1c) = param_3[3];
+  *(undefined4 *)(in_ECX + 0x20) = param_3[4];
+  *(undefined4 *)(in_ECX + 0x24) = param_3[5];
+  *(float *)(in_ECX + 0x18) = *(float *)(in_ECX + 0x18) * 20.0;
+  *(float *)(in_ECX + 0x24) = *(float *)(in_ECX + 0x24) * 20.0;
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005d5380 : PUSH ESI
+005d5381 : MOV ESI,ECX
+005d5383 : MOV AL,byte ptr [ESI]
+005d5385 : SHR AL,0x4
+005d5388 : AND AL,0x1
+005d538a : PUSH EDI
+005d538b : MOV EDI,dword ptr [ESP + 0x10]
+005d538f : JZ 0x005d5396
+005d5391 : CMP EDI,dword ptr [ESI + 0x4]
+005d5394 : JZ 0x005d53ba
+005d5396 : TEST AL,AL
+005d5398 : JZ 0x005d53a6
+005d539a : MOV ECX,dword ptr [ESI + 0x4]
+005d539d : TEST ECX,ECX
+005d539f : JZ 0x005d53a6
+005d53a1 : CALL 0x004ff7e0
+005d53a6 : MOV AL,byte ptr [ESP + 0xc]
+005d53aa : MOV byte ptr [ESI],AL
+005d53ac : MOV dword ptr [ESI + 0x4],EDI
+005d53af : TEST EDI,EDI
+005d53b1 : JZ 0x005d53ba
+005d53b3 : MOV ECX,EDI
+005d53b5 : CALL 0x00523dd0
+005d53ba : MOV EAX,dword ptr [ESP + 0x14]
+005d53be : FLD float ptr [EAX]
+005d53c0 : POP EDI
+005d53c1 : FSTP float ptr [ESI + 0x10]
+005d53c4 : FLD float ptr [EAX + 0x4]
+005d53c7 : FSTP float ptr [ESI + 0x14]
+005d53ca : FLD float ptr [EAX + 0x8]
+005d53cd : FSTP float ptr [ESI + 0x18]
+005d53d0 : FLD float ptr [EAX + 0xc]
+005d53d3 : FSTP float ptr [ESI + 0x1c]
+005d53d6 : FLD float ptr [EAX + 0x10]
+005d53d9 : FSTP float ptr [ESI + 0x20]
+005d53dc : FLD float ptr [EAX + 0x14]
+005d53df : FSTP float ptr [ESI + 0x24]
+005d53e2 : FLD float ptr [ESI + 0x18]
+005d53e5 : FLD double ptr [0x00b86058]
+005d53eb : FMUL ST1
+005d53ed : FXCH
+005d53ef : FSTP float ptr [ESI + 0x18]
+005d53f2 : FMUL float ptr [ESI + 0x24]
+005d53f5 : FSTP float ptr [ESI + 0x24]
+005d53f8 : POP ESI
+005d53f9 : RET 0xc

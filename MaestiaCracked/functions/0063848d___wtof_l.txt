@@ -1,0 +1,119 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __wtof_l
+ENTRY    : 0063848d
+BODY     : [[0063848d, 00638518]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __wtof_l
+   
+   Library: Visual Studio 2008 Release */
+
+double __cdecl __wtof_l(wchar_t *_Str,_locale_t _Locale)
+
+{
+  double dVar1;
+  int *piVar2;
+  int iVar3;
+  _locale_t _Locale_00;
+  FLT p_Var4;
+  _flt local_2c;
+  localeinfo_struct local_14;
+  int local_c;
+  char local_8;
+  
+  _LocaleUpdate::_LocaleUpdate((_LocaleUpdate *)&local_14,_Locale);
+  if (_Str == (wchar_t *)0x0) {
+    piVar2 = __errno();
+    *piVar2 = 0x16;
+    __invalid_parameter(0,0,0,0,0);
+    if (local_8 != '\0') {
+      *(uint *)(local_c + 0x70) = *(uint *)(local_c + 0x70) & 0xfffffffd;
+    }
+    dVar1 = 0.0;
+  }
+  else {
+    while( true ) {
+      iVar3 = __iswctype_l(*_Str,8,&local_14);
+      if (iVar3 == 0) break;
+      _Str = _Str + 1;
+    }
+    _Locale_00 = (_locale_t)FUN_00644bcf(_Str,0,0,&local_14);
+    p_Var4 = __wfltin2(&local_2c,_Str,_Locale_00);
+    dVar1 = p_Var4->dval;
+    if (local_8 != '\0') {
+      *(uint *)(local_c + 0x70) = *(uint *)(local_c + 0x70) & 0xfffffffd;
+    }
+  }
+  return dVar1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0063848d : MOV EDI,EDI
+0063848f : PUSH EBP
+00638490 : MOV EBP,ESP
+00638492 : SUB ESP,0x28
+00638495 : PUSH EBX
+00638496 : PUSH ESI
+00638497 : PUSH dword ptr [EBP + 0xc]
+0063849a : LEA ECX,[EBP + -0x10]
+0063849d : CALL 0x00637880
+006384a2 : MOV ESI,dword ptr [EBP + 0x8]
+006384a5 : XOR EBX,EBX
+006384a7 : CMP ESI,EBX
+006384a9 : JNZ 0x006384d5
+006384ab : CALL 0x0063ab82
+006384b0 : PUSH EBX
+006384b1 : PUSH EBX
+006384b2 : PUSH EBX
+006384b3 : PUSH EBX
+006384b4 : PUSH EBX
+006384b5 : MOV dword ptr [EAX],0x16
+006384bb : CALL 0x006372b8
+006384c0 : ADD ESP,0x14
+006384c3 : CMP byte ptr [EBP + -0x4],BL
+006384c6 : JZ 0x006384cf
+006384c8 : MOV EAX,dword ptr [EBP + -0x8]
+006384cb : AND dword ptr [EAX + 0x70],0xfffffffd
+006384cf : FLDZ
+006384d1 : JMP 0x00638515
+006384d3 : INC ESI
+006384d4 : INC ESI
+006384d5 : LEA EAX,[EBP + -0x10]
+006384d8 : PUSH EAX
+006384d9 : MOVZX EAX,word ptr [ESI]
+006384dc : PUSH 0x8
+006384de : PUSH EAX
+006384df : CALL 0x006517ab
+006384e4 : ADD ESP,0xc
+006384e7 : TEST EAX,EAX
+006384e9 : JNZ 0x006384d3
+006384eb : LEA EAX,[EBP + -0x10]
+006384ee : PUSH EAX
+006384ef : PUSH EBX
+006384f0 : PUSH EBX
+006384f1 : PUSH ESI
+006384f2 : CALL 0x00644bcf
+006384f7 : POP ECX
+006384f8 : PUSH EAX
+006384f9 : LEA EAX,[EBP + -0x28]
+006384fc : PUSH ESI
+006384fd : PUSH EAX
+006384fe : CALL 0x00652e1f
+00638503 : FLD double ptr [EAX + 0x10]
+00638506 : ADD ESP,0x18
+00638509 : CMP byte ptr [EBP + -0x4],BL
+0063850c : JZ 0x00638515
+0063850e : MOV EAX,dword ptr [EBP + -0x8]
+00638511 : AND dword ptr [EAX + 0x70],0xfffffffd
+00638515 : POP ESI
+00638516 : POP EBX
+00638517 : LEAVE
+00638518 : RET

@@ -1,0 +1,92 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_006942b0
+ENTRY    : 006942b0
+BODY     : [[006942b0, 00694325]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined4 FUN_006942b0(void)
+
+{
+  uint uVar1;
+  uint uVar2;
+  undefined1 *in_EDX;
+  uint unaff_EBX;
+  uint uVar3;
+  uint uVar4;
+  
+  uVar3 = CONCAT31(CONCAT21(CONCAT11(*in_EDX,in_EDX[1]),in_EDX[2]),in_EDX[3]);
+  uVar4 = 0;
+  if (uVar3 != 0) {
+    do {
+      uVar2 = uVar3 + uVar4 >> 1;
+      uVar1 = (uint)CONCAT21(CONCAT11(in_EDX[uVar2 * 4 + 4],in_EDX[uVar2 * 4 + 5]),
+                             in_EDX[uVar2 * 4 + 6]);
+      if (uVar1 <= unaff_EBX) {
+        if (unaff_EBX <= (byte)in_EDX[uVar2 * 4 + 7] + uVar1) {
+          return 1;
+        }
+        uVar4 = uVar2 + 1;
+        uVar2 = uVar3;
+      }
+      uVar3 = uVar2;
+    } while (uVar4 < uVar2);
+  }
+  return 0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006942b0 : MOVZX EAX,byte ptr [EDX + 0x1]
+006942b4 : MOVZX ECX,byte ptr [EDX + 0x2]
+006942b8 : PUSH EBP
+006942b9 : PUSH ESI
+006942ba : MOVZX ESI,byte ptr [EDX]
+006942bd : SHL ESI,0x8
+006942c0 : OR ESI,EAX
+006942c2 : MOVZX EAX,byte ptr [EDX + 0x3]
+006942c6 : SHL ESI,0x8
+006942c9 : OR ESI,ECX
+006942cb : SHL ESI,0x8
+006942ce : PUSH EDI
+006942cf : OR ESI,EAX
+006942d1 : XOR EDI,EDI
+006942d3 : ADD EDX,0x4
+006942d6 : TEST ESI,ESI
+006942d8 : JBE 0x00694317
+006942da : LEA EBX,[EBX]
+006942e0 : LEA ECX,[ESI + EDI*0x1]
+006942e3 : SHR ECX,0x1
+006942e5 : MOVZX EAX,byte ptr [EDX + ECX*0x4]
+006942e9 : MOVZX EBP,byte ptr [EDX + ECX*0x4 + 0x1]
+006942ee : SHL EAX,0x8
+006942f1 : OR EAX,EBP
+006942f3 : MOVZX EBP,byte ptr [EDX + ECX*0x4 + 0x2]
+006942f8 : SHL EAX,0x8
+006942fb : OR EAX,EBP
+006942fd : CMP EBX,EAX
+006942ff : JNC 0x00694305
+00694301 : MOV ESI,ECX
+00694303 : JMP 0x00694313
+00694305 : MOVZX EDI,byte ptr [EDX + ECX*0x4 + 0x3]
+0069430a : ADD EDI,EAX
+0069430c : CMP EBX,EDI
+0069430e : JBE 0x0069431d
+00694310 : LEA EDI,[ECX + 0x1]
+00694313 : CMP EDI,ESI
+00694315 : JC 0x006942e0
+00694317 : POP EDI
+00694318 : POP ESI
+00694319 : XOR EAX,EAX
+0069431b : POP EBP
+0069431c : RET
+0069431d : POP EDI
+0069431e : POP ESI
+0069431f : MOV EAX,0x1
+00694324 : POP EBP
+00694325 : RET

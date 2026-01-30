@@ -1,0 +1,112 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0063c948
+ENTRY    : 0063c948
+BODY     : [[0063c948, 0063c9f5]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+float10 FUN_0063c948(int param_1,uint param_2)
+
+{
+  uint in_EAX;
+  bool in_ZF;
+  short in_FPUControlWord;
+  float10 in_ST0;
+  float10 extraout_ST0;
+  float10 fVar1;
+  
+  if (in_ZF) {
+    if (((in_EAX & 0xfffff) != 0) || (fVar1 = _DAT_00d67fc0, param_1 != 0)) {
+      fVar1 = (float10)FUN_0065740c();
+    }
+LAB_0063c9d7:
+    if (DAT_00d7b7d8 == 0) {
+      fVar1 = (float10)__startOneArgErrorHandling();
+      return fVar1;
+    }
+  }
+  else {
+    if (in_FPUControlWord != 0x27f) {
+      in_EAX = FUN_006573f5();
+      in_ST0 = extraout_ST0;
+    }
+    if (in_EAX < 0x3ff00000) {
+      fVar1 = (float10)fpatan(SQRT(((float10)1 - in_ST0) * ((float10)1 + in_ST0)),in_ST0);
+    }
+    else {
+      fVar1 = _DAT_00d67fc0;
+      if ((0x3ff00000 < in_EAX) || ((param_2 & 0xfffff) != 0 || param_1 != 0)) goto LAB_0063c9d7;
+      if ((param_2 & 0x80000000) == 0) {
+        fVar1 = (float10)0;
+      }
+      else {
+        fVar1 = (float10)3.141592653589793;
+      }
+    }
+    if (DAT_00d7b7d8 == 0) {
+      fVar1 = (float10)__math_exit();
+      return fVar1;
+    }
+  }
+  return fVar1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0063c948 : PUSH EDX
+0063c949 : FSTCW word ptr [ESP]
+0063c94d : JZ 0x0063c9bc
+0063c94f : CMP word ptr [ESP],0x27f
+0063c955 : JZ 0x0063c95c
+0063c957 : CALL 0x006573f5
+0063c95c : CMP EAX,0x3ff00000
+0063c961 : JNC 0x0063c990
+0063c963 : FLD1
+0063c965 : FADD ST0,ST1
+0063c967 : FLD1
+0063c969 : FSUB ST0,ST2
+0063c96b : FMULP
+0063c96d : FSQRT
+0063c96f : FXCH
+0063c971 : FPATAN
+0063c973 : CMP dword ptr [0x00d7b7d8],0x0
+0063c97a : JNZ 0x0065747e
+0063c980 : MOV EDX,0xd
+0063c985 : LEA ECX,[0xd67080]
+0063c98b : JMP 0x0065748b
+0063c990 : JA 0x0063c9ca
+0063c992 : MOV EAX,dword ptr [ESP + 0xc]
+0063c996 : MOV ECX,EAX
+0063c998 : AND EAX,0xfffff
+0063c99d : OR EAX,dword ptr [ESP + 0x8]
+0063c9a1 : JNZ 0x0063c9ca
+0063c9a3 : AND ECX,0x80000000
+0063c9a9 : FSTP ST0
+0063c9ab : JZ 0x0063c9b1
+0063c9ad : FLDPI
+0063c9af : JMP 0x0063c973
+0063c9b1 : FLDZ
+0063c9b3 : JMP 0x0063c973
+0063c9b5 : CALL 0x0065740c
+0063c9ba : JMP 0x0063c9d7
+0063c9bc : TEST EAX,0xfffff
+0063c9c1 : JNZ 0x0063c9b5
+0063c9c3 : CMP dword ptr [ESP + 0x8],0x0
+0063c9c8 : JNZ 0x0063c9b5
+0063c9ca : FSTP ST0
+0063c9cc : FLD extended double ptr [0x00d67fc0]
+0063c9d2 : MOV EAX,0x1
+0063c9d7 : CMP dword ptr [0x00d7b7d8],0x0
+0063c9de : JNZ 0x0065747e
+0063c9e4 : MOV EDX,0xd
+0063c9e9 : LEA ECX,[0xd67080]
+0063c9ef : CALL 0x00657587
+0063c9f4 : POP EDX
+0063c9f5 : RET

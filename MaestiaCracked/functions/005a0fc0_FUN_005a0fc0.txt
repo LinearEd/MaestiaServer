@@ -1,0 +1,140 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005a0fc0
+ENTRY    : 005a0fc0
+BODY     : [[005a0fc0, 005a10a1]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_005a0fc0(void)
+
+{
+  undefined4 *puVar1;
+  GRefCountImpl *this;
+  undefined4 *in_ECX;
+  int iVar2;
+  undefined4 *puVar3;
+  
+  *in_ECX = &PTR_FUN_00b8f134;
+  in_ECX[5] = &PTR_LAB_00b8f12c;
+  if ((undefined4 *)in_ECX[0xad] != (undefined4 *)0x0) {
+    (*(code *)**(undefined4 **)in_ECX[0xad])(1);
+  }
+  this = *(GRefCountImpl **)(in_ECX[8] + 0x84);
+  if (this != (GRefCountImpl *)0x0) {
+    GRefCountImpl::AddRef(this);
+  }
+  FUN_00539f80();
+  if ((GRefCountImpl *)in_ECX[8] != (GRefCountImpl *)0x0) {
+    GRefCountImpl::Release((GRefCountImpl *)in_ECX[8]);
+  }
+  in_ECX[8] = 0;
+  if ((GRefCountImpl *)in_ECX[7] != (GRefCountImpl *)0x0) {
+    GRefCountImpl::Release((GRefCountImpl *)in_ECX[7]);
+  }
+  in_ECX[7] = 0;
+  GMutex::Lock((GMutex *)(this + 8));
+  this[0x20] = (GRefCountImpl)0x1;
+  GWaitCondition::NotifyAll((GWaitCondition *)(this + 0x1c));
+  GMutex::Unlock((GMutex *)(this + 8));
+  GRefCountImpl::Release(this);
+  FUN_00515cf0(in_ECX[0xc2]);
+  puVar3 = in_ECX + 0xc2;
+  iVar2 = 1;
+  do {
+    puVar1 = puVar3 + -3;
+    puVar3 = puVar3 + -3;
+    FUN_00515cf0(*puVar1);
+    iVar2 = iVar2 + -1;
+  } while (-1 < iVar2);
+  FUN_00512cb0();
+  if ((GRefCountImpl *)in_ECX[8] != (GRefCountImpl *)0x0) {
+    GRefCountImpl::Release((GRefCountImpl *)in_ECX[8]);
+  }
+  if ((GRefCountImpl *)in_ECX[7] != (GRefCountImpl *)0x0) {
+    GRefCountImpl::Release((GRefCountImpl *)in_ECX[7]);
+  }
+  in_ECX[5] = &PTR_LAB_00b8b11c;
+  FUN_00513bd0();
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005a0fc0 : PUSH EBX
+005a0fc1 : PUSH EBP
+005a0fc2 : PUSH ESI
+005a0fc3 : MOV ESI,ECX
+005a0fc5 : MOV ECX,dword ptr [ESI + 0x2b4]
+005a0fcb : XOR EBX,EBX
+005a0fcd : PUSH EDI
+005a0fce : MOV dword ptr [ESI],0xb8f134
+005a0fd4 : MOV dword ptr [ESI + 0x14],0xb8f12c
+005a0fdb : CMP ECX,EBX
+005a0fdd : JZ 0x005a0fe7
+005a0fdf : MOV EAX,dword ptr [ECX]
+005a0fe1 : MOV EDX,dword ptr [EAX]
+005a0fe3 : PUSH 0x1
+005a0fe5 : CALL EDX
+005a0fe7 : MOV EAX,dword ptr [ESI + 0x20]
+005a0fea : MOV EDI,dword ptr [EAX + 0x84]
+005a0ff0 : CMP EDI,EBX
+005a0ff2 : JZ 0x005a0ffb
+005a0ff4 : MOV ECX,EDI
+005a0ff6 : CALL 0x00523dd0
+005a0ffb : LEA EBP,[ESI + 0x28]
+005a0ffe : MOV ECX,EBP
+005a1000 : CALL 0x00539f80
+005a1005 : MOV ECX,dword ptr [ESI + 0x20]
+005a1008 : CMP ECX,EBX
+005a100a : JZ 0x005a1011
+005a100c : CALL 0x004ff7e0
+005a1011 : MOV dword ptr [ESI + 0x20],EBX
+005a1014 : MOV ECX,dword ptr [ESI + 0x1c]
+005a1017 : CMP ECX,EBX
+005a1019 : JZ 0x005a1020
+005a101b : CALL 0x004ff7e0
+005a1020 : MOV dword ptr [ESI + 0x1c],EBX
+005a1023 : LEA EBX,[EDI + 0x8]
+005a1026 : MOV ECX,EBX
+005a1028 : CALL 0x005162b0
+005a102d : LEA ECX,[EDI + 0x1c]
+005a1030 : MOV byte ptr [EDI + 0x20],0x1
+005a1034 : CALL 0x00516460
+005a1039 : MOV ECX,EBX
+005a103b : CALL 0x005170a0
+005a1040 : MOV ECX,EDI
+005a1042 : CALL 0x004ff7e0
+005a1047 : MOV ECX,dword ptr [ESI + 0x308]
+005a104d : PUSH ECX
+005a104e : CALL 0x00515cf0
+005a1053 : LEA EDI,[ESI + 0x308]
+005a1059 : MOV EBX,0x1
+005a105e : MOV EDI,EDI
+005a1060 : MOV EDX,dword ptr [EDI + -0xc]
+005a1063 : SUB EDI,0xc
+005a1066 : PUSH EDX
+005a1067 : CALL 0x00515cf0
+005a106c : SUB EBX,0x1
+005a106f : JNS 0x005a1060
+005a1071 : MOV ECX,EBP
+005a1073 : CALL 0x00512cb0
+005a1078 : MOV ECX,dword ptr [ESI + 0x20]
+005a107b : TEST ECX,ECX
+005a107d : JZ 0x005a1084
+005a107f : CALL 0x004ff7e0
+005a1084 : MOV ECX,dword ptr [ESI + 0x1c]
+005a1087 : TEST ECX,ECX
+005a1089 : JZ 0x005a1090
+005a108b : CALL 0x004ff7e0
+005a1090 : POP EDI
+005a1091 : MOV dword ptr [ESI + 0x14],0xb8b11c
+005a1098 : MOV ECX,ESI
+005a109a : POP ESI
+005a109b : POP EBP
+005a109c : POP EBX
+005a109d : JMP 0x00513bd0

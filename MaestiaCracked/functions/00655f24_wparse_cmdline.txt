@@ -1,0 +1,264 @@
+PROGRAM  : Maestia.exe
+FUNCTION : wparse_cmdline
+ENTRY    : 00655f24
+BODY     : [[00655f24, 00656074]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    _wparse_cmdline
+   
+   Library: Visual Studio 2008 Release */
+
+void __cdecl wparse_cmdline(undefined4 *param_1,int *param_2)
+
+{
+  bool bVar1;
+  bool bVar2;
+  short *in_EAX;
+  short *psVar3;
+  short sVar4;
+  short *in_ECX;
+  uint uVar5;
+  int *unaff_EBX;
+  
+  bVar1 = false;
+  *unaff_EBX = 0;
+  *param_2 = 1;
+  if (param_1 != (undefined4 *)0x0) {
+    *param_1 = in_ECX;
+    param_1 = param_1 + 1;
+  }
+  do {
+    if (*in_EAX == 0x22) {
+      bVar1 = !bVar1;
+      sVar4 = 0x22;
+    }
+    else {
+      *unaff_EBX = *unaff_EBX + 1;
+      if (in_ECX != (short *)0x0) {
+        *in_ECX = *in_EAX;
+        in_ECX = in_ECX + 1;
+      }
+      sVar4 = *in_EAX;
+      if (sVar4 == 0) goto LAB_00655f94;
+    }
+    in_EAX = in_EAX + 1;
+  } while ((bVar1) || ((sVar4 != 0x20 && (sVar4 != 9))));
+  if (in_ECX != (short *)0x0) {
+    in_ECX[-1] = 0;
+  }
+LAB_00655f94:
+  bVar1 = false;
+  while (psVar3 = in_EAX, *in_EAX != 0) {
+    for (; (*psVar3 == 0x20 || (*psVar3 == 9)); psVar3 = psVar3 + 1) {
+    }
+    if (*psVar3 == 0) break;
+    if (param_1 != (undefined4 *)0x0) {
+      *param_1 = in_ECX;
+      param_1 = param_1 + 1;
+    }
+    *param_2 = *param_2 + 1;
+    while( true ) {
+      bVar2 = true;
+      uVar5 = 0;
+      for (; *psVar3 == 0x5c; psVar3 = psVar3 + 1) {
+        uVar5 = uVar5 + 1;
+      }
+      in_EAX = psVar3;
+      if (*psVar3 == 0x22) {
+        if (((uVar5 & 1) == 0) && ((!bVar1 || (in_EAX = psVar3 + 1, *in_EAX != 0x22)))) {
+          bVar2 = false;
+          bVar1 = !bVar1;
+          in_EAX = psVar3;
+        }
+        uVar5 = uVar5 >> 1;
+      }
+      while (uVar5 != 0) {
+        uVar5 = uVar5 - 1;
+        if (in_ECX != (short *)0x0) {
+          *in_ECX = 0x5c;
+          in_ECX = in_ECX + 1;
+        }
+        *unaff_EBX = *unaff_EBX + 1;
+      }
+      sVar4 = *in_EAX;
+      if ((sVar4 == 0) || ((!bVar1 && ((sVar4 == 0x20 || (sVar4 == 9)))))) break;
+      if (bVar2) {
+        if (in_ECX != (short *)0x0) {
+          *in_ECX = sVar4;
+          in_ECX = in_ECX + 1;
+        }
+        *unaff_EBX = *unaff_EBX + 1;
+      }
+      psVar3 = in_EAX + 1;
+    }
+    if (in_ECX != (short *)0x0) {
+      *in_ECX = 0;
+      in_ECX = in_ECX + 1;
+    }
+    *unaff_EBX = *unaff_EBX + 1;
+  }
+  if (param_1 != (undefined4 *)0x0) {
+    *param_1 = 0;
+  }
+  *param_2 = *param_2 + 1;
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00655f24 : MOV EDI,EDI
+00655f26 : PUSH EBP
+00655f27 : MOV EBP,ESP
+00655f29 : PUSH ECX
+00655f2a : PUSH ESI
+00655f2b : XOR EDX,EDX
+00655f2d : PUSH EDI
+00655f2e : MOV EDI,dword ptr [EBP + 0xc]
+00655f31 : MOV dword ptr [EBX],EDX
+00655f33 : MOV ESI,ECX
+00655f35 : MOV dword ptr [EDI],0x1
+00655f3b : CMP dword ptr [EBP + 0x8],EDX
+00655f3e : JZ 0x00655f49
+00655f40 : MOV ECX,dword ptr [EBP + 0x8]
+00655f43 : ADD dword ptr [EBP + 0x8],0x4
+00655f47 : MOV dword ptr [ECX],ESI
+00655f49 : CMP word ptr [EAX],0x22
+00655f4d : JNZ 0x00655f62
+00655f4f : MOV EDI,dword ptr [EBP + 0xc]
+00655f52 : XOR ECX,ECX
+00655f54 : TEST EDX,EDX
+00655f56 : SETZ CL
+00655f59 : PUSH 0x22
+00655f5b : INC EAX
+00655f5c : INC EAX
+00655f5d : MOV EDX,ECX
+00655f5f : POP ECX
+00655f60 : JMP 0x00655f7a
+00655f62 : INC dword ptr [EBX]
+00655f64 : TEST ESI,ESI
+00655f66 : JZ 0x00655f70
+00655f68 : MOV CX,word ptr [EAX]
+00655f6b : MOV word ptr [ESI],CX
+00655f6e : INC ESI
+00655f6f : INC ESI
+00655f70 : MOVZX ECX,word ptr [EAX]
+00655f73 : INC EAX
+00655f74 : INC EAX
+00655f75 : TEST CX,CX
+00655f78 : JZ 0x00655fb6
+00655f7a : TEST EDX,EDX
+00655f7c : JNZ 0x00655f49
+00655f7e : CMP CX,0x20
+00655f82 : JZ 0x00655f8a
+00655f84 : CMP CX,0x9
+00655f88 : JNZ 0x00655f49
+00655f8a : TEST ESI,ESI
+00655f8c : JZ 0x00655f94
+00655f8e : XOR ECX,ECX
+00655f90 : MOV word ptr [ESI + -0x2],CX
+00655f94 : AND dword ptr [EBP + -0x4],0x0
+00655f98 : XOR EDX,EDX
+00655f9a : CMP word ptr [EAX],DX
+00655f9d : JZ 0x00656066
+00655fa3 : MOVZX ECX,word ptr [EAX]
+00655fa6 : CMP CX,0x20
+00655faa : JZ 0x00655fb2
+00655fac : CMP CX,0x9
+00655fb0 : JNZ 0x00655fba
+00655fb2 : INC EAX
+00655fb3 : INC EAX
+00655fb4 : JMP 0x00655fa3
+00655fb6 : DEC EAX
+00655fb7 : DEC EAX
+00655fb8 : JMP 0x00655f94
+00655fba : CMP word ptr [EAX],DX
+00655fbd : JZ 0x00656066
+00655fc3 : CMP dword ptr [EBP + 0x8],EDX
+00655fc6 : JZ 0x00655fd1
+00655fc8 : MOV ECX,dword ptr [EBP + 0x8]
+00655fcb : ADD dword ptr [EBP + 0x8],0x4
+00655fcf : MOV dword ptr [ECX],ESI
+00655fd1 : INC dword ptr [EDI]
+00655fd3 : XOR EDI,EDI
+00655fd5 : INC EDI
+00655fd6 : XOR EDX,EDX
+00655fd8 : JMP 0x00655fdd
+00655fda : INC EAX
+00655fdb : INC EAX
+00655fdc : INC EDX
+00655fdd : CMP word ptr [EAX],0x5c
+00655fe1 : JZ 0x00655fda
+00655fe3 : CMP word ptr [EAX],0x22
+00655fe7 : JNZ 0x00656021
+00655fe9 : TEST DL,0x1
+00655fec : JNZ 0x0065600e
+00655fee : CMP dword ptr [EBP + -0x4],0x0
+00655ff2 : JZ 0x00656001
+00655ff4 : LEA ECX,[EAX + 0x2]
+00655ff7 : CMP word ptr [ECX],0x22
+00655ffb : JNZ 0x00656001
+00655ffd : MOV EAX,ECX
+00655fff : JMP 0x0065600e
+00656001 : XOR ECX,ECX
+00656003 : XOR EDI,EDI
+00656005 : CMP dword ptr [EBP + -0x4],ECX
+00656008 : SETZ CL
+0065600b : MOV dword ptr [EBP + -0x4],ECX
+0065600e : SHR EDX,0x1
+00656010 : JMP 0x00656021
+00656012 : DEC EDX
+00656013 : TEST ESI,ESI
+00656015 : JZ 0x0065601f
+00656017 : PUSH 0x5c
+00656019 : POP ECX
+0065601a : MOV word ptr [ESI],CX
+0065601d : INC ESI
+0065601e : INC ESI
+0065601f : INC dword ptr [EBX]
+00656021 : TEST EDX,EDX
+00656023 : JNZ 0x00656012
+00656025 : MOVZX ECX,word ptr [EAX]
+00656028 : TEST CX,CX
+0065602b : JZ 0x00656051
+0065602d : CMP dword ptr [EBP + -0x4],EDX
+00656030 : JNZ 0x0065603e
+00656032 : CMP CX,0x20
+00656036 : JZ 0x00656051
+00656038 : CMP CX,0x9
+0065603c : JZ 0x00656051
+0065603e : TEST EDI,EDI
+00656040 : JZ 0x0065604d
+00656042 : TEST ESI,ESI
+00656044 : JZ 0x0065604b
+00656046 : MOV word ptr [ESI],CX
+00656049 : INC ESI
+0065604a : INC ESI
+0065604b : INC dword ptr [EBX]
+0065604d : INC EAX
+0065604e : INC EAX
+0065604f : JMP 0x00655fd3
+00656051 : TEST ESI,ESI
+00656053 : JZ 0x0065605c
+00656055 : XOR ECX,ECX
+00656057 : MOV word ptr [ESI],CX
+0065605a : INC ESI
+0065605b : INC ESI
+0065605c : INC dword ptr [EBX]
+0065605e : MOV EDI,dword ptr [EBP + 0xc]
+00656061 : JMP 0x00655f98
+00656066 : MOV EAX,dword ptr [EBP + 0x8]
+00656069 : CMP EAX,EDX
+0065606b : JZ 0x0065606f
+0065606d : MOV dword ptr [EAX],EDX
+0065606f : INC dword ptr [EDI]
+00656071 : POP EDI
+00656072 : POP ESI
+00656073 : LEAVE
+00656074 : RET

@@ -1,0 +1,60 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00613fa0
+ENTRY    : 00613fa0
+BODY     : [[00613fa0, 00613fe9]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined4 FUN_00613fa0(int param_1)
+
+{
+  uint uVar1;
+  
+  uVar1 = *(int *)(param_1 + 0xe8) >> 8 & 0xff;
+  if (((*(uint *)(param_1 + 0x68) & 0x8000000) != 0) || (uVar1 == 1)) {
+    return 1;
+  }
+  if (((*(uint *)(param_1 + 0x68) & 0x40000000) == 0) && (uVar1 != 2)) {
+    if (uVar1 == 4) {
+      return 4;
+    }
+    if (uVar1 == 3) {
+      return 3;
+    }
+    return 0;
+  }
+  return 2;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00613fa0 : MOV ECX,dword ptr [ESP + 0x4]
+00613fa4 : MOV EAX,dword ptr [ECX + 0xe8]
+00613faa : MOV ECX,dword ptr [ECX + 0x68]
+00613fad : SAR EAX,0x8
+00613fb0 : AND EAX,0xff
+00613fb5 : TEST ECX,0x8000000
+00613fbb : JNZ 0x00613fe4
+00613fbd : CMP EAX,0x1
+00613fc0 : JZ 0x00613fe4
+00613fc2 : TEST ECX,0x40000000
+00613fc8 : JNZ 0x00613fde
+00613fca : CMP EAX,0x2
+00613fcd : JZ 0x00613fde
+00613fcf : CMP EAX,0x4
+00613fd2 : JNZ 0x00613fd5
+00613fd4 : RET
+00613fd5 : CMP EAX,0x3
+00613fd8 : JNZ 0x00613fdb
+00613fda : RET
+00613fdb : XOR EAX,EAX
+00613fdd : RET
+00613fde : MOV EAX,0x2
+00613fe3 : RET
+00613fe4 : MOV EAX,0x1
+00613fe9 : RET

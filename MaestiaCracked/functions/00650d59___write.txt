@@ -1,0 +1,126 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __write
+ENTRY    : 00650d59
+BODY     : [[00650d59, 00650e2a]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* WARNING: Function: __SEH_prolog4 replaced with injection: SEH_prolog4 */
+/* WARNING: Function: __SEH_epilog4 replaced with injection: EH_epilog3 */
+/* Library Function - Single Match
+    __write
+   
+   Library: Visual Studio 2008 Release */
+
+int __cdecl __write(int _FileHandle,void *_Buf,uint _MaxCharCount)
+
+{
+  ulong *puVar1;
+  int *piVar2;
+  int iVar3;
+  int local_20;
+  
+  if (_FileHandle == -2) {
+    puVar1 = ___doserrno();
+    *puVar1 = 0;
+    piVar2 = __errno();
+    *piVar2 = 9;
+  }
+  else {
+    if ((-1 < _FileHandle) && ((uint)_FileHandle < DAT_01728c30)) {
+      iVar3 = (_FileHandle & 0x1fU) * 0x40;
+      if ((*(byte *)((&DAT_01728c40)[_FileHandle >> 5] + 4 + iVar3) & 1) != 0) {
+        ___lock_fhandle(_FileHandle);
+        if ((*(byte *)((&DAT_01728c40)[_FileHandle >> 5] + 4 + iVar3) & 1) == 0) {
+          piVar2 = __errno();
+          *piVar2 = 9;
+          puVar1 = ___doserrno();
+          *puVar1 = 0;
+          local_20 = -1;
+        }
+        else {
+          local_20 = __write_nolock(_FileHandle,_Buf,_MaxCharCount);
+        }
+        FUN_00650e2b();
+        return local_20;
+      }
+    }
+    puVar1 = ___doserrno();
+    *puVar1 = 0;
+    piVar2 = __errno();
+    *piVar2 = 9;
+    __invalid_parameter(0,0,0,0,0);
+  }
+  return -1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00650d59 : PUSH 0x10
+00650d5b : PUSH 0xced278
+00650d60 : CALL 0x0064c228
+00650d65 : MOV EAX,dword ptr [EBP + 0x8]
+00650d68 : CMP EAX,-0x2
+00650d6b : JNZ 0x00650d88
+00650d6d : CALL 0x0063ab95
+00650d72 : AND dword ptr [EAX],0x0
+00650d75 : CALL 0x0063ab82
+00650d7a : MOV dword ptr [EAX],0x9
+00650d80 : OR EAX,0xffffffff
+00650d83 : JMP 0x00650e25
+00650d88 : XOR EDI,EDI
+00650d8a : CMP EAX,EDI
+00650d8c : JL 0x00650d96
+00650d8e : CMP EAX,dword ptr [0x01728c30]
+00650d94 : JC 0x00650db7
+00650d96 : CALL 0x0063ab95
+00650d9b : MOV dword ptr [EAX],EDI
+00650d9d : CALL 0x0063ab82
+00650da2 : MOV dword ptr [EAX],0x9
+00650da8 : PUSH EDI
+00650da9 : PUSH EDI
+00650daa : PUSH EDI
+00650dab : PUSH EDI
+00650dac : PUSH EDI
+00650dad : CALL 0x006372b8
+00650db2 : ADD ESP,0x14
+00650db5 : JMP 0x00650d80
+00650db7 : MOV ECX,EAX
+00650db9 : SAR ECX,0x5
+00650dbc : LEA EBX,[ECX*0x4 + 0x1728c40]
+00650dc3 : MOV ESI,EAX
+00650dc5 : AND ESI,0x1f
+00650dc8 : SHL ESI,0x6
+00650dcb : MOV ECX,dword ptr [EBX]
+00650dcd : MOVSX ECX,byte ptr [ECX + ESI*0x1 + 0x4]
+00650dd2 : AND ECX,0x1
+00650dd5 : JZ 0x00650d96
+00650dd7 : PUSH EAX
+00650dd8 : CALL 0x0065cc82
+00650ddd : POP ECX
+00650dde : MOV dword ptr [EBP + -0x4],EDI
+00650de1 : MOV EAX,dword ptr [EBX]
+00650de3 : TEST byte ptr [EAX + ESI*0x1 + 0x4],0x1
+00650de8 : JZ 0x00650e00
+00650dea : PUSH dword ptr [EBP + 0x10]
+00650ded : PUSH dword ptr [EBP + 0xc]
+00650df0 : PUSH dword ptr [EBP + 0x8]
+00650df3 : CALL 0x00650626
+00650df8 : ADD ESP,0xc
+00650dfb : MOV dword ptr [EBP + -0x1c],EAX
+00650dfe : JMP 0x00650e16
+00650e00 : CALL 0x0063ab82
+00650e05 : MOV dword ptr [EAX],0x9
+00650e0b : CALL 0x0063ab95
+00650e10 : MOV dword ptr [EAX],EDI
+00650e12 : OR dword ptr [EBP + -0x1c],0xffffffff
+00650e16 : MOV dword ptr [EBP + -0x4],0xfffffffe
+00650e1d : CALL 0x00650e2b
+00650e22 : MOV EAX,dword ptr [EBP + -0x1c]
+00650e25 : CALL 0x0064c26d
+00650e2a : RET

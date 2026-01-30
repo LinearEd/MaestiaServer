@@ -1,0 +1,78 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0050ab40
+ENTRY    : 0050ab40
+BODY     : [[0050ab40, 0050abad]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_0050ab40(void)
+
+{
+  byte bVar1;
+  bool bVar2;
+  int *in_ECX;
+  
+  bVar1 = *(byte *)(in_ECX + 0x32);
+  if (((bVar1 & 1) == 0) || ((*(byte *)(in_ECX[0x28] + 0x141) & 8) != 0)) {
+    bVar2 = false;
+  }
+  else {
+    bVar2 = true;
+  }
+  if (bVar2) {
+    FUN_00544660();
+  }
+  else {
+    *(byte *)(in_ECX[0x28] + 0x141) = *(byte *)(in_ECX[0x28] + 0x141) & 0xfe;
+  }
+  if ((bVar1 & 1) == 0) {
+    *(byte *)(in_ECX[0x28] + 0x141) = *(byte *)(in_ECX[0x28] + 0x141) & 0xfd;
+  }
+  else {
+    FUN_00544680();
+  }
+                    /* WARNING: Could not recover jumptable at 0x0050abac. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+  (**(code **)(*in_ECX + 0x13c))();
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0050ab40 : PUSH EBX
+0050ab41 : PUSH ESI
+0050ab42 : MOV ESI,ECX
+0050ab44 : MOV BL,byte ptr [ESI + 0xc8]
+0050ab4a : AND BL,0x1
+0050ab4d : JZ 0x0050ab62
+0050ab4f : MOV EAX,dword ptr [ESI + 0xa0]
+0050ab55 : TEST byte ptr [EAX + 0x141],0x8
+0050ab5c : JNZ 0x0050ab62
+0050ab5e : MOV AL,0x1
+0050ab60 : JMP 0x0050ab64
+0050ab62 : XOR AL,AL
+0050ab64 : TEST AL,AL
+0050ab66 : JZ 0x0050ab75
+0050ab68 : MOV ECX,dword ptr [ESI + 0xa0]
+0050ab6e : CALL 0x00544660
+0050ab73 : JMP 0x0050ab82
+0050ab75 : MOV EAX,dword ptr [ESI + 0xa0]
+0050ab7b : AND byte ptr [EAX + 0x141],0xfe
+0050ab82 : TEST BL,BL
+0050ab84 : JZ 0x0050ab93
+0050ab86 : MOV ECX,dword ptr [ESI + 0xa0]
+0050ab8c : CALL 0x00544680
+0050ab91 : JMP 0x0050aba0
+0050ab93 : MOV EAX,dword ptr [ESI + 0xa0]
+0050ab99 : AND byte ptr [EAX + 0x141],0xfd
+0050aba0 : MOV EDX,dword ptr [ESI]
+0050aba2 : MOV EAX,dword ptr [EDX + 0x13c]
+0050aba8 : MOV ECX,ESI
+0050abaa : POP ESI
+0050abab : POP EBX
+0050abac : JMP EAX

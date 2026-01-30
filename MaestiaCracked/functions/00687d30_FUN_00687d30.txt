@@ -1,0 +1,119 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00687d30
+ENTRY    : 00687d30
+BODY     : [[00687d30, 00687dac]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+int FUN_00687d30(void)
+
+{
+  uint uVar1;
+  uint uVar2;
+  uint uVar3;
+  byte bVar4;
+  uint uVar5;
+  uint *unaff_EDI;
+  
+  uVar1 = *unaff_EDI;
+  uVar2 = unaff_EDI[1];
+  uVar5 = uVar1;
+  if ((int)uVar1 < 0) {
+    uVar5 = -uVar1;
+  }
+  uVar3 = uVar2;
+  if ((int)uVar2 < 0) {
+    uVar3 = -uVar2;
+  }
+  uVar3 = uVar3 | uVar5;
+  uVar5 = 0;
+  if (0xffff < (int)uVar3) {
+    uVar3 = (int)uVar3 >> 0x10;
+    uVar5 = 0x10;
+  }
+  if (0xff < (int)uVar3) {
+    uVar3 = (int)uVar3 >> 8;
+    uVar5 = uVar5 + 8;
+  }
+  if (0xf < (int)uVar3) {
+    uVar3 = (int)uVar3 >> 4;
+    uVar5 = uVar5 + 4;
+  }
+  if (3 < (int)uVar3) {
+    uVar3 = (int)uVar3 >> 2;
+    uVar5 = uVar5 + 2;
+  }
+  if (1 < (int)uVar3) {
+    uVar5 = uVar5 + 1;
+  }
+  if (uVar5 < 0x1c) {
+    bVar4 = (byte)(0x1b - uVar5);
+    *unaff_EDI = uVar1 << (bVar4 & 0x1f);
+    unaff_EDI[1] = uVar2 << (bVar4 & 0x1f);
+    return 0x1b - uVar5;
+  }
+  bVar4 = (byte)(uVar5 - 0x1b);
+  unaff_EDI[1] = (int)uVar2 >> (bVar4 & 0x1f);
+  *unaff_EDI = (int)uVar1 >> (bVar4 & 0x1f);
+  return -(uVar5 - 0x1b);
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00687d30 : MOV EDX,dword ptr [EDI]
+00687d32 : PUSH ESI
+00687d33 : MOV ESI,dword ptr [EDI + 0x4]
+00687d36 : MOV ECX,EDX
+00687d38 : TEST EDX,EDX
+00687d3a : JGE 0x00687d3e
+00687d3c : NEG ECX
+00687d3e : MOV EAX,ESI
+00687d40 : TEST ESI,ESI
+00687d42 : JGE 0x00687d46
+00687d44 : NEG EAX
+00687d46 : OR EAX,ECX
+00687d48 : XOR ECX,ECX
+00687d4a : CMP EAX,0x10000
+00687d4f : JL 0x00687d59
+00687d51 : SAR EAX,0x10
+00687d54 : MOV ECX,0x10
+00687d59 : CMP EAX,0x100
+00687d5e : JL 0x00687d66
+00687d60 : SAR EAX,0x8
+00687d63 : ADD ECX,0x8
+00687d66 : CMP EAX,0x10
+00687d69 : JL 0x00687d71
+00687d6b : SAR EAX,0x4
+00687d6e : ADD ECX,0x4
+00687d71 : CMP EAX,0x4
+00687d74 : JL 0x00687d7c
+00687d76 : SAR EAX,0x2
+00687d79 : ADD ECX,0x2
+00687d7c : CMP EAX,0x2
+00687d7f : JL 0x00687d82
+00687d81 : INC ECX
+00687d82 : CMP ECX,0x1b
+00687d85 : JG 0x00687d9b
+00687d87 : MOV EAX,0x1b
+00687d8c : SUB EAX,ECX
+00687d8e : MOV ECX,EAX
+00687d90 : SHL EDX,CL
+00687d92 : SHL ESI,CL
+00687d94 : MOV dword ptr [EDI],EDX
+00687d96 : MOV dword ptr [EDI + 0x4],ESI
+00687d99 : POP ESI
+00687d9a : RET
+00687d9b : SUB ECX,0x1b
+00687d9e : SAR ESI,CL
+00687da0 : SAR EDX,CL
+00687da2 : NEG ECX
+00687da4 : MOV EAX,ECX
+00687da6 : MOV dword ptr [EDI + 0x4],ESI
+00687da9 : MOV dword ptr [EDI],EDX
+00687dab : POP ESI
+00687dac : RET

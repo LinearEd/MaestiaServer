@@ -1,0 +1,72 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00457c80
+ENTRY    : 00457c80
+BODY     : [[00457c80, 00457cc6]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00457c80(void)
+
+{
+  char cVar1;
+  char *pcVar2;
+  size_t _Size;
+  char *in_EDX;
+  undefined4 *unaff_ESI;
+  
+  *unaff_ESI = &PTR_LAB_00cd4200;
+  if (in_EDX == (char *)0x0) {
+    unaff_ESI[1] = 0;
+    *(undefined1 *)(unaff_ESI + 2) = 0;
+    return;
+  }
+  pcVar2 = in_EDX;
+  do {
+    cVar1 = *pcVar2;
+    pcVar2 = pcVar2 + 1;
+  } while (cVar1 != '\0');
+  _Size = (int)pcVar2 - (int)(in_EDX + 1);
+  if (_Size != 0) {
+    _memmove(unaff_ESI + 2,in_EDX,_Size);
+  }
+  unaff_ESI[1] = _Size;
+  *(undefined1 *)(_Size + 8 + (int)unaff_ESI) = 0;
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00457c80 : MOV dword ptr [ESI],0xcd4200
+00457c86 : TEST EDX,EDX
+00457c88 : JNZ 0x00457c93
+00457c8a : MOV dword ptr [ESI + 0x4],EDX
+00457c8d : MOV byte ptr [ESI + 0x8],DL
+00457c90 : MOV EAX,ESI
+00457c92 : RET
+00457c93 : MOV EAX,EDX
+00457c95 : PUSH EDI
+00457c96 : LEA EDI,[EAX + 0x1]
+00457c99 : LEA ESP,[ESP]
+00457ca0 : MOV CL,byte ptr [EAX]
+00457ca2 : INC EAX
+00457ca3 : TEST CL,CL
+00457ca5 : JNZ 0x00457ca0
+00457ca7 : SUB EAX,EDI
+00457ca9 : MOV EDI,EAX
+00457cab : JZ 0x00457cbb
+00457cad : PUSH EDI
+00457cae : PUSH EDX
+00457caf : LEA EAX,[ESI + 0x8]
+00457cb2 : PUSH EAX
+00457cb3 : CALL 0x00636880
+00457cb8 : ADD ESP,0xc
+00457cbb : MOV dword ptr [ESI + 0x4],EDI
+00457cbe : MOV byte ptr [EDI + ESI*0x1 + 0x8],0x0
+00457cc3 : POP EDI
+00457cc4 : MOV EAX,ESI
+00457cc6 : RET

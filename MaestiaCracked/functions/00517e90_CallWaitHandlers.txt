@@ -1,0 +1,100 @@
+PROGRAM  : Maestia.exe
+FUNCTION : CallWaitHandlers
+ENTRY    : 00517e90
+BODY     : [[00517e90, 00517f0b]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* public: void __thiscall GWaitable::HandlerArray::CallWaitHandlers(void) */
+
+void __thiscall GWaitable::HandlerArray::CallWaitHandlers(HandlerArray *this)
+
+{
+  LPCRITICAL_SECTION lpCriticalSection;
+  uint uVar1;
+  int local_c;
+  uint local_8;
+  
+                    /* 0x117e90  58  ?CallWaitHandlers@HandlerArray@GWaitable@@QAEXXZ */
+  lpCriticalSection = (LPCRITICAL_SECTION)(this + 0x10);
+  EnterCriticalSection(lpCriticalSection);
+  if (*(int *)(this + 8) != 0) {
+    if (*(int *)(this + 8) == 1) {
+      (*(code *)**(undefined4 **)(this + 4))((*(undefined4 **)(this + 4))[1]);
+      LeaveCriticalSection(lpCriticalSection);
+      return;
+    }
+    FUN_00517d60(this + 4);
+    uVar1 = 0;
+    if (local_8 != 0) {
+      do {
+        (**(code **)(local_c + uVar1 * 8))(*(undefined4 *)(local_c + 4 + uVar1 * 8));
+        uVar1 = uVar1 + 1;
+      } while (uVar1 < local_8);
+    }
+    FUN_00515cf0(local_c);
+  }
+  LeaveCriticalSection(lpCriticalSection);
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00517e90 : SUB ESP,0xc
+00517e93 : PUSH EBP
+00517e94 : PUSH ESI
+00517e95 : MOV ESI,ECX
+00517e97 : LEA EBP,[ESI + 0x10]
+00517e9a : PUSH EBP
+00517e9b : CALL dword ptr [0x00b85118]
+00517ea1 : MOV EAX,dword ptr [ESI + 0x8]
+00517ea4 : TEST EAX,EAX
+00517ea6 : JZ 0x00517eff
+00517ea8 : CMP EAX,0x1
+00517eab : JNZ 0x00517ec8
+00517ead : MOV ESI,dword ptr [ESI + 0x4]
+00517eb0 : MOV EAX,dword ptr [ESI + 0x4]
+00517eb3 : MOV ECX,dword ptr [ESI]
+00517eb5 : PUSH EAX
+00517eb6 : CALL ECX
+00517eb8 : ADD ESP,0x4
+00517ebb : PUSH EBP
+00517ebc : CALL dword ptr [0x00b8511c]
+00517ec2 : POP ESI
+00517ec3 : POP EBP
+00517ec4 : ADD ESP,0xc
+00517ec7 : RET
+00517ec8 : PUSH EBX
+00517ec9 : PUSH EDI
+00517eca : ADD ESI,0x4
+00517ecd : PUSH ESI
+00517ece : LEA ECX,[ESP + 0x14]
+00517ed2 : CALL 0x00517d60
+00517ed7 : MOV EBX,dword ptr [ESP + 0x14]
+00517edb : MOV EDI,dword ptr [ESP + 0x10]
+00517edf : XOR ESI,ESI
+00517ee1 : TEST EBX,EBX
+00517ee3 : JBE 0x00517ef7
+00517ee5 : MOV EDX,dword ptr [EDI + ESI*0x8 + 0x4]
+00517ee9 : MOV EAX,dword ptr [EDI + ESI*0x8]
+00517eec : PUSH EDX
+00517eed : CALL EAX
+00517eef : INC ESI
+00517ef0 : ADD ESP,0x4
+00517ef3 : CMP ESI,EBX
+00517ef5 : JC 0x00517ee5
+00517ef7 : PUSH EDI
+00517ef8 : CALL 0x00515cf0
+00517efd : POP EDI
+00517efe : POP EBX
+00517eff : PUSH EBP
+00517f00 : CALL dword ptr [0x00b8511c]
+00517f06 : POP ESI
+00517f07 : POP EBP
+00517f08 : ADD ESP,0xc
+00517f0b : RET

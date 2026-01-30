@@ -1,0 +1,111 @@
+PROGRAM  : Maestia.exe
+FUNCTION : _strspn
+ENTRY    : 0063c100
+BODY     : [[0063c100, 0063c145]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    _strspn
+   
+   Library: Visual Studio */
+
+size_t __cdecl _strspn(char *_Str,char *_Control)
+
+{
+  byte bVar1;
+  size_t sVar2;
+  byte abStack_28 [32];
+  
+  abStack_28[0x1c] = 0;
+  abStack_28[0x1d] = 0;
+  abStack_28[0x1e] = 0;
+  abStack_28[0x1f] = 0;
+  abStack_28[0x18] = 0;
+  abStack_28[0x19] = 0;
+  abStack_28[0x1a] = 0;
+  abStack_28[0x1b] = 0;
+  abStack_28[0x14] = 0;
+  abStack_28[0x15] = 0;
+  abStack_28[0x16] = 0;
+  abStack_28[0x17] = 0;
+  abStack_28[0x10] = 0;
+  abStack_28[0x11] = 0;
+  abStack_28[0x12] = 0;
+  abStack_28[0x13] = 0;
+  abStack_28[0xc] = 0;
+  abStack_28[0xd] = 0;
+  abStack_28[0xe] = 0;
+  abStack_28[0xf] = 0;
+  abStack_28[8] = 0;
+  abStack_28[9] = 0;
+  abStack_28[10] = 0;
+  abStack_28[0xb] = 0;
+  abStack_28[4] = 0;
+  abStack_28[5] = 0;
+  abStack_28[6] = 0;
+  abStack_28[7] = 0;
+  abStack_28[0] = 0;
+  abStack_28[1] = 0;
+  abStack_28[2] = 0;
+  abStack_28[3] = 0;
+  while( true ) {
+    bVar1 = *_Control;
+    if (bVar1 == 0) break;
+    _Control = (char *)((byte *)_Control + 1);
+    abStack_28[(int)(uint)bVar1 >> 3] = abStack_28[(int)(uint)bVar1 >> 3] | '\x01' << (bVar1 & 7);
+  }
+  sVar2 = 0xffffffff;
+  do {
+    sVar2 = sVar2 + 1;
+    bVar1 = *_Str;
+    if (bVar1 == 0) {
+      return sVar2;
+    }
+    _Str = (char *)((byte *)_Str + 1);
+  } while ((abStack_28[(int)(uint)bVar1 >> 3] >> (bVar1 & 7) & 1) != 0);
+  return sVar2;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0063c100 : PUSH EBP
+0063c101 : MOV EBP,ESP
+0063c103 : PUSH ESI
+0063c104 : XOR EAX,EAX
+0063c106 : PUSH EAX
+0063c107 : PUSH EAX
+0063c108 : PUSH EAX
+0063c109 : PUSH EAX
+0063c10a : PUSH EAX
+0063c10b : PUSH EAX
+0063c10c : PUSH EAX
+0063c10d : PUSH EAX
+0063c10e : MOV EDX,dword ptr [EBP + 0xc]
+0063c111 : LEA ECX,[ECX]
+0063c114 : MOV AL,byte ptr [EDX]
+0063c116 : OR AL,AL
+0063c118 : JZ 0x0063c123
+0063c11a : ADD EDX,0x1
+0063c11d : BTS [ESP],EAX
+0063c121 : JMP 0x0063c114
+0063c123 : MOV ESI,dword ptr [EBP + 0x8]
+0063c126 : OR ECX,0xffffffff
+0063c129 : LEA ECX,[ECX]
+0063c12c : ADD ECX,0x1
+0063c12f : MOV AL,byte ptr [ESI]
+0063c131 : OR AL,AL
+0063c133 : JZ 0x0063c13e
+0063c135 : ADD ESI,0x1
+0063c138 : BT [ESP],EAX
+0063c13c : JC 0x0063c12c
+0063c13e : MOV EAX,ECX
+0063c140 : ADD ESP,0x20
+0063c143 : POP ESI
+0063c144 : LEAVE
+0063c145 : RET

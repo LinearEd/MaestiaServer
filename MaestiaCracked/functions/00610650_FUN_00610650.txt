@@ -1,0 +1,110 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00610650
+ENTRY    : 00610650
+BODY     : [[00610650, 006106ef]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00610650(void)
+
+{
+  uint *puVar1;
+  undefined4 *puVar2;
+  int iVar3;
+  undefined4 uVar4;
+  undefined4 uVar5;
+  int in_ECX;
+  uint uVar6;
+  uint local_14;
+  
+  local_14 = 0;
+  if (*(int *)(in_ECX + 0x44) != 0) {
+    do {
+      puVar2 = (undefined4 *)
+               (*(int *)(*(int *)(in_ECX + 0x50) + (local_14 >> 8) * 4) + (local_14 & 0xff) * 0x1c);
+      iVar3 = puVar2[4];
+      if (iVar3 != -1) {
+        uVar4 = puVar2[1];
+        uVar5 = *puVar2;
+        puVar1 = (uint *)(in_ECX + 0x24);
+        uVar6 = *(uint *)(in_ECX + 0x24) >> 8;
+        if (*(uint *)(in_ECX + 0x28) <= uVar6) {
+          FUN_005ea770(uVar6);
+        }
+        puVar2 = (undefined4 *)
+                 (*(int *)(*(int *)(in_ECX + 0x30) + uVar6 * 4) + (*puVar1 & 0xff) * 0xc);
+        *puVar2 = uVar5;
+        puVar2[1] = uVar4;
+        puVar2[2] = iVar3;
+        *puVar1 = *puVar1 + 1;
+      }
+      local_14 = local_14 + 1;
+    } while (local_14 < *(uint *)(in_ECX + 0x44));
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00610650 : SUB ESP,0x14
+00610653 : XOR EDX,EDX
+00610655 : MOV dword ptr [ESP + 0x4],ECX
+00610659 : MOV dword ptr [ESP],EDX
+0061065c : CMP dword ptr [ECX + 0x44],EDX
+0061065f : JBE 0x006106ec
+00610665 : PUSH EBX
+00610666 : PUSH EBP
+00610667 : PUSH ESI
+00610668 : PUSH EDI
+00610669 : LEA ESP,[ESP]
+00610670 : MOV EDI,dword ptr [ECX + 0x50]
+00610673 : MOV EAX,EDX
+00610675 : AND EAX,0xff
+0061067a : LEA EBX,[EAX*0x8 + 0x0]
+00610681 : MOV ESI,EDX
+00610683 : SUB EBX,EAX
+00610685 : SHR ESI,0x8
+00610688 : MOV EAX,dword ptr [EDI + ESI*0x4]
+0061068b : LEA EAX,[EAX + EBX*0x4]
+0061068e : MOV EBX,dword ptr [EAX + 0x10]
+00610691 : CMP EBX,-0x1
+00610694 : JZ 0x006106de
+00610696 : MOV EDI,dword ptr [ECX + 0x24]
+00610699 : MOV EDX,dword ptr [EAX + 0x4]
+0061069c : MOV EBP,dword ptr [EAX]
+0061069e : LEA ESI,[ECX + 0x24]
+006106a1 : SHR EDI,0x8
+006106a4 : MOV dword ptr [ESP + 0x1c],EDX
+006106a8 : CMP EDI,dword ptr [ESI + 0x4]
+006106ab : JC 0x006106b9
+006106ad : PUSH EDI
+006106ae : MOV ECX,ESI
+006106b0 : CALL 0x005ea770
+006106b5 : MOV ECX,dword ptr [ESP + 0x14]
+006106b9 : MOV EAX,dword ptr [ESI]
+006106bb : MOV EDX,dword ptr [ESI + 0xc]
+006106be : MOV EDX,dword ptr [EDX + EDI*0x4]
+006106c1 : AND EAX,0xff
+006106c6 : LEA EAX,[EAX + EAX*0x2]
+006106c9 : LEA EAX,[EDX + EAX*0x4]
+006106cc : MOV EDX,dword ptr [ESP + 0x1c]
+006106d0 : MOV dword ptr [EAX],EBP
+006106d2 : MOV dword ptr [EAX + 0x4],EDX
+006106d5 : MOV EDX,dword ptr [ESP + 0x10]
+006106d9 : MOV dword ptr [EAX + 0x8],EBX
+006106dc : INC dword ptr [ESI]
+006106de : INC EDX
+006106df : MOV dword ptr [ESP + 0x10],EDX
+006106e3 : CMP EDX,dword ptr [ECX + 0x44]
+006106e6 : JC 0x00610670
+006106e8 : POP EDI
+006106e9 : POP ESI
+006106ea : POP EBP
+006106eb : POP EBX
+006106ec : ADD ESP,0x14
+006106ef : RET

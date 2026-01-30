@@ -1,0 +1,128 @@
+PROGRAM  : Maestia.exe
+FUNCTION : ___hw_cw_sse2
+ENTRY    : 00658cfd
+BODY     : [[00658cfd, 00658d9c]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    ___hw_cw_sse2
+   
+   Library: Visual Studio 2008 Release */
+
+uint ___hw_cw_sse2(void)
+
+{
+  uint uVar1;
+  uint uVar2;
+  uint in_EDX;
+  
+  uVar1 = 0;
+  if ((in_EDX & 0x10) != 0) {
+    uVar1 = 0x80;
+  }
+  if ((in_EDX & 8) != 0) {
+    uVar1 = uVar1 | 0x200;
+  }
+  if ((in_EDX & 4) != 0) {
+    uVar1 = uVar1 | 0x400;
+  }
+  if ((in_EDX & 2) != 0) {
+    uVar1 = uVar1 | 0x800;
+  }
+  if ((in_EDX & 1) != 0) {
+    uVar1 = uVar1 | 0x1000;
+  }
+  if ((in_EDX & 0x80000) != 0) {
+    uVar1 = uVar1 | 0x100;
+  }
+  uVar2 = in_EDX & 0x300;
+  if (uVar2 != 0) {
+    if (uVar2 == 0x100) {
+      uVar1 = uVar1 | 0x2000;
+    }
+    else if (uVar2 == 0x200) {
+      uVar1 = uVar1 | 0x4000;
+    }
+    else if (uVar2 == 0x300) {
+      uVar1 = uVar1 | 0x6000;
+    }
+  }
+  uVar2 = in_EDX & 0x3000000;
+  if (uVar2 == 0x1000000) {
+    uVar1 = uVar1 | 0x8040;
+  }
+  else {
+    if (uVar2 == 0x2000000) {
+      return uVar1 | 0x40;
+    }
+    if (uVar2 == 0x3000000) {
+      return uVar1 | 0x8000;
+    }
+  }
+  return uVar1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00658cfd : XOR EAX,EAX
+00658cff : TEST DL,0x10
+00658d02 : JZ 0x00658d09
+00658d04 : MOV EAX,0x80
+00658d09 : PUSH EBX
+00658d0a : PUSH ESI
+00658d0b : PUSH EDI
+00658d0c : MOV EBX,0x200
+00658d11 : TEST DL,0x8
+00658d14 : JZ 0x00658d18
+00658d16 : OR EAX,EBX
+00658d18 : TEST DL,0x4
+00658d1b : JZ 0x00658d22
+00658d1d : OR EAX,0x400
+00658d22 : TEST DL,0x2
+00658d25 : JZ 0x00658d2c
+00658d27 : OR EAX,0x800
+00658d2c : TEST DL,0x1
+00658d2f : JZ 0x00658d36
+00658d31 : OR EAX,0x1000
+00658d36 : MOV EDI,0x100
+00658d3b : TEST EDX,0x80000
+00658d41 : JZ 0x00658d45
+00658d43 : OR EAX,EDI
+00658d45 : MOV ECX,EDX
+00658d47 : MOV ESI,0x300
+00658d4c : AND ECX,ESI
+00658d4e : JZ 0x00658d6f
+00658d50 : CMP ECX,EDI
+00658d52 : JZ 0x00658d6a
+00658d54 : CMP ECX,EBX
+00658d56 : JZ 0x00658d63
+00658d58 : CMP ECX,ESI
+00658d5a : JNZ 0x00658d6f
+00658d5c : OR EAX,0x6000
+00658d61 : JMP 0x00658d6f
+00658d63 : OR EAX,0x4000
+00658d68 : JMP 0x00658d6f
+00658d6a : OR EAX,0x2000
+00658d6f : MOV ECX,0x3000000
+00658d74 : POP EDI
+00658d75 : AND EDX,ECX
+00658d77 : POP ESI
+00658d78 : POP EBX
+00658d79 : CMP EDX,0x1000000
+00658d7f : JZ 0x00658d97
+00658d81 : CMP EDX,0x2000000
+00658d87 : JZ 0x00658d93
+00658d89 : CMP EDX,ECX
+00658d8b : JNZ 0x00658d9c
+00658d8d : OR EAX,0x8000
+00658d92 : RET
+00658d93 : OR EAX,0x40
+00658d96 : RET
+00658d97 : OR EAX,0x8040
+00658d9c : RET

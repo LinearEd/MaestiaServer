@@ -1,0 +1,67 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005d2c20
+ENTRY    : 005d2c20
+BODY     : [[005d2c20, 005d2c66]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+bool FUN_005d2c20(void)
+
+{
+  uint uVar1;
+  int *in_ECX;
+  byte *pbVar2;
+  
+  if (*(char *)((int)in_ECX + 0x19) == '\0') {
+    uVar1 = 0;
+    *(undefined1 *)((int)in_ECX + 0x19) = 0xff;
+    if (in_ECX[1] != 0) {
+      pbVar2 = (byte *)(*in_ECX + 0x24);
+      while ((*pbVar2 & 7) == 0) {
+        uVar1 = uVar1 + 1;
+        pbVar2 = pbVar2 + 0x28;
+        if ((uint)in_ECX[1] <= uVar1) {
+          return *(char *)((int)in_ECX + 0x19) == '\x01';
+        }
+      }
+      *(undefined1 *)((int)in_ECX + 0x19) = 1;
+    }
+  }
+  return *(char *)((int)in_ECX + 0x19) == '\x01';
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005d2c20 : CMP byte ptr [ECX + 0x19],0x0
+005d2c24 : JNZ 0x005d2c5d
+005d2c26 : PUSH ESI
+005d2c27 : MOV ESI,dword ptr [ECX + 0x4]
+005d2c2a : XOR EAX,EAX
+005d2c2c : MOV byte ptr [ECX + 0x19],0xff
+005d2c30 : TEST ESI,ESI
+005d2c32 : JBE 0x005d2c5c
+005d2c34 : MOV EDX,dword ptr [ECX]
+005d2c36 : ADD EDX,0x24
+005d2c39 : LEA ESP,[ESP]
+005d2c40 : TEST byte ptr [EDX],0x7
+005d2c43 : JNZ 0x005d2c58
+005d2c45 : INC EAX
+005d2c46 : ADD EDX,0x28
+005d2c49 : CMP EAX,ESI
+005d2c4b : JC 0x005d2c40
+005d2c4d : XOR EAX,EAX
+005d2c4f : CMP byte ptr [ECX + 0x19],0x1
+005d2c53 : POP ESI
+005d2c54 : SETZ AL
+005d2c57 : RET
+005d2c58 : MOV byte ptr [ECX + 0x19],0x1
+005d2c5c : POP ESI
+005d2c5d : XOR EAX,EAX
+005d2c5f : CMP byte ptr [ECX + 0x19],0x1
+005d2c63 : SETZ AL
+005d2c66 : RET

@@ -1,0 +1,84 @@
+PROGRAM  : Maestia.exe
+FUNCTION : write_string
+ENTRY    : 00646063
+BODY     : [[00646063, 006460b4]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    _write_string
+   
+   Library: Visual Studio 2008 Release */
+
+void __cdecl write_string(int param_1)
+
+{
+  int *in_EAX;
+  int *piVar1;
+  undefined2 *in_ECX;
+  int unaff_EDI;
+  
+  if (((*(byte *)(unaff_EDI + 0xc) & 0x40) == 0) || (*(int *)(unaff_EDI + 8) != 0)) {
+    while (0 < param_1) {
+      param_1 = param_1 + -1;
+      write_char(*in_ECX);
+      in_ECX = in_ECX + 1;
+      if (*in_EAX == -1) {
+        piVar1 = __errno();
+        if (*piVar1 != 0x2a) {
+          return;
+        }
+        write_char(0x3f);
+      }
+    }
+  }
+  else {
+    *in_EAX = *in_EAX + param_1;
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00646063 : MOV EDI,EDI
+00646065 : PUSH EBP
+00646066 : MOV EBP,ESP
+00646068 : TEST byte ptr [EDI + 0xc],0x40
+0064606c : PUSH EBX
+0064606d : PUSH ESI
+0064606e : MOV ESI,EAX
+00646070 : MOV EBX,ECX
+00646072 : JZ 0x006460ab
+00646074 : CMP dword ptr [EDI + 0x8],0x0
+00646078 : JNZ 0x006460ab
+0064607a : MOV EAX,dword ptr [EBP + 0x8]
+0064607d : ADD dword ptr [ESI],EAX
+0064607f : JMP 0x006460b1
+00646081 : MOVZX EAX,word ptr [EBX]
+00646084 : DEC dword ptr [EBP + 0x8]
+00646087 : PUSH EAX
+00646088 : MOV EAX,EDI
+0064608a : CALL 0x00647943
+0064608f : INC EBX
+00646090 : INC EBX
+00646091 : CMP dword ptr [ESI],-0x1
+00646094 : POP ECX
+00646095 : JNZ 0x006460ab
+00646097 : CALL 0x0063ab82
+0064609c : CMP dword ptr [EAX],0x2a
+0064609f : JNZ 0x006460b1
+006460a1 : PUSH 0x3f
+006460a3 : MOV EAX,EDI
+006460a5 : CALL 0x00647943
+006460aa : POP ECX
+006460ab : CMP dword ptr [EBP + 0x8],0x0
+006460af : JG 0x00646081
+006460b1 : POP ESI
+006460b2 : POP EBX
+006460b3 : POP EBP
+006460b4 : RET

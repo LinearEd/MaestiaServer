@@ -1,0 +1,108 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0063ca98
+ENTRY    : 0063ca98
+BODY     : [[0063ca98, 0063cb45]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+float10 FUN_0063ca98(int param_1,uint param_2)
+
+{
+  uint in_EAX;
+  bool in_ZF;
+  short in_FPUControlWord;
+  float10 in_ST0;
+  float10 extraout_ST0;
+  float10 fVar1;
+  
+  if (in_ZF) {
+    if (((in_EAX & 0xfffff) != 0) || (fVar1 = _DAT_00d67fc0, param_1 != 0)) {
+      fVar1 = (float10)FUN_0065740c();
+    }
+LAB_0063cb27:
+    if (DAT_00d7b7d8 == 0) {
+      fVar1 = (float10)__startOneArgErrorHandling();
+      return fVar1;
+    }
+  }
+  else {
+    if (in_FPUControlWord != 0x27f) {
+      in_EAX = FUN_006573f5();
+      in_ST0 = extraout_ST0;
+    }
+    if (in_EAX < 0x3ff00000) {
+      fVar1 = (float10)fpatan(in_ST0,SQRT(((float10)1 - in_ST0) * ((float10)1 + in_ST0)));
+    }
+    else {
+      fVar1 = _DAT_00d67fc0;
+      if ((0x3ff00000 < in_EAX) || ((param_2 & 0xfffff) != 0 || param_1 != 0)) goto LAB_0063cb27;
+      fVar1 = _DAT_00d67fca;
+      if ((param_2 & 0x80000000) != 0) {
+        fVar1 = -_DAT_00d67fca;
+      }
+    }
+    if (DAT_00d7b7d8 == 0) {
+      fVar1 = (float10)__math_exit();
+      return fVar1;
+    }
+  }
+  return fVar1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0063ca98 : PUSH EDX
+0063ca99 : FSTCW word ptr [ESP]
+0063ca9d : JZ 0x0063cb0c
+0063ca9f : CMP word ptr [ESP],0x27f
+0063caa5 : JZ 0x0063caac
+0063caa7 : CALL 0x006573f5
+0063caac : CMP EAX,0x3ff00000
+0063cab1 : JNC 0x0063cade
+0063cab3 : FLD1
+0063cab5 : FADD ST0,ST1
+0063cab7 : FLD1
+0063cab9 : FSUB ST0,ST2
+0063cabb : FMULP
+0063cabd : FSQRT
+0063cabf : FPATAN
+0063cac1 : CMP dword ptr [0x00d7b7d8],0x0
+0063cac8 : JNZ 0x0065747e
+0063cace : MOV EDX,0xe
+0063cad3 : LEA ECX,[0xd67090]
+0063cad9 : JMP 0x0065748b
+0063cade : JA 0x0063cb1a
+0063cae0 : MOV EAX,dword ptr [ESP + 0xc]
+0063cae4 : MOV ECX,EAX
+0063cae6 : AND EAX,0xfffff
+0063caeb : OR EAX,dword ptr [ESP + 0x8]
+0063caef : JNZ 0x0063cb1a
+0063caf1 : AND ECX,0x80000000
+0063caf7 : FSTP ST0
+0063caf9 : FLD extended double ptr [0x00d67fca]
+0063caff : JZ 0x0063cac1
+0063cb01 : FCHS
+0063cb03 : JMP 0x0063cac1
+0063cb05 : CALL 0x0065740c
+0063cb0a : JMP 0x0063cb27
+0063cb0c : TEST EAX,0xfffff
+0063cb11 : JNZ 0x0063cb05
+0063cb13 : CMP dword ptr [ESP + 0x8],0x0
+0063cb18 : JNZ 0x0063cb05
+0063cb1a : FSTP ST0
+0063cb1c : FLD extended double ptr [0x00d67fc0]
+0063cb22 : MOV EAX,0x1
+0063cb27 : CMP dword ptr [0x00d7b7d8],0x0
+0063cb2e : JNZ 0x0065747e
+0063cb34 : MOV EDX,0xe
+0063cb39 : LEA ECX,[0xd67090]
+0063cb3f : CALL 0x00657587
+0063cb44 : POP EDX
+0063cb45 : RET

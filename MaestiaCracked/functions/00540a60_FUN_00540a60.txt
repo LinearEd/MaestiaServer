@@ -1,0 +1,97 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00540a60
+ENTRY    : 00540a60
+BODY     : [[00540a60, 00540ad8]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00540a60(uint param_1,undefined4 *param_2)
+
+{
+  uint uVar1;
+  void *_Src;
+  uint uVar2;
+  undefined4 *puVar3;
+  int *in_ECX;
+  int iVar4;
+  
+  uVar2 = in_ECX[1];
+  uVar1 = uVar2 + 1;
+  FUN_005402b0(in_ECX,uVar1);
+  if (uVar2 < uVar1) {
+    puVar3 = (undefined4 *)(*in_ECX + uVar2 * 4);
+    for (iVar4 = uVar1 - uVar2; iVar4 != 0; iVar4 = iVar4 + -1) {
+      if (puVar3 != (undefined4 *)0x0) {
+        *puVar3 = 0;
+      }
+      puVar3 = puVar3 + 1;
+    }
+  }
+  if (param_1 < in_ECX[1] - 1U) {
+    _Src = (void *)(*in_ECX + param_1 * 4);
+    _memmove((void *)((int)_Src + 4),_Src,(in_ECX[1] - param_1) * 4 - 4);
+  }
+  puVar3 = (undefined4 *)(*in_ECX + param_1 * 4);
+  if (puVar3 != (undefined4 *)0x0) {
+    *puVar3 = *param_2;
+    *param_2 = 0;
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00540a60 : PUSH EBX
+00540a61 : PUSH ESI
+00540a62 : PUSH EDI
+00540a63 : MOV EDI,ECX
+00540a65 : MOV EBX,dword ptr [EDI + 0x4]
+00540a68 : LEA ESI,[EBX + 0x1]
+00540a6b : PUSH ESI
+00540a6c : PUSH EDI
+00540a6d : CALL 0x005402b0
+00540a72 : CMP ESI,EBX
+00540a74 : JBE 0x00540a92
+00540a76 : SUB ESI,EBX
+00540a78 : MOV EAX,dword ptr [EDI]
+00540a7a : LEA EAX,[EAX + EBX*0x4]
+00540a7d : JZ 0x00540a92
+00540a7f : NOP
+00540a80 : TEST EAX,EAX
+00540a82 : JZ 0x00540a8a
+00540a84 : MOV dword ptr [EAX],0x0
+00540a8a : ADD EAX,0x4
+00540a8d : SUB ESI,0x1
+00540a90 : JNZ 0x00540a80
+00540a92 : MOV EAX,dword ptr [EDI + 0x4]
+00540a95 : MOV ESI,dword ptr [ESP + 0x10]
+00540a99 : LEA ECX,[EAX + -0x1]
+00540a9c : CMP ESI,ECX
+00540a9e : JNC 0x00540abc
+00540aa0 : MOV EDX,dword ptr [EDI]
+00540aa2 : SUB EAX,ESI
+00540aa4 : LEA EAX,[EAX*0x4 + 0xfffffffc]
+00540aab : LEA ECX,[EDX + ESI*0x4]
+00540aae : PUSH EAX
+00540aaf : PUSH ECX
+00540ab0 : ADD ECX,0x4
+00540ab3 : PUSH ECX
+00540ab4 : CALL 0x00636880
+00540ab9 : ADD ESP,0xc
+00540abc : MOV ECX,dword ptr [EDI]
+00540abe : POP EDI
+00540abf : LEA EAX,[ECX + ESI*0x4]
+00540ac2 : POP ESI
+00540ac3 : POP EBX
+00540ac4 : TEST EAX,EAX
+00540ac6 : JZ 0x00540ad6
+00540ac8 : MOV ECX,dword ptr [ESP + 0x8]
+00540acc : MOV EDX,dword ptr [ECX]
+00540ace : MOV dword ptr [EAX],EDX
+00540ad0 : MOV dword ptr [ECX],0x0
+00540ad6 : RET 0x8

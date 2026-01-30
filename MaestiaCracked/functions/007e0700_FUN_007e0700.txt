@@ -1,0 +1,91 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_007e0700
+ENTRY    : 007e0700
+BODY     : [[007e0700, 007e0763] [007e076a, 007e076f]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_007e0700(int param_1)
+
+{
+  int *piVar1;
+  int in_ECX;
+  int *piVar2;
+  
+  if (in_ECX != 0) {
+    piVar1 = *(int **)(param_1 + 0x1f0);
+    piVar2 = (int *)*piVar1;
+    if (piVar2 != piVar1) {
+      do {
+        if (piVar2[2] == in_ECX) break;
+        piVar2 = (int *)*piVar2;
+      } while (piVar2 != piVar1);
+      if (piVar2 != piVar1) {
+        piVar1 = (int *)piVar2[2];
+        FUN_007bc7f0();
+        if (piVar1 != (int *)0x0) {
+          (**(code **)(*piVar1 + 0x18))(1);
+        }
+        if (piVar2 != *(int **)(param_1 + 0x1f0)) {
+          *(int *)piVar2[1] = *piVar2;
+          *(int *)(*piVar2 + 4) = piVar2[1];
+                    /* WARNING: Subroutine does not return */
+          FUN_006f04e0();
+        }
+      }
+    }
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+007e0700 : PUSH EBP
+007e0701 : MOV EBP,ESP
+007e0703 : PUSH EBX
+007e0704 : MOV EBX,dword ptr [EBP + 0x8]
+007e0707 : TEST ECX,ECX
+007e0709 : JZ 0x007e076b
+007e070b : MOV EAX,dword ptr [EBX + 0x1f0]
+007e0711 : PUSH ESI
+007e0712 : MOV ESI,dword ptr [EAX]
+007e0714 : CMP ESI,EAX
+007e0716 : JZ 0x007e076a
+007e0718 : CMP dword ptr [ESI + 0x8],ECX
+007e071b : JZ 0x007e0723
+007e071d : MOV ESI,dword ptr [ESI]
+007e071f : CMP ESI,EAX
+007e0721 : JNZ 0x007e0718
+007e0723 : CMP ESI,EAX
+007e0725 : JZ 0x007e076a
+007e0727 : MOV ECX,dword ptr [0x01725208]
+007e072d : PUSH EDI
+007e072e : MOV EDI,dword ptr [ESI + 0x8]
+007e0731 : CALL 0x007bc7f0
+007e0736 : TEST EDI,EDI
+007e0738 : JZ 0x007e0745
+007e073a : MOV EAX,dword ptr [EDI]
+007e073c : MOV EDX,dword ptr [EAX + 0x18]
+007e073f : PUSH 0x1
+007e0741 : MOV ECX,EDI
+007e0743 : CALL EDX
+007e0745 : POP EDI
+007e0746 : CMP ESI,dword ptr [EBX + 0x1f0]
+007e074c : JZ 0x007e076a
+007e074e : MOV EAX,dword ptr [ESI + 0x4]
+007e0751 : MOV ECX,dword ptr [ESI]
+007e0753 : MOV dword ptr [EAX],ECX
+007e0755 : MOV EDX,dword ptr [ESI]
+007e0757 : MOV EAX,dword ptr [ESI + 0x4]
+007e075a : MOV ECX,ESI
+007e075c : MOV dword ptr [EDX + 0x4],EAX
+007e075f : CALL 0x006f04e0
+007e076a : POP ESI
+007e076b : POP EBX
+007e076c : POP EBP
+007e076d : RET 0x4

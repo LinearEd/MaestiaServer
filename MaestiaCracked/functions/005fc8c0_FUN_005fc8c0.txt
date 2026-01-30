@@ -1,0 +1,84 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005fc8c0
+ENTRY    : 005fc8c0
+BODY     : [[005fc8c0, 005fc943]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+int FUN_005fc8c0(float *param_1)
+
+{
+  uint *puVar1;
+  uint uVar2;
+  int iVar3;
+  int in_ECX;
+  uint uVar4;
+  
+  if ((*(float *)(in_ECX + 0x118) < param_1[1]) || (*(float *)(in_ECX + 0x114) < *param_1)) {
+    *(float *)(in_ECX + 0x114) = *param_1;
+    puVar1 = (uint *)(in_ECX + 0x104);
+    *(float *)(in_ECX + 0x118) = param_1[1];
+    uVar4 = *puVar1 >> 10;
+    if (*(uint *)(in_ECX + 0x108) <= uVar4) {
+      FUN_005fa460(uVar4);
+    }
+    uVar2 = *puVar1;
+    iVar3 = *(int *)(*(int *)(in_ECX + 0x110) + uVar4 * 4);
+    *(undefined4 *)(iVar3 + (uVar2 & 0x3ff) * 8) = *(undefined4 *)(in_ECX + 0x114);
+    *(undefined4 *)(iVar3 + 4 + (uVar2 & 0x3ff) * 8) = *(undefined4 *)(in_ECX + 0x118);
+    *puVar1 = *puVar1 + 1;
+  }
+  return *(int *)(in_ECX + 0x104) + -1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005fc8c0 : PUSH EDI
+005fc8c1 : MOV EDI,ECX
+005fc8c3 : MOV ECX,dword ptr [ESP + 0x8]
+005fc8c7 : FLD float ptr [ECX + 0x4]
+005fc8ca : FLD float ptr [EDI + 0x118]
+005fc8d0 : FCOMPP
+005fc8d2 : FNSTSW AX
+005fc8d4 : TEST AH,0x5
+005fc8d7 : JNP 0x005fc8ea
+005fc8d9 : FLD float ptr [ECX]
+005fc8db : FLD float ptr [EDI + 0x114]
+005fc8e1 : FCOMPP
+005fc8e3 : FNSTSW AX
+005fc8e5 : TEST AH,0x5
+005fc8e8 : JP 0x005fc939
+005fc8ea : MOV EAX,dword ptr [ECX]
+005fc8ec : PUSH EBX
+005fc8ed : MOV dword ptr [EDI + 0x114],EAX
+005fc8f3 : MOV ECX,dword ptr [ECX + 0x4]
+005fc8f6 : PUSH ESI
+005fc8f7 : LEA ESI,[EDI + 0x104]
+005fc8fd : MOV dword ptr [EDI + 0x118],ECX
+005fc903 : MOV EBX,dword ptr [ESI]
+005fc905 : SHR EBX,0xa
+005fc908 : CMP EBX,dword ptr [ESI + 0x4]
+005fc90b : JC 0x005fc915
+005fc90d : PUSH EBX
+005fc90e : MOV ECX,ESI
+005fc910 : CALL 0x005fa460
+005fc915 : MOV EDX,dword ptr [ESI + 0xc]
+005fc918 : MOV EAX,dword ptr [ESI]
+005fc91a : MOV EBX,dword ptr [EDX + EBX*0x4]
+005fc91d : MOV ECX,dword ptr [EDI + 0x114]
+005fc923 : AND EAX,0x3ff
+005fc928 : MOV dword ptr [EBX + EAX*0x8],ECX
+005fc92b : MOV EDX,dword ptr [EDI + 0x118]
+005fc931 : MOV dword ptr [EBX + EAX*0x8 + 0x4],EDX
+005fc935 : INC dword ptr [ESI]
+005fc937 : POP ESI
+005fc938 : POP EBX
+005fc939 : MOV EAX,dword ptr [EDI + 0x104]
+005fc93f : DEC EAX
+005fc940 : POP EDI
+005fc941 : RET 0x4

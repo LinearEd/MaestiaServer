@@ -1,0 +1,106 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __lseeki64_nolock
+ENTRY    : 0065c72d
+BODY     : [[0065c72d, 0065c7b1]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __lseeki64_nolock
+   
+   Library: Visual Studio 2008 Release */
+
+longlong __cdecl __lseeki64_nolock(int _FileHandle,longlong _Offset,int _Origin)
+
+{
+  byte *pbVar1;
+  HANDLE hFile;
+  int *piVar2;
+  DWORD DVar3;
+  DWORD DVar4;
+  LONG in_stack_00000008;
+  LONG local_8;
+  
+  local_8 = (LONG)_Offset;
+  hFile = (HANDLE)__get_osfhandle(_FileHandle);
+  if (hFile == (HANDLE)0xffffffff) {
+    piVar2 = __errno();
+    *piVar2 = 9;
+LAB_0065c75e:
+    DVar3 = 0xffffffff;
+    local_8 = -1;
+  }
+  else {
+    DVar3 = SetFilePointer(hFile,in_stack_00000008,&local_8,_Offset._4_4_);
+    if (DVar3 == 0xffffffff) {
+      DVar4 = GetLastError();
+      if (DVar4 != 0) {
+        __dosmaperr(DVar4);
+        goto LAB_0065c75e;
+      }
+    }
+    pbVar1 = (byte *)((&DAT_01728c40)[_FileHandle >> 5] + 4 + (_FileHandle & 0x1fU) * 0x40);
+    *pbVar1 = *pbVar1 & 0xfd;
+  }
+  return CONCAT44(local_8,DVar3);
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0065c72d : MOV EDI,EDI
+0065c72f : PUSH EBP
+0065c730 : MOV EBP,ESP
+0065c732 : PUSH ECX
+0065c733 : PUSH ECX
+0065c734 : MOV EAX,dword ptr [EBP + 0xc]
+0065c737 : PUSH ESI
+0065c738 : MOV ESI,dword ptr [EBP + 0x8]
+0065c73b : MOV dword ptr [EBP + -0x8],EAX
+0065c73e : MOV EAX,dword ptr [EBP + 0x10]
+0065c741 : PUSH EDI
+0065c742 : PUSH ESI
+0065c743 : MOV dword ptr [EBP + -0x4],EAX
+0065c746 : CALL 0x0065cc0b
+0065c74b : OR EDI,0xffffffff
+0065c74e : POP ECX
+0065c74f : CMP EAX,EDI
+0065c751 : JNZ 0x0065c764
+0065c753 : CALL 0x0063ab82
+0065c758 : MOV dword ptr [EAX],0x9
+0065c75e : MOV EAX,EDI
+0065c760 : MOV EDX,EDI
+0065c762 : JMP 0x0065c7ae
+0065c764 : PUSH dword ptr [EBP + 0x14]
+0065c767 : LEA ECX,[EBP + -0x4]
+0065c76a : PUSH ECX
+0065c76b : PUSH dword ptr [EBP + -0x8]
+0065c76e : PUSH EAX
+0065c76f : CALL dword ptr [0x00b85334]
+0065c775 : MOV dword ptr [EBP + -0x8],EAX
+0065c778 : CMP EAX,EDI
+0065c77a : JNZ 0x0065c78f
+0065c77c : CALL dword ptr [0x00b85128]
+0065c782 : TEST EAX,EAX
+0065c784 : JZ 0x0065c78f
+0065c786 : PUSH EAX
+0065c787 : CALL 0x0063aba8
+0065c78c : POP ECX
+0065c78d : JMP 0x0065c75e
+0065c78f : MOV EAX,ESI
+0065c791 : SAR EAX,0x5
+0065c794 : MOV EAX,dword ptr [EAX*0x4 + 0x1728c40]
+0065c79b : AND ESI,0x1f
+0065c79e : SHL ESI,0x6
+0065c7a1 : LEA EAX,[EAX + ESI*0x1 + 0x4]
+0065c7a5 : AND byte ptr [EAX],0xfd
+0065c7a8 : MOV EAX,dword ptr [EBP + -0x8]
+0065c7ab : MOV EDX,dword ptr [EBP + -0x4]
+0065c7ae : POP EDI
+0065c7af : POP ESI
+0065c7b0 : LEAVE
+0065c7b1 : RET

@@ -1,0 +1,81 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00746610
+ENTRY    : 00746610
+BODY     : [[00746610, 007466a9]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00746610(void)
+
+{
+  LPCRITICAL_SECTION unaff_ESI;
+  void *local_10;
+  undefined1 *puStack_c;
+  undefined4 local_8;
+  
+  local_8 = 0xffffffff;
+  puStack_c = &LAB_00b0d4fb;
+  local_10 = ExceptionList;
+  ExceptionList = &local_10;
+  EnterCriticalSection(unaff_ESI);
+  local_8 = 0;
+  if ((char)unaff_ESI[0xf].LockCount != '\0') {
+    PostMessageW(*(HWND *)(DAT_017251ac + 0x170),(UINT)unaff_ESI[0xf].DebugInfo,0,0);
+    unaff_ESI[0xf].DebugInfo = (PRTL_CRITICAL_SECTION_DEBUG)0xffffffff;
+    unaff_ESI[0xe].SpinCount = 0;
+    *(undefined1 *)&unaff_ESI[0xf].LockCount = 0;
+    *(undefined1 *)((int)&unaff_ESI[0xf].LockCount + 1) = 0;
+  }
+  local_8 = 0xffffffff;
+  LeaveCriticalSection(unaff_ESI);
+  ExceptionList = local_10;
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00746610 : PUSH EBP
+00746611 : MOV EBP,ESP
+00746613 : PUSH -0x1
+00746615 : PUSH 0xb0d4fb
+0074661a : MOV EAX,FS:[0x0]
+00746620 : PUSH EAX
+00746621 : PUSH ECX
+00746622 : MOV EAX,[0x00d66fa0]
+00746627 : XOR EAX,EBP
+00746629 : PUSH EAX
+0074662a : LEA EAX,[EBP + -0xc]
+0074662d : MOV FS:[0x0],EAX
+00746633 : PUSH ESI
+00746634 : MOV dword ptr [EBP + -0x10],ESI
+00746637 : CALL dword ptr [0x00b85118]
+0074663d : MOV dword ptr [EBP + -0x4],0x0
+00746644 : CMP byte ptr [ESI + 0x16c],0x0
+0074664b : JZ 0x0074668d
+0074664d : MOV EAX,[0x017251ac]
+00746652 : MOV ECX,dword ptr [ESI + 0x168]
+00746658 : MOV EAX,dword ptr [EAX + 0x170]
+0074665e : PUSH 0x0
+00746660 : PUSH 0x0
+00746662 : PUSH ECX
+00746663 : PUSH EAX
+00746664 : CALL dword ptr [0x00b85508]
+0074666a : XORPS XMM0,XMM0
+0074666d : MOV dword ptr [ESI + 0x168],0xffffffff
+00746677 : MOVSS dword ptr [ESI + 0x164],XMM0
+0074667f : MOV byte ptr [ESI + 0x16c],0x0
+00746686 : MOV byte ptr [ESI + 0x16d],0x0
+0074668d : MOV dword ptr [EBP + -0x4],0xffffffff
+00746694 : PUSH ESI
+00746695 : CALL dword ptr [0x00b8511c]
+0074669b : MOV ECX,dword ptr [EBP + -0xc]
+0074669e : MOV dword ptr FS:[0x0],ECX
+007466a5 : POP ECX
+007466a6 : MOV ESP,EBP
+007466a8 : POP EBP
+007466a9 : RET

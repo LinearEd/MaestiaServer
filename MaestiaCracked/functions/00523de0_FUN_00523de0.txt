@@ -1,0 +1,61 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00523de0
+ENTRY    : 00523de0
+BODY     : [[00523de0, 00523e10]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined4 FUN_00523de0(void)
+
+{
+  int Comperand;
+  LONG LVar1;
+  int in_ECX;
+  
+  Comperand = *(int *)(in_ECX + 4);
+  while( true ) {
+    if (Comperand == 0) {
+      return 0;
+    }
+    LVar1 = InterlockedCompareExchange((LONG *)(in_ECX + 4),Comperand + 1,Comperand);
+    if (LVar1 == Comperand) break;
+    Comperand = *(LONG *)(in_ECX + 4);
+  }
+  return 1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00523de0 : PUSH EBX
+00523de1 : PUSH ESI
+00523de2 : MOV ESI,dword ptr [ECX + 0x4]
+00523de5 : PUSH EDI
+00523de6 : LEA EDI,[ECX + 0x4]
+00523de9 : TEST ESI,ESI
+00523deb : JZ 0x00523e05
+00523ded : MOV EBX,dword ptr [0x00b85228]
+00523df3 : PUSH ESI
+00523df4 : LEA EAX,[ESI + 0x1]
+00523df7 : PUSH EAX
+00523df8 : PUSH EDI
+00523df9 : CALL EBX
+00523dfb : CMP EAX,ESI
+00523dfd : JZ 0x00523e0b
+00523dff : MOV ESI,dword ptr [EDI]
+00523e01 : TEST ESI,ESI
+00523e03 : JNZ 0x00523df3
+00523e05 : POP EDI
+00523e06 : POP ESI
+00523e07 : XOR AL,AL
+00523e09 : POP EBX
+00523e0a : RET
+00523e0b : POP EDI
+00523e0c : POP ESI
+00523e0d : MOV AL,0x1
+00523e0f : POP EBX
+00523e10 : RET

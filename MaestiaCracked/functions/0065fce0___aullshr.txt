@@ -1,0 +1,51 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __aullshr
+ENTRY    : 0065fce0
+BODY     : [[0065fce0, 0065fcfe]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __aullshr
+   
+   Library: Visual Studio 2008 Release */
+
+ulonglong __aullshr(void)
+
+{
+  uint in_EAX;
+  byte in_CL;
+  uint in_EDX;
+  
+  if (0x3f < in_CL) {
+    return 0;
+  }
+  if (in_CL < 0x20) {
+    return CONCAT44(in_EDX >> (in_CL & 0x1f),
+                    in_EAX >> (in_CL & 0x1f) | in_EDX << 0x20 - (in_CL & 0x1f));
+  }
+  return (ulonglong)(in_EDX >> (in_CL & 0x1f));
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0065fce0 : CMP CL,0x40
+0065fce3 : JNC 0x0065fcfa
+0065fce5 : CMP CL,0x20
+0065fce8 : JNC 0x0065fcf0
+0065fcea : SHRD EAX,EDX,CL
+0065fced : SHR EDX,CL
+0065fcef : RET
+0065fcf0 : MOV EAX,EDX
+0065fcf2 : XOR EDX,EDX
+0065fcf4 : AND CL,0x1f
+0065fcf7 : SHR EAX,CL
+0065fcf9 : RET
+0065fcfa : XOR EAX,EAX
+0065fcfc : XOR EDX,EDX
+0065fcfe : RET

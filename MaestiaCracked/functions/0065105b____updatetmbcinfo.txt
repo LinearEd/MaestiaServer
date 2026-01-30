@@ -1,0 +1,101 @@
+PROGRAM  : Maestia.exe
+FUNCTION : ___updatetmbcinfo
+ENTRY    : 0065105b
+BODY     : [[0065105b, 006510f2]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* WARNING: Function: __SEH_prolog4 replaced with injection: SEH_prolog4 */
+/* WARNING: Function: __SEH_epilog4 replaced with injection: EH_epilog3 */
+/* Library Function - Single Match
+    ___updatetmbcinfo
+   
+   Library: Visual Studio 2008 Release */
+
+pthreadmbcinfo __cdecl ___updatetmbcinfo(void)
+
+{
+  _ptiddata p_Var1;
+  LONG LVar2;
+  pthreadmbcinfo lpAddend;
+  
+  p_Var1 = __getptd();
+  if (((p_Var1->_ownlocale & DAT_00d67d50) == 0) || (p_Var1->ptlocinfo == (pthreadlocinfo)0x0)) {
+    __lock(0xd);
+    lpAddend = p_Var1->ptmbcinfo;
+    if (lpAddend != (pthreadmbcinfo)PTR_DAT_00d67c58) {
+      if (lpAddend != (pthreadmbcinfo)0x0) {
+        LVar2 = InterlockedDecrement(&lpAddend->refcount);
+        if ((LVar2 == 0) && (lpAddend != (pthreadmbcinfo)&DAT_00d67830)) {
+          _free(lpAddend);
+        }
+      }
+      p_Var1->ptmbcinfo = (pthreadmbcinfo)PTR_DAT_00d67c58;
+      lpAddend = (pthreadmbcinfo)PTR_DAT_00d67c58;
+      InterlockedIncrement((LONG *)PTR_DAT_00d67c58);
+    }
+    FUN_006510f6();
+  }
+  else {
+    lpAddend = p_Var1->ptmbcinfo;
+  }
+  if (lpAddend == (pthreadmbcinfo)0x0) {
+    __amsg_exit(0x20);
+  }
+  return lpAddend;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0065105b : PUSH 0xc
+0065105d : PUSH 0xced298
+00651062 : CALL 0x0064c228
+00651067 : CALL 0x006458f6
+0065106c : MOV EDI,EAX
+0065106e : MOV EAX,[0x00d67d50]
+00651073 : TEST dword ptr [EDI + 0x70],EAX
+00651076 : JZ 0x00651095
+00651078 : CMP dword ptr [EDI + 0x6c],0x0
+0065107c : JZ 0x00651095
+0065107e : MOV ESI,dword ptr [EDI + 0x68]
+00651081 : TEST ESI,ESI
+00651083 : JNZ 0x0065108d
+00651085 : PUSH 0x20
+00651087 : CALL 0x00635703
+0065108c : POP ECX
+0065108d : MOV EAX,ESI
+0065108f : CALL 0x0064c26d
+00651094 : RET
+00651095 : PUSH 0xd
+00651097 : CALL 0x0064c598
+0065109c : POP ECX
+0065109d : AND dword ptr [EBP + -0x4],0x0
+006510a1 : MOV ESI,dword ptr [EDI + 0x68]
+006510a4 : MOV dword ptr [EBP + -0x1c],ESI
+006510a7 : CMP ESI,dword ptr [0x00d67c58]
+006510ad : JZ 0x006510e5
+006510af : TEST ESI,ESI
+006510b1 : JZ 0x006510cd
+006510b3 : PUSH ESI
+006510b4 : CALL dword ptr [0x00b851b0]
+006510ba : TEST EAX,EAX
+006510bc : JNZ 0x006510cd
+006510be : CMP ESI,0xd67830
+006510c4 : JZ 0x006510cd
+006510c6 : PUSH ESI
+006510c7 : CALL 0x0063610d
+006510cc : POP ECX
+006510cd : MOV EAX,[0x00d67c58]
+006510d2 : MOV dword ptr [EDI + 0x68],EAX
+006510d5 : MOV ESI,dword ptr [0x00d67c58]
+006510db : MOV dword ptr [EBP + -0x1c],ESI
+006510de : PUSH ESI
+006510df : CALL dword ptr [0x00b850dc]
+006510e5 : MOV dword ptr [EBP + -0x4],0xfffffffe
+006510ec : CALL 0x006510f6
+006510f1 : JMP 0x00651081

@@ -1,0 +1,57 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00664830
+ENTRY    : 00664830
+BODY     : [[00664830, 00664866]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+uint FUN_00664830(int *param_1)
+
+{
+  LONG *lpAddend;
+  uint uVar1;
+  
+  lpAddend = param_1 + 2;
+  uVar1 = InterlockedDecrement(lpAddend);
+  if (uVar1 == 0) {
+    *lpAddend = *lpAddend + 1;
+    (**(code **)(*param_1 + 0xc))(1);
+    return 0;
+  }
+  if (uVar1 < 2) {
+    uVar1 = 1;
+  }
+  return uVar1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00664830 : PUSH ESI
+00664831 : PUSH EDI
+00664832 : MOV EDI,dword ptr [ESP + 0xc]
+00664836 : LEA ESI,[EDI + 0x8]
+00664839 : PUSH ESI
+0066483a : CALL dword ptr [0x00b851b0]
+00664840 : TEST EAX,EAX
+00664842 : JNZ 0x00664858
+00664844 : INC dword ptr [ESI]
+00664846 : MOV EAX,dword ptr [EDI]
+00664848 : MOV EDX,dword ptr [EAX + 0xc]
+0066484b : PUSH 0x1
+0066484d : MOV ECX,EDI
+0066484f : CALL EDX
+00664851 : POP EDI
+00664852 : XOR EAX,EAX
+00664854 : POP ESI
+00664855 : RET 0x4
+00664858 : CMP EAX,0x1
+0066485b : JA 0x00664862
+0066485d : MOV EAX,0x1
+00664862 : POP EDI
+00664863 : POP ESI
+00664864 : RET 0x4

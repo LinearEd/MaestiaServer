@@ -1,0 +1,96 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00755d30
+ENTRY    : 00755d30
+BODY     : [[00755d30, 00755dc1]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined4 FUN_00755d30(int param_1)
+
+{
+  float fVar1;
+  float fVar2;
+  float fVar3;
+  int in_EAX;
+  float *pfVar4;
+  int in_ECX;
+  int iVar5;
+  float fVar6;
+  float fVar7;
+  
+  fVar3 = DAT_00d72c24;
+  fVar1 = (float)in_EAX;
+  if (in_EAX < 0) {
+    fVar1 = fVar1 + 4.2949673e+09;
+  }
+  fVar2 = (float)in_ECX;
+  if (in_ECX < 0) {
+    fVar2 = fVar2 + 4.2949673e+09;
+  }
+  iVar5 = 0;
+  fVar6 = (1.0 / fVar1) * DAT_00d72c24;
+  pfVar4 = (float *)(param_1 + 8);
+  do {
+    fVar7 = ((float)iVar5 - fVar3) * (1.0 / fVar2);
+    pfVar4[-2] = (1.0 / fVar1) * -0.5;
+    pfVar4[-1] = fVar7;
+    *pfVar4 = fVar6;
+    pfVar4[1] = fVar7;
+    iVar5 = iVar5 + 1;
+    pfVar4 = pfVar4 + 4;
+  } while (iVar5 < 2);
+  return 0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00755d30 : PUSH EBP
+00755d31 : MOV EBP,ESP
+00755d33 : SUB ESP,0x8
+00755d36 : MOV dword ptr [EBP + -0x8],EAX
+00755d39 : FILD dword ptr [EBP + -0x8]
+00755d3c : TEST EAX,EAX
+00755d3e : JGE 0x00755d46
+00755d40 : FADD float ptr [0x00cdf0e0]
+00755d46 : FLD1
+00755d48 : MOV dword ptr [EBP + -0x8],ECX
+00755d4b : FLD ST0
+00755d4d : FDIVRP ST2,ST0
+00755d4f : FXCH
+00755d51 : FSTP float ptr [EBP + -0x4]
+00755d54 : FILD dword ptr [EBP + -0x8]
+00755d57 : TEST ECX,ECX
+00755d59 : JGE 0x00755d61
+00755d5b : FADD float ptr [0x00cdf0e0]
+00755d61 : FDIVP
+00755d63 : MOVSS XMM0,dword ptr [EBP + -0x4]
+00755d68 : MOVSS XMM2,dword ptr [0x00d72c24]
+00755d70 : MOV EAX,dword ptr [EBP + 0x8]
+00755d73 : MOVAPS XMM1,XMM0
+00755d76 : MULSS XMM1,dword ptr [0x00cdf160]
+00755d7e : XOR ECX,ECX
+00755d80 : MULSS XMM0,XMM2
+00755d84 : MOVAPS XMM3,XMM0
+00755d87 : ADD EAX,0x8
+00755d8a : FSTP float ptr [EBP + -0x8]
+00755d8d : MOVSS XMM4,dword ptr [EBP + -0x8]
+00755d92 : CVTSI2SS XMM0,ECX
+00755d96 : SUBSS XMM0,XMM2
+00755d9a : MULSS XMM0,XMM4
+00755d9e : MOVSS dword ptr [EAX + -0x8],XMM1
+00755da3 : MOVSS dword ptr [EAX + -0x4],XMM0
+00755da8 : MOVSS dword ptr [EAX],XMM3
+00755dac : MOVSS dword ptr [EAX + 0x4],XMM0
+00755db1 : INC ECX
+00755db2 : ADD EAX,0x10
+00755db5 : CMP ECX,0x2
+00755db8 : JL 0x00755d92
+00755dba : XOR EAX,EAX
+00755dbc : MOV ESP,EBP
+00755dbe : POP EBP
+00755dbf : RET 0x4

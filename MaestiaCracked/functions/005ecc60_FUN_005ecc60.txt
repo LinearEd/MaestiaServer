@@ -1,0 +1,72 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005ecc60
+ENTRY    : 005ecc60
+BODY     : [[005ecc60, 005eccbe]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+int FUN_005ecc60(int param_1,byte *param_2)
+
+{
+  int iVar1;
+  uint uVar2;
+  int *in_ECX;
+  
+  uVar2 = FUN_005ec580();
+  if ((((uVar2 < (uint)in_ECX[1]) &&
+       (iVar1 = *(int *)(*in_ECX + uVar2 * 4), *(int *)(iVar1 + 0x14) == param_1)) &&
+      (uVar2 != 0xffffffff)) && (*(int *)(iVar1 + 0x14) == param_1)) {
+    if (param_2 != (byte *)0x0) {
+      *param_2 = *(byte *)(iVar1 + 0x66) >> 6 & 1;
+    }
+    return iVar1;
+  }
+  return 0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005ecc60 : PUSH ESI
+005ecc61 : PUSH EDI
+005ecc62 : MOV EDI,dword ptr [ESP + 0xc]
+005ecc66 : MOV ESI,ECX
+005ecc68 : MOV EAX,dword ptr [ESI + 0x4]
+005ecc6b : PUSH 0x5ec560
+005ecc70 : LEA ECX,[ESP + 0x10]
+005ecc74 : PUSH ECX
+005ecc75 : PUSH EAX
+005ecc76 : PUSH 0x0
+005ecc78 : PUSH ESI
+005ecc79 : MOV dword ptr [ESP + 0x20],EDI
+005ecc7d : CALL 0x005ec580
+005ecc82 : ADD ESP,0x14
+005ecc85 : CMP EAX,dword ptr [ESI + 0x4]
+005ecc88 : JNC 0x005eccb8
+005ecc8a : MOV EDX,dword ptr [ESI]
+005ecc8c : MOV ECX,dword ptr [EDX + EAX*0x4]
+005ecc8f : CMP dword ptr [ECX + 0x14],EDI
+005ecc92 : JNZ 0x005eccb8
+005ecc94 : CMP EAX,-0x1
+005ecc97 : JZ 0x005eccb8
+005ecc99 : CMP dword ptr [ECX + 0x14],EDI
+005ecc9c : JNZ 0x005eccb8
+005ecc9e : MOV EAX,dword ptr [ESP + 0x10]
+005ecca2 : TEST EAX,EAX
+005ecca4 : JZ 0x005eccb1
+005ecca6 : MOV DL,byte ptr [ECX + 0x66]
+005ecca9 : SHR DL,0x6
+005eccac : AND DL,0x1
+005eccaf : MOV byte ptr [EAX],DL
+005eccb1 : POP EDI
+005eccb2 : MOV EAX,ECX
+005eccb4 : POP ESI
+005eccb5 : RET 0x8
+005eccb8 : POP EDI
+005eccb9 : XOR EAX,EAX
+005eccbb : POP ESI
+005eccbc : RET 0x8

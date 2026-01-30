@@ -1,0 +1,133 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __stbuf
+ENTRY    : 006501d4
+BODY     : [[006501d4, 0065026f]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+/* Library Function - Single Match
+    __stbuf
+   
+   Library: Visual Studio 2008 Release */
+
+int __cdecl __stbuf(FILE *_File)
+
+{
+  int *piVar1;
+  char *pcVar2;
+  int iVar3;
+  void *pvVar4;
+  
+  iVar3 = __fileno(_File);
+  iVar3 = __isatty(iVar3);
+  if (iVar3 == 0) {
+    return 0;
+  }
+  iVar3 = FUN_0063d8b9();
+  if (_File == (FILE *)(iVar3 + 0x20)) {
+    iVar3 = 0;
+  }
+  else {
+    iVar3 = FUN_0063d8b9();
+    if (_File != (FILE *)(iVar3 + 0x40)) {
+      return 0;
+    }
+    iVar3 = 1;
+  }
+  _DAT_00d7b7f0 = _DAT_00d7b7f0 + 1;
+  if ((_File->_flag & 0x10cU) != 0) {
+    return 0;
+  }
+  piVar1 = &DAT_00d7c0a4 + iVar3;
+  if (*piVar1 == 0) {
+    pvVar4 = __malloc_crt(0x1000);
+    *piVar1 = (int)pvVar4;
+    if (pvVar4 == (void *)0x0) {
+      _File->_base = (char *)&_File->_charbuf;
+      _File->_ptr = (char *)&_File->_charbuf;
+      _File->_bufsiz = 2;
+      _File->_cnt = 2;
+      goto LAB_0065025d;
+    }
+  }
+  pcVar2 = (char *)*piVar1;
+  _File->_base = pcVar2;
+  _File->_ptr = pcVar2;
+  _File->_bufsiz = 0x1000;
+  _File->_cnt = 0x1000;
+LAB_0065025d:
+  _File->_flag = _File->_flag | 0x1102;
+  return 1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006501d4 : MOV EDI,EDI
+006501d6 : PUSH EBP
+006501d7 : MOV EBP,ESP
+006501d9 : PUSH ESI
+006501da : MOV ESI,dword ptr [EBP + 0x8]
+006501dd : PUSH ESI
+006501de : CALL 0x0064dfc6
+006501e3 : PUSH EAX
+006501e4 : CALL 0x0065c8cb
+006501e9 : POP ECX
+006501ea : POP ECX
+006501eb : TEST EAX,EAX
+006501ed : JZ 0x0065026b
+006501ef : CALL 0x0063d8b9
+006501f4 : ADD EAX,0x20
+006501f7 : CMP ESI,EAX
+006501f9 : JNZ 0x006501ff
+006501fb : XOR EAX,EAX
+006501fd : JMP 0x0065020e
+006501ff : CALL 0x0063d8b9
+00650204 : ADD EAX,0x40
+00650207 : CMP ESI,EAX
+00650209 : JNZ 0x0065026b
+0065020b : XOR EAX,EAX
+0065020d : INC EAX
+0065020e : INC dword ptr [0x00d7b7f0]
+00650214 : TEST dword ptr [ESI + 0xc],0x10c
+0065021b : JNZ 0x0065026b
+0065021d : PUSH EBX
+0065021e : PUSH EDI
+0065021f : LEA EDI,[EAX*0x4 + 0xd7c0a4]
+00650226 : CMP dword ptr [EDI],0x0
+00650229 : MOV EBX,0x1000
+0065022e : JNZ 0x00650250
+00650230 : PUSH EBX
+00650231 : CALL 0x0064255f
+00650236 : POP ECX
+00650237 : MOV dword ptr [EDI],EAX
+00650239 : TEST EAX,EAX
+0065023b : JNZ 0x00650250
+0065023d : LEA EAX,[ESI + 0x14]
+00650240 : PUSH 0x2
+00650242 : MOV dword ptr [ESI + 0x8],EAX
+00650245 : MOV dword ptr [ESI],EAX
+00650247 : POP EAX
+00650248 : MOV dword ptr [ESI + 0x18],EAX
+0065024b : MOV dword ptr [ESI + 0x4],EAX
+0065024e : JMP 0x0065025d
+00650250 : MOV EDI,dword ptr [EDI]
+00650252 : MOV dword ptr [ESI + 0x8],EDI
+00650255 : MOV dword ptr [ESI],EDI
+00650257 : MOV dword ptr [ESI + 0x18],EBX
+0065025a : MOV dword ptr [ESI + 0x4],EBX
+0065025d : OR dword ptr [ESI + 0xc],0x1102
+00650264 : XOR EAX,EAX
+00650266 : POP EDI
+00650267 : INC EAX
+00650268 : POP EBX
+00650269 : JMP 0x0065026d
+0065026b : XOR EAX,EAX
+0065026d : POP ESI
+0065026e : POP EBP
+0065026f : RET

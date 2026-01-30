@@ -1,0 +1,71 @@
+PROGRAM  : Maestia.exe
+FUNCTION : write_char
+ENTRY    : 0064b545
+BODY     : [[0064b545, 0064b577]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    _write_char
+   
+   Library: Visual Studio 2008 Release */
+
+void __cdecl write_char(void)
+
+{
+  int *piVar1;
+  byte in_AL;
+  uint uVar2;
+  FILE *in_ECX;
+  int *unaff_ESI;
+  
+  if (((in_ECX->_flag & 0x40) == 0) || (in_ECX->_base != (char *)0x0)) {
+    piVar1 = &in_ECX->_cnt;
+    *piVar1 = *piVar1 + -1;
+    if (*piVar1 < 0) {
+      uVar2 = __flsbuf((int)(char)in_AL,in_ECX);
+    }
+    else {
+      *in_ECX->_ptr = in_AL;
+      in_ECX->_ptr = in_ECX->_ptr + 1;
+      uVar2 = (uint)in_AL;
+    }
+    if (uVar2 == 0xffffffff) {
+      *unaff_ESI = -1;
+      return;
+    }
+  }
+  *unaff_ESI = *unaff_ESI + 1;
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0064b545 : TEST byte ptr [ECX + 0xc],0x40
+0064b549 : JZ 0x0064b551
+0064b54b : CMP dword ptr [ECX + 0x8],0x0
+0064b54f : JZ 0x0064b575
+0064b551 : DEC dword ptr [ECX + 0x4]
+0064b554 : JS 0x0064b561
+0064b556 : MOV EDX,dword ptr [ECX]
+0064b558 : MOV byte ptr [EDX],AL
+0064b55a : INC dword ptr [ECX]
+0064b55c : MOVZX EAX,AL
+0064b55f : JMP 0x0064b56d
+0064b561 : MOVSX EAX,AL
+0064b564 : PUSH ECX
+0064b565 : PUSH EAX
+0064b566 : CALL 0x00645eff
+0064b56b : POP ECX
+0064b56c : POP ECX
+0064b56d : CMP EAX,-0x1
+0064b570 : JNZ 0x0064b575
+0064b572 : OR dword ptr [ESI],EAX
+0064b574 : RET
+0064b575 : INC dword ptr [ESI]
+0064b577 : RET

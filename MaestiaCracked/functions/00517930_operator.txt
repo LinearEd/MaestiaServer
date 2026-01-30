@@ -1,0 +1,64 @@
+PROGRAM  : Maestia.exe
+FUNCTION : operator++
+ENTRY    : 00517930
+BODY     : [[00517930, 00517976]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* public: int __thiscall GSemaphore::operator++(int) */
+
+int __thiscall GSemaphore::operator++(GSemaphore *this,int param_1)
+
+{
+  GMutex *this_00;
+  int iVar1;
+  
+                    /* 0x117930  36  ??EGSemaphore@@QAEHH@Z */
+  this_00 = (GMutex *)(this + 0x18);
+  GMutex::Lock(this_00);
+  if (*(int *)(this + 0x10) <= *(int *)(this + 0x14)) {
+    do {
+      GWaitCondition::Wait((GWaitCondition *)(this + 0x2c),this_00,0xffffffff);
+    } while (*(int *)(this + 0x10) <= *(int *)(this + 0x14));
+  }
+  *(int *)(this + 0x14) = *(int *)(this + 0x14) + 1;
+  iVar1 = *(int *)(this + 0x14);
+  GMutex::Unlock(this_00);
+  return iVar1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00517930 : PUSH ESI
+00517931 : MOV ESI,ECX
+00517933 : PUSH EDI
+00517934 : LEA EDI,[ESI + 0x18]
+00517937 : MOV ECX,EDI
+00517939 : CALL 0x005162b0
+0051793e : MOV EAX,dword ptr [ESI + 0x14]
+00517941 : CMP EAX,dword ptr [ESI + 0x10]
+00517944 : JL 0x00517963
+00517946 : PUSH EBX
+00517947 : LEA EBX,[ESI + 0x2c]
+0051794a : LEA EBX,[EBX]
+00517950 : PUSH -0x1
+00517952 : PUSH EDI
+00517953 : MOV ECX,EBX
+00517955 : CALL 0x00516820
+0051795a : MOV ECX,dword ptr [ESI + 0x14]
+0051795d : CMP ECX,dword ptr [ESI + 0x10]
+00517960 : JGE 0x00517950
+00517962 : POP EBX
+00517963 : INC dword ptr [ESI + 0x14]
+00517966 : MOV ESI,dword ptr [ESI + 0x14]
+00517969 : MOV ECX,EDI
+0051796b : CALL 0x005170a0
+00517970 : POP EDI
+00517971 : MOV EAX,ESI
+00517973 : POP ESI
+00517974 : RET 0x4

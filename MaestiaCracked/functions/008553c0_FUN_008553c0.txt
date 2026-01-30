@@ -1,0 +1,130 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_008553c0
+ENTRY    : 008553c0
+BODY     : [[008553c0, 008554e3]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined4 FUN_008553c0(void)
+
+{
+  int iVar1;
+  byte in_CL;
+  float *unaff_ESI;
+  float *unaff_EDI;
+  float10 extraout_ST0;
+  float10 fVar2;
+  float fVar3;
+  double dVar4;
+  float fVar5;
+  float local_4c;
+  float local_48;
+  float local_44;
+  
+  iVar1 = *(int *)(DAT_00da93ec + 0xc) + (uint)in_CL * 0x28;
+  if ((*(byte *)(iVar1 + 0x274) == in_CL) && ((*(byte *)(iVar1 + 0x294) & 0x40) != 0)) {
+    local_4c = *unaff_ESI - *unaff_EDI;
+    local_48 = unaff_ESI[1] - unaff_EDI[1];
+    local_44 = unaff_ESI[2] - unaff_EDI[2];
+    fVar3 = local_4c * local_4c;
+    fVar5 = local_44 * local_44;
+    FUN_0040f460(local_48 * local_48 + fVar3 + fVar5);
+    if ((float10)1e-09 <= extraout_ST0) {
+      fVar2 = (float10)FUN_0040f460(fVar3 + fVar5);
+      local_4c = (float)fVar2;
+      local_44 = 0.0;
+      D3DXVec3Normalize(&local_4c,&local_4c);
+      dVar4 = (double)fVar5;
+      FUN_00b0b091();
+      if ((float)dVar4 * 57.295776 <= 45.0) {
+        return 1;
+      }
+      (*(code *)PTR_FUN_00d6d23c)("Angle(%.1f)\n",(double)((float)dVar4 * 57.295776));
+    }
+    return 0;
+  }
+  return 1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+008553c0 : PUSH EBP
+008553c1 : MOV EBP,ESP
+008553c3 : AND ESP,0xffffffc0
+008553c6 : MOV EAX,[0x00da93ec]
+008553cb : MOV EDX,dword ptr [EAX + 0xc]
+008553ce : MOVZX EAX,CL
+008553d1 : LEA EAX,[EAX + EAX*0x4]
+008553d4 : LEA EAX,[EDX + EAX*0x8]
+008553d7 : SUB ESP,0x40
+008553da : CMP byte ptr [EAX + 0x274],CL
+008553e0 : JNZ 0x008554de
+008553e6 : TEST byte ptr [EAX + 0x294],0x40
+008553ed : JZ 0x008554de
+008553f3 : MOVSS XMM0,dword ptr [ESI]
+008553f7 : SUBSS XMM0,dword ptr [EDI]
+008553fb : MOVSS XMM1,dword ptr [ESI + 0x4]
+00855400 : SUBSS XMM1,dword ptr [EDI + 0x4]
+00855405 : MOVSS XMM2,dword ptr [ESI + 0x8]
+0085540a : SUBSS XMM2,dword ptr [EDI + 0x8]
+0085540f : MOVSS dword ptr [ESP + 0x34],XMM0
+00855415 : MULSS XMM0,XMM0
+00855419 : MOVAPS XMM3,XMM1
+0085541c : MULSS XMM3,XMM1
+00855420 : MOVSS dword ptr [ESP + 0x3c],XMM2
+00855426 : MULSS XMM2,XMM2
+0085542a : ADDSS XMM3,XMM0
+0085542e : PUSH ECX
+0085542f : ADDSS XMM3,XMM2
+00855433 : MOVSS dword ptr [ESP + 0x3c],XMM1
+00855439 : MOVSS dword ptr [ESP + 0x34],XMM2
+0085543f : MOVSS dword ptr [ESP + 0x30],XMM0
+00855445 : MOVSS dword ptr [ESP],XMM3
+0085544a : CALL 0x0040f460
+0085544f : FLD float ptr [0x00cdf474]
+00855455 : ADD ESP,0x4
+00855458 : FCOMIP ST0,ST1
+0085545a : FSTP ST0
+0085545c : JA 0x008554d8
+0085545e : MOVSS XMM0,dword ptr [ESP + 0x2c]
+00855464 : ADDSS XMM0,dword ptr [ESP + 0x30]
+0085546a : PUSH ECX
+0085546b : MOVSS dword ptr [ESP],XMM0
+00855470 : CALL 0x0040f460
+00855475 : FSTP float ptr [ESP + 0x38]
+00855479 : XORPS XMM0,XMM0
+0085547c : ADD ESP,0x4
+0085547f : LEA ECX,[ESP + 0x34]
+00855483 : PUSH ECX
+00855484 : MOV EDX,ECX
+00855486 : PUSH EDX
+00855487 : MOVSS dword ptr [ESP + 0x44],XMM0
+0085548d : CALL 0x004ff722
+00855492 : MOVSS XMM1,dword ptr [ESP + 0x34]
+00855498 : MOVSS XMM0,dword ptr [ESP + 0x38]
+0085549e : CVTPS2PD XMM0,XMM0
+008554a1 : CVTPS2PD XMM1,XMM1
+008554a4 : CALL 0x00b0b091
+008554a9 : CVTSD2SS XMM0,XMM0
+008554ad : MULSS XMM0,dword ptr [0x00cdf344]
+008554b5 : COMISS XMM0,dword ptr [0x00cdf45c]
+008554bc : JBE 0x008554de
+008554be : SUB ESP,0x8
+008554c1 : CVTSS2SD XMM0,XMM0
+008554c5 : MOVSD qword ptr [ESP],XMM0
+008554ca : PUSH 0xc3fba8
+008554cf : CALL dword ptr [0x00d6d23c]
+008554d5 : ADD ESP,0xc
+008554d8 : XOR AL,AL
+008554da : MOV ESP,EBP
+008554dc : POP EBP
+008554dd : RET
+008554de : MOV AL,0x1
+008554e0 : MOV ESP,EBP
+008554e2 : POP EBP
+008554e3 : RET

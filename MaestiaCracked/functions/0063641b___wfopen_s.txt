@@ -1,0 +1,84 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __wfopen_s
+ENTRY    : 0063641b
+BODY     : [[0063641b, 0063646d]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __wfopen_s
+   
+   Library: Visual Studio 2008 Release */
+
+errno_t __cdecl __wfopen_s(FILE **_File,wchar_t *_Filename,wchar_t *_Mode)
+
+{
+  int *piVar1;
+  FILE *pFVar2;
+  int iVar3;
+  
+  if (_File == (FILE **)0x0) {
+    piVar1 = __errno();
+    iVar3 = 0x16;
+    *piVar1 = 0x16;
+    __invalid_parameter(0,0,0,0,0);
+  }
+  else {
+    pFVar2 = __wfsopen(_Filename,_Mode,0x80);
+    *_File = pFVar2;
+    if (pFVar2 == (FILE *)0x0) {
+      piVar1 = __errno();
+      iVar3 = *piVar1;
+    }
+    else {
+      iVar3 = 0;
+    }
+  }
+  return iVar3;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0063641b : MOV EDI,EDI
+0063641d : PUSH EBP
+0063641e : MOV EBP,ESP
+00636420 : PUSH ESI
+00636421 : PUSH EDI
+00636422 : MOV EDI,dword ptr [EBP + 0x8]
+00636425 : XOR ESI,ESI
+00636427 : CMP EDI,ESI
+00636429 : JNZ 0x00636446
+0063642b : CALL 0x0063ab82
+00636430 : PUSH 0x16
+00636432 : POP EDI
+00636433 : PUSH ESI
+00636434 : PUSH ESI
+00636435 : PUSH ESI
+00636436 : PUSH ESI
+00636437 : PUSH ESI
+00636438 : MOV dword ptr [EAX],EDI
+0063643a : CALL 0x006372b8
+0063643f : ADD ESP,0x14
+00636442 : MOV EAX,EDI
+00636444 : JMP 0x0063646a
+00636446 : PUSH 0x80
+0063644b : PUSH dword ptr [EBP + 0x10]
+0063644e : PUSH dword ptr [EBP + 0xc]
+00636451 : CALL 0x0063633e
+00636456 : ADD ESP,0xc
+00636459 : MOV dword ptr [EDI],EAX
+0063645b : CMP EAX,ESI
+0063645d : JZ 0x00636463
+0063645f : XOR EAX,EAX
+00636461 : JMP 0x0063646a
+00636463 : CALL 0x0063ab82
+00636468 : MOV EAX,dword ptr [EAX]
+0063646a : POP EDI
+0063646b : POP ESI
+0063646c : POP EBP
+0063646d : RET

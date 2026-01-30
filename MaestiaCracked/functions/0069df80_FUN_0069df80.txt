@@ -1,0 +1,72 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0069df80
+ENTRY    : 0069df80
+BODY     : [[0069df80, 0069dfc9]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+int FUN_0069df80(void)
+
+{
+  int iVar1;
+  byte *pbVar2;
+  uint uVar3;
+  int *extraout_EDX;
+  
+  FUN_0069dea0();
+  if (1 < extraout_EDX[3]) {
+    return 0;
+  }
+  iVar1 = *extraout_EDX;
+  while (pbVar2 = (byte *)*extraout_EDX, pbVar2 < (byte *)extraout_EDX[2]) {
+    uVar3 = (uint)*pbVar2;
+    *extraout_EDX = (int)(pbVar2 + 1);
+    if ((uVar3 == 0xd) || (uVar3 == 10)) {
+      extraout_EDX[3] = 2;
+      return iVar1 + -1;
+    }
+    if ((uVar3 == 0xffffffff) || (uVar3 == 0x1a)) break;
+  }
+  extraout_EDX[3] = 3;
+  return iVar1 + -1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0069df80 : CALL 0x0069dea0
+0069df85 : CMP dword ptr [EDX + 0xc],0x2
+0069df89 : JL 0x0069df8e
+0069df8b : XOR EAX,EAX
+0069df8d : RET
+0069df8e : MOV EAX,dword ptr [EDX]
+0069df90 : PUSH ESI
+0069df91 : PUSH EDI
+0069df92 : MOV EDI,dword ptr [EDX + 0x8]
+0069df95 : DEC EAX
+0069df96 : MOV ESI,dword ptr [EDX]
+0069df98 : CMP ESI,EDI
+0069df9a : JNC 0x0069dfb6
+0069df9c : MOVZX ECX,byte ptr [ESI]
+0069df9f : INC ESI
+0069dfa0 : MOV dword ptr [EDX],ESI
+0069dfa2 : CMP ECX,0xd
+0069dfa5 : JZ 0x0069dfc0
+0069dfa7 : CMP ECX,0xa
+0069dfaa : JZ 0x0069dfc0
+0069dfac : CMP ECX,-0x1
+0069dfaf : JZ 0x0069dfb6
+0069dfb1 : CMP ECX,0x1a
+0069dfb4 : JNZ 0x0069df96
+0069dfb6 : POP EDI
+0069dfb7 : MOV dword ptr [EDX + 0xc],0x3
+0069dfbe : POP ESI
+0069dfbf : RET
+0069dfc0 : POP EDI
+0069dfc1 : MOV dword ptr [EDX + 0xc],0x2
+0069dfc8 : POP ESI
+0069dfc9 : RET

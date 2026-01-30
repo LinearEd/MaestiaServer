@@ -1,0 +1,92 @@
+PROGRAM  : Maestia.exe
+FUNCTION : CatchIt
+ENTRY    : 006431f6
+BODY     : [[006431f6, 00643263]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    void __cdecl CatchIt(struct EHExceptionRecord *,struct EHRegistrationNode *,struct _CONTEXT
+   *,void *,struct _s_FuncInfo const *,struct _s_HandlerType const *,struct _s_CatchableType const
+   *,struct _s_TryBlockMapEntry const *,int,struct EHRegistrationNode *,unsigned char)
+   
+   Library: Visual Studio 2008 Release */
+
+void __cdecl
+CatchIt(EHExceptionRecord *param_1,EHRegistrationNode *param_2,_CONTEXT *param_3,void *param_4,
+       _s_FuncInfo *param_5,_s_HandlerType *param_6,_s_CatchableType *param_7,
+       _s_TryBlockMapEntry *param_8,int param_9,EHRegistrationNode *param_10,uchar param_11)
+
+{
+  void *pvVar1;
+  EHRegistrationNode *unaff_ESI;
+  int unaff_EDI;
+  EHRegistrationNode *pEVar2;
+  
+  if (param_5 != (_s_FuncInfo *)0x0) {
+    ___BuildCatchObject(param_1);
+  }
+  if (param_7 == (_s_CatchableType *)0x0) {
+    param_7 = (_s_CatchableType *)unaff_ESI;
+  }
+  _UnwindNestedFrames((EHRegistrationNode *)param_7,param_1);
+  pEVar2 = unaff_ESI;
+  ___FrameUnwindToState();
+  *(int *)(unaff_ESI + 8) = *(int *)(unaff_EDI + 4) + 1;
+  pvVar1 = CallCatchBlock(param_1,unaff_ESI,(_CONTEXT *)param_2,param_4,param_6,0x100,(ulong)pEVar2)
+  ;
+  if (pvVar1 != (void *)0x0) {
+    _JumpToContinuation(pvVar1,unaff_ESI);
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006431f6 : MOV EDI,EDI
+006431f8 : PUSH EBP
+006431f9 : MOV EBP,ESP
+006431fb : CMP dword ptr [EBP + 0x18],0x0
+006431ff : JZ 0x00643211
+00643201 : PUSH dword ptr [EBP + 0x18]
+00643204 : PUSH EBX
+00643205 : PUSH ESI
+00643206 : PUSH dword ptr [EBP + 0x8]
+00643209 : CALL 0x00643164
+0064320e : ADD ESP,0x10
+00643211 : CMP dword ptr [EBP + 0x20],0x0
+00643215 : PUSH dword ptr [EBP + 0x8]
+00643218 : JNZ 0x0064321d
+0064321a : PUSH ESI
+0064321b : JMP 0x00643220
+0064321d : PUSH dword ptr [EBP + 0x20]
+00643220 : CALL 0x00640a70
+00643225 : PUSH dword ptr [EDI]
+00643227 : PUSH dword ptr [EBP + 0x14]
+0064322a : PUSH dword ptr [EBP + 0x10]
+0064322d : PUSH ESI
+0064322e : CALL 0x00642be1
+00643233 : MOV EAX,dword ptr [EDI + 0x4]
+00643236 : PUSH 0x100
+0064323b : PUSH dword ptr [EBP + 0x1c]
+0064323e : INC EAX
+0064323f : PUSH dword ptr [EBP + 0x14]
+00643242 : MOV dword ptr [ESI + 0x8],EAX
+00643245 : PUSH dword ptr [EBP + 0xc]
+00643248 : MOV ECX,dword ptr [EBX + 0xc]
+0064324b : PUSH ESI
+0064324c : PUSH dword ptr [EBP + 0x8]
+0064324f : CALL 0x00642e49
+00643254 : ADD ESP,0x28
+00643257 : TEST EAX,EAX
+00643259 : JZ 0x00643262
+0064325b : PUSH ESI
+0064325c : PUSH EAX
+0064325d : CALL 0x00640a37
+00643262 : POP EBP
+00643263 : RET

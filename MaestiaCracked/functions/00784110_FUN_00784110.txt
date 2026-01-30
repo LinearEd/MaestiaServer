@@ -1,0 +1,131 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00784110
+ENTRY    : 00784110
+BODY     : [[00784110, 00784208]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined4 FUN_00784110(float *param_1,undefined4 param_2)
+
+{
+  int *piVar1;
+  int *piVar2;
+  int *piVar3;
+  char cVar4;
+  int in_ECX;
+  float10 fVar5;
+  undefined4 local_10;
+  float local_8;
+  
+  local_10 = 0;
+  local_8 = 99900.0;
+  if (*(int *)(in_ECX + 0x84) == 0) {
+    piVar1 = *(int **)(in_ECX + 0x6c);
+    piVar2 = (int *)*piVar1;
+    while (piVar2 != piVar1) {
+      cVar4 = (**(code **)(*(int *)piVar2[3] + 0x4c))(param_1,param_2);
+      if (cVar4 != '\0') {
+        piVar3 = *(int **)(piVar2[3] + 0x24);
+        if (*(char *)((int)piVar3 + 0x5d) != '\0') {
+          (**(code **)(*piVar3 + 0x14))();
+        }
+        fVar5 = (float10)FUN_0040f460(((float)piVar3[0x30] - param_1[2]) *
+                                      ((float)piVar3[0x30] - param_1[2]) +
+                                      ((float)piVar3[0x2e] - *param_1) *
+                                      ((float)piVar3[0x2e] - *param_1) +
+                                      ((float)piVar3[0x2f] - param_1[1]) *
+                                      ((float)piVar3[0x2f] - param_1[1]));
+        if (fVar5 < (float10)local_8) {
+          local_10 = piVar2[3];
+          local_8 = (float)fVar5;
+        }
+      }
+      FUN_0045d060();
+    }
+  }
+  return local_10;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00784110 : PUSH EBP
+00784111 : MOV EBP,ESP
+00784113 : SUB ESP,0x10
+00784116 : MOVSS XMM0,dword ptr [0x00cdf400]
+0078411e : XOR EAX,EAX
+00784120 : MOV dword ptr [EBP + -0xc],EAX
+00784123 : MOVSS dword ptr [EBP + -0x4],XMM0
+00784128 : CMP dword ptr [ECX + 0x84],EAX
+0078412e : JNZ 0x00784203
+00784134 : MOV ECX,dword ptr [ECX + 0x6c]
+00784137 : PUSH EDI
+00784138 : MOV EDI,dword ptr [ECX]
+0078413a : MOV dword ptr [EBP + -0x10],ECX
+0078413d : MOV dword ptr [EBP + -0x8],EDI
+00784140 : CMP EDI,ECX
+00784142 : JZ 0x00784202
+00784148 : PUSH EBX
+00784149 : MOV EBX,dword ptr [EBP + 0x8]
+0078414c : PUSH ESI
+0078414d : LEA ECX,[ECX]
+00784150 : MOV ECX,dword ptr [EDI + 0xc]
+00784153 : MOV EDX,dword ptr [EBP + 0xc]
+00784156 : MOV EAX,dword ptr [ECX]
+00784158 : MOV EAX,dword ptr [EAX + 0x4c]
+0078415b : PUSH EDX
+0078415c : PUSH EBX
+0078415d : CALL EAX
+0078415f : TEST AL,AL
+00784161 : JZ 0x007841e9
+00784167 : MOV ECX,dword ptr [EDI + 0xc]
+0078416a : MOV ESI,dword ptr [ECX + 0x24]
+0078416d : CMP byte ptr [ESI + 0x5d],0x0
+00784171 : JZ 0x0078417c
+00784173 : MOV EDX,dword ptr [ESI]
+00784175 : MOV EAX,dword ptr [EDX + 0x14]
+00784178 : MOV ECX,ESI
+0078417a : CALL EAX
+0078417c : MOVSS XMM2,dword ptr [ESI + 0xc0]
+00784184 : SUBSS XMM2,dword ptr [EBX + 0x8]
+00784189 : MOVSS XMM0,dword ptr [ESI + 0xb8]
+00784191 : SUBSS XMM0,dword ptr [EBX]
+00784195 : MOVSS XMM1,dword ptr [ESI + 0xbc]
+0078419d : SUBSS XMM1,dword ptr [EBX + 0x4]
+007841a2 : MOVAPS XMM3,XMM2
+007841a5 : MULSS XMM3,XMM2
+007841a9 : MOVAPS XMM2,XMM0
+007841ac : MULSS XMM2,XMM0
+007841b0 : MOVAPS XMM0,XMM1
+007841b3 : ADDSS XMM3,XMM2
+007841b7 : MULSS XMM0,XMM1
+007841bb : PUSH ECX
+007841bc : ADDSS XMM3,XMM0
+007841c0 : MOVSS dword ptr [ESP],XMM3
+007841c5 : CALL 0x0040f460
+007841ca : FST float ptr [EBP + 0x8]
+007841cd : FLD float ptr [EBP + -0x4]
+007841d0 : ADD ESP,0x4
+007841d3 : FCOMIP ST0,ST1
+007841d5 : FSTP ST0
+007841d7 : JBE 0x007841e9
+007841d9 : MOV ECX,dword ptr [EDI + 0xc]
+007841dc : MOVSS XMM0,dword ptr [EBP + 0x8]
+007841e1 : MOV dword ptr [EBP + -0xc],ECX
+007841e4 : MOVSS dword ptr [EBP + -0x4],XMM0
+007841e9 : LEA EDX,[EBP + -0x8]
+007841ec : CALL 0x0045d060
+007841f1 : MOV EDI,dword ptr [EBP + -0x8]
+007841f4 : CMP EDI,dword ptr [EBP + -0x10]
+007841f7 : JNZ 0x00784150
+007841fd : MOV EAX,dword ptr [EBP + -0xc]
+00784200 : POP ESI
+00784201 : POP EBX
+00784202 : POP EDI
+00784203 : MOV ESP,EBP
+00784205 : POP EBP
+00784206 : RET 0x8

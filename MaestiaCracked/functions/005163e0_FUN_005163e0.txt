@@ -1,0 +1,97 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005163e0
+ENTRY    : 005163e0
+BODY     : [[005163e0, 00516449]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_005163e0(void)
+
+{
+  undefined4 *puVar1;
+  int iVar2;
+  LPCRITICAL_SECTION in_ECX;
+  
+  EnterCriticalSection(in_ECX);
+  puVar1 = (undefined4 *)in_ECX[1].LockCount;
+  if (puVar1 != (undefined4 *)0x0) {
+    if (puVar1[1] == 0) {
+      in_ECX[1].LockCount = 0;
+      in_ECX[1].RecursionCount = 0;
+    }
+    else {
+      iVar2 = puVar1[1];
+      in_ECX[1].LockCount = iVar2;
+      *(undefined4 *)(iVar2 + 8) = 0;
+    }
+    while (puVar1 != (undefined4 *)0x0) {
+      SetEvent((HANDLE)*puVar1);
+      puVar1 = (undefined4 *)in_ECX[1].LockCount;
+      if (puVar1 == (undefined4 *)0x0) break;
+      if (puVar1[1] == 0) {
+        in_ECX[1].LockCount = 0;
+        in_ECX[1].RecursionCount = 0;
+      }
+      else {
+        iVar2 = puVar1[1];
+        in_ECX[1].LockCount = iVar2;
+        *(undefined4 *)(iVar2 + 8) = 0;
+      }
+    }
+  }
+  LeaveCriticalSection(in_ECX);
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005163e0 : PUSH ESI
+005163e1 : PUSH EDI
+005163e2 : MOV ESI,ECX
+005163e4 : PUSH ESI
+005163e5 : CALL dword ptr [0x00b85118]
+005163eb : MOV EAX,dword ptr [ESI + 0x1c]
+005163ee : XOR EDI,EDI
+005163f0 : CMP EAX,EDI
+005163f2 : JZ 0x00516440
+005163f4 : MOV ECX,EAX
+005163f6 : CMP dword ptr [ECX + 0x4],EDI
+005163f9 : JZ 0x00516406
+005163fb : MOV ECX,dword ptr [EAX + 0x4]
+005163fe : MOV dword ptr [ESI + 0x1c],ECX
+00516401 : MOV dword ptr [ECX + 0x8],EDI
+00516404 : JMP 0x0051640c
+00516406 : MOV dword ptr [ESI + 0x1c],EDI
+00516409 : MOV dword ptr [ESI + 0x20],EDI
+0051640c : CMP EAX,EDI
+0051640e : JZ 0x00516440
+00516410 : PUSH EBX
+00516411 : MOV EBX,dword ptr [0x00b851e8]
+00516417 : MOV EDX,dword ptr [EAX]
+00516419 : PUSH EDX
+0051641a : CALL EBX
+0051641c : MOV EAX,dword ptr [ESI + 0x1c]
+0051641f : CMP EAX,EDI
+00516421 : JZ 0x0051643f
+00516423 : MOV ECX,EAX
+00516425 : CMP dword ptr [ECX + 0x4],EDI
+00516428 : JZ 0x00516435
+0051642a : MOV ECX,dword ptr [EAX + 0x4]
+0051642d : MOV dword ptr [ESI + 0x1c],ECX
+00516430 : MOV dword ptr [ECX + 0x8],EDI
+00516433 : JMP 0x0051643b
+00516435 : MOV dword ptr [ESI + 0x1c],EDI
+00516438 : MOV dword ptr [ESI + 0x20],EDI
+0051643b : CMP EAX,EDI
+0051643d : JNZ 0x00516417
+0051643f : POP EBX
+00516440 : PUSH ESI
+00516441 : CALL dword ptr [0x00b8511c]
+00516447 : POP EDI
+00516448 : POP ESI
+00516449 : RET

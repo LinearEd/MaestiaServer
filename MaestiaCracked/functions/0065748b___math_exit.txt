@@ -1,0 +1,48 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __math_exit
+ENTRY    : 0065748b
+BODY     : [[0065748b, 006574b4]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __math_exit
+   
+   Library: Visual Studio */
+
+void __math_exit(void)
+
+{
+  ushort in_FPUStatusWord;
+  ushort unaff_retaddr;
+  
+  if (((unaff_retaddr != 0x27f) && ((unaff_retaddr & 0x20) != 0)) &&
+     ((in_FPUStatusWord & 0x20) != 0)) {
+    __startOneArgErrorHandling();
+    return;
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0065748b : MOV AX,word ptr [ESP]
+0065748f : CMP AX,0x27f
+00657493 : JZ 0x006574b3
+00657495 : AND AX,0x20
+00657499 : JZ 0x006574b0
+0065749b : FSTSW AX
+0065749e : AND AX,0x20
+006574a2 : JZ 0x006574b0
+006574a4 : MOV EAX,0x8
+006574a9 : CALL 0x00657587
+006574ae : POP EDX
+006574af : RET
+006574b0 : FLDCW word ptr [ESP]
+006574b3 : POP EDX
+006574b4 : RET

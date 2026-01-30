@@ -1,0 +1,151 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_006db060
+ENTRY    : 006db060
+BODY     : [[006db060, 006db134]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+uint FUN_006db060(int param_1,int param_2,int param_3,int param_4,int param_5)
+
+{
+  char cVar1;
+  uint uVar2;
+  
+  if (param_3 < param_5) {
+    cVar1 = FUN_006daf40(param_1,param_2,param_3,param_5);
+    if (cVar1 == '\0') {
+      return 0xffffffff;
+    }
+    param_2 = *(int *)(param_1 + 8);
+    param_3 = *(int *)(param_1 + 0xc);
+  }
+  param_3 = param_3 - param_5;
+  uVar2 = param_2 >> ((byte)param_3 & 0x1f) & (1 << ((byte)param_5 & 0x1f)) - 1U;
+  if (*(int *)(param_4 + param_5 * 4) < (int)uVar2) {
+    do {
+      if (param_3 < 1) {
+        cVar1 = FUN_006daf40(param_1,param_2,param_3,1);
+        if (cVar1 == '\0') {
+          return 0xffffffff;
+        }
+        param_2 = *(int *)(param_1 + 8);
+        param_3 = *(int *)(param_1 + 0xc);
+      }
+      param_3 = param_3 + -1;
+      param_5 = param_5 + 1;
+      uVar2 = uVar2 * 2 | param_2 >> ((byte)param_3 & 0x1f) & 1U;
+    } while (*(int *)(param_4 + param_5 * 4) < (int)uVar2);
+  }
+  *(int *)(param_1 + 8) = param_2;
+  *(int *)(param_1 + 0xc) = param_3;
+  if (param_5 < 0x11) {
+    return (uint)*(byte *)(*(int *)(param_4 + 0x48 + param_5 * 4) + *(int *)(param_4 + 0x8c) + 0x11
+                          + uVar2);
+  }
+  *(undefined4 *)(**(int **)(param_1 + 0x10) + 0x14) = 0x76;
+  (**(code **)(**(int **)(param_1 + 0x10) + 4))(*(int **)(param_1 + 0x10),0xffffffff);
+  return 0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006db060 : MOV EAX,dword ptr [ESP + 0xc]
+006db064 : PUSH EBX
+006db065 : MOV EBX,dword ptr [ESP + 0x18]
+006db069 : CMP EAX,EBX
+006db06b : PUSH EDI
+006db06c : MOV EDI,dword ptr [ESP + 0xc]
+006db070 : JGE 0x006db094
+006db072 : PUSH EBX
+006db073 : PUSH EAX
+006db074 : MOV EAX,dword ptr [ESP + 0x18]
+006db078 : PUSH EAX
+006db079 : PUSH EDI
+006db07a : CALL 0x006daf40
+006db07f : ADD ESP,0x10
+006db082 : TEST AL,AL
+006db084 : JNZ 0x006db08c
+006db086 : POP EDI
+006db087 : OR EAX,0xffffffff
+006db08a : POP EBX
+006db08b : RET
+006db08c : MOV EDX,dword ptr [EDI + 0x8]
+006db08f : MOV EAX,dword ptr [EDI + 0xc]
+006db092 : JMP 0x006db098
+006db094 : MOV EDX,dword ptr [ESP + 0x10]
+006db098 : PUSH EBP
+006db099 : PUSH ESI
+006db09a : SUB EAX,EBX
+006db09c : MOV ECX,EAX
+006db09e : MOV ESI,EDX
+006db0a0 : SAR ESI,CL
+006db0a2 : MOV ECX,EBX
+006db0a4 : MOV EBP,0x1
+006db0a9 : SHL EBP,CL
+006db0ab : MOV ECX,dword ptr [ESP + 0x20]
+006db0af : DEC EBP
+006db0b0 : AND ESI,EBP
+006db0b2 : CMP ESI,dword ptr [ECX + EBX*0x4]
+006db0b5 : JLE 0x006db0eb
+006db0b7 : ADD ESI,ESI
+006db0b9 : CMP EAX,0x1
+006db0bc : JGE 0x006db0d5
+006db0be : PUSH 0x1
+006db0c0 : PUSH EAX
+006db0c1 : PUSH EDX
+006db0c2 : PUSH EDI
+006db0c3 : CALL 0x006daf40
+006db0c8 : ADD ESP,0x10
+006db0cb : TEST AL,AL
+006db0cd : JZ 0x006db119
+006db0cf : MOV EDX,dword ptr [EDI + 0x8]
+006db0d2 : MOV EAX,dword ptr [EDI + 0xc]
+006db0d5 : DEC EAX
+006db0d6 : MOV ECX,EAX
+006db0d8 : MOV EBP,EDX
+006db0da : SAR EBP,CL
+006db0dc : MOV ECX,dword ptr [ESP + 0x20]
+006db0e0 : INC EBX
+006db0e1 : AND EBP,0x1
+006db0e4 : OR ESI,EBP
+006db0e6 : CMP ESI,dword ptr [ECX + EBX*0x4]
+006db0e9 : JG 0x006db0b7
+006db0eb : CMP EBX,0x10
+006db0ee : MOV dword ptr [EDI + 0x8],EDX
+006db0f1 : MOV dword ptr [EDI + 0xc],EAX
+006db0f4 : JLE 0x006db121
+006db0f6 : MOV ECX,dword ptr [EDI + 0x10]
+006db0f9 : MOV EDX,dword ptr [ECX]
+006db0fb : MOV dword ptr [EDX + 0x14],0x76
+006db102 : MOV EDI,dword ptr [EDI + 0x10]
+006db105 : MOV EAX,dword ptr [EDI]
+006db107 : MOV ECX,dword ptr [EAX + 0x4]
+006db10a : PUSH -0x1
+006db10c : PUSH EDI
+006db10d : CALL ECX
+006db10f : ADD ESP,0x8
+006db112 : POP ESI
+006db113 : POP EBP
+006db114 : POP EDI
+006db115 : XOR EAX,EAX
+006db117 : POP EBX
+006db118 : RET
+006db119 : POP ESI
+006db11a : POP EBP
+006db11b : POP EDI
+006db11c : OR EAX,0xffffffff
+006db11f : POP EBX
+006db120 : RET
+006db121 : MOV EDX,dword ptr [ECX + EBX*0x4 + 0x48]
+006db125 : ADD EDX,dword ptr [ECX + 0x8c]
+006db12b : MOVZX EAX,byte ptr [EDX + ESI*0x1 + 0x11]
+006db130 : POP ESI
+006db131 : POP EBP
+006db132 : POP EDI
+006db133 : POP EBX
+006db134 : RET

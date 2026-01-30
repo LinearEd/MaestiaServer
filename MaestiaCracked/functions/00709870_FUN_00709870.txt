@@ -1,0 +1,98 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00709870
+ENTRY    : 00709870
+BODY     : [[00709870, 007098f2]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00709870(undefined4 param_1)
+
+{
+  byte *pbVar1;
+  int iVar2;
+  byte bVar3;
+  int *in_ECX;
+  uint uVar4;
+  
+  FUN_00707fd0(param_1);
+  iVar2 = 0;
+  in_ECX[0xc] = 0;
+  uVar4 = 0;
+  do {
+    pbVar1 = (byte *)(iVar2 + in_ECX[3]);
+    bVar3 = (byte)uVar4;
+    uVar4 = uVar4 + 8;
+    iVar2 = iVar2 + 1;
+    in_ECX[0xc] = in_ECX[0xc] | (uint)*pbVar1 << (bVar3 & 0x1f);
+  } while (uVar4 < 0x10);
+  if ((in_ECX[0xc] & 0x8000U) != 0) {
+    *(undefined1 *)(in_ECX + 0xd) = 0;
+    *(undefined1 *)(in_ECX + 0xd) = *(undefined1 *)(in_ECX[3] + 2);
+    in_ECX[0xe] = 0;
+    in_ECX[0xe] = (uint)*(byte *)(in_ECX[3] + 3);
+    (**(code **)(*in_ECX + 0x10))();
+    return;
+  }
+  FUN_00707800();
+  (**(code **)(*in_ECX + 0x10))();
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00709870 : PUSH EBP
+00709871 : MOV EBP,ESP
+00709873 : MOV EAX,dword ptr [EBP + 0x8]
+00709876 : PUSH ESI
+00709877 : PUSH EDI
+00709878 : PUSH EAX
+00709879 : MOV EDI,ECX
+0070987b : CALL 0x00707fd0
+00709880 : XOR EDX,EDX
+00709882 : XOR EAX,EAX
+00709884 : MOV dword ptr [EDI + 0x30],EDX
+00709887 : XOR ECX,ECX
+00709889 : LEA ESP,[ESP]
+00709890 : MOV ESI,dword ptr [EDI + 0xc]
+00709893 : MOVZX ESI,byte ptr [EAX + ESI*0x1]
+00709897 : SHL ESI,CL
+00709899 : ADD ECX,0x8
+0070989c : INC EAX
+0070989d : OR dword ptr [EDI + 0x30],ESI
+007098a0 : CMP ECX,0x10
+007098a3 : JC 0x00709890
+007098a5 : TEST dword ptr [EDI + 0x30],0x8000
+007098ac : JZ 0x007098d6
+007098ae : MOV byte ptr [EDI + 0x34],DL
+007098b1 : MOV ECX,dword ptr [EDI + 0xc]
+007098b4 : MOV AL,byte ptr [ECX + 0x2]
+007098b7 : MOV byte ptr [EDI + 0x34],AL
+007098ba : MOV dword ptr [EDI + 0x38],EDX
+007098bd : MOV ECX,dword ptr [EDI + 0xc]
+007098c0 : MOVZX EDX,byte ptr [ECX + 0x3]
+007098c4 : MOV dword ptr [EDI + 0x38],EDX
+007098c7 : MOV EAX,dword ptr [EDI]
+007098c9 : MOV EDX,dword ptr [EAX + 0x10]
+007098cc : MOV ECX,EDI
+007098ce : CALL EDX
+007098d0 : POP EDI
+007098d1 : POP ESI
+007098d2 : POP EBP
+007098d3 : RET 0x4
+007098d6 : MOV EAX,dword ptr [EDI + 0xc]
+007098d9 : ADD EAX,0x2
+007098dc : LEA ESI,[EDI + 0x3c]
+007098df : CALL 0x00707800
+007098e4 : MOV EAX,dword ptr [EDI]
+007098e6 : MOV EDX,dword ptr [EAX + 0x10]
+007098e9 : MOV ECX,EDI
+007098eb : CALL EDX
+007098ed : POP EDI
+007098ee : POP ESI
+007098ef : POP EBP
+007098f0 : RET 0x4

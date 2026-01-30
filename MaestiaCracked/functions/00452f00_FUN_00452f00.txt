@@ -1,0 +1,105 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00452f00
+ENTRY    : 00452f00
+BODY     : [[00452f00, 00452f80]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00452f00(int param_1,undefined4 *param_2)
+
+{
+  undefined4 *puVar1;
+  undefined4 uVar2;
+  uint uVar3;
+  uint uVar4;
+  uint uVar5;
+  uint uVar6;
+  undefined4 *local_8;
+  
+  local_8 = (undefined4 *)(param_1 + 4);
+  if (local_8 != param_2) {
+    uVar5 = 2;
+    do {
+      uVar6 = 0x7fff;
+      uVar3 = _rand();
+      uVar3 = uVar3 & 0x7fff;
+      if (0x7fff < uVar5) {
+        do {
+          if (uVar6 == 0xffffffff) break;
+          uVar4 = _rand();
+          uVar6 = uVar6 << 0xf | 0x7fff;
+          uVar3 = uVar3 << 0xf | uVar4 & 0x7fff;
+        } while (uVar6 < uVar5);
+      }
+      puVar1 = (undefined4 *)(param_1 + (uVar3 % uVar5) * 4);
+      if (local_8 != puVar1) {
+        uVar2 = *local_8;
+        *local_8 = *puVar1;
+        *puVar1 = uVar2;
+      }
+      local_8 = local_8 + 1;
+      uVar5 = uVar5 + 1;
+    } while (local_8 != param_2);
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00452f00 : PUSH EBP
+00452f01 : MOV EBP,ESP
+00452f03 : PUSH ECX
+00452f04 : MOV EAX,dword ptr [EBP + 0x8]
+00452f07 : ADD EAX,0x4
+00452f0a : PUSH EBX
+00452f0b : MOV EBX,0x2
+00452f10 : MOV dword ptr [EBP + -0x4],EAX
+00452f13 : CMP EAX,dword ptr [EBP + 0xc]
+00452f16 : JZ 0x00452f7c
+00452f18 : PUSH ESI
+00452f19 : PUSH EDI
+00452f1a : LEA EBX,[EBX]
+00452f20 : MOV ESI,0x7fff
+00452f25 : CALL 0x00635d2f
+00452f2a : MOV EDI,EAX
+00452f2c : AND EDI,ESI
+00452f2e : CMP EBX,ESI
+00452f30 : JBE 0x00452f53
+00452f32 : CMP ESI,-0x1
+00452f35 : JZ 0x00452f53
+00452f37 : CALL 0x00635d2f
+00452f3c : SHL ESI,0xf
+00452f3f : AND EAX,0x7fff
+00452f44 : SHL EDI,0xf
+00452f47 : OR ESI,0x7fff
+00452f4d : OR EDI,EAX
+00452f4f : CMP ESI,EBX
+00452f51 : JC 0x00452f32
+00452f53 : XOR EDX,EDX
+00452f55 : MOV EAX,EDI
+00452f57 : DIV EBX
+00452f59 : MOV EAX,dword ptr [EBP + 0x8]
+00452f5c : MOV ECX,dword ptr [EBP + -0x4]
+00452f5f : LEA EAX,[EAX + EDX*0x4]
+00452f62 : CMP ECX,EAX
+00452f64 : JZ 0x00452f6e
+00452f66 : MOV ESI,dword ptr [EAX]
+00452f68 : MOV EDX,dword ptr [ECX]
+00452f6a : MOV dword ptr [ECX],ESI
+00452f6c : MOV dword ptr [EAX],EDX
+00452f6e : ADD ECX,0x4
+00452f71 : INC EBX
+00452f72 : MOV dword ptr [EBP + -0x4],ECX
+00452f75 : CMP ECX,dword ptr [EBP + 0xc]
+00452f78 : JNZ 0x00452f20
+00452f7a : POP EDI
+00452f7b : POP ESI
+00452f7c : POP EBX
+00452f7d : MOV ESP,EBP
+00452f7f : POP EBP
+00452f80 : RET

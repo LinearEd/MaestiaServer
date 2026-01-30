@@ -1,0 +1,87 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_004c96c0
+ENTRY    : 004c96c0
+BODY     : [[004c96c0, 004c9712]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_004c96c0(void)
+
+{
+  char cVar1;
+  int *piVar2;
+  int iVar3;
+  int iVar4;
+  int *in_EDX;
+  
+  piVar2 = (int *)*in_EDX;
+  if (*(char *)((int)piVar2 + 0x3d) != '\0') {
+    *in_EDX = piVar2[2];
+    return;
+  }
+  iVar3 = *piVar2;
+  if (*(char *)(iVar3 + 0x3d) != '\0') {
+    piVar2 = (int *)piVar2[1];
+    cVar1 = *(char *)((int)piVar2 + 0x3d);
+    while ((cVar1 == '\0' && (*in_EDX == *piVar2))) {
+      *in_EDX = (int)piVar2;
+      piVar2 = (int *)piVar2[1];
+      cVar1 = *(char *)((int)piVar2 + 0x3d);
+    }
+    if (*(char *)(*in_EDX + 0x3d) == '\0') {
+      *in_EDX = (int)piVar2;
+    }
+    return;
+  }
+  cVar1 = *(char *)(*(int *)(iVar3 + 8) + 0x3d);
+  iVar4 = *(int *)(iVar3 + 8);
+  while (cVar1 == '\0') {
+    cVar1 = *(char *)(*(int *)(iVar4 + 8) + 0x3d);
+    iVar3 = iVar4;
+    iVar4 = *(int *)(iVar4 + 8);
+  }
+  *in_EDX = iVar3;
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+004c96c0 : MOV EAX,dword ptr [EDX]
+004c96c2 : CMP byte ptr [EAX + 0x3d],0x0
+004c96c6 : JZ 0x004c96ce
+004c96c8 : MOV EAX,dword ptr [EAX + 0x8]
+004c96cb : MOV dword ptr [EDX],EAX
+004c96cd : RET
+004c96ce : MOV ECX,dword ptr [EAX]
+004c96d0 : CMP byte ptr [ECX + 0x3d],0x0
+004c96d4 : JNZ 0x004c96ee
+004c96d6 : MOV EAX,dword ptr [ECX + 0x8]
+004c96d9 : CMP byte ptr [EAX + 0x3d],0x0
+004c96dd : JNZ 0x004c96eb
+004c96df : NOP
+004c96e0 : MOV ECX,EAX
+004c96e2 : MOV EAX,dword ptr [ECX + 0x8]
+004c96e5 : CMP byte ptr [EAX + 0x3d],0x0
+004c96e9 : JZ 0x004c96e0
+004c96eb : MOV dword ptr [EDX],ECX
+004c96ed : RET
+004c96ee : MOV EAX,dword ptr [EAX + 0x4]
+004c96f1 : CMP byte ptr [EAX + 0x3d],0x0
+004c96f5 : JNZ 0x004c9708
+004c96f7 : MOV ECX,dword ptr [EDX]
+004c96f9 : CMP ECX,dword ptr [EAX]
+004c96fb : JNZ 0x004c9708
+004c96fd : MOV dword ptr [EDX],EAX
+004c96ff : MOV EAX,dword ptr [EAX + 0x4]
+004c9702 : CMP byte ptr [EAX + 0x3d],0x0
+004c9706 : JZ 0x004c96f7
+004c9708 : MOV ECX,dword ptr [EDX]
+004c970a : CMP byte ptr [ECX + 0x3d],0x0
+004c970e : JNZ 0x004c9712
+004c9710 : MOV dword ptr [EDX],EAX
+004c9712 : RET

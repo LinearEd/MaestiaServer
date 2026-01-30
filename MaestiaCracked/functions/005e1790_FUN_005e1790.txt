@@ -1,0 +1,63 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005e1790
+ENTRY    : 005e1790
+BODY     : [[005e1790, 005e17d7]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_005e1790(byte param_1)
+
+{
+  uint uVar1;
+  LONG LVar2;
+  GRefCountImplCore *in_ECX;
+  
+  uVar1 = *(uint *)(in_ECX + 0xc);
+  LVar2 = InterlockedExchangeAdd((LONG *)((uVar1 & 0xfffffffc) + 4),-1);
+  if (LVar2 == 1) {
+    FUN_00515cf0(uVar1 & 0xfffffffc);
+  }
+  if (*(GRefCountImpl **)(in_ECX + 8) != (GRefCountImpl *)0x0) {
+    GRefCountImpl::Release(*(GRefCountImpl **)(in_ECX + 8));
+  }
+  GRefCountImplCore::~GRefCountImplCore(in_ECX);
+  if ((param_1 & 1) != 0) {
+    FUN_00515cf0(in_ECX);
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005e1790 : PUSH ESI
+005e1791 : PUSH EDI
+005e1792 : MOV EDI,ECX
+005e1794 : MOV ESI,dword ptr [EDI + 0xc]
+005e1797 : AND ESI,0xfffffffc
+005e179a : PUSH -0x1
+005e179c : LEA EAX,[ESI + 0x4]
+005e179f : PUSH EAX
+005e17a0 : CALL dword ptr [0x00b851cc]
+005e17a6 : SUB EAX,0x1
+005e17a9 : JNZ 0x005e17b1
+005e17ab : PUSH ESI
+005e17ac : CALL 0x00515cf0
+005e17b1 : MOV ECX,dword ptr [EDI + 0x8]
+005e17b4 : TEST ECX,ECX
+005e17b6 : JZ 0x005e17bd
+005e17b8 : CALL 0x004ff7e0
+005e17bd : MOV ECX,EDI
+005e17bf : CALL 0x004ff7b0
+005e17c4 : TEST byte ptr [ESP + 0xc],0x1
+005e17c9 : JZ 0x005e17d1
+005e17cb : PUSH EDI
+005e17cc : CALL 0x00515cf0
+005e17d1 : MOV EAX,EDI
+005e17d3 : POP EDI
+005e17d4 : POP ESI
+005e17d5 : RET 0x4

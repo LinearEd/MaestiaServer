@@ -1,0 +1,233 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_006786a0
+ENTRY    : 006786a0
+BODY     : [[006786a0, 00678838]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+int FUN_006786a0(ushort param_1)
+
+{
+  int iVar1;
+  HDC hdc;
+  float fVar2;
+  int iVar3;
+  int *piVar4;
+  HGDIOBJ pvVar5;
+  DWORD DVar6;
+  int in_ECX;
+  int local_48;
+  undefined2 *local_44;
+  int *local_40;
+  MAT2 local_3c;
+  _GLYPHMETRICS local_2c;
+  uint local_18;
+  float local_14;
+  float local_10;
+  float local_c;
+  float local_8;
+  float local_4;
+  
+  pvVar5 = *(HGDIOBJ *)(in_ECX + 0x38);
+  if (pvVar5 == (HGDIOBJ)0x0) {
+    return -1;
+  }
+  iVar1 = *(int *)(in_ECX + 0x50);
+  if (iVar1 != 0) {
+    iVar3 = FUN_006774b0(&param_1,*(uint *)(iVar1 + 4) & (uint)param_1);
+    if (((-1 < iVar3) && (iVar1 = iVar1 + (iVar3 * 3 + 3) * 4, iVar1 != 0)) &&
+       (piVar4 = (int *)(iVar1 + 4), piVar4 != (int *)0x0)) {
+      return *piVar4;
+    }
+  }
+  hdc = *(HDC *)(*(int *)(in_ECX + 0x1c) + 0xc);
+  pvVar5 = SelectObject(hdc,pvVar5);
+  local_3c.eM12.fract = 0;
+  local_3c.eM21.value = 0;
+  local_3c.eM11.value = 1;
+  local_3c.eM21.fract = 0;
+  local_3c.eM11.fract = 0;
+  local_3c.eM12.value = 0;
+  local_3c.eM22.fract = 0;
+  local_3c.eM22.value = 1;
+  DVar6 = GetGlyphOutlineW(*(HDC *)(*(int *)(in_ECX + 0x1c) + 0xc),(uint)param_1,0,&local_2c,0,
+                           (LPVOID)0x0,&local_3c);
+  if (DVar6 == 0xffffffff) {
+    SelectObject(hdc,pvVar5);
+    return -1;
+  }
+  local_48 = (int)local_2c.gmCellIncX;
+  local_18 = (uint)param_1;
+  local_14 = (float)local_48 * *(float *)(in_ECX + 0x5c);
+  local_10 = (float)local_2c.gmptGlyphOrigin.x * *(float *)(in_ECX + 0x5c);
+  local_c = -(float)local_2c.gmptGlyphOrigin.y * *(float *)(in_ECX + 0x5c);
+  fVar2 = (float)(int)local_2c.gmBlackBoxX;
+  if ((int)local_2c.gmBlackBoxX < 0) {
+    fVar2 = fVar2 + 4.2949673e+09;
+  }
+  local_8 = fVar2 * *(float *)(in_ECX + 0x5c) + local_10;
+  fVar2 = (float)(int)local_2c.gmBlackBoxY;
+  if ((int)local_2c.gmBlackBoxY < 0) {
+    fVar2 = fVar2 + 4.2949673e+09;
+  }
+  local_4 = fVar2 * *(float *)(in_ECX + 0x5c) + local_c;
+  FUN_00677650(&local_18);
+  local_48 = *(int *)(in_ECX + 0x48) + -1;
+  local_44 = &param_1;
+  local_40 = &local_48;
+  FUN_006776e0(in_ECX + 0x50,&local_44,param_1);
+  iVar1 = *(int *)(in_ECX + 0x48);
+  SelectObject(hdc,pvVar5);
+  return iVar1 + -1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006786a0 : SUB ESP,0x48
+006786a3 : PUSH EBX
+006786a4 : PUSH ESI
+006786a5 : MOV ESI,ECX
+006786a7 : MOV EBX,dword ptr [ESI + 0x38]
+006786aa : TEST EBX,EBX
+006786ac : JZ 0x0067882e
+006786b2 : LEA ECX,[ESI + 0x50]
+006786b5 : PUSH EDI
+006786b6 : MOV EDI,dword ptr [ECX]
+006786b8 : TEST EDI,EDI
+006786ba : JZ 0x006786f0
+006786bc : MOVZX EAX,word ptr [ESP + 0x58]
+006786c1 : MOV EDX,dword ptr [EDI + 0x4]
+006786c4 : AND EDX,EAX
+006786c6 : PUSH EDX
+006786c7 : LEA EAX,[ESP + 0x5c]
+006786cb : PUSH EAX
+006786cc : CALL 0x006774b0
+006786d1 : TEST EAX,EAX
+006786d3 : JL 0x006786f0
+006786d5 : LEA ECX,[EAX + EAX*0x2 + 0x3]
+006786d9 : LEA EAX,[EDI + ECX*0x4]
+006786dc : TEST EAX,EAX
+006786de : JZ 0x006786f0
+006786e0 : ADD EAX,0x4
+006786e3 : JZ 0x006786f0
+006786e5 : MOV EAX,dword ptr [EAX]
+006786e7 : POP EDI
+006786e8 : POP ESI
+006786e9 : POP EBX
+006786ea : ADD ESP,0x48
+006786ed : RET 0x4
+006786f0 : MOV EDX,dword ptr [ESI + 0x1c]
+006786f3 : MOV EDI,dword ptr [EDX + 0xc]
+006786f6 : PUSH EBP
+006786f7 : PUSH EBX
+006786f8 : MOV EBX,dword ptr [0x00b85058]
+006786fe : PUSH EDI
+006786ff : CALL EBX
+00678701 : XOR EDX,EDX
+00678703 : MOV word ptr [ESP + 0x20],DX
+00678708 : MOV word ptr [ESP + 0x26],DX
+0067870d : MOV EBP,EAX
+0067870f : XOR EAX,EAX
+00678711 : MOV ECX,0x1
+00678716 : MOV word ptr [ESP + 0x1e],CX
+0067871b : LEA EDX,[ESP + 0x1c]
+0067871f : PUSH EDX
+00678720 : MOV EDX,dword ptr [ESI + 0x1c]
+00678723 : PUSH EAX
+00678724 : XOR ECX,ECX
+00678726 : PUSH EAX
+00678727 : MOV word ptr [ESP + 0x30],CX
+0067872c : MOV word ptr [ESP + 0x28],AX
+00678731 : MOV word ptr [ESP + 0x2e],AX
+00678736 : MOV word ptr [ESP + 0x34],AX
+0067873b : MOV ECX,0x1
+00678740 : MOV word ptr [ESP + 0x36],CX
+00678745 : MOVZX ECX,word ptr [ESP + 0x68]
+0067874a : LEA EAX,[ESP + 0x38]
+0067874e : PUSH EAX
+0067874f : MOV EAX,dword ptr [EDX + 0xc]
+00678752 : PUSH 0x0
+00678754 : PUSH ECX
+00678755 : PUSH EAX
+00678756 : CALL dword ptr [0x00b85050]
+0067875c : CMP EAX,-0x1
+0067875f : JNZ 0x00678772
+00678761 : PUSH EBP
+00678762 : PUSH EDI
+00678763 : CALL EBX
+00678765 : POP EBP
+00678766 : POP EDI
+00678767 : POP ESI
+00678768 : OR EAX,0xffffffff
+0067876b : POP EBX
+0067876c : ADD ESP,0x48
+0067876f : RET 0x4
+00678772 : MOVSX EDX,word ptr [ESP + 0x3c]
+00678777 : MOVZX ECX,word ptr [ESP + 0x5c]
+0067877c : MOV EAX,dword ptr [ESP + 0x2c]
+00678780 : MOV dword ptr [ESP + 0x10],EDX
+00678784 : MOV dword ptr [ESP + 0x40],ECX
+00678788 : FILD dword ptr [ESP + 0x10]
+0067878c : FMUL float ptr [ESI + 0x5c]
+0067878f : FSTP float ptr [ESP + 0x44]
+00678793 : FILD dword ptr [ESP + 0x34]
+00678797 : FMUL float ptr [ESI + 0x5c]
+0067879a : FSTP float ptr [ESP + 0x48]
+0067879e : FILD dword ptr [ESP + 0x38]
+006787a2 : FCHS
+006787a4 : FMUL float ptr [ESI + 0x5c]
+006787a7 : FSTP float ptr [ESP + 0x4c]
+006787ab : FILD dword ptr [ESP + 0x2c]
+006787af : TEST EAX,EAX
+006787b1 : JGE 0x006787b9
+006787b3 : FADD float ptr [0x00cdf0e0]
+006787b9 : FMUL float ptr [ESI + 0x5c]
+006787bc : MOV ECX,dword ptr [ESP + 0x30]
+006787c0 : FADD float ptr [ESP + 0x48]
+006787c4 : FSTP float ptr [ESP + 0x50]
+006787c8 : FILD dword ptr [ESP + 0x30]
+006787cc : TEST ECX,ECX
+006787ce : JGE 0x006787d6
+006787d0 : FADD float ptr [0x00cdf0e0]
+006787d6 : FMUL float ptr [ESI + 0x5c]
+006787d9 : LEA EDX,[ESP + 0x40]
+006787dd : PUSH EDX
+006787de : LEA ECX,[ESI + 0x44]
+006787e1 : FADD float ptr [ESP + 0x50]
+006787e5 : FSTP float ptr [ESP + 0x58]
+006787e9 : CALL 0x00677650
+006787ee : MOV EAX,dword ptr [ESI + 0x48]
+006787f1 : DEC EAX
+006787f2 : MOV dword ptr [ESP + 0x10],EAX
+006787f6 : MOVZX EAX,word ptr [ESP + 0x5c]
+006787fb : LEA ECX,[ESP + 0x5c]
+006787ff : MOV dword ptr [ESP + 0x14],ECX
+00678803 : PUSH EAX
+00678804 : LEA ECX,[ESP + 0x18]
+00678808 : PUSH ECX
+00678809 : LEA ECX,[ESI + 0x50]
+0067880c : LEA EDX,[ESP + 0x18]
+00678810 : PUSH ECX
+00678811 : MOV dword ptr [ESP + 0x24],EDX
+00678815 : CALL 0x006776e0
+0067881a : MOV ESI,dword ptr [ESI + 0x48]
+0067881d : PUSH EBP
+0067881e : PUSH EDI
+0067881f : CALL EBX
+00678821 : POP EBP
+00678822 : POP EDI
+00678823 : LEA EAX,[ESI + -0x1]
+00678826 : POP ESI
+00678827 : POP EBX
+00678828 : ADD ESP,0x48
+0067882b : RET 0x4
+0067882e : POP ESI
+0067882f : OR EAX,0xffffffff
+00678832 : POP EBX
+00678833 : ADD ESP,0x48
+00678836 : RET 0x4

@@ -1,0 +1,100 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __controlfp_s
+ENTRY    : 0063c57b
+BODY     : [[0063c57b, 0063c5e6]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __controlfp_s
+   
+   Library: Visual Studio 2008 Release */
+
+errno_t __cdecl __controlfp_s(uint *_CurrentState,uint _NewValue,uint _Mask)
+
+{
+  uint uVar1;
+  int *piVar2;
+  errno_t eVar3;
+  
+  uVar1 = _Mask & 0xfff7ffff;
+  if ((_NewValue & uVar1 & 0xfcf0fce0) == 0) {
+    if (_CurrentState == (uint *)0x0) {
+      __control87(_NewValue,uVar1);
+    }
+    else {
+      uVar1 = __control87(_NewValue,uVar1);
+      *_CurrentState = uVar1;
+    }
+    eVar3 = 0;
+  }
+  else {
+    if (_CurrentState != (uint *)0x0) {
+      uVar1 = __control87(0,0);
+      *_CurrentState = uVar1;
+    }
+    piVar2 = __errno();
+    eVar3 = 0x16;
+    *piVar2 = 0x16;
+    __invalid_parameter(0,0,0,0,0);
+  }
+  return eVar3;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0063c57b : MOV EDI,EDI
+0063c57d : PUSH EBP
+0063c57e : MOV EBP,ESP
+0063c580 : MOV EAX,dword ptr [EBP + 0x10]
+0063c583 : MOV ECX,dword ptr [EBP + 0xc]
+0063c586 : AND EAX,0xfff7ffff
+0063c58b : AND ECX,EAX
+0063c58d : PUSH ESI
+0063c58e : TEST ECX,0xfcf0fce0
+0063c594 : JZ 0x0063c5c7
+0063c596 : PUSH EDI
+0063c597 : MOV EDI,dword ptr [EBP + 0x8]
+0063c59a : XOR ESI,ESI
+0063c59c : CMP EDI,ESI
+0063c59e : JZ 0x0063c5ab
+0063c5a0 : PUSH ESI
+0063c5a1 : PUSH ESI
+0063c5a2 : CALL 0x00658d9d
+0063c5a7 : POP ECX
+0063c5a8 : POP ECX
+0063c5a9 : MOV dword ptr [EDI],EAX
+0063c5ab : CALL 0x0063ab82
+0063c5b0 : PUSH 0x16
+0063c5b2 : POP EDI
+0063c5b3 : PUSH ESI
+0063c5b4 : PUSH ESI
+0063c5b5 : PUSH ESI
+0063c5b6 : PUSH ESI
+0063c5b7 : PUSH ESI
+0063c5b8 : MOV dword ptr [EAX],EDI
+0063c5ba : CALL 0x006372b8
+0063c5bf : ADD ESP,0x14
+0063c5c2 : MOV EAX,EDI
+0063c5c4 : POP EDI
+0063c5c5 : JMP 0x0063c5e4
+0063c5c7 : MOV ESI,dword ptr [EBP + 0x8]
+0063c5ca : PUSH EAX
+0063c5cb : PUSH dword ptr [EBP + 0xc]
+0063c5ce : TEST ESI,ESI
+0063c5d0 : JZ 0x0063c5db
+0063c5d2 : CALL 0x00658d9d
+0063c5d7 : MOV dword ptr [ESI],EAX
+0063c5d9 : JMP 0x0063c5e0
+0063c5db : CALL 0x00658d9d
+0063c5e0 : POP ECX
+0063c5e1 : POP ECX
+0063c5e2 : XOR EAX,EAX
+0063c5e4 : POP ESI
+0063c5e5 : POP EBP
+0063c5e6 : RET

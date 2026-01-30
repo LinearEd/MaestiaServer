@@ -1,0 +1,87 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00ac82a0
+ENTRY    : 00ac82a0
+BODY     : [[00ac82a0, 00ac832d]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00ac82a0(short *param_1,short param_2)
+
+{
+  int in_EAX;
+  int iVar1;
+  short *psVar2;
+  int unaff_EDI;
+  
+  if (*(int *)(unaff_EDI + 0x214) == 0) {
+    iVar1 = FUN_006f0760(0xc000,"",0,(DAT_01725270 >> 3 & 1) == 0);
+    *(int *)(unaff_EDI + 0x214) = iVar1;
+    *(undefined4 *)(unaff_EDI + 0x218) = 0;
+    if (iVar1 == 0) {
+      return;
+    }
+  }
+  iVar1 = *(int *)(unaff_EDI + 0x218) + in_EAX;
+  if (iVar1 < 0x6001) {
+    psVar2 = (short *)(*(int *)(unaff_EDI + 0x214) + *(int *)(unaff_EDI + 0x218) * 2);
+    *(int *)(unaff_EDI + 0x218) = iVar1;
+    for (; 0 < in_EAX; in_EAX = in_EAX + -1) {
+      *psVar2 = *param_1 + param_2;
+      psVar2 = psVar2 + 1;
+      param_1 = param_1 + 1;
+    }
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00ac82a0 : PUSH EBP
+00ac82a1 : MOV EBP,ESP
+00ac82a3 : CMP dword ptr [EDI + 0x214],0x0
+00ac82aa : PUSH EBX
+00ac82ab : MOV EBX,dword ptr [EBP + 0x8]
+00ac82ae : PUSH ESI
+00ac82af : MOV ESI,EAX
+00ac82b1 : JNZ 0x00ac82ef
+00ac82b3 : MOV EAX,[0x01725270]
+00ac82b8 : SHR EAX,0x3
+00ac82bb : MOV ECX,0x0
+00ac82c0 : AND EAX,0x1
+00ac82c3 : SETZ CL
+00ac82c6 : PUSH ECX
+00ac82c7 : PUSH 0x0
+00ac82c9 : PUSH 0xbf1a4b
+00ac82ce : PUSH 0xc000
+00ac82d3 : CALL 0x006f0760
+00ac82d8 : ADD ESP,0x10
+00ac82db : MOV dword ptr [EDI + 0x214],EAX
+00ac82e1 : MOV dword ptr [EDI + 0x218],0x0
+00ac82eb : TEST EAX,EAX
+00ac82ed : JZ 0x00ac8328
+00ac82ef : MOV EAX,dword ptr [EDI + 0x218]
+00ac82f5 : LEA ECX,[EAX + ESI*0x1]
+00ac82f8 : CMP ECX,0x6000
+00ac82fe : JG 0x00ac8328
+00ac8300 : MOV EDX,dword ptr [EDI + 0x214]
+00ac8306 : LEA EAX,[EDX + EAX*0x2]
+00ac8309 : MOV dword ptr [EDI + 0x218],ECX
+00ac830f : TEST ESI,ESI
+00ac8311 : JLE 0x00ac8328
+00ac8313 : MOV CX,word ptr [EBX]
+00ac8316 : ADD CX,word ptr [EBP + 0xc]
+00ac831a : DEC ESI
+00ac831b : MOV word ptr [EAX],CX
+00ac831e : ADD EAX,0x2
+00ac8321 : ADD EBX,0x2
+00ac8324 : TEST ESI,ESI
+00ac8326 : JG 0x00ac8313
+00ac8328 : POP ESI
+00ac8329 : POP EBX
+00ac832a : POP EBP
+00ac832b : RET 0x8

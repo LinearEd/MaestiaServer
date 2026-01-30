@@ -1,0 +1,167 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00638800
+ENTRY    : 00638800
+BODY     : [[00638800, 006388bd]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+uint * FUN_00638800(uint *param_1,char param_2)
+
+{
+  uint uVar1;
+  char cVar2;
+  uint uVar3;
+  uint uVar4;
+  uint *puVar5;
+  
+  while (((uint)param_1 & 3) != 0) {
+    uVar1 = *param_1;
+    if ((char)uVar1 == param_2) {
+      return param_1;
+    }
+    param_1 = (uint *)((int)param_1 + 1);
+    if ((char)uVar1 == '\0') {
+      return (uint *)0x0;
+    }
+  }
+  while( true ) {
+    while( true ) {
+      uVar1 = *param_1;
+      uVar4 = uVar1 ^ CONCAT22(CONCAT11(param_2,param_2),CONCAT11(param_2,param_2));
+      uVar3 = uVar1 ^ 0xffffffff ^ uVar1 + 0x7efefeff;
+      puVar5 = param_1 + 1;
+      if (((uVar4 ^ 0xffffffff ^ uVar4 + 0x7efefeff) & 0x81010100) != 0) break;
+      param_1 = puVar5;
+      if ((uVar3 & 0x81010100) != 0) {
+        if ((uVar3 & 0x1010100) != 0) {
+          return (uint *)0x0;
+        }
+        if ((uVar1 + 0x7efefeff & 0x80000000) == 0) {
+          return (uint *)0x0;
+        }
+      }
+    }
+    uVar1 = *param_1;
+    if ((char)uVar1 == param_2) {
+      return param_1;
+    }
+    if ((char)uVar1 == '\0') {
+      return (uint *)0x0;
+    }
+    cVar2 = (char)(uVar1 >> 8);
+    if (cVar2 == param_2) {
+      return (uint *)((int)param_1 + 1);
+    }
+    if (cVar2 == '\0') {
+      return (uint *)0x0;
+    }
+    cVar2 = (char)(uVar1 >> 0x10);
+    if (cVar2 == param_2) {
+      return (uint *)((int)param_1 + 2);
+    }
+    if (cVar2 == '\0') break;
+    cVar2 = (char)(uVar1 >> 0x18);
+    if (cVar2 == param_2) {
+      return (uint *)((int)param_1 + 3);
+    }
+    param_1 = puVar5;
+    if (cVar2 == '\0') {
+      return (uint *)0x0;
+    }
+  }
+  return (uint *)0x0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00638800 : XOR EAX,EAX
+00638802 : MOV AL,byte ptr [ESP + 0x8]
+00638806 : PUSH EBX
+00638807 : MOV EBX,EAX
+00638809 : SHL EAX,0x8
+0063880c : MOV EDX,dword ptr [ESP + 0x8]
+00638810 : TEST EDX,0x3
+00638816 : JZ 0x0063882d
+00638818 : MOV CL,byte ptr [EDX]
+0063881a : ADD EDX,0x1
+0063881d : CMP CL,BL
+0063881f : JZ 0x006387f0
+00638821 : TEST CL,CL
+00638823 : JZ 0x00638876
+00638825 : TEST EDX,0x3
+0063882b : JNZ 0x00638818
+0063882d : OR EBX,EAX
+0063882f : PUSH EDI
+00638830 : MOV EAX,EBX
+00638832 : SHL EBX,0x10
+00638835 : PUSH ESI
+00638836 : OR EBX,EAX
+00638838 : MOV ECX,dword ptr [EDX]
+0063883a : MOV EDI,0x7efefeff
+0063883f : MOV EAX,ECX
+00638841 : MOV ESI,EDI
+00638843 : XOR ECX,EBX
+00638845 : ADD ESI,EAX
+00638847 : ADD EDI,ECX
+00638849 : XOR ECX,0xffffffff
+0063884c : XOR EAX,0xffffffff
+0063884f : XOR ECX,EDI
+00638851 : XOR EAX,ESI
+00638853 : ADD EDX,0x4
+00638856 : AND ECX,0x81010100
+0063885c : JNZ 0x0063887a
+0063885e : AND EAX,0x81010100
+00638863 : JZ 0x00638838
+00638865 : AND EAX,0x1010100
+0063886a : JNZ 0x00638874
+0063886c : AND ESI,0x80000000
+00638872 : JNZ 0x00638838
+00638874 : POP ESI
+00638875 : POP EDI
+00638876 : POP EBX
+00638877 : XOR EAX,EAX
+00638879 : RET
+0063887a : MOV EAX,dword ptr [EDX + -0x4]
+0063887d : CMP AL,BL
+0063887f : JZ 0x006388b7
+00638881 : TEST AL,AL
+00638883 : JZ 0x00638874
+00638885 : CMP AH,BL
+00638887 : JZ 0x006388b0
+00638889 : TEST AH,AH
+0063888b : JZ 0x00638874
+0063888d : SHR EAX,0x10
+00638890 : CMP AL,BL
+00638892 : JZ 0x006388a9
+00638894 : TEST AL,AL
+00638896 : JZ 0x00638874
+00638898 : CMP AH,BL
+0063889a : JZ 0x006388a2
+0063889c : TEST AH,AH
+0063889e : JZ 0x00638874
+006388a0 : JMP 0x00638838
+006388a2 : POP ESI
+006388a3 : POP EDI
+006388a4 : LEA EAX,[EDX + -0x1]
+006388a7 : POP EBX
+006388a8 : RET
+006388a9 : LEA EAX,[EDX + -0x2]
+006388ac : POP ESI
+006388ad : POP EDI
+006388ae : POP EBX
+006388af : RET
+006388b0 : LEA EAX,[EDX + -0x3]
+006388b3 : POP ESI
+006388b4 : POP EDI
+006388b5 : POP EBX
+006388b6 : RET
+006388b7 : LEA EAX,[EDX + -0x4]
+006388ba : POP ESI
+006388bb : POP EDI
+006388bc : POP EBX
+006388bd : RET

@@ -1,0 +1,83 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_004ca8b0
+ENTRY    : 004ca8b0
+BODY     : [[004ca8b0, 004ca907]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+uint FUN_004ca8b0(int param_1)
+
+{
+  undefined8 *puVar1;
+  undefined8 *puVar2;
+  int in_ECX;
+  int iVar3;
+  undefined8 *puVar4;
+  
+  puVar1 = *(undefined8 **)(in_ECX + 0x5c);
+  iVar3 = 0;
+  puVar4 = *(undefined8 **)(in_ECX + 0x58);
+  while( true ) {
+    if (puVar4 == puVar1) {
+      return (uint)puVar4 & 0xffffff00;
+    }
+    puVar2 = puVar4 + 2;
+    if (param_1 == iVar3) break;
+    iVar3 = iVar3 + 1;
+    puVar4 = puVar2;
+  }
+  for (; puVar2 != puVar1; puVar2 = puVar2 + 2) {
+    *puVar4 = *puVar2;
+    puVar4[1] = puVar2[1];
+    puVar4 = puVar4 + 2;
+  }
+  *(int *)(in_ECX + 0x5c) = *(int *)(in_ECX + 0x5c) + -0x10;
+  return CONCAT31((int3)((uint)puVar2 >> 8),1);
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+004ca8b0 : PUSH EBP
+004ca8b1 : MOV EBP,ESP
+004ca8b3 : MOV EAX,dword ptr [ECX + 0x58]
+004ca8b6 : PUSH ESI
+004ca8b7 : MOV ESI,dword ptr [ECX + 0x5c]
+004ca8ba : XOR EDX,EDX
+004ca8bc : PUSH EDI
+004ca8bd : CMP EAX,ESI
+004ca8bf : JZ 0x004ca8d0
+004ca8c1 : MOV EDI,dword ptr [EBP + 0x8]
+004ca8c4 : ADD EAX,0x10
+004ca8c7 : CMP EDI,EDX
+004ca8c9 : JZ 0x004ca8d8
+004ca8cb : INC EDX
+004ca8cc : CMP EAX,ESI
+004ca8ce : JNZ 0x004ca8c4
+004ca8d0 : POP EDI
+004ca8d1 : XOR AL,AL
+004ca8d3 : POP ESI
+004ca8d4 : POP EBP
+004ca8d5 : RET 0x4
+004ca8d8 : CMP EAX,ESI
+004ca8da : JZ 0x004ca8fc
+004ca8dc : LEA EDX,[EAX + -0x10]
+004ca8df : NOP
+004ca8e0 : MOVQ XMM0,qword ptr [EAX]
+004ca8e4 : MOVQ qword ptr [EDX],XMM0
+004ca8e8 : MOVQ XMM0,qword ptr [EAX + 0x8]
+004ca8ed : MOVQ qword ptr [EDX + 0x8],XMM0
+004ca8f2 : ADD EAX,0x10
+004ca8f5 : ADD EDX,0x10
+004ca8f8 : CMP EAX,ESI
+004ca8fa : JNZ 0x004ca8e0
+004ca8fc : ADD dword ptr [ECX + 0x5c],-0x10
+004ca900 : POP EDI
+004ca901 : MOV AL,0x1
+004ca903 : POP ESI
+004ca904 : POP EBP
+004ca905 : RET 0x4

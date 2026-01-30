@@ -1,0 +1,61 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_006b6ba0
+ENTRY    : 006b6ba0
+BODY     : [[006b6ba0, 006b6bd4]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_006b6ba0(void)
+
+{
+  int *piVar1;
+  uint in_EAX;
+  int iVar2;
+  uint unaff_EBX;
+  int *unaff_ESI;
+  uint unaff_EDI;
+  
+  iVar2 = *(int *)(unaff_ESI[1] + unaff_EDI * 8) - *(int *)(*unaff_ESI + unaff_EDI * 8);
+  if (iVar2 != 0) {
+    for (; in_EAX < unaff_EDI; in_EAX = in_EAX + 1) {
+      piVar1 = (int *)(unaff_ESI[1] + in_EAX * 8);
+      *piVar1 = *piVar1 + iVar2;
+    }
+    while (unaff_EDI = unaff_EDI + 1, unaff_EDI <= unaff_EBX) {
+      piVar1 = (int *)(unaff_ESI[1] + unaff_EDI * 8);
+      *piVar1 = *piVar1 + iVar2;
+    }
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006b6ba0 : MOV EDX,dword ptr [ESI + 0x4]
+006b6ba3 : MOV ECX,dword ptr [ESI]
+006b6ba5 : MOV EDX,dword ptr [EDX + EDI*0x8]
+006b6ba8 : SUB EDX,dword ptr [ECX + EDI*0x8]
+006b6bab : JZ 0x006b6bd4
+006b6bad : CMP EAX,EDI
+006b6baf : JNC 0x006b6bbf
+006b6bb1 : MOV ECX,dword ptr [ESI + 0x4]
+006b6bb4 : ADD dword ptr [ECX + EAX*0x8],EDX
+006b6bb7 : LEA ECX,[ECX + EAX*0x8]
+006b6bba : INC EAX
+006b6bbb : CMP EAX,EDI
+006b6bbd : JC 0x006b6bb1
+006b6bbf : LEA EAX,[EDI + 0x1]
+006b6bc2 : CMP EAX,EBX
+006b6bc4 : JA 0x006b6bd4
+006b6bc6 : MOV ECX,dword ptr [ESI + 0x4]
+006b6bc9 : ADD dword ptr [ECX + EAX*0x8],EDX
+006b6bcc : LEA ECX,[ECX + EAX*0x8]
+006b6bcf : INC EAX
+006b6bd0 : CMP EAX,EBX
+006b6bd2 : JBE 0x006b6bc6
+006b6bd4 : RET

@@ -1,0 +1,92 @@
+PROGRAM  : Maestia.exe
+FUNCTION : ___lock_fhandle
+ENTRY    : 0065cc82
+BODY     : [[0065cc82, 0065cd13]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* WARNING: Function: __SEH_prolog4 replaced with injection: SEH_prolog4 */
+/* WARNING: Function: __SEH_epilog4 replaced with injection: EH_epilog3 */
+/* Library Function - Single Match
+    ___lock_fhandle
+   
+   Library: Visual Studio 2008 Release */
+
+int __cdecl ___lock_fhandle(int _Filehandle)
+
+{
+  int iVar1;
+  int iVar2;
+  uint local_20;
+  
+  iVar2 = (_Filehandle & 0x1fU) * 0x40 + (&DAT_01728c40)[_Filehandle >> 5];
+  local_20 = 1;
+  if (*(int *)(iVar2 + 8) == 0) {
+    __lock(10);
+    if (*(int *)(iVar2 + 8) == 0) {
+      iVar1 = ___crtInitCritSecAndSpinCount(iVar2 + 0xc,4000);
+      local_20 = (uint)(iVar1 != 0);
+      *(int *)(iVar2 + 8) = *(int *)(iVar2 + 8) + 1;
+    }
+    FUN_0065cd19();
+  }
+  if (local_20 != 0) {
+    EnterCriticalSection
+              ((LPCRITICAL_SECTION)
+               ((&DAT_01728c40)[_Filehandle >> 5] + 0xc + (_Filehandle & 0x1fU) * 0x40));
+  }
+  return local_20;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0065cc82 : PUSH 0xc
+0065cc84 : PUSH 0xced3b8
+0065cc89 : CALL 0x0064c228
+0065cc8e : MOV EDI,dword ptr [EBP + 0x8]
+0065cc91 : MOV EAX,EDI
+0065cc93 : SAR EAX,0x5
+0065cc96 : MOV ESI,EDI
+0065cc98 : AND ESI,0x1f
+0065cc9b : SHL ESI,0x6
+0065cc9e : ADD ESI,dword ptr [EAX*0x4 + 0x1728c40]
+0065cca5 : MOV dword ptr [EBP + -0x1c],0x1
+0065ccac : XOR EBX,EBX
+0065ccae : CMP dword ptr [ESI + 0x8],EBX
+0065ccb1 : JNZ 0x0065cce9
+0065ccb3 : PUSH 0xa
+0065ccb5 : CALL 0x0064c598
+0065ccba : POP ECX
+0065ccbb : MOV dword ptr [EBP + -0x4],EBX
+0065ccbe : CMP dword ptr [ESI + 0x8],EBX
+0065ccc1 : JNZ 0x0065ccdd
+0065ccc3 : PUSH 0xfa0
+0065ccc8 : LEA EAX,[ESI + 0xc]
+0065cccb : PUSH EAX
+0065cccc : CALL 0x0064cbb2
+0065ccd1 : POP ECX
+0065ccd2 : POP ECX
+0065ccd3 : TEST EAX,EAX
+0065ccd5 : JNZ 0x0065ccda
+0065ccd7 : MOV dword ptr [EBP + -0x1c],EBX
+0065ccda : INC dword ptr [ESI + 0x8]
+0065ccdd : MOV dword ptr [EBP + -0x4],0xfffffffe
+0065cce4 : CALL 0x0065cd19
+0065cce9 : CMP dword ptr [EBP + -0x1c],EBX
+0065ccec : JZ 0x0065cd0b
+0065ccee : MOV EAX,EDI
+0065ccf0 : SAR EAX,0x5
+0065ccf3 : AND EDI,0x1f
+0065ccf6 : SHL EDI,0x6
+0065ccf9 : MOV EAX,dword ptr [EAX*0x4 + 0x1728c40]
+0065cd00 : LEA EAX,[EAX + EDI*0x1 + 0xc]
+0065cd04 : PUSH EAX
+0065cd05 : CALL dword ptr [0x00b85118]
+0065cd0b : MOV EAX,dword ptr [EBP + -0x1c]
+0065cd0e : CALL 0x0064c26d
+0065cd13 : RET

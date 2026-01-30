@@ -1,0 +1,132 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005d4780
+ENTRY    : 005d4780
+BODY     : [[005d4780, 005d4845]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_005d4780(void)
+
+{
+  float fVar1;
+  float fVar2;
+  float *in_ECX;
+  
+  fVar1 = *in_ECX * *in_ECX;
+  in_ECX[3] = fVar1;
+  fVar2 = fVar1 - (in_ECX[2] * in_ECX[2] + in_ECX[1] * in_ECX[1]);
+  if (fVar2 != 0.0) {
+    in_ECX[4] = *in_ECX / fVar2;
+    return;
+  }
+  if (in_ECX[1] != 0.0) {
+    if (0.0 <= in_ECX[1]) {
+      fVar2 = in_ECX[1] - 1.0;
+    }
+    else {
+      fVar2 = in_ECX[1] + 1.0;
+    }
+    in_ECX[1] = fVar2;
+  }
+  if (in_ECX[2] != 0.0) {
+    if (0.0 <= in_ECX[2]) {
+      in_ECX[2] = in_ECX[2] - 1.0;
+    }
+    else {
+      in_ECX[2] = in_ECX[2] + 1.0;
+    }
+  }
+  in_ECX[4] = *in_ECX / (fVar1 - (in_ECX[1] * in_ECX[1] + in_ECX[2] * in_ECX[2]));
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005d4780 : PUSH ECX
+005d4781 : FLD float ptr [ECX]
+005d4783 : FMUL ST0
+005d4785 : FSTP float ptr [ESP]
+005d4788 : FLD float ptr [ESP]
+005d478b : FST float ptr [ECX + 0xc]
+005d478e : FLD float ptr [ECX + 0x8]
+005d4791 : FLD float ptr [ECX + 0x4]
+005d4794 : FLD ST0
+005d4796 : FMULP
+005d4798 : FSTP float ptr [ESP]
+005d479b : FLD float ptr [ESP]
+005d479e : FLD ST1
+005d47a0 : FMULP ST2
+005d47a2 : FXCH
+005d47a4 : FSTP float ptr [ESP]
+005d47a7 : FLD float ptr [ESP]
+005d47aa : FADDP
+005d47ac : FSUBR ST0,ST1
+005d47ae : FSTP float ptr [ESP]
+005d47b1 : FLDZ
+005d47b3 : FCOM float ptr [ESP]
+005d47b6 : FNSTSW AX
+005d47b8 : TEST AH,0x44
+005d47bb : JP 0x005d4838
+005d47bd : FCOM float ptr [ECX + 0x4]
+005d47c0 : FNSTSW AX
+005d47c2 : FLD1
+005d47c4 : TEST AH,0x44
+005d47c7 : JNP 0x005d47e3
+005d47c9 : FXCH
+005d47cb : FCOM float ptr [ECX + 0x4]
+005d47ce : FNSTSW AX
+005d47d0 : FLD float ptr [ECX + 0x4]
+005d47d3 : TEST AH,0x41
+005d47d6 : JNZ 0x005d47dc
+005d47d8 : FADD ST0,ST2
+005d47da : JMP 0x005d47de
+005d47dc : FSUB ST0,ST2
+005d47de : FSTP float ptr [ECX + 0x4]
+005d47e1 : FXCH
+005d47e3 : FLD ST1
+005d47e5 : FCOMP float ptr [ECX + 0x8]
+005d47e8 : FNSTSW AX
+005d47ea : TEST AH,0x44
+005d47ed : JNP 0x005d480b
+005d47ef : FXCH
+005d47f1 : FCOMP float ptr [ECX + 0x8]
+005d47f4 : FNSTSW AX
+005d47f6 : TEST AH,0x41
+005d47f9 : JNZ 0x005d4803
+005d47fb : FADD float ptr [ECX + 0x8]
+005d47fe : FSTP float ptr [ECX + 0x8]
+005d4801 : JMP 0x005d480f
+005d4803 : FSUBR float ptr [ECX + 0x8]
+005d4806 : FSTP float ptr [ECX + 0x8]
+005d4809 : JMP 0x005d480f
+005d480b : FSTP ST1
+005d480d : FSTP ST0
+005d480f : FLD float ptr [ECX + 0x8]
+005d4812 : FLD float ptr [ECX + 0x4]
+005d4815 : FMUL ST0
+005d4817 : FSTP float ptr [ESP]
+005d481a : FLD float ptr [ESP]
+005d481d : FLD ST1
+005d481f : FMULP ST2
+005d4821 : FXCH
+005d4823 : FSTP float ptr [ESP]
+005d4826 : FADD float ptr [ESP]
+005d4829 : FSUBP
+005d482b : FSTP float ptr [ESP]
+005d482e : FLD float ptr [ECX]
+005d4830 : FDIV float ptr [ESP]
+005d4833 : FSTP float ptr [ECX + 0x10]
+005d4836 : POP ECX
+005d4837 : RET
+005d4838 : FSTP ST0
+005d483a : FSTP ST0
+005d483c : FLD float ptr [ECX]
+005d483e : FDIV float ptr [ESP]
+005d4841 : FSTP float ptr [ECX + 0x10]
+005d4844 : POP ECX
+005d4845 : RET

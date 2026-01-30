@@ -1,0 +1,100 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005ffd30
+ENTRY    : 005ffd30
+BODY     : [[005ffd30, 005ffdbe]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_005ffd30(int param_1,uint param_2)
+
+{
+  int iVar1;
+  float *pfVar2;
+  int in_ECX;
+  
+  if ((param_1 != 0) && (iVar1 = *(int *)(param_1 + 4), iVar1 != 0)) {
+    pfVar2 = *(float **)(iVar1 + 0x14);
+    if (pfVar2 == (float *)0x0) {
+      FUN_005fcb20(iVar1,param_2);
+      return;
+    }
+    if (*(float *)(*(int *)(*(int *)(in_ECX + 0x110) + ((param_2 & 0xbfffffff) >> 10) * 4) + 4 +
+                  (param_2 & 0x3ff) * 8) != *pfVar2) {
+      if ((param_2 & 0x40000000) != 0) {
+        FUN_005fcde0(param_1,param_2);
+        return;
+      }
+      FUN_005fd080(param_1,param_2);
+      return;
+    }
+    pfVar2[3] = (float)(param_2 & 0xbfffffff);
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005ffd30 : MOV EAX,dword ptr [ESP + 0x4]
+005ffd34 : TEST EAX,EAX
+005ffd36 : JZ 0x005ffd82
+005ffd38 : MOV EAX,dword ptr [EAX + 0x4]
+005ffd3b : TEST EAX,EAX
+005ffd3d : JZ 0x005ffd82
+005ffd3f : PUSH ESI
+005ffd40 : MOV ESI,dword ptr [EAX + 0x14]
+005ffd43 : TEST ESI,ESI
+005ffd45 : JZ 0x005ffdb0
+005ffd47 : FLD float ptr [ESI]
+005ffd49 : PUSH EBX
+005ffd4a : MOV EBX,dword ptr [ECX + 0x110]
+005ffd50 : PUSH EBP
+005ffd51 : PUSH EDI
+005ffd52 : MOV EDI,dword ptr [ESP + 0x18]
+005ffd56 : MOV EDX,EDI
+005ffd58 : AND EDX,0xbfffffff
+005ffd5e : MOV EAX,EDX
+005ffd60 : SHR EAX,0xa
+005ffd63 : MOV EAX,dword ptr [EBX + EAX*0x4]
+005ffd66 : MOV EBP,EDX
+005ffd68 : AND EBP,0x3ff
+005ffd6e : FLD float ptr [EAX + EBP*0x8 + 0x4]
+005ffd72 : FUCOMPP
+005ffd74 : FNSTSW AX
+005ffd76 : TEST AH,0x44
+005ffd79 : JP 0x005ffd85
+005ffd7b : POP EDI
+005ffd7c : POP EBP
+005ffd7d : POP EBX
+005ffd7e : MOV dword ptr [ESI + 0xc],EDX
+005ffd81 : POP ESI
+005ffd82 : RET 0xc
+005ffd85 : PUSH EDI
+005ffd86 : TEST EDI,0x40000000
+005ffd8c : JZ 0x005ffd9f
+005ffd8e : MOV EDX,dword ptr [ESP + 0x18]
+005ffd92 : PUSH EDX
+005ffd93 : CALL 0x005fcde0
+005ffd98 : POP EDI
+005ffd99 : POP EBP
+005ffd9a : POP EBX
+005ffd9b : POP ESI
+005ffd9c : RET 0xc
+005ffd9f : MOV EAX,dword ptr [ESP + 0x18]
+005ffda3 : PUSH EAX
+005ffda4 : CALL 0x005fd080
+005ffda9 : POP EDI
+005ffdaa : POP EBP
+005ffdab : POP EBX
+005ffdac : POP ESI
+005ffdad : RET 0xc
+005ffdb0 : MOV EDX,dword ptr [ESP + 0xc]
+005ffdb4 : PUSH EDX
+005ffdb5 : PUSH EAX
+005ffdb6 : CALL 0x005fcb20
+005ffdbb : POP ESI
+005ffdbc : RET 0xc

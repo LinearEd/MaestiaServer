@@ -1,0 +1,170 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00585440
+ENTRY    : 00585440
+BODY     : [[00585440, 0058553d]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00585440(int param_1,undefined4 param_2)
+
+{
+  int iVar1;
+  int iVar2;
+  int iVar3;
+  undefined4 uVar4;
+  int in_ECX;
+  uint uVar5;
+  
+  uVar4 = param_2;
+  iVar1 = param_1;
+  *(int *)(in_ECX + 0x44) = *(int *)(in_ECX + 0x44) + 1;
+  if (0xfe < *(int *)(in_ECX + 0x44)) {
+    FUN_00524f70(*(int *)(in_ECX + 0x30) + 0xc,"256 levels of recursion is reached\n");
+    *(int *)(in_ECX + 0x44) = *(int *)(in_ECX + 0x44) + -1;
+    return;
+  }
+  param_1 = *(undefined4 *)(*(int *)(param_1 + 0x78) + 0x288);
+  iVar1 = FUN_00526fa0(iVar1);
+  if (iVar1 != 0) {
+    iVar2 = (**(code **)(*(int *)(iVar1 + 0x10) + 8))();
+    if (iVar2 == 7) {
+      if (*(int *)(iVar1 + 0x38) != 0) {
+        iVar2 = *(int *)(in_ECX + 0x38);
+        FUN_00585260(*(int *)(iVar1 + 0x38) + iVar2);
+        uVar5 = 0;
+        if (*(int *)(iVar1 + 0x38) != 0) {
+          iVar2 = iVar2 * 4;
+          do {
+            iVar3 = FUN_00515840(0x10,0);
+            if (iVar3 == 0) {
+              uVar4 = 0;
+            }
+            else {
+              uVar4 = FUN_005266c0(*(undefined4 *)(*(int *)(iVar1 + 0x34) + uVar5 * 4));
+            }
+            *(undefined4 *)(*(int *)(in_ECX + 0x34) + iVar2) = uVar4;
+            uVar5 = uVar5 + 1;
+            iVar2 = iVar2 + 4;
+          } while (uVar5 < *(uint *)(iVar1 + 0x38));
+          *(int *)(in_ECX + 0x44) = *(int *)(in_ECX + 0x44) + -1;
+          return;
+        }
+      }
+      goto LAB_00585534;
+    }
+  }
+  iVar1 = FUN_00515840(0x10,0);
+  if (iVar1 == 0) {
+    param_1 = 0;
+  }
+  else {
+    param_1 = FUN_005266c0(uVar4);
+  }
+  FUN_00585070(&param_1);
+LAB_00585534:
+  *(int *)(in_ECX + 0x44) = *(int *)(in_ECX + 0x44) + -1;
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00585440 : PUSH EBX
+00585441 : MOV EBX,ECX
+00585443 : INC dword ptr [EBX + 0x44]
+00585446 : CMP dword ptr [EBX + 0x44],0xff
+0058544d : JL 0x0058546a
+0058544f : MOV EAX,dword ptr [EBX + 0x30]
+00585452 : ADD EAX,0xc
+00585455 : PUSH 0xb8df18
+0058545a : PUSH EAX
+0058545b : CALL 0x00524f70
+00585460 : ADD ESP,0x8
+00585463 : DEC dword ptr [EBX + 0x44]
+00585466 : POP EBX
+00585467 : RET 0x8
+0058546a : MOV EAX,dword ptr [ESP + 0x8]
+0058546e : MOV ECX,dword ptr [EAX + 0x78]
+00585471 : PUSH EBP
+00585472 : MOV EBP,dword ptr [ESP + 0x10]
+00585476 : PUSH ESI
+00585477 : PUSH EDI
+00585478 : MOV EDI,dword ptr [ECX + 0x288]
+0058547e : PUSH EAX
+0058547f : MOV ECX,EBP
+00585481 : MOV dword ptr [ESP + 0x18],EDI
+00585485 : CALL 0x00526fa0
+0058548a : MOV ESI,EAX
+0058548c : TEST ESI,ESI
+0058548e : JZ 0x00585502
+00585490 : MOV EDX,dword ptr [ESI + 0x10]
+00585493 : MOV EAX,dword ptr [EDX + 0x8]
+00585496 : LEA ECX,[ESI + 0x10]
+00585499 : CALL EAX
+0058549b : CMP EAX,0x7
+0058549e : JNZ 0x00585502
+005854a0 : MOV EAX,dword ptr [ESI + 0x38]
+005854a3 : TEST EAX,EAX
+005854a5 : JZ 0x00585534
+005854ab : MOV EBP,dword ptr [EBX + 0x38]
+005854ae : ADD EAX,EBP
+005854b0 : PUSH EAX
+005854b1 : MOV ECX,EBX
+005854b3 : CALL 0x00585260
+005854b8 : XOR EDI,EDI
+005854ba : CMP dword ptr [ESI + 0x38],EDI
+005854bd : JBE 0x00585534
+005854bf : ADD EBP,EBP
+005854c1 : ADD EBP,EBP
+005854c3 : MOV ECX,dword ptr [ESP + 0x14]
+005854c7 : PUSH 0x0
+005854c9 : PUSH 0x10
+005854cb : CALL 0x00515840
+005854d0 : TEST EAX,EAX
+005854d2 : JZ 0x005854e7
+005854d4 : MOV ECX,dword ptr [ESI + 0x34]
+005854d7 : MOV EDX,dword ptr [ECX + EDI*0x4]
+005854da : LEA ECX,[ECX + EDI*0x4]
+005854dd : PUSH EDX
+005854de : MOV ECX,EAX
+005854e0 : CALL 0x005266c0
+005854e5 : JMP 0x005854e9
+005854e7 : XOR EAX,EAX
+005854e9 : MOV ECX,dword ptr [EBX + 0x34]
+005854ec : MOV dword ptr [ECX + EBP*0x1],EAX
+005854ef : INC EDI
+005854f0 : ADD EBP,0x4
+005854f3 : CMP EDI,dword ptr [ESI + 0x38]
+005854f6 : JC 0x005854c3
+005854f8 : DEC dword ptr [EBX + 0x44]
+005854fb : POP EDI
+005854fc : POP ESI
+005854fd : POP EBP
+005854fe : POP EBX
+005854ff : RET 0x8
+00585502 : PUSH 0x0
+00585504 : PUSH 0x10
+00585506 : MOV ECX,EDI
+00585508 : CALL 0x00515840
+0058550d : TEST EAX,EAX
+0058550f : JZ 0x0058551f
+00585511 : PUSH EBP
+00585512 : MOV ECX,EAX
+00585514 : CALL 0x005266c0
+00585519 : MOV dword ptr [ESP + 0x14],EAX
+0058551d : JMP 0x00585527
+0058551f : MOV dword ptr [ESP + 0x14],0x0
+00585527 : LEA EDX,[ESP + 0x14]
+0058552b : PUSH EDX
+0058552c : LEA ECX,[EBX + 0x34]
+0058552f : CALL 0x00585070
+00585534 : DEC dword ptr [EBX + 0x44]
+00585537 : POP EDI
+00585538 : POP ESI
+00585539 : POP EBP
+0058553a : POP EBX
+0058553b : RET 0x8

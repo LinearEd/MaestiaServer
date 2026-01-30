@@ -1,0 +1,81 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0080ced0
+ENTRY    : 0080ced0
+BODY     : [[0080ced0, 0080cf66]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_0080ced0(void)
+
+{
+  int unaff_EDI;
+  float fVar1;
+  
+  if (*(char *)(unaff_EDI + 0xcd) != '\0') {
+    if (*(char *)(unaff_EDI + 0xcc) == '\x01') {
+      fVar1 = 1.0;
+    }
+    else {
+      fVar1 = -1.0;
+    }
+    if (*(int *)(DAT_00da93ec + 0x74) != 0) {
+      fVar1 = *(float *)(unaff_EDI + 0xd0) + fVar1;
+      if (fVar1 < 23.0) {
+        if (fVar1 < 0.1) {
+          fVar1 = 0.1;
+        }
+      }
+      else {
+        fVar1 = 23.0;
+      }
+      *(float *)(unaff_EDI + 0xd0) = fVar1;
+      FUN_007f2070();
+      if ((23.0 <= *(float *)(unaff_EDI + 0xd0)) || (*(float *)(unaff_EDI + 0xd0) <= 0.1)) {
+        *(undefined1 *)(unaff_EDI + 0xcd) = 0;
+      }
+    }
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0080ced0 : CMP byte ptr [EDI + 0xcd],0x0
+0080ced7 : JZ 0x0080cf66
+0080cedd : CMP byte ptr [EDI + 0xcc],0x1
+0080cee4 : JNZ 0x0080cef0
+0080cee6 : MOVSS XMM1,dword ptr [0x00c10fc4]
+0080ceee : JMP 0x0080cef8
+0080cef0 : MOVSS XMM1,dword ptr [0x00cdf0d0]
+0080cef8 : MOV EAX,[0x00da93ec]
+0080cefd : PUSH ESI
+0080cefe : MOV ESI,dword ptr [EAX + 0x74]
+0080cf01 : TEST ESI,ESI
+0080cf03 : JZ 0x0080cf65
+0080cf05 : MOVSS XMM0,dword ptr [EDI + 0xd0]
+0080cf0d : MOVSS XMM2,dword ptr [0x00cdf0f0]
+0080cf15 : ADDSS XMM0,XMM1
+0080cf19 : MOVSS XMM1,dword ptr [0x00cdf250]
+0080cf21 : COMISS XMM0,XMM1
+0080cf24 : JC 0x0080cf2b
+0080cf26 : MOVAPS XMM0,XMM1
+0080cf29 : JMP 0x0080cf33
+0080cf2b : COMISS XMM2,XMM0
+0080cf2e : JBE 0x0080cf33
+0080cf30 : MOVAPS XMM0,XMM2
+0080cf33 : MOVSS dword ptr [EDI + 0xd0],XMM0
+0080cf3b : CALL 0x007f2070
+0080cf40 : MOVSS XMM0,dword ptr [EDI + 0xd0]
+0080cf48 : COMISS XMM0,dword ptr [0x00cdf250]
+0080cf4f : JNC 0x0080cf5e
+0080cf51 : MOVSS XMM1,dword ptr [0x00cdf0f0]
+0080cf59 : COMISS XMM1,XMM0
+0080cf5c : JC 0x0080cf65
+0080cf5e : MOV byte ptr [EDI + 0xcd],0x0
+0080cf65 : POP ESI
+0080cf66 : RET

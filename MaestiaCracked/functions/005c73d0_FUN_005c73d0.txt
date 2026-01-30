@@ -1,0 +1,85 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005c73d0
+ENTRY    : 005c73d0
+BODY     : [[005c73d0, 005c7433]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_005c73d0(void)
+
+{
+  uint uVar1;
+  undefined4 *puVar2;
+  int in_ECX;
+  uint uVar3;
+  
+  FUN_005c6610();
+  FUN_005684e0();
+  FUN_005684e0();
+  if (*(int *)(in_ECX + 0x60) != 0) {
+    uVar1 = *(uint *)(*(int *)(in_ECX + 0x60) + 4);
+    uVar3 = 0;
+    if (uVar1 != 0) {
+      do {
+        puVar2 = *(undefined4 **)(**(int **)(in_ECX + 0x60) + uVar3 * 4);
+        if (puVar2 != (undefined4 *)0x0) {
+          puVar2[2] = puVar2[2] + 1;
+          if ((puVar2[2] & 0x70000000) != 0) {
+            puVar2[2] = puVar2[2] & 0x8fffffff;
+            (**(code **)*puVar2)(2);
+          }
+        }
+        uVar3 = uVar3 + 1;
+      } while (uVar3 < uVar1);
+    }
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005c73d0 : PUSH EDI
+005c73d1 : MOV EDI,ECX
+005c73d3 : CALL 0x005c6610
+005c73d8 : LEA ECX,[EDI + 0x48]
+005c73db : CALL 0x005684e0
+005c73e0 : LEA ECX,[EDI + 0x54]
+005c73e3 : CALL 0x005684e0
+005c73e8 : MOV EAX,dword ptr [EDI + 0x60]
+005c73eb : TEST EAX,EAX
+005c73ed : JZ 0x005c7432
+005c73ef : PUSH EBX
+005c73f0 : MOV EBX,dword ptr [EAX + 0x4]
+005c73f3 : PUSH ESI
+005c73f4 : XOR ESI,ESI
+005c73f6 : TEST EBX,EBX
+005c73f8 : JBE 0x005c7430
+005c73fa : LEA EBX,[EBX]
+005c7400 : MOV EAX,dword ptr [EDI + 0x60]
+005c7403 : MOV ECX,dword ptr [EAX]
+005c7405 : LEA EAX,[ECX + ESI*0x4]
+005c7408 : MOV ECX,dword ptr [EAX]
+005c740a : TEST ECX,ECX
+005c740c : JZ 0x005c742b
+005c740e : INC dword ptr [ECX + 0x8]
+005c7411 : MOV EAX,dword ptr [ECX + 0x8]
+005c7414 : TEST EAX,0x70000000
+005c7419 : JZ 0x005c742b
+005c741b : MOV EDX,dword ptr [ECX]
+005c741d : AND EAX,0x8fffffff
+005c7422 : MOV dword ptr [ECX + 0x8],EAX
+005c7425 : MOV EAX,dword ptr [EDX]
+005c7427 : PUSH 0x2
+005c7429 : CALL EAX
+005c742b : INC ESI
+005c742c : CMP ESI,EBX
+005c742e : JC 0x005c7400
+005c7430 : POP ESI
+005c7431 : POP EBX
+005c7432 : POP EDI
+005c7433 : RET

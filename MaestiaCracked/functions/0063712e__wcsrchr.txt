@@ -1,0 +1,62 @@
+PROGRAM  : Maestia.exe
+FUNCTION : _wcsrchr
+ENTRY    : 0063712e
+BODY     : [[0063712e, 00637159]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    _wcsrchr
+   
+   Library: Visual Studio 2008 Release */
+
+wchar_t * __cdecl _wcsrchr(wchar_t *_Str,wchar_t _Ch)
+
+{
+  wchar_t wVar1;
+  wchar_t *pwVar2;
+  
+  pwVar2 = _Str;
+  do {
+    wVar1 = *pwVar2;
+    pwVar2 = pwVar2 + 1;
+  } while (wVar1 != L'\0');
+  do {
+    pwVar2 = pwVar2 + -1;
+    if (pwVar2 == _Str) break;
+  } while (*pwVar2 != _Ch);
+  if (*pwVar2 != _Ch) {
+    pwVar2 = (wchar_t *)0x0;
+  }
+  return pwVar2;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0063712e : MOV EDI,EDI
+00637130 : PUSH EBP
+00637131 : MOV EBP,ESP
+00637133 : MOV EAX,dword ptr [EBP + 0x8]
+00637136 : MOV EDX,EAX
+00637138 : MOV CX,word ptr [EAX]
+0063713b : INC EAX
+0063713c : INC EAX
+0063713d : TEST CX,CX
+00637140 : JNZ 0x00637138
+00637142 : MOV CX,word ptr [EBP + 0xc]
+00637146 : DEC EAX
+00637147 : DEC EAX
+00637148 : CMP EAX,EDX
+0063714a : JZ 0x00637151
+0063714c : CMP word ptr [EAX],CX
+0063714f : JNZ 0x00637146
+00637151 : CMP word ptr [EAX],CX
+00637154 : JZ 0x00637158
+00637156 : XOR EAX,EAX
+00637158 : POP EBP
+00637159 : RET

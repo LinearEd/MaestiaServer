@@ -1,0 +1,90 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00a5d800
+ENTRY    : 00a5d800
+BODY     : [[00a5d800, 00a5d867]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+int FUN_00a5d800(int param_1)
+
+{
+  int iVar1;
+  int *piVar2;
+  uint unaff_ESI;
+  int unaff_EDI;
+  
+  if ((unaff_ESI == 0) && (unaff_EDI == 0)) {
+    if ((*(char *)(param_1 + 0x5c) == '\0') ||
+       (iVar1 = param_1 + 0x58,
+       *(int *)(param_1 + 0x80) + *(int *)(param_1 + 0x78) != *(int *)(param_1 + 0x88))) {
+      return 0;
+    }
+  }
+  else {
+    iVar1 = 0;
+    piVar2 = (int *)(param_1 + 0x78);
+    do {
+      if ((char)piVar2[-7] == '\0') break;
+      if (((uint)piVar2[2] <= unaff_ESI) && (unaff_ESI + unaff_EDI <= (uint)(*piVar2 + piVar2[2])))
+      {
+        return iVar1 * 0x54 + 0x58 + param_1;
+      }
+      iVar1 = iVar1 + 1;
+      piVar2 = piVar2 + 0x15;
+    } while (iVar1 < 0x20);
+    iVar1 = 0;
+  }
+  return iVar1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00a5d800 : PUSH EBP
+00a5d801 : MOV EBP,ESP
+00a5d803 : MOV EAX,dword ptr [EBP + 0x8]
+00a5d806 : TEST ESI,ESI
+00a5d808 : JNZ 0x00a5d82b
+00a5d80a : TEST EDI,EDI
+00a5d80c : JNZ 0x00a5d82b
+00a5d80e : CMP byte ptr [EAX + 0x5c],0x0
+00a5d812 : JZ 0x00a5d825
+00a5d814 : MOV ECX,dword ptr [EAX + 0x80]
+00a5d81a : ADD ECX,dword ptr [EAX + 0x78]
+00a5d81d : ADD EAX,0x58
+00a5d820 : CMP ECX,dword ptr [EAX + 0x30]
+00a5d823 : JZ 0x00a5d855
+00a5d825 : XOR EAX,EAX
+00a5d827 : POP EBP
+00a5d828 : RET 0x4
+00a5d82b : XOR EDX,EDX
+00a5d82d : ADD EAX,0x78
+00a5d830 : PUSH EBX
+00a5d831 : CMP byte ptr [EAX + -0x1c],0x0
+00a5d835 : JZ 0x00a5d852
+00a5d837 : MOV ECX,dword ptr [EAX + 0x8]
+00a5d83a : CMP ESI,ECX
+00a5d83c : JC 0x00a5d849
+00a5d83e : MOV EBX,dword ptr [EAX]
+00a5d840 : ADD EBX,ECX
+00a5d842 : LEA ECX,[ESI + EDI*0x1]
+00a5d845 : CMP ECX,EBX
+00a5d847 : JBE 0x00a5d859
+00a5d849 : INC EDX
+00a5d84a : ADD EAX,0x54
+00a5d84d : CMP EDX,0x20
+00a5d850 : JL 0x00a5d831
+00a5d852 : XOR EAX,EAX
+00a5d854 : POP EBX
+00a5d855 : POP EBP
+00a5d856 : RET 0x4
+00a5d859 : MOV EAX,dword ptr [EBP + 0x8]
+00a5d85c : IMUL EDX,EDX,0x54
+00a5d85f : LEA EAX,[EDX + EAX*0x1 + 0x58]
+00a5d863 : POP EBX
+00a5d864 : POP EBP
+00a5d865 : RET 0x4

@@ -1,0 +1,103 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0054bdc0
+ENTRY    : 0054bdc0
+BODY     : [[0054bdc0, 0054be42]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+uint FUN_0054bdc0(void)
+
+{
+  byte bVar1;
+  float fVar2;
+  char cVar3;
+  int iVar4;
+  int in_ECX;
+  uint uVar5;
+  uint uVar6;
+  
+  if ((*(byte *)(in_ECX + 0x143) & 3) != 0) {
+    FUN_00549ad0();
+    *(byte *)(in_ECX + 0x143) = *(byte *)(in_ECX + 0x143) & 0xfc;
+  }
+  iVar4 = FUN_005993d0();
+  fVar2 = (float)iVar4;
+  if (iVar4 < 0) {
+    fVar2 = fVar2 + 4.2949673e+09;
+  }
+  bVar1 = *(byte *)(in_ECX + 0x9c);
+  uVar5 = 0;
+  uVar6 = *(uint *)(in_ECX + 0x3c);
+  while( true ) {
+    if ((*(uint *)(in_ECX + 0x2c) <= uVar6) || ((int)uVar6 < 0)) {
+      return uVar5;
+    }
+    if (((bVar1 >> 2 & 1) == 0) && (cVar3 = FUN_00599410(uVar6,-fVar2), cVar3 == '\0')) break;
+    if (*(uint *)(in_ECX + 0x2c) <= uVar6) {
+      return uVar6;
+    }
+    uVar5 = uVar6;
+    uVar6 = uVar6 + 1;
+  }
+  return uVar5;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0054bdc0 : PUSH ECX
+0054bdc1 : PUSH EBX
+0054bdc2 : PUSH EBP
+0054bdc3 : PUSH ESI
+0054bdc4 : MOV ESI,ECX
+0054bdc6 : TEST byte ptr [ESI + 0x143],0x3
+0054bdcd : PUSH EDI
+0054bdce : JZ 0x0054bddc
+0054bdd0 : CALL 0x00549ad0
+0054bdd5 : AND byte ptr [ESI + 0x143],0xfc
+0054bddc : ADD ESI,0x28
+0054bddf : MOV ECX,ESI
+0054bde1 : CALL 0x005993d0
+0054bde6 : MOV dword ptr [ESP + 0x10],EAX
+0054bdea : FILD dword ptr [ESP + 0x10]
+0054bdee : TEST EAX,EAX
+0054bdf0 : JGE 0x0054bdf8
+0054bdf2 : FADD float ptr [0x00cdf0e0]
+0054bdf8 : MOV BL,byte ptr [ESI + 0x74]
+0054bdfb : FCHS
+0054bdfd : MOV EDI,dword ptr [ESI + 0x14]
+0054be00 : FSTP float ptr [ESP + 0x10]
+0054be04 : SHR BL,0x2
+0054be07 : AND BL,0x1
+0054be0a : XOR EBP,EBP
+0054be0c : LEA ESP,[ESP]
+0054be10 : CMP EDI,dword ptr [ESI + 0x4]
+0054be13 : JNC 0x0054be3b
+0054be15 : TEST EDI,EDI
+0054be17 : JL 0x0054be3b
+0054be19 : TEST BL,BL
+0054be1b : JNZ 0x0054be31
+0054be1d : FLD float ptr [ESP + 0x10]
+0054be21 : PUSH ECX
+0054be22 : FSTP float ptr [ESP]
+0054be25 : PUSH EDI
+0054be26 : MOV ECX,ESI
+0054be28 : CALL 0x00599410
+0054be2d : TEST AL,AL
+0054be2f : JZ 0x0054be3b
+0054be31 : MOV EBP,EDI
+0054be33 : CMP EDI,dword ptr [ESI + 0x4]
+0054be36 : JNC 0x0054be3b
+0054be38 : INC EDI
+0054be39 : JMP 0x0054be10
+0054be3b : POP EDI
+0054be3c : POP ESI
+0054be3d : MOV EAX,EBP
+0054be3f : POP EBP
+0054be40 : POP EBX
+0054be41 : POP ECX
+0054be42 : RET

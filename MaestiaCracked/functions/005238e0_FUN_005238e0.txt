@@ -1,0 +1,80 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005238e0
+ENTRY    : 005238e0
+BODY     : [[005238e0, 0052393f]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+uint FUN_005238e0(uint *param_1,uint param_2)
+
+{
+  int iVar1;
+  uint uVar2;
+  uint uVar3;
+  int *in_ECX;
+  uint *puVar4;
+  
+  iVar1 = *in_ECX;
+  puVar4 = (uint *)(iVar1 + 8 + param_2 * 8);
+  if ((*(int *)(iVar1 + 8 + param_2 * 8) != -2) &&
+     (uVar3 = param_2, ((puVar4[1] >> 6 ^ puVar4[1]) & *(uint *)(iVar1 + 4)) == param_2)) {
+    while( true ) {
+      uVar2 = puVar4[1];
+      if ((((uVar2 >> 6 ^ uVar2) & *(uint *)(iVar1 + 4)) == param_2) && (uVar2 == *param_1)) {
+        return uVar3;
+      }
+      uVar3 = *puVar4;
+      if (uVar3 == 0xffffffff) break;
+      puVar4 = (uint *)(iVar1 + 8 + uVar3 * 8);
+    }
+  }
+  return 0xffffffff;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005238e0 : PUSH EBX
+005238e1 : PUSH EBP
+005238e2 : PUSH ESI
+005238e3 : MOV ESI,dword ptr [ESP + 0x14]
+005238e7 : PUSH EDI
+005238e8 : MOV EDI,dword ptr [ECX]
+005238ea : CMP dword ptr [EDI + ESI*0x8 + 0x8],-0x2
+005238ef : LEA ECX,[EDI + ESI*0x8 + 0x8]
+005238f3 : MOV EAX,ESI
+005238f5 : JZ 0x00523936
+005238f7 : MOV EDX,dword ptr [ECX + 0x4]
+005238fa : MOV EBX,dword ptr [EDI + 0x4]
+005238fd : MOV EBP,EDX
+005238ff : SHR EBP,0x6
+00523902 : XOR EBP,EDX
+00523904 : AND EBP,EBX
+00523906 : CMP EBP,ESI
+00523908 : JNZ 0x00523936
+0052390a : LEA EBX,[EBX]
+00523910 : MOV EDX,dword ptr [ECX + 0x4]
+00523913 : MOV EBP,EDX
+00523915 : SHR EBP,0x6
+00523918 : XOR EBP,EDX
+0052391a : AND EBP,EBX
+0052391c : CMP EBP,ESI
+0052391e : JNZ 0x00523929
+00523920 : MOV EBP,dword ptr [ESP + 0x14]
+00523924 : CMP EDX,dword ptr [EBP]
+00523927 : JZ 0x00523939
+00523929 : MOV EAX,dword ptr [ECX]
+0052392b : CMP EAX,-0x1
+0052392e : JZ 0x00523936
+00523930 : LEA ECX,[EDI + EAX*0x8 + 0x8]
+00523934 : JMP 0x00523910
+00523936 : OR EAX,0xffffffff
+00523939 : POP EDI
+0052393a : POP ESI
+0052393b : POP EBP
+0052393c : POP EBX
+0052393d : RET 0x8

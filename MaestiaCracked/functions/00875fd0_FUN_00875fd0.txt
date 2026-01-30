@@ -1,0 +1,74 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00875fd0
+ENTRY    : 00875fd0
+BODY     : [[00875fd0, 00876036]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00875fd0(void)
+
+{
+  short sVar1;
+  int *piVar2;
+  short in_AX;
+  int unaff_ESI;
+  
+  if (((((in_AX == 0x67) || (in_AX == 0x68)) || (in_AX == 0x69)) ||
+      ((in_AX == 0x6a || (in_AX == 0x6c)))) || (in_AX == 0xda)) {
+    piVar2 = *(int **)(unaff_ESI + 8);
+    sVar1 = *(short *)((int)piVar2 + 0x2a);
+    if ((((sVar1 == 0xcb) || (sVar1 == 0xd6)) || (sVar1 == 0xd5)) &&
+       (piVar2 != *(int **)(unaff_ESI + 0x70))) {
+      (**(code **)(*piVar2 + 0xc))();
+      *(int **)(unaff_ESI + 8) = *(int **)(unaff_ESI + 0x70);
+                    /* WARNING: Could not recover jumptable at 0x00876034. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+      (**(code **)(**(int **)(unaff_ESI + 0x70) + 4))();
+      return;
+    }
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00875fd0 : CMP AX,0x67
+00875fd4 : JZ 0x00875ff8
+00875fd6 : CMP AX,0x68
+00875fda : JZ 0x00875ff8
+00875fdc : CMP AX,0x69
+00875fe0 : JZ 0x00875ff8
+00875fe2 : CMP AX,0x6a
+00875fe6 : JZ 0x00875ff8
+00875fe8 : CMP AX,0x6c
+00875fec : JZ 0x00875ff8
+00875fee : MOV ECX,0xda
+00875ff3 : CMP AX,CX
+00875ff6 : JNZ 0x00876036
+00875ff8 : MOV ECX,dword ptr [ESI + 0x8]
+00875ffb : MOVZX EAX,word ptr [ECX + 0x2a]
+00875fff : MOV EDX,0xcb
+00876004 : CMP AX,DX
+00876007 : JZ 0x0087601d
+00876009 : MOV EDX,0xd6
+0087600e : CMP AX,DX
+00876011 : JZ 0x0087601d
+00876013 : MOV EDX,0xd5
+00876018 : CMP AX,DX
+0087601b : JNZ 0x00876036
+0087601d : CMP ECX,dword ptr [ESI + 0x70]
+00876020 : JZ 0x00876036
+00876022 : MOV EAX,dword ptr [ECX]
+00876024 : MOV EDX,dword ptr [EAX + 0xc]
+00876027 : CALL EDX
+00876029 : MOV ECX,dword ptr [ESI + 0x70]
+0087602c : MOV dword ptr [ESI + 0x8],ECX
+0087602f : MOV EAX,dword ptr [ECX]
+00876031 : MOV EDX,dword ptr [EAX + 0x4]
+00876034 : JMP EDX
+00876036 : RET

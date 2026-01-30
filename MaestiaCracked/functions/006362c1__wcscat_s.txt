@@ -1,0 +1,129 @@
+PROGRAM  : Maestia.exe
+FUNCTION : _wcscat_s
+ENTRY    : 006362c1
+BODY     : [[006362c1, 0063633d]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    _wcscat_s
+   
+   Library: Visual Studio 2008 Release */
+
+errno_t __cdecl _wcscat_s(wchar_t *_Dst,rsize_t _SizeInWords,wchar_t *_Src)
+
+{
+  wchar_t wVar1;
+  int *piVar2;
+  wchar_t *pwVar3;
+  errno_t eVar4;
+  
+  if ((_Dst != (wchar_t *)0x0) && (_SizeInWords != 0)) {
+    pwVar3 = _Dst;
+    if (_Src != (wchar_t *)0x0) {
+      do {
+        if (*pwVar3 == L'\0') break;
+        pwVar3 = pwVar3 + 1;
+        _SizeInWords = _SizeInWords - 1;
+      } while (_SizeInWords != 0);
+      if (_SizeInWords != 0) {
+        do {
+          wVar1 = *_Src;
+          *pwVar3 = wVar1;
+          pwVar3 = pwVar3 + 1;
+          _Src = _Src + 1;
+          if (wVar1 == L'\0') break;
+          _SizeInWords = _SizeInWords - 1;
+        } while (_SizeInWords != 0);
+        if (_SizeInWords != 0) {
+          return 0;
+        }
+        *_Dst = L'\0';
+        piVar2 = __errno();
+        eVar4 = 0x22;
+        *piVar2 = 0x22;
+        goto LAB_006362e3;
+      }
+    }
+    *_Dst = L'\0';
+  }
+  piVar2 = __errno();
+  eVar4 = 0x16;
+  *piVar2 = 0x16;
+LAB_006362e3:
+  __invalid_parameter(0,0,0,0,0);
+  return eVar4;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006362c1 : MOV EDI,EDI
+006362c3 : PUSH EBP
+006362c4 : MOV EBP,ESP
+006362c6 : MOV EDX,dword ptr [EBP + 0x8]
+006362c9 : PUSH EBX
+006362ca : PUSH ESI
+006362cb : PUSH EDI
+006362cc : XOR EDI,EDI
+006362ce : CMP EDX,EDI
+006362d0 : JZ 0x006362d9
+006362d2 : MOV EBX,dword ptr [EBP + 0xc]
+006362d5 : CMP EBX,EDI
+006362d7 : JA 0x006362f7
+006362d9 : CALL 0x0063ab82
+006362de : PUSH 0x16
+006362e0 : POP ESI
+006362e1 : MOV dword ptr [EAX],ESI
+006362e3 : PUSH EDI
+006362e4 : PUSH EDI
+006362e5 : PUSH EDI
+006362e6 : PUSH EDI
+006362e7 : PUSH EDI
+006362e8 : CALL 0x006372b8
+006362ed : ADD ESP,0x14
+006362f0 : MOV EAX,ESI
+006362f2 : POP EDI
+006362f3 : POP ESI
+006362f4 : POP EBX
+006362f5 : POP EBP
+006362f6 : RET
+006362f7 : MOV ESI,dword ptr [EBP + 0x10]
+006362fa : CMP ESI,EDI
+006362fc : JNZ 0x00636305
+006362fe : XOR EAX,EAX
+00636300 : MOV word ptr [EDX],AX
+00636303 : JMP 0x006362d9
+00636305 : MOV ECX,EDX
+00636307 : CMP word ptr [ECX],DI
+0063630a : JZ 0x00636311
+0063630c : INC ECX
+0063630d : INC ECX
+0063630e : DEC EBX
+0063630f : JNZ 0x00636307
+00636311 : CMP EBX,EDI
+00636313 : JZ 0x006362fe
+00636315 : MOVZX EAX,word ptr [ESI]
+00636318 : MOV word ptr [ECX],AX
+0063631b : INC ECX
+0063631c : INC ECX
+0063631d : INC ESI
+0063631e : INC ESI
+0063631f : CMP AX,DI
+00636322 : JZ 0x00636327
+00636324 : DEC EBX
+00636325 : JNZ 0x00636315
+00636327 : XOR EAX,EAX
+00636329 : CMP EBX,EDI
+0063632b : JNZ 0x006362f2
+0063632d : MOV word ptr [EDX],AX
+00636330 : CALL 0x0063ab82
+00636335 : PUSH 0x22
+00636337 : POP ECX
+00636338 : MOV dword ptr [EAX],ECX
+0063633a : MOV ESI,ECX
+0063633c : JMP 0x006362e3

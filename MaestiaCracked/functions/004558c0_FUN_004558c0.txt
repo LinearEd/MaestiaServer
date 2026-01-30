@@ -1,0 +1,116 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_004558c0
+ENTRY    : 004558c0
+BODY     : [[004558c0, 0045599a]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined4 FUN_004558c0(undefined4 *param_1)
+
+{
+  size_t _Size;
+  int iVar1;
+  undefined4 uVar2;
+  uint in_ECX;
+  void *local_c;
+  undefined1 *puStack_8;
+  undefined4 local_4;
+  
+  local_4 = 0xffffffff;
+  puStack_8 = &LAB_00b81d9b;
+  local_c = ExceptionList;
+  ExceptionList = &local_c;
+  if (*(char *)(param_1 + 0x44) == '\0') {
+    *(undefined1 *)(param_1 + 0x44) = 1;
+    iVar1 = FUN_00451af0();
+    local_4 = 0;
+    _Size = *(size_t *)(iVar1 + 4);
+    param_1[3] = _Size;
+    if (*(int *)(iVar1 + 4) != 0) {
+      _memmove(param_1 + 4,(void *)(iVar1 + 8),_Size);
+    }
+    *(undefined1 *)(param_1[3] + 0x10 + (int)param_1) = 0;
+    local_4 = 0xffffffff;
+    if ((uint)param_1[1] < in_ECX) {
+      FUN_00455c80();
+      param_1[1] = in_ECX;
+      uVar2 = FUN_00471930();
+      *param_1 = uVar2;
+    }
+    uVar2 = *param_1;
+  }
+  else {
+    FUN_00807d70("CSharedHeapBlock::Lock(), overlapping tmp buffer requests; likely CCore::UnlockTmpBuffer was not called"
+                 ,DAT_00d66fa0 ^ (uint)&stack0xfffffedc);
+    uVar2 = 0;
+  }
+  ExceptionList = local_c;
+  return uVar2;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+004558c0 : PUSH -0x1
+004558c2 : PUSH 0xb81d9b
+004558c7 : MOV EAX,FS:[0x0]
+004558cd : PUSH EAX
+004558ce : SUB ESP,0x10c
+004558d4 : PUSH EBP
+004558d5 : PUSH ESI
+004558d6 : PUSH EDI
+004558d7 : MOV EAX,[0x00d66fa0]
+004558dc : XOR EAX,ESP
+004558de : PUSH EAX
+004558df : LEA EAX,[ESP + 0x11c]
+004558e6 : MOV FS:[0x0],EAX
+004558ec : MOV EDI,ECX
+004558ee : MOV EBP,dword ptr [ESP + 0x12c]
+004558f5 : XOR ESI,ESI
+004558f7 : CMP byte ptr [EBP + 0x110],0x0
+004558fe : JNZ 0x00455971
+00455900 : LEA ESI,[ESP + 0x10]
+00455904 : MOV byte ptr [EBP + 0x110],0x1
+0045590b : CALL 0x00451af0
+00455910 : MOV dword ptr [ESP + 0x124],0x0
+0045591b : MOV ECX,dword ptr [EAX + 0x4]
+0045591e : MOV dword ptr [EBP + 0xc],ECX
+00455921 : CMP dword ptr [EAX + 0x4],0x0
+00455925 : JBE 0x0045593a
+00455927 : MOV EDX,ECX
+00455929 : PUSH EDX
+0045592a : ADD EAX,0x8
+0045592d : PUSH EAX
+0045592e : LEA EAX,[EBP + 0x10]
+00455931 : PUSH EAX
+00455932 : CALL 0x00636880
+00455937 : ADD ESP,0xc
+0045593a : MOV ECX,dword ptr [EBP + 0xc]
+0045593d : MOV byte ptr [ECX + EBP*0x1 + 0x10],0x0
+00455942 : MOV dword ptr [ESP + 0x124],0xffffffff
+0045594d : MOV dword ptr [ESP + 0x10],0xcd3f48
+00455955 : CMP EDI,dword ptr [EBP + 0x4]
+00455958 : JBE 0x0045596c
+0045595a : MOV ESI,EBP
+0045595c : CALL 0x00455c80
+00455961 : MOV dword ptr [EBP + 0x4],EDI
+00455964 : CALL 0x00471930
+00455969 : MOV dword ptr [EBP],EAX
+0045596c : MOV EAX,dword ptr [EBP]
+0045596f : JMP 0x00455980
+00455971 : PUSH 0xcd4110
+00455976 : CALL 0x00807d70
+0045597b : ADD ESP,0x4
+0045597e : MOV EAX,ESI
+00455980 : MOV ECX,dword ptr [ESP + 0x11c]
+00455987 : MOV dword ptr FS:[0x0],ECX
+0045598e : POP ECX
+0045598f : POP EDI
+00455990 : POP ESI
+00455991 : POP EBP
+00455992 : ADD ESP,0x118
+00455998 : RET 0x4

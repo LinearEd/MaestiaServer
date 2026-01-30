@@ -1,0 +1,88 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005c2180
+ENTRY    : 005c2180
+BODY     : [[005c2180, 005c21fd]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_005c2180(int param_1)
+
+{
+  byte *pbVar1;
+  char cVar2;
+  int iVar3;
+  
+  cVar2 = FUN_00526030(0x23);
+  if (cVar2 == '\0') {
+    FUN_00526050(&DAT_00b8fdec,0,0);
+    return;
+  }
+  if (*(int *)(param_1 + 8) == 0) {
+    iVar3 = 0;
+  }
+  else {
+    iVar3 = *(int *)(param_1 + 8) + -0x10;
+  }
+  iVar3 = *(int *)(iVar3 + 0x38);
+  pbVar1 = *(byte **)(param_1 + 4);
+  if (4 < *pbVar1) {
+    FUN_00526400();
+  }
+  *pbVar1 = 3;
+  *(double *)(pbVar1 + 4) = (double)((iVar3 % 60000) / 1000);
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005c2180 : SUB ESP,0x8
+005c2183 : PUSH ESI
+005c2184 : MOV ESI,dword ptr [ESP + 0x10]
+005c2188 : PUSH 0x23
+005c218a : MOV ECX,ESI
+005c218c : CALL 0x00526030
+005c2191 : TEST AL,AL
+005c2193 : JNZ 0x005c21aa
+005c2195 : PUSH 0x0
+005c2197 : PUSH 0x0
+005c2199 : PUSH 0xb8fdec
+005c219e : MOV ECX,ESI
+005c21a0 : CALL 0x00526050
+005c21a5 : POP ESI
+005c21a6 : ADD ESP,0x8
+005c21a9 : RET
+005c21aa : MOV EAX,dword ptr [ESI + 0x8]
+005c21ad : TEST EAX,EAX
+005c21af : JZ 0x005c21b6
+005c21b1 : ADD EAX,-0x10
+005c21b4 : JMP 0x005c21b8
+005c21b6 : XOR EAX,EAX
+005c21b8 : MOV EAX,dword ptr [EAX + 0x38]
+005c21bb : CDQ
+005c21bc : MOV ECX,0xea60
+005c21c1 : IDIV ECX
+005c21c3 : MOV ESI,dword ptr [ESI + 0x4]
+005c21c6 : MOV EAX,0x10624dd3
+005c21cb : IMUL EDX
+005c21cd : SAR EDX,0x6
+005c21d0 : MOV EAX,EDX
+005c21d2 : SHR EAX,0x1f
+005c21d5 : ADD EAX,EDX
+005c21d7 : CMP byte ptr [ESI],0x5
+005c21da : MOV dword ptr [ESP + 0x4],EAX
+005c21de : FILD dword ptr [ESP + 0x4]
+005c21e2 : FSTP double ptr [ESP + 0x4]
+005c21e6 : JC 0x005c21ef
+005c21e8 : MOV ECX,ESI
+005c21ea : CALL 0x00526400
+005c21ef : FLD double ptr [ESP + 0x4]
+005c21f3 : MOV byte ptr [ESI],0x3
+005c21f6 : FSTP double ptr [ESI + 0x4]
+005c21f9 : POP ESI
+005c21fa : ADD ESP,0x8
+005c21fd : RET

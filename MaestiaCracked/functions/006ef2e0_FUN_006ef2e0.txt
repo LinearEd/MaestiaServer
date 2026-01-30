@@ -1,0 +1,84 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_006ef2e0
+ENTRY    : 006ef2e0
+BODY     : [[006ef2e0, 006ef328] [006ef330, 006ef341]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_006ef2e0(void)
+
+{
+  short sVar1;
+  short *in_EAX;
+  short *psVar2;
+  uint uVar3;
+  uint uVar4;
+  
+  psVar2 = in_EAX;
+  do {
+    sVar1 = *psVar2;
+    psVar2 = psVar2 + 1;
+  } while (sVar1 != 0);
+  if ((uint)((int)psVar2 - (int)(in_EAX + 1) >> 1) < 0x105) {
+    psVar2 = in_EAX;
+    do {
+      sVar1 = *psVar2;
+      psVar2 = psVar2 + 1;
+    } while (sVar1 != 0);
+    uVar4 = (int)psVar2 - (int)(in_EAX + 1) >> 1;
+  }
+  else {
+    uVar4 = 0x104;
+  }
+  uVar3 = 0;
+  if (uVar4 != 0) {
+    do {
+      in_EAX[uVar3] = ~in_EAX[uVar3];
+      uVar3 = uVar3 + 1;
+    } while (uVar3 < uVar4);
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006ef2e0 : MOV ECX,EAX
+006ef2e2 : PUSH ESI
+006ef2e3 : LEA ESI,[ECX + 0x2]
+006ef2e6 : MOV DX,word ptr [ECX]
+006ef2e9 : ADD ECX,0x2
+006ef2ec : TEST DX,DX
+006ef2ef : JNZ 0x006ef2e6
+006ef2f1 : SUB ECX,ESI
+006ef2f3 : SAR ECX,0x1
+006ef2f5 : CMP ECX,0x104
+006ef2fb : JBE 0x006ef304
+006ef2fd : MOV EDX,0x104
+006ef302 : JMP 0x006ef321
+006ef304 : MOV ECX,EAX
+006ef306 : LEA ESI,[ECX + 0x2]
+006ef309 : LEA ESP,[ESP]
+006ef310 : MOV DX,word ptr [ECX]
+006ef313 : ADD ECX,0x2
+006ef316 : TEST DX,DX
+006ef319 : JNZ 0x006ef310
+006ef31b : SUB ECX,ESI
+006ef31d : SAR ECX,0x1
+006ef31f : MOV EDX,ECX
+006ef321 : XOR ECX,ECX
+006ef323 : TEST EDX,EDX
+006ef325 : JBE 0x006ef340
+006ef327 : JMP 0x006ef330
+006ef330 : MOV SI,word ptr [EAX + ECX*0x2]
+006ef334 : NOT SI
+006ef337 : MOV word ptr [EAX + ECX*0x2],SI
+006ef33b : INC ECX
+006ef33c : CMP ECX,EDX
+006ef33e : JC 0x006ef330
+006ef340 : POP ESI
+006ef341 : RET

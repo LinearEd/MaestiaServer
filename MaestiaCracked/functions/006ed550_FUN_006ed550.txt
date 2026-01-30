@@ -1,0 +1,72 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_006ed550
+ENTRY    : 006ed550
+BODY     : [[006ed550, 006ed5c0]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_006ed550(void)
+
+{
+  int iVar1;
+  uint uVar2;
+  int iVar3;
+  int *in_EAX;
+  
+  if ((*(int *)*in_EAX != 0x12345678) || (((int *)*in_EAX)[7] != 0x12345678)) {
+    RaiseException(0xbc614e,0,0,(ULONG_PTR *)0x0);
+  }
+  iVar1 = *(int *)ThreadLocalStoragePointer;
+  uVar2 = *(uint *)(iVar1 + 0x1c);
+  if (uVar2 < 0x80) {
+    *(int *)(iVar1 + 0x2c) = *(int *)(iVar1 + 0x2c) + -1;
+    iVar3 = DAT_01720ef0;
+    if ((DAT_01720ef0 != 0) && (*(uint *)(iVar1 + 0x2c) < 0x40)) {
+      *(undefined4 *)(DAT_01720ef0 + ((uVar2 + 0x20) * 0x40 + *(uint *)(iVar1 + 0x2c)) * 4) = 0;
+    }
+    DAT_01720ef4 = DAT_01720ef4 + 1;
+    *(int *)(iVar3 + 0xa000 + uVar2 * 4) = DAT_01720ef4;
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006ed550 : MOV EAX,dword ptr [EAX]
+006ed552 : CMP dword ptr [EAX],0x12345678
+006ed558 : JNZ 0x006ed563
+006ed55a : CMP dword ptr [EAX + 0x1c],0x12345678
+006ed561 : JZ 0x006ed574
+006ed563 : PUSH 0x0
+006ed565 : PUSH 0x0
+006ed567 : PUSH 0x0
+006ed569 : PUSH 0xbc614e
+006ed56e : CALL dword ptr [0x00b85300]
+006ed574 : MOV ECX,dword ptr FS:[0x2c]
+006ed57b : MOV EAX,dword ptr [ECX]
+006ed57d : MOV EDX,dword ptr [EAX + 0x1c]
+006ed580 : CMP EDX,0x80
+006ed586 : JNC 0x006ed5c0
+006ed588 : DEC dword ptr [EAX + 0x2c]
+006ed58b : MOV ECX,dword ptr [0x01720ef0]
+006ed591 : MOV EAX,dword ptr [EAX + 0x2c]
+006ed594 : TEST ECX,ECX
+006ed596 : JZ 0x006ed5ae
+006ed598 : CMP EAX,0x40
+006ed59b : JNC 0x006ed5ae
+006ed59d : PUSH ESI
+006ed59e : LEA ESI,[EDX + 0x20]
+006ed5a1 : SHL ESI,0x6
+006ed5a4 : ADD ESI,EAX
+006ed5a6 : MOV dword ptr [ECX + ESI*0x4],0x0
+006ed5ad : POP ESI
+006ed5ae : MOV EAX,[0x01720ef4]
+006ed5b3 : INC EAX
+006ed5b4 : MOV [0x01720ef4],EAX
+006ed5b9 : MOV dword ptr [ECX + EDX*0x4 + 0xa000],EAX
+006ed5c0 : RET

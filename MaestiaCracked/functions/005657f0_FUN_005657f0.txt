@@ -1,0 +1,148 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005657f0
+ENTRY    : 005657f0
+BODY     : [[005657f0, 005658d8]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_005657f0(void)
+
+{
+  int iVar1;
+  undefined4 *in_ECX;
+  GRefCountImpl *this;
+  GMutex *this_00;
+  
+  *in_ECX = &PTR_FUN_00b8cbe0;
+  if (in_ECX[8] == 0) {
+    this = (GRefCountImpl *)0x0;
+  }
+  else {
+    this = *(GRefCountImpl **)(in_ECX[8] + 0x78);
+    if (this != (GRefCountImpl *)0x0) {
+      GRefCountImpl::AddRef(this);
+    }
+  }
+  if (in_ECX[8] != 0) {
+    if (*(int *)(in_ECX[8] + 0x74) == 1) {
+      iVar1 = in_ECX[8];
+      this_00 = (GMutex *)(*(int *)(iVar1 + 0x78) + 8);
+      GMutex::Lock(this_00);
+      *(undefined4 *)(iVar1 + 0x74) = 3;
+      GWaitCondition::NotifyAll((GWaitCondition *)(*(int *)(iVar1 + 0x78) + 0x1c));
+      GMutex::Unlock(this_00);
+    }
+    if ((GRefCountImpl *)in_ECX[8] != (GRefCountImpl *)0x0) {
+      GRefCountImpl::Release((GRefCountImpl *)in_ECX[8]);
+    }
+    in_ECX[8] = 0;
+  }
+  iVar1 = in_ECX[0xc];
+  if (iVar1 != 0) {
+    FUN_005a2e40();
+    FUN_00515cf0(iVar1);
+  }
+  if ((GRefCountNTSImpl *)in_ECX[7] != (GRefCountNTSImpl *)0x0) {
+    GRefCountNTSImpl::Release((GRefCountNTSImpl *)in_ECX[7]);
+  }
+  in_ECX[7] = 0;
+  if (this != (GRefCountImpl *)0x0) {
+    GMutex::Lock((GMutex *)(this + 8));
+    this[0x20] = (GRefCountImpl)0x1;
+    GWaitCondition::NotifyAll((GWaitCondition *)(this + 0x1c));
+    GMutex::Unlock((GMutex *)(this + 8));
+    GRefCountImpl::Release(this);
+  }
+  if ((GRefCountImpl *)in_ECX[8] != (GRefCountImpl *)0x0) {
+    GRefCountImpl::Release((GRefCountImpl *)in_ECX[8]);
+  }
+  if ((GRefCountNTSImpl *)in_ECX[7] != (GRefCountNTSImpl *)0x0) {
+    GRefCountNTSImpl::Release((GRefCountNTSImpl *)in_ECX[7]);
+  }
+  FUN_00513bd0();
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005657f0 : PUSH EBP
+005657f1 : PUSH ESI
+005657f2 : MOV ESI,ECX
+005657f4 : MOV EAX,dword ptr [ESI + 0x20]
+005657f7 : PUSH EDI
+005657f8 : MOV dword ptr [ESI],0xb8cbe0
+005657fe : TEST EAX,EAX
+00565800 : JZ 0x005658d2
+00565806 : MOV EBP,dword ptr [EAX + 0x78]
+00565809 : TEST EBP,EBP
+0056580b : JZ 0x00565814
+0056580d : MOV ECX,EBP
+0056580f : CALL 0x00523dd0
+00565814 : MOV EAX,dword ptr [ESI + 0x20]
+00565817 : TEST EAX,EAX
+00565819 : JZ 0x00565861
+0056581b : MOV EAX,dword ptr [EAX + 0x74]
+0056581e : CMP EAX,0x1
+00565821 : JNZ 0x0056584e
+00565823 : PUSH EBX
+00565824 : MOV EBX,dword ptr [ESI + 0x20]
+00565827 : MOV EDI,dword ptr [EBX + 0x78]
+0056582a : ADD EDI,0x8
+0056582d : MOV ECX,EDI
+0056582f : CALL 0x005162b0
+00565834 : MOV ECX,dword ptr [EBX + 0x78]
+00565837 : ADD ECX,0x1c
+0056583a : MOV dword ptr [EBX + 0x74],0x3
+00565841 : CALL 0x00516460
+00565846 : MOV ECX,EDI
+00565848 : CALL 0x005170a0
+0056584d : POP EBX
+0056584e : MOV ECX,dword ptr [ESI + 0x20]
+00565851 : TEST ECX,ECX
+00565853 : JZ 0x0056585a
+00565855 : CALL 0x004ff7e0
+0056585a : MOV dword ptr [ESI + 0x20],0x0
+00565861 : MOV EDI,dword ptr [ESI + 0x30]
+00565864 : TEST EDI,EDI
+00565866 : JZ 0x00565875
+00565868 : MOV ECX,EDI
+0056586a : CALL 0x005a2e40
+0056586f : PUSH EDI
+00565870 : CALL 0x00515cf0
+00565875 : MOV ECX,dword ptr [ESI + 0x1c]
+00565878 : TEST ECX,ECX
+0056587a : JZ 0x00565881
+0056587c : CALL 0x004ff7c0
+00565881 : MOV dword ptr [ESI + 0x1c],0x0
+00565888 : TEST EBP,EBP
+0056588a : JZ 0x005658b0
+0056588c : LEA EDI,[EBP + 0x8]
+0056588f : MOV ECX,EDI
+00565891 : CALL 0x005162b0
+00565896 : LEA ECX,[EBP + 0x1c]
+00565899 : MOV byte ptr [EBP + 0x20],0x1
+0056589d : CALL 0x00516460
+005658a2 : MOV ECX,EDI
+005658a4 : CALL 0x005170a0
+005658a9 : MOV ECX,EBP
+005658ab : CALL 0x004ff7e0
+005658b0 : MOV ECX,dword ptr [ESI + 0x20]
+005658b3 : TEST ECX,ECX
+005658b5 : JZ 0x005658bc
+005658b7 : CALL 0x004ff7e0
+005658bc : MOV ECX,dword ptr [ESI + 0x1c]
+005658bf : TEST ECX,ECX
+005658c1 : JZ 0x005658c8
+005658c3 : CALL 0x004ff7c0
+005658c8 : POP EDI
+005658c9 : MOV ECX,ESI
+005658cb : POP ESI
+005658cc : POP EBP
+005658cd : JMP 0x00513bd0
+005658d2 : XOR EBP,EBP
+005658d4 : JMP 0x00565814

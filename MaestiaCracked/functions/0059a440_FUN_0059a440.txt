@@ -1,0 +1,89 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0059a440
+ENTRY    : 0059a440
+BODY     : [[0059a440, 0059a4a8]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_0059a440(void)
+
+{
+  int iVar1;
+  uint uVar2;
+  uint *in_ECX;
+  int iVar3;
+  uint uVar4;
+  
+  if ((*in_ECX >> 0x1e & 1) != 0) {
+    iVar1 = (int)in_ECX + 0x1e;
+    iVar3 = (int)in_ECX + 0x1e;
+    if ((int)*in_ECX < 0) {
+      uVar4 = (uint)(byte)in_ECX[7];
+      uVar2 = (uint)(byte)in_ECX[7];
+    }
+    else {
+      iVar1 = (int)in_ECX + 0x2a;
+      uVar4 = in_ECX[1];
+      uVar2 = in_ECX[1];
+      iVar3 = (int)in_ECX + 0x2a;
+    }
+    FUN_0059a360(iVar1,uVar4,iVar3 + 3 + uVar2 * 8 & 0xfffffffc);
+    if ((int)*in_ECX < 0) {
+      *(undefined1 *)(in_ECX + 7) = 0;
+      return;
+    }
+    in_ECX[1] = 0;
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0059a440 : PUSH ESI
+0059a441 : MOV ESI,ECX
+0059a443 : MOV EAX,dword ptr [ESI]
+0059a445 : MOV ECX,EAX
+0059a447 : SHR ECX,0x1e
+0059a44a : TEST CL,0x1
+0059a44d : JZ 0x0059a4a7
+0059a44f : SHR EAX,0x1f
+0059a452 : AND AL,0x1
+0059a454 : PUSH EDI
+0059a455 : LEA EDI,[ESI + 0x1e]
+0059a458 : JNZ 0x0059a45d
+0059a45a : LEA EDI,[ESI + 0x2a]
+0059a45d : TEST AL,AL
+0059a45f : JZ 0x0059a467
+0059a461 : MOVZX EDX,byte ptr [ESI + 0x1c]
+0059a465 : JMP 0x0059a46a
+0059a467 : MOV EDX,dword ptr [ESI + 0x4]
+0059a46a : LEA ECX,[ESI + 0x1e]
+0059a46d : TEST AL,AL
+0059a46f : JNZ 0x0059a49a
+0059a471 : MOV EAX,dword ptr [ESI + 0x4]
+0059a474 : LEA ECX,[ESI + 0x2a]
+0059a477 : LEA EAX,[ECX + EAX*0x8 + 0x3]
+0059a47b : AND EAX,0xfffffffc
+0059a47e : PUSH EAX
+0059a47f : PUSH EDX
+0059a480 : PUSH EDI
+0059a481 : CALL 0x0059a360
+0059a486 : MOV ECX,dword ptr [ESI]
+0059a488 : ADD ESP,0xc
+0059a48b : SHR ECX,0x1f
+0059a48e : POP EDI
+0059a48f : TEST CL,0x1
+0059a492 : JZ 0x0059a4a0
+0059a494 : MOV byte ptr [ESI + 0x1c],0x0
+0059a498 : POP ESI
+0059a499 : RET
+0059a49a : MOVZX EAX,byte ptr [ESI + 0x1c]
+0059a49e : JMP 0x0059a477
+0059a4a0 : MOV dword ptr [ESI + 0x4],0x0
+0059a4a7 : POP ESI
+0059a4a8 : RET

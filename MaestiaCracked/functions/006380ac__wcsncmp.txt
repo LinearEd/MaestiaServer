@@ -1,0 +1,59 @@
+PROGRAM  : Maestia.exe
+FUNCTION : _wcsncmp
+ENTRY    : 006380ac
+BODY     : [[006380ac, 006380e2]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    _wcsncmp
+   
+   Library: Visual Studio 2008 Release */
+
+int __cdecl _wcsncmp(wchar_t *_Str1,wchar_t *_Str2,size_t _MaxCount)
+
+{
+  if (_MaxCount != 0) {
+    for (; ((_MaxCount = _MaxCount - 1, _MaxCount != 0 && (*_Str1 != L'\0')) && (*_Str1 == *_Str2));
+        _Str1 = _Str1 + 1) {
+      _Str2 = _Str2 + 1;
+    }
+    return (uint)(ushort)*_Str1 - (uint)(ushort)*_Str2;
+  }
+  return 0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006380ac : MOV EDI,EDI
+006380ae : PUSH EBP
+006380af : MOV EBP,ESP
+006380b1 : CMP dword ptr [EBP + 0x10],0x0
+006380b5 : JNZ 0x006380bb
+006380b7 : XOR EAX,EAX
+006380b9 : POP EBP
+006380ba : RET
+006380bb : MOV EDX,dword ptr [EBP + 0xc]
+006380be : MOV ECX,dword ptr [EBP + 0x8]
+006380c1 : DEC dword ptr [EBP + 0x10]
+006380c4 : JZ 0x006380d9
+006380c6 : MOVZX EAX,word ptr [ECX]
+006380c9 : TEST AX,AX
+006380cc : JZ 0x006380d9
+006380ce : CMP AX,word ptr [EDX]
+006380d1 : JNZ 0x006380d9
+006380d3 : INC ECX
+006380d4 : INC ECX
+006380d5 : INC EDX
+006380d6 : INC EDX
+006380d7 : JMP 0x006380c1
+006380d9 : MOVZX EAX,word ptr [ECX]
+006380dc : MOVZX ECX,word ptr [EDX]
+006380df : SUB EAX,ECX
+006380e1 : POP EBP
+006380e2 : RET

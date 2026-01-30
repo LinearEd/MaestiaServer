@@ -1,0 +1,99 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005174c0
+ENTRY    : 005174c0
+BODY     : [[005174c0, 0051754e]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+int FUN_005174c0(int *param_1)
+
+{
+  HANDLE pvVar1;
+  int iVar2;
+  DWORD DVar3;
+  DWORD_PTR dwThreadAffinityMask;
+  
+  dwThreadAffinityMask = param_1[9];
+  if (dwThreadAffinityMask != 0xffffffff) {
+    pvVar1 = GetCurrentThread();
+    SetThreadAffinityMask(pvVar1,dwThreadAffinityMask);
+  }
+  iVar2 = FUN_00516490(param_1[10]);
+  pvVar1 = GetCurrentThread();
+  SetThreadPriority(pvVar1,iVar2);
+  if ((param_1[6] & 8U) != 0) {
+    if ((param_1[6] & 1U) != 0) {
+      DVar3 = SuspendThread((HANDLE)param_1[0xb]);
+      if (DVar3 != 0xffffffff) {
+        InterlockedExchangeAdd(param_1 + 7,1);
+      }
+    }
+    FUN_00516e60(0xfffffff7);
+  }
+  iVar2 = (**(code **)(*param_1 + 0xc))();
+  param_1[0xc] = iVar2;
+  FUN_005171f0();
+  FUN_00517410(param_1);
+  return iVar2;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005174c0 : PUSH ESI
+005174c1 : MOV ESI,dword ptr [ESP + 0x8]
+005174c5 : MOV EAX,dword ptr [ESI + 0x24]
+005174c8 : PUSH EDI
+005174c9 : MOV EDI,dword ptr [0x00b8518c]
+005174cf : CMP EAX,-0x1
+005174d2 : JZ 0x005174de
+005174d4 : PUSH EAX
+005174d5 : CALL EDI
+005174d7 : PUSH EAX
+005174d8 : CALL dword ptr [0x00b85244]
+005174de : MOV EAX,dword ptr [ESI + 0x28]
+005174e1 : PUSH EAX
+005174e2 : CALL 0x00516490
+005174e7 : ADD ESP,0x4
+005174ea : PUSH EAX
+005174eb : CALL EDI
+005174ed : PUSH EAX
+005174ee : CALL dword ptr [0x00b85210]
+005174f4 : MOV ECX,dword ptr [ESI + 0x18]
+005174f7 : LEA EDI,[ESI + 0x18]
+005174fa : TEST CL,0x8
+005174fd : JZ 0x0051752a
+005174ff : MOV EDX,dword ptr [EDI]
+00517501 : TEST DL,0x1
+00517504 : JZ 0x00517521
+00517506 : MOV EAX,dword ptr [ESI + 0x2c]
+00517509 : PUSH EAX
+0051750a : CALL dword ptr [0x00b85240]
+00517510 : CMP EAX,-0x1
+00517513 : JZ 0x00517521
+00517515 : PUSH 0x1
+00517517 : LEA ECX,[ESI + 0x1c]
+0051751a : PUSH ECX
+0051751b : CALL dword ptr [0x00b851cc]
+00517521 : PUSH -0x9
+00517523 : MOV ECX,EDI
+00517525 : CALL 0x00516e60
+0051752a : MOV EDX,dword ptr [ESI]
+0051752c : MOV EAX,dword ptr [EDX + 0xc]
+0051752f : MOV ECX,ESI
+00517531 : CALL EAX
+00517533 : MOV EDI,EAX
+00517535 : MOV ECX,ESI
+00517537 : MOV dword ptr [ESI + 0x30],EDI
+0051753a : CALL 0x005171f0
+0051753f : PUSH ESI
+00517540 : CALL 0x00517410
+00517545 : ADD ESP,0x4
+00517548 : MOV EAX,EDI
+0051754a : POP EDI
+0051754b : POP ESI
+0051754c : RET 0x4

@@ -1,0 +1,125 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __cropzeros_l
+ENTRY    : 00656289
+BODY     : [[00656289, 0065630a]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __cropzeros_l
+   
+   Libraries: Visual Studio 2008 Release, Visual Studio 2010 Release */
+
+void __cdecl __cropzeros_l(char *_Buf,_locale_t _Locale)
+
+{
+  char *pcVar1;
+  char cVar3;
+  int local_14 [2];
+  int local_c;
+  char local_8;
+  char *pcVar2;
+  
+  _LocaleUpdate::_LocaleUpdate((_LocaleUpdate *)local_14,_Locale);
+  cVar3 = *_Buf;
+  if (cVar3 != '\0') {
+    do {
+      if (cVar3 == *(char *)**(undefined4 **)(local_14[0] + 0xbc)) break;
+      _Buf = _Buf + 1;
+      cVar3 = *_Buf;
+    } while (cVar3 != '\0');
+  }
+  if (*_Buf != '\0') {
+    do {
+      _Buf = _Buf + 1;
+      cVar3 = *_Buf;
+      pcVar1 = _Buf;
+      if ((cVar3 == '\0') || (cVar3 == 'e')) break;
+    } while (cVar3 != 'E');
+    do {
+      pcVar2 = pcVar1;
+      pcVar1 = pcVar2 + -1;
+    } while (*pcVar1 == '0');
+    if (*pcVar1 == *(char *)**(undefined4 **)(local_14[0] + 0xbc)) {
+      pcVar1 = pcVar2 + -2;
+    }
+    do {
+      cVar3 = *_Buf;
+      pcVar1 = pcVar1 + 1;
+      _Buf = _Buf + 1;
+      *pcVar1 = cVar3;
+    } while (cVar3 != '\0');
+  }
+  if (local_8 != '\0') {
+    *(uint *)(local_c + 0x70) = *(uint *)(local_c + 0x70) & 0xfffffffd;
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00656289 : MOV EDI,EDI
+0065628b : PUSH EBP
+0065628c : MOV EBP,ESP
+0065628e : SUB ESP,0x10
+00656291 : PUSH ESI
+00656292 : PUSH dword ptr [EBP + 0xc]
+00656295 : LEA ECX,[EBP + -0x10]
+00656298 : CALL 0x00637880
+0065629d : MOV EAX,dword ptr [EBP + 0x8]
+006562a0 : MOV CL,byte ptr [EAX]
+006562a2 : MOV ESI,dword ptr [EBP + -0x10]
+006562a5 : TEST CL,CL
+006562a7 : JZ 0x006562be
+006562a9 : MOV EDX,dword ptr [ESI + 0xbc]
+006562af : MOV EDX,dword ptr [EDX]
+006562b1 : MOV DL,byte ptr [EDX]
+006562b3 : CMP CL,DL
+006562b5 : JZ 0x006562be
+006562b7 : INC EAX
+006562b8 : MOV CL,byte ptr [EAX]
+006562ba : TEST CL,CL
+006562bc : JNZ 0x006562b3
+006562be : MOV CL,byte ptr [EAX]
+006562c0 : INC EAX
+006562c1 : TEST CL,CL
+006562c3 : JZ 0x006562fb
+006562c5 : JMP 0x006562d2
+006562c7 : CMP CL,0x65
+006562ca : JZ 0x006562d8
+006562cc : CMP CL,0x45
+006562cf : JZ 0x006562d8
+006562d1 : INC EAX
+006562d2 : MOV CL,byte ptr [EAX]
+006562d4 : TEST CL,CL
+006562d6 : JNZ 0x006562c7
+006562d8 : MOV EDX,EAX
+006562da : DEC EAX
+006562db : CMP byte ptr [EAX],0x30
+006562de : JZ 0x006562da
+006562e0 : MOV ECX,dword ptr [ESI + 0xbc]
+006562e6 : MOV ECX,dword ptr [ECX]
+006562e8 : PUSH EBX
+006562e9 : MOV BL,byte ptr [EAX]
+006562eb : CMP BL,byte ptr [ECX]
+006562ed : POP EBX
+006562ee : JNZ 0x006562f1
+006562f0 : DEC EAX
+006562f1 : MOV CL,byte ptr [EDX]
+006562f3 : INC EAX
+006562f4 : INC EDX
+006562f5 : MOV byte ptr [EAX],CL
+006562f7 : TEST CL,CL
+006562f9 : JNZ 0x006562f1
+006562fb : CMP byte ptr [EBP + -0x4],0x0
+006562ff : POP ESI
+00656300 : JZ 0x00656309
+00656302 : MOV EAX,dword ptr [EBP + -0x8]
+00656305 : AND dword ptr [EAX + 0x70],0xfffffffd
+00656309 : LEAVE
+0065630a : RET

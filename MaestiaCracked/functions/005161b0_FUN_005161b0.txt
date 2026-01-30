@@ -1,0 +1,83 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005161b0
+ENTRY    : 005161b0
+BODY     : [[005161b0, 00516232]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined4 FUN_005161b0(undefined4 *param_1)
+
+{
+  LPCRITICAL_SECTION lpCriticalSection;
+  int iVar1;
+  undefined4 *puVar2;
+  undefined4 local_20 [6];
+  undefined4 local_8;
+  
+  if (DAT_00d7324c == 0) {
+    return 0;
+  }
+  lpCriticalSection = (LPCRITICAL_SECTION)(DAT_00d7324c + 0x2c4);
+  puVar2 = (undefined4 *)&stack0xffffffdc;
+  EnterCriticalSection(lpCriticalSection);
+  if (DAT_00d73250 != 0) {
+    LeaveCriticalSection(lpCriticalSection);
+    return 0;
+  }
+  for (iVar1 = 8; puVar2 = puVar2 + 1, iVar1 != 0; iVar1 = iVar1 + -1) {
+    *puVar2 = *param_1;
+    param_1 = param_1 + 1;
+  }
+  local_8 = 1;
+  DAT_00d73250 = FUN_00515f50("Global",0,local_20);
+  LeaveCriticalSection(lpCriticalSection);
+  return DAT_00d73250;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005161b0 : MOV EAX,[0x00d7324c]
+005161b5 : SUB ESP,0x20
+005161b8 : TEST EAX,EAX
+005161ba : JNZ 0x005161c2
+005161bc : ADD ESP,0x20
+005161bf : RET 0x4
+005161c2 : PUSH EBX
+005161c3 : LEA EBX,[EAX + 0x2c4]
+005161c9 : PUSH EBX
+005161ca : CALL dword ptr [0x00b85118]
+005161d0 : CMP dword ptr [0x00d73250],0x0
+005161d7 : JZ 0x005161e9
+005161d9 : PUSH EBX
+005161da : CALL dword ptr [0x00b8511c]
+005161e0 : XOR EAX,EAX
+005161e2 : POP EBX
+005161e3 : ADD ESP,0x20
+005161e6 : RET 0x4
+005161e9 : PUSH ESI
+005161ea : MOV ESI,dword ptr [ESP + 0x2c]
+005161ee : PUSH EDI
+005161ef : LEA EAX,[ESP + 0xc]
+005161f3 : PUSH EAX
+005161f4 : MOV ECX,0x8
+005161f9 : LEA EDI,[ESP + 0x10]
+005161fd : MOVSD.REP ES:EDI,ESI
+005161ff : MOV ECX,dword ptr [0x00d7324c]
+00516205 : PUSH 0x0
+00516207 : PUSH 0xb870fc
+0051620c : MOV dword ptr [ESP + 0x30],0x1
+00516214 : CALL 0x00515f50
+00516219 : PUSH EBX
+0051621a : MOV [0x00d73250],EAX
+0051621f : CALL dword ptr [0x00b8511c]
+00516225 : MOV EAX,[0x00d73250]
+0051622a : POP EDI
+0051622b : POP ESI
+0051622c : POP EBX
+0051622d : ADD ESP,0x20
+00516230 : RET 0x4

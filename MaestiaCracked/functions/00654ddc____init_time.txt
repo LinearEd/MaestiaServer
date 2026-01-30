@@ -1,0 +1,103 @@
+PROGRAM  : Maestia.exe
+FUNCTION : ___init_time
+ENTRY    : 00654ddc
+BODY     : [[00654ddc, 00654e54]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    ___init_time
+   
+   Library: Visual Studio 2008 Release */
+
+int __cdecl ___init_time(threadlocinfo *_LocInfo)
+
+{
+  undefined **ppuVar1;
+  undefined **_Memory;
+  int iVar2;
+  int **ppiVar3;
+  
+  if (_LocInfo->lc_category[1].locale == (char *)0x0) {
+    _Memory = &PTR_PTR_00d673e0;
+LAB_00654e34:
+    ppiVar3 = &_LocInfo[1].lc_category[0].wrefcount;
+    ppuVar1 = (undefined **)*ppiVar3;
+    if (ppuVar1 != &PTR_PTR_00d673e0) {
+      InterlockedDecrement((LONG *)(ppuVar1 + 0x2d));
+    }
+    *ppiVar3 = (int *)_Memory;
+    iVar2 = 0;
+  }
+  else {
+    _Memory = __calloc_crt(1,0xb8);
+    if (_Memory != (undefined **)0x0) {
+      iVar2 = __get_lc_time();
+      if (iVar2 == 0) {
+        _Memory[0x2d] = (undefined *)0x1;
+        goto LAB_00654e34;
+      }
+      ___free_lc_time(_Memory);
+      _free(_Memory);
+    }
+    iVar2 = 1;
+  }
+  return iVar2;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00654ddc : MOV EDI,EDI
+00654dde : PUSH EBP
+00654ddf : MOV EBP,ESP
+00654de1 : PUSH EBX
+00654de2 : PUSH ESI
+00654de3 : PUSH EDI
+00654de4 : MOV EDI,dword ptr [EBP + 0x8]
+00654de7 : CMP dword ptr [EDI + 0x20],0x0
+00654deb : MOV EBX,0xd673e0
+00654df0 : JZ 0x00654e32
+00654df2 : PUSH 0xb8
+00654df7 : PUSH 0x1
+00654df9 : CALL 0x006425a4
+00654dfe : MOV ESI,EAX
+00654e00 : POP ECX
+00654e01 : POP ECX
+00654e02 : TEST ESI,ESI
+00654e04 : JNZ 0x00654e0b
+00654e06 : XOR EAX,EAX
+00654e08 : INC EAX
+00654e09 : JMP 0x00654e50
+00654e0b : MOV EAX,EDI
+00654e0d : CALL 0x0065482c
+00654e12 : TEST EAX,EAX
+00654e14 : JZ 0x00654e26
+00654e16 : PUSH ESI
+00654e17 : CALL 0x00654c47
+00654e1c : PUSH ESI
+00654e1d : CALL 0x0063610d
+00654e22 : POP ECX
+00654e23 : POP ECX
+00654e24 : JMP 0x00654e06
+00654e26 : MOV dword ptr [ESI + 0xb4],0x1
+00654e30 : JMP 0x00654e34
+00654e32 : MOV ESI,EBX
+00654e34 : ADD EDI,0xd4
+00654e3a : MOV EAX,dword ptr [EDI]
+00654e3c : CMP EAX,EBX
+00654e3e : JZ 0x00654e4c
+00654e40 : ADD EAX,0xb4
+00654e45 : PUSH EAX
+00654e46 : CALL dword ptr [0x00b851b0]
+00654e4c : MOV dword ptr [EDI],ESI
+00654e4e : XOR EAX,EAX
+00654e50 : POP EDI
+00654e51 : POP ESI
+00654e52 : POP EBX
+00654e53 : POP EBP
+00654e54 : RET

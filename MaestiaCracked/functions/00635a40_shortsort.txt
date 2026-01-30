@@ -1,0 +1,110 @@
+PROGRAM  : Maestia.exe
+FUNCTION : shortsort
+ENTRY    : 00635a40
+BODY     : [[00635a40, 00635a5c] [00635a60, 00635a9c] [00635aa0, 00635ac2]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    _shortsort
+   
+   Library: Visual Studio 2008 Release */
+
+void __cdecl shortsort(undefined1 *param_1,int param_2,code *param_3)
+
+{
+  undefined1 uVar1;
+  undefined1 *puVar2;
+  undefined1 *in_EAX;
+  int iVar3;
+  undefined1 *puVar4;
+  
+  for (; puVar2 = param_1, puVar4 = param_1, param_1 < in_EAX; in_EAX = in_EAX + -param_2) {
+    while (puVar4 = puVar4 + param_2, puVar4 <= in_EAX) {
+      iVar3 = (*param_3)(puVar4,puVar2);
+      if (0 < iVar3) {
+        puVar2 = puVar4;
+      }
+    }
+    if ((puVar2 != in_EAX) && (param_2 != 0)) {
+      puVar4 = in_EAX;
+      iVar3 = param_2;
+      do {
+        uVar1 = puVar4[(int)puVar2 - (int)in_EAX];
+        puVar4[(int)puVar2 - (int)in_EAX] = *puVar4;
+        iVar3 = iVar3 + -1;
+        *puVar4 = uVar1;
+        puVar4 = puVar4 + 1;
+      } while (iVar3 != 0);
+    }
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00635a40 : MOV EDI,EDI
+00635a42 : PUSH EBP
+00635a43 : MOV EBP,ESP
+00635a45 : PUSH ECX
+00635a46 : MOV EDX,dword ptr [EBP + 0x8]
+00635a49 : PUSH EDI
+00635a4a : MOV EDI,EAX
+00635a4c : CMP EDI,EDX
+00635a4e : JBE 0x00635abe
+00635a50 : MOV ECX,dword ptr [EBP + 0xc]
+00635a53 : LEA EAX,[EDX + ECX*0x1]
+00635a56 : PUSH EBX
+00635a57 : MOV dword ptr [EBP + -0x4],EAX
+00635a5a : PUSH ESI
+00635a5b : JMP 0x00635a60
+00635a60 : MOV ESI,dword ptr [EBP + -0x4]
+00635a63 : MOV EBX,EDX
+00635a65 : CMP ESI,EDI
+00635a67 : JA 0x00635a8b
+00635a69 : LEA ESP,[ESP]
+00635a70 : PUSH EBX
+00635a71 : PUSH ESI
+00635a72 : CALL dword ptr [EBP + 0x10]
+00635a75 : ADD ESP,0x8
+00635a78 : TEST EAX,EAX
+00635a7a : JLE 0x00635a7e
+00635a7c : MOV EBX,ESI
+00635a7e : ADD ESI,dword ptr [EBP + 0xc]
+00635a81 : CMP ESI,EDI
+00635a83 : JBE 0x00635a70
+00635a85 : MOV ECX,dword ptr [EBP + 0xc]
+00635a88 : MOV EDX,dword ptr [EBP + 0x8]
+00635a8b : MOV ESI,ECX
+00635a8d : MOV EAX,EDI
+00635a8f : CMP EBX,EDI
+00635a91 : JZ 0x00635ab6
+00635a93 : TEST ECX,ECX
+00635a95 : JZ 0x00635ab6
+00635a97 : MOV ECX,EBX
+00635a99 : SUB ECX,EDI
+00635a9b : JMP 0x00635aa0
+00635aa0 : MOV BL,byte ptr [EAX]
+00635aa2 : MOV DL,byte ptr [ECX + EAX*0x1]
+00635aa5 : MOV byte ptr [ECX + EAX*0x1],BL
+00635aa8 : DEC ESI
+00635aa9 : MOV byte ptr [EAX],DL
+00635aab : INC EAX
+00635aac : TEST ESI,ESI
+00635aae : JNZ 0x00635aa0
+00635ab0 : MOV ECX,dword ptr [EBP + 0xc]
+00635ab3 : MOV EDX,dword ptr [EBP + 0x8]
+00635ab6 : SUB EDI,ECX
+00635ab8 : CMP EDI,EDX
+00635aba : JA 0x00635a60
+00635abc : POP ESI
+00635abd : POP EBX
+00635abe : POP EDI
+00635abf : MOV ESP,EBP
+00635ac1 : POP EBP
+00635ac2 : RET

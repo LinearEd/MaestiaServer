@@ -1,0 +1,176 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00564570
+ENTRY    : 00564570
+BODY     : [[00564570, 00564685]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined1 FUN_00564570(undefined4 param_1,char *param_2,int *param_3,char param_4)
+
+{
+  bool bVar1;
+  char *pcVar2;
+  char cVar3;
+  int iVar4;
+  LONG LVar5;
+  char *pcVar6;
+  undefined1 uVar7;
+  float10 fVar8;
+  char *local_c;
+  uint local_8;
+  
+  pcVar2 = param_2;
+  if ((param_2 == (char *)0x0) || (cVar3 = *param_2, cVar3 == '\0')) {
+    return 0;
+  }
+  if (param_4 != '\0') {
+    bVar1 = false;
+    pcVar6 = param_2;
+    do {
+      if ((byte)(cVar3 - 0x30U) < 10) {
+        bVar1 = true;
+      }
+      else if ((((cVar3 != '+') && (cVar3 != '-')) || (bVar1)) &&
+              ((cVar3 != ' ' && (cVar3 != '\t')))) break;
+      cVar3 = pcVar6[1];
+      pcVar6 = pcVar6 + 1;
+      if (cVar3 == '\0') {
+        local_c = (char *)0x0;
+        fVar8 = (float10)FUN_0051ca10(param_2,&local_c);
+        local_8 = (uint)(longlong)ROUND(fVar8);
+        if ((local_c != pcVar2) && (*local_c == '\0')) {
+          *param_3 = local_8 + -1;
+          return 1;
+        }
+        return 0;
+      }
+    } while( true );
+  }
+  param_2 = (char *)FUN_0051c480(param_2);
+  iVar4 = FUN_00563110(&param_2);
+  if (iVar4 == 0) {
+    uVar7 = 0;
+  }
+  else {
+    if (param_3 != (int *)0x0) {
+      *param_3 = *(int *)(iVar4 + 4);
+    }
+    uVar7 = 1;
+  }
+  LVar5 = InterlockedExchangeAdd((LONG *)((local_8 & 0xfffffffc) + 4),-1);
+  if (LVar5 == 1) {
+    FUN_00515cf0(local_8 & 0xfffffffc);
+  }
+  return uVar7;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00564570 : SUB ESP,0xc
+00564573 : PUSH ESI
+00564574 : MOV ESI,dword ptr [ESP + 0x18]
+00564578 : TEST ESI,ESI
+0056457a : JZ 0x0056467f
+00564580 : MOV AL,byte ptr [ESI]
+00564582 : TEST AL,AL
+00564584 : JZ 0x0056467f
+0056458a : CMP byte ptr [ESP + 0x20],0x0
+0056458f : PUSH EBX
+00564590 : JZ 0x00564626
+00564596 : XOR DL,DL
+00564598 : MOV ECX,ESI
+0056459a : LEA EBX,[EBX]
+005645a0 : MOV BL,AL
+005645a2 : SUB BL,0x30
+005645a5 : CMP BL,0x9
+005645a8 : JA 0x005645ae
+005645aa : MOV DL,0x1
+005645ac : JMP 0x005645c2
+005645ae : CMP AL,0x2b
+005645b0 : JZ 0x005645b6
+005645b2 : CMP AL,0x2d
+005645b4 : JNZ 0x005645ba
+005645b6 : TEST DL,DL
+005645b8 : JZ 0x005645c2
+005645ba : CMP AL,0x20
+005645bc : JZ 0x005645c2
+005645be : CMP AL,0x9
+005645c0 : JNZ 0x00564626
+005645c2 : MOV AL,byte ptr [ECX + 0x1]
+005645c5 : INC ECX
+005645c6 : TEST AL,AL
+005645c8 : JNZ 0x005645a0
+005645ca : LEA EAX,[ESP + 0x8]
+005645ce : PUSH EAX
+005645cf : PUSH ESI
+005645d0 : MOV dword ptr [ESP + 0x10],0x0
+005645d8 : CALL 0x0051ca10
+005645dd : FNSTCW word ptr [ESP + 0x24]
+005645e1 : MOVZX EAX,word ptr [ESP + 0x24]
+005645e6 : OR EAX,0xc00
+005645eb : MOV dword ptr [ESP + 0x14],EAX
+005645ef : MOV EAX,dword ptr [ESP + 0x10]
+005645f3 : FLDCW word ptr [ESP + 0x14]
+005645f7 : ADD ESP,0x8
+005645fa : FISTP qword ptr [ESP + 0xc]
+005645fe : MOV ECX,dword ptr [ESP + 0xc]
+00564602 : FLDCW word ptr [ESP + 0x1c]
+00564606 : CMP EAX,ESI
+00564608 : JZ 0x0056461e
+0056460a : CMP byte ptr [EAX],0x0
+0056460d : JNZ 0x0056461e
+0056460f : MOV EDX,dword ptr [ESP + 0x20]
+00564613 : DEC ECX
+00564614 : POP EBX
+00564615 : MOV dword ptr [EDX],ECX
+00564617 : MOV AL,0x1
+00564619 : POP ESI
+0056461a : ADD ESP,0xc
+0056461d : RET
+0056461e : POP EBX
+0056461f : XOR AL,AL
+00564621 : POP ESI
+00564622 : ADD ESP,0xc
+00564625 : RET
+00564626 : PUSH ESI
+00564627 : LEA ECX,[ESP + 0x10]
+0056462b : CALL 0x0051c480
+00564630 : MOV ECX,dword ptr [ESP + 0x18]
+00564634 : MOV dword ptr [ESP + 0x1c],EAX
+00564638 : LEA EAX,[ESP + 0x1c]
+0056463c : PUSH EAX
+0056463d : CALL 0x00563110
+00564642 : TEST EAX,EAX
+00564644 : JZ 0x00564657
+00564646 : MOV ECX,dword ptr [ESP + 0x20]
+0056464a : TEST ECX,ECX
+0056464c : JZ 0x00564653
+0056464e : MOV EDX,dword ptr [EAX + 0x4]
+00564651 : MOV dword ptr [ECX],EDX
+00564653 : MOV BL,0x1
+00564655 : JMP 0x00564659
+00564657 : XOR BL,BL
+00564659 : MOV ESI,dword ptr [ESP + 0xc]
+0056465d : AND ESI,0xfffffffc
+00564660 : PUSH -0x1
+00564662 : LEA EAX,[ESI + 0x4]
+00564665 : PUSH EAX
+00564666 : CALL dword ptr [0x00b851cc]
+0056466c : SUB EAX,0x1
+0056466f : JNZ 0x00564677
+00564671 : PUSH ESI
+00564672 : CALL 0x00515cf0
+00564677 : MOV AL,BL
+00564679 : POP EBX
+0056467a : POP ESI
+0056467b : ADD ESP,0xc
+0056467e : RET
+0056467f : XOR AL,AL
+00564681 : POP ESI
+00564682 : ADD ESP,0xc
+00564685 : RET

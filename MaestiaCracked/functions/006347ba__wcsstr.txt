@@ -1,0 +1,102 @@
+PROGRAM  : Maestia.exe
+FUNCTION : _wcsstr
+ENTRY    : 006347ba
+BODY     : [[006347ba, 0063481a]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    _wcsstr
+   
+   Library: Visual Studio 2008 Release */
+
+wchar_t * __cdecl _wcsstr(wchar_t *_Str,wchar_t *_SubStr)
+
+{
+  wchar_t wVar1;
+  wchar_t *pwVar2;
+  int iVar3;
+  
+  if (*_SubStr != L'\0') {
+    wVar1 = *_Str;
+    if (wVar1 != L'\0') {
+      iVar3 = (int)_Str - (int)_SubStr;
+      pwVar2 = _SubStr;
+joined_r0x006347e2:
+      do {
+        if (wVar1 != L'\0') {
+          if (*pwVar2 == L'\0') {
+            return _Str;
+          }
+          if (*(wchar_t *)(iVar3 + (int)pwVar2) == *pwVar2) {
+            wVar1 = *(wchar_t *)(iVar3 + (int)(pwVar2 + 1));
+            pwVar2 = pwVar2 + 1;
+            goto joined_r0x006347e2;
+          }
+        }
+        if (*pwVar2 == L'\0') {
+          return _Str;
+        }
+        _Str = _Str + 1;
+        wVar1 = *_Str;
+        iVar3 = iVar3 + 2;
+        pwVar2 = _SubStr;
+      } while (wVar1 != L'\0');
+    }
+    _Str = (wchar_t *)0x0;
+  }
+  return _Str;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006347ba : MOV EDI,EDI
+006347bc : PUSH EBP
+006347bd : MOV EBP,ESP
+006347bf : MOV EAX,dword ptr [EBP + 0x8]
+006347c2 : PUSH EBX
+006347c3 : MOV EBX,dword ptr [EBP + 0xc]
+006347c6 : CMP word ptr [EBX],0x0
+006347ca : PUSH EDI
+006347cb : MOV EDI,EAX
+006347cd : JZ 0x00634813
+006347cf : MOVZX ECX,word ptr [EAX]
+006347d2 : TEST CX,CX
+006347d5 : JZ 0x00634811
+006347d7 : MOVZX EDX,CX
+006347da : SUB EAX,EBX
+006347dc : MOV ECX,dword ptr [EBP + 0xc]
+006347df : TEST DX,DX
+006347e2 : JZ 0x006347ff
+006347e4 : MOVZX EDX,word ptr [ECX]
+006347e7 : TEST DX,DX
+006347ea : JZ 0x00634817
+006347ec : MOVZX EBX,word ptr [EAX + ECX*0x1]
+006347f0 : MOVZX EDX,DX
+006347f3 : SUB EBX,EDX
+006347f5 : JNZ 0x006347ff
+006347f7 : INC ECX
+006347f8 : INC ECX
+006347f9 : CMP word ptr [EAX + ECX*0x1],BX
+006347fd : JNZ 0x006347e4
+006347ff : CMP word ptr [ECX],0x0
+00634803 : JZ 0x00634817
+00634805 : INC EDI
+00634806 : INC EDI
+00634807 : MOVZX EDX,word ptr [EDI]
+0063480a : INC EAX
+0063480b : INC EAX
+0063480c : TEST DX,DX
+0063480f : JNZ 0x006347dc
+00634811 : XOR EAX,EAX
+00634813 : POP EDI
+00634814 : POP EBX
+00634815 : POP EBP
+00634816 : RET
+00634817 : MOV EAX,EDI
+00634819 : JMP 0x00634813

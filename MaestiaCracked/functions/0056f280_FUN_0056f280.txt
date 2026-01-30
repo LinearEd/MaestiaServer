@@ -1,0 +1,81 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0056f280
+ENTRY    : 0056f280
+BODY     : [[0056f280, 0056f2e4]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_0056f280(void)
+
+{
+  uint uVar1;
+  LONG LVar2;
+  GRefCountImplCore *in_ECX;
+  
+  if (*(GRefCountImpl **)(in_ECX + 0x1c) != (GRefCountImpl *)0x0) {
+    GRefCountImpl::Release(*(GRefCountImpl **)(in_ECX + 0x1c));
+  }
+  uVar1 = *(uint *)(in_ECX + 0x18);
+  LVar2 = InterlockedExchangeAdd((LONG *)((uVar1 & 0xfffffffc) + 4),-1);
+  if (LVar2 == 1) {
+    FUN_00515cf0(uVar1 & 0xfffffffc);
+  }
+  uVar1 = *(uint *)(in_ECX + 0x14);
+  LVar2 = InterlockedExchangeAdd((LONG *)((uVar1 & 0xfffffffc) + 4),-1);
+  if (LVar2 == 1) {
+    FUN_00515cf0(uVar1 & 0xfffffffc);
+  }
+  if (*(GRefCountImpl **)(in_ECX + 0x10) != (GRefCountImpl *)0x0) {
+    GRefCountImpl::Release(*(GRefCountImpl **)(in_ECX + 0x10));
+  }
+  *(undefined ***)in_ECX = &PTR_FUN_00b86dd8;
+  GRefCountImplCore::~GRefCountImplCore(in_ECX);
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0056f280 : PUSH EDI
+0056f281 : MOV EDI,ECX
+0056f283 : MOV ECX,dword ptr [EDI + 0x1c]
+0056f286 : TEST ECX,ECX
+0056f288 : JZ 0x0056f28f
+0056f28a : CALL 0x004ff7e0
+0056f28f : PUSH EBX
+0056f290 : MOV EBX,dword ptr [0x00b851cc]
+0056f296 : PUSH ESI
+0056f297 : MOV ESI,dword ptr [EDI + 0x18]
+0056f29a : AND ESI,0xfffffffc
+0056f29d : PUSH -0x1
+0056f29f : LEA EAX,[ESI + 0x4]
+0056f2a2 : PUSH EAX
+0056f2a3 : CALL EBX
+0056f2a5 : SUB EAX,0x1
+0056f2a8 : JNZ 0x0056f2b0
+0056f2aa : PUSH ESI
+0056f2ab : CALL 0x00515cf0
+0056f2b0 : MOV ESI,dword ptr [EDI + 0x14]
+0056f2b3 : AND ESI,0xfffffffc
+0056f2b6 : PUSH -0x1
+0056f2b8 : LEA ECX,[ESI + 0x4]
+0056f2bb : PUSH ECX
+0056f2bc : CALL EBX
+0056f2be : SUB EAX,0x1
+0056f2c1 : JNZ 0x0056f2c9
+0056f2c3 : PUSH ESI
+0056f2c4 : CALL 0x00515cf0
+0056f2c9 : MOV ECX,dword ptr [EDI + 0x10]
+0056f2cc : POP ESI
+0056f2cd : POP EBX
+0056f2ce : TEST ECX,ECX
+0056f2d0 : JZ 0x0056f2d7
+0056f2d2 : CALL 0x004ff7e0
+0056f2d7 : MOV dword ptr [EDI],0xb86dd8
+0056f2dd : MOV ECX,EDI
+0056f2df : POP EDI
+0056f2e0 : JMP 0x004ff7b0

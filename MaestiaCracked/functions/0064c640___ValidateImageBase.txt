@@ -1,0 +1,50 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __ValidateImageBase
+ENTRY    : 0064c640
+BODY     : [[0064c640, 0064c674]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __ValidateImageBase
+   
+   Libraries: Visual Studio 2008 Release, Visual Studio 2010 Release */
+
+BOOL __cdecl __ValidateImageBase(PBYTE pImageBase)
+
+{
+  if ((*(short *)pImageBase == 0x5a4d) &&
+     (*(int *)(pImageBase + *(int *)(pImageBase + 0x3c)) == 0x4550)) {
+    return (uint)((short)*(int *)((int)(pImageBase + *(int *)(pImageBase + 0x3c)) + 0x18) == 0x10b);
+  }
+  return 0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0064c640 : MOV EDI,EDI
+0064c642 : PUSH EBP
+0064c643 : MOV EBP,ESP
+0064c645 : MOV ECX,dword ptr [EBP + 0x8]
+0064c648 : MOV EAX,0x5a4d
+0064c64d : CMP word ptr [ECX],AX
+0064c650 : JZ 0x0064c656
+0064c652 : XOR EAX,EAX
+0064c654 : POP EBP
+0064c655 : RET
+0064c656 : MOV EAX,dword ptr [ECX + 0x3c]
+0064c659 : ADD EAX,ECX
+0064c65b : CMP dword ptr [EAX],0x4550
+0064c661 : JNZ 0x0064c652
+0064c663 : XOR EDX,EDX
+0064c665 : MOV ECX,0x10b
+0064c66a : CMP word ptr [EAX + 0x18],CX
+0064c66e : SETZ DL
+0064c671 : MOV EAX,EDX
+0064c673 : POP EBP
+0064c674 : RET

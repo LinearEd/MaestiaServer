@@ -1,0 +1,80 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00a79c90
+ENTRY    : 00a79c90
+BODY     : [[00a79c90, 00a79d09]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00a79c90(void)
+
+{
+  float fVar1;
+  DWORD DVar2;
+  int iVar3;
+  int in_ECX;
+  
+  if ((*(int *)(in_ECX + 0x4c) == 2) && (*(char *)(in_ECX + 0x54) != '\0')) {
+    DVar2 = timeGetTime();
+    iVar3 = DVar2 - *(int *)(in_ECX + 0x58);
+    fVar1 = (float)iVar3;
+    if (iVar3 < 0) {
+      fVar1 = fVar1 + 4.2949673e+09;
+    }
+    fVar1 = (40000.0 - fVar1) * 2.5e-05 * 100.0;
+    if (fVar1 < 0.0) {
+      *(undefined1 *)(in_ECX + 0x54) = 0;
+      FUN_00a79c40();
+    }
+    if (0.1 < *(float *)(in_ECX + 0x50) - fVar1) {
+      FUN_00a79c40();
+    }
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00a79c90 : PUSH EBP
+00a79c91 : MOV EBP,ESP
+00a79c93 : PUSH ECX
+00a79c94 : PUSH ESI
+00a79c95 : MOV ESI,ECX
+00a79c97 : CMP dword ptr [ESI + 0x4c],0x2
+00a79c9b : JNZ 0x00a79d05
+00a79c9d : CMP byte ptr [ESI + 0x54],0x0
+00a79ca1 : JZ 0x00a79d05
+00a79ca3 : CALL dword ptr [0x00b85598]
+00a79ca9 : SUB EAX,dword ptr [ESI + 0x58]
+00a79cac : MOV dword ptr [EBP + -0x4],EAX
+00a79caf : FILD dword ptr [EBP + -0x4]
+00a79cb2 : TEST EAX,EAX
+00a79cb4 : JGE 0x00a79cbc
+00a79cb6 : FADD float ptr [0x00cdf0e0]
+00a79cbc : FSUBR float ptr [0x00cdf4a0]
+00a79cc2 : FMUL float ptr [0x00cdf49c]
+00a79cc8 : FMUL float ptr [0x00cdf230]
+00a79cce : FST float ptr [EBP + -0x4]
+00a79cd1 : FLDZ
+00a79cd3 : FCOMIP ST0,ST1
+00a79cd5 : FSTP ST0
+00a79cd7 : JBE 0x00a79ce7
+00a79cd9 : XORPS XMM0,XMM0
+00a79cdc : MOV EAX,ESI
+00a79cde : MOV byte ptr [ESI + 0x54],0x0
+00a79ce2 : CALL 0x00a79c40
+00a79ce7 : MOVSS XMM1,dword ptr [ESI + 0x50]
+00a79cec : MOVSS XMM0,dword ptr [EBP + -0x4]
+00a79cf1 : SUBSS XMM1,XMM0
+00a79cf5 : COMISS XMM1,dword ptr [0x00cdf0f0]
+00a79cfc : JBE 0x00a79d05
+00a79cfe : MOV EAX,ESI
+00a79d00 : CALL 0x00a79c40
+00a79d05 : POP ESI
+00a79d06 : MOV ESP,EBP
+00a79d08 : POP EBP
+00a79d09 : RET

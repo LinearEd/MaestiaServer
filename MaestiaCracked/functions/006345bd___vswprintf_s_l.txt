@@ -1,0 +1,108 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __vswprintf_s_l
+ENTRY    : 006345bd
+BODY     : [[006345bd, 00634647]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __vswprintf_s_l
+   
+   Library: Visual Studio 2008 Release */
+
+int __cdecl
+__vswprintf_s_l(wchar_t *_DstBuf,size_t _DstSize,wchar_t *_Format,_locale_t _Locale,va_list _ArgList
+               )
+
+{
+  int *piVar1;
+  int iVar2;
+  
+  if (_Format == (wchar_t *)0x0) {
+    piVar1 = __errno();
+    *piVar1 = 0x16;
+    __invalid_parameter(0,0,0,0,0);
+  }
+  else {
+    if ((_DstBuf == (wchar_t *)0x0) || (_DstSize == 0)) {
+      piVar1 = __errno();
+      *piVar1 = 0x16;
+    }
+    else {
+      iVar2 = __vswprintf_helper(__woutput_s_l,_DstBuf,_DstSize,_Format,_Locale,_ArgList);
+      if (iVar2 < 0) {
+        *_DstBuf = L'\0';
+      }
+      if (iVar2 != -2) {
+        return iVar2;
+      }
+      piVar1 = __errno();
+      *piVar1 = 0x22;
+    }
+    __invalid_parameter(0,0,0,0,0);
+  }
+  return -1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006345bd : MOV EDI,EDI
+006345bf : PUSH EBP
+006345c0 : MOV EBP,ESP
+006345c2 : PUSH ESI
+006345c3 : XOR ESI,ESI
+006345c5 : CMP dword ptr [EBP + 0x10],ESI
+006345c8 : JNZ 0x006345e7
+006345ca : CALL 0x0063ab82
+006345cf : PUSH ESI
+006345d0 : PUSH ESI
+006345d1 : PUSH ESI
+006345d2 : PUSH ESI
+006345d3 : PUSH ESI
+006345d4 : MOV dword ptr [EAX],0x16
+006345da : CALL 0x006372b8
+006345df : ADD ESP,0x14
+006345e2 : OR EAX,0xffffffff
+006345e5 : JMP 0x00634645
+006345e7 : PUSH EDI
+006345e8 : MOV EDI,dword ptr [EBP + 0x8]
+006345eb : CMP EDI,ESI
+006345ed : JZ 0x006345f4
+006345ef : CMP dword ptr [EBP + 0xc],ESI
+006345f2 : JA 0x00634601
+006345f4 : CALL 0x0063ab82
+006345f9 : MOV dword ptr [EAX],0x16
+006345ff : JMP 0x00634634
+00634601 : PUSH dword ptr [EBP + 0x18]
+00634604 : PUSH dword ptr [EBP + 0x14]
+00634607 : PUSH dword ptr [EBP + 0x10]
+0063460a : PUSH dword ptr [EBP + 0xc]
+0063460d : PUSH EDI
+0063460e : PUSH 0x646c4d
+00634613 : CALL 0x0063449b
+00634618 : ADD ESP,0x18
+0063461b : CMP EAX,ESI
+0063461d : JGE 0x00634624
+0063461f : XOR ECX,ECX
+00634621 : MOV word ptr [EDI],CX
+00634624 : CMP EAX,-0x2
+00634627 : JNZ 0x00634644
+00634629 : CALL 0x0063ab82
+0063462e : MOV dword ptr [EAX],0x22
+00634634 : PUSH ESI
+00634635 : PUSH ESI
+00634636 : PUSH ESI
+00634637 : PUSH ESI
+00634638 : PUSH ESI
+00634639 : CALL 0x006372b8
+0063463e : ADD ESP,0x14
+00634641 : OR EAX,0xffffffff
+00634644 : POP EDI
+00634645 : POP ESI
+00634646 : POP EBP
+00634647 : RET

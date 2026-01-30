@@ -1,0 +1,66 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005de260
+ENTRY    : 005de260
+BODY     : [[005de260, 005de2be]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined4 FUN_005de260(uint param_1,uint *param_2)
+
+{
+  uint uVar1;
+  uint uVar2;
+  int *in_ECX;
+  
+  uVar1 = (uint)*(char *)(*(int *)(*(int *)(*in_ECX + 0xc) + (param_1 >> 0xc) * 4) +
+                         (param_1 & 0xfff));
+  uVar2 = (int)uVar1 >> 1;
+  if ((uVar1 & 1) == 0) {
+    *param_2 = uVar2;
+    return 1;
+  }
+  *param_2 = (int)*(char *)(*(int *)(*(int *)(*in_ECX + 0xc) + (param_1 + 1 >> 0xc) * 4) +
+                           (param_1 + 1 & 0xfff)) << 7 | uVar2 & 0x7f;
+  return 2;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005de260 : MOV EAX,dword ptr [ECX]
+005de262 : MOV EDX,dword ptr [EAX + 0xc]
+005de265 : MOV ECX,dword ptr [ESP + 0x4]
+005de269 : PUSH ESI
+005de26a : MOV EAX,ECX
+005de26c : SHR EAX,0xc
+005de26f : MOV EAX,dword ptr [EDX + EAX*0x4]
+005de272 : MOV ESI,ECX
+005de274 : AND ESI,0xfff
+005de27a : MOVSX EAX,byte ptr [EAX + ESI*0x1]
+005de27e : TEST AL,0x1
+005de280 : JNZ 0x005de293
+005de282 : MOV ECX,dword ptr [ESP + 0xc]
+005de286 : SAR EAX,0x1
+005de288 : MOV dword ptr [ECX],EAX
+005de28a : MOV EAX,0x1
+005de28f : POP ESI
+005de290 : RET 0x8
+005de293 : INC ECX
+005de294 : MOV ESI,ECX
+005de296 : SHR ESI,0xc
+005de299 : MOV EDX,dword ptr [EDX + ESI*0x4]
+005de29c : AND ECX,0xfff
+005de2a2 : MOVSX ECX,byte ptr [EDX + ECX*0x1]
+005de2a6 : MOV EDX,dword ptr [ESP + 0xc]
+005de2aa : SAR EAX,0x1
+005de2ac : AND EAX,0x7f
+005de2af : SHL ECX,0x7
+005de2b2 : OR ECX,EAX
+005de2b4 : MOV dword ptr [EDX],ECX
+005de2b6 : MOV EAX,0x2
+005de2bb : POP ESI
+005de2bc : RET 0x8

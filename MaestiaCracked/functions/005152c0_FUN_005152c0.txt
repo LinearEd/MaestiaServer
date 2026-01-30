@@ -1,0 +1,73 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005152c0
+ENTRY    : 005152c0
+BODY     : [[005152c0, 0051531d]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_005152c0(undefined4 param_1,GRefCountImpl *param_2)
+
+{
+  LPCRITICAL_SECTION lpCriticalSection;
+  GRefCountImpl *this;
+  int in_ECX;
+  
+  lpCriticalSection = (LPCRITICAL_SECTION)(in_ECX + 0x14);
+  EnterCriticalSection(lpCriticalSection);
+  this = param_2;
+  if (param_2 != (GRefCountImpl *)0x0) {
+    GRefCountImpl::AddRef(param_2);
+    param_2 = this;
+    FUN_00515110(in_ECX + 0x10,&param_2);
+    GRefCountImpl::Release(this);
+    LeaveCriticalSection(lpCriticalSection);
+    return;
+  }
+  FUN_00515060(&param_1);
+  LeaveCriticalSection(lpCriticalSection);
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005152c0 : PUSH EBX
+005152c1 : PUSH ESI
+005152c2 : PUSH EDI
+005152c3 : MOV EDI,ECX
+005152c5 : LEA EBX,[EDI + 0x14]
+005152c8 : PUSH EBX
+005152c9 : CALL dword ptr [0x00b85118]
+005152cf : MOV ESI,dword ptr [ESP + 0x14]
+005152d3 : TEST ESI,ESI
+005152d5 : JZ 0x00515304
+005152d7 : MOV ECX,ESI
+005152d9 : CALL 0x00523dd0
+005152de : LEA EAX,[ESP + 0x14]
+005152e2 : LEA ECX,[EDI + 0x10]
+005152e5 : PUSH EAX
+005152e6 : PUSH ECX
+005152e7 : MOV dword ptr [ESP + 0x1c],ESI
+005152eb : CALL 0x00515110
+005152f0 : MOV ECX,ESI
+005152f2 : CALL 0x004ff7e0
+005152f7 : PUSH EBX
+005152f8 : CALL dword ptr [0x00b8511c]
+005152fe : POP EDI
+005152ff : POP ESI
+00515300 : POP EBX
+00515301 : RET 0x8
+00515304 : LEA ECX,[ESP + 0x10]
+00515308 : PUSH ECX
+00515309 : LEA ECX,[EDI + 0x10]
+0051530c : CALL 0x00515060
+00515311 : PUSH EBX
+00515312 : CALL dword ptr [0x00b8511c]
+00515318 : POP EDI
+00515319 : POP ESI
+0051531a : POP EBX
+0051531b : RET 0x8

@@ -1,0 +1,100 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0060f310
+ENTRY    : 0060f310
+BODY     : [[0060f310, 0060f3d3]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_0060f310(float param_1)
+
+{
+  int in_ECX;
+  int iVar1;
+  float10 fVar2;
+  undefined4 local_8;
+  
+  if (param_1 == 1.0) {
+    *(float *)(in_ECX + 4) = param_1;
+    *(undefined4 *)(in_ECX + 0xc) = 0;
+    return;
+  }
+  FUN_0060f1a0(0x100,0);
+  iVar1 = 0;
+  *(undefined4 *)(in_ECX + 0xc) = 0x100;
+  do {
+    fVar2 = (float10)FUN_0063cd40();
+    iVar1 = iVar1 + 1;
+    local_8 = (undefined4)(longlong)ROUND((float)fVar2 * 255.0 + 0.5);
+    *(undefined4 *)(*(int *)(in_ECX + 8) + -4 + iVar1 * 4) = local_8;
+  } while (iVar1 < 0x100);
+  *(float *)(in_ECX + 4) = param_1;
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0060f310 : FLD1
+0060f312 : SUB ESP,0xc
+0060f315 : FLD float ptr [ESP + 0x10]
+0060f319 : PUSH EBX
+0060f31a : FUCOM
+0060f31c : MOV EBX,ECX
+0060f31e : FNSTSW AX
+0060f320 : FSTP ST1
+0060f322 : TEST AH,0x44
+0060f325 : JP 0x0060f338
+0060f327 : FSTP float ptr [EBX + 0x4]
+0060f32a : MOV dword ptr [EBX + 0xc],0x0
+0060f331 : POP EBX
+0060f332 : ADD ESP,0xc
+0060f335 : RET 0x4
+0060f338 : PUSH ESI
+0060f339 : FSTP ST0
+0060f33b : PUSH EDI
+0060f33c : PUSH 0x0
+0060f33e : LEA EDI,[EBX + 0x8]
+0060f341 : PUSH 0x100
+0060f346 : MOV ECX,EDI
+0060f348 : CALL 0x0060f1a0
+0060f34d : FLD double ptr [0x00b86b48]
+0060f353 : XOR ESI,ESI
+0060f355 : MOV dword ptr [EDI + 0x4],0x100
+0060f35c : MOV dword ptr [ESP + 0xc],ESI
+0060f360 : FIDIVR dword ptr [ESP + 0xc]
+0060f364 : FSTP float ptr [ESP + 0xc]
+0060f368 : FLD float ptr [ESP + 0xc]
+0060f36c : FLD float ptr [ESP + 0x1c]
+0060f370 : CALL 0x0063cd40
+0060f375 : FSTP float ptr [ESP + 0xc]
+0060f379 : FLD float ptr [ESP + 0xc]
+0060f37d : MOV ECX,dword ptr [EDI]
+0060f37f : FLD double ptr [0x00b86b48]
+0060f385 : INC ESI
+0060f386 : FNSTCW word ptr [ESP + 0xc]
+0060f38a : MOVZX EAX,word ptr [ESP + 0xc]
+0060f38f : FMUL ST1
+0060f391 : OR EAX,0xc00
+0060f396 : FXCH
+0060f398 : CMP ESI,0x100
+0060f39e : MOV dword ptr [ESP + 0x10],EAX
+0060f3a2 : FADD double ptr [0x00cdf120]
+0060f3a8 : FLDCW word ptr [ESP + 0x10]
+0060f3ac : FISTP qword ptr [ESP + 0x10]
+0060f3b0 : MOV EAX,dword ptr [ESP + 0x10]
+0060f3b4 : MOV dword ptr [ECX + ESI*0x4 + -0x4],EAX
+0060f3b8 : FLDCW word ptr [ESP + 0xc]
+0060f3bc : MOV dword ptr [ESP + 0xc],ESI
+0060f3c0 : JL 0x0060f360
+0060f3c2 : FSTP ST0
+0060f3c4 : POP EDI
+0060f3c5 : FLD float ptr [ESP + 0x18]
+0060f3c9 : POP ESI
+0060f3ca : FSTP float ptr [EBX + 0x4]
+0060f3cd : POP EBX
+0060f3ce : ADD ESP,0xc
+0060f3d1 : RET 0x4

@@ -1,0 +1,53 @@
+PROGRAM  : Maestia.exe
+FUNCTION : BytesAvailable
+ENTRY    : 005e9f50
+BODY     : [[005e9f50, 005e9f7c]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* public: virtual int __thiscall GBufferedFile::BytesAvailable(void) */
+
+int __thiscall GBufferedFile::BytesAvailable(GBufferedFile *this)
+
+{
+  int iVar1;
+  
+                    /* 0x1e9f50  56  ?BytesAvailable@GBufferedFile@@UAEHXZ */
+  iVar1 = (**(code **)(**(int **)(this + 8) + 0x30))();
+  if (*(int *)(this + 0x10) == 1) {
+    iVar1 = iVar1 + (*(int *)(this + 0x18) - *(int *)(this + 0x14));
+  }
+  else if ((*(int *)(this + 0x10) == 2) && (iVar1 = iVar1 - *(int *)(this + 0x14), iVar1 < 0)) {
+    return 0;
+  }
+  return iVar1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005e9f50 : PUSH ESI
+005e9f51 : MOV ESI,ECX
+005e9f53 : MOV ECX,dword ptr [ESI + 0x8]
+005e9f56 : MOV EAX,dword ptr [ECX]
+005e9f58 : MOV EDX,dword ptr [EAX + 0x30]
+005e9f5b : CALL EDX
+005e9f5d : MOV ECX,dword ptr [ESI + 0x10]
+005e9f60 : SUB ECX,0x1
+005e9f63 : JZ 0x005e9f73
+005e9f65 : SUB ECX,0x1
+005e9f68 : JNZ 0x005e9f7b
+005e9f6a : SUB EAX,dword ptr [ESI + 0x14]
+005e9f6d : JNS 0x005e9f7b
+005e9f6f : XOR EAX,EAX
+005e9f71 : POP ESI
+005e9f72 : RET
+005e9f73 : MOV ECX,dword ptr [ESI + 0x18]
+005e9f76 : SUB ECX,dword ptr [ESI + 0x14]
+005e9f79 : ADD EAX,ECX
+005e9f7b : POP ESI
+005e9f7c : RET

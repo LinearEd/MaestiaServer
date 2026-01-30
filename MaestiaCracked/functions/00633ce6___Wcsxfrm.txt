@@ -1,0 +1,165 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __Wcsxfrm
+ENTRY    : 00633ce6
+BODY     : [[00633ce6, 00633dbe]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __Wcsxfrm
+   
+   Library: Visual Studio 2008 Release */
+
+size_t __cdecl
+__Wcsxfrm(wchar_t *_String1,wchar_t *_End1,wchar_t *param_3,wchar_t *param_4,_Collvec *param_5)
+
+{
+  int iVar1;
+  DWORD _DWMapFlag;
+  void *_Memory;
+  LPWSTR pWVar2;
+  LPWSTR pWVar3;
+  LPWSTR _Size;
+  
+  pWVar3 = (LPWSTR)((int)param_4 - (int)param_3 >> 1);
+  _Size = (LPWSTR)((int)_End1 - (int)_String1 >> 1);
+  if (param_5 == (_Collvec *)0x0) {
+    iVar1 = ____lc_handle_func();
+    _DWMapFlag = *(DWORD *)(iVar1 + 4);
+  }
+  else {
+    _DWMapFlag = param_5->_Page;
+  }
+  if (_DWMapFlag == 0) {
+    pWVar2 = pWVar3;
+    if (pWVar3 <= _Size) {
+      _memcpy(_String1,param_3,(int)pWVar3 * 2);
+    }
+  }
+  else {
+    _Memory = __malloc_crt((size_t)_Size);
+    pWVar2 = (LPWSTR)0xffffffff;
+    if (_Memory != (void *)0x0) {
+      ____lc_collate_cp_func();
+      pWVar2 = (LPWSTR)___crtLCMapStringW((LPCWSTR)0x0,_DWMapFlag,(LPCWSTR)0x400,(int)param_3,pWVar3
+                                          ,(int)_Memory);
+      if (pWVar2 == (LPWSTR)0x0) {
+        ____lc_collate_cp_func();
+        pWVar2 = (LPWSTR)___crtLCMapStringW((LPCWSTR)0x0,_DWMapFlag,(LPCWSTR)0x400,(int)param_3,
+                                            pWVar3,0);
+        if (pWVar2 == (LPWSTR)0x0) {
+          pWVar2 = (LPWSTR)0x7fffffff;
+        }
+      }
+      else {
+        pWVar3 = (LPWSTR)0x0;
+        if (pWVar2 != (LPWSTR)0x0) {
+          do {
+            _String1[(int)pWVar3] = (ushort)*(byte *)((int)pWVar3 + (int)_Memory);
+            pWVar3 = (LPWSTR)((int)pWVar3 + 1);
+          } while (pWVar3 < pWVar2);
+        }
+      }
+      _free(_Memory);
+    }
+  }
+  return (size_t)pWVar2;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00633ce6 : MOV EDI,EDI
+00633ce8 : PUSH EBP
+00633ce9 : MOV EBP,ESP
+00633ceb : MOV EAX,dword ptr [EBP + 0x18]
+00633cee : PUSH EBX
+00633cef : PUSH ESI
+00633cf0 : MOV ESI,dword ptr [EBP + 0x14]
+00633cf3 : SUB ESI,dword ptr [EBP + 0x10]
+00633cf6 : PUSH EDI
+00633cf7 : MOV EDI,dword ptr [EBP + 0xc]
+00633cfa : SUB EDI,dword ptr [EBP + 0x8]
+00633cfd : SAR ESI,0x1
+00633cff : SAR EDI,0x1
+00633d01 : OR EBX,0xffffffff
+00633d04 : TEST EAX,EAX
+00633d06 : JNZ 0x00633d12
+00633d08 : CALL 0x00642ac3
+00633d0d : MOV EAX,dword ptr [EAX + 0x4]
+00633d10 : JMP 0x00633d14
+00633d12 : MOV EAX,dword ptr [EAX]
+00633d14 : MOV dword ptr [EBP + 0xc],EAX
+00633d17 : TEST EAX,EAX
+00633d19 : JNZ 0x00633d38
+00633d1b : CMP ESI,EDI
+00633d1d : JA 0x00633d31
+00633d1f : LEA EAX,[ESI + ESI*0x1]
+00633d22 : PUSH EAX
+00633d23 : PUSH dword ptr [EBP + 0x10]
+00633d26 : PUSH dword ptr [EBP + 0x8]
+00633d29 : CALL 0x0063ae40
+00633d2e : ADD ESP,0xc
+00633d31 : MOV EBX,ESI
+00633d33 : JMP 0x00633db8
+00633d38 : PUSH EDI
+00633d39 : CALL 0x0064255f
+00633d3e : POP ECX
+00633d3f : MOV dword ptr [EBP + 0x14],EAX
+00633d42 : TEST EAX,EAX
+00633d44 : JZ 0x00633db8
+00633d46 : CALL 0x00642a9d
+00633d4b : PUSH EAX
+00633d4c : PUSH EDI
+00633d4d : PUSH dword ptr [EBP + 0x14]
+00633d50 : MOV EDI,0x400
+00633d55 : PUSH ESI
+00633d56 : PUSH dword ptr [EBP + 0x10]
+00633d59 : PUSH EDI
+00633d5a : PUSH dword ptr [EBP + 0xc]
+00633d5d : PUSH 0x0
+00633d5f : CALL 0x00645215
+00633d64 : MOV EBX,EAX
+00633d66 : ADD ESP,0x20
+00633d69 : TEST EBX,EBX
+00633d6b : JNZ 0x00633d95
+00633d6d : CALL 0x00642a9d
+00633d72 : PUSH EAX
+00633d73 : XOR EAX,EAX
+00633d75 : PUSH EAX
+00633d76 : PUSH EAX
+00633d77 : PUSH ESI
+00633d78 : PUSH dword ptr [EBP + 0x10]
+00633d7b : PUSH EDI
+00633d7c : PUSH dword ptr [EBP + 0xc]
+00633d7f : PUSH EAX
+00633d80 : CALL 0x00645215
+00633d85 : MOV EBX,EAX
+00633d87 : ADD ESP,0x20
+00633d8a : TEST EBX,EBX
+00633d8c : JNZ 0x00633daf
+00633d8e : MOV EBX,0x7fffffff
+00633d93 : JMP 0x00633daf
+00633d95 : XOR EAX,EAX
+00633d97 : TEST EBX,EBX
+00633d99 : JBE 0x00633daf
+00633d9b : MOV ECX,dword ptr [EBP + 0x14]
+00633d9e : MOVZX CX,byte ptr [EAX + ECX*0x1]
+00633da3 : MOV EDX,dword ptr [EBP + 0x8]
+00633da6 : MOV word ptr [EDX + EAX*0x2],CX
+00633daa : INC EAX
+00633dab : CMP EAX,EBX
+00633dad : JC 0x00633d9b
+00633daf : PUSH dword ptr [EBP + 0x14]
+00633db2 : CALL 0x0063610d
+00633db7 : POP ECX
+00633db8 : POP EDI
+00633db9 : POP ESI
+00633dba : MOV EAX,EBX
+00633dbc : POP EBX
+00633dbd : POP EBP
+00633dbe : RET

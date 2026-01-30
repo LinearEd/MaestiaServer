@@ -1,0 +1,84 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00516140
+ENTRY    : 00516140
+BODY     : [[00516140, 005161ac]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined4 * FUN_00516140(undefined4 param_1,undefined4 param_2)
+
+{
+  int *piVar1;
+  undefined4 *puVar2;
+  int in_ECX;
+  LPCRITICAL_SECTION lpCriticalSection;
+  
+  lpCriticalSection = (LPCRITICAL_SECTION)(DAT_00d7324c + 0x2c4);
+  EnterCriticalSection(lpCriticalSection);
+  puVar2 = (undefined4 *)FUN_00515f50(param_1,in_ECX,param_2);
+  if (puVar2 != (undefined4 *)0x0) {
+    *(int *)(in_ECX + 0xc) = *(int *)(in_ECX + 0xc) + 1;
+  }
+  LeaveCriticalSection(lpCriticalSection);
+  if (puVar2 != (undefined4 *)0x0) {
+    EnterCriticalSection((LPCRITICAL_SECTION)(in_ECX + 0x48));
+    piVar1 = (int *)(in_ECX + 0x40);
+    *puVar2 = *(undefined4 *)(in_ECX + 0x40);
+    puVar2[1] = piVar1;
+    *(undefined4 **)(*piVar1 + 4) = puVar2;
+    *piVar1 = (int)puVar2;
+    LeaveCriticalSection((LPCRITICAL_SECTION)(in_ECX + 0x48));
+  }
+  return puVar2;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00516140 : PUSH EBX
+00516141 : MOV EBX,dword ptr [0x00d7324c]
+00516147 : PUSH EBP
+00516148 : PUSH ESI
+00516149 : PUSH EDI
+0051614a : ADD EBX,0x2c4
+00516150 : PUSH EBX
+00516151 : MOV EDI,ECX
+00516153 : CALL dword ptr [0x00b85118]
+00516159 : MOV EAX,dword ptr [ESP + 0x18]
+0051615d : MOV ECX,dword ptr [ESP + 0x14]
+00516161 : PUSH EAX
+00516162 : PUSH EDI
+00516163 : PUSH ECX
+00516164 : MOV ECX,dword ptr [0x00d7324c]
+0051616a : CALL 0x00515f50
+0051616f : MOV ESI,EAX
+00516171 : TEST ESI,ESI
+00516173 : JZ 0x00516178
+00516175 : INC dword ptr [EDI + 0xc]
+00516178 : MOV EBP,dword ptr [0x00b8511c]
+0051617e : PUSH EBX
+0051617f : CALL EBP
+00516181 : TEST ESI,ESI
+00516183 : JZ 0x005161a4
+00516185 : LEA EBX,[EDI + 0x48]
+00516188 : PUSH EBX
+00516189 : CALL dword ptr [0x00b85118]
+0051618f : MOV EDX,dword ptr [EDI + 0x40]
+00516192 : LEA EAX,[EDI + 0x40]
+00516195 : MOV dword ptr [ESI],EDX
+00516197 : MOV dword ptr [ESI + 0x4],EAX
+0051619a : MOV ECX,dword ptr [EAX]
+0051619c : MOV dword ptr [ECX + 0x4],ESI
+0051619f : PUSH EBX
+005161a0 : MOV dword ptr [EAX],ESI
+005161a2 : CALL EBP
+005161a4 : POP EDI
+005161a5 : MOV EAX,ESI
+005161a7 : POP ESI
+005161a8 : POP EBP
+005161a9 : POP EBX
+005161aa : RET 0x8

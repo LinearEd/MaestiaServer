@@ -1,0 +1,90 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00685ea0
+ENTRY    : 00685ea0
+BODY     : [[00685ea0, 00685f23]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+uint FUN_00685ea0(uint param_1,uint param_2)
+
+{
+  uint uVar1;
+  uint uVar2;
+  uint uVar3;
+  
+  if ((param_1 != 0) && (param_2 != 0x10000)) {
+    uVar1 = ((int)param_1 >> 0x1f ^ param_1) - ((int)param_1 >> 0x1f);
+    uVar2 = ((int)param_2 >> 0x1f ^ param_2) - ((int)param_2 >> 0x1f);
+    if ((uVar1 < 0x801) && (uVar2 < 0x100001)) {
+      uVar3 = (int)(param_1 ^ param_2) >> 0x1f;
+      return (uVar2 * uVar1 + 0x8000 >> 0x10 ^ uVar3) - uVar3;
+    }
+    param_1 = (int)(param_1 ^ param_2) >> 0x1f;
+    param_1 = (((uVar2 & 0xffff) * (uVar1 & 0xffff) + 0x8000 >> 0x10) +
+               (uVar2 >> 0x10) * (uVar1 & 0xffff) + (uVar1 >> 0x10) * uVar2 ^ param_1) - param_1;
+  }
+  return param_1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00685ea0 : MOV EAX,dword ptr [ESP + 0x4]
+00685ea4 : PUSH EBX
+00685ea5 : TEST EAX,EAX
+00685ea7 : JZ 0x00685f22
+00685ea9 : MOV EBX,dword ptr [ESP + 0xc]
+00685ead : CMP EBX,0x10000
+00685eb3 : JZ 0x00685f22
+00685eb5 : PUSH ESI
+00685eb6 : PUSH EDI
+00685eb7 : MOV ESI,EAX
+00685eb9 : SAR ESI,0x1f
+00685ebc : MOV EDI,EBX
+00685ebe : SAR EDI,0x1f
+00685ec1 : MOV ECX,ESI
+00685ec3 : XOR ECX,EAX
+00685ec5 : MOV EDX,EDI
+00685ec7 : XOR EDX,EBX
+00685ec9 : SUB ECX,ESI
+00685ecb : SUB EDX,EDI
+00685ecd : CMP ECX,0x800
+00685ed3 : JA 0x00685ef5
+00685ed5 : CMP EDX,0x100000
+00685edb : JA 0x00685ef5
+00685edd : IMUL EDX,ECX
+00685ee0 : ADD EDX,0x8000
+00685ee6 : SHR EDX,0x10
+00685ee9 : XOR ESI,EDI
+00685eeb : MOV EAX,EDX
+00685eed : XOR EAX,ESI
+00685eef : POP EDI
+00685ef0 : SUB EAX,ESI
+00685ef2 : POP ESI
+00685ef3 : POP EBX
+00685ef4 : RET
+00685ef5 : MOVZX EBX,CX
+00685ef8 : PUSH EBP
+00685ef9 : MOVZX EAX,DX
+00685efc : IMUL EAX,EBX
+00685eff : MOV EBP,EDX
+00685f01 : SHR EBP,0x10
+00685f04 : IMUL EBP,EBX
+00685f07 : SHR ECX,0x10
+00685f0a : IMUL ECX,EDX
+00685f0d : ADD EAX,0x8000
+00685f12 : SHR EAX,0x10
+00685f15 : ADD EAX,EBP
+00685f17 : XOR ESI,EDI
+00685f19 : ADD EAX,ECX
+00685f1b : POP EBP
+00685f1c : XOR EAX,ESI
+00685f1e : POP EDI
+00685f1f : SUB EAX,ESI
+00685f21 : POP ESI
+00685f22 : POP EBX
+00685f23 : RET

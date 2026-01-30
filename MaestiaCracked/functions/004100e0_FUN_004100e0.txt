@@ -1,0 +1,77 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_004100e0
+ENTRY    : 004100e0
+BODY     : [[004100e0, 0041012a]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_004100e0(void)
+
+{
+  char cVar1;
+  int iVar2;
+  int *piVar3;
+  int *piVar4;
+  int *in_EDX;
+  
+  iVar2 = *in_EDX;
+  if (*(char *)(iVar2 + 0x39) == '\0') {
+    piVar3 = *(int **)(iVar2 + 8);
+    if (*(char *)((int)piVar3 + 0x39) == '\0') {
+      cVar1 = *(char *)(*piVar3 + 0x39);
+      piVar4 = (int *)*piVar3;
+      while (cVar1 == '\0') {
+        cVar1 = *(char *)(*piVar4 + 0x39);
+        piVar3 = piVar4;
+        piVar4 = (int *)*piVar4;
+      }
+      *in_EDX = (int)piVar3;
+      return;
+    }
+    iVar2 = *(int *)(iVar2 + 4);
+    cVar1 = *(char *)(iVar2 + 0x39);
+    while ((cVar1 == '\0' && (*in_EDX == *(int *)(iVar2 + 8)))) {
+      *in_EDX = iVar2;
+      iVar2 = *(int *)(iVar2 + 4);
+      cVar1 = *(char *)(iVar2 + 0x39);
+    }
+    *in_EDX = iVar2;
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+004100e0 : MOV EAX,dword ptr [EDX]
+004100e2 : CMP byte ptr [EAX + 0x39],0x0
+004100e6 : JNZ 0x0041012a
+004100e8 : MOV ECX,dword ptr [EAX + 0x8]
+004100eb : CMP byte ptr [ECX + 0x39],0x0
+004100ef : JNZ 0x0041010d
+004100f1 : MOV EAX,dword ptr [ECX]
+004100f3 : CMP byte ptr [EAX + 0x39],0x0
+004100f7 : JNZ 0x0041010a
+004100f9 : LEA ESP,[ESP]
+00410100 : MOV ECX,EAX
+00410102 : MOV EAX,dword ptr [ECX]
+00410104 : CMP byte ptr [EAX + 0x39],0x0
+00410108 : JZ 0x00410100
+0041010a : MOV dword ptr [EDX],ECX
+0041010c : RET
+0041010d : MOV EAX,dword ptr [EAX + 0x4]
+00410110 : CMP byte ptr [EAX + 0x39],0x0
+00410114 : JNZ 0x00410128
+00410116 : MOV ECX,dword ptr [EDX]
+00410118 : CMP ECX,dword ptr [EAX + 0x8]
+0041011b : JNZ 0x00410128
+0041011d : MOV dword ptr [EDX],EAX
+0041011f : MOV EAX,dword ptr [EAX + 0x4]
+00410122 : CMP byte ptr [EAX + 0x39],0x0
+00410126 : JZ 0x00410116
+00410128 : MOV dword ptr [EDX],EAX
+0041012a : RET

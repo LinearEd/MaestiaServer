@@ -1,0 +1,57 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __lock_file
+ENTRY    : 0063d990
+BODY     : [[0063d990, 0063d9d0]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __lock_file
+   
+   Library: Visual Studio 2008 Release */
+
+void __cdecl __lock_file(FILE *_File)
+
+{
+  if ((_File < &PTR_DAT_00d670c0) || ((FILE *)&DAT_00d67320 < _File)) {
+    EnterCriticalSection((LPCRITICAL_SECTION)(_File + 1));
+  }
+  else {
+    __lock(((int)(_File + -0x6b386) >> 5) + 0x10);
+    _File->_flag = _File->_flag | 0x8000;
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0063d990 : MOV EDI,EDI
+0063d992 : PUSH EBP
+0063d993 : MOV EBP,ESP
+0063d995 : PUSH ESI
+0063d996 : MOV ESI,dword ptr [EBP + 0x8]
+0063d999 : MOV EAX,0xd670c0
+0063d99e : CMP ESI,EAX
+0063d9a0 : JC 0x0063d9c4
+0063d9a2 : CMP ESI,0xd67320
+0063d9a8 : JA 0x0063d9c4
+0063d9aa : MOV ECX,ESI
+0063d9ac : SUB ECX,EAX
+0063d9ae : SAR ECX,0x5
+0063d9b1 : ADD ECX,0x10
+0063d9b4 : PUSH ECX
+0063d9b5 : CALL 0x0064c598
+0063d9ba : OR dword ptr [ESI + 0xc],0x8000
+0063d9c1 : POP ECX
+0063d9c2 : JMP 0x0063d9ce
+0063d9c4 : ADD ESI,0x20
+0063d9c7 : PUSH ESI
+0063d9c8 : CALL dword ptr [0x00b85118]
+0063d9ce : POP ESI
+0063d9cf : POP EBP
+0063d9d0 : RET

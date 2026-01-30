@@ -1,0 +1,152 @@
+PROGRAM  : Maestia.exe
+FUNCTION : _strncmp
+ENTRY    : 0063abcb
+BODY     : [[0063abcb, 0063ac8a]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    _strncmp
+   
+   Library: Visual Studio 2008 Release */
+
+int __cdecl _strncmp(char *_Str1,char *_Str2,size_t _MaxCount)
+
+{
+  byte *pbVar1;
+  uint uVar2;
+  byte *pbVar3;
+  uint uVar4;
+  uint local_8;
+  
+  local_8 = 0;
+  if (_MaxCount != 0) {
+    if ((3 < _MaxCount) && (pbVar1 = (byte *)_Str1, pbVar3 = (byte *)_Str2, _MaxCount != 4)) {
+      do {
+        _Str1 = (char *)(pbVar1 + 4);
+        _Str2 = (char *)(pbVar3 + 4);
+        if ((*pbVar1 == 0) || (*pbVar1 != *pbVar3)) {
+          uVar2 = (uint)*pbVar1;
+          uVar4 = (uint)*pbVar3;
+          goto LAB_0063ac87;
+        }
+        if ((pbVar1[1] == 0) || (pbVar1[1] != pbVar3[1])) {
+          uVar2 = (uint)pbVar1[1];
+          uVar4 = (uint)pbVar3[1];
+          goto LAB_0063ac87;
+        }
+        if ((pbVar1[2] == 0) || (pbVar1[2] != pbVar3[2])) {
+          uVar2 = (uint)pbVar1[2];
+          uVar4 = (uint)pbVar3[2];
+          goto LAB_0063ac87;
+        }
+        if ((pbVar1[3] == 0) || (pbVar1[3] != pbVar3[3])) {
+          uVar2 = (uint)pbVar1[3];
+          uVar4 = (uint)pbVar3[3];
+          goto LAB_0063ac87;
+        }
+        local_8 = local_8 + 4;
+        pbVar1 = (byte *)_Str1;
+        pbVar3 = (byte *)_Str2;
+      } while (local_8 < _MaxCount - 4);
+    }
+    for (; local_8 < _MaxCount; local_8 = local_8 + 1) {
+      if ((*_Str1 == 0) || (*_Str1 != *_Str2)) {
+        uVar2 = (uint)(byte)*_Str1;
+        uVar4 = (uint)(byte)*_Str2;
+LAB_0063ac87:
+        return uVar2 - uVar4;
+      }
+      _Str1 = (char *)((byte *)_Str1 + 1);
+      _Str2 = (char *)((byte *)_Str2 + 1);
+    }
+  }
+  return 0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0063abcb : MOV EDI,EDI
+0063abcd : PUSH EBP
+0063abce : MOV EBP,ESP
+0063abd0 : PUSH ECX
+0063abd1 : AND dword ptr [EBP + -0x4],0x0
+0063abd5 : PUSH EBX
+0063abd6 : MOV EBX,dword ptr [EBP + 0x10]
+0063abd9 : TEST EBX,EBX
+0063abdb : JNZ 0x0063abe4
+0063abdd : XOR EAX,EAX
+0063abdf : JMP 0x0063ac7e
+0063abe4 : PUSH EDI
+0063abe5 : CMP EBX,0x4
+0063abe8 : JC 0x0063ac5f
+0063abea : LEA EDI,[EBX + -0x4]
+0063abed : TEST EDI,EDI
+0063abef : JBE 0x0063ac5f
+0063abf1 : MOV ECX,dword ptr [EBP + 0xc]
+0063abf4 : MOV EAX,dword ptr [EBP + 0x8]
+0063abf7 : MOV DL,byte ptr [EAX]
+0063abf9 : ADD EAX,0x4
+0063abfc : ADD ECX,0x4
+0063abff : TEST DL,DL
+0063ac01 : JZ 0x0063ac55
+0063ac03 : CMP DL,byte ptr [ECX + -0x4]
+0063ac06 : JNZ 0x0063ac55
+0063ac08 : MOV DL,byte ptr [EAX + -0x3]
+0063ac0b : TEST DL,DL
+0063ac0d : JZ 0x0063ac4b
+0063ac0f : CMP DL,byte ptr [ECX + -0x3]
+0063ac12 : JNZ 0x0063ac4b
+0063ac14 : MOV DL,byte ptr [EAX + -0x2]
+0063ac17 : TEST DL,DL
+0063ac19 : JZ 0x0063ac41
+0063ac1b : CMP DL,byte ptr [ECX + -0x2]
+0063ac1e : JNZ 0x0063ac41
+0063ac20 : MOV DL,byte ptr [EAX + -0x1]
+0063ac23 : TEST DL,DL
+0063ac25 : JZ 0x0063ac37
+0063ac27 : CMP DL,byte ptr [ECX + -0x1]
+0063ac2a : JNZ 0x0063ac37
+0063ac2c : ADD dword ptr [EBP + -0x4],0x4
+0063ac30 : CMP dword ptr [EBP + -0x4],EDI
+0063ac33 : JC 0x0063abf7
+0063ac35 : JMP 0x0063ac76
+0063ac37 : MOVZX EAX,byte ptr [EAX + -0x1]
+0063ac3b : MOVZX ECX,byte ptr [ECX + -0x1]
+0063ac3f : JMP 0x0063ac87
+0063ac41 : MOVZX EAX,byte ptr [EAX + -0x2]
+0063ac45 : MOVZX ECX,byte ptr [ECX + -0x2]
+0063ac49 : JMP 0x0063ac87
+0063ac4b : MOVZX EAX,byte ptr [EAX + -0x3]
+0063ac4f : MOVZX ECX,byte ptr [ECX + -0x3]
+0063ac53 : JMP 0x0063ac87
+0063ac55 : MOVZX EAX,byte ptr [EAX + -0x4]
+0063ac59 : MOVZX ECX,byte ptr [ECX + -0x4]
+0063ac5d : JMP 0x0063ac87
+0063ac5f : MOV ECX,dword ptr [EBP + 0xc]
+0063ac62 : MOV EAX,dword ptr [EBP + 0x8]
+0063ac65 : JMP 0x0063ac76
+0063ac67 : MOV DL,byte ptr [EAX]
+0063ac69 : TEST DL,DL
+0063ac6b : JZ 0x0063ac81
+0063ac6d : CMP DL,byte ptr [ECX]
+0063ac6f : JNZ 0x0063ac81
+0063ac71 : INC EAX
+0063ac72 : INC ECX
+0063ac73 : INC dword ptr [EBP + -0x4]
+0063ac76 : CMP dword ptr [EBP + -0x4],EBX
+0063ac79 : JC 0x0063ac67
+0063ac7b : XOR EAX,EAX
+0063ac7d : POP EDI
+0063ac7e : POP EBX
+0063ac7f : LEAVE
+0063ac80 : RET
+0063ac81 : MOVZX EAX,byte ptr [EAX]
+0063ac84 : MOVZX ECX,byte ptr [ECX]
+0063ac87 : SUB EAX,ECX
+0063ac89 : JMP 0x0063ac7d

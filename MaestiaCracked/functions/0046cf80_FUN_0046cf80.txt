@@ -1,0 +1,50 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0046cf80
+ENTRY    : 0046cf80
+BODY     : [[0046cf80, 0046cfd1]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_0046cf80(void)
+
+{
+  int in_ECX;
+  float *in_EDX;
+  
+  if (((*(float *)(in_ECX + 0xbd8) != *in_EDX) || (*(float *)(in_ECX + 0xbdc) != in_EDX[1])) ||
+     (*(float *)(in_ECX + 0xbe0) != in_EDX[2])) {
+    *(undefined8 *)(in_ECX + 0xbd8) = *(undefined8 *)in_EDX;
+    *(float *)(in_ECX + 0xbe0) = in_EDX[2];
+    *(undefined1 *)(in_ECX + 0xbe4) = 1;
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0046cf80 : MOVSS XMM0,dword ptr [ECX + 0xbd8]
+0046cf88 : UCOMISS XMM0,dword ptr [EDX]
+0046cf8b : LAHF
+0046cf8c : TEST AH,0x44
+0046cf8f : JP 0x0046cfb5
+0046cf91 : MOVSS XMM0,dword ptr [ECX + 0xbdc]
+0046cf99 : UCOMISS XMM0,dword ptr [EDX + 0x4]
+0046cf9d : LAHF
+0046cf9e : TEST AH,0x44
+0046cfa1 : JP 0x0046cfb5
+0046cfa3 : MOVSS XMM0,dword ptr [ECX + 0xbe0]
+0046cfab : UCOMISS XMM0,dword ptr [EDX + 0x8]
+0046cfaf : LAHF
+0046cfb0 : TEST AH,0x44
+0046cfb3 : JNP 0x0046cfd1
+0046cfb5 : MOVQ XMM0,qword ptr [EDX]
+0046cfb9 : MOVQ qword ptr [ECX + 0xbd8],XMM0
+0046cfc1 : MOV EAX,dword ptr [EDX + 0x8]
+0046cfc4 : MOV dword ptr [ECX + 0xbe0],EAX
+0046cfca : MOV byte ptr [ECX + 0xbe4],0x1
+0046cfd1 : RET

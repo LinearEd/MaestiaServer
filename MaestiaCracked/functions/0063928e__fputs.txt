@@ -1,0 +1,153 @@
+PROGRAM  : Maestia.exe
+FUNCTION : _fputs
+ENTRY    : 0063928e
+BODY     : [[0063928e, 00639391]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* WARNING: Function: __SEH_prolog4 replaced with injection: SEH_prolog4 */
+/* WARNING: Function: __SEH_epilog4 replaced with injection: EH_epilog3 */
+/* Library Function - Single Match
+    _fputs
+   
+   Library: Visual Studio 2008 Release */
+
+int __cdecl _fputs(char *_Str,FILE *_File)
+
+{
+  int *piVar1;
+  uint uVar2;
+  size_t _Count;
+  int _Flag;
+  size_t sVar3;
+  undefined *puVar4;
+  
+  if ((_Str != (char *)0x0) && (_File != (FILE *)0x0)) {
+    if ((_File->_flag & 0x40) != 0) {
+LAB_0063933b:
+      _Count = _strlen(_Str);
+      __lock_file(_File);
+      _Flag = __stbuf(_File);
+      sVar3 = __fwrite_nolock(_Str,1,_Count,_File);
+      __ftbuf(_Flag,_File);
+      FUN_00639395();
+      return (sVar3 == _Count) - 1;
+    }
+    uVar2 = __fileno(_File);
+    if ((uVar2 == 0xffffffff) || (uVar2 == 0xfffffffe)) {
+      puVar4 = &DAT_00d677f0;
+    }
+    else {
+      puVar4 = (undefined *)((uVar2 & 0x1f) * 0x40 + (&DAT_01728c40)[(int)uVar2 >> 5]);
+    }
+    if ((puVar4[0x24] & 0x7f) == 0) {
+      if ((uVar2 == 0xffffffff) || (uVar2 == 0xfffffffe)) {
+        puVar4 = &DAT_00d677f0;
+      }
+      else {
+        puVar4 = (undefined *)((uVar2 & 0x1f) * 0x40 + (&DAT_01728c40)[(int)uVar2 >> 5]);
+      }
+      if ((puVar4[0x24] & 0x80) == 0) goto LAB_0063933b;
+    }
+  }
+  piVar1 = __errno();
+  *piVar1 = 0x16;
+  __invalid_parameter(0,0,0,0,0);
+  return -1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0063928e : PUSH 0x10
+00639290 : PUSH 0xcecc98
+00639295 : CALL 0x0064c228
+0063929a : XOR EAX,EAX
+0063929c : XOR ESI,ESI
+0063929e : CMP dword ptr [EBP + 0x8],ESI
+006392a1 : SETNZ AL
+006392a4 : CMP EAX,ESI
+006392a6 : JNZ 0x006392c8
+006392a8 : CALL 0x0063ab82
+006392ad : MOV dword ptr [EAX],0x16
+006392b3 : PUSH ESI
+006392b4 : PUSH ESI
+006392b5 : PUSH ESI
+006392b6 : PUSH ESI
+006392b7 : PUSH ESI
+006392b8 : CALL 0x006372b8
+006392bd : ADD ESP,0x14
+006392c0 : OR EAX,0xffffffff
+006392c3 : JMP 0x0063938c
+006392c8 : XOR EAX,EAX
+006392ca : MOV EDI,dword ptr [EBP + 0xc]
+006392cd : CMP EDI,ESI
+006392cf : SETNZ AL
+006392d2 : CMP EAX,ESI
+006392d4 : JZ 0x006392a8
+006392d6 : TEST byte ptr [EDI + 0xc],0x40
+006392da : JNZ 0x0063933b
+006392dc : PUSH EDI
+006392dd : CALL 0x0064dfc6
+006392e2 : POP ECX
+006392e3 : CMP EAX,-0x1
+006392e6 : JZ 0x00639303
+006392e8 : CMP EAX,-0x2
+006392eb : JZ 0x00639303
+006392ed : MOV EDX,EAX
+006392ef : SAR EDX,0x5
+006392f2 : MOV ECX,EAX
+006392f4 : AND ECX,0x1f
+006392f7 : SHL ECX,0x6
+006392fa : ADD ECX,dword ptr [EDX*0x4 + 0x1728c40]
+00639301 : JMP 0x00639308
+00639303 : MOV ECX,0xd677f0
+00639308 : TEST byte ptr [ECX + 0x24],0x7f
+0063930c : JNZ 0x006392a8
+0063930e : CMP EAX,-0x1
+00639311 : JZ 0x0063932c
+00639313 : CMP EAX,-0x2
+00639316 : JZ 0x0063932c
+00639318 : MOV ECX,EAX
+0063931a : SAR ECX,0x5
+0063931d : AND EAX,0x1f
+00639320 : SHL EAX,0x6
+00639323 : ADD EAX,dword ptr [ECX*0x4 + 0x1728c40]
+0063932a : JMP 0x00639331
+0063932c : MOV EAX,0xd677f0
+00639331 : TEST byte ptr [EAX + 0x24],0x80
+00639335 : JNZ 0x006392a8
+0063933b : PUSH dword ptr [EBP + 0x8]
+0063933e : CALL 0x00640960
+00639343 : MOV dword ptr [EBP + -0x1c],EAX
+00639346 : PUSH EDI
+00639347 : CALL 0x0063d990
+0063934c : POP ECX
+0063934d : POP ECX
+0063934e : MOV dword ptr [EBP + -0x4],ESI
+00639351 : PUSH EDI
+00639352 : CALL 0x006501d4
+00639357 : MOV ESI,EAX
+00639359 : PUSH EDI
+0063935a : PUSH dword ptr [EBP + -0x1c]
+0063935d : PUSH 0x1
+0063935f : PUSH dword ptr [EBP + 0x8]
+00639362 : CALL 0x0063758d
+00639367 : MOV dword ptr [EBP + -0x20],EAX
+0063936a : PUSH EDI
+0063936b : PUSH ESI
+0063936c : CALL 0x00650270
+00639371 : ADD ESP,0x1c
+00639374 : MOV dword ptr [EBP + -0x4],0xfffffffe
+0063937b : CALL 0x00639395
+00639380 : XOR EAX,EAX
+00639382 : MOV ECX,dword ptr [EBP + -0x1c]
+00639385 : CMP dword ptr [EBP + -0x20],ECX
+00639388 : SETZ AL
+0063938b : DEC EAX
+0063938c : CALL 0x0064c26d
+00639391 : RET

@@ -1,0 +1,115 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00662c10
+ENTRY    : 00662c10
+BODY     : [[00662c10, 00662ca4]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined4 FUN_00662c10(int param_1,int *param_2,undefined4 param_3,undefined4 param_4,byte param_5)
+
+{
+  int iVar1;
+  undefined4 uVar2;
+  LPCRITICAL_SECTION lpCriticalSection;
+  
+  *param_2 = 0;
+  while( true ) {
+    if (param_1 == 0xc) {
+      lpCriticalSection = (LPCRITICAL_SECTION)0x0;
+    }
+    else {
+      lpCriticalSection = (LPCRITICAL_SECTION)(param_1 + 4);
+    }
+    EnterCriticalSection(lpCriticalSection);
+    if (*(int *)(param_1 + 0x44) == 0) {
+      LeaveCriticalSection(lpCriticalSection);
+      return 0x80040211;
+    }
+    iVar1 = *(int *)(param_1 + 0x1c);
+    if (iVar1 == 0) {
+      *(int *)(param_1 + 0x28) = *(int *)(param_1 + 0x28) + 1;
+    }
+    else {
+      uVar2 = *(undefined4 *)(iVar1 + 0x1c);
+      *(int *)(param_1 + 0x20) = *(int *)(param_1 + 0x20) + -1;
+      *(undefined4 *)(param_1 + 0x1c) = uVar2;
+    }
+    LeaveCriticalSection(lpCriticalSection);
+    if (iVar1 != 0) break;
+    if ((param_5 & 4) != 0) {
+      return 0x8004022e;
+    }
+    WaitForSingleObject(*(HANDLE *)(param_1 + 0x24),0xffffffff);
+  }
+  *(undefined4 *)(iVar1 + 0x44) = 1;
+  *param_2 = iVar1;
+  return 0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00662c10 : MOV EAX,dword ptr [ESP + 0x8]
+00662c14 : PUSH EBX
+00662c15 : MOV EBX,dword ptr [0x00b8511c]
+00662c1b : PUSH EBP
+00662c1c : PUSH ESI
+00662c1d : MOV ESI,dword ptr [ESP + 0x10]
+00662c21 : PUSH EDI
+00662c22 : MOV dword ptr [EAX],0x0
+00662c28 : LEA EAX,[ESI + -0xc]
+00662c2b : TEST EAX,EAX
+00662c2d : JZ 0x00662c34
+00662c2f : LEA EBP,[ESI + 0x4]
+00662c32 : JMP 0x00662c36
+00662c34 : XOR EBP,EBP
+00662c36 : PUSH EBP
+00662c37 : CALL dword ptr [0x00b85118]
+00662c3d : CMP dword ptr [ESI + 0x44],0x0
+00662c41 : JZ 0x00662c74
+00662c43 : MOV EDI,dword ptr [ESI + 0x1c]
+00662c46 : TEST EDI,EDI
+00662c48 : JZ 0x00662c55
+00662c4a : MOV ECX,dword ptr [EDI + 0x1c]
+00662c4d : DEC dword ptr [ESI + 0x20]
+00662c50 : MOV dword ptr [ESI + 0x1c],ECX
+00662c53 : JMP 0x00662c58
+00662c55 : INC dword ptr [ESI + 0x28]
+00662c58 : PUSH EBP
+00662c59 : CALL EBX
+00662c5b : TEST EDI,EDI
+00662c5d : JNZ 0x00662c83
+00662c5f : TEST byte ptr [ESP + 0x24],0x4
+00662c64 : JNZ 0x00662c99
+00662c66 : MOV EDX,dword ptr [ESI + 0x24]
+00662c69 : PUSH -0x1
+00662c6b : PUSH EDX
+00662c6c : CALL dword ptr [0x00b85100]
+00662c72 : JMP 0x00662c28
+00662c74 : PUSH EBP
+00662c75 : CALL EBX
+00662c77 : POP EDI
+00662c78 : POP ESI
+00662c79 : POP EBP
+00662c7a : MOV EAX,0x80040211
+00662c7f : POP EBX
+00662c80 : RET 0x14
+00662c83 : MOV EAX,dword ptr [ESP + 0x18]
+00662c87 : MOV dword ptr [EDI + 0x44],0x1
+00662c8e : MOV dword ptr [EAX],EDI
+00662c90 : POP EDI
+00662c91 : POP ESI
+00662c92 : POP EBP
+00662c93 : XOR EAX,EAX
+00662c95 : POP EBX
+00662c96 : RET 0x14
+00662c99 : POP EDI
+00662c9a : POP ESI
+00662c9b : POP EBP
+00662c9c : MOV EAX,0x8004022e
+00662ca1 : POP EBX
+00662ca2 : RET 0x14

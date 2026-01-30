@@ -1,0 +1,98 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0051ca10
+ENTRY    : 0051ca10
+BODY     : [[0051ca10, 0051ca9f]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_0051ca10(char *param_1,undefined4 param_2)
+
+{
+  char cVar1;
+  lconv *plVar2;
+  char *pcVar3;
+  char local_160 [348];
+  uint local_4;
+  
+  local_4 = DAT_00d66fa0 ^ (uint)local_160;
+  plVar2 = _localeconv();
+  cVar1 = *plVar2->decimal_point;
+  if (cVar1 != '.') {
+    _strcpy_s(local_160,0x15c,param_1);
+    pcVar3 = local_160;
+    if (local_160[0] == '\0') {
+LAB_0051ca76:
+      param_1 = local_160;
+    }
+    else {
+      do {
+        if (*pcVar3 == '.') {
+          *pcVar3 = cVar1;
+          goto LAB_0051ca76;
+        }
+        pcVar3 = pcVar3 + 1;
+      } while (*pcVar3 != '\0');
+      param_1 = local_160;
+    }
+  }
+  FUN_0063bc4d(param_1,param_2);
+  __security_check_cookie(local_4 ^ (uint)local_160);
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0051ca10 : SUB ESP,0x160
+0051ca16 : MOV EAX,[0x00d66fa0]
+0051ca1b : XOR EAX,ESP
+0051ca1d : MOV dword ptr [ESP + 0x15c],EAX
+0051ca24 : PUSH EBX
+0051ca25 : PUSH ESI
+0051ca26 : MOV ESI,dword ptr [ESP + 0x16c]
+0051ca2d : PUSH EDI
+0051ca2e : MOV EDI,dword ptr [ESP + 0x174]
+0051ca35 : CALL 0x0063bc64
+0051ca3a : MOV EAX,dword ptr [EAX]
+0051ca3c : MOV BL,byte ptr [EAX]
+0051ca3e : CMP BL,0x2e
+0051ca41 : JZ 0x0051ca7e
+0051ca43 : PUSH ESI
+0051ca44 : LEA ECX,[ESP + 0x10]
+0051ca48 : PUSH 0x15c
+0051ca4d : PUSH ECX
+0051ca4e : CALL 0x00638300
+0051ca53 : ADD ESP,0xc
+0051ca56 : CMP byte ptr [ESP + 0xc],0x0
+0051ca5b : LEA EAX,[ESP + 0xc]
+0051ca5f : JZ 0x0051ca76
+0051ca61 : CMP byte ptr [EAX],0x2e
+0051ca64 : JZ 0x0051ca74
+0051ca66 : INC EAX
+0051ca67 : CMP byte ptr [EAX],0x0
+0051ca6a : JNZ 0x0051ca61
+0051ca6c : PUSH EDI
+0051ca6d : LEA EDX,[ESP + 0x10]
+0051ca71 : PUSH EDX
+0051ca72 : JMP 0x0051ca80
+0051ca74 : MOV byte ptr [EAX],BL
+0051ca76 : PUSH EDI
+0051ca77 : LEA EDX,[ESP + 0x10]
+0051ca7b : PUSH EDX
+0051ca7c : JMP 0x0051ca80
+0051ca7e : PUSH EDI
+0051ca7f : PUSH ESI
+0051ca80 : CALL 0x0063bc4d
+0051ca85 : MOV ECX,dword ptr [ESP + 0x170]
+0051ca8c : ADD ESP,0x8
+0051ca8f : POP EDI
+0051ca90 : POP ESI
+0051ca91 : POP EBX
+0051ca92 : XOR ECX,ESP
+0051ca94 : CALL 0x00633e6b
+0051ca99 : ADD ESP,0x160
+0051ca9f : RET

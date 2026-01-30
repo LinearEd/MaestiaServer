@@ -1,0 +1,80 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_006b3f10
+ENTRY    : 006b3f10
+BODY     : [[006b3f10, 006b3f5d]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+uint FUN_006b3f10(void)
+
+{
+  uint in_EAX;
+  uint uVar1;
+  uint uVar2;
+  uint in_ECX;
+  uint uVar3;
+  uint uVar4;
+  
+  uVar4 = in_ECX ^ in_EAX;
+  if ((int)in_ECX < 0) {
+    in_ECX = -in_ECX;
+  }
+  if ((int)in_EAX < 0) {
+    in_EAX = -in_EAX;
+  }
+  uVar1 = ((int)in_ECX >> 0x10 & 0xffffU) * in_EAX;
+  uVar2 = uVar1 * 0x10000 + 0x2000;
+  uVar3 = (in_ECX & 0xffff) * in_EAX + uVar2;
+  uVar1 = uVar1 >> 0x10;
+  if (uVar3 < uVar2) {
+    uVar1 = uVar1 + 1;
+  }
+  uVar1 = uVar1 << 0x12 | uVar3 >> 0xe;
+  if ((int)uVar4 < 0) {
+    uVar1 = -uVar1;
+  }
+  return uVar1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006b3f10 : PUSH ESI
+006b3f11 : PUSH EDI
+006b3f12 : MOV ESI,EAX
+006b3f14 : MOV EDI,ECX
+006b3f16 : XOR EDI,ESI
+006b3f18 : TEST ECX,ECX
+006b3f1a : JGE 0x006b3f1e
+006b3f1c : NEG ECX
+006b3f1e : TEST ESI,ESI
+006b3f20 : JGE 0x006b3f24
+006b3f22 : NEG ESI
+006b3f24 : MOV EAX,ECX
+006b3f26 : SAR EAX,0x10
+006b3f29 : AND EAX,0xffff
+006b3f2e : IMUL EAX,ESI
+006b3f31 : MOVZX ECX,CX
+006b3f34 : IMUL ECX,ESI
+006b3f37 : MOV EDX,EAX
+006b3f39 : SHL EAX,0x10
+006b3f3c : ADD EAX,0x2000
+006b3f41 : ADD ECX,EAX
+006b3f43 : SHR EDX,0x10
+006b3f46 : CMP ECX,EAX
+006b3f48 : JNC 0x006b3f4b
+006b3f4a : INC EDX
+006b3f4b : SHL EDX,0x12
+006b3f4e : SHR ECX,0xe
+006b3f51 : OR EDX,ECX
+006b3f53 : TEST EDI,EDI
+006b3f55 : POP EDI
+006b3f56 : MOV EAX,EDX
+006b3f58 : POP ESI
+006b3f59 : JGE 0x006b3f5d
+006b3f5b : NEG EAX
+006b3f5d : RET

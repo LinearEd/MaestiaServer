@@ -1,0 +1,91 @@
+PROGRAM  : Maestia.exe
+FUNCTION : _wcsncpy
+ENTRY    : 00634e39
+BODY     : [[00634e39, 00634e82]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    _wcsncpy
+   
+   Library: Visual Studio 2008 Release */
+
+wchar_t * __cdecl _wcsncpy(wchar_t *_Dest,wchar_t *_Source,size_t _Count)
+
+{
+  wchar_t wVar1;
+  uint uVar2;
+  uint uVar3;
+  wchar_t *pwVar4;
+  
+  pwVar4 = _Dest;
+  if (_Count != 0) {
+    do {
+      wVar1 = *_Source;
+      *pwVar4 = wVar1;
+      pwVar4 = pwVar4 + 1;
+      _Source = _Source + 1;
+      if (wVar1 == L'\0') break;
+      _Count = _Count - 1;
+    } while (_Count != 0);
+    if ((_Count != 0) && (uVar2 = _Count - 1, uVar2 != 0)) {
+      for (uVar3 = uVar2 >> 1; uVar3 != 0; uVar3 = uVar3 - 1) {
+        pwVar4[0] = L'\0';
+        pwVar4[1] = L'\0';
+        pwVar4 = pwVar4 + 2;
+      }
+      for (uVar2 = (uint)((uVar2 & 1) != 0); uVar2 != 0; uVar2 = uVar2 - 1) {
+        *pwVar4 = L'\0';
+        pwVar4 = pwVar4 + 1;
+      }
+    }
+  }
+  return _Dest;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00634e39 : MOV EDI,EDI
+00634e3b : PUSH EBP
+00634e3c : MOV EBP,ESP
+00634e3e : MOV ECX,dword ptr [EBP + 0x10]
+00634e41 : PUSH ESI
+00634e42 : PUSH EDI
+00634e43 : MOV EDI,dword ptr [EBP + 0x8]
+00634e46 : MOV ESI,EDI
+00634e48 : TEST ECX,ECX
+00634e4a : JZ 0x00634e7d
+00634e4c : MOV EDX,dword ptr [EBP + 0xc]
+00634e4f : MOVZX EAX,word ptr [EDX]
+00634e52 : MOV word ptr [EDI],AX
+00634e55 : INC EDI
+00634e56 : INC EDI
+00634e57 : INC EDX
+00634e58 : INC EDX
+00634e59 : TEST AX,AX
+00634e5c : JZ 0x00634e61
+00634e5e : DEC ECX
+00634e5f : JNZ 0x00634e4f
+00634e61 : TEST ECX,ECX
+00634e63 : JZ 0x00634e7d
+00634e65 : DEC ECX
+00634e66 : JZ 0x00634e7d
+00634e68 : XOR EAX,EAX
+00634e6a : MOVZX EDX,AX
+00634e6d : MOV EAX,EDX
+00634e6f : SHL EDX,0x10
+00634e72 : OR EAX,EDX
+00634e74 : SHR ECX,0x1
+00634e76 : STOSD.REP ES:EDI
+00634e78 : ADC ECX,ECX
+00634e7a : STOSW.REP ES:EDI
+00634e7d : POP EDI
+00634e7e : MOV EAX,ESI
+00634e80 : POP ESI
+00634e81 : POP EBP
+00634e82 : RET

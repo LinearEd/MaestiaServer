@@ -1,0 +1,94 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0045fbd0
+ENTRY    : 0045fbd0
+BODY     : [[0045fbd0, 0045fc19] [0045fc20, 0045fc43]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_0045fbd0(int *param_1,int *param_2)
+
+{
+  float fVar1;
+  int iVar2;
+  int *piVar3;
+  int *piVar4;
+  
+  piVar3 = param_1;
+  if (param_1 != param_2) {
+    while (piVar3 = piVar3 + 1, piVar3 != param_2) {
+      iVar2 = *piVar3;
+      fVar1 = *(float *)(iVar2 + 0x38);
+      piVar4 = piVar3;
+      if (*(float *)(*param_1 + 0x38) <= fVar1) {
+        while( true ) {
+          if (*(float *)(piVar4[-1] + 0x38) <= fVar1) break;
+          *piVar4 = piVar4[-1];
+          piVar4 = piVar4 + -1;
+        }
+        *piVar4 = iVar2;
+      }
+      else {
+        for (; param_1 != piVar4; piVar4 = piVar4 + -1) {
+          *piVar4 = piVar4[-1];
+        }
+        *param_1 = iVar2;
+      }
+    }
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0045fbd0 : PUSH EBP
+0045fbd1 : MOV EBP,ESP
+0045fbd3 : MOV ECX,dword ptr [EBP + 0x8]
+0045fbd6 : MOV EAX,dword ptr [EBP + 0xc]
+0045fbd9 : CMP ECX,EAX
+0045fbdb : JZ 0x0045fc42
+0045fbdd : PUSH ESI
+0045fbde : LEA ESI,[ECX + 0x4]
+0045fbe1 : CMP ESI,EAX
+0045fbe3 : JZ 0x0045fc41
+0045fbe5 : PUSH EDI
+0045fbe6 : JMP 0x0045fbeb
+0045fbe8 : MOV ECX,dword ptr [EBP + 0x8]
+0045fbeb : MOV EAX,dword ptr [ECX]
+0045fbed : MOV EDI,dword ptr [ESI]
+0045fbef : MOVSS XMM1,dword ptr [EAX + 0x38]
+0045fbf4 : MOVSS XMM0,dword ptr [EDI + 0x38]
+0045fbf9 : COMISS XMM1,XMM0
+0045fbfc : MOV EDX,ESI
+0045fbfe : MOV EAX,ESI
+0045fc00 : JBE 0x0045fc20
+0045fc02 : CMP ECX,ESI
+0045fc04 : JZ 0x0045fc16
+0045fc06 : MOV EDX,dword ptr [EAX + -0x4]
+0045fc09 : SUB EAX,0x4
+0045fc0c : MOV dword ptr [EAX + 0x4],EDX
+0045fc0f : CMP EAX,ECX
+0045fc11 : JNZ 0x0045fc06
+0045fc13 : MOV ECX,dword ptr [EBP + 0x8]
+0045fc16 : MOV dword ptr [ECX],EDI
+0045fc18 : JMP 0x0045fc38
+0045fc20 : MOV ECX,dword ptr [EAX + -0x4]
+0045fc23 : MOVSS XMM1,dword ptr [ECX + 0x38]
+0045fc28 : SUB EAX,0x4
+0045fc2b : COMISS XMM1,XMM0
+0045fc2e : JBE 0x0045fc36
+0045fc30 : MOV dword ptr [EDX],ECX
+0045fc32 : MOV EDX,EAX
+0045fc34 : JMP 0x0045fc20
+0045fc36 : MOV dword ptr [EDX],EDI
+0045fc38 : ADD ESI,0x4
+0045fc3b : CMP ESI,dword ptr [EBP + 0xc]
+0045fc3e : JNZ 0x0045fbe8
+0045fc40 : POP EDI
+0045fc41 : POP ESI
+0045fc42 : POP EBP
+0045fc43 : RET

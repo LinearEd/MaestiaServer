@@ -1,0 +1,80 @@
+PROGRAM  : Maestia.exe
+FUNCTION : _iswctype
+ENTRY    : 00651835
+BODY     : [[00651835, 006518aa]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    _iswctype
+   
+   Library: Visual Studio 2008 Release */
+
+int __cdecl _iswctype(wint_t _C,wctype_t _Type)
+
+{
+  int iVar1;
+  undefined2 in_stack_00000006;
+  undefined2 in_stack_0000000a;
+  undefined1 local_8 [4];
+  
+  if (_C == 0xffff) {
+    return 0;
+  }
+  if (_C < 0x100) {
+    return (uint)(*(ushort *)(PTR_DAT_00d673d8 + (uint)_C * 2) & _Type);
+  }
+  if (DAT_00d7b7c8 == 0) {
+    ___crtGetStringTypeW(&PTR_DAT_00d67e40,1,&_C,1,local_8,DAT_00d67d64,DAT_00d67d74);
+  }
+  iVar1 = __iswctype_l((wint_t)__C,(wctype_t)__Type,(_locale_t)0x0);
+  return iVar1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00651835 : MOV EDI,EDI
+00651837 : PUSH EBP
+00651838 : MOV EBP,ESP
+0065183a : PUSH ECX
+0065183b : MOV EAX,0xffff
+00651840 : CMP word ptr [EBP + 0x8],AX
+00651844 : JNZ 0x0065184a
+00651846 : XOR EAX,EAX
+00651848 : LEAVE
+00651849 : RET
+0065184a : MOV EAX,0x100
+0065184f : CMP word ptr [EBP + 0x8],AX
+00651853 : JNC 0x0065186b
+00651855 : MOVZX EAX,word ptr [EBP + 0x8]
+00651859 : MOV ECX,dword ptr [0x00d673d8]
+0065185f : MOVZX EAX,word ptr [ECX + EAX*0x2]
+00651863 : MOVZX ECX,word ptr [EBP + 0xc]
+00651867 : AND EAX,ECX
+00651869 : LEAVE
+0065186a : RET
+0065186b : CMP dword ptr [0x00d7b7c8],0x0
+00651872 : JNZ 0x00651899
+00651874 : PUSH dword ptr [0x00d67d74]
+0065187a : LEA EAX,[EBP + -0x4]
+0065187d : PUSH dword ptr [0x00d67d64]
+00651883 : PUSH EAX
+00651884 : PUSH 0x1
+00651886 : LEA EAX,[EBP + 0x8]
+00651889 : PUSH EAX
+0065188a : PUSH 0x1
+0065188c : PUSH 0xd67e40
+00651891 : CALL 0x006451d7
+00651896 : ADD ESP,0x1c
+00651899 : PUSH 0x0
+0065189b : PUSH dword ptr [EBP + 0xc]
+0065189e : PUSH dword ptr [EBP + 0x8]
+006518a1 : CALL 0x006517ab
+006518a6 : ADD ESP,0xc
+006518a9 : LEAVE
+006518aa : RET

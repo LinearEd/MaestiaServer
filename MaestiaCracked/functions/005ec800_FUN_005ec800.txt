@@ -1,0 +1,72 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005ec800
+ENTRY    : 005ec800
+BODY     : [[005ec800, 005ec846]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_005ec800(uint param_1)
+
+{
+  byte *pbVar1;
+  uint uVar2;
+  GRefCountNTSImpl *this;
+  int *in_ECX;
+  uint uVar3;
+  
+  uVar2 = in_ECX[1];
+  uVar3 = 0;
+  if (uVar2 != 0) {
+    do {
+      this = *(GRefCountNTSImpl **)(*in_ECX + uVar3 * 4);
+      if (this != (GRefCountNTSImpl *)0x0) {
+        *(int *)(this + 4) = *(int *)(this + 4) + 1;
+      }
+      if ((*(uint *)(this + 0x14) < 0x4000) && (param_1 < *(uint *)(this + 0x18))) {
+        pbVar1 = (byte *)(*(int *)(*in_ECX + uVar3 * 4) + 0x66);
+        *pbVar1 = *pbVar1 | 0x40;
+      }
+      GRefCountNTSImpl::Release(this);
+      uVar3 = uVar3 + 1;
+    } while (uVar3 < uVar2);
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005ec800 : PUSH EBP
+005ec801 : PUSH ESI
+005ec802 : PUSH EDI
+005ec803 : MOV EDI,ECX
+005ec805 : MOV EBP,dword ptr [EDI + 0x4]
+005ec808 : XOR ESI,ESI
+005ec80a : TEST EBP,EBP
+005ec80c : JBE 0x005ec841
+005ec80e : MOV EDI,EDI
+005ec810 : MOV EAX,dword ptr [EDI]
+005ec812 : MOV ECX,dword ptr [EAX + ESI*0x4]
+005ec815 : TEST ECX,ECX
+005ec817 : JZ 0x005ec81c
+005ec819 : INC dword ptr [ECX + 0x4]
+005ec81c : CMP dword ptr [ECX + 0x14],0x3fff
+005ec823 : JA 0x005ec837
+005ec825 : MOV EDX,dword ptr [ESP + 0x10]
+005ec829 : CMP dword ptr [ECX + 0x18],EDX
+005ec82c : JBE 0x005ec837
+005ec82e : MOV EAX,dword ptr [EDI]
+005ec830 : MOV EAX,dword ptr [EAX + ESI*0x4]
+005ec833 : OR byte ptr [EAX + 0x66],0x40
+005ec837 : CALL 0x004ff7c0
+005ec83c : INC ESI
+005ec83d : CMP ESI,EBP
+005ec83f : JC 0x005ec810
+005ec841 : POP EDI
+005ec842 : POP ESI
+005ec843 : POP EBP
+005ec844 : RET 0x4

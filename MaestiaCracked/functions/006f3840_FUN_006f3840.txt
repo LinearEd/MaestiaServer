@@ -1,0 +1,119 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_006f3840
+ENTRY    : 006f3840
+BODY     : [[006f3840, 006f3916]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+int __fastcall FUN_006f3840(int len,uint8_t *packet)
+
+{
+  ushort uVar1;
+  int iVar2;
+  ushort uVar3;
+  int unaff_ESI;
+  
+  if ((*(int *)(unaff_ESI + 0x2418) != 0x12345678) || (*(int *)(unaff_ESI + 0x241c) != 0x19760915))
+  {
+    FUN_006ee470(L"[CRITICAL] [AvSocket::SendNormal] this is deleted pointer\n");
+    return 0;
+  }
+  if (*(int *)(unaff_ESI + 0xec0) != 0) {
+    FUN_006ee470(L"[CRITICAL] Send: CloseAfterSend set\n",*(int *)(unaff_ESI + 0xec0));
+    return 1;
+  }
+  if (packet == (uint8_t *)0x0) {
+    FUN_006ee470(L"[CRITICAL] Send: input packet is NULL\n");
+    return 0;
+  }
+  uVar3 = (ushort)len;
+  if ((uVar3 != 0) && (*(int *)(unaff_ESI + 0xee0) != -1)) {
+    if (0x1000 < uVar3) {
+      FUN_006ee470(L"[CRITICAL] Send: length exceeds limit (%d > %d)\n",len & 0xffff,0x1000);
+      return 0;
+    }
+    uVar1 = *(ushort *)packet;
+    if ((uVar1 & 0x1fff) != uVar3) {
+      *(ushort *)packet = (uVar1 ^ uVar3) & 0x1fff ^ uVar1;
+    }
+    iVar2 = FUN_006f3540(unaff_ESI,packet,len);
+    return iVar2;
+  }
+  FUN_006ee470(L"[CRITICAL] Send: invalid request (length %d, socket %d)\n",len & 0xffff,
+               *(undefined4 *)(unaff_ESI + 0xee0));
+  return 1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006f3840 : CMP dword ptr [ESI + 0x2418],0x12345678
+006f384a : JNZ 0x006f3907
+006f3850 : CMP dword ptr [ESI + 0x241c],0x19760915
+006f385a : JNZ 0x006f3907
+006f3860 : MOV EAX,dword ptr [ESI + 0xec0]
+006f3866 : TEST EAX,EAX
+006f3868 : JZ 0x006f387e
+006f386a : PUSH EAX
+006f386b : PUSH 0xbf6b70
+006f3870 : CALL 0x006ee470
+006f3875 : ADD ESP,0x8
+006f3878 : MOV EAX,0x1
+006f387d : RET
+006f387e : TEST EDX,EDX
+006f3880 : JNZ 0x006f3892
+006f3882 : PUSH 0xbf6bc0
+006f3887 : CALL 0x006ee470
+006f388c : ADD ESP,0x4
+006f388f : XOR EAX,EAX
+006f3891 : RET
+006f3892 : TEST CX,CX
+006f3895 : JZ 0x006f38e9
+006f3897 : CMP dword ptr [ESI + 0xee0],-0x1
+006f389e : JZ 0x006f38e9
+006f38a0 : MOV EAX,0x1000
+006f38a5 : CMP CX,AX
+006f38a8 : JBE 0x006f38bf
+006f38aa : MOVZX ECX,CX
+006f38ad : PUSH EAX
+006f38ae : PUSH ECX
+006f38af : PUSH 0xbf6c88
+006f38b4 : CALL 0x006ee470
+006f38b9 : ADD ESP,0xc
+006f38bc : XOR EAX,EAX
+006f38be : RET
+006f38bf : MOVZX EAX,word ptr [EDX]
+006f38c2 : PUSH EDI
+006f38c3 : MOV EDI,EAX
+006f38c5 : AND EDI,0x1fff
+006f38cb : CMP DI,CX
+006f38ce : JZ 0x006f38df
+006f38d0 : MOV EDI,EAX
+006f38d2 : XOR EDI,ECX
+006f38d4 : AND EDI,0x1fff
+006f38da : XOR EDI,EAX
+006f38dc : MOV word ptr [EDX],DI
+006f38df : PUSH ECX
+006f38e0 : PUSH EDX
+006f38e1 : PUSH ESI
+006f38e2 : CALL 0x006f3540
+006f38e7 : POP EDI
+006f38e8 : RET
+006f38e9 : MOV EDX,dword ptr [ESI + 0xee0]
+006f38ef : MOVZX EAX,CX
+006f38f2 : PUSH EDX
+006f38f3 : PUSH EAX
+006f38f4 : PUSH 0xbf6c10
+006f38f9 : CALL 0x006ee470
+006f38fe : ADD ESP,0xc
+006f3901 : MOV EAX,0x1
+006f3906 : RET
+006f3907 : PUSH 0xbf6af8
+006f390c : CALL 0x006ee470
+006f3911 : ADD ESP,0x4
+006f3914 : XOR EAX,EAX
+006f3916 : RET

@@ -1,0 +1,64 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005544d0
+ENTRY    : 005544d0
+BODY     : [[005544d0, 00554504]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+uint FUN_005544d0(byte *param_1)
+
+{
+  int iVar1;
+  byte bVar2;
+  uint uVar3;
+  byte bVar4;
+  uint uVar5;
+  uint uVar6;
+  
+  uVar6 = *param_1 >> 3 & 3;
+  uVar3 = 0;
+  uVar5 = 0;
+  bVar4 = 0;
+  if (uVar6 != 0xffffffff) {
+    do {
+      iVar1 = uVar5 + 1;
+      bVar2 = bVar4 & 0x1f;
+      uVar5 = uVar5 + 1;
+      bVar4 = bVar4 + 8;
+      uVar3 = uVar3 | (uint)param_1[iVar1] << bVar2;
+    } while (uVar5 < uVar6 + 1);
+  }
+  return uVar3;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005544d0 : PUSH ESI
+005544d1 : PUSH EDI
+005544d2 : MOV EDI,dword ptr [ESP + 0xc]
+005544d6 : MOVZX ESI,byte ptr [EDI]
+005544d9 : SHR ESI,0x3
+005544dc : AND ESI,0x3
+005544df : ADD ESI,0x1
+005544e2 : MOV EAX,0x0
+005544e7 : MOV EDX,EAX
+005544e9 : MOV ECX,EAX
+005544eb : JZ 0x00554502
+005544ed : PUSH EBX
+005544ee : MOV EDI,EDI
+005544f0 : MOVZX EBX,byte ptr [EDX + EDI*0x1 + 0x1]
+005544f5 : SHL EBX,CL
+005544f7 : INC EDX
+005544f8 : ADD ECX,0x8
+005544fb : OR EAX,EBX
+005544fd : CMP EDX,ESI
+005544ff : JC 0x005544f0
+00554501 : POP EBX
+00554502 : POP EDI
+00554503 : POP ESI
+00554504 : RET

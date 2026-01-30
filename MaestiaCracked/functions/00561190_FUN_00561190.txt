@@ -1,0 +1,52 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00561190
+ENTRY    : 00561190
+BODY     : [[00561190, 005611c1]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00561190(void)
+
+{
+  GMutex *this;
+  int in_ECX;
+  
+  this = (GMutex *)(in_ECX + 8);
+  GMutex::Lock(this);
+  if (*(char *)(in_ECX + 0x20) == '\0') {
+    do {
+      GWaitCondition::Wait((GWaitCondition *)(in_ECX + 0x1c),this,0xffffffff);
+    } while (*(char *)(in_ECX + 0x20) == '\0');
+  }
+  GMutex::Unlock(this);
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00561190 : PUSH ESI
+00561191 : MOV ESI,ECX
+00561193 : PUSH EDI
+00561194 : LEA EDI,[ESI + 0x8]
+00561197 : MOV ECX,EDI
+00561199 : CALL 0x005162b0
+0056119e : CMP byte ptr [ESI + 0x20],0x0
+005611a2 : JNZ 0x005611b9
+005611a4 : PUSH EBX
+005611a5 : LEA EBX,[ESI + 0x1c]
+005611a8 : PUSH -0x1
+005611aa : PUSH EDI
+005611ab : MOV ECX,EBX
+005611ad : CALL 0x00516820
+005611b2 : CMP byte ptr [ESI + 0x20],0x0
+005611b6 : JZ 0x005611a8
+005611b8 : POP EBX
+005611b9 : MOV ECX,EDI
+005611bb : POP EDI
+005611bc : POP ESI
+005611bd : JMP 0x005170a0

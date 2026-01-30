@@ -1,0 +1,197 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00753f10
+ENTRY    : 00753f10
+BODY     : [[00753f10, 0075409e]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00753f10(float *param_1)
+
+{
+  float fVar1;
+  float fVar2;
+  int *piVar3;
+  uint uVar4;
+  int iVar5;
+  int *unaff_ESI;
+  float10 fVar6;
+  LPCRITICAL_SECTION local_24;
+  char *local_20;
+  undefined4 local_1c;
+  int local_18;
+  undefined4 local_14;
+  void *local_10;
+  undefined1 *puStack_c;
+  undefined4 local_8;
+  
+  local_8 = 0xffffffff;
+  puStack_c = &LAB_00b0e61f;
+  local_10 = ExceptionList;
+  uVar4 = DAT_00d66fa0 ^ (uint)&stack0xfffffffc;
+  ExceptionList = &local_10;
+  if ((unaff_ESI[0xc] != 0) && (*unaff_ESI != 0)) {
+    iVar5 = _AIL_sample_status_4(*unaff_ESI);
+    if (iVar5 == 4) {
+      local_24 = (LPCRITICAL_SECTION)(unaff_ESI + 0x18);
+      local_18 = 0;
+      local_20 = ".\\mss\\AvaMixerChannel.cpp";
+      local_1c = 0x221;
+      local_14 = 1;
+      FUN_006ef1a0(&local_24);
+      local_8 = 0;
+      piVar3 = (int *)unaff_ESI[0xf];
+      if (piVar3 != (int *)0x0) {
+        if (*(char *)((int)piVar3 + 0x5d) != '\0') {
+          (**(code **)(*piVar3 + 0x14))(uVar4);
+        }
+        fVar1 = (float)piVar3[0x2f];
+        fVar2 = (float)piVar3[0x30];
+        if ((((float)piVar3[0x2e] != (float)unaff_ESI[0x10]) || (fVar1 != (float)unaff_ESI[0x11]))
+           || (fVar2 != (float)unaff_ESI[0x12])) {
+          unaff_ESI[0x10] = piVar3[0x2e];
+          unaff_ESI[0x11] = (int)fVar1;
+          unaff_ESI[0x12] = (int)fVar2;
+          _AIL_set_sample_3D_position_16(*unaff_ESI,unaff_ESI[0x10],unaff_ESI[0x11],unaff_ESI[0x12])
+          ;
+        }
+      }
+      local_8 = 0xffffffff;
+      if (local_18 != 0) {
+        LeaveCriticalSection(local_24);
+        local_18 = 0;
+      }
+      fVar6 = (float10)FUN_0040f460(((float)unaff_ESI[0x12] - param_1[2]) *
+                                    ((float)unaff_ESI[0x12] - param_1[2]) +
+                                    ((float)unaff_ESI[0x11] - param_1[1]) *
+                                    ((float)unaff_ESI[0x11] - param_1[1]) +
+                                    ((float)unaff_ESI[0x10] - *param_1) *
+                                    ((float)unaff_ESI[0x10] - *param_1));
+      unaff_ESI[0x15] = (int)(float)fVar6;
+      if ((float10)(float)unaff_ESI[0x14] + (float10)100.0 <= fVar6) {
+        _AIL_end_sample_4(*unaff_ESI);
+      }
+    }
+  }
+  ExceptionList = local_10;
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00753f10 : PUSH EBP
+00753f11 : MOV EBP,ESP
+00753f13 : PUSH -0x1
+00753f15 : PUSH 0xb0e61f
+00753f1a : MOV EAX,FS:[0x0]
+00753f20 : PUSH EAX
+00753f21 : SUB ESP,0x14
+00753f24 : PUSH EDI
+00753f25 : MOV EAX,[0x00d66fa0]
+00753f2a : XOR EAX,EBP
+00753f2c : PUSH EAX
+00753f2d : LEA EAX,[EBP + -0xc]
+00753f30 : MOV FS:[0x0],EAX
+00753f36 : CMP dword ptr [ESI + 0x30],0x0
+00753f3a : JZ 0x0075408d
+00753f40 : MOV EAX,dword ptr [ESI]
+00753f42 : TEST EAX,EAX
+00753f44 : JZ 0x0075408d
+00753f4a : PUSH EAX
+00753f4b : CALL dword ptr [0x00b85708]
+00753f51 : CMP EAX,0x4
+00753f54 : JNZ 0x0075408d
+00753f5a : LEA ECX,[EBP + -0x20]
+00753f5d : LEA EAX,[ESI + 0x60]
+00753f60 : PUSH ECX
+00753f61 : MOV dword ptr [EBP + -0x14],0x0
+00753f68 : MOV dword ptr [EBP + -0x20],EAX
+00753f6b : MOV dword ptr [EBP + -0x1c],0xc0a904
+00753f72 : MOV dword ptr [EBP + -0x18],0x221
+00753f79 : MOV dword ptr [EBP + -0x10],0x1
+00753f80 : CALL 0x006ef1a0
+00753f85 : MOV dword ptr [EBP + -0x4],0x0
+00753f8c : MOV EDI,dword ptr [ESI + 0x3c]
+00753f8f : TEST EDI,EDI
+00753f91 : JZ 0x00754007
+00753f93 : CMP byte ptr [EDI + 0x5d],0x0
+00753f97 : JZ 0x00753fa2
+00753f99 : MOV EDX,dword ptr [EDI]
+00753f9b : MOV EAX,dword ptr [EDX + 0x14]
+00753f9e : MOV ECX,EDI
+00753fa0 : CALL EAX
+00753fa2 : MOVSS XMM0,dword ptr [EDI + 0xb8]
+00753faa : UCOMISS XMM0,dword ptr [ESI + 0x40]
+00753fae : MOVSS XMM1,dword ptr [EDI + 0xbc]
+00753fb6 : MOVSS XMM2,dword ptr [EDI + 0xc0]
+00753fbe : LAHF
+00753fbf : TEST AH,0x44
+00753fc2 : JP 0x00753fd8
+00753fc4 : UCOMISS XMM1,dword ptr [ESI + 0x44]
+00753fc8 : LAHF
+00753fc9 : TEST AH,0x44
+00753fcc : JP 0x00753fd8
+00753fce : UCOMISS XMM2,dword ptr [ESI + 0x48]
+00753fd2 : LAHF
+00753fd3 : TEST AH,0x44
+00753fd6 : JNP 0x00754007
+00753fd8 : MOVSS dword ptr [ESI + 0x40],XMM0
+00753fdd : MOVSS dword ptr [ESI + 0x44],XMM1
+00753fe2 : MOVSS dword ptr [ESI + 0x48],XMM2
+00753fe7 : FLD float ptr [ESI + 0x48]
+00753fea : MOV ECX,dword ptr [ESI]
+00753fec : SUB ESP,0xc
+00753fef : FSTP float ptr [ESP + 0x8]
+00753ff3 : FLD float ptr [ESI + 0x44]
+00753ff6 : FSTP float ptr [ESP + 0x4]
+00753ffa : FLD float ptr [ESI + 0x40]
+00753ffd : FSTP float ptr [ESP]
+00754000 : PUSH ECX
+00754001 : CALL dword ptr [0x00b85754]
+00754007 : MOV dword ptr [EBP + -0x4],0xffffffff
+0075400e : CMP dword ptr [EBP + -0x14],0x0
+00754012 : JZ 0x00754025
+00754014 : MOV EDX,dword ptr [EBP + -0x20]
+00754017 : PUSH EDX
+00754018 : CALL dword ptr [0x00b8511c]
+0075401e : MOV dword ptr [EBP + -0x14],0x0
+00754025 : MOV EAX,dword ptr [EBP + 0x8]
+00754028 : MOVSS XMM2,dword ptr [ESI + 0x48]
+0075402d : SUBSS XMM2,dword ptr [EAX + 0x8]
+00754032 : MOVSS XMM1,dword ptr [ESI + 0x44]
+00754037 : SUBSS XMM1,dword ptr [EAX + 0x4]
+0075403c : MOVSS XMM0,dword ptr [ESI + 0x40]
+00754041 : SUBSS XMM0,dword ptr [EAX]
+00754045 : MOVAPS XMM3,XMM2
+00754048 : MULSS XMM3,XMM2
+0075404c : MOVAPS XMM2,XMM1
+0075404f : MULSS XMM2,XMM1
+00754053 : MOVAPS XMM1,XMM0
+00754056 : ADDSS XMM3,XMM2
+0075405a : MULSS XMM1,XMM0
+0075405e : PUSH ECX
+0075405f : ADDSS XMM3,XMM1
+00754063 : MOVSS dword ptr [ESP],XMM3
+00754068 : CALL 0x0040f460
+0075406d : FST float ptr [ESI + 0x54]
+00754070 : FLD float ptr [ESI + 0x50]
+00754073 : ADD ESP,0x4
+00754076 : FADD float ptr [0x00cdf230]
+0075407c : FXCH
+0075407e : FCOMIP ST0,ST1
+00754080 : FSTP ST0
+00754082 : JC 0x0075408d
+00754084 : MOV EAX,dword ptr [ESI]
+00754086 : PUSH EAX
+00754087 : CALL dword ptr [0x00b856f4]
+0075408d : MOV ECX,dword ptr [EBP + -0xc]
+00754090 : MOV dword ptr FS:[0x0],ECX
+00754097 : POP ECX
+00754098 : POP EDI
+00754099 : MOV ESP,EBP
+0075409b : POP EBP
+0075409c : RET 0x4

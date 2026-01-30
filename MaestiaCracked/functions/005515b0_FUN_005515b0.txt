@@ -1,0 +1,64 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005515b0
+ENTRY    : 005515b0
+BODY     : [[005515b0, 005515f9]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+int FUN_005515b0(int *param_1,char param_2)
+
+{
+  int iVar1;
+  int iVar2;
+  int *in_ECX;
+  
+  if (param_2 == '\0') {
+    iVar2 = FUN_00550e90(param_1);
+    return iVar2;
+  }
+  iVar2 = *in_ECX;
+  if (iVar2 != 0) {
+    iVar1 = FUN_0054f420(param_1,*(uint *)(*param_1 + 0xc) & *(uint *)(iVar2 + 4));
+    if ((-1 < iVar1) && (iVar2 = iVar2 + 0xc + iVar1 * 0x24, iVar2 != 0)) {
+      return iVar2 + 4;
+    }
+  }
+  return 0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005515b0 : CMP byte ptr [ESP + 0x8],0x0
+005515b5 : JZ 0x005515ed
+005515b7 : PUSH ESI
+005515b8 : MOV ESI,dword ptr [ECX]
+005515ba : TEST ESI,ESI
+005515bc : JZ 0x005515e7
+005515be : MOV EAX,dword ptr [ESP + 0x8]
+005515c2 : MOV EDX,dword ptr [EAX]
+005515c4 : MOV EDX,dword ptr [EDX + 0xc]
+005515c7 : AND EDX,dword ptr [ESI + 0x4]
+005515ca : PUSH EDX
+005515cb : PUSH EAX
+005515cc : CALL 0x0054f420
+005515d1 : TEST EAX,EAX
+005515d3 : JL 0x005515e7
+005515d5 : LEA EAX,[EAX + EAX*0x8]
+005515d8 : LEA EAX,[ESI + EAX*0x4 + 0xc]
+005515dc : TEST EAX,EAX
+005515de : JZ 0x005515e7
+005515e0 : ADD EAX,0x4
+005515e3 : POP ESI
+005515e4 : RET 0x8
+005515e7 : XOR EAX,EAX
+005515e9 : POP ESI
+005515ea : RET 0x8
+005515ed : MOV EDX,dword ptr [ESP + 0x4]
+005515f1 : PUSH EDX
+005515f2 : CALL 0x00550e90
+005515f7 : RET 0x8

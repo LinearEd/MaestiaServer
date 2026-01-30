@@ -1,0 +1,61 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_008c10f0
+ENTRY    : 008c10f0
+BODY     : [[008c10f0, 008c10fc] [008c1100, 008c1123]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_008c10f0(void)
+
+{
+  int iVar1;
+  int *piVar2;
+  int in_ECX;
+  ushort in_DX;
+  int unaff_ESI;
+  
+  piVar2 = *(int **)(in_ECX + 4);
+  if (piVar2 != *(int **)(in_ECX + 8)) {
+    while (iVar1 = *piVar2, *(int *)(iVar1 + 4) != unaff_ESI) {
+      piVar2 = piVar2 + 1;
+      if (piVar2 == *(int **)(in_ECX + 8)) {
+        return;
+      }
+    }
+    if (*(ushort *)(iVar1 + 0x12) < in_DX) {
+      in_DX = *(ushort *)(iVar1 + 0x12);
+    }
+    *(ushort *)(iVar1 + 0x10) = in_DX;
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+008c10f0 : MOV EAX,dword ptr [ECX + 0x4]
+008c10f3 : MOV ECX,dword ptr [ECX + 0x8]
+008c10f6 : CMP EAX,ECX
+008c10f8 : JZ 0x008c1123
+008c10fa : PUSH EDI
+008c10fb : JMP 0x008c1100
+008c1100 : MOV EDI,dword ptr [EAX]
+008c1102 : CMP dword ptr [EDI + 0x4],ESI
+008c1105 : JZ 0x008c1110
+008c1107 : ADD EAX,0x4
+008c110a : CMP EAX,ECX
+008c110c : JNZ 0x008c1100
+008c110e : POP EDI
+008c110f : RET
+008c1110 : MOV EAX,EDI
+008c1112 : MOVZX ECX,word ptr [EAX + 0x12]
+008c1116 : CMP CX,DX
+008c1119 : JNC 0x008c111e
+008c111b : MOVZX EDX,CX
+008c111e : MOV word ptr [EAX + 0x10],DX
+008c1122 : POP EDI
+008c1123 : RET

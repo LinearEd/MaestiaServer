@@ -1,0 +1,93 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_006cd940
+ENTRY    : 006cd940
+BODY     : [[006cd940, 006cd9e2]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_006cd940(int param_1,int param_2,int param_3)
+
+{
+  int local_8;
+  
+  if ((param_1 != 0) && (param_2 != 0)) {
+    if (param_3 < -0x80000000) {
+      if (param_3 < 0) {
+        FUN_006c24c0(param_1,"Setting negative gamma to zero");
+        local_8 = 0;
+      }
+      else {
+        local_8 = param_3;
+      }
+    }
+    else {
+      FUN_006c24c0(param_1,"Limiting gamma to 21474.83");
+      local_8 = 0x7fffffff;
+    }
+    *(float *)(param_2 + 0x28) = (float)local_8 / 100000.0;
+    *(int *)(param_2 + 0xfc) = local_8;
+    *(uint *)(param_2 + 8) = *(uint *)(param_2 + 8) | 1;
+    if (local_8 == 0) {
+      FUN_006c24c0(param_1,"Setting gamma=0");
+    }
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006cd940 : PUSH EBP
+006cd941 : MOV EBP,ESP
+006cd943 : PUSH ECX
+006cd944 : CMP dword ptr [EBP + 0x8],0x0
+006cd948 : JZ 0x006cd950
+006cd94a : CMP dword ptr [EBP + 0xc],0x0
+006cd94e : JNZ 0x006cd955
+006cd950 : JMP 0x006cd9df
+006cd955 : CMP dword ptr [EBP + 0x10],0x7fffffff
+006cd95c : JLE 0x006cd978
+006cd95e : PUSH 0xbedbbc
+006cd963 : MOV EAX,dword ptr [EBP + 0x8]
+006cd966 : PUSH EAX
+006cd967 : CALL 0x006c24c0
+006cd96c : ADD ESP,0x8
+006cd96f : MOV dword ptr [EBP + -0x4],0x7fffffff
+006cd976 : JMP 0x006cd99e
+006cd978 : CMP dword ptr [EBP + 0x10],0x0
+006cd97c : JGE 0x006cd998
+006cd97e : PUSH 0xbedbd8
+006cd983 : MOV ECX,dword ptr [EBP + 0x8]
+006cd986 : PUSH ECX
+006cd987 : CALL 0x006c24c0
+006cd98c : ADD ESP,0x8
+006cd98f : MOV dword ptr [EBP + -0x4],0x0
+006cd996 : JMP 0x006cd99e
+006cd998 : MOV EDX,dword ptr [EBP + 0x10]
+006cd99b : MOV dword ptr [EBP + -0x4],EDX
+006cd99e : FILD dword ptr [EBP + -0x4]
+006cd9a1 : FDIV double ptr [0x00bed7f0]
+006cd9a7 : MOV EAX,dword ptr [EBP + 0xc]
+006cd9aa : FSTP float ptr [EAX + 0x28]
+006cd9ad : MOV ECX,dword ptr [EBP + 0xc]
+006cd9b0 : MOV EDX,dword ptr [EBP + -0x4]
+006cd9b3 : MOV dword ptr [ECX + 0xfc],EDX
+006cd9b9 : MOV EAX,dword ptr [EBP + 0xc]
+006cd9bc : MOV ECX,dword ptr [EAX + 0x8]
+006cd9bf : OR ECX,0x1
+006cd9c2 : MOV EDX,dword ptr [EBP + 0xc]
+006cd9c5 : MOV dword ptr [EDX + 0x8],ECX
+006cd9c8 : CMP dword ptr [EBP + -0x4],0x0
+006cd9cc : JNZ 0x006cd9df
+006cd9ce : PUSH 0xbedbac
+006cd9d3 : MOV EAX,dword ptr [EBP + 0x8]
+006cd9d6 : PUSH EAX
+006cd9d7 : CALL 0x006c24c0
+006cd9dc : ADD ESP,0x8
+006cd9df : MOV ESP,EBP
+006cd9e1 : POP EBP
+006cd9e2 : RET

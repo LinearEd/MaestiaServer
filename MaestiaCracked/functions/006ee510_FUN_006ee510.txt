@@ -1,0 +1,62 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_006ee510
+ENTRY    : 006ee510
+BODY     : [[006ee510, 006ee556]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+uint FUN_006ee510(SYSTEMTIME *param_1)
+
+{
+  uint uVar1;
+  SYSTEMTIME *in_ECX;
+  _FILETIME local_18;
+  _FILETIME local_10;
+  
+  SystemTimeToFileTime(in_ECX,&local_10);
+  SystemTimeToFileTime(param_1,&local_18);
+  uVar1 = __alldiv(local_10.dwLowDateTime - local_18.dwLowDateTime,
+                   (local_10.dwHighDateTime - local_18.dwHighDateTime) -
+                   (uint)(local_10.dwLowDateTime < local_18.dwLowDateTime),FUN_00989680,0);
+  return uVar1 & ((int)uVar1 < 1) - 1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006ee510 : PUSH EBP
+006ee511 : MOV EBP,ESP
+006ee513 : SUB ESP,0x18
+006ee516 : PUSH ESI
+006ee517 : MOV ESI,dword ptr [0x00b852f8]
+006ee51d : LEA EAX,[EBP + -0xc]
+006ee520 : PUSH EAX
+006ee521 : PUSH ECX
+006ee522 : CALL ESI
+006ee524 : MOV EAX,dword ptr [EBP + 0x8]
+006ee527 : LEA EDX,[EBP + -0x14]
+006ee52a : PUSH EDX
+006ee52b : PUSH EAX
+006ee52c : CALL ESI
+006ee52e : MOV ECX,dword ptr [EBP + -0xc]
+006ee531 : SUB ECX,dword ptr [EBP + -0x14]
+006ee534 : MOV EDX,dword ptr [EBP + -0x8]
+006ee537 : SBB EDX,dword ptr [EBP + -0x10]
+006ee53a : PUSH 0x0
+006ee53c : PUSH 0x989680
+006ee541 : PUSH EDX
+006ee542 : PUSH ECX
+006ee543 : CALL 0x0063c760
+006ee548 : XOR ECX,ECX
+006ee54a : TEST EAX,EAX
+006ee54c : SETLE CL
+006ee54f : POP ESI
+006ee550 : DEC ECX
+006ee551 : AND EAX,ECX
+006ee553 : MOV ESP,EBP
+006ee555 : POP EBP
+006ee556 : RET

@@ -1,0 +1,339 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00678090
+ENTRY    : 00678090
+BODY     : [[00678090, 00678302]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+int FUN_00678090(int param_1,int param_2)
+
+{
+  UINT *pUVar1;
+  HDC hdc;
+  undefined4 *puVar2;
+  char cVar3;
+  HFONT pHVar4;
+  HGDIOBJ h;
+  DWORD DVar5;
+  int iVar6;
+  int *in_ECX;
+  MAT2 MStack_2c;
+  _GLYPHMETRICS _Stack_1c;
+  
+  cVar3 = (**(code **)(*in_ECX + 0x14))(param_1,param_2);
+  if (cVar3 == '\0') {
+    return 0;
+  }
+  pUVar1 = (UINT *)(in_ECX[0x11] + param_1 * 0x18);
+  if (param_2 != in_ECX[0x10]) {
+    if ((HGDIOBJ)in_ECX[0xf] != (HGDIOBJ)0x0) {
+      DeleteObject((HGDIOBJ)in_ECX[0xf]);
+    }
+    pHVar4 = CreateFontW(-param_2,0,0,0,(-(uint)(((uint)in_ECX[5] >> 1 & 1) != 0) & 300) + 400,
+                         (uint)(*(byte *)(in_ECX + 5) & 1),0,0,1,0,0,4,0,(LPCWSTR)in_ECX[0xb]);
+    in_ECX[0xf] = (int)pHVar4;
+    in_ECX[0x10] = param_2;
+  }
+  hdc = *(HDC *)(in_ECX[7] + 0xc);
+  h = SelectObject(hdc,(HGDIOBJ)in_ECX[0xf]);
+  if (*(int *)(in_ECX[7] + 4) == 0) {
+    FUN_0058fd10(0x3f8);
+  }
+  MStack_2c.eM11.value = 1;
+  MStack_2c.eM21.fract = 0;
+  MStack_2c.eM11.fract = 0;
+  MStack_2c.eM12.value = 0;
+  MStack_2c.eM22.fract = 0;
+  puVar2 = (undefined4 *)in_ECX[7];
+  MStack_2c.eM12.fract = 0;
+  MStack_2c.eM21.value = 0;
+  MStack_2c.eM22.value = 1;
+  DVar5 = GetGlyphOutlineW((HDC)puVar2[3],*pUVar1,puVar2[4],&_Stack_1c,puVar2[1],(LPVOID)*puVar2,
+                           &MStack_2c);
+  if ((DVar5 != 0xffffffff) && ((int)DVar5 <= *(int *)(in_ECX[7] + 4))) {
+LAB_00678228:
+    if (in_ECX[0x16] == 0) {
+      iVar6 = FUN_00515840(0x24,0);
+      if (iVar6 == 0) {
+        iVar6 = 0;
+      }
+      else {
+        iVar6 = FUN_00677810();
+      }
+      if ((GRefCountNTSImpl *)in_ECX[0x16] != (GRefCountNTSImpl *)0x0) {
+        GRefCountNTSImpl::Release((GRefCountNTSImpl *)in_ECX[0x16]);
+      }
+      in_ECX[0x16] = iVar6;
+    }
+    if (DVar5 != 0) {
+      FUN_00677d30(*(undefined4 *)in_ECX[7],_Stack_1c.gmBlackBoxX,_Stack_1c.gmBlackBoxY,
+                   _Stack_1c.gmptGlyphOrigin.x,_Stack_1c.gmptGlyphOrigin.y,in_ECX[0x16]);
+      iVar6 = in_ECX[0x16];
+      SelectObject(hdc,h);
+      return iVar6;
+    }
+    *(undefined4 *)(in_ECX[0x16] + 0x14) = 1;
+    *(undefined4 *)(in_ECX[0x16] + 0x18) = 1;
+    FUN_0058fd10(1);
+    **(undefined1 **)(in_ECX[0x16] + 8) = 0;
+    iVar6 = in_ECX[0x16];
+    SelectObject(hdc,h);
+    return iVar6;
+  }
+  DVar5 = GetGlyphOutlineW(*(HDC *)(in_ECX[7] + 0xc),*pUVar1,*(UINT *)(in_ECX[7] + 0x10),&_Stack_1c,
+                           0,(LPVOID)0x0,&MStack_2c);
+  if (DVar5 != 0xffffffff) {
+    FUN_0058fd10(DVar5 + 0x3f8);
+    puVar2 = (undefined4 *)in_ECX[7];
+    DVar5 = GetGlyphOutlineW((HDC)puVar2[3],*pUVar1,puVar2[4],&_Stack_1c,puVar2[1],(LPVOID)*puVar2,
+                             &MStack_2c);
+    if ((DVar5 != 0xffffffff) && ((int)DVar5 <= *(int *)(in_ECX[7] + 4))) goto LAB_00678228;
+  }
+  SelectObject(hdc,h);
+  return 0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00678090 : SUB ESP,0x2c
+00678093 : PUSH EBX
+00678094 : MOV EBX,dword ptr [ESP + 0x34]
+00678098 : PUSH ESI
+00678099 : PUSH EDI
+0067809a : MOV EDI,dword ptr [ESP + 0x40]
+0067809e : MOV ESI,ECX
+006780a0 : MOV EAX,dword ptr [ESI]
+006780a2 : MOV EDX,dword ptr [EAX + 0x14]
+006780a5 : PUSH EDI
+006780a6 : PUSH EBX
+006780a7 : CALL EDX
+006780a9 : TEST AL,AL
+006780ab : JNZ 0x006780b8
+006780ad : POP EDI
+006780ae : POP ESI
+006780af : XOR EAX,EAX
+006780b1 : POP EBX
+006780b2 : ADD ESP,0x2c
+006780b5 : RET 0x8
+006780b8 : MOV ECX,dword ptr [ESI + 0x44]
+006780bb : LEA EAX,[EBX + EBX*0x2]
+006780be : LEA EBX,[ECX + EAX*0x8]
+006780c1 : CMP EDI,dword ptr [ESI + 0x40]
+006780c4 : JZ 0x00678120
+006780c6 : MOV EAX,dword ptr [ESI + 0x3c]
+006780c9 : TEST EAX,EAX
+006780cb : JZ 0x006780d4
+006780cd : PUSH EAX
+006780ce : CALL dword ptr [0x00b85074]
+006780d4 : MOV EDX,dword ptr [ESI + 0x2c]
+006780d7 : MOV EAX,dword ptr [ESI + 0x14]
+006780da : MOV CL,byte ptr [ESI + 0x14]
+006780dd : PUSH EDX
+006780de : PUSH 0x0
+006780e0 : PUSH 0x4
+006780e2 : SHR EAX,0x1
+006780e4 : PUSH 0x0
+006780e6 : AND AL,0x1
+006780e8 : PUSH 0x0
+006780ea : PUSH 0x1
+006780ec : MOVZX EAX,AL
+006780ef : AND CL,0x1
+006780f2 : PUSH 0x0
+006780f4 : NEG EAX
+006780f6 : PUSH 0x0
+006780f8 : MOVZX EDX,CL
+006780fb : SBB EAX,EAX
+006780fd : PUSH EDX
+006780fe : AND EAX,0x12c
+00678103 : ADD EAX,0x190
+00678108 : PUSH EAX
+00678109 : PUSH 0x0
+0067810b : PUSH 0x0
+0067810d : MOV ECX,EDI
+0067810f : PUSH 0x0
+00678111 : NEG ECX
+00678113 : PUSH ECX
+00678114 : CALL dword ptr [0x00b85068]
+0067811a : MOV dword ptr [ESI + 0x3c],EAX
+0067811d : MOV dword ptr [ESI + 0x40],EDI
+00678120 : MOV EAX,dword ptr [ESI + 0x3c]
+00678123 : MOV EDX,dword ptr [ESI + 0x1c]
+00678126 : MOV ECX,dword ptr [EDX + 0xc]
+00678129 : PUSH EAX
+0067812a : PUSH ECX
+0067812b : MOV dword ptr [ESP + 0x48],ECX
+0067812f : CALL dword ptr [0x00b85058]
+00678135 : MOV ECX,dword ptr [ESI + 0x1c]
+00678138 : CMP dword ptr [ECX + 0x4],0x0
+0067813c : MOV dword ptr [ESP + 0x10],EAX
+00678140 : JNZ 0x0067814c
+00678142 : PUSH 0x3f8
+00678147 : CALL 0x0058fd10
+0067814c : PUSH EBP
+0067814d : MOV EBP,dword ptr [0x00b85050]
+00678153 : XOR EAX,EAX
+00678155 : MOV ECX,0x1
+0067815a : MOV word ptr [ESP + 0x1a],CX
+0067815f : XOR ECX,ECX
+00678161 : MOV word ptr [ESP + 0x20],CX
+00678166 : MOV word ptr [ESP + 0x18],AX
+0067816b : MOV word ptr [ESP + 0x1e],AX
+00678170 : MOV word ptr [ESP + 0x24],AX
+00678175 : MOV EAX,dword ptr [ESI + 0x1c]
+00678178 : XOR EDX,EDX
+0067817a : MOV word ptr [ESP + 0x1c],DX
+0067817f : MOV word ptr [ESP + 0x22],DX
+00678184 : MOV ECX,0x1
+00678189 : MOV word ptr [ESP + 0x26],CX
+0067818e : MOV ECX,dword ptr [EAX]
+00678190 : MOV EDX,dword ptr [EAX + 0x4]
+00678193 : LEA EDI,[ESP + 0x18]
+00678197 : PUSH EDI
+00678198 : PUSH ECX
+00678199 : MOV ECX,dword ptr [EAX + 0x10]
+0067819c : MOV EAX,dword ptr [EAX + 0xc]
+0067819f : PUSH EDX
+006781a0 : LEA EDX,[ESP + 0x34]
+006781a4 : PUSH EDX
+006781a5 : MOV EDX,dword ptr [EBX]
+006781a7 : PUSH ECX
+006781a8 : PUSH EDX
+006781a9 : PUSH EAX
+006781aa : CALL EBP
+006781ac : MOV EDI,EAX
+006781ae : CMP EDI,-0x1
+006781b1 : JZ 0x006781bb
+006781b3 : MOV ECX,dword ptr [ESI + 0x1c]
+006781b6 : CMP EDI,dword ptr [ECX + 0x4]
+006781b9 : JLE 0x00678228
+006781bb : MOV EAX,dword ptr [ESI + 0x1c]
+006781be : LEA EDX,[ESP + 0x18]
+006781c2 : PUSH EDX
+006781c3 : MOV EDX,dword ptr [EAX + 0x10]
+006781c6 : PUSH 0x0
+006781c8 : PUSH 0x0
+006781ca : LEA ECX,[ESP + 0x34]
+006781ce : PUSH ECX
+006781cf : MOV ECX,dword ptr [EBX]
+006781d1 : PUSH EDX
+006781d2 : MOV EDX,dword ptr [EAX + 0xc]
+006781d5 : PUSH ECX
+006781d6 : PUSH EDX
+006781d7 : CALL EBP
+006781d9 : CMP EAX,-0x1
+006781dc : JZ 0x006782e7
+006781e2 : MOV ECX,dword ptr [ESI + 0x1c]
+006781e5 : ADD EAX,0x3f8
+006781ea : PUSH EAX
+006781eb : CALL 0x0058fd10
+006781f0 : MOV EAX,dword ptr [ESI + 0x1c]
+006781f3 : MOV ECX,dword ptr [EAX]
+006781f5 : MOV EDX,dword ptr [EAX + 0x4]
+006781f8 : LEA EDI,[ESP + 0x18]
+006781fc : PUSH EDI
+006781fd : PUSH ECX
+006781fe : MOV ECX,dword ptr [EAX + 0x10]
+00678201 : MOV EAX,dword ptr [EAX + 0xc]
+00678204 : PUSH EDX
+00678205 : LEA EDX,[ESP + 0x34]
+00678209 : PUSH EDX
+0067820a : MOV EDX,dword ptr [EBX]
+0067820c : PUSH ECX
+0067820d : PUSH EDX
+0067820e : PUSH EAX
+0067820f : CALL EBP
+00678211 : MOV EDI,EAX
+00678213 : CMP EDI,-0x1
+00678216 : JZ 0x006782e7
+0067821c : MOV ECX,dword ptr [ESI + 0x1c]
+0067821f : CMP EDI,dword ptr [ECX + 0x4]
+00678222 : JG 0x006782e7
+00678228 : CMP dword ptr [ESI + 0x58],0x0
+0067822c : JNZ 0x0067825d
+0067822e : MOV ECX,dword ptr [0x00d73250]
+00678234 : PUSH 0x0
+00678236 : PUSH 0x24
+00678238 : CALL 0x00515840
+0067823d : TEST EAX,EAX
+0067823f : JZ 0x0067824c
+00678241 : MOV ECX,EAX
+00678243 : CALL 0x00677810
+00678248 : MOV EBX,EAX
+0067824a : JMP 0x0067824e
+0067824c : XOR EBX,EBX
+0067824e : MOV ECX,dword ptr [ESI + 0x58]
+00678251 : TEST ECX,ECX
+00678253 : JZ 0x0067825a
+00678255 : CALL 0x004ff7c0
+0067825a : MOV dword ptr [ESI + 0x58],EBX
+0067825d : MOV EDX,dword ptr [ESI + 0x58]
+00678260 : TEST EDI,EDI
+00678262 : JZ 0x006782a5
+00678264 : MOV EAX,dword ptr [ESP + 0x34]
+00678268 : MOV ECX,dword ptr [ESP + 0x30]
+0067826c : PUSH EDX
+0067826d : MOV EDX,dword ptr [ESP + 0x30]
+00678271 : PUSH EAX
+00678272 : MOV EAX,dword ptr [ESP + 0x30]
+00678276 : PUSH ECX
+00678277 : MOV ECX,dword ptr [ESI + 0x1c]
+0067827a : PUSH EDX
+0067827b : MOV EDX,dword ptr [ECX]
+0067827d : PUSH EAX
+0067827e : PUSH EDX
+0067827f : MOV ECX,ESI
+00678281 : CALL 0x00677d30
+00678286 : MOV EAX,dword ptr [ESP + 0x14]
+0067828a : MOV ECX,dword ptr [ESP + 0x44]
+0067828e : MOV ESI,dword ptr [ESI + 0x58]
+00678291 : PUSH EAX
+00678292 : PUSH ECX
+00678293 : CALL dword ptr [0x00b85058]
+00678299 : POP EBP
+0067829a : POP EDI
+0067829b : MOV EAX,ESI
+0067829d : POP ESI
+0067829e : POP EBX
+0067829f : ADD ESP,0x2c
+006782a2 : RET 0x8
+006782a5 : MOV EAX,0x1
+006782aa : MOV dword ptr [EDX + 0x14],EAX
+006782ad : MOV ECX,dword ptr [ESI + 0x58]
+006782b0 : MOV dword ptr [ECX + 0x18],EAX
+006782b3 : MOV ECX,dword ptr [ESI + 0x58]
+006782b6 : PUSH EAX
+006782b7 : ADD ECX,0x8
+006782ba : CALL 0x0058fd10
+006782bf : MOV EDX,dword ptr [ESI + 0x58]
+006782c2 : MOV EAX,dword ptr [EDX + 0x8]
+006782c5 : MOV ECX,dword ptr [ESP + 0x14]
+006782c9 : MOV EDX,dword ptr [ESP + 0x44]
+006782cd : PUSH ECX
+006782ce : MOV byte ptr [EAX],0x0
+006782d1 : MOV ESI,dword ptr [ESI + 0x58]
+006782d4 : PUSH EDX
+006782d5 : CALL dword ptr [0x00b85058]
+006782db : POP EBP
+006782dc : POP EDI
+006782dd : MOV EAX,ESI
+006782df : POP ESI
+006782e0 : POP EBX
+006782e1 : ADD ESP,0x2c
+006782e4 : RET 0x8
+006782e7 : MOV EAX,dword ptr [ESP + 0x14]
+006782eb : MOV ECX,dword ptr [ESP + 0x44]
+006782ef : PUSH EAX
+006782f0 : PUSH ECX
+006782f1 : CALL dword ptr [0x00b85058]
+006782f7 : POP EBP
+006782f8 : POP EDI
+006782f9 : POP ESI
+006782fa : XOR EAX,EAX
+006782fc : POP EBX
+006782fd : ADD ESP,0x2c
+00678300 : RET 0x8

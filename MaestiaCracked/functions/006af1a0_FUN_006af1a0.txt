@@ -1,0 +1,110 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_006af1a0
+ENTRY    : 006af1a0
+BODY     : [[006af1a0, 006af228]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined4 FUN_006af1a0(int param_1,uint param_2,int param_3)
+
+{
+  uint *puVar1;
+  undefined4 uVar2;
+  int iVar3;
+  uint uVar4;
+  uint uVar5;
+  
+  puVar1 = *(uint **)(param_1 + 0x210);
+  uVar2 = 6;
+  if ((puVar1 != (uint *)0x0) && (puVar1[1] == param_2)) {
+    uVar4 = 0;
+    if (*puVar1 != 0) {
+      do {
+        uVar5 = 0;
+        uVar2 = 0x10000;
+        if (puVar1[1] != 0) {
+          do {
+            iVar3 = *(int *)(param_3 + uVar5 * 4);
+            if (iVar3 < 0) {
+              iVar3 = 0;
+            }
+            else if (0x10000 < iVar3) {
+              iVar3 = 0x10000;
+            }
+            if ((uVar4 & 1 << ((byte)uVar5 & 0x1f)) == 0) {
+              iVar3 = 0x10000 - iVar3;
+            }
+            uVar2 = FUN_00685ea0(uVar2,iVar3);
+            uVar5 = uVar5 + 1;
+          } while (uVar5 < puVar1[1]);
+        }
+        *(undefined4 *)(puVar1[0x22] + uVar4 * 4) = uVar2;
+        uVar4 = uVar4 + 1;
+      } while (uVar4 < *puVar1);
+    }
+    uVar2 = 0;
+  }
+  return uVar2;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006af1a0 : MOV EAX,dword ptr [ESP + 0x4]
+006af1a4 : PUSH EDI
+006af1a5 : MOV EDI,dword ptr [EAX + 0x210]
+006af1ab : MOV EAX,0x6
+006af1b0 : TEST EDI,EDI
+006af1b2 : JZ 0x006af227
+006af1b4 : MOV ECX,dword ptr [EDI + 0x4]
+006af1b7 : CMP ECX,dword ptr [ESP + 0xc]
+006af1bb : JNZ 0x006af227
+006af1bd : PUSH EBX
+006af1be : XOR EBX,EBX
+006af1c0 : CMP dword ptr [EDI],EBX
+006af1c2 : JBE 0x006af224
+006af1c4 : PUSH EBP
+006af1c5 : PUSH ESI
+006af1c6 : XOR ESI,ESI
+006af1c8 : MOV EAX,0x10000
+006af1cd : CMP dword ptr [EDI + 0x4],ESI
+006af1d0 : JBE 0x006af214
+006af1d2 : MOV EDX,dword ptr [ESP + 0x1c]
+006af1d6 : MOV EDX,dword ptr [EDX + ESI*0x4]
+006af1d9 : TEST EDX,EDX
+006af1db : JGE 0x006af1e1
+006af1dd : XOR EDX,EDX
+006af1df : JMP 0x006af1ee
+006af1e1 : CMP EDX,0x10000
+006af1e7 : JLE 0x006af1ee
+006af1e9 : MOV EDX,0x10000
+006af1ee : MOV EBP,0x1
+006af1f3 : MOV ECX,ESI
+006af1f5 : SHL EBP,CL
+006af1f7 : TEST EBX,EBP
+006af1f9 : JNZ 0x006af204
+006af1fb : MOV ECX,0x10000
+006af200 : SUB ECX,EDX
+006af202 : MOV EDX,ECX
+006af204 : PUSH EDX
+006af205 : PUSH EAX
+006af206 : CALL 0x00685ea0
+006af20b : INC ESI
+006af20c : ADD ESP,0x8
+006af20f : CMP ESI,dword ptr [EDI + 0x4]
+006af212 : JC 0x006af1d2
+006af214 : MOV EDX,dword ptr [EDI + 0x88]
+006af21a : MOV dword ptr [EDX + EBX*0x4],EAX
+006af21d : INC EBX
+006af21e : CMP EBX,dword ptr [EDI]
+006af220 : JC 0x006af1c6
+006af222 : POP ESI
+006af223 : POP EBP
+006af224 : XOR EAX,EAX
+006af226 : POP EBX
+006af227 : POP EDI
+006af228 : RET

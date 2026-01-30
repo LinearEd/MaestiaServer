@@ -1,0 +1,223 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00843470
+ENTRY    : 00843470
+BODY     : [[00843470, 00843603]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00843470(uint param_1,undefined4 param_2,uint param_3,uint param_4,int param_5)
+
+{
+  byte bVar1;
+  int iVar2;
+  int iVar3;
+  int *piVar4;
+  uint uVar5;
+  int iVar6;
+  char cVar7;
+  
+  iVar3 = param_5;
+  if (0x16 < (byte)param_4) {
+    FUN_008018d0(
+                L"AvaSkillDataManager::OnLearnSkill The skill level is higher than the maximum skill level"
+                );
+    param_4 = CONCAT31(param_4._1_3_,0x15);
+  }
+  uVar5 = param_3;
+  iVar6 = FUN_008413b0(param_3,0);
+  iVar2 = DAT_00d7c54c;
+  if (iVar6 == 0) {
+    FUN_00842fb0(param_1,param_2,uVar5,param_4,iVar3,0);
+    param_3 = uVar5;
+  }
+  else {
+    param_1 = uVar5;
+    FUN_004437f0(&param_1);
+    if ((param_5 == *(int *)(iVar2 + 0x44)) || (iVar2 = *(int *)(param_5 + 0x10), iVar2 == 0)) {
+      FUN_008018d0(L"AvaSkillDataManager::OnLearnSkill Skill not found");
+      return;
+    }
+    cVar7 = (char)iVar3;
+    *(byte *)(iVar6 + 8) = (byte)param_4;
+    *(char *)(iVar6 + 9) = cVar7;
+    bVar1 = *(byte *)(iVar2 + 0x208);
+    *(byte *)(iVar6 + 0xb) = (byte)param_4 + cVar7;
+    *(byte *)(iVar6 + 10) = bVar1;
+    if (bVar1 < (byte)param_4) {
+      *(byte *)(iVar6 + 8) = bVar1;
+      param_4 = CONCAT31(param_4._1_3_,bVar1);
+    }
+    if (bVar1 < *(byte *)(iVar6 + 0xb)) {
+      *(byte *)(iVar6 + 0xb) = bVar1;
+    }
+    if ((*(char *)(iVar6 + 0x30) == '\0') && (*(char *)(iVar6 + 0x31) == '\0')) {
+      FUN_008018d0(L"AvaSkillDataManager::OnLearnSkill - PassiveSkillData : proto(%d), index(%d)",
+                   param_3,param_3 & 0xffff);
+      FUN_00842810();
+    }
+    if (*DAT_00da9894 != 0) {
+      FUN_0090cc20();
+    }
+  }
+  piVar4 = DAT_00da9894;
+  iVar3 = DAT_00d7c54c;
+  if (*DAT_00da9894 != 0) {
+    FUN_004437f0(&param_3);
+    if (((param_1 != *(uint *)(iVar3 + 0x44)) && (*(int *)(param_1 + 0x10) != 0)) &&
+       ((*(byte *)(*(int *)(param_1 + 0x10) + 0x40) & 0x80) != 0)) {
+      FUN_008c2030(*(undefined4 *)(*piVar4 + 0x1ec),param_4 & 0xff);
+    }
+    if (*(int *)(*DAT_00da9894 + 300) == 0) {
+      FUN_00931dc0(0);
+      return;
+    }
+    FUN_00931dc0(*(undefined4 *)(*(int *)(*DAT_00da9894 + 300) + 0xc));
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00843470 : PUSH EBP
+00843471 : MOV EBP,ESP
+00843473 : CMP byte ptr [EBP + 0x14],0x16
+00843477 : PUSH EBX
+00843478 : MOV EBX,dword ptr [EBP + 0x18]
+0084347b : PUSH ESI
+0084347c : PUSH EDI
+0084347d : JBE 0x00843496
+0084347f : MOV ESI,dword ptr [0x00da98e8]
+00843485 : PUSH 0xc3ac80
+0084348a : CALL 0x008018d0
+0084348f : ADD ESP,0x4
+00843492 : MOV byte ptr [EBP + 0x14],0x15
+00843496 : MOV ESI,dword ptr [EBP + 0x10]
+00843499 : MOV ECX,dword ptr [EBP + 0x8]
+0084349c : PUSH 0x0
+0084349e : PUSH ESI
+0084349f : CALL 0x008413b0
+008434a4 : MOV EDI,EAX
+008434a6 : TEST EDI,EDI
+008434a8 : JZ 0x008435da
+008434ae : MOV dword ptr [EBP + 0x8],ESI
+008434b1 : MOV ESI,dword ptr [0x00d7c54c]
+008434b7 : LEA EAX,[EBP + 0x8]
+008434ba : PUSH EAX
+008434bb : LEA ECX,[ESI + 0x40]
+008434be : LEA EAX,[EBP + 0x18]
+008434c1 : CALL 0x004437f0
+008434c6 : MOV EAX,dword ptr [EBP + 0x18]
+008434c9 : CMP EAX,dword ptr [ESI + 0x44]
+008434cc : JZ 0x008434d5
+008434ce : MOV ESI,dword ptr [EAX + 0x10]
+008434d1 : TEST ESI,ESI
+008434d3 : JNZ 0x008434ef
+008434d5 : MOV ESI,dword ptr [0x00da98e8]
+008434db : PUSH 0xc3ad38
+008434e0 : CALL 0x008018d0
+008434e5 : ADD ESP,0x4
+008434e8 : POP EDI
+008434e9 : POP ESI
+008434ea : POP EBX
+008434eb : POP EBP
+008434ec : RET 0x14
+008434ef : MOV CL,byte ptr [EBP + 0x14]
+008434f2 : MOV AL,CL
+008434f4 : ADD AL,BL
+008434f6 : MOV byte ptr [EDI + 0x8],CL
+008434f9 : MOV byte ptr [EDI + 0x9],BL
+008434fc : MOV DL,byte ptr [ESI + 0x208]
+00843502 : MOV byte ptr [EDI + 0xb],AL
+00843505 : MOV AL,DL
+00843507 : MOV byte ptr [EDI + 0xa],DL
+0084350a : CMP AL,CL
+0084350c : JNC 0x00843514
+0084350e : MOV byte ptr [EDI + 0x8],AL
+00843511 : MOV byte ptr [EBP + 0x14],AL
+00843514 : CMP AL,byte ptr [EDI + 0xb]
+00843517 : JNC 0x0084351c
+00843519 : MOV byte ptr [EDI + 0xb],AL
+0084351c : CMP byte ptr [EDI + 0x30],0x0
+00843520 : JNZ 0x00843548
+00843522 : CMP byte ptr [EDI + 0x31],0x0
+00843526 : JNZ 0x00843548
+00843528 : MOV EAX,dword ptr [EBP + 0x10]
+0084352b : MOV ESI,dword ptr [0x00da98e8]
+00843531 : MOVZX ECX,AX
+00843534 : PUSH ECX
+00843535 : PUSH EAX
+00843536 : PUSH 0xc3adc0
+0084353b : CALL 0x008018d0
+00843540 : ADD ESP,0xc
+00843543 : CALL 0x00842810
+00843548 : MOV EDX,dword ptr [0x00da9894]
+0084354e : MOV EAX,dword ptr [EDX]
+00843550 : TEST EAX,EAX
+00843552 : JZ 0x00843563
+00843554 : MOV ECX,dword ptr [EAX + 0x17c]
+0084355a : MOV EAX,EDI
+0084355c : MOV EDI,ECX
+0084355e : CALL 0x0090cc20
+00843563 : MOV ESI,dword ptr [EBP + 0x10]
+00843566 : MOV EBX,dword ptr [0x00da9894]
+0084356c : CMP dword ptr [EBX],0x0
+0084356f : JZ 0x008435fd
+00843575 : MOV EDI,dword ptr [0x00d7c54c]
+0084357b : LEA EAX,[EBP + 0x10]
+0084357e : PUSH EAX
+0084357f : LEA ECX,[EDI + 0x40]
+00843582 : LEA EAX,[EBP + 0x8]
+00843585 : MOV dword ptr [EBP + 0x10],ESI
+00843588 : CALL 0x004437f0
+0084358d : MOV EAX,dword ptr [EBP + 0x8]
+00843590 : CMP EAX,dword ptr [EDI + 0x44]
+00843593 : JZ 0x008435bb
+00843595 : MOV EAX,dword ptr [EAX + 0x10]
+00843598 : TEST EAX,EAX
+0084359a : JZ 0x008435bb
+0084359c : TEST byte ptr [EAX + 0x40],0x80
+008435a0 : JZ 0x008435bb
+008435a2 : MOVZX CX,byte ptr [EBP + 0x14]
+008435a7 : MOV EAX,dword ptr [EBX]
+008435a9 : MOVZX EDX,CX
+008435ac : MOV ECX,dword ptr [EAX + 0x1ec]
+008435b2 : PUSH EDX
+008435b3 : PUSH ECX
+008435b4 : MOV EAX,ESI
+008435b6 : CALL 0x008c2030
+008435bb : MOV EDX,dword ptr [0x00da9894]
+008435c1 : MOV EAX,dword ptr [EDX]
+008435c3 : MOV EAX,dword ptr [EAX + 0x12c]
+008435c9 : TEST EAX,EAX
+008435cb : JNZ 0x008435f4
+008435cd : PUSH EAX
+008435ce : CALL 0x00931dc0
+008435d3 : POP EDI
+008435d4 : POP ESI
+008435d5 : POP EBX
+008435d6 : POP EBP
+008435d7 : RET 0x14
+008435da : MOV EAX,dword ptr [EBP + 0x14]
+008435dd : MOV ECX,dword ptr [EBP + 0xc]
+008435e0 : MOV EDX,dword ptr [EBP + 0x8]
+008435e3 : PUSH 0x0
+008435e5 : PUSH EBX
+008435e6 : PUSH EAX
+008435e7 : PUSH ESI
+008435e8 : PUSH ECX
+008435e9 : PUSH EDX
+008435ea : CALL 0x00842fb0
+008435ef : JMP 0x00843566
+008435f4 : MOV EAX,dword ptr [EAX + 0xc]
+008435f7 : PUSH EAX
+008435f8 : CALL 0x00931dc0
+008435fd : POP EDI
+008435fe : POP ESI
+008435ff : POP EBX
+00843600 : POP EBP
+00843601 : RET 0x14

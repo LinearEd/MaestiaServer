@@ -1,0 +1,52 @@
+PROGRAM  : Maestia.exe
+FUNCTION : Suspend
+ENTRY    : 00516fd0
+BODY     : [[00516fd0, 00516ffc]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* public: bool __thiscall GThread::Suspend(void) */
+
+bool __thiscall GThread::Suspend(GThread *this)
+
+{
+  DWORD DVar1;
+  
+                    /* 0x116fd0  152  ?Suspend@GThread@@QAE_NXZ */
+  if ((*(uint *)(this + 0x18) & 1) != 0) {
+    DVar1 = SuspendThread(*(HANDLE *)(this + 0x2c));
+    if (DVar1 != 0xffffffff) {
+      InterlockedExchangeAdd((LONG *)(this + 0x1c),1);
+      return true;
+    }
+  }
+  return false;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00516fd0 : PUSH ESI
+00516fd1 : MOV ESI,ECX
+00516fd3 : MOV EAX,dword ptr [ESI + 0x18]
+00516fd6 : TEST AL,0x1
+00516fd8 : JZ 0x00516ff9
+00516fda : MOV ECX,dword ptr [ESI + 0x2c]
+00516fdd : PUSH ECX
+00516fde : CALL dword ptr [0x00b85240]
+00516fe4 : CMP EAX,-0x1
+00516fe7 : JZ 0x00516ff9
+00516fe9 : PUSH 0x1
+00516feb : ADD ESI,0x1c
+00516fee : PUSH ESI
+00516fef : CALL dword ptr [0x00b851cc]
+00516ff5 : MOV AL,0x1
+00516ff7 : POP ESI
+00516ff8 : RET
+00516ff9 : XOR AL,AL
+00516ffb : POP ESI
+00516ffc : RET

@@ -1,0 +1,94 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0053f910
+ENTRY    : 0053f910
+BODY     : [[0053f910, 0053f982]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_0053f910(GRefCountImpl *param_1)
+
+{
+  int iVar1;
+  GRefCountImpl *this;
+  int in_ECX;
+  GRefCountImpl *pGVar2;
+  bool bVar3;
+  
+  this = param_1;
+  bVar3 = (*(ushort *)(param_1 + 0x2a) >> 9 & 1) == 0;
+  if (bVar3) {
+    param_1 = (GRefCountImpl *)0x0;
+    pGVar2 = (GRefCountImpl *)&param_1;
+  }
+  else {
+    pGVar2 = param_1 + 0x18;
+  }
+  iVar1 = *(int *)pGVar2;
+  if ((bVar3) && (param_1 != (GRefCountImpl *)0x0)) {
+    GRefCountNTSImpl::Release((GRefCountNTSImpl *)param_1);
+  }
+  if (iVar1 != 0) {
+    FUN_0053f7c0(this);
+    return;
+  }
+  GRefCountImpl::AddRef(this);
+  if (*(GRefCountImpl **)(in_ECX + 0x1c) != (GRefCountImpl *)0x0) {
+    GRefCountImpl::Release(*(GRefCountImpl **)(in_ECX + 0x1c));
+  }
+  *(GRefCountImpl **)(in_ECX + 0x1c) = this;
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0053f910 : PUSH ECX
+0053f911 : PUSH EBX
+0053f912 : PUSH ESI
+0053f913 : MOV ESI,dword ptr [ESP + 0x10]
+0053f917 : MOV EBX,ECX
+0053f919 : MOV CX,word ptr [ESI + 0x2a]
+0053f91d : XOR EAX,EAX
+0053f91f : SHR CX,0x9
+0053f923 : MOV dword ptr [ESP + 0x8],EAX
+0053f927 : TEST CL,0x1
+0053f92a : JZ 0x0053f935
+0053f92c : MOV ECX,dword ptr [ESP + 0x10]
+0053f930 : LEA EDX,[ESI + 0x18]
+0053f933 : JMP 0x0053f944
+0053f935 : XOR ECX,ECX
+0053f937 : MOV EAX,0x1
+0053f93c : MOV dword ptr [ESP + 0x10],ECX
+0053f940 : LEA EDX,[ESP + 0x10]
+0053f944 : PUSH EDI
+0053f945 : MOV EDI,dword ptr [EDX]
+0053f947 : TEST AL,0x1
+0053f949 : JZ 0x0053f954
+0053f94b : TEST ECX,ECX
+0053f94d : JZ 0x0053f954
+0053f94f : CALL 0x004ff7c0
+0053f954 : TEST EDI,EDI
+0053f956 : POP EDI
+0053f957 : JZ 0x0053f967
+0053f959 : PUSH ESI
+0053f95a : MOV ECX,EBX
+0053f95c : CALL 0x0053f7c0
+0053f961 : POP ESI
+0053f962 : POP EBX
+0053f963 : POP ECX
+0053f964 : RET 0x4
+0053f967 : MOV ECX,ESI
+0053f969 : CALL 0x00523dd0
+0053f96e : MOV ECX,dword ptr [EBX + 0x1c]
+0053f971 : TEST ECX,ECX
+0053f973 : JZ 0x0053f97a
+0053f975 : CALL 0x004ff7e0
+0053f97a : MOV dword ptr [EBX + 0x1c],ESI
+0053f97d : POP ESI
+0053f97e : POP EBX
+0053f97f : POP ECX
+0053f980 : RET 0x4

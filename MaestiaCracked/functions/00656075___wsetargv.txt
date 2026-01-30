@@ -1,0 +1,119 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __wsetargv
+ENTRY    : 00656075
+BODY     : [[00656075, 00656122]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+/* Library Function - Single Match
+    __wsetargv
+   
+   Library: Visual Studio 2008 Release */
+
+int __cdecl __wsetargv(void)
+
+{
+  uint _Size;
+  void *pvVar1;
+  int iVar2;
+  uint in_ECX;
+  uint local_8;
+  
+  _DAT_00d7c2f8 = 0;
+  local_8 = in_ECX;
+  GetModuleFileNameW((HMODULE)0x0,(LPWSTR)&DAT_00d7c0f0,0x104);
+  _DAT_00d7b7b4 = &DAT_00d7c0f0;
+  wparse_cmdline(0,&local_8);
+  if ((((local_8 < 0x3fffffff) && (in_ECX < 0x7fffffff)) &&
+      (_Size = (in_ECX + local_8 * 2) * 2, in_ECX * 2 <= _Size)) &&
+     (pvVar1 = __malloc_crt(_Size), pvVar1 != (void *)0x0)) {
+    wparse_cmdline(pvVar1,&local_8);
+    _DAT_00d7b794 = local_8 - 1;
+    iVar2 = 0;
+    _DAT_00d7b79c = pvVar1;
+  }
+  else {
+    iVar2 = -1;
+  }
+  return iVar2;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00656075 : MOV EDI,EDI
+00656077 : PUSH EBP
+00656078 : MOV EBP,ESP
+0065607a : PUSH ECX
+0065607b : PUSH ECX
+0065607c : PUSH EBX
+0065607d : PUSH ESI
+0065607e : PUSH EDI
+0065607f : PUSH 0x104
+00656084 : MOV ESI,0xd7c0f0
+00656089 : PUSH ESI
+0065608a : XOR EAX,EAX
+0065608c : XOR EBX,EBX
+0065608e : PUSH EBX
+0065608f : MOV [0x00d7c2f8],AX
+00656095 : CALL dword ptr [0x00b85144]
+0065609b : MOV EAX,[0x01729d64]
+006560a0 : MOV dword ptr [0x00d7b7b4],ESI
+006560a6 : CMP EAX,EBX
+006560a8 : JZ 0x006560b1
+006560aa : MOV EDI,EAX
+006560ac : CMP word ptr [EAX],BX
+006560af : JNZ 0x006560b3
+006560b1 : MOV EDI,ESI
+006560b3 : LEA EAX,[EBP + -0x4]
+006560b6 : PUSH EAX
+006560b7 : PUSH EBX
+006560b8 : LEA EBX,[EBP + -0x8]
+006560bb : XOR ECX,ECX
+006560bd : MOV EAX,EDI
+006560bf : CALL 0x00655f24
+006560c4 : MOV EBX,dword ptr [EBP + -0x4]
+006560c7 : POP ECX
+006560c8 : POP ECX
+006560c9 : CMP EBX,0x3fffffff
+006560cf : JNC 0x0065611b
+006560d1 : MOV ECX,dword ptr [EBP + -0x8]
+006560d4 : CMP ECX,0x7fffffff
+006560da : JNC 0x0065611b
+006560dc : LEA EAX,[ECX + EBX*0x2]
+006560df : ADD EAX,EAX
+006560e1 : ADD ECX,ECX
+006560e3 : CMP EAX,ECX
+006560e5 : JC 0x0065611b
+006560e7 : PUSH EAX
+006560e8 : CALL 0x0064255f
+006560ed : MOV ESI,EAX
+006560ef : POP ECX
+006560f0 : TEST ESI,ESI
+006560f2 : JZ 0x0065611b
+006560f4 : LEA EAX,[EBP + -0x4]
+006560f7 : PUSH EAX
+006560f8 : LEA ECX,[ESI + EBX*0x4]
+006560fb : PUSH ESI
+006560fc : LEA EBX,[EBP + -0x8]
+006560ff : MOV EAX,EDI
+00656101 : CALL 0x00655f24
+00656106 : MOV EAX,dword ptr [EBP + -0x4]
+00656109 : DEC EAX
+0065610a : POP ECX
+0065610b : MOV [0x00d7b794],EAX
+00656110 : POP ECX
+00656111 : MOV dword ptr [0x00d7b79c],ESI
+00656117 : XOR EAX,EAX
+00656119 : JMP 0x0065611e
+0065611b : OR EAX,0xffffffff
+0065611e : POP EDI
+0065611f : POP ESI
+00656120 : POP EBX
+00656121 : LEAVE
+00656122 : RET

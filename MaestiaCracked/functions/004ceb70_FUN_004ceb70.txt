@@ -1,0 +1,93 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_004ceb70
+ENTRY    : 004ceb70
+BODY     : [[004ceb70, 004cebf2]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_004ceb70(wchar_t *param_1)
+
+{
+  wchar_t wVar1;
+  wchar_t *_DstBuf;
+  wchar_t *pwVar2;
+  int in_ECX;
+  
+  _DstBuf = _malloc(0xa08);
+  if (_DstBuf != (wchar_t *)0x0) {
+    _DstBuf[0] = L'\xdddd';
+    _DstBuf[1] = L'\0';
+    _DstBuf = _DstBuf + 4;
+  }
+  __vsnwprintf_s(_DstBuf,0x400,0xffffffff,param_1,&stack0x00000008);
+  pwVar2 = _DstBuf;
+  do {
+    wVar1 = *pwVar2;
+    pwVar2 = pwVar2 + 1;
+  } while (wVar1 != L'\0');
+  if ((int)pwVar2 - (int)(_DstBuf + 1) >> 1 <= *(int *)(in_ECX + 4)) {
+    _wcscpy_s((wchar_t *)(in_ECX + 8),0x400,_DstBuf);
+  }
+  if ((_DstBuf != (wchar_t *)0x0) && (*(int *)(_DstBuf + -4) == 0xdddd)) {
+    _free(_DstBuf + -4);
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+004ceb70 : PUSH EBP
+004ceb71 : MOV EBP,ESP
+004ceb73 : PUSH ESI
+004ceb74 : PUSH EDI
+004ceb75 : PUSH 0xa08
+004ceb7a : MOV EDI,ECX
+004ceb7c : CALL 0x00636043
+004ceb81 : MOV ESI,EAX
+004ceb83 : ADD ESP,0x4
+004ceb86 : TEST ESI,ESI
+004ceb88 : JZ 0x004ceb93
+004ceb8a : MOV dword ptr [ESI],0xdddd
+004ceb90 : ADD ESI,0x8
+004ceb93 : MOV ECX,dword ptr [EBP + 0x8]
+004ceb96 : LEA EAX,[EBP + 0xc]
+004ceb99 : PUSH EAX
+004ceb9a : PUSH ECX
+004ceb9b : PUSH -0x1
+004ceb9d : PUSH 0x400
+004ceba2 : PUSH ESI
+004ceba3 : CALL 0x00634771
+004ceba8 : MOV EAX,ESI
+004cebaa : ADD ESP,0x14
+004cebad : LEA EDX,[EAX + 0x2]
+004cebb0 : MOV CX,word ptr [EAX]
+004cebb3 : ADD EAX,0x2
+004cebb6 : TEST CX,CX
+004cebb9 : JNZ 0x004cebb0
+004cebbb : SUB EAX,EDX
+004cebbd : SAR EAX,0x1
+004cebbf : CMP EAX,dword ptr [EDI + 0x4]
+004cebc2 : JG 0x004cebd6
+004cebc4 : PUSH ESI
+004cebc5 : PUSH 0x400
+004cebca : ADD EDI,0x8
+004cebcd : PUSH EDI
+004cebce : CALL 0x0063481b
+004cebd3 : ADD ESP,0xc
+004cebd6 : TEST ESI,ESI
+004cebd8 : JZ 0x004cebef
+004cebda : CMP dword ptr [ESI + -0x8],0xdddd
+004cebe1 : LEA EAX,[ESI + -0x8]
+004cebe4 : JNZ 0x004cebef
+004cebe6 : PUSH EAX
+004cebe7 : CALL 0x0063610d
+004cebec : ADD ESP,0x4
+004cebef : POP EDI
+004cebf0 : POP ESI
+004cebf1 : POP EBP
+004cebf2 : RET

@@ -1,0 +1,91 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0055eb40
+ENTRY    : 0055eb40
+BODY     : [[0055eb40, 0055ebc0]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined4 FUN_0055eb40(int param_1)
+
+{
+  int iVar1;
+  int in_ECX;
+  
+  if ((((*(byte *)(in_ECX + 0x2a) >> 2 & 1) == 0) || ((*(byte *)(param_1 + 0x2a) >> 2 & 1) == 0)) ||
+     (iVar1 = FUN_0051b280((*(uint *)(in_ECX + 8) & 0xfffffffc) + 8,
+                           (*(uint *)(param_1 + 8) & 0xfffffffc) + 8), iVar1 != 0)) {
+    if ((*(ushort *)(in_ECX + 0x2a) >> 0xb & 1) == 0) {
+      return 0;
+    }
+    if ((*(ushort *)(param_1 + 0x2a) >> 0xb & 1) == 0) {
+      return 0;
+    }
+    if (*(int *)(in_ECX + 0x1c) != *(int *)(param_1 + 0x1c)) {
+      return 0;
+    }
+  }
+  if ((((*(byte *)(in_ECX + 0x28) ^ *(byte *)(param_1 + 0x28)) & 1) == 0) &&
+     (((*(byte *)(in_ECX + 0x28) ^ *(byte *)(param_1 + 0x28)) & 2) == 0)) {
+    return 1;
+  }
+  return 0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0055eb40 : PUSH ESI
+0055eb41 : MOV ESI,ECX
+0055eb43 : MOV AL,byte ptr [ESI + 0x2a]
+0055eb46 : SHR AL,0x2
+0055eb49 : PUSH EDI
+0055eb4a : MOV EDI,dword ptr [ESP + 0xc]
+0055eb4e : TEST AL,0x1
+0055eb50 : JZ 0x0055eb7a
+0055eb52 : MOV CL,byte ptr [EDI + 0x2a]
+0055eb55 : SHR CL,0x2
+0055eb58 : TEST CL,0x1
+0055eb5b : JZ 0x0055eb7a
+0055eb5d : MOV EAX,dword ptr [EDI + 0x8]
+0055eb60 : MOV ECX,dword ptr [ESI + 0x8]
+0055eb63 : AND EAX,0xfffffffc
+0055eb66 : AND ECX,0xfffffffc
+0055eb69 : ADD EAX,0x8
+0055eb6c : PUSH EAX
+0055eb6d : ADD ECX,0x8
+0055eb70 : PUSH ECX
+0055eb71 : CALL 0x0051b280
+0055eb76 : TEST EAX,EAX
+0055eb78 : JZ 0x0055eb9b
+0055eb7a : MOV DX,word ptr [ESI + 0x2a]
+0055eb7e : SHR DX,0xb
+0055eb82 : TEST DL,0x1
+0055eb85 : JZ 0x0055ebba
+0055eb87 : MOV AX,word ptr [EDI + 0x2a]
+0055eb8b : SHR AX,0xb
+0055eb8f : TEST AL,0x1
+0055eb91 : JZ 0x0055ebba
+0055eb93 : MOV ECX,dword ptr [ESI + 0x1c]
+0055eb96 : CMP ECX,dword ptr [EDI + 0x1c]
+0055eb99 : JNZ 0x0055ebba
+0055eb9b : MOV AL,byte ptr [ESI + 0x28]
+0055eb9e : MOV CL,byte ptr [EDI + 0x28]
+0055eba1 : MOV DL,AL
+0055eba3 : XOR DL,CL
+0055eba5 : TEST DL,0x1
+0055eba8 : JNZ 0x0055ebba
+0055ebaa : XOR AL,CL
+0055ebac : TEST AL,0x2
+0055ebae : JNZ 0x0055ebba
+0055ebb0 : POP EDI
+0055ebb1 : MOV EAX,0x1
+0055ebb6 : POP ESI
+0055ebb7 : RET 0x4
+0055ebba : POP EDI
+0055ebbb : XOR EAX,EAX
+0055ebbd : POP ESI
+0055ebbe : RET 0x4

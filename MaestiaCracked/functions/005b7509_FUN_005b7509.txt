@@ -1,0 +1,67 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005b7509
+ENTRY    : 005b7509
+BODY     : [[005b7509, 005b7553]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_005b7509(void)
+
+{
+  uint uVar1;
+  int *piVar2;
+  int in_EAX;
+  int in_ECX;
+  uint uVar3;
+  
+  uVar1 = *(uint *)(in_ECX + 0xa8);
+  *(uint *)(in_ECX + 0x8c) =
+       *(uint *)(in_ECX + 0x8c) ^ (in_EAX << 0x10 ^ *(uint *)(in_ECX + 0x8c)) & 0x30000;
+  uVar3 = 0;
+  if (uVar1 != 0) {
+    do {
+      piVar2 = *(int **)(*(int *)(in_ECX + 0xa4) + uVar3 * 4);
+      if (piVar2 != (int *)0x0) {
+        (**(code **)(*piVar2 + 0xa4))();
+      }
+      uVar3 = uVar3 + 1;
+    } while (uVar3 < uVar1);
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005b7509 : PUSH ESI
+005b750a : MOV ESI,ECX
+005b750c : MOV EBP,dword ptr [ESI + 0xa8]
+005b7512 : SHL EAX,0x10
+005b7515 : XOR EAX,dword ptr [ESI + 0x8c]
+005b751b : PUSH EDI
+005b751c : AND EAX,0x30000
+005b7521 : XOR dword ptr [ESI + 0x8c],EAX
+005b7527 : XOR EDI,EDI
+005b7529 : TEST EBP,EBP
+005b752b : JBE 0x005b754d
+005b752d : LEA ECX,[ECX]
+005b7530 : MOV ECX,dword ptr [ESI + 0xa4]
+005b7536 : MOV ECX,dword ptr [ECX + EDI*0x4]
+005b7539 : TEST ECX,ECX
+005b753b : JZ 0x005b7548
+005b753d : MOV EDX,dword ptr [ECX]
+005b753f : MOV EAX,dword ptr [EDX + 0xa4]
+005b7545 : PUSH EBX
+005b7546 : CALL EAX
+005b7548 : INC EDI
+005b7549 : CMP EDI,EBP
+005b754b : JC 0x005b7530
+005b754d : POP EDI
+005b754e : POP ESI
+005b754f : POP EBP
+005b7550 : POP EBX
+005b7551 : RET 0x4

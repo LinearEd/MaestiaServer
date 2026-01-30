@@ -1,0 +1,163 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00526120
+ENTRY    : 00526120
+BODY     : [[00526120, 00526205]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+bool FUN_00526120(int param_1)
+
+{
+  char cVar1;
+  int iVar2;
+  char *in_ECX;
+  byte bVar3;
+  double local_8;
+  
+  cVar1 = *in_ECX;
+  if (cVar1 == '\x05') {
+    if (*(int *)(*(int *)(in_ECX + 4) + 0x10) != 0) {
+      if (6 < *(byte *)(param_1 + 0x7c)) {
+        return true;
+      }
+      cVar1 = FUN_00525e80();
+      if (cVar1 != '\0') {
+        cVar1 = FUN_0050a220(local_8);
+        if (cVar1 == '\0') {
+          bVar3 = (byte)((ushort)((ushort)NAN(local_8) << 10) >> 8) |
+                  (byte)((ushort)((ushort)(local_8 == 0.0) << 0xe) >> 8);
+          goto LAB_00526174;
+        }
+      }
+    }
+  }
+  else {
+    if (cVar1 != '\x03') {
+      if (cVar1 != '\x04') {
+        if (cVar1 == '\x02') {
+          return (bool)in_ECX[4];
+        }
+        if (cVar1 != '\x06') {
+          if (cVar1 == '\a') {
+            iVar2 = FUN_00525fa0();
+            return iVar2 != 0;
+          }
+          if (cVar1 != '\b') {
+            return cVar1 == '\v';
+          }
+        }
+      }
+      return *(int *)(in_ECX + 4) != 0;
+    }
+    cVar1 = FUN_0050a220(*(undefined8 *)(in_ECX + 4));
+    if (cVar1 == '\0') {
+      bVar3 = (byte)((ushort)((ushort)NAN(*(double *)(in_ECX + 4)) << 10) >> 8) |
+              (byte)((ushort)((ushort)(*(double *)(in_ECX + 4) == 0.0) << 0xe) >> 8);
+LAB_00526174:
+      if ((POPCOUNT(bVar3) & 1U) == 0) {
+        return true;
+      }
+      return false;
+    }
+  }
+  return false;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00526120 : SUB ESP,0x8
+00526123 : PUSH ESI
+00526124 : MOV ESI,ECX
+00526126 : MOV AL,byte ptr [ESI]
+00526128 : CMP AL,0x5
+0052612a : JNZ 0x00526199
+0052612c : MOV ESI,dword ptr [ESI + 0x4]
+0052612f : CMP dword ptr [ESI + 0x10],0x0
+00526133 : JNZ 0x0052613e
+00526135 : XOR AL,AL
+00526137 : POP ESI
+00526138 : ADD ESP,0x8
+0052613b : RET 0x4
+0052613e : MOV EAX,dword ptr [ESP + 0x10]
+00526142 : CMP byte ptr [EAX + 0x7c],0x6
+00526146 : JA 0x00526190
+00526148 : MOV ESI,dword ptr [ESI]
+0052614a : LEA ECX,[ESP + 0x4]
+0052614e : PUSH ECX
+0052614f : CALL 0x00525e80
+00526154 : ADD ESP,0x4
+00526157 : TEST AL,AL
+00526159 : JZ 0x00526135
+0052615b : FLD double ptr [ESP + 0x4]
+0052615f : SUB ESP,0x8
+00526162 : FSTP double ptr [ESP]
+00526165 : CALL 0x0050a220
+0052616a : TEST AL,AL
+0052616c : JNZ 0x00526135
+0052616e : FLDZ
+00526170 : FCOMP double ptr [ESP + 0x4]
+00526174 : FNSTSW AX
+00526176 : TEST AH,0x44
+00526179 : JNP 0x00526187
+0052617b : MOV EAX,0x1
+00526180 : POP ESI
+00526181 : ADD ESP,0x8
+00526184 : RET 0x4
+00526187 : XOR EAX,EAX
+00526189 : POP ESI
+0052618a : ADD ESP,0x8
+0052618d : RET 0x4
+00526190 : MOV AL,0x1
+00526192 : POP ESI
+00526193 : ADD ESP,0x8
+00526196 : RET 0x4
+00526199 : CMP AL,0x3
+0052619b : JNZ 0x005261b6
+0052619d : FLD double ptr [ESI + 0x4]
+005261a0 : SUB ESP,0x8
+005261a3 : FSTP double ptr [ESP]
+005261a6 : CALL 0x0050a220
+005261ab : TEST AL,AL
+005261ad : JNZ 0x00526135
+005261af : FLDZ
+005261b1 : FCOMP double ptr [ESI + 0x4]
+005261b4 : JMP 0x00526174
+005261b6 : CMP AL,0x4
+005261b8 : JNZ 0x005261c9
+005261ba : XOR EAX,EAX
+005261bc : CMP dword ptr [ESI + 0x4],EAX
+005261bf : POP ESI
+005261c0 : SETNZ AL
+005261c3 : ADD ESP,0x8
+005261c6 : RET 0x4
+005261c9 : CMP AL,0x2
+005261cb : JNZ 0x005261d7
+005261cd : MOV AL,byte ptr [ESI + 0x4]
+005261d0 : POP ESI
+005261d1 : ADD ESP,0x8
+005261d4 : RET 0x4
+005261d7 : CMP AL,0x6
+005261d9 : JZ 0x005261ba
+005261db : CMP AL,0x7
+005261dd : JNZ 0x005261f6
+005261df : MOV EDX,dword ptr [ESP + 0x10]
+005261e3 : PUSH EDX
+005261e4 : CALL 0x00525fa0
+005261e9 : NEG EAX
+005261eb : SBB EAX,EAX
+005261ed : NEG EAX
+005261ef : POP ESI
+005261f0 : ADD ESP,0x8
+005261f3 : RET 0x4
+005261f6 : CMP AL,0x8
+005261f8 : JZ 0x005261ba
+005261fa : CMP AL,0xb
+005261fc : SETZ AL
+005261ff : POP ESI
+00526200 : ADD ESP,0x8
+00526203 : RET 0x4

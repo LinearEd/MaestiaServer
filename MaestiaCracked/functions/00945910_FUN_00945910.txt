@@ -1,0 +1,104 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00945910
+ENTRY    : 00945910
+BODY     : [[00945910, 00945996]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* WARNING: Removing unreachable block (ram,0x00945985) */
+
+void FUN_00945910(void)
+
+{
+  void *_Src;
+  rsize_t _DstSize;
+  uint uVar1;
+  int iVar2;
+  int unaff_ESI;
+  
+  uVar1 = *(int *)(unaff_ESI + 100) - *(int *)(unaff_ESI + 0x60);
+  while( true ) {
+    if ((uVar1 & 0xfffffffc) == 0) {
+      if (*(int *)(unaff_ESI + 0x60) != *(int *)(unaff_ESI + 100)) {
+        *(int *)(unaff_ESI + 100) = *(int *)(unaff_ESI + 0x60);
+      }
+      return;
+    }
+    if (**(int **)(unaff_ESI + 0x60) != 0) break;
+    _Src = (void *)((int)*(void **)(unaff_ESI + 0x60) + 4);
+    iVar2 = *(int *)(unaff_ESI + 100) - (int)_Src >> 2;
+    if (0 < iVar2) {
+      _DstSize = iVar2 * 4;
+      _memmove_s(*(void **)(unaff_ESI + 0x60),_DstSize,_Src,_DstSize);
+    }
+    *(int *)(unaff_ESI + 100) = *(int *)(unaff_ESI + 100) + -4;
+    uVar1 = *(int *)(unaff_ESI + 100) - *(int *)(unaff_ESI + 0x60);
+  }
+  FUN_00426790(**(int **)(unaff_ESI + 0x60));
+                    /* WARNING: Subroutine does not return */
+  FUN_006f04e0();
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00945910 : MOV EAX,dword ptr [ESI + 0x64]
+00945913 : SUB EAX,dword ptr [ESI + 0x60]
+00945916 : PUSH EBX
+00945917 : MOV EBX,0xfffffffc
+0094591c : PUSH EDI
+0094591d : TEST EBX,EAX
+0094591f : JZ 0x00945966
+00945921 : MOV ECX,dword ptr [ESI + 0x60]
+00945924 : MOV EDI,dword ptr [ECX]
+00945926 : TEST EDI,EDI
+00945928 : JZ 0x00945937
+0094592a : PUSH EDI
+0094592b : CALL 0x00426790
+00945930 : MOV ECX,EDI
+00945932 : CALL 0x006f04e0
+00945937 : MOV ECX,dword ptr [ESI + 0x60]
+0094593a : MOV EAX,dword ptr [ESI + 0x64]
+0094593d : LEA EDX,[ECX + 0x4]
+00945940 : SUB EAX,EDX
+00945942 : SAR EAX,0x2
+00945945 : TEST EAX,EAX
+00945947 : JLE 0x00945959
+00945949 : ADD EAX,EAX
+0094594b : ADD EAX,EAX
+0094594d : PUSH EAX
+0094594e : PUSH EDX
+0094594f : PUSH EAX
+00945950 : PUSH ECX
+00945951 : CALL 0x00634101
+00945956 : ADD ESP,0x10
+00945959 : ADD dword ptr [ESI + 0x64],EBX
+0094595c : MOV EDX,dword ptr [ESI + 0x64]
+0094595f : SUB EDX,dword ptr [ESI + 0x60]
+00945962 : TEST EBX,EDX
+00945964 : JNZ 0x00945921
+00945966 : MOV ECX,dword ptr [ESI + 0x64]
+00945969 : MOV EDI,dword ptr [ESI + 0x60]
+0094596c : CMP EDI,ECX
+0094596e : JZ 0x00945994
+00945970 : MOV EAX,ECX
+00945972 : SUB EAX,ECX
+00945974 : SAR EAX,0x2
+00945977 : LEA EDX,[EAX*0x4 + 0x0]
+0094597e : LEA EBX,[EDX + EDI*0x1]
+00945981 : TEST EAX,EAX
+00945983 : JLE 0x00945991
+00945985 : PUSH EDX
+00945986 : PUSH ECX
+00945987 : PUSH EDX
+00945988 : PUSH EDI
+00945989 : CALL 0x00634101
+0094598e : ADD ESP,0x10
+00945991 : MOV dword ptr [ESI + 0x64],EBX
+00945994 : POP EDI
+00945995 : POP EBX
+00945996 : RET

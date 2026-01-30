@@ -1,0 +1,94 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_004118a0
+ENTRY    : 004118a0
+BODY     : [[004118a0, 00411935]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_004118a0(void)
+
+{
+  char cVar1;
+  char *pcVar2;
+  char *in_ECX;
+  undefined2 *unaff_EDI;
+  undefined1 local_408 [1024];
+  uint local_8;
+  
+  local_8 = DAT_00d66fa0 ^ (uint)&stack0xfffffffc;
+  if (in_ECX == (char *)0x0) {
+    in_ECX = "";
+  }
+  pcVar2 = in_ECX;
+  do {
+    cVar1 = *pcVar2;
+    pcVar2 = pcVar2 + 1;
+  } while (cVar1 != '\0');
+  if (0xfe < (uint)((int)pcVar2 - (int)(in_ECX + 1))) {
+    FUN_00411b70("ERROR StringConvertBuffer& set : jw_strlen=%d , buf_size= %d, ARRAY_SIZE(w_buf)=%d"
+                 ,(int)pcVar2 - (int)(in_ECX + 1),0x100,0xff);
+    FUN_004d6640(L"[ERROR] %s , %s",local_408,in_ECX);
+  }
+  _strncpy((char *)(unaff_EDI + 0x100),in_ECX,0xff);
+  *(undefined1 *)((int)unaff_EDI + 0x2ff) = 0;
+  *unaff_EDI = 0;
+  __security_check_cookie(local_8 ^ (uint)&stack0xfffffffc);
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+004118a0 : PUSH EBP
+004118a1 : MOV EBP,ESP
+004118a3 : SUB ESP,0x404
+004118a9 : MOV EAX,[0x00d66fa0]
+004118ae : XOR EAX,EBP
+004118b0 : MOV dword ptr [EBP + -0x4],EAX
+004118b3 : PUSH ESI
+004118b4 : MOV ESI,ECX
+004118b6 : TEST ESI,ESI
+004118b8 : JNZ 0x004118bf
+004118ba : MOV ESI,0xcca874
+004118bf : MOV EAX,ESI
+004118c1 : LEA EDX,[EAX + 0x1]
+004118c4 : MOV CL,byte ptr [EAX]
+004118c6 : INC EAX
+004118c7 : TEST CL,CL
+004118c9 : JNZ 0x004118c4
+004118cb : SUB EAX,EDX
+004118cd : CMP EAX,0xfe
+004118d2 : JBE 0x00411904
+004118d4 : PUSH 0xff
+004118d9 : PUSH 0x100
+004118de : PUSH EAX
+004118df : PUSH 0xcca7f0
+004118e4 : LEA EDX,[EBP + 0xfffffbfc]
+004118ea : CALL 0x00411b70
+004118ef : PUSH ESI
+004118f0 : LEA EAX,[EBP + 0xfffffbfc]
+004118f6 : PUSH EAX
+004118f7 : PUSH 0xcca844
+004118fc : CALL 0x004d6640
+00411901 : ADD ESP,0x1c
+00411904 : PUSH 0xff
+00411909 : LEA ECX,[EDI + 0x200]
+0041190f : PUSH ESI
+00411910 : PUSH ECX
+00411911 : CALL 0x00636e50
+00411916 : MOV ECX,dword ptr [EBP + -0x4]
+00411919 : ADD ESP,0xc
+0041191c : XOR EDX,EDX
+0041191e : XOR ECX,EBP
+00411920 : MOV byte ptr [EDI + 0x2ff],0x0
+00411927 : MOV word ptr [EDI],DX
+0041192a : MOV EAX,EDI
+0041192c : POP ESI
+0041192d : CALL 0x00633e6b
+00411932 : MOV ESP,EBP
+00411934 : POP EBP
+00411935 : RET

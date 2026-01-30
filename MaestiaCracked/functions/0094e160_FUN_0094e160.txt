@@ -1,0 +1,75 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0094e160
+ENTRY    : 0094e160
+BODY     : [[0094e160, 0094e1de]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_0094e160(void)
+
+{
+  int *piVar1;
+  int in_EAX;
+  float fVar2;
+  float in_XMM2_Da;
+  
+  piVar1 = *(int **)(in_EAX + 0x40);
+  if (((piVar1 != (int *)0x0) && (piVar1[0xfa] != 0)) && (*(short *)((int)piVar1 + 0x43a) != 0x15))
+  {
+    fVar2 = *(float *)(in_EAX + 0x8c) * 57.295776 + in_XMM2_Da;
+    if (in_XMM2_Da <= 0.0) {
+      if (fVar2 < 0.0) {
+        fVar2 = 360.0;
+      }
+    }
+    else if (360.0 < fVar2) {
+      fVar2 = 0.0;
+    }
+    *(float *)(in_EAX + 0x8c) = fVar2 * 0.017453292;
+    (**(code **)(*piVar1 + 0x2a4))(fVar2 * 0.017453292);
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0094e160 : PUSH EBP
+0094e161 : MOV EBP,ESP
+0094e163 : PUSH ECX
+0094e164 : MOV ECX,dword ptr [EAX + 0x40]
+0094e167 : TEST ECX,ECX
+0094e169 : JZ 0x0094e1db
+0094e16b : CMP dword ptr [ECX + 0x3e8],0x0
+0094e172 : JZ 0x0094e1db
+0094e174 : CMP word ptr [ECX + 0x43a],0x15
+0094e17c : JZ 0x0094e1db
+0094e17e : MOVSS XMM0,dword ptr [EAX + 0x8c]
+0094e186 : XORPS XMM1,XMM1
+0094e189 : COMISS XMM2,XMM1
+0094e18c : MULSS XMM0,dword ptr [0x00cdf344]
+0094e194 : ADDSS XMM0,XMM2
+0094e198 : JBE 0x0094e1a8
+0094e19a : COMISS XMM0,dword ptr [0x00cdf340]
+0094e1a1 : JBE 0x0094e1b5
+0094e1a3 : MOVAPS XMM0,XMM1
+0094e1a6 : JMP 0x0094e1b5
+0094e1a8 : COMISS XMM1,XMM0
+0094e1ab : JBE 0x0094e1b5
+0094e1ad : MOVSS XMM0,dword ptr [0x00cdf340]
+0094e1b5 : MULSS XMM0,dword ptr [0x00cdf170]
+0094e1bd : MOVSS dword ptr [EBP + -0x4],XMM0
+0094e1c2 : FLD float ptr [EBP + -0x4]
+0094e1c5 : MOVSS dword ptr [EAX + 0x8c],XMM0
+0094e1cd : MOV EAX,dword ptr [ECX]
+0094e1cf : MOV EDX,dword ptr [EAX + 0x2a4]
+0094e1d5 : PUSH ECX
+0094e1d6 : FSTP float ptr [ESP]
+0094e1d9 : CALL EDX
+0094e1db : MOV ESP,EBP
+0094e1dd : POP EBP
+0094e1de : RET

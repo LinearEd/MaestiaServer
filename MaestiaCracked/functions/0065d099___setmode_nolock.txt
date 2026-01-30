@@ -1,0 +1,130 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __setmode_nolock
+ENTRY    : 0065d099
+BODY     : [[0065d099, 0065d154]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __setmode_nolock
+   
+   Library: Visual Studio 2008 Release */
+
+int __cdecl __setmode_nolock(int _FileHandle,int _Mode)
+
+{
+  int iVar1;
+  int *piVar2;
+  char cVar3;
+  byte bVar4;
+  byte *pbVar5;
+  byte bVar6;
+  int iVar7;
+  
+  piVar2 = &DAT_01728c40 + (_FileHandle >> 5);
+  iVar7 = (_FileHandle & 0x1fU) * 0x40;
+  iVar1 = *piVar2 + iVar7;
+  cVar3 = *(char *)(iVar1 + 0x24);
+  bVar4 = *(byte *)(iVar1 + 4);
+  if (_Mode == 0x4000) {
+    *(byte *)(iVar1 + 4) = *(byte *)(iVar1 + 4) | 0x80;
+    pbVar5 = (byte *)(*piVar2 + 0x24 + iVar7);
+    *pbVar5 = *pbVar5 & 0x80;
+  }
+  else if (_Mode == 0x8000) {
+    *(byte *)(iVar1 + 4) = *(byte *)(iVar1 + 4) & 0x7f;
+  }
+  else {
+    if ((_Mode == 0x10000) || (_Mode == 0x20000)) {
+      *(byte *)(iVar1 + 4) = *(byte *)(iVar1 + 4) | 0x80;
+      pbVar5 = (byte *)(*piVar2 + 0x24 + iVar7);
+      bVar6 = *pbVar5 & 0x82 | 2;
+    }
+    else {
+      if (_Mode != 0x40000) goto LAB_0065d137;
+      *(byte *)(iVar1 + 4) = *(byte *)(iVar1 + 4) | 0x80;
+      pbVar5 = (byte *)(*piVar2 + 0x24 + iVar7);
+      bVar6 = *pbVar5 & 0x81 | 1;
+    }
+    *pbVar5 = bVar6;
+  }
+LAB_0065d137:
+  if ((bVar4 & 0x80) == 0) {
+    return 0x8000;
+  }
+  return (-(uint)((char)(cVar3 * '\x02') >> 1 != '\0') & 0xc000) + 0x4000;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0065d099 : MOV EDI,EDI
+0065d09b : PUSH EBP
+0065d09c : MOV EBP,ESP
+0065d09e : PUSH EBX
+0065d09f : MOV EBX,dword ptr [EBP + 0xc]
+0065d0a2 : PUSH ESI
+0065d0a3 : MOV ESI,dword ptr [EBP + 0x8]
+0065d0a6 : MOV EAX,ESI
+0065d0a8 : SAR EAX,0x5
+0065d0ab : LEA EDX,[EAX*0x4 + 0x1728c40]
+0065d0b2 : MOV EAX,dword ptr [EDX]
+0065d0b4 : AND ESI,0x1f
+0065d0b7 : SHL ESI,0x6
+0065d0ba : LEA ECX,[EAX + ESI*0x1]
+0065d0bd : MOV AL,byte ptr [ECX + 0x24]
+0065d0c0 : ADD AL,AL
+0065d0c2 : PUSH EDI
+0065d0c3 : MOVZX EDI,byte ptr [ECX + 0x4]
+0065d0c7 : MOVSX EAX,AL
+0065d0ca : AND EDI,0x80
+0065d0d0 : SAR EAX,0x1
+0065d0d2 : CMP EBX,0x4000
+0065d0d8 : JZ 0x0065d12a
+0065d0da : CMP EBX,0x8000
+0065d0e0 : JZ 0x0065d124
+0065d0e2 : CMP EBX,0x10000
+0065d0e8 : JZ 0x0065d110
+0065d0ea : CMP EBX,0x20000
+0065d0f0 : JZ 0x0065d110
+0065d0f2 : CMP EBX,0x40000
+0065d0f8 : JNZ 0x0065d137
+0065d0fa : OR byte ptr [ECX + 0x4],0x80
+0065d0fe : MOV ECX,dword ptr [EDX]
+0065d100 : LEA ECX,[ECX + ESI*0x1 + 0x24]
+0065d104 : MOV DL,byte ptr [ECX]
+0065d106 : AND DL,0x81
+0065d109 : OR DL,0x1
+0065d10c : MOV byte ptr [ECX],DL
+0065d10e : JMP 0x0065d137
+0065d110 : OR byte ptr [ECX + 0x4],0x80
+0065d114 : MOV ECX,dword ptr [EDX]
+0065d116 : LEA ECX,[ECX + ESI*0x1 + 0x24]
+0065d11a : MOV DL,byte ptr [ECX]
+0065d11c : AND DL,0x82
+0065d11f : OR DL,0x2
+0065d122 : JMP 0x0065d10c
+0065d124 : AND byte ptr [ECX + 0x4],0x7f
+0065d128 : JMP 0x0065d137
+0065d12a : OR byte ptr [ECX + 0x4],0x80
+0065d12e : MOV ECX,dword ptr [EDX]
+0065d130 : LEA ECX,[ECX + ESI*0x1 + 0x24]
+0065d134 : AND byte ptr [ECX],0x80
+0065d137 : TEST EDI,EDI
+0065d139 : POP EDI
+0065d13a : POP ESI
+0065d13b : POP EBX
+0065d13c : JNZ 0x0065d145
+0065d13e : MOV EAX,0x8000
+0065d143 : POP EBP
+0065d144 : RET
+0065d145 : NEG EAX
+0065d147 : SBB EAX,EAX
+0065d149 : AND EAX,0xc000
+0065d14e : ADD EAX,0x4000
+0065d153 : POP EBP
+0065d154 : RET

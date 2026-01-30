@@ -1,0 +1,73 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0051d5a0
+ENTRY    : 0051d5a0
+BODY     : [[0051d5a0, 0051d616]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_0051d5a0(int param_1)
+
+{
+  int iVar1;
+  int in_ECX;
+  
+  if ((((*(uint *)(in_ECX + 0x8c) >> 0x13 & 1) == 0) &&
+      ((*(uint *)(param_1 + 0xb00) >> 0x13 & 1) == 0)) && ((*(byte *)(in_ECX + 0x66) & 0x10) == 0))
+  {
+    for (iVar1 = *(int *)(in_ECX + 0x74); iVar1 != 0; iVar1 = *(int *)(iVar1 + 0x74)) {
+      if ((*(uint *)(iVar1 + 0x8c) >> 0x13 & 1) != 0) {
+        *(undefined4 *)(in_ECX + 0x78) = *(undefined4 *)(iVar1 + 0x78);
+        *(int *)(iVar1 + 0x78) = in_ECX;
+        goto LAB_0051d5f4;
+      }
+    }
+    *(undefined4 *)(in_ECX + 0x78) = *(undefined4 *)(param_1 + 0xaf8);
+    *(int *)(param_1 + 0xaf8) = in_ECX;
+LAB_0051d5f4:
+    *(uint *)(in_ECX + 0x8c) = *(uint *)(in_ECX + 0x8c) | 0x80000;
+    *(uint *)(param_1 + 0xb00) = *(uint *)(param_1 + 0xb00) | 0x400;
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0051d5a0 : MOV EAX,dword ptr [ECX + 0x8c]
+0051d5a6 : SHR EAX,0x13
+0051d5a9 : TEST AL,0x1
+0051d5ab : JNZ 0x0051d609
+0051d5ad : PUSH ESI
+0051d5ae : MOV ESI,dword ptr [ESP + 0x8]
+0051d5b2 : MOV EDX,dword ptr [ESI + 0xb00]
+0051d5b8 : SHR EDX,0x13
+0051d5bb : TEST DL,0x1
+0051d5be : JNZ 0x0051d608
+0051d5c0 : TEST byte ptr [ECX + 0x66],0x10
+0051d5c4 : JNZ 0x0051d608
+0051d5c6 : MOV EAX,dword ptr [ECX + 0x74]
+0051d5c9 : TEST EAX,EAX
+0051d5cb : JZ 0x0051d5e5
+0051d5cd : LEA ECX,[ECX]
+0051d5d0 : MOV EDX,dword ptr [EAX + 0x8c]
+0051d5d6 : SHR EDX,0x13
+0051d5d9 : TEST DL,0x1
+0051d5dc : JNZ 0x0051d60c
+0051d5de : MOV EAX,dword ptr [EAX + 0x74]
+0051d5e1 : TEST EAX,EAX
+0051d5e3 : JNZ 0x0051d5d0
+0051d5e5 : MOV EAX,dword ptr [ESI + 0xaf8]
+0051d5eb : MOV dword ptr [ECX + 0x78],EAX
+0051d5ee : MOV dword ptr [ESI + 0xaf8],ECX
+0051d5f4 : OR dword ptr [ECX + 0x8c],0x80000
+0051d5fe : OR dword ptr [ESI + 0xb00],0x400
+0051d608 : POP ESI
+0051d609 : RET 0x4
+0051d60c : MOV EDX,dword ptr [EAX + 0x78]
+0051d60f : MOV dword ptr [ECX + 0x78],EDX
+0051d612 : MOV dword ptr [EAX + 0x78],ECX
+0051d615 : JMP 0x0051d5f4

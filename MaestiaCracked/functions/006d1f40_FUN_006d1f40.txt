@@ -1,0 +1,219 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_006d1f40
+ENTRY    : 006d1f40
+BODY     : [[006d1f40, 006d20ec]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_006d1f40(int param_1,undefined4 param_2,int param_3)
+
+{
+  char *pcVar1;
+  int iVar2;
+  undefined4 *puVar3;
+  size_t sVar4;
+  char *local_c;
+  
+  if ((*(uint *)(param_1 + 0x68) & 1) == 0) {
+    FUN_006c23a0(param_1,"Missing IHDR before tEXt");
+  }
+  if ((*(uint *)(param_1 + 0x68) & 4) != 0) {
+    *(uint *)(param_1 + 0x68) = *(uint *)(param_1 + 0x68) | 8;
+  }
+  pcVar1 = (char *)FUN_006cef50(param_1,param_3 + 1);
+  if (pcVar1 == (char *)0x0) {
+    FUN_006c24c0(param_1,"No memory to process text chunk.");
+  }
+  else {
+    FUN_006cf100(param_1,pcVar1,param_3);
+    iVar2 = FUN_006cf140(param_1,0);
+    if (iVar2 == 0) {
+      pcVar1[param_3] = '\0';
+      for (local_c = pcVar1; *local_c != '\0'; local_c = local_c + 1) {
+      }
+      if (local_c != pcVar1 + param_3) {
+        local_c = local_c + 1;
+      }
+      puVar3 = (undefined4 *)FUN_006cef50(param_1,0x10);
+      if (puVar3 == (undefined4 *)0x0) {
+        FUN_006c24c0(param_1,"Not enough memory to process text chunk.");
+        FUN_006ceee0(param_1,pcVar1);
+      }
+      else {
+        *puVar3 = 0xffffffff;
+        puVar3[1] = pcVar1;
+        puVar3[2] = local_c;
+        sVar4 = _strlen(local_c);
+        puVar3[3] = sVar4;
+        iVar2 = FUN_006ce520(param_1,param_2,puVar3,1);
+        FUN_006ceee0(param_1,pcVar1);
+        FUN_006ceee0(param_1,puVar3);
+        if (iVar2 != 0) {
+          FUN_006c24c0(param_1,"Insufficient memory to process text chunk.");
+        }
+      }
+    }
+    else {
+      FUN_006ceee0(param_1,pcVar1);
+    }
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006d1f40 : PUSH EBP
+006d1f41 : MOV EBP,ESP
+006d1f43 : SUB ESP,0x18
+006d1f46 : MOV dword ptr [EBP + -0xc],0x0
+006d1f4d : MOV EAX,dword ptr [EBP + 0x8]
+006d1f50 : MOV ECX,dword ptr [EAX + 0x68]
+006d1f53 : AND ECX,0x1
+006d1f56 : JNZ 0x006d1f69
+006d1f58 : PUSH 0xbeed38
+006d1f5d : MOV EDX,dword ptr [EBP + 0x8]
+006d1f60 : PUSH EDX
+006d1f61 : CALL 0x006c23a0
+006d1f66 : ADD ESP,0x8
+006d1f69 : MOV EAX,dword ptr [EBP + 0x8]
+006d1f6c : MOV ECX,dword ptr [EAX + 0x68]
+006d1f6f : AND ECX,0x4
+006d1f72 : JZ 0x006d1f83
+006d1f74 : MOV EDX,dword ptr [EBP + 0x8]
+006d1f77 : MOV EAX,dword ptr [EDX + 0x68]
+006d1f7a : OR EAX,0x8
+006d1f7d : MOV ECX,dword ptr [EBP + 0x8]
+006d1f80 : MOV dword ptr [ECX + 0x68],EAX
+006d1f83 : MOV EDX,dword ptr [EBP + 0x10]
+006d1f86 : ADD EDX,0x1
+006d1f89 : PUSH EDX
+006d1f8a : MOV EAX,dword ptr [EBP + 0x8]
+006d1f8d : PUSH EAX
+006d1f8e : CALL 0x006cef50
+006d1f93 : ADD ESP,0x8
+006d1f96 : MOV dword ptr [EBP + -0x10],EAX
+006d1f99 : CMP dword ptr [EBP + -0x10],0x0
+006d1f9d : JNZ 0x006d1fb5
+006d1f9f : PUSH 0xbeed14
+006d1fa4 : MOV ECX,dword ptr [EBP + 0x8]
+006d1fa7 : PUSH ECX
+006d1fa8 : CALL 0x006c24c0
+006d1fad : ADD ESP,0x8
+006d1fb0 : JMP 0x006d20e9
+006d1fb5 : MOV EDX,dword ptr [EBP + 0x10]
+006d1fb8 : MOV dword ptr [EBP + -0x4],EDX
+006d1fbb : MOV EAX,dword ptr [EBP + -0x4]
+006d1fbe : PUSH EAX
+006d1fbf : MOV ECX,dword ptr [EBP + -0x10]
+006d1fc2 : PUSH ECX
+006d1fc3 : MOV EDX,dword ptr [EBP + 0x8]
+006d1fc6 : PUSH EDX
+006d1fc7 : CALL 0x006cf100
+006d1fcc : ADD ESP,0xc
+006d1fcf : MOV EAX,dword ptr [EBP + -0xc]
+006d1fd2 : PUSH EAX
+006d1fd3 : MOV ECX,dword ptr [EBP + 0x8]
+006d1fd6 : PUSH ECX
+006d1fd7 : CALL 0x006cf140
+006d1fdc : ADD ESP,0x8
+006d1fdf : TEST EAX,EAX
+006d1fe1 : JZ 0x006d1ff8
+006d1fe3 : MOV EDX,dword ptr [EBP + -0x10]
+006d1fe6 : PUSH EDX
+006d1fe7 : MOV EAX,dword ptr [EBP + 0x8]
+006d1fea : PUSH EAX
+006d1feb : CALL 0x006ceee0
+006d1ff0 : ADD ESP,0x8
+006d1ff3 : JMP 0x006d20e9
+006d1ff8 : MOV ECX,dword ptr [EBP + -0x10]
+006d1ffb : ADD ECX,dword ptr [EBP + -0x4]
+006d1ffe : MOV byte ptr [ECX],0x0
+006d2001 : MOV EDX,dword ptr [EBP + -0x10]
+006d2004 : MOV dword ptr [EBP + -0x8],EDX
+006d2007 : JMP 0x006d2012
+006d2009 : MOV EAX,dword ptr [EBP + -0x8]
+006d200c : ADD EAX,0x1
+006d200f : MOV dword ptr [EBP + -0x8],EAX
+006d2012 : MOV ECX,dword ptr [EBP + -0x8]
+006d2015 : MOVSX EDX,byte ptr [ECX]
+006d2018 : TEST EDX,EDX
+006d201a : JZ 0x006d201e
+006d201c : JMP 0x006d2009
+006d201e : MOV EAX,dword ptr [EBP + -0x10]
+006d2021 : ADD EAX,dword ptr [EBP + -0x4]
+006d2024 : CMP dword ptr [EBP + -0x8],EAX
+006d2027 : JZ 0x006d2032
+006d2029 : MOV ECX,dword ptr [EBP + -0x8]
+006d202c : ADD ECX,0x1
+006d202f : MOV dword ptr [EBP + -0x8],ECX
+006d2032 : PUSH 0x10
+006d2034 : MOV EDX,dword ptr [EBP + 0x8]
+006d2037 : PUSH EDX
+006d2038 : CALL 0x006cef50
+006d203d : ADD ESP,0x8
+006d2040 : MOV dword ptr [EBP + -0x18],EAX
+006d2043 : CMP dword ptr [EBP + -0x18],0x0
+006d2047 : JNZ 0x006d206c
+006d2049 : PUSH 0xbeece8
+006d204e : MOV EAX,dword ptr [EBP + 0x8]
+006d2051 : PUSH EAX
+006d2052 : CALL 0x006c24c0
+006d2057 : ADD ESP,0x8
+006d205a : MOV ECX,dword ptr [EBP + -0x10]
+006d205d : PUSH ECX
+006d205e : MOV EDX,dword ptr [EBP + 0x8]
+006d2061 : PUSH EDX
+006d2062 : CALL 0x006ceee0
+006d2067 : ADD ESP,0x8
+006d206a : JMP 0x006d20e9
+006d206c : MOV EAX,dword ptr [EBP + -0x18]
+006d206f : MOV dword ptr [EAX],0xffffffff
+006d2075 : MOV ECX,dword ptr [EBP + -0x18]
+006d2078 : MOV EDX,dword ptr [EBP + -0x10]
+006d207b : MOV dword ptr [ECX + 0x4],EDX
+006d207e : MOV EAX,dword ptr [EBP + -0x18]
+006d2081 : MOV ECX,dword ptr [EBP + -0x8]
+006d2084 : MOV dword ptr [EAX + 0x8],ECX
+006d2087 : MOV EDX,dword ptr [EBP + -0x8]
+006d208a : PUSH EDX
+006d208b : CALL 0x00640960
+006d2090 : ADD ESP,0x4
+006d2093 : MOV ECX,dword ptr [EBP + -0x18]
+006d2096 : MOV dword ptr [ECX + 0xc],EAX
+006d2099 : PUSH 0x1
+006d209b : MOV EDX,dword ptr [EBP + -0x18]
+006d209e : PUSH EDX
+006d209f : MOV EAX,dword ptr [EBP + 0xc]
+006d20a2 : PUSH EAX
+006d20a3 : MOV ECX,dword ptr [EBP + 0x8]
+006d20a6 : PUSH ECX
+006d20a7 : CALL 0x006ce520
+006d20ac : ADD ESP,0x10
+006d20af : MOV dword ptr [EBP + -0x14],EAX
+006d20b2 : MOV EDX,dword ptr [EBP + -0x10]
+006d20b5 : PUSH EDX
+006d20b6 : MOV EAX,dword ptr [EBP + 0x8]
+006d20b9 : PUSH EAX
+006d20ba : CALL 0x006ceee0
+006d20bf : ADD ESP,0x8
+006d20c2 : MOV ECX,dword ptr [EBP + -0x18]
+006d20c5 : PUSH ECX
+006d20c6 : MOV EDX,dword ptr [EBP + 0x8]
+006d20c9 : PUSH EDX
+006d20ca : CALL 0x006ceee0
+006d20cf : ADD ESP,0x8
+006d20d2 : CMP dword ptr [EBP + -0x14],0x0
+006d20d6 : JZ 0x006d20e9
+006d20d8 : PUSH 0xbeecbc
+006d20dd : MOV EAX,dword ptr [EBP + 0x8]
+006d20e0 : PUSH EAX
+006d20e1 : CALL 0x006c24c0
+006d20e6 : ADD ESP,0x8
+006d20e9 : MOV ESP,EBP
+006d20eb : POP EBP
+006d20ec : RET

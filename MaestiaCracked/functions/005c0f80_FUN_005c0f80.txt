@@ -1,0 +1,61 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005c0f80
+ENTRY    : 005c0f80
+BODY     : [[005c0f80, 005c0fcd]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined4 FUN_005c0f80(void)
+
+{
+  uint uVar1;
+  uint in_ECX;
+  
+  uVar1 = in_ECX & 0x80000003;
+  if ((int)uVar1 < 0) {
+    uVar1 = (uVar1 - 1 | 0xfffffffc) + 1;
+  }
+  if ((uVar1 == 0) &&
+     ((in_ECX != ((int)in_ECX / 100) * 100 || (in_ECX == ((int)in_ECX / 400) * 400)))) {
+    return 1;
+  }
+  return 0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005c0f80 : MOV EAX,ECX
+005c0f82 : AND EAX,0x80000003
+005c0f87 : JNS 0x005c0f8e
+005c0f89 : DEC EAX
+005c0f8a : OR EAX,0xfffffffc
+005c0f8d : INC EAX
+005c0f8e : JNZ 0x005c0fcb
+005c0f90 : MOV EAX,0x51eb851f
+005c0f95 : IMUL ECX
+005c0f97 : SAR EDX,0x5
+005c0f9a : MOV EAX,EDX
+005c0f9c : SHR EAX,0x1f
+005c0f9f : ADD EAX,EDX
+005c0fa1 : IMUL EAX,EAX,0x64
+005c0fa4 : MOV EDX,ECX
+005c0fa6 : SUB EDX,EAX
+005c0fa8 : JNZ 0x005c0fc5
+005c0faa : MOV EAX,0x51eb851f
+005c0faf : IMUL ECX
+005c0fb1 : SAR EDX,0x7
+005c0fb4 : MOV EAX,EDX
+005c0fb6 : SHR EAX,0x1f
+005c0fb9 : ADD EAX,EDX
+005c0fbb : IMUL EAX,EAX,0x190
+005c0fc1 : SUB ECX,EAX
+005c0fc3 : JNZ 0x005c0fcb
+005c0fc5 : MOV EAX,0x1
+005c0fca : RET
+005c0fcb : XOR EAX,EAX
+005c0fcd : RET

@@ -1,0 +1,413 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_008cd400
+ENTRY    : 008cd400
+BODY     : [[008cd400, 008cd765]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_008cd400(int param_1,uint param_2)
+
+{
+  byte bVar1;
+  int *piVar2;
+  double dVar3;
+  double dVar4;
+  int iVar5;
+  int iVar6;
+  undefined4 uVar7;
+  ushort in_FPUControlWord;
+  undefined1 local_40 [24];
+  uint local_28;
+  undefined8 local_24;
+  uint local_18;
+  int local_14;
+  void *local_10;
+  undefined1 *puStack_c;
+  undefined4 local_8;
+  
+  local_8 = 0xffffffff;
+  puStack_c = &LAB_00b51930;
+  local_10 = ExceptionList;
+  ExceptionList = &local_10;
+  if (param_2 != 0) {
+    local_18 = (uint)*(ushort *)(param_2 + 4);
+    iVar5 = FUN_00703c00(0xa801,DAT_00d66fa0 ^ (uint)&stack0xfffffffc);
+    if (iVar5 != 0) {
+      iVar6 = FUN_00703c00(0xa801);
+      if (iVar6 != 0) {
+        bVar1 = *(byte *)(iVar5 + 0x40);
+        param_2 = ((uint)bVar1 * 100 + (uint)(*(byte *)(iVar5 + 0x41) >> 4)) * 100;
+        iVar5 = (uint)*(byte *)(iVar6 + 0x40) * 100 + (uint)(*(byte *)(iVar6 + 0x41) >> 4);
+        local_24._4_4_ = iVar5 * 100;
+        if (param_2 + iVar5 * -100 == 0) {
+          if (3 < bVar1) {
+            FUN_00406460(L"Buffer Over Run!!");
+            local_8 = 1;
+            if ((int *)*DAT_00da98e8 != (int *)0x0) {
+              (**(code **)(*(int *)*DAT_00da98e8 + 0x14))
+                        (L"AvaGuiCraft::ReceiveCraftGradeUp",0x37c,local_40);
+            }
+            local_8 = 0xffffffff;
+            FUN_00406560();
+            ExceptionList = local_10;
+            return;
+          }
+          FUN_004437f0(&param_2);
+          if (local_14 != *(int *)(param_1 + ((uint)bVar1 * 3 + 0x15) * 4)) {
+            *(uint *)(*(int *)(local_14 + 0x10) + 4) = local_18;
+            *(uint *)(*(int *)(local_14 + 0x10) + 0x28) = (uint)*(ushort *)(iVar6 + 0x46);
+            uVar7 = DAT_0172491c;
+            *(uint *)(*(int *)(local_14 + 0x10) + 0x2c) = (uint)*(ushort *)(iVar6 + 0x4a);
+            uVar7 = FUN_00824a20(uVar7,0);
+            local_8 = 2;
+            FUN_00405d70(uVar7);
+            local_8 = 0xffffffff;
+            FUN_00406560();
+            *(ushort *)(*(int *)(local_14 + 0x10) + 0x34) = (ushort)*(byte *)(iVar6 + 0x42);
+            *(undefined2 *)(*(int *)(local_14 + 0x10) + 0x36) = *(undefined2 *)(iVar6 + 0x4c);
+            if ((*(char *)(param_1 + 0x32) != '\0') && (*(int *)(param_1 + 0x80) == local_24._4_4_))
+            {
+              iVar5 = *DAT_00da9894;
+              if ((iVar5 != 0) && (*(int *)(iVar5 + 0x114) != 0)) {
+                iVar6 = *(int *)(local_14 + 0x10);
+                if (*(uint *)(iVar6 + 0x20) < 8) {
+                  iVar6 = iVar6 + 0xc;
+                }
+                else {
+                  iVar6 = *(int *)(iVar6 + 0xc);
+                }
+                (**(code **)(**(int **)(iVar5 + 0x114) + 4))
+                          (*(int **)(iVar5 + 0x114),"SetCraftTitle",&DAT_00c53c3c,iVar6);
+              }
+              if (*(int *)(*(int *)(local_14 + 0x10) + 0x28) == 0) {
+                FUN_00406460(L"Zero Division");
+                local_8 = 3;
+                if ((int *)*DAT_00da98e8 != (int *)0x0) {
+                  (**(code **)(*(int *)*DAT_00da98e8 + 0x14))
+                            (L"AvaGuiCraft::ReceiveCraftGradeUp",0x392,local_40);
+                }
+                local_8 = 0xffffffff;
+                FUN_00406560();
+                ExceptionList = local_10;
+                return;
+              }
+              if ((*DAT_00da9894 != 0) &&
+                 (piVar2 = *(int **)(*DAT_00da9894 + 0x114), piVar2 != (int *)0x0)) {
+                iVar5 = *(int *)(local_14 + 0x10);
+                dVar3 = (double)*(int *)(iVar5 + 0x30);
+                if (*(int *)(iVar5 + 0x30) < 0) {
+                  dVar3 = dVar3 + 4294967296.0;
+                }
+                dVar4 = (double)*(int *)(iVar5 + 0x28);
+                if (*(int *)(iVar5 + 0x28) < 0) {
+                  dVar4 = dVar4 + 4294967296.0;
+                }
+                param_2 = in_FPUControlWord | 0xc00;
+                local_24 = (longlong)ROUND((dVar3 / dVar4) * 100.0);
+                (**(code **)(*piVar2 + 4))
+                          (piVar2,"SetCraftProgress","%d, %d, %d",(undefined4)local_24,
+                           *(undefined4 *)(iVar5 + 0x30),*(undefined4 *)(iVar5 + 0x28));
+              }
+            }
+          }
+        }
+      }
+    }
+    ExceptionList = local_10;
+    return;
+  }
+  FUN_00406460(L"Packetdata NULL");
+  local_8 = 0;
+  if ((int *)*DAT_00da98e8 != (int *)0x0) {
+    (**(code **)(*(int *)*DAT_00da98e8 + 0x14))(L"AvaGuiCraft::ReceiveCraftGradeUp",0x365,local_40);
+  }
+  local_8 = 0xffffffff;
+  if (7 < local_28) {
+                    /* WARNING: Subroutine does not return */
+    FUN_006f04e0();
+  }
+  ExceptionList = local_10;
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+008cd400 : PUSH EBP
+008cd401 : MOV EBP,ESP
+008cd403 : PUSH -0x1
+008cd405 : PUSH 0xb51930
+008cd40a : MOV EAX,FS:[0x0]
+008cd410 : PUSH EAX
+008cd411 : SUB ESP,0x34
+008cd414 : PUSH EBX
+008cd415 : PUSH ESI
+008cd416 : PUSH EDI
+008cd417 : MOV EAX,[0x00d66fa0]
+008cd41c : XOR EAX,EBP
+008cd41e : PUSH EAX
+008cd41f : LEA EAX,[EBP + -0xc]
+008cd422 : MOV FS:[0x0],EAX
+008cd428 : MOV EAX,dword ptr [EBP + 0xc]
+008cd42b : XOR ESI,ESI
+008cd42d : CMP EAX,ESI
+008cd42f : JNZ 0x008cd49a
+008cd431 : PUSH 0xc53c1c
+008cd436 : LEA ECX,[EBP + -0x3c]
+008cd439 : CALL 0x00406460
+008cd43e : MOV dword ptr [EBP + -0x4],ESI
+008cd441 : MOV EAX,[0x00da98e8]
+008cd446 : MOV ECX,dword ptr [EAX]
+008cd448 : CMP ECX,ESI
+008cd44a : JZ 0x008cd461
+008cd44c : MOV EDX,dword ptr [ECX]
+008cd44e : MOV EDX,dword ptr [EDX + 0x14]
+008cd451 : LEA EAX,[EBP + -0x3c]
+008cd454 : PUSH EAX
+008cd455 : PUSH 0x365
+008cd45a : PUSH 0xc53c40
+008cd45f : CALL EDX
+008cd461 : MOV dword ptr [EBP + -0x4],0xffffffff
+008cd468 : CMP dword ptr [EBP + -0x24],0x8
+008cd46c : JC 0x008cd476
+008cd46e : MOV ECX,dword ptr [EBP + -0x38]
+008cd471 : CALL 0x006f04e0
+008cd476 : XOR EAX,EAX
+008cd478 : MOV dword ptr [EBP + -0x24],0x7
+008cd47f : MOV dword ptr [EBP + -0x28],ESI
+008cd482 : MOV word ptr [EBP + -0x38],AX
+008cd486 : MOV ECX,dword ptr [EBP + -0xc]
+008cd489 : MOV dword ptr FS:[0x0],ECX
+008cd490 : POP ECX
+008cd491 : POP EDI
+008cd492 : POP ESI
+008cd493 : POP EBX
+008cd494 : MOV ESP,EBP
+008cd496 : POP EBP
+008cd497 : RET 0x8
+008cd49a : MOVZX ESI,word ptr [EAX + 0x4]
+008cd49e : MOVZX EDI,word ptr [EAX + 0x6]
+008cd4a2 : PUSH 0xa801
+008cd4a7 : MOV dword ptr [EBP + -0x14],ESI
+008cd4aa : CALL 0x00703c00
+008cd4af : MOV EBX,EAX
+008cd4b1 : ADD ESP,0x4
+008cd4b4 : TEST EBX,EBX
+008cd4b6 : JZ 0x008cd752
+008cd4bc : PUSH 0xa801
+008cd4c1 : MOV EDI,ESI
+008cd4c3 : CALL 0x00703c00
+008cd4c8 : MOV EDI,EAX
+008cd4ca : ADD ESP,0x4
+008cd4cd : TEST EDI,EDI
+008cd4cf : JZ 0x008cd752
+008cd4d5 : MOVZX CX,byte ptr [EBX + 0x40]
+008cd4da : MOVZX EDX,byte ptr [EBX + 0x41]
+008cd4de : MOVZX ESI,CX
+008cd4e1 : SHR DL,0x4
+008cd4e4 : MOVZX AX,DL
+008cd4e8 : MOVZX DX,byte ptr [EDI + 0x40]
+008cd4ed : MOVZX ECX,AX
+008cd4f0 : MOVZX EBX,SI
+008cd4f3 : MOV EAX,EBX
+008cd4f5 : IMUL EAX,EAX,0x64
+008cd4f8 : MOVZX ECX,CX
+008cd4fb : ADD EAX,ECX
+008cd4fd : MOVZX ECX,DX
+008cd500 : IMUL EAX,EAX,0x64
+008cd503 : MOVZX EDX,byte ptr [EDI + 0x41]
+008cd507 : SHR DL,0x4
+008cd50a : MOVZX ECX,CX
+008cd50d : MOVZX DX,DL
+008cd511 : IMUL ECX,ECX,0x64
+008cd514 : MOVZX EDX,DX
+008cd517 : MOVZX EDX,DX
+008cd51a : ADD ECX,EDX
+008cd51c : IMUL ECX,ECX,0x64
+008cd51f : MOV dword ptr [EBP + 0xc],EAX
+008cd522 : MOV dword ptr [EBP + -0x1c],ECX
+008cd525 : CMP EAX,ECX
+008cd527 : JNZ 0x008cd752
+008cd52d : CMP SI,0x4
+008cd531 : JC 0x008cd58a
+008cd533 : PUSH 0xc53bb4
+008cd538 : LEA ECX,[EBP + -0x3c]
+008cd53b : CALL 0x00406460
+008cd540 : MOV dword ptr [EBP + -0x4],0x1
+008cd547 : MOV EAX,[0x00da98e8]
+008cd54c : MOV ECX,dword ptr [EAX]
+008cd54e : TEST ECX,ECX
+008cd550 : JZ 0x008cd567
+008cd552 : MOV EDX,dword ptr [ECX]
+008cd554 : MOV EDX,dword ptr [EDX + 0x14]
+008cd557 : LEA EAX,[EBP + -0x3c]
+008cd55a : PUSH EAX
+008cd55b : PUSH 0x37c
+008cd560 : PUSH 0xc53c88
+008cd565 : CALL EDX
+008cd567 : MOV dword ptr [EBP + -0x4],0xffffffff
+008cd56e : LEA ECX,[EBP + -0x3c]
+008cd571 : CALL 0x00406560
+008cd576 : MOV ECX,dword ptr [EBP + -0xc]
+008cd579 : MOV dword ptr FS:[0x0],ECX
+008cd580 : POP ECX
+008cd581 : POP EDI
+008cd582 : POP ESI
+008cd583 : POP EBX
+008cd584 : MOV ESP,EBP
+008cd586 : POP EBP
+008cd587 : RET 0x8
+008cd58a : MOV ESI,dword ptr [EBP + 0x8]
+008cd58d : LEA EAX,[EBP + 0xc]
+008cd590 : PUSH EAX
+008cd591 : LEA ECX,[EBX + EBX*0x2]
+008cd594 : LEA ECX,[ESI + ECX*0x4 + 0x50]
+008cd598 : LEA EAX,[EBP + -0x10]
+008cd59b : CALL 0x004437f0
+008cd5a0 : LEA EDX,[EBX + EBX*0x2 + 0x15]
+008cd5a4 : MOV EAX,dword ptr [ESI + EDX*0x4]
+008cd5a7 : MOV EBX,dword ptr [EBP + -0x10]
+008cd5aa : CMP EBX,EAX
+008cd5ac : JZ 0x008cd752
+008cd5b2 : MOV EAX,dword ptr [EBX + 0x10]
+008cd5b5 : MOV ECX,dword ptr [EBP + -0x14]
+008cd5b8 : MOV dword ptr [EAX + 0x4],ECX
+008cd5bb : MOVZX EDX,word ptr [EDI + 0x46]
+008cd5bf : MOV EAX,dword ptr [EBX + 0x10]
+008cd5c2 : MOV dword ptr [EAX + 0x28],EDX
+008cd5c5 : MOVZX ECX,word ptr [EDI + 0x4a]
+008cd5c9 : MOV EDX,dword ptr [EBX + 0x10]
+008cd5cc : MOV EAX,[0x0172491c]
+008cd5d1 : PUSH 0x0
+008cd5d3 : MOV dword ptr [EDX + 0x2c],ECX
+008cd5d6 : LEA EDX,[EDI + 0x18]
+008cd5d9 : PUSH EAX
+008cd5da : LEA ESI,[EBP + -0x3c]
+008cd5dd : CALL 0x00824a20
+008cd5e2 : MOV dword ptr [EBP + -0x4],0x2
+008cd5e9 : MOV ECX,dword ptr [EBX + 0x10]
+008cd5ec : PUSH EAX
+008cd5ed : ADD ECX,0x8
+008cd5f0 : CALL 0x00405d70
+008cd5f5 : OR ESI,0xffffffff
+008cd5f8 : MOV dword ptr [EBP + -0x4],ESI
+008cd5fb : LEA ECX,[EBP + -0x3c]
+008cd5fe : CALL 0x00406560
+008cd603 : MOVZX ECX,byte ptr [EDI + 0x42]
+008cd607 : MOV EDX,dword ptr [EBX + 0x10]
+008cd60a : MOV word ptr [EDX + 0x34],CX
+008cd60e : MOVZX ECX,word ptr [EDI + 0x4c]
+008cd612 : MOV EAX,dword ptr [EBX + 0x10]
+008cd615 : MOV word ptr [EAX + 0x36],CX
+008cd619 : MOV EAX,dword ptr [EBP + 0x8]
+008cd61c : CMP byte ptr [EAX + 0x32],0x0
+008cd620 : JZ 0x008cd752
+008cd626 : MOV EDX,dword ptr [EBP + -0x1c]
+008cd629 : CMP dword ptr [EAX + 0x80],EDX
+008cd62f : JNZ 0x008cd752
+008cd635 : MOV EAX,[0x00da9894]
+008cd63a : MOV EAX,dword ptr [EAX]
+008cd63c : TEST EAX,EAX
+008cd63e : JZ 0x008cd679
+008cd640 : CMP dword ptr [EAX + 0x114],0x0
+008cd647 : JZ 0x008cd679
+008cd649 : MOV ECX,dword ptr [EAX + 0x114]
+008cd64f : MOV EAX,dword ptr [EBX + 0x10]
+008cd652 : ADD EAX,0x8
+008cd655 : CMP dword ptr [EAX + 0x18],0x8
+008cd659 : JC 0x008cd660
+008cd65b : MOV EAX,dword ptr [EAX + 0x4]
+008cd65e : JMP 0x008cd663
+008cd660 : ADD EAX,0x4
+008cd663 : MOV EDX,dword ptr [ECX]
+008cd665 : PUSH EAX
+008cd666 : MOV EAX,dword ptr [EDX + 0x4]
+008cd669 : PUSH 0xc53c3c
+008cd66e : PUSH 0xc53ccc
+008cd673 : PUSH ECX
+008cd674 : CALL EAX
+008cd676 : ADD ESP,0x10
+008cd679 : MOV ECX,dword ptr [EBX + 0x10]
+008cd67c : CMP dword ptr [ECX + 0x28],0x0
+008cd680 : JNZ 0x008cd6d6
+008cd682 : PUSH 0xc53cdc
+008cd687 : LEA ECX,[EBP + -0x3c]
+008cd68a : CALL 0x00406460
+008cd68f : MOV dword ptr [EBP + -0x4],0x3
+008cd696 : MOV EDX,dword ptr [0x00da98e8]
+008cd69c : MOV ECX,dword ptr [EDX]
+008cd69e : TEST ECX,ECX
+008cd6a0 : JZ 0x008cd6b7
+008cd6a2 : MOV EAX,dword ptr [ECX]
+008cd6a4 : MOV EAX,dword ptr [EAX + 0x14]
+008cd6a7 : LEA EDX,[EBP + -0x3c]
+008cd6aa : PUSH EDX
+008cd6ab : PUSH 0x392
+008cd6b0 : PUSH 0xc53cf8
+008cd6b5 : CALL EAX
+008cd6b7 : MOV dword ptr [EBP + -0x4],ESI
+008cd6ba : LEA ECX,[EBP + -0x3c]
+008cd6bd : CALL 0x00406560
+008cd6c2 : MOV ECX,dword ptr [EBP + -0xc]
+008cd6c5 : MOV dword ptr FS:[0x0],ECX
+008cd6cc : POP ECX
+008cd6cd : POP EDI
+008cd6ce : POP ESI
+008cd6cf : POP EBX
+008cd6d0 : MOV ESP,EBP
+008cd6d2 : POP EBP
+008cd6d3 : RET 0x8
+008cd6d6 : MOV ECX,dword ptr [0x00da9894]
+008cd6dc : MOV EAX,dword ptr [ECX]
+008cd6de : TEST EAX,EAX
+008cd6e0 : JZ 0x008cd752
+008cd6e2 : MOV ECX,dword ptr [EAX + 0x114]
+008cd6e8 : TEST ECX,ECX
+008cd6ea : JZ 0x008cd752
+008cd6ec : MOV EAX,dword ptr [EBX + 0x10]
+008cd6ef : MOV ESI,dword ptr [EAX + 0x28]
+008cd6f2 : MOV EDX,dword ptr [ECX]
+008cd6f4 : MOV EBX,EAX
+008cd6f6 : MOV EAX,dword ptr [EAX + 0x30]
+008cd6f9 : FILD dword ptr [EBX + 0x30]
+008cd6fc : PUSH ESI
+008cd6fd : PUSH EAX
+008cd6fe : MOV EAX,dword ptr [EBX + 0x30]
+008cd701 : TEST EAX,EAX
+008cd703 : JGE 0x008cd70b
+008cd705 : FADD double ptr [0x00cdf6f8]
+008cd70b : MOV EAX,dword ptr [EBX + 0x28]
+008cd70e : FILD dword ptr [EBX + 0x28]
+008cd711 : TEST EAX,EAX
+008cd713 : JGE 0x008cd71b
+008cd715 : FADD double ptr [0x00cdf6f8]
+008cd71b : FDIVP
+008cd71d : FMUL double ptr [0x00cdf2a8]
+008cd723 : FNSTCW word ptr [EBP + 0xa]
+008cd726 : MOVZX EAX,word ptr [EBP + 0xa]
+008cd72a : OR EAX,0xc00
+008cd72f : MOV dword ptr [EBP + 0xc],EAX
+008cd732 : FLDCW word ptr [EBP + 0xc]
+008cd735 : FISTP qword ptr [EBP + -0x20]
+008cd738 : MOV EAX,dword ptr [EBP + -0x20]
+008cd73b : PUSH EAX
+008cd73c : PUSH 0xc53d3c
+008cd741 : FLDCW word ptr [EBP + 0xa]
+008cd744 : PUSH 0xc53d48
+008cd749 : PUSH ECX
+008cd74a : MOV ECX,dword ptr [EDX + 0x4]
+008cd74d : CALL ECX
+008cd74f : ADD ESP,0x18
+008cd752 : MOV ECX,dword ptr [EBP + -0xc]
+008cd755 : MOV dword ptr FS:[0x0],ECX
+008cd75c : POP ECX
+008cd75d : POP EDI
+008cd75e : POP ESI
+008cd75f : POP EBX
+008cd760 : MOV ESP,EBP
+008cd762 : POP EBP
+008cd763 : RET 0x8

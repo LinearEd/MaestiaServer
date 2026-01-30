@@ -1,0 +1,74 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_004ffbc0
+ENTRY    : 004ffbc0
+BODY     : [[004ffbc0, 004ffc0a]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined4 FUN_004ffbc0(byte *param_1)
+
+{
+  byte bVar1;
+  byte *pbVar2;
+  int iVar3;
+  uint *in_ECX;
+  bool bVar4;
+  
+  pbVar2 = (byte *)((*in_ECX & 0xfffffffc) + 8);
+  while( true ) {
+    bVar1 = *pbVar2;
+    bVar4 = bVar1 < *param_1;
+    if (bVar1 != *param_1) break;
+    if (bVar1 == 0) {
+      return 1;
+    }
+    bVar1 = pbVar2[1];
+    bVar4 = bVar1 < param_1[1];
+    if (bVar1 != param_1[1]) break;
+    pbVar2 = pbVar2 + 2;
+    param_1 = param_1 + 2;
+    if (bVar1 == 0) {
+      return 1;
+    }
+  }
+  iVar3 = (1 - (uint)bVar4) - (uint)(bVar4 != 0);
+  return CONCAT31((int3)((uint)iVar3 >> 8),iVar3 == 0);
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+004ffbc0 : MOV EAX,dword ptr [ECX]
+004ffbc2 : MOV EDX,dword ptr [ESP + 0x4]
+004ffbc6 : AND EAX,0xfffffffc
+004ffbc9 : ADD EAX,0x8
+004ffbcc : LEA ESP,[ESP]
+004ffbd0 : MOV CL,byte ptr [EAX]
+004ffbd2 : CMP CL,byte ptr [EDX]
+004ffbd4 : JNZ 0x004ffbfa
+004ffbd6 : TEST CL,CL
+004ffbd8 : JZ 0x004ffbec
+004ffbda : MOV CL,byte ptr [EAX + 0x1]
+004ffbdd : CMP CL,byte ptr [EDX + 0x1]
+004ffbe0 : JNZ 0x004ffbfa
+004ffbe2 : ADD EAX,0x2
+004ffbe5 : ADD EDX,0x2
+004ffbe8 : TEST CL,CL
+004ffbea : JNZ 0x004ffbd0
+004ffbec : XOR EAX,EAX
+004ffbee : XOR ECX,ECX
+004ffbf0 : TEST EAX,EAX
+004ffbf2 : SETZ CL
+004ffbf5 : MOV AL,CL
+004ffbf7 : RET 0x4
+004ffbfa : SBB EAX,EAX
+004ffbfc : SBB EAX,-0x1
+004ffbff : XOR ECX,ECX
+004ffc01 : TEST EAX,EAX
+004ffc03 : SETZ CL
+004ffc06 : MOV AL,CL
+004ffc08 : RET 0x4

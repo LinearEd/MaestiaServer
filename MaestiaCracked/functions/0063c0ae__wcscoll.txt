@@ -1,0 +1,74 @@
+PROGRAM  : Maestia.exe
+FUNCTION : _wcscoll
+ENTRY    : 0063c0ae
+BODY     : [[0063c0ae, 0063c0ff]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    _wcscoll
+   
+   Library: Visual Studio 2008 Release */
+
+int __cdecl _wcscoll(wchar_t *_Str1,wchar_t *_Str2)
+
+{
+  int *piVar1;
+  int iVar2;
+  
+  if (DAT_00d7b7c8 == 0) {
+    if ((_Str1 != (wchar_t *)0x0) && (_Str2 != (wchar_t *)0x0)) {
+      iVar2 = _wcscmp(_Str1,_Str2);
+      return iVar2;
+    }
+    piVar1 = __errno();
+    *piVar1 = 0x16;
+    __invalid_parameter(0,0,0,0,0);
+    iVar2 = 0x7fffffff;
+  }
+  else {
+    iVar2 = __wcscoll_l(_Str1,_Str2,(_locale_t)0x0);
+  }
+  return iVar2;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0063c0ae : MOV EDI,EDI
+0063c0b0 : PUSH EBP
+0063c0b1 : MOV EBP,ESP
+0063c0b3 : PUSH ESI
+0063c0b4 : XOR ESI,ESI
+0063c0b6 : CMP dword ptr [0x00d7b7c8],ESI
+0063c0bc : JNZ 0x0063c0ee
+0063c0be : CMP dword ptr [EBP + 0x8],ESI
+0063c0c1 : JNZ 0x0063c0e2
+0063c0c3 : CALL 0x0063ab82
+0063c0c8 : PUSH ESI
+0063c0c9 : PUSH ESI
+0063c0ca : PUSH ESI
+0063c0cb : PUSH ESI
+0063c0cc : PUSH ESI
+0063c0cd : MOV dword ptr [EAX],0x16
+0063c0d3 : CALL 0x006372b8
+0063c0d8 : ADD ESP,0x14
+0063c0db : MOV EAX,0x7fffffff
+0063c0e0 : JMP 0x0063c0fd
+0063c0e2 : CMP dword ptr [EBP + 0xc],ESI
+0063c0e5 : JZ 0x0063c0c3
+0063c0e7 : POP ESI
+0063c0e8 : POP EBP
+0063c0e9 : JMP 0x00658c38
+0063c0ee : PUSH ESI
+0063c0ef : PUSH dword ptr [EBP + 0xc]
+0063c0f2 : PUSH dword ptr [EBP + 0x8]
+0063c0f5 : CALL 0x0063c008
+0063c0fa : ADD ESP,0xc
+0063c0fd : POP ESI
+0063c0fe : POP EBP
+0063c0ff : RET

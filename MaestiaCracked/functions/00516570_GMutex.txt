@@ -1,0 +1,100 @@
+PROGRAM  : Maestia.exe
+FUNCTION : GMutex
+ENTRY    : 00516570
+BODY     : [[00516570, 00516607]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* public: __thiscall GMutex::GMutex(bool,bool) */
+
+GMutex * __thiscall GMutex::GMutex(GMutex *this,bool param_1,bool param_2)
+
+{
+  undefined4 *puVar1;
+  HANDLE pvVar2;
+  undefined3 in_stack_00000009;
+  
+                    /* 0x116570  9  ??0GMutex@@QAE@_N0@Z */
+  FUN_00517c80(_param_2);
+  *(undefined ***)(this + 0xc) = &PTR_FUN_00cd40d4;
+  *(undefined ***)this = &PTR_LAB_00b87134;
+  *(undefined ***)(this + 0xc) = &PTR_LAB_00b87120;
+  puVar1 = (undefined4 *)FUN_00515840(0x14,0);
+  if (puVar1 == (undefined4 *)0x0) {
+    *(undefined4 *)(this + 0x10) = 0;
+    return this;
+  }
+  puVar1[3] = &PTR_LAB_00b87104;
+  puVar1[4] = 0;
+  *(bool *)(puVar1 + 1) = param_1;
+  puVar1[4] = this;
+  puVar1[2] = 0;
+  if (*(char *)(puVar1 + 1) != '\0') {
+    pvVar2 = CreateMutexA((LPSECURITY_ATTRIBUTES)0x0,0,(LPCSTR)0x0);
+    *puVar1 = pvVar2;
+    *(undefined4 **)(this + 0x10) = puVar1;
+    return this;
+  }
+  pvVar2 = CreateSemaphoreA((LPSECURITY_ATTRIBUTES)0x0,1,1,(LPCSTR)0x0);
+  *puVar1 = pvVar2;
+  *(undefined4 **)(this + 0x10) = puVar1;
+  return this;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00516570 : MOV EAX,dword ptr [ESP + 0x8]
+00516574 : PUSH ESI
+00516575 : PUSH EDI
+00516576 : PUSH EAX
+00516577 : MOV ESI,ECX
+00516579 : CALL 0x00517c80
+0051657e : MOV dword ptr [ESI + 0xc],0xcd40d4
+00516585 : PUSH 0x0
+00516587 : MOV dword ptr [ESI],0xb87134
+0051658d : MOV dword ptr [ESI + 0xc],0xb87120
+00516594 : MOV ECX,dword ptr [0x00d73250]
+0051659a : PUSH 0x14
+0051659c : CALL 0x00515840
+005165a1 : MOV EDI,EAX
+005165a3 : TEST EDI,EDI
+005165a5 : JZ 0x005165fc
+005165a7 : MOV CL,byte ptr [ESP + 0xc]
+005165ab : MOV dword ptr [EDI + 0xc],0xb87104
+005165b2 : MOV dword ptr [EDI + 0x10],0x0
+005165b9 : MOV byte ptr [EDI + 0x4],CL
+005165bc : CMP byte ptr [EDI + 0x4],0x0
+005165c0 : MOV dword ptr [EDI + 0x10],ESI
+005165c3 : MOV dword ptr [EDI + 0x8],0x0
+005165ca : PUSH 0x0
+005165cc : JZ 0x005165e4
+005165ce : PUSH 0x0
+005165d0 : PUSH 0x0
+005165d2 : CALL dword ptr [0x00b85230]
+005165d8 : MOV dword ptr [EDI],EAX
+005165da : MOV dword ptr [ESI + 0x10],EDI
+005165dd : POP EDI
+005165de : MOV EAX,ESI
+005165e0 : POP ESI
+005165e1 : RET 0x8
+005165e4 : PUSH 0x1
+005165e6 : PUSH 0x1
+005165e8 : PUSH 0x0
+005165ea : CALL dword ptr [0x00b8522c]
+005165f0 : MOV dword ptr [EDI],EAX
+005165f2 : MOV dword ptr [ESI + 0x10],EDI
+005165f5 : POP EDI
+005165f6 : MOV EAX,ESI
+005165f8 : POP ESI
+005165f9 : RET 0x8
+005165fc : XOR EAX,EAX
+005165fe : MOV dword ptr [ESI + 0x10],EAX
+00516601 : POP EDI
+00516602 : MOV EAX,ESI
+00516604 : POP ESI
+00516605 : RET 0x8

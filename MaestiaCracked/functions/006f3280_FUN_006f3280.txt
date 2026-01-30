@@ -1,0 +1,332 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_006f3280
+ENTRY    : 006f3280
+BODY     : [[006f3280, 006f3539]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined4 FUN_006f3280(void)
+
+{
+  undefined4 *puVar1;
+  undefined4 *puVar2;
+  uint uVar3;
+  int iVar4;
+  int in_ECX;
+  LPCRITICAL_SECTION local_30;
+  char *local_2c;
+  undefined4 local_28;
+  int local_24;
+  undefined4 local_20;
+  int local_1c;
+  undefined4 *local_18;
+  int local_14;
+  void *local_10;
+  undefined1 *puStack_c;
+  undefined4 local_8;
+  
+  local_8 = 0xffffffff;
+  puStack_c = &LAB_00b36865;
+  local_10 = ExceptionList;
+  uVar3 = DAT_00d66fa0 ^ (uint)&stack0xfffffffc;
+  ExceptionList = &local_10;
+  local_30 = (LPCRITICAL_SECTION)(in_ECX + 0xf44);
+  local_24 = 0;
+  local_2c = ".\\AvSocket.cpp";
+  local_28 = 0x535;
+  local_20 = 1;
+  FUN_006ef1a0(&local_30);
+  local_8 = 0;
+  if (*(int *)(in_ECX + 0xee0) != -1) {
+    if ((*(int *)(in_ECX + 0x2418) == 0x12345678) && (*(int *)(in_ECX + 0x241c) == 0x19760915)) {
+      puVar2 = *(undefined4 **)(in_ECX + 0x23f0);
+      if (puVar2 == (undefined4 *)0x0) {
+        local_8 = 0xffffffff;
+        if (local_24 != 0) {
+          LeaveCriticalSection(local_30);
+        }
+        ExceptionList = local_10;
+        return 1;
+      }
+      iVar4 = puVar2[0x801];
+      *(int *)(in_ECX + 0x23f0) = iVar4;
+      if (iVar4 == 0) {
+        *(undefined4 *)(in_ECX + 0x23f4) = 0;
+      }
+      InterlockedDecrement((LONG *)(in_ECX + 0x23ec));
+      *(undefined4 *)(in_ECX + 0xfdc) = 0;
+      puVar1 = puVar2 + 1;
+      local_1c = puVar2[0x802];
+      local_8 = 0xffffffff;
+      local_18 = puVar1;
+      if (local_24 != 0) {
+        LeaveCriticalSection(local_30);
+        local_24 = 0;
+      }
+      if (*(uint *)(in_ECX + 0xfdc) < (uint)puVar2[0x802]) {
+        do {
+          local_14 = 0;
+          iVar4 = WSASend(*(undefined4 *)(in_ECX + 0xee0),&local_1c,1,&local_14,0,0,0);
+          if (iVar4 != 0) {
+            iVar4 = WSAGetLastError();
+            FUN_006ee470(L"[ERROR]AvSocket::SendBlockMode() error = %d\n",iVar4);
+            if (iVar4 == 0x2746) {
+              FUN_006f2e90(0xe5);
+              ExceptionList = local_10;
+              return 0;
+            }
+            FUN_006f2e90(0xe0);
+            ExceptionList = local_10;
+            return 0;
+          }
+          *(int *)(in_ECX + 0xfdc) = *(int *)(in_ECX + 0xfdc) + local_14;
+          uVar3 = *(uint *)(in_ECX + 0xfdc);
+          if (uVar3 < (uint)puVar2[0x802]) {
+            local_18 = (undefined4 *)(uVar3 + (int)puVar1);
+            local_1c = puVar2[0x802] - uVar3;
+            FUN_006ee470(L"[ERROR]AvSocket::SendBlockMode() PartialSend = %d, %d\n",uVar3,local_14);
+          }
+        } while (*(uint *)(in_ECX + 0xfdc) < (uint)puVar2[0x802]);
+      }
+      (**(code **)*puVar2)(1);
+      if (*(int *)(in_ECX + 0xec0) != 0) {
+        FUN_006f2e90(*(undefined2 *)(in_ECX + 0xecc));
+        ExceptionList = local_10;
+        return 0;
+      }
+      FUN_006ef2b0(0x57c);
+      local_8 = 1;
+      if ((*(int *)(in_ECX + 0x23f0) != 0) && (*(HANDLE *)(in_ECX + 0x242c) != (HANDLE)0x0)) {
+        SetEvent(*(HANDLE *)(in_ECX + 0x242c));
+      }
+      local_8 = 0xffffffff;
+      FUN_006ef180();
+      ExceptionList = local_10;
+      return 1;
+    }
+    FUN_006ee470(L"[CRITICAL] [AvSocket::SendBlockMode] this is deleted pointer\n",uVar3);
+  }
+  local_8 = 0xffffffff;
+  if (local_24 != 0) {
+    LeaveCriticalSection(local_30);
+  }
+  ExceptionList = local_10;
+  return 0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006f3280 : PUSH EBP
+006f3281 : MOV EBP,ESP
+006f3283 : PUSH -0x1
+006f3285 : PUSH 0xb36865
+006f328a : MOV EAX,FS:[0x0]
+006f3290 : PUSH EAX
+006f3291 : SUB ESP,0x24
+006f3294 : PUSH EBX
+006f3295 : PUSH ESI
+006f3296 : PUSH EDI
+006f3297 : MOV EAX,[0x00d66fa0]
+006f329c : XOR EAX,EBP
+006f329e : PUSH EAX
+006f329f : LEA EAX,[EBP + -0xc]
+006f32a2 : MOV FS:[0x0],EAX
+006f32a8 : MOV EDI,ECX
+006f32aa : LEA ECX,[EBP + -0x2c]
+006f32ad : LEA EAX,[EDI + 0xf44]
+006f32b3 : XOR EBX,EBX
+006f32b5 : PUSH ECX
+006f32b6 : MOV dword ptr [EBP + -0x20],EBX
+006f32b9 : MOV dword ptr [EBP + -0x2c],EAX
+006f32bc : MOV dword ptr [EBP + -0x28],0xbf6f34
+006f32c3 : MOV dword ptr [EBP + -0x24],0x535
+006f32ca : MOV dword ptr [EBP + -0x1c],0x1
+006f32d1 : CALL 0x006ef1a0
+006f32d6 : MOV dword ptr [EBP + -0x4],EBX
+006f32d9 : OR ESI,0xffffffff
+006f32dc : CMP dword ptr [EDI + 0xee0],ESI
+006f32e2 : JZ 0x006f3511
+006f32e8 : CMP dword ptr [EDI + 0x2418],0x12345678
+006f32f2 : JNZ 0x006f3504
+006f32f8 : CMP dword ptr [EDI + 0x241c],0x19760915
+006f3302 : JNZ 0x006f3504
+006f3308 : MOV ESI,dword ptr [EDI + 0x23f0]
+006f330e : CMP ESI,EBX
+006f3310 : JNZ 0x006f3342
+006f3312 : MOV dword ptr [EBP + -0x4],0xffffffff
+006f3319 : CMP dword ptr [EBP + -0x20],EBX
+006f331c : JZ 0x006f332b
+006f331e : MOV EAX,dword ptr [EBP + -0x2c]
+006f3321 : PUSH EAX
+006f3322 : CALL dword ptr [0x00b8511c]
+006f3328 : MOV dword ptr [EBP + -0x20],EBX
+006f332b : MOV EAX,0x1
+006f3330 : MOV ECX,dword ptr [EBP + -0xc]
+006f3333 : MOV dword ptr FS:[0x0],ECX
+006f333a : POP ECX
+006f333b : POP EDI
+006f333c : POP ESI
+006f333d : POP EBX
+006f333e : MOV ESP,EBP
+006f3340 : POP EBP
+006f3341 : RET
+006f3342 : MOV EAX,dword ptr [ESI + 0x2004]
+006f3348 : MOV dword ptr [EDI + 0x23f0],EAX
+006f334e : CMP EAX,EBX
+006f3350 : JNZ 0x006f3358
+006f3352 : MOV dword ptr [EDI + 0x23f4],EBX
+006f3358 : LEA ECX,[EDI + 0x23ec]
+006f335e : PUSH ECX
+006f335f : CALL dword ptr [0x00b851b0]
+006f3365 : MOV dword ptr [EDI + 0xfdc],EBX
+006f336b : LEA EBX,[ESI + 0x4]
+006f336e : MOV dword ptr [EBP + -0x14],EBX
+006f3371 : MOV EDX,dword ptr [ESI + 0x2008]
+006f3377 : MOV dword ptr [EBP + -0x18],EDX
+006f337a : MOV dword ptr [EBP + -0x4],0xffffffff
+006f3381 : CMP dword ptr [EBP + -0x20],0x0
+006f3385 : JZ 0x006f3398
+006f3387 : MOV EAX,dword ptr [EBP + -0x2c]
+006f338a : PUSH EAX
+006f338b : CALL dword ptr [0x00b8511c]
+006f3391 : MOV dword ptr [EBP + -0x20],0x0
+006f3398 : MOV ECX,dword ptr [EDI + 0xfdc]
+006f339e : CMP ECX,dword ptr [ESI + 0x2008]
+006f33a4 : JNC 0x006f3413
+006f33a6 : MOV ECX,dword ptr [EDI + 0xee0]
+006f33ac : PUSH 0x0
+006f33ae : PUSH 0x0
+006f33b0 : PUSH 0x0
+006f33b2 : LEA EDX,[EBP + -0x10]
+006f33b5 : PUSH EDX
+006f33b6 : PUSH 0x1
+006f33b8 : LEA EAX,[EBP + -0x18]
+006f33bb : PUSH EAX
+006f33bc : PUSH ECX
+006f33bd : MOV dword ptr [EBP + -0x10],0x0
+006f33c4 : CALL dword ptr [0x00b855d4]
+006f33ca : TEST EAX,EAX
+006f33cc : JNZ 0x006f3449
+006f33ce : MOV ECX,dword ptr [EBP + -0x10]
+006f33d1 : ADD dword ptr [EDI + 0xfdc],ECX
+006f33d7 : MOV EAX,dword ptr [EDI + 0xfdc]
+006f33dd : CMP EAX,dword ptr [ESI + 0x2008]
+006f33e3 : JNC 0x006f3405
+006f33e5 : LEA EDX,[EAX + EBX*0x1]
+006f33e8 : MOV dword ptr [EBP + -0x14],EDX
+006f33eb : MOV EDX,dword ptr [ESI + 0x2008]
+006f33f1 : PUSH ECX
+006f33f2 : PUSH EAX
+006f33f3 : SUB EDX,EAX
+006f33f5 : PUSH 0xbf7028
+006f33fa : MOV dword ptr [EBP + -0x18],EDX
+006f33fd : CALL 0x006ee470
+006f3402 : ADD ESP,0xc
+006f3405 : MOV EAX,dword ptr [EDI + 0xfdc]
+006f340b : CMP EAX,dword ptr [ESI + 0x2008]
+006f3411 : JC 0x006f33a6
+006f3413 : MOV EDX,dword ptr [ESI]
+006f3415 : MOV EAX,dword ptr [EDX]
+006f3417 : PUSH 0x1
+006f3419 : MOV ECX,ESI
+006f341b : CALL EAX
+006f341d : CMP dword ptr [EDI + 0xec0],0x0
+006f3424 : JZ 0x006f34a5
+006f3426 : MOVZX ECX,word ptr [EDI + 0xecc]
+006f342d : PUSH ECX
+006f342e : MOV ESI,EDI
+006f3430 : CALL 0x006f2e90
+006f3435 : XOR EAX,EAX
+006f3437 : MOV ECX,dword ptr [EBP + -0xc]
+006f343a : MOV dword ptr FS:[0x0],ECX
+006f3441 : POP ECX
+006f3442 : POP EDI
+006f3443 : POP ESI
+006f3444 : POP EBX
+006f3445 : MOV ESP,EBP
+006f3447 : POP EBP
+006f3448 : RET
+006f3449 : CALL dword ptr [0x00b855c8]
+006f344f : MOV ESI,EAX
+006f3451 : PUSH ESI
+006f3452 : PUSH 0xbf6fc8
+006f3457 : CALL 0x006ee470
+006f345c : ADD ESP,0x8
+006f345f : CMP ESI,0x2746
+006f3465 : MOV ESI,EDI
+006f3467 : JNZ 0x006f3487
+006f3469 : PUSH 0xe5
+006f346e : CALL 0x006f2e90
+006f3473 : XOR EAX,EAX
+006f3475 : MOV ECX,dword ptr [EBP + -0xc]
+006f3478 : MOV dword ptr FS:[0x0],ECX
+006f347f : POP ECX
+006f3480 : POP EDI
+006f3481 : POP ESI
+006f3482 : POP EBX
+006f3483 : MOV ESP,EBP
+006f3485 : POP EBP
+006f3486 : RET
+006f3487 : PUSH 0xe0
+006f348c : CALL 0x006f2e90
+006f3491 : XOR EAX,EAX
+006f3493 : MOV ECX,dword ptr [EBP + -0xc]
+006f3496 : MOV dword ptr FS:[0x0],ECX
+006f349d : POP ECX
+006f349e : POP EDI
+006f349f : POP ESI
+006f34a0 : POP EBX
+006f34a1 : MOV ESP,EBP
+006f34a3 : POP EBP
+006f34a4 : RET
+006f34a5 : PUSH 0x57c
+006f34aa : LEA EAX,[EDI + 0xf40]
+006f34b0 : MOV ECX,0xbf7098
+006f34b5 : LEA ESI,[EBP + -0x2c]
+006f34b8 : CALL 0x006ef2b0
+006f34bd : MOV dword ptr [EBP + -0x4],0x1
+006f34c4 : CMP dword ptr [EDI + 0x23f0],0x0
+006f34cb : JZ 0x006f34de
+006f34cd : MOV EDI,dword ptr [EDI + 0x242c]
+006f34d3 : TEST EDI,EDI
+006f34d5 : JZ 0x006f34de
+006f34d7 : PUSH EDI
+006f34d8 : CALL dword ptr [0x00b851e8]
+006f34de : MOV dword ptr [EBP + -0x4],0xffffffff
+006f34e5 : LEA ESI,[EBP + -0x2c]
+006f34e8 : CALL 0x006ef180
+006f34ed : MOV EAX,0x1
+006f34f2 : MOV ECX,dword ptr [EBP + -0xc]
+006f34f5 : MOV dword ptr FS:[0x0],ECX
+006f34fc : POP ECX
+006f34fd : POP EDI
+006f34fe : POP ESI
+006f34ff : POP EBX
+006f3500 : MOV ESP,EBP
+006f3502 : POP EBP
+006f3503 : RET
+006f3504 : PUSH 0xbf6f48
+006f3509 : CALL 0x006ee470
+006f350e : ADD ESP,0x4
+006f3511 : MOV dword ptr [EBP + -0x4],ESI
+006f3514 : CMP dword ptr [EBP + -0x20],EBX
+006f3517 : JZ 0x006f3526
+006f3519 : MOV EDX,dword ptr [EBP + -0x2c]
+006f351c : PUSH EDX
+006f351d : CALL dword ptr [0x00b8511c]
+006f3523 : MOV dword ptr [EBP + -0x20],EBX
+006f3526 : XOR EAX,EAX
+006f3528 : MOV ECX,dword ptr [EBP + -0xc]
+006f352b : MOV dword ptr FS:[0x0],ECX
+006f3532 : POP ECX
+006f3533 : POP EDI
+006f3534 : POP ESI
+006f3535 : POP EBX
+006f3536 : MOV ESP,EBP
+006f3538 : POP EBP
+006f3539 : RET

@@ -1,0 +1,85 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00688530
+ENTRY    : 00688530
+BODY     : [[00688530, 0068858e]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined4 FUN_00688530(int param_1,int param_2)
+
+{
+  int *piVar1;
+  int iVar2;
+  int *piVar3;
+  
+  if (param_1 == 0) {
+    return 0x23;
+  }
+  piVar3 = *(int **)(param_1 + 0x28);
+  if (piVar3 == (int *)0x0) {
+    return 0x26;
+  }
+  iVar2 = FUN_00686c60(param_2);
+  if (iVar2 != 0xe) {
+    piVar1 = piVar3 + *(int *)(param_1 + 0x24);
+    for (; piVar3 < piVar1; piVar3 = piVar3 + 1) {
+      if (*piVar3 == param_2) {
+        *(int *)(param_1 + 0x5c) = *piVar3;
+        return 0;
+      }
+    }
+  }
+  return 6;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00688530 : PUSH EDI
+00688531 : MOV EDI,dword ptr [ESP + 0x8]
+00688535 : TEST EDI,EDI
+00688537 : JNZ 0x0068853e
+00688539 : LEA EAX,[EDI + 0x23]
+0068853c : POP EDI
+0068853d : RET
+0068853e : PUSH ESI
+0068853f : MOV ESI,dword ptr [EDI + 0x28]
+00688542 : TEST ESI,ESI
+00688544 : JNZ 0x0068854c
+00688546 : LEA EAX,[ESI + 0x26]
+00688549 : POP ESI
+0068854a : POP EDI
+0068854b : RET
+0068854c : PUSH EBX
+0068854d : MOV EBX,dword ptr [ESP + 0x14]
+00688551 : PUSH EBX
+00688552 : CALL 0x00686c60
+00688557 : ADD ESP,0x4
+0068855a : CMP EAX,0xe
+0068855d : JZ 0x0068857b
+0068855f : MOV EAX,dword ptr [EDI + 0x24]
+00688562 : LEA EAX,[ESI + EAX*0x4]
+00688565 : CMP ESI,EAX
+00688567 : JNC 0x0068857b
+00688569 : LEA ESP,[ESP]
+00688570 : CMP dword ptr [ESI],EBX
+00688572 : JZ 0x00688584
+00688574 : ADD ESI,0x4
+00688577 : CMP ESI,EAX
+00688579 : JC 0x00688570
+0068857b : POP EBX
+0068857c : POP ESI
+0068857d : MOV EAX,0x6
+00688582 : POP EDI
+00688583 : RET
+00688584 : MOV ECX,dword ptr [ESI]
+00688586 : POP EBX
+00688587 : POP ESI
+00688588 : MOV dword ptr [EDI + 0x5c],ECX
+0068858b : XOR EAX,EAX
+0068858d : POP EDI
+0068858e : RET

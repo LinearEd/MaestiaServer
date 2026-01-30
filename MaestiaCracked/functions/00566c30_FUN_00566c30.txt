@@ -1,0 +1,82 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00566c30
+ENTRY    : 00566c30
+BODY     : [[00566c30, 00566cac]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined4 * FUN_00566c30(undefined4 *param_1,uint param_2)
+
+{
+  undefined4 uVar1;
+  int in_ECX;
+  int iVar2;
+  undefined4 *local_8;
+  undefined4 *local_4;
+  
+  uVar1 = *(undefined4 *)(in_ECX + 0xa8);
+  *param_1 = 1;
+  param_1[1] = uVar1;
+  *(int *)(in_ECX + 0xa8) = *(int *)(in_ECX + 0xa8) + 1;
+  iVar2 = 0;
+  if (*(int *)(in_ECX + 0x74) < 2) {
+    EnterCriticalSection((LPCRITICAL_SECTION)(in_ECX + 0xac));
+    iVar2 = in_ECX;
+  }
+  local_8 = &param_2;
+  local_4 = param_1;
+  FUN_00564f30(in_ECX + 0xc4,&local_8,param_2 >> 8 ^ param_2);
+  if (iVar2 != 0) {
+    LeaveCriticalSection((LPCRITICAL_SECTION)(iVar2 + 0xac));
+  }
+  return param_1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00566c30 : SUB ESP,0x8
+00566c33 : PUSH EBX
+00566c34 : PUSH ESI
+00566c35 : MOV ESI,ECX
+00566c37 : MOV EAX,dword ptr [ESI + 0xa8]
+00566c3d : PUSH EDI
+00566c3e : MOV EDI,dword ptr [ESP + 0x18]
+00566c42 : MOV dword ptr [EDI],0x1
+00566c48 : MOV dword ptr [EDI + 0x4],EAX
+00566c4b : INC dword ptr [ESI + 0xa8]
+00566c51 : XOR EBX,EBX
+00566c53 : CMP dword ptr [ESI + 0x74],0x2
+00566c57 : JGE 0x00566c68
+00566c59 : LEA EAX,[ESI + 0xac]
+00566c5f : PUSH EAX
+00566c60 : MOV EBX,ESI
+00566c62 : CALL dword ptr [0x00b85118]
+00566c68 : MOV EDX,dword ptr [ESP + 0x1c]
+00566c6c : LEA EAX,[ESP + 0x1c]
+00566c70 : MOV dword ptr [ESP + 0xc],EAX
+00566c74 : MOV EAX,EDX
+00566c76 : SHR EAX,0x8
+00566c79 : XOR EAX,EDX
+00566c7b : PUSH EAX
+00566c7c : LEA EDX,[ESP + 0x10]
+00566c80 : LEA ECX,[ESI + 0xc4]
+00566c86 : PUSH EDX
+00566c87 : PUSH ECX
+00566c88 : MOV dword ptr [ESP + 0x1c],EDI
+00566c8c : CALL 0x00564f30
+00566c91 : TEST EBX,EBX
+00566c93 : JZ 0x00566ca2
+00566c95 : LEA EAX,[EBX + 0xac]
+00566c9b : PUSH EAX
+00566c9c : CALL dword ptr [0x00b8511c]
+00566ca2 : MOV EAX,EDI
+00566ca4 : POP EDI
+00566ca5 : POP ESI
+00566ca6 : POP EBX
+00566ca7 : ADD ESP,0x8
+00566caa : RET 0x8

@@ -1,0 +1,99 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_006952c0
+ENTRY    : 006952c0
+BODY     : [[006952c0, 00695333]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+int FUN_006952c0(int param_1,undefined4 param_2)
+
+{
+  undefined1 *puVar1;
+  undefined1 *puVar2;
+  int iVar3;
+  ushort uVar4;
+  uint uVar5;
+  uint uVar6;
+  int iVar7;
+  
+  iVar7 = *(int *)(param_1 + 0x10);
+  uVar6 = (uint)(*(ushort *)(param_1 + 8) >> 1);
+  iVar3 = FUN_0068a220(param_2,1,0,uVar6 + 1,0,&param_1);
+  if (param_1 == 0) {
+    uVar5 = 0;
+    if (uVar6 != 0) {
+      iVar7 = iVar7 + -1;
+      do {
+        puVar1 = (undefined1 *)(iVar7 + 1);
+        puVar2 = (undefined1 *)(iVar7 + 2);
+        iVar7 = iVar7 + 2;
+        uVar4 = CONCAT11(*puVar1,*puVar2);
+        if ((uVar4 < 0x20) || (0x7f < uVar4)) {
+          uVar4 = 0x3f;
+        }
+        *(char *)(uVar5 + iVar3) = (char)uVar4;
+        uVar5 = uVar5 + 1;
+      } while (uVar5 < uVar6);
+    }
+    *(undefined1 *)(iVar3 + uVar6) = 0;
+    return iVar3;
+  }
+  return 0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006952c0 : MOV EAX,dword ptr [ESP + 0x4]
+006952c4 : MOV EDX,dword ptr [ESP + 0x8]
+006952c8 : PUSH ESI
+006952c9 : MOVZX ESI,word ptr [EAX + 0x8]
+006952cd : PUSH EDI
+006952ce : MOV EDI,dword ptr [EAX + 0x10]
+006952d1 : LEA EAX,[ESP + 0xc]
+006952d5 : PUSH EAX
+006952d6 : PUSH 0x0
+006952d8 : SHR ESI,0x1
+006952da : LEA ECX,[ESI + 0x1]
+006952dd : PUSH ECX
+006952de : PUSH 0x0
+006952e0 : PUSH 0x1
+006952e2 : PUSH EDX
+006952e3 : CALL 0x0068a220
+006952e8 : ADD ESP,0x18
+006952eb : CMP dword ptr [ESP + 0xc],0x0
+006952f0 : JZ 0x006952f7
+006952f2 : POP EDI
+006952f3 : XOR EAX,EAX
+006952f5 : POP ESI
+006952f6 : RET
+006952f7 : XOR EDX,EDX
+006952f9 : TEST ESI,ESI
+006952fb : JBE 0x0069532d
+006952fd : DEC EDI
+006952fe : PUSH EBX
+006952ff : NOP
+00695300 : MOVZX CX,byte ptr [EDI + 0x1]
+00695305 : MOVZX EBX,byte ptr [EDI + 0x2]
+00695309 : ADD EDI,0x2
+0069530c : SHL CX,0x8
+00695310 : MOVZX ECX,CX
+00695313 : OR ECX,EBX
+00695315 : CMP ECX,0x20
+00695318 : JC 0x0069531f
+0069531a : CMP ECX,0x7f
+0069531d : JBE 0x00695324
+0069531f : MOV ECX,0x3f
+00695324 : MOV byte ptr [EDX + EAX*0x1],CL
+00695327 : INC EDX
+00695328 : CMP EDX,ESI
+0069532a : JC 0x00695300
+0069532c : POP EBX
+0069532d : POP EDI
+0069532e : MOV byte ptr [EAX + ESI*0x1],0x0
+00695332 : POP ESI
+00695333 : RET

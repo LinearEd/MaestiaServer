@@ -1,0 +1,94 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00610f30
+ENTRY    : 00610f30
+BODY     : [[00610f30, 00610faf]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+short * FUN_00610f30(short param_1,short param_2)
+
+{
+  uint *puVar1;
+  int *piVar2;
+  int iVar3;
+  uint uVar4;
+  short *psVar5;
+  int in_ECX;
+  
+  puVar1 = (uint *)(in_ECX + 0x14);
+  uVar4 = *(int *)(in_ECX + 0x14) - 1;
+  psVar5 = (short *)(*(int *)(*(int *)(in_ECX + 0x20) + (uVar4 >> 6) * 4) + (uVar4 & 0x3f) * 4);
+  _param_1 = CONCAT22(param_2,param_1);
+  if ((param_1 != *psVar5) || (param_2 != psVar5[1])) {
+    uVar4 = *puVar1 >> 6;
+    if (*(uint *)(in_ECX + 0x18) <= uVar4) {
+      FUN_00610bf0(uVar4);
+    }
+    *(undefined4 *)(*(int *)(*(int *)(in_ECX + 0x20) + uVar4 * 4) + (*puVar1 & 0x3f) * 4) = _param_1
+    ;
+    *puVar1 = *puVar1 + 1;
+    uVar4 = *(int *)(in_ECX + 4) - 1;
+    iVar3 = *(int *)(*(int *)(in_ECX + 0x10) + (uVar4 >> 4) * 4);
+    uVar4 = uVar4 & 0xf;
+    piVar2 = (int *)(iVar3 + 4 + uVar4 * 8);
+    *piVar2 = *piVar2 + 1;
+    psVar5 = (short *)(iVar3 + 4 + uVar4 * 8);
+  }
+  return psVar5;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00610f30 : PUSH ESI
+00610f31 : PUSH EDI
+00610f32 : MOV EDI,ECX
+00610f34 : MOV EAX,dword ptr [EDI + 0x14]
+00610f37 : MOV EDX,dword ptr [EDI + 0x20]
+00610f3a : LEA ESI,[EDI + 0x14]
+00610f3d : DEC EAX
+00610f3e : MOV ECX,EAX
+00610f40 : SHR ECX,0x6
+00610f43 : MOV ECX,dword ptr [EDX + ECX*0x4]
+00610f46 : MOV EDX,dword ptr [ESP + 0x10]
+00610f4a : AND EAX,0x3f
+00610f4d : LEA EAX,[ECX + EAX*0x4]
+00610f50 : MOV ECX,dword ptr [ESP + 0xc]
+00610f54 : MOV word ptr [ESP + 0xc],CX
+00610f59 : MOV word ptr [ESP + 0xe],DX
+00610f5e : CMP CX,word ptr [EAX]
+00610f61 : JNZ 0x00610f69
+00610f63 : CMP DX,word ptr [EAX + 0x2]
+00610f67 : JZ 0x00610fab
+00610f69 : PUSH EBX
+00610f6a : MOV EBX,dword ptr [ESI]
+00610f6c : SHR EBX,0x6
+00610f6f : CMP EBX,dword ptr [ESI + 0x4]
+00610f72 : JC 0x00610f7c
+00610f74 : PUSH EBX
+00610f75 : MOV ECX,ESI
+00610f77 : CALL 0x00610bf0
+00610f7c : MOV EDX,dword ptr [ESI + 0xc]
+00610f7f : MOV ECX,dword ptr [EDX + EBX*0x4]
+00610f82 : MOV EAX,dword ptr [ESI]
+00610f84 : MOV EDX,dword ptr [ESP + 0x10]
+00610f88 : AND EAX,0x3f
+00610f8b : MOV dword ptr [ECX + EAX*0x4],EDX
+00610f8e : INC dword ptr [ESI]
+00610f90 : MOV EAX,dword ptr [EDI + 0x4]
+00610f93 : MOV EDX,dword ptr [EDI + 0x10]
+00610f96 : DEC EAX
+00610f97 : MOV ECX,EAX
+00610f99 : SHR ECX,0x4
+00610f9c : MOV ECX,dword ptr [EDX + ECX*0x4]
+00610f9f : AND EAX,0xf
+00610fa2 : INC dword ptr [ECX + EAX*0x8 + 0x4]
+00610fa6 : LEA EAX,[ECX + EAX*0x8 + 0x4]
+00610faa : POP EBX
+00610fab : POP EDI
+00610fac : POP ESI
+00610fad : RET 0x8

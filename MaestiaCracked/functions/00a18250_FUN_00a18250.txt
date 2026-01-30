@@ -1,0 +1,97 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00a18250
+ENTRY    : 00a18250
+BODY     : [[00a18250, 00a18313]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00a18250(void)
+
+{
+  int iVar1;
+  int in_EAX;
+  int in_ECX;
+  float fVar2;
+  float fVar3;
+  
+  fVar2 = *(float *)(in_EAX + 0x224);
+  iVar1 = *(int *)(in_EAX + 0x74);
+  fVar3 = DAT_00d72a88;
+  if (*(float *)(iVar1 + 0x1f8) < fVar2) goto LAB_00a182d1;
+  fVar3 = *(float *)(iVar1 + 500);
+  if (fVar2 < fVar3) {
+    fVar3 = 1.0;
+    goto LAB_00a182d1;
+  }
+  fVar2 = (fVar2 - fVar3) / (*(float *)(iVar1 + 0x1f8) - fVar3);
+  if (fVar2 < 0.0) {
+LAB_00a182b9:
+    fVar2 = 0.0;
+  }
+  else if (1.0 <= fVar2) {
+    fVar2 = 1.0;
+  }
+  else if (fVar2 < 0.0) goto LAB_00a182b9;
+  fVar3 = fVar2 * fVar2 * 6.0 + 1.0;
+LAB_00a182d1:
+  fVar3 = *(float *)(in_EAX + 0x224) -
+          fVar3 * DAT_00d72c24 * (float)(in_ECX - *(int *)(in_EAX + 0x204));
+  *(float *)(in_EAX + 0x224) = fVar3;
+  fVar2 = *(float *)(iVar1 + 0x1f8);
+  if ((fVar2 < fVar3) || (fVar2 = *(float *)(iVar1 + 500), fVar3 < fVar2)) {
+    *(float *)(in_EAX + 0x224) = fVar2;
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00a18250 : SUB ECX,dword ptr [EAX + 0x204]
+00a18256 : MOVSS XMM0,dword ptr [EAX + 0x224]
+00a1825e : CVTSI2SS XMM3,ECX
+00a18262 : MOV ECX,dword ptr [EAX + 0x74]
+00a18265 : MOVSS XMM1,dword ptr [ECX + 0x1f8]
+00a1826d : COMISS XMM0,XMM1
+00a18270 : JBE 0x00a1827c
+00a18272 : MOVSS XMM0,dword ptr [0x00d72a88]
+00a1827a : JMP 0x00a182d1
+00a1827c : MOVSS XMM2,dword ptr [ECX + 0x1f4]
+00a18284 : COMISS XMM2,XMM0
+00a18287 : JBE 0x00a18293
+00a18289 : MOVSS XMM0,dword ptr [0x00c10fc4]
+00a18291 : JMP 0x00a182d1
+00a18293 : SUBSS XMM1,XMM2
+00a18297 : SUBSS XMM0,XMM2
+00a1829b : MOVSS XMM2,dword ptr [0x00c10fc4]
+00a182a3 : DIVSS XMM0,XMM1
+00a182a7 : XORPS XMM1,XMM1
+00a182aa : COMISS XMM1,XMM0
+00a182ad : JA 0x00a182b9
+00a182af : COMISS XMM2,XMM0
+00a182b2 : JBE 0x00a182be
+00a182b4 : COMISS XMM1,XMM0
+00a182b7 : JBE 0x00a182c1
+00a182b9 : MOVAPS XMM0,XMM1
+00a182bc : JMP 0x00a182c1
+00a182be : MOVAPS XMM0,XMM2
+00a182c1 : MULSS XMM0,XMM0
+00a182c5 : MULSS XMM0,dword ptr [0x00cdf148]
+00a182cd : ADDSS XMM0,XMM2
+00a182d1 : MULSS XMM0,dword ptr [0x00d72c24]
+00a182d9 : MOVSS XMM1,dword ptr [EAX + 0x224]
+00a182e1 : MULSS XMM0,XMM3
+00a182e5 : SUBSS XMM1,XMM0
+00a182e9 : MOVSS dword ptr [EAX + 0x224],XMM1
+00a182f1 : MOVSS XMM0,dword ptr [ECX + 0x1f8]
+00a182f9 : COMISS XMM1,XMM0
+00a182fc : JA 0x00a1830b
+00a182fe : MOVSS XMM0,dword ptr [ECX + 0x1f4]
+00a18306 : COMISS XMM0,XMM1
+00a18309 : JBE 0x00a18313
+00a1830b : MOVSS dword ptr [EAX + 0x224],XMM0
+00a18313 : RET

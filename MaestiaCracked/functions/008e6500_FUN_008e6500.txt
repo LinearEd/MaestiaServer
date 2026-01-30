@@ -1,0 +1,73 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_008e6500
+ENTRY    : 008e6500
+BODY     : [[008e6500, 008e654c]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_008e6500(void)
+
+{
+  int *piVar1;
+  int *piVar2;
+  int in_EAX;
+  int *piVar3;
+  uint unaff_ESI;
+  ushort unaff_DI;
+  
+  piVar3 = *(int **)(*(int *)(in_EAX + 0x5c) + 200);
+  piVar1 = *(int **)(*(int *)(in_EAX + 0x5c) + 0xcc);
+  if (piVar3 != piVar1) {
+    do {
+      piVar2 = (int *)*piVar3;
+      if (((piVar2[1] == (unaff_ESI & 0xffff)) && (piVar2[2] == (uint)unaff_DI)) && (*piVar2 != 0))
+      {
+                    /* WARNING: Could not recover jumptable at 0x008e654b. Too many branches */
+                    /* WARNING: Treating indirect jump as call */
+        (**(code **)(*(int *)*piVar2 + 0x48))();
+        return;
+      }
+      piVar3 = piVar3 + 1;
+    } while (piVar3 != piVar1);
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+008e6500 : PUSH EBP
+008e6501 : MOV EBP,ESP
+008e6503 : MOV ECX,dword ptr [EAX + 0x5c]
+008e6506 : MOV EAX,dword ptr [ECX + 0xc8]
+008e650c : MOV ECX,dword ptr [ECX + 0xcc]
+008e6512 : CMP EAX,ECX
+008e6514 : JZ 0x008e653c
+008e6516 : MOVZX ESI,SI
+008e6519 : PUSH EBX
+008e651a : LEA EBX,[EBX]
+008e6520 : MOV EDX,dword ptr [EAX]
+008e6522 : CMP dword ptr [EDX + 0x4],ESI
+008e6525 : JNZ 0x008e6534
+008e6527 : MOVZX EBX,DI
+008e652a : CMP dword ptr [EDX + 0x8],EBX
+008e652d : JNZ 0x008e6534
+008e652f : CMP dword ptr [EDX],0x0
+008e6532 : JNZ 0x008e6540
+008e6534 : ADD EAX,0x4
+008e6537 : CMP EAX,ECX
+008e6539 : JNZ 0x008e6520
+008e653b : POP EBX
+008e653c : POP EBP
+008e653d : RET 0x4
+008e6540 : MOV ECX,EDX
+008e6542 : MOV ECX,dword ptr [ECX]
+008e6544 : MOV EDX,dword ptr [ECX]
+008e6546 : MOV EDX,dword ptr [EDX + 0x48]
+008e6549 : POP EBX
+008e654a : POP EBP
+008e654b : JMP EDX

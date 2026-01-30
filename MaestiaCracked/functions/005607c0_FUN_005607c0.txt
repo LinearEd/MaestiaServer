@@ -1,0 +1,80 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005607c0
+ENTRY    : 005607c0
+BODY     : [[005607c0, 00560817]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+int FUN_005607c0(undefined4 *param_1)
+
+{
+  GRefCountNTSImpl *this;
+  uint uVar1;
+  uint uVar2;
+  int iVar3;
+  int *in_ECX;
+  
+  if (*in_ECX != 0) {
+    this = (GRefCountNTSImpl *)*param_1;
+    if (this != (GRefCountNTSImpl *)0x0) {
+      *(int *)(this + 4) = *(int *)(this + 4) + 1;
+    }
+    uVar2 = FUN_0055ee60(this);
+    uVar1 = *(uint *)(*in_ECX + 4);
+    if (this != (GRefCountNTSImpl *)0x0) {
+      GRefCountNTSImpl::Release(this);
+    }
+    iVar3 = FUN_0055f2d0(param_1,uVar2 & uVar1);
+    if (-1 < iVar3) {
+      return *in_ECX + 0x10 + iVar3 * 0xc;
+    }
+  }
+  return 0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005607c0 : PUSH EBX
+005607c1 : MOV EBX,ECX
+005607c3 : CMP dword ptr [EBX],0x0
+005607c6 : JZ 0x00560812
+005607c8 : PUSH EBP
+005607c9 : MOV EBP,dword ptr [ESP + 0xc]
+005607cd : PUSH ESI
+005607ce : MOV ESI,dword ptr [EBP]
+005607d1 : PUSH EDI
+005607d2 : TEST ESI,ESI
+005607d4 : JZ 0x005607d9
+005607d6 : INC dword ptr [ESI + 0x4]
+005607d9 : PUSH ESI
+005607da : LEA ECX,[ESP + 0x18]
+005607de : CALL 0x0055ee60
+005607e3 : MOV EDI,EAX
+005607e5 : MOV EAX,dword ptr [EBX]
+005607e7 : AND EDI,dword ptr [EAX + 0x4]
+005607ea : TEST ESI,ESI
+005607ec : JZ 0x005607f5
+005607ee : MOV ECX,ESI
+005607f0 : CALL 0x004ff7c0
+005607f5 : PUSH EDI
+005607f6 : PUSH EBP
+005607f7 : MOV ECX,EBX
+005607f9 : CALL 0x0055f2d0
+005607fe : POP EDI
+005607ff : POP ESI
+00560800 : POP EBP
+00560801 : TEST EAX,EAX
+00560803 : JL 0x00560812
+00560805 : MOV EDX,dword ptr [EBX]
+00560807 : LEA ECX,[EAX + EAX*0x2]
+0056080a : LEA EAX,[EDX + ECX*0x4 + 0x10]
+0056080e : POP EBX
+0056080f : RET 0x4
+00560812 : XOR EAX,EAX
+00560814 : POP EBX
+00560815 : RET 0x4

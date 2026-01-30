@@ -1,0 +1,72 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005171f0
+ENTRY    : 005171f0
+BODY     : [[005171f0, 0051723d]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_005171f0(void)
+
+{
+  HandlerArray *Addend;
+  GRefCountImpl *in_ECX;
+  HandlerArray *this;
+  
+  Addend = *(HandlerArray **)(in_ECX + 8);
+  this = (HandlerArray *)0x0;
+  if (Addend != (HandlerArray *)0x0) {
+    InterlockedExchangeAdd((LONG *)Addend,1);
+    this = Addend;
+  }
+  FUN_00516e60(0xfffffffe);
+  FUN_00516e90(2);
+  GRefCountImpl::Release(in_ECX);
+  if (this != (HandlerArray *)0x0) {
+    GWaitable::HandlerArray::CallWaitHandlers(this);
+    GWaitable::HandlerArray::Release(this);
+    return;
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005171f0 : PUSH EBX
+005171f1 : PUSH ESI
+005171f2 : MOV ESI,ECX
+005171f4 : PUSH EDI
+005171f5 : MOV EDI,dword ptr [ESI + 0x8]
+005171f8 : XOR EBX,EBX
+005171fa : TEST EDI,EDI
+005171fc : JZ 0x00517209
+005171fe : PUSH 0x1
+00517200 : PUSH EDI
+00517201 : CALL dword ptr [0x00b851cc]
+00517207 : MOV EBX,EDI
+00517209 : LEA EDI,[ESI + 0x18]
+0051720c : PUSH -0x2
+0051720e : MOV ECX,EDI
+00517210 : CALL 0x00516e60
+00517215 : PUSH 0x2
+00517217 : MOV ECX,EDI
+00517219 : CALL 0x00516e90
+0051721e : MOV ECX,ESI
+00517220 : CALL 0x004ff7e0
+00517225 : TEST EBX,EBX
+00517227 : JZ 0x0051723a
+00517229 : MOV ECX,EBX
+0051722b : CALL 0x00517e90
+00517230 : POP EDI
+00517231 : POP ESI
+00517232 : MOV ECX,EBX
+00517234 : POP EBX
+00517235 : JMP 0x00517e60
+0051723a : POP EDI
+0051723b : POP ESI
+0051723c : POP EBX
+0051723d : RET

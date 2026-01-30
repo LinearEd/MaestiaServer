@@ -1,0 +1,105 @@
+PROGRAM  : Maestia.exe
+FUNCTION : ___sbh_alloc_new_region
+ENTRY    : 0064cf58
+BODY     : [[0064cf58, 0064d007]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    ___sbh_alloc_new_region
+   
+   Library: Visual Studio 2008 Release */
+
+undefined4 * ___sbh_alloc_new_region(void)
+
+{
+  LPVOID pvVar1;
+  undefined4 *puVar2;
+  
+  if (DAT_01728d44 == DAT_01728d54) {
+    pvVar1 = HeapReAlloc(DAT_00d7c09c,0,DAT_01728d48,(DAT_01728d54 + 0x10) * 0x14);
+    if (pvVar1 == (LPVOID)0x0) {
+      return (undefined4 *)0x0;
+    }
+    DAT_01728d54 = DAT_01728d54 + 0x10;
+    DAT_01728d48 = pvVar1;
+  }
+  puVar2 = (undefined4 *)(DAT_01728d44 * 0x14 + (int)DAT_01728d48);
+  pvVar1 = HeapAlloc(DAT_00d7c09c,8,0x41c4);
+  puVar2[4] = pvVar1;
+  if (pvVar1 != (LPVOID)0x0) {
+    pvVar1 = VirtualAlloc((LPVOID)0x0,0x100000,0x2000,4);
+    puVar2[3] = pvVar1;
+    if (pvVar1 != (LPVOID)0x0) {
+      puVar2[2] = 0xffffffff;
+      *puVar2 = 0;
+      puVar2[1] = 0;
+      DAT_01728d44 = DAT_01728d44 + 1;
+      *(undefined4 *)puVar2[4] = 0xffffffff;
+      return puVar2;
+    }
+    HeapFree(DAT_00d7c09c,0,(LPVOID)puVar2[4]);
+  }
+  return (undefined4 *)0x0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0064cf58 : MOV EAX,[0x01728d54]
+0064cf5d : PUSH ESI
+0064cf5e : MOV ESI,dword ptr [0x01728d44]
+0064cf64 : PUSH EDI
+0064cf65 : XOR EDI,EDI
+0064cf67 : CMP ESI,EAX
+0064cf69 : JNZ 0x0064cf9f
+0064cf6b : ADD EAX,0x10
+0064cf6e : IMUL EAX,EAX,0x14
+0064cf71 : PUSH EAX
+0064cf72 : PUSH dword ptr [0x01728d48]
+0064cf78 : PUSH EDI
+0064cf79 : PUSH dword ptr [0x00d7c09c]
+0064cf7f : CALL dword ptr [0x00b852b4]
+0064cf85 : CMP EAX,EDI
+0064cf87 : JNZ 0x0064cf8d
+0064cf89 : XOR EAX,EAX
+0064cf8b : JMP 0x0064d005
+0064cf8d : ADD dword ptr [0x01728d54],0x10
+0064cf94 : MOV ESI,dword ptr [0x01728d44]
+0064cf9a : MOV [0x01728d48],EAX
+0064cf9f : IMUL ESI,ESI,0x14
+0064cfa2 : ADD ESI,dword ptr [0x01728d48]
+0064cfa8 : PUSH 0x41c4
+0064cfad : PUSH 0x8
+0064cfaf : PUSH dword ptr [0x00d7c09c]
+0064cfb5 : CALL dword ptr [0x00b852c8]
+0064cfbb : MOV dword ptr [ESI + 0x10],EAX
+0064cfbe : CMP EAX,EDI
+0064cfc0 : JZ 0x0064cf89
+0064cfc2 : PUSH 0x4
+0064cfc4 : PUSH 0x2000
+0064cfc9 : PUSH 0x100000
+0064cfce : PUSH EDI
+0064cfcf : CALL dword ptr [0x00b85248]
+0064cfd5 : MOV dword ptr [ESI + 0xc],EAX
+0064cfd8 : CMP EAX,EDI
+0064cfda : JNZ 0x0064cfee
+0064cfdc : PUSH dword ptr [ESI + 0x10]
+0064cfdf : PUSH EDI
+0064cfe0 : PUSH dword ptr [0x00d7c09c]
+0064cfe6 : CALL dword ptr [0x00b852c4]
+0064cfec : JMP 0x0064cf89
+0064cfee : OR dword ptr [ESI + 0x8],0xffffffff
+0064cff2 : MOV dword ptr [ESI],EDI
+0064cff4 : MOV dword ptr [ESI + 0x4],EDI
+0064cff7 : INC dword ptr [0x01728d44]
+0064cffd : MOV EAX,dword ptr [ESI + 0x10]
+0064d000 : OR dword ptr [EAX],0xffffffff
+0064d003 : MOV EAX,ESI
+0064d005 : POP EDI
+0064d006 : POP ESI
+0064d007 : RET

@@ -1,0 +1,79 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __fflush_nolock
+ENTRY    : 006394d5
+BODY     : [[006394d5, 0063951c]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __fflush_nolock
+   
+   Library: Visual Studio 2008 Release */
+
+int __cdecl __fflush_nolock(FILE *_File)
+
+{
+  int iVar1;
+  
+  if (_File == (FILE *)0x0) {
+    iVar1 = flsall(0);
+  }
+  else {
+    iVar1 = __flush(_File);
+    if (iVar1 == 0) {
+      if ((_File->_flag & 0x4000U) == 0) {
+        iVar1 = 0;
+      }
+      else {
+        iVar1 = __fileno(_File);
+        iVar1 = __commit(iVar1);
+        iVar1 = -(uint)(iVar1 != 0);
+      }
+    }
+    else {
+      iVar1 = -1;
+    }
+  }
+  return iVar1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006394d5 : MOV EDI,EDI
+006394d7 : PUSH EBP
+006394d8 : MOV EBP,ESP
+006394da : PUSH ESI
+006394db : MOV ESI,dword ptr [EBP + 0x8]
+006394de : TEST ESI,ESI
+006394e0 : JNZ 0x006394eb
+006394e2 : PUSH ESI
+006394e3 : CALL 0x0063951d
+006394e8 : POP ECX
+006394e9 : JMP 0x0063951a
+006394eb : PUSH ESI
+006394ec : CALL 0x0063946d
+006394f1 : POP ECX
+006394f2 : TEST EAX,EAX
+006394f4 : JZ 0x006394fb
+006394f6 : OR EAX,0xffffffff
+006394f9 : JMP 0x0063951a
+006394fb : TEST dword ptr [ESI + 0xc],0x4000
+00639502 : JZ 0x00639518
+00639504 : PUSH ESI
+00639505 : CALL 0x0064dfc6
+0063950a : PUSH EAX
+0063950b : CALL 0x0065474b
+00639510 : POP ECX
+00639511 : NEG EAX
+00639513 : POP ECX
+00639514 : SBB EAX,EAX
+00639516 : JMP 0x0063951a
+00639518 : XOR EAX,EAX
+0063951a : POP ESI
+0063951b : POP EBP
+0063951c : RET

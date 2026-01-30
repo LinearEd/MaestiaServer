@@ -1,0 +1,93 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_006eff30
+ENTRY    : 006eff30
+BODY     : [[006eff30, 006effaf]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_006eff30(void)
+
+{
+  BOOL BVar1;
+  DWORD DVar2;
+  
+  if (DAT_01726c40 != 0) {
+    FUN_006ee470(L"[ERROR][RsaCrypter::Init] m_hCryptProv is not null.\n");
+    return;
+  }
+  BVar1 = CryptAcquireContextA
+                    ((HCRYPTPROV *)&DAT_01726c40,"Microsoft RSA Signature Cryptographic Provider",
+                     (LPCSTR)0x0,1,0);
+  if (BVar1 == 0) {
+    DVar2 = GetLastError();
+    if (DVar2 == 0x80090016) {
+      BVar1 = CryptAcquireContextA
+                        ((HCRYPTPROV *)&DAT_01726c40,
+                         "Microsoft RSA Signature Cryptographic Provider",(LPCSTR)0x0,1,8);
+      if (BVar1 == 0) {
+        DVar2 = GetLastError();
+        FUN_006ee470(L"[ERROR][RsaCrypter::Init]Could not create a new key container. %d\n",DVar2);
+        return;
+      }
+    }
+    else {
+      DVar2 = GetLastError();
+      FUN_006ee470(L"[ERROR][RsaCrypter::Init]A cryptographic service handle could not be acquired. %d\n"
+                   ,DVar2);
+    }
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006eff30 : CMP dword ptr [0x01726c40],0x0
+006eff37 : JZ 0x006eff47
+006eff39 : PUSH 0xbf31e8
+006eff3e : CALL 0x006ee470
+006eff43 : ADD ESP,0x4
+006eff46 : RET
+006eff47 : PUSH ESI
+006eff48 : MOV ESI,dword ptr [0x00b85020]
+006eff4e : PUSH 0x0
+006eff50 : PUSH 0x1
+006eff52 : PUSH 0x0
+006eff54 : PUSH 0xbf31b4
+006eff59 : PUSH 0x1726c40
+006eff5e : CALL ESI
+006eff60 : TEST EAX,EAX
+006eff62 : JNZ 0x006effae
+006eff64 : PUSH EDI
+006eff65 : MOV EDI,dword ptr [0x00b85128]
+006eff6b : CALL EDI
+006eff6d : CMP EAX,0x80090016
+006eff72 : JNZ 0x006eff9d
+006eff74 : PUSH 0x8
+006eff76 : PUSH 0x1
+006eff78 : PUSH 0x0
+006eff7a : PUSH 0xbf31b4
+006eff7f : PUSH 0x1726c40
+006eff84 : CALL ESI
+006eff86 : TEST EAX,EAX
+006eff88 : JNZ 0x006effad
+006eff8a : CALL EDI
+006eff8c : PUSH EAX
+006eff8d : PUSH 0xbf3258
+006eff92 : CALL 0x006ee470
+006eff97 : ADD ESP,0x8
+006eff9a : POP EDI
+006eff9b : POP ESI
+006eff9c : RET
+006eff9d : CALL EDI
+006eff9f : PUSH EAX
+006effa0 : PUSH 0xbf32e0
+006effa5 : CALL 0x006ee470
+006effaa : ADD ESP,0x8
+006effad : POP EDI
+006effae : POP ESI
+006effaf : RET

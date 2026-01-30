@@ -1,0 +1,94 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __encode_pointer
+ENTRY    : 006455f2
+BODY     : [[006455f2, 00645663]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __encode_pointer
+   
+   Library: Visual Studio 2008 Release */
+
+int __encode_pointer(int param_1)
+
+{
+  LPVOID pvVar1;
+  code *pcVar2;
+  int iVar3;
+  HMODULE hModule;
+  FARPROC pFVar4;
+  
+  pvVar1 = TlsGetValue(DAT_00d6755c);
+  if ((pvVar1 != (LPVOID)0x0) && (DAT_00d67558 != -1)) {
+    iVar3 = DAT_00d67558;
+    pcVar2 = TlsGetValue(DAT_00d6755c);
+    iVar3 = (*pcVar2)(iVar3);
+    if (iVar3 != 0) {
+      pFVar4 = *(FARPROC *)(iVar3 + 0x1f8);
+      goto LAB_00645652;
+    }
+  }
+  hModule = GetModuleHandleW(L"KERNEL32.DLL");
+  if ((hModule == (HMODULE)0x0) &&
+     (hModule = (HMODULE)__crt_waiting_on_module_handle(L"KERNEL32.DLL"), hModule == (HMODULE)0x0))
+  {
+    return param_1;
+  }
+  pFVar4 = GetProcAddress(hModule,"EncodePointer");
+LAB_00645652:
+  if (pFVar4 != (FARPROC)0x0) {
+    param_1 = (*pFVar4)(param_1);
+  }
+  return param_1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006455f2 : MOV EDI,EDI
+006455f4 : PUSH EBP
+006455f5 : MOV EBP,ESP
+006455f7 : PUSH ESI
+006455f8 : PUSH dword ptr [0x00d6755c]
+006455fe : MOV ESI,dword ptr [0x00b8527c]
+00645604 : CALL ESI
+00645606 : TEST EAX,EAX
+00645608 : JZ 0x0064562b
+0064560a : MOV EAX,[0x00d67558]
+0064560f : CMP EAX,-0x1
+00645612 : JZ 0x0064562b
+00645614 : PUSH EAX
+00645615 : PUSH dword ptr [0x00d6755c]
+0064561b : CALL ESI
+0064561d : CALL EAX
+0064561f : TEST EAX,EAX
+00645621 : JZ 0x0064562b
+00645623 : MOV EAX,dword ptr [EAX + 0x1f8]
+00645629 : JMP 0x00645652
+0064562b : MOV ESI,0xb9bf84
+00645630 : PUSH ESI
+00645631 : CALL dword ptr [0x00b8517c]
+00645637 : TEST EAX,EAX
+00645639 : JNZ 0x00645646
+0064563b : PUSH ESI
+0064563c : CALL 0x006356d3
+00645641 : POP ECX
+00645642 : TEST EAX,EAX
+00645644 : JZ 0x0064565e
+00645646 : PUSH 0xb9bf74
+0064564b : PUSH EAX
+0064564c : CALL dword ptr [0x00b85160]
+00645652 : TEST EAX,EAX
+00645654 : JZ 0x0064565e
+00645656 : PUSH dword ptr [EBP + 0x8]
+00645659 : CALL EAX
+0064565b : MOV dword ptr [EBP + 0x8],EAX
+0064565e : MOV EAX,dword ptr [EBP + 0x8]
+00645661 : POP ESI
+00645662 : POP EBP
+00645663 : RET

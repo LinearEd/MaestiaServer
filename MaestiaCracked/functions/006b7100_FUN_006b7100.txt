@@ -1,0 +1,62 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_006b7100
+ENTRY    : 006b7100
+BODY     : [[006b7100, 006b7149]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_006b7100(void)
+
+{
+  uint uVar1;
+  uint uVar2;
+  uint *in_EDX;
+  int unaff_ESI;
+  
+  uVar1 = *in_EDX;
+  uVar2 = 0;
+  if ((uVar1 & 1) != 0) {
+    uVar2 = 0x23;
+  }
+  if (((uVar1 & 2) != 0) && (*(char *)(unaff_ESI + 0x119) != '\0')) {
+    uVar2 = uVar2 | 0x80;
+  }
+  if (((uVar1 & 4) != 0) && (*(char *)(unaff_ESI + 0x11a) != '\0')) {
+    uVar2 = uVar2 | 0x100;
+  }
+  if (((uVar1 & 0x20) != 0) && (*(char *)(unaff_ESI + 0x25c) != '\0')) {
+    uVar2 = uVar2 | 0x1000;
+  }
+  *in_EDX = uVar2;
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006b7100 : MOV ECX,dword ptr [EDX]
+006b7102 : XOR EAX,EAX
+006b7104 : TEST CL,0x1
+006b7107 : JZ 0x006b710e
+006b7109 : MOV EAX,0x23
+006b710e : TEST CL,0x2
+006b7111 : JZ 0x006b7121
+006b7113 : CMP byte ptr [ESI + 0x119],0x0
+006b711a : JZ 0x006b7121
+006b711c : OR EAX,0x80
+006b7121 : TEST CL,0x4
+006b7124 : JZ 0x006b7134
+006b7126 : CMP byte ptr [ESI + 0x11a],0x0
+006b712d : JZ 0x006b7134
+006b712f : OR EAX,0x100
+006b7134 : TEST CL,0x20
+006b7137 : JZ 0x006b7147
+006b7139 : CMP byte ptr [ESI + 0x25c],0x0
+006b7140 : JZ 0x006b7147
+006b7142 : OR EAX,0x1000
+006b7147 : MOV dword ptr [EDX],EAX
+006b7149 : RET

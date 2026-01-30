@@ -1,0 +1,70 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_008eb680
+ENTRY    : 008eb680
+BODY     : [[008eb680, 008eb6bf]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_008eb680(void)
+
+{
+  int *piVar1;
+  rsize_t _DstSize;
+  int *_Dst;
+  int iVar2;
+  int in_EDX;
+  int unaff_ESI;
+  
+  _Dst = *(int **)(unaff_ESI + 8);
+  piVar1 = *(int **)(unaff_ESI + 0xc);
+  if (_Dst != piVar1) {
+    do {
+      if (*_Dst == in_EDX) break;
+      _Dst = _Dst + 1;
+    } while (_Dst != piVar1);
+    if (_Dst != piVar1) {
+      iVar2 = (int)piVar1 - (int)(_Dst + 1) >> 2;
+      if (0 < iVar2) {
+        _DstSize = iVar2 * 4;
+        _memmove_s(_Dst,_DstSize,_Dst + 1,_DstSize);
+      }
+      *(int *)(unaff_ESI + 0xc) = *(int *)(unaff_ESI + 0xc) + -4;
+    }
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+008eb680 : MOV EAX,dword ptr [ESI + 0x8]
+008eb683 : MOV ECX,dword ptr [ESI + 0xc]
+008eb686 : CMP EAX,ECX
+008eb688 : JZ 0x008eb6bf
+008eb68a : LEA EBX,[EBX]
+008eb690 : CMP dword ptr [EAX],EDX
+008eb692 : JZ 0x008eb69b
+008eb694 : ADD EAX,0x4
+008eb697 : CMP EAX,ECX
+008eb699 : JNZ 0x008eb690
+008eb69b : CMP EAX,ECX
+008eb69d : JZ 0x008eb6bf
+008eb69f : LEA EDX,[EAX + 0x4]
+008eb6a2 : SUB ECX,EDX
+008eb6a4 : SAR ECX,0x2
+008eb6a7 : TEST ECX,ECX
+008eb6a9 : JLE 0x008eb6bb
+008eb6ab : ADD ECX,ECX
+008eb6ad : ADD ECX,ECX
+008eb6af : PUSH ECX
+008eb6b0 : PUSH EDX
+008eb6b1 : PUSH ECX
+008eb6b2 : PUSH EAX
+008eb6b3 : CALL 0x00634101
+008eb6b8 : ADD ESP,0x10
+008eb6bb : ADD dword ptr [ESI + 0xc],-0x4
+008eb6bf : RET

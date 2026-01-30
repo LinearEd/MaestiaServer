@@ -1,0 +1,102 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0068c020
+ENTRY    : 0068c020
+BODY     : [[0068c020, 0068c08d]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+int FUN_0068c020(int *param_1,undefined1 param_2,int *param_3)
+
+{
+  char cVar1;
+  int iVar2;
+  char *pcVar3;
+  int iVar4;
+  uint uVar5;
+  
+  *param_3 = 0;
+  if ((param_1 == (int *)0x0) || (param_1[2] == 0)) {
+    return 0;
+  }
+  iVar2 = *(int *)*param_1;
+  iVar4 = 0;
+  if (param_1[2] != 0) {
+    uVar5 = 0;
+    do {
+      pcVar3 = *(char **)(*param_1 + uVar5 * 4);
+      cVar1 = *pcVar3;
+      while (cVar1 != '\0') {
+        pcVar3 = pcVar3 + 1;
+        *(char *)(iVar4 + iVar2) = cVar1;
+        iVar4 = iVar4 + 1;
+        cVar1 = *pcVar3;
+      }
+      uVar5 = uVar5 + 1;
+      if ((uint)param_1[2] <= uVar5) break;
+      *(undefined1 *)(iVar4 + iVar2) = param_2;
+      iVar4 = iVar4 + 1;
+    } while (uVar5 < (uint)param_1[2]);
+  }
+  *(undefined1 *)(iVar4 + iVar2) = 0;
+  *param_3 = iVar4;
+  return iVar2;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0068c020 : MOV EAX,dword ptr [ESP + 0xc]
+0068c024 : PUSH EBX
+0068c025 : MOV BL,byte ptr [ESP + 0xc]
+0068c029 : PUSH EBP
+0068c02a : MOV EBP,dword ptr [ESP + 0xc]
+0068c02e : MOV dword ptr [EAX],0x0
+0068c034 : TEST EBP,EBP
+0068c036 : JZ 0x0068c089
+0068c038 : MOV ECX,dword ptr [EBP + 0x8]
+0068c03b : TEST ECX,ECX
+0068c03d : JZ 0x0068c089
+0068c03f : MOV EDX,dword ptr [EBP]
+0068c042 : MOV EAX,dword ptr [EDX]
+0068c044 : PUSH ESI
+0068c045 : PUSH EDI
+0068c046 : XOR ESI,ESI
+0068c048 : XOR EDI,EDI
+0068c04a : TEST ECX,ECX
+0068c04c : JBE 0x0068c07a
+0068c04e : MOV EDI,EDI
+0068c050 : MOV ECX,dword ptr [EBP]
+0068c053 : MOV EDX,dword ptr [ECX + EDI*0x4]
+0068c056 : MOV CL,byte ptr [EDX]
+0068c058 : TEST CL,CL
+0068c05a : JZ 0x0068c06b
+0068c05c : LEA ESP,[ESP]
+0068c060 : INC EDX
+0068c061 : MOV byte ptr [ESI + EAX*0x1],CL
+0068c064 : MOV CL,byte ptr [EDX]
+0068c066 : INC ESI
+0068c067 : TEST CL,CL
+0068c069 : JNZ 0x0068c060
+0068c06b : INC EDI
+0068c06c : CMP EDI,dword ptr [EBP + 0x8]
+0068c06f : JNC 0x0068c07a
+0068c071 : MOV byte ptr [ESI + EAX*0x1],BL
+0068c074 : INC ESI
+0068c075 : CMP EDI,dword ptr [EBP + 0x8]
+0068c078 : JC 0x0068c050
+0068c07a : MOV EDX,dword ptr [ESP + 0x1c]
+0068c07e : POP EDI
+0068c07f : MOV byte ptr [ESI + EAX*0x1],0x0
+0068c083 : MOV dword ptr [EDX],ESI
+0068c085 : POP ESI
+0068c086 : POP EBP
+0068c087 : POP EBX
+0068c088 : RET
+0068c089 : POP EBP
+0068c08a : XOR EAX,EAX
+0068c08c : POP EBX
+0068c08d : RET

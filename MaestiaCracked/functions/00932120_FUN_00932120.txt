@@ -1,0 +1,98 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00932120
+ENTRY    : 00932120
+BODY     : [[00932120, 009321b9]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+void FUN_00932120(uint param_1)
+
+{
+  int in_EAX;
+  DWORD DVar1;
+  uint unaff_EDI;
+  
+  DVar1 = timeGetTime();
+  if (DVar1 - _DAT_01724880 < 0x96) {
+    FUN_008018d0(L"AvaGuiQuickSlot::OnOpenSubSlot QuickSlotBar itemchange too quick");
+    return;
+  }
+  if (((int)unaff_EDI < 3) && ((int)param_1 < 3)) {
+    if ((*(ushort *)(*(int *)(in_EAX + 0x48) + 0x50) == unaff_EDI) &&
+       (*(ushort *)(in_EAX + 0x5c) == param_1)) {
+      FUN_008018d0(L"AvaGuiQuickSlot::OnOpenSubSlot same data");
+      return;
+    }
+    FUN_0092eea0(*(int *)(in_EAX + 0x48));
+    FUN_0092f700(*(undefined4 *)(in_EAX + 0x48),unaff_EDI);
+    FUN_0092fd90();
+    _DAT_01724880 = timeGetTime();
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00932120 : PUSH EBP
+00932121 : MOV EBP,ESP
+00932123 : PUSH ECX
+00932124 : PUSH EBX
+00932125 : MOV EBX,dword ptr [EBP + 0x8]
+00932128 : PUSH ESI
+00932129 : MOV ESI,EAX
+0093212b : CALL dword ptr [0x00b85598]
+00932131 : SUB EAX,dword ptr [0x01724880]
+00932137 : CMP EAX,0x96
+0093213c : JNC 0x00932158
+0093213e : MOV ESI,dword ptr [0x00da98e8]
+00932144 : PUSH 0xc6dd50
+00932149 : CALL 0x008018d0
+0093214e : ADD ESP,0x4
+00932151 : POP ESI
+00932152 : POP EBX
+00932153 : POP ECX
+00932154 : POP EBP
+00932155 : RET 0x4
+00932158 : CMP EDI,0x3
+0093215b : JGE 0x009321b3
+0093215d : CMP EBX,0x3
+00932160 : JGE 0x009321b3
+00932162 : MOV EAX,dword ptr [ESI + 0x48]
+00932165 : MOVZX ECX,word ptr [EAX + 0x50]
+00932169 : CMP ECX,EDI
+0093216b : JNZ 0x0093218f
+0093216d : MOVZX EDX,word ptr [ESI + 0x5c]
+00932171 : CMP EDX,EBX
+00932173 : JNZ 0x0093218f
+00932175 : MOV ESI,dword ptr [0x00da98e8]
+0093217b : PUSH 0xc6ddd8
+00932180 : CALL 0x008018d0
+00932185 : ADD ESP,0x4
+00932188 : POP ESI
+00932189 : POP EBX
+0093218a : POP ECX
+0093218b : POP EBP
+0093218c : RET 0x4
+0093218f : PUSH EAX
+00932190 : CALL 0x0092eea0
+00932195 : MOV EAX,dword ptr [ESI + 0x48]
+00932198 : PUSH EDI
+00932199 : PUSH EAX
+0093219a : CALL 0x0092f700
+0093219f : MOV ECX,EBX
+009321a1 : MOV EAX,ESI
+009321a3 : CALL 0x0092fd90
+009321a8 : CALL dword ptr [0x00b85598]
+009321ae : MOV [0x01724880],EAX
+009321b3 : POP ESI
+009321b4 : POP EBX
+009321b5 : POP ECX
+009321b6 : POP EBP
+009321b7 : RET 0x4

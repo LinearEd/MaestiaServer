@@ -1,0 +1,65 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00609e30
+ENTRY    : 00609e30
+BODY     : [[00609e30, 00609e4c] [00609e50, 00609e7b]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+uint FUN_00609e30(uint param_1)
+
+{
+  uint uVar1;
+  int in_ECX;
+  uint uVar2;
+  
+  uVar2 = 0;
+  uVar1 = FUN_00609200(param_1);
+  if (param_1 < uVar1) {
+    do {
+      uVar2 = (uint)*(byte *)(*(int *)(*(int *)(*(int *)(in_ECX + 0xc) + 0xc) + (param_1 >> 0xc) * 4
+                                      ) + (param_1 & 0xfff)) ^ uVar2 * 0x21;
+      param_1 = param_1 + 1;
+    } while (param_1 < uVar1);
+  }
+  return uVar2;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00609e30 : PUSH EBX
+00609e31 : PUSH ESI
+00609e32 : MOV ESI,dword ptr [ESP + 0xc]
+00609e36 : PUSH EDI
+00609e37 : PUSH ESI
+00609e38 : MOV EBX,ECX
+00609e3a : XOR EDI,EDI
+00609e3c : CALL 0x00609200
+00609e41 : CMP ESI,EAX
+00609e43 : JNC 0x00609e74
+00609e45 : MOV ECX,dword ptr [EBX + 0xc]
+00609e48 : MOV ECX,dword ptr [ECX + 0xc]
+00609e4b : JMP 0x00609e50
+00609e50 : MOV EDX,ESI
+00609e52 : SHR EDX,0xc
+00609e55 : MOV EDX,dword ptr [ECX + EDX*0x4]
+00609e58 : MOV EBX,ESI
+00609e5a : AND EBX,0xfff
+00609e60 : MOVZX EDX,byte ptr [EDX + EBX*0x1]
+00609e64 : MOV EBX,EDI
+00609e66 : SHL EBX,0x5
+00609e69 : ADD EBX,EDI
+00609e6b : XOR EDX,EBX
+00609e6d : INC ESI
+00609e6e : MOV EDI,EDX
+00609e70 : CMP ESI,EAX
+00609e72 : JC 0x00609e50
+00609e74 : MOV EAX,EDI
+00609e76 : POP EDI
+00609e77 : POP ESI
+00609e78 : POP EBX
+00609e79 : RET 0x4

@@ -1,0 +1,65 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005ed4f0
+ENTRY    : 005ed4f0
+BODY     : [[005ed4f0, 005ed4fc] [005ed500, 005ed524]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_005ed4f0(void)
+
+{
+  byte *pbVar1;
+  int iVar2;
+  char cVar3;
+  int *in_ECX;
+  uint uVar4;
+  
+  uVar4 = 0;
+  if (in_ECX[1] != 0) {
+    do {
+      iVar2 = *(int *)(*in_ECX + uVar4 * 4);
+      if ((*(byte *)(iVar2 + 0x66) & 0x40) != 0) {
+        pbVar1 = (byte *)(iVar2 + 0x66);
+        *pbVar1 = *pbVar1 & 0xbf;
+        cVar3 = FUN_005ed0c0(uVar4);
+        if (cVar3 != '\0') {
+          uVar4 = uVar4 - 1;
+        }
+      }
+      uVar4 = uVar4 + 1;
+    } while (uVar4 < (uint)in_ECX[1]);
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005ed4f0 : PUSH ESI
+005ed4f1 : PUSH EDI
+005ed4f2 : MOV EDI,ECX
+005ed4f4 : XOR ESI,ESI
+005ed4f6 : CMP dword ptr [EDI + 0x4],ESI
+005ed4f9 : JBE 0x005ed522
+005ed4fb : JMP 0x005ed500
+005ed500 : MOV EAX,dword ptr [EDI]
+005ed502 : MOV EAX,dword ptr [EAX + ESI*0x4]
+005ed505 : TEST byte ptr [EAX + 0x66],0x40
+005ed509 : JZ 0x005ed51c
+005ed50b : AND byte ptr [EAX + 0x66],0xbf
+005ed50f : PUSH ESI
+005ed510 : MOV ECX,EDI
+005ed512 : CALL 0x005ed0c0
+005ed517 : TEST AL,AL
+005ed519 : JZ 0x005ed51c
+005ed51b : DEC ESI
+005ed51c : INC ESI
+005ed51d : CMP ESI,dword ptr [EDI + 0x4]
+005ed520 : JC 0x005ed500
+005ed522 : POP EDI
+005ed523 : POP ESI
+005ed524 : RET

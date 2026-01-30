@@ -1,0 +1,68 @@
+PROGRAM  : Maestia.exe
+FUNCTION : ___ascii_stricmp
+ENTRY    : 0063b7ab
+BODY     : [[0063b7ab, 0063b7e3]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    ___ascii_stricmp
+   
+   Library: Visual Studio 2008 Release */
+
+int __cdecl ___ascii_stricmp(char *_Str1,char *_Str2)
+
+{
+  uint uVar1;
+  uint uVar2;
+  
+  do {
+    uVar1 = (uint)(byte)*_Str1;
+    _Str1 = (char *)((byte *)_Str1 + 1);
+    if (uVar1 - 0x41 < 0x1a) {
+      uVar1 = uVar1 + 0x20;
+    }
+    uVar2 = (uint)(byte)*_Str2;
+    _Str2 = (char *)((byte *)_Str2 + 1);
+    if (uVar2 - 0x41 < 0x1a) {
+      uVar2 = uVar2 + 0x20;
+    }
+  } while ((uVar1 != 0) && (uVar1 == uVar2));
+  return uVar1 - uVar2;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0063b7ab : MOV EDI,EDI
+0063b7ad : PUSH EBP
+0063b7ae : MOV EBP,ESP
+0063b7b0 : MOV EDX,dword ptr [EBP + 0xc]
+0063b7b3 : PUSH ESI
+0063b7b4 : MOV ESI,dword ptr [EBP + 0x8]
+0063b7b7 : PUSH EDI
+0063b7b8 : MOVZX EAX,byte ptr [ESI]
+0063b7bb : LEA ECX,[EAX + -0x41]
+0063b7be : INC ESI
+0063b7bf : CMP ECX,0x19
+0063b7c2 : JA 0x0063b7c7
+0063b7c4 : ADD EAX,0x20
+0063b7c7 : MOVZX ECX,byte ptr [EDX]
+0063b7ca : LEA EDI,[ECX + -0x41]
+0063b7cd : INC EDX
+0063b7ce : CMP EDI,0x19
+0063b7d1 : JA 0x0063b7d6
+0063b7d3 : ADD ECX,0x20
+0063b7d6 : TEST EAX,EAX
+0063b7d8 : JZ 0x0063b7de
+0063b7da : CMP EAX,ECX
+0063b7dc : JZ 0x0063b7b8
+0063b7de : POP EDI
+0063b7df : SUB EAX,ECX
+0063b7e1 : POP ESI
+0063b7e2 : POP EBP
+0063b7e3 : RET

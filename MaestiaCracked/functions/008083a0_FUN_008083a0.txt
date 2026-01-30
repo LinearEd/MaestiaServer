@@ -1,0 +1,68 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_008083a0
+ENTRY    : 008083a0
+BODY     : [[008083a0, 008083e8]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined1 FUN_008083a0(void)
+
+{
+  HMODULE hModule;
+  FARPROC pFVar1;
+  char *_Str1;
+  int iVar2;
+  undefined1 uVar3;
+  
+  uVar3 = 0;
+  hModule = LoadLibraryW(L"AvaDriver.dll");
+  if (hModule != (HMODULE)0x0) {
+    pFVar1 = GetProcAddress(hModule,"GetAvaDriverVerInfo");
+    uVar3 = 0;
+    if (pFVar1 != (FARPROC)0x0) {
+      _Str1 = (char *)(*pFVar1)();
+      iVar2 = _strncmp(_Str1,"3.0.0.1",7);
+      if (iVar2 == 0) {
+        uVar3 = 1;
+      }
+    }
+    FreeLibrary(hModule);
+  }
+  return uVar3;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+008083a0 : PUSH EBX
+008083a1 : PUSH ESI
+008083a2 : PUSH 0xc2c9cc
+008083a7 : XOR BL,BL
+008083a9 : CALL dword ptr [0x00b85150]
+008083af : MOV ESI,EAX
+008083b1 : TEST ESI,ESI
+008083b3 : JZ 0x008083e4
+008083b5 : PUSH 0xc2ca4c
+008083ba : PUSH ESI
+008083bb : CALL dword ptr [0x00b85160]
+008083c1 : TEST EAX,EAX
+008083c3 : JZ 0x008083dd
+008083c5 : CALL EAX
+008083c7 : PUSH 0x7
+008083c9 : PUSH 0xc2d39c
+008083ce : PUSH EAX
+008083cf : CALL 0x0063abcb
+008083d4 : ADD ESP,0xc
+008083d7 : TEST EAX,EAX
+008083d9 : JNZ 0x008083dd
+008083db : MOV BL,0x1
+008083dd : PUSH ESI
+008083de : CALL dword ptr [0x00b85208]
+008083e4 : POP ESI
+008083e5 : MOV AL,BL
+008083e7 : POP EBX
+008083e8 : RET

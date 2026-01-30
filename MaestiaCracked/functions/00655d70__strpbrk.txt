@@ -1,0 +1,108 @@
+PROGRAM  : Maestia.exe
+FUNCTION : _strpbrk
+ENTRY    : 00655d70
+BODY     : [[00655d70, 00655daf]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    _strpbrk
+   
+   Library: Visual Studio 2008 Release */
+
+char * __cdecl _strpbrk(char *_Str,char *_Control)
+
+{
+  byte bVar1;
+  byte *pbVar2;
+  byte abStack_28 [32];
+  
+  abStack_28[0x1c] = 0;
+  abStack_28[0x1d] = 0;
+  abStack_28[0x1e] = 0;
+  abStack_28[0x1f] = 0;
+  abStack_28[0x18] = 0;
+  abStack_28[0x19] = 0;
+  abStack_28[0x1a] = 0;
+  abStack_28[0x1b] = 0;
+  abStack_28[0x14] = 0;
+  abStack_28[0x15] = 0;
+  abStack_28[0x16] = 0;
+  abStack_28[0x17] = 0;
+  abStack_28[0x10] = 0;
+  abStack_28[0x11] = 0;
+  abStack_28[0x12] = 0;
+  abStack_28[0x13] = 0;
+  abStack_28[0xc] = 0;
+  abStack_28[0xd] = 0;
+  abStack_28[0xe] = 0;
+  abStack_28[0xf] = 0;
+  abStack_28[8] = 0;
+  abStack_28[9] = 0;
+  abStack_28[10] = 0;
+  abStack_28[0xb] = 0;
+  abStack_28[4] = 0;
+  abStack_28[5] = 0;
+  abStack_28[6] = 0;
+  abStack_28[7] = 0;
+  abStack_28[0] = 0;
+  abStack_28[1] = 0;
+  abStack_28[2] = 0;
+  abStack_28[3] = 0;
+  while( true ) {
+    bVar1 = *_Control;
+    if (bVar1 == 0) break;
+    _Control = (char *)((byte *)_Control + 1);
+    abStack_28[(int)(uint)bVar1 >> 3] = abStack_28[(int)(uint)bVar1 >> 3] | '\x01' << (bVar1 & 7);
+  }
+  do {
+    pbVar2 = (byte *)_Str;
+    bVar1 = *pbVar2;
+    if (bVar1 == 0) {
+      return (char *)0x0;
+    }
+    _Str = (char *)(pbVar2 + 1);
+  } while ((abStack_28[(int)(uint)bVar1 >> 3] >> (bVar1 & 7) & 1) == 0);
+  return (char *)pbVar2;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00655d70 : PUSH EBP
+00655d71 : MOV EBP,ESP
+00655d73 : PUSH ESI
+00655d74 : XOR EAX,EAX
+00655d76 : PUSH EAX
+00655d77 : PUSH EAX
+00655d78 : PUSH EAX
+00655d79 : PUSH EAX
+00655d7a : PUSH EAX
+00655d7b : PUSH EAX
+00655d7c : PUSH EAX
+00655d7d : PUSH EAX
+00655d7e : MOV EDX,dword ptr [EBP + 0xc]
+00655d81 : LEA ECX,[ECX]
+00655d84 : MOV AL,byte ptr [EDX]
+00655d86 : OR AL,AL
+00655d88 : JZ 0x00655d93
+00655d8a : ADD EDX,0x1
+00655d8d : BTS [ESP],EAX
+00655d91 : JMP 0x00655d84
+00655d93 : MOV ESI,dword ptr [EBP + 0x8]
+00655d96 : MOV EDI,EDI
+00655d98 : MOV AL,byte ptr [ESI]
+00655d9a : OR AL,AL
+00655d9c : JZ 0x00655daa
+00655d9e : ADD ESI,0x1
+00655da1 : BT [ESP],EAX
+00655da5 : JNC 0x00655d98
+00655da7 : LEA EAX,[ESI + -0x1]
+00655daa : ADD ESP,0x20
+00655dad : POP ESI
+00655dae : LEAVE
+00655daf : RET

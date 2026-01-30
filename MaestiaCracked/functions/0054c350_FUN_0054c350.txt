@@ -1,0 +1,54 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0054c350
+ENTRY    : 0054c350
+BODY     : [[0054c350, 0054c38b]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_0054c350(char param_1,char param_2)
+
+{
+  int in_ECX;
+  
+  if ((*(byte *)(in_ECX + 0x68) & 1) == 0) {
+    if (param_1 == '\0') {
+      *(ushort *)(in_ECX + 0x68) = *(ushort *)(in_ECX + 0x68) & 0xfff7;
+    }
+    else {
+      *(ushort *)(in_ECX + 0x68) = *(ushort *)(in_ECX + 0x68) | 8;
+    }
+  }
+  else {
+    *(ushort *)(in_ECX + 0x68) = *(ushort *)(in_ECX + 0x68) & 0xfff7;
+  }
+  *(undefined8 *)(in_ECX + 0x38) = 0;
+  if (param_2 != '\0') {
+    *(ushort *)(in_ECX + 0x68) = *(ushort *)(in_ECX + 0x68) | 0x10;
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0054c350 : TEST byte ptr [ECX + 0x68],0x1
+0054c354 : JNZ 0x0054c36f
+0054c356 : CMP byte ptr [ESP + 0x4],0x0
+0054c35b : JZ 0x0054c364
+0054c35d : OR word ptr [ECX + 0x68],0x8
+0054c362 : JMP 0x0054c378
+0054c364 : MOV EAX,0xfff7
+0054c369 : AND word ptr [ECX + 0x68],AX
+0054c36d : JMP 0x0054c378
+0054c36f : MOV EDX,0xfff7
+0054c374 : AND word ptr [ECX + 0x68],DX
+0054c378 : CMP byte ptr [ESP + 0x8],0x0
+0054c37d : FLDZ
+0054c37f : FSTP double ptr [ECX + 0x38]
+0054c382 : JZ 0x0054c389
+0054c384 : OR word ptr [ECX + 0x68],0x10
+0054c389 : RET 0x8

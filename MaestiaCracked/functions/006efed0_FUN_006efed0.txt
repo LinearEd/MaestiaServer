@@ -1,0 +1,48 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_006efed0
+ENTRY    : 006efed0
+BODY     : [[006efed0, 006efefc]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_006efed0(void)
+
+{
+  BOOL BVar1;
+  DWORD DVar2;
+  HCRYPTKEY *unaff_ESI;
+  
+  if (*unaff_ESI != 0) {
+    BVar1 = CryptDestroyKey(*unaff_ESI);
+    if (BVar1 == 0) {
+      DVar2 = GetLastError();
+      FUN_006ee470(L"[ERROR][RsaKey::~RsaKey]Error during CryptDestroyKey. %d\n",DVar2);
+      return;
+    }
+  }
+  *unaff_ESI = 0;
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006efed0 : MOV EAX,dword ptr [ESI]
+006efed2 : TEST EAX,EAX
+006efed4 : JZ 0x006efef6
+006efed6 : PUSH EAX
+006efed7 : CALL dword ptr [0x00b85018]
+006efedd : TEST EAX,EAX
+006efedf : JNZ 0x006efef6
+006efee1 : CALL dword ptr [0x00b85128]
+006efee7 : PUSH EAX
+006efee8 : PUSH 0xbf34f0
+006efeed : CALL 0x006ee470
+006efef2 : ADD ESP,0x8
+006efef5 : RET
+006efef6 : MOV dword ptr [ESI],0x0
+006efefc : RET

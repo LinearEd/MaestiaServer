@@ -1,0 +1,142 @@
+PROGRAM  : Maestia.exe
+FUNCTION : _LanguageEnumProc@4
+ENTRY    : 00655812
+BODY     : [[00655812, 006558d2]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    _LanguageEnumProc@4
+   
+   Library: Visual Studio 2008 Release */
+
+void _LanguageEnumProc_4(void)
+
+{
+  int *piVar1;
+  _ptiddata p_Var2;
+  LCID Locale;
+  int iVar3;
+  undefined4 uVar4;
+  CHAR local_80 [120];
+  uint local_8;
+  
+  local_8 = DAT_00d66fa0 ^ (uint)&stack0xfffffffc;
+  p_Var2 = __getptd();
+  Locale = _LcidFromHexString();
+  iVar3 = GetLocaleInfoA(Locale,(-(uint)((p_Var2->_setloc_data).bAbbrevLanguage != 0) & 0xfffff002)
+                                + 0x1001,local_80,0x78);
+  if (iVar3 == 0) {
+    (p_Var2->_setloc_data).iLocState = 0;
+    goto LAB_006558c3;
+  }
+  iVar3 = __stricmp((char *)(p_Var2->_setloc_data).pchLanguage,local_80);
+  if (iVar3 == 0) {
+    if ((p_Var2->_setloc_data).bAbbrevLanguage == 0) {
+      uVar4 = 1;
+      goto LAB_006558a0;
+    }
+  }
+  else {
+    if ((((p_Var2->_setloc_data).bAbbrevLanguage != 0) || ((p_Var2->_setloc_data).iPrimaryLen == 0))
+       || (iVar3 = __stricmp((char *)(p_Var2->_setloc_data).pchLanguage,local_80), iVar3 != 0))
+    goto LAB_006558c3;
+    uVar4 = 0;
+LAB_006558a0:
+    iVar3 = _TestDefaultLanguage(Locale,uVar4);
+    if (iVar3 == 0) goto LAB_006558c3;
+  }
+  piVar1 = &(p_Var2->_setloc_data).iLocState;
+  *piVar1 = *piVar1 | 4;
+  (p_Var2->_setloc_data)._cachecp = Locale;
+  *(LCID *)(p_Var2->_setloc_data)._cachein = Locale;
+LAB_006558c3:
+  __security_check_cookie(local_8 ^ (uint)&stack0xfffffffc);
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00655812 : MOV EDI,EDI
+00655814 : PUSH EBP
+00655815 : MOV EBP,ESP
+00655817 : SUB ESP,0x7c
+0065581a : MOV EAX,[0x00d66fa0]
+0065581f : XOR EAX,EBP
+00655821 : MOV dword ptr [EBP + -0x4],EAX
+00655824 : PUSH ESI
+00655825 : PUSH EDI
+00655826 : MOV EDI,dword ptr [EBP + 0x8]
+00655829 : CALL 0x006458f6
+0065582e : MOV ESI,EAX
+00655830 : MOV EDX,EDI
+00655832 : ADD ESI,0x9c
+00655838 : CALL 0x006554e5
+0065583d : MOV EDI,EAX
+0065583f : PUSH 0x78
+00655841 : LEA EAX,[EBP + -0x7c]
+00655844 : PUSH EAX
+00655845 : MOV EAX,dword ptr [ESI + 0x10]
+00655848 : NEG EAX
+0065584a : SBB EAX,EAX
+0065584c : AND EAX,0xfffff002
+00655851 : ADD EAX,0x1001
+00655856 : PUSH EAX
+00655857 : PUSH EDI
+00655858 : CALL dword ptr [0x00b852d4]
+0065585e : TEST EAX,EAX
+00655860 : JNZ 0x00655868
+00655862 : AND dword ptr [ESI + 0x8],EAX
+00655865 : INC EAX
+00655866 : JMP 0x006558c3
+00655868 : LEA EAX,[EBP + -0x7c]
+0065586b : PUSH EAX
+0065586c : PUSH dword ptr [ESI]
+0065586e : CALL 0x0063b8b9
+00655873 : POP ECX
+00655874 : POP ECX
+00655875 : TEST EAX,EAX
+00655877 : JNZ 0x00655882
+00655879 : CMP dword ptr [ESI + 0x10],EAX
+0065587c : JNZ 0x006558ae
+0065587e : PUSH 0x1
+00655880 : JMP 0x006558a0
+00655882 : CMP dword ptr [ESI + 0x10],0x0
+00655886 : JNZ 0x006558b8
+00655888 : CMP dword ptr [ESI + 0xc],0x0
+0065588c : JZ 0x006558b8
+0065588e : LEA EAX,[EBP + -0x7c]
+00655891 : PUSH EAX
+00655892 : PUSH dword ptr [ESI]
+00655894 : CALL 0x0063b8b9
+00655899 : POP ECX
+0065589a : POP ECX
+0065589b : TEST EAX,EAX
+0065589d : JNZ 0x006558b8
+0065589f : PUSH EAX
+006558a0 : PUSH EDI
+006558a1 : MOV ECX,ESI
+006558a3 : CALL 0x006555cc
+006558a8 : POP ECX
+006558a9 : POP ECX
+006558aa : TEST EAX,EAX
+006558ac : JZ 0x006558b8
+006558ae : OR dword ptr [ESI + 0x8],0x4
+006558b2 : MOV dword ptr [ESI + 0x18],EDI
+006558b5 : MOV dword ptr [ESI + 0x1c],EDI
+006558b8 : MOV EAX,dword ptr [ESI + 0x8]
+006558bb : SHR EAX,0x2
+006558be : NOT EAX
+006558c0 : AND EAX,0x1
+006558c3 : MOV ECX,dword ptr [EBP + -0x4]
+006558c6 : POP EDI
+006558c7 : XOR ECX,EBP
+006558c9 : POP ESI
+006558ca : CALL 0x00633e6b
+006558cf : LEAVE
+006558d0 : RET 0x4

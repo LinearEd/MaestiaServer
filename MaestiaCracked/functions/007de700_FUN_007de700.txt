@@ -1,0 +1,136 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_007de700
+ENTRY    : 007de700
+BODY     : [[007de700, 007de7d6]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+uint FUN_007de700(float param_1,float param_2,uint *param_3)
+
+{
+  int iVar1;
+  float fVar2;
+  uint in_EAX;
+  int in_ECX;
+  uint *unaff_ESI;
+  undefined4 local_c;
+  
+  iVar1 = *(int *)(in_ECX + 0x9c);
+  if (iVar1 != 0) {
+    in_EAX = *(int *)(iVar1 + 0x48) - 1;
+    fVar2 = (float)(int)in_EAX;
+    if ((int)in_EAX < 0) {
+      fVar2 = fVar2 + 4.2949673e+09;
+    }
+    param_2 = fVar2 * *(float *)(iVar1 + 100) - param_2;
+    if (0.0 <= param_2) {
+      in_EAX = *(int *)(iVar1 + 0x48) - 1;
+      fVar2 = (float)(int)in_EAX;
+      if ((int)in_EAX < 0) {
+        fVar2 = fVar2 + 4.2949673e+09;
+      }
+      if (param_2 < fVar2 * *(float *)(iVar1 + 100)) {
+        fVar2 = (float)*(int *)(iVar1 + 0x58);
+        if (*(int *)(iVar1 + 0x58) < 0) {
+          fVar2 = fVar2 + 4.2949673e+09;
+        }
+        fVar2 = 1.0 / (fVar2 * *(float *)(iVar1 + 100));
+        local_c = (uint)(longlong)ROUND(fVar2 * param_2);
+        *unaff_ESI = local_c;
+        local_c = (uint)(longlong)ROUND(fVar2 * param_1);
+        *param_3 = local_c;
+        iVar1 = *(int *)(in_ECX + 0x9c);
+        in_EAX = local_c;
+        if (local_c < *(uint *)(iVar1 + 0x5c)) {
+          return CONCAT31((int3)((uint)iVar1 >> 8),*unaff_ESI < *(uint *)(iVar1 + 0x60));
+        }
+      }
+    }
+  }
+  return in_EAX & 0xffffff00;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+007de700 : PUSH EBP
+007de701 : MOV EBP,ESP
+007de703 : MOV EDX,dword ptr [ECX + 0x9c]
+007de709 : SUB ESP,0x8
+007de70c : TEST EDX,EDX
+007de70e : JZ 0x007de732
+007de710 : MOV EAX,dword ptr [EDX + 0x48]
+007de713 : DEC EAX
+007de714 : MOV dword ptr [EBP + -0x4],EAX
+007de717 : FILD dword ptr [EBP + -0x4]
+007de71a : TEST EAX,EAX
+007de71c : JGE 0x007de724
+007de71e : FADD float ptr [0x00cdf0e0]
+007de724 : FMUL float ptr [EDX + 0x64]
+007de727 : FSUB float ptr [EBP + 0xc]
+007de72a : FLDZ
+007de72c : FCOMIP ST0,ST1
+007de72e : JBE 0x007de73a
+007de730 : FSTP ST0
+007de732 : XOR AL,AL
+007de734 : MOV ESP,EBP
+007de736 : POP EBP
+007de737 : RET 0xc
+007de73a : MOV EAX,dword ptr [EDX + 0x48]
+007de73d : DEC EAX
+007de73e : MOV dword ptr [EBP + 0xc],EAX
+007de741 : FILD dword ptr [EBP + 0xc]
+007de744 : TEST EAX,EAX
+007de746 : JGE 0x007de74e
+007de748 : FADD float ptr [0x00cdf0e0]
+007de74e : FMUL float ptr [EDX + 0x64]
+007de751 : FXCH
+007de753 : FCOMI ST0,ST1
+007de755 : FSTP ST1
+007de757 : JNC 0x007de730
+007de759 : MOV EAX,EDX
+007de75b : MOV EDX,dword ptr [EAX + 0x58]
+007de75e : FILD dword ptr [EAX + 0x58]
+007de761 : TEST EDX,EDX
+007de763 : JGE 0x007de76b
+007de765 : FADD float ptr [0x00cdf0e0]
+007de76b : FMUL float ptr [EAX + 0x64]
+007de76e : MOV EDX,dword ptr [EBP + 0x10]
+007de771 : FLD1
+007de773 : FDIVRP
+007de775 : FNSTCW word ptr [EBP + 0xe]
+007de778 : FLD ST0
+007de77a : MOVZX EAX,word ptr [EBP + 0xe]
+007de77e : FMULP ST2
+007de780 : OR EAX,0xc00
+007de785 : FXCH
+007de787 : MOV dword ptr [EBP + -0x4],EAX
+007de78a : FLDCW word ptr [EBP + -0x4]
+007de78d : FISTP qword ptr [EBP + -0x8]
+007de790 : MOV EAX,dword ptr [EBP + -0x8]
+007de793 : MOV dword ptr [ESI],EAX
+007de795 : FLDCW word ptr [EBP + 0xe]
+007de798 : FMUL float ptr [EBP + 0x8]
+007de79b : FNSTCW word ptr [EBP + 0xe]
+007de79e : MOVZX EAX,word ptr [EBP + 0xe]
+007de7a2 : OR EAX,0xc00
+007de7a7 : MOV dword ptr [EBP + 0x8],EAX
+007de7aa : FLDCW word ptr [EBP + 0x8]
+007de7ad : FISTP qword ptr [EBP + -0x8]
+007de7b0 : MOV EAX,dword ptr [EBP + -0x8]
+007de7b3 : MOV dword ptr [EDX],EAX
+007de7b5 : MOV EDX,dword ptr [ECX + 0x9c]
+007de7bb : FLDCW word ptr [EBP + 0xe]
+007de7be : CMP EAX,dword ptr [EDX + 0x5c]
+007de7c1 : JNC 0x007de732
+007de7c7 : MOV ECX,dword ptr [ESI]
+007de7c9 : MOV EAX,EDX
+007de7cb : CMP ECX,dword ptr [EAX + 0x60]
+007de7ce : SETC AL
+007de7d1 : MOV ESP,EBP
+007de7d3 : POP EBP
+007de7d4 : RET 0xc

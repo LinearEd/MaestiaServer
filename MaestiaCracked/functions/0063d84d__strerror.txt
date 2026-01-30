@@ -1,0 +1,98 @@
+PROGRAM  : Maestia.exe
+FUNCTION : _strerror
+ENTRY    : 0063d84d
+BODY     : [[0063d84d, 0063d8ae] [0063d8b2, 0063d8b8]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    _strerror
+   
+   Library: Visual Studio 2008 Release */
+
+char * __cdecl _strerror(char *_ErrMsg)
+
+{
+  _ptiddata p_Var1;
+  char *pcVar2;
+  char *_Src;
+  errno_t eVar3;
+  
+  p_Var1 = __getptd_noexit();
+  if (p_Var1 == (_ptiddata)0x0) {
+    pcVar2 = "Visual C++ CRT: Not enough memory to complete call to strerror.";
+  }
+  else {
+    if (p_Var1->_errmsg == (char *)0x0) {
+      pcVar2 = __calloc_crt(0x86,1);
+      p_Var1->_errmsg = pcVar2;
+      if (pcVar2 == (char *)0x0) {
+        return "Visual C++ CRT: Not enough memory to complete call to strerror.";
+      }
+    }
+    pcVar2 = p_Var1->_errmsg;
+    _Src = __get_sys_err_msg((int)_ErrMsg);
+    eVar3 = _strcpy_s(pcVar2,0x86,_Src);
+    if (eVar3 != 0) {
+                    /* WARNING: Subroutine does not return */
+      __invoke_watson((wchar_t *)0x0,(wchar_t *)0x0,(wchar_t *)0x0,0,0);
+    }
+  }
+  return pcVar2;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0063d84d : MOV EDI,EDI
+0063d84f : PUSH EBP
+0063d850 : MOV EBP,ESP
+0063d852 : PUSH EBX
+0063d853 : PUSH ESI
+0063d854 : CALL 0x0064587d
+0063d859 : MOV ESI,EAX
+0063d85b : XOR EBX,EBX
+0063d85d : CMP ESI,EBX
+0063d85f : JNZ 0x0063d868
+0063d861 : MOV EAX,0xb96390
+0063d866 : JMP 0x0063d8b5
+0063d868 : PUSH EDI
+0063d869 : MOV EDI,0x86
+0063d86e : CMP dword ptr [ESI + 0x24],EBX
+0063d871 : JNZ 0x0063d88b
+0063d873 : PUSH 0x1
+0063d875 : PUSH EDI
+0063d876 : CALL 0x006425a4
+0063d87b : POP ECX
+0063d87c : POP ECX
+0063d87d : MOV dword ptr [ESI + 0x24],EAX
+0063d880 : CMP EAX,EBX
+0063d882 : JNZ 0x0063d88b
+0063d884 : MOV EAX,0xb96390
+0063d889 : JMP 0x0063d8b4
+0063d88b : PUSH dword ptr [EBP + 0x8]
+0063d88e : MOV ESI,dword ptr [ESI + 0x24]
+0063d891 : CALL 0x0063d825
+0063d896 : PUSH EAX
+0063d897 : PUSH EDI
+0063d898 : PUSH ESI
+0063d899 : CALL 0x00638300
+0063d89e : ADD ESP,0x10
+0063d8a1 : TEST EAX,EAX
+0063d8a3 : JZ 0x0063d8b2
+0063d8a5 : PUSH EBX
+0063d8a6 : PUSH EBX
+0063d8a7 : PUSH EBX
+0063d8a8 : PUSH EBX
+0063d8a9 : PUSH EBX
+0063d8aa : CALL 0x00637169
+0063d8b2 : MOV EAX,ESI
+0063d8b4 : POP EDI
+0063d8b5 : POP ESI
+0063d8b6 : POP EBX
+0063d8b7 : POP EBP
+0063d8b8 : RET

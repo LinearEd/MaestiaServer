@@ -1,0 +1,92 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005f7a80
+ENTRY    : 005f7a80
+BODY     : [[005f7a80, 005f7af3]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+uint FUN_005f7a80(void)
+
+{
+  int iVar1;
+  int *piVar2;
+  int in_ECX;
+  uint uVar3;
+  
+  iVar1 = _fclose(*(FILE **)(in_ECX + 0x10));
+  if (iVar1 == 0) {
+    *(undefined1 *)(in_ECX + 0xc) = 0;
+    *(undefined4 *)(in_ECX + 0x10) = 0;
+    *(undefined4 *)(in_ECX + 0x18) = 0;
+    return 1;
+  }
+  piVar2 = __errno();
+  if (*piVar2 == 2) {
+    *(undefined4 *)(in_ECX + 0x18) = 0x1001;
+    return 0x1000;
+  }
+  piVar2 = __errno();
+  if (*piVar2 != 0xd) {
+    piVar2 = __errno();
+    if (*piVar2 != 1) {
+      piVar2 = __errno();
+      uVar3 = (*piVar2 == 0x1c) + 0x1003;
+      *(uint *)(in_ECX + 0x18) = uVar3;
+      return uVar3 & 0xffffff00;
+    }
+  }
+  *(undefined4 *)(in_ECX + 0x18) = 0x1002;
+  return 0x1000;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005f7a80 : PUSH ESI
+005f7a81 : MOV ESI,ECX
+005f7a83 : MOV EAX,dword ptr [ESI + 0x10]
+005f7a86 : PUSH EAX
+005f7a87 : CALL 0x006366db
+005f7a8c : ADD ESP,0x4
+005f7a8f : TEST EAX,EAX
+005f7a91 : JZ 0x005f7ae5
+005f7a93 : CALL 0x0063ab82
+005f7a98 : CMP dword ptr [EAX],0x2
+005f7a9b : JNZ 0x005f7aa9
+005f7a9d : MOV EAX,0x1001
+005f7aa2 : MOV dword ptr [ESI + 0x18],EAX
+005f7aa5 : XOR AL,AL
+005f7aa7 : POP ESI
+005f7aa8 : RET
+005f7aa9 : CALL 0x0063ab82
+005f7aae : CMP dword ptr [EAX],0xd
+005f7ab1 : JZ 0x005f7ad9
+005f7ab3 : CALL 0x0063ab82
+005f7ab8 : CMP dword ptr [EAX],0x1
+005f7abb : JZ 0x005f7ad9
+005f7abd : CALL 0x0063ab82
+005f7ac2 : XOR ECX,ECX
+005f7ac4 : CMP dword ptr [EAX],0x1c
+005f7ac7 : SETZ CL
+005f7aca : ADD ECX,0x1003
+005f7ad0 : MOV EAX,ECX
+005f7ad2 : MOV dword ptr [ESI + 0x18],EAX
+005f7ad5 : XOR AL,AL
+005f7ad7 : POP ESI
+005f7ad8 : RET
+005f7ad9 : MOV EAX,0x1002
+005f7ade : MOV dword ptr [ESI + 0x18],EAX
+005f7ae1 : XOR AL,AL
+005f7ae3 : POP ESI
+005f7ae4 : RET
+005f7ae5 : XOR EAX,EAX
+005f7ae7 : MOV byte ptr [ESI + 0xc],AL
+005f7aea : MOV dword ptr [ESI + 0x10],EAX
+005f7aed : MOV dword ptr [ESI + 0x18],EAX
+005f7af0 : MOV AL,0x1
+005f7af2 : POP ESI
+005f7af3 : RET

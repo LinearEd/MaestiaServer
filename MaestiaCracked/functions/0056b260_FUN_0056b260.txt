@@ -1,0 +1,58 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0056b260
+ENTRY    : 0056b260
+BODY     : [[0056b260, 0056b28f]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+int FUN_0056b260(int param_1)
+
+{
+  uint uVar1;
+  int in_ECX;
+  int *piVar2;
+  
+  uVar1 = 0;
+  if (*(uint *)(in_ECX + 0x60) != 0) {
+    piVar2 = *(int **)(in_ECX + 0x5c);
+    do {
+      if (*piVar2 == param_1) {
+        return (*(int **)(in_ECX + 0x5c))[uVar1 * 2 + 1];
+      }
+      uVar1 = uVar1 + 1;
+      piVar2 = piVar2 + 2;
+    } while (uVar1 < *(uint *)(in_ECX + 0x60));
+  }
+  return 0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0056b260 : MOV EDX,dword ptr [ECX + 0x60]
+0056b263 : PUSH ESI
+0056b264 : XOR EAX,EAX
+0056b266 : PUSH EDI
+0056b267 : TEST EDX,EDX
+0056b269 : JBE 0x0056b280
+0056b26b : MOV ESI,dword ptr [ECX + 0x5c]
+0056b26e : MOV EDI,dword ptr [ESP + 0xc]
+0056b272 : MOV ECX,ESI
+0056b274 : CMP dword ptr [ECX],EDI
+0056b276 : JZ 0x0056b287
+0056b278 : INC EAX
+0056b279 : ADD ECX,0x8
+0056b27c : CMP EAX,EDX
+0056b27e : JC 0x0056b274
+0056b280 : POP EDI
+0056b281 : XOR EAX,EAX
+0056b283 : POP ESI
+0056b284 : RET 0x4
+0056b287 : MOV EAX,dword ptr [ESI + EAX*0x8 + 0x4]
+0056b28b : POP EDI
+0056b28c : POP ESI
+0056b28d : RET 0x4

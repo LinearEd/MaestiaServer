@@ -1,0 +1,78 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00515c80
+ENTRY    : 00515c80
+BODY     : [[00515c80, 00515ced]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined4 FUN_00515c80(uint param_1,undefined4 param_2)
+
+{
+  LPCRITICAL_SECTION lpCriticalSection;
+  int iVar1;
+  undefined4 uVar2;
+  
+  iVar1 = *(int *)(*(int *)(DAT_00d7b334 + 4 + (param_1 >> 0x14) * 8) + (param_1 >> 0xc & 0xff) * 4)
+  ;
+  if (*(char *)(*(int *)(iVar1 + 0x14) + 0x60) != '\0') {
+    lpCriticalSection = (LPCRITICAL_SECTION)(*(int *)(iVar1 + 0x14) + 0x48);
+    EnterCriticalSection(lpCriticalSection);
+    uVar2 = FUN_005a9c10(iVar1,param_1,param_2);
+    LeaveCriticalSection(lpCriticalSection);
+    return uVar2;
+  }
+  uVar2 = FUN_005a9c10(iVar1,param_1,param_2);
+  return uVar2;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00515c80 : MOV EDX,dword ptr [0x00d7b334]
+00515c86 : PUSH EBX
+00515c87 : MOV EBX,dword ptr [ESP + 0x8]
+00515c8b : MOV EAX,EBX
+00515c8d : MOV ECX,EBX
+00515c8f : SHR EAX,0x14
+00515c92 : MOV EAX,dword ptr [EDX + EAX*0x8 + 0x4]
+00515c96 : SHR ECX,0xc
+00515c99 : AND ECX,0xff
+00515c9f : PUSH EBP
+00515ca0 : MOV EBP,dword ptr [EAX + ECX*0x4]
+00515ca3 : PUSH ESI
+00515ca4 : MOV ESI,dword ptr [EBP + 0x14]
+00515ca7 : CMP byte ptr [ESI + 0x60],0x0
+00515cab : JZ 0x00515cd9
+00515cad : PUSH EDI
+00515cae : LEA EDI,[ESI + 0x48]
+00515cb1 : PUSH EDI
+00515cb2 : CALL dword ptr [0x00b85118]
+00515cb8 : MOV ECX,dword ptr [ESP + 0x18]
+00515cbc : PUSH ECX
+00515cbd : MOV ECX,dword ptr [ESI + 0x64]
+00515cc0 : PUSH EBX
+00515cc1 : PUSH EBP
+00515cc2 : CALL 0x005a9c10
+00515cc7 : PUSH EDI
+00515cc8 : MOV ESI,EAX
+00515cca : CALL dword ptr [0x00b8511c]
+00515cd0 : POP EDI
+00515cd1 : MOV EAX,ESI
+00515cd3 : POP ESI
+00515cd4 : POP EBP
+00515cd5 : POP EBX
+00515cd6 : RET 0x8
+00515cd9 : MOV EDX,dword ptr [ESP + 0x14]
+00515cdd : MOV ECX,dword ptr [ESI + 0x64]
+00515ce0 : PUSH EDX
+00515ce1 : PUSH EBX
+00515ce2 : PUSH EBP
+00515ce3 : CALL 0x005a9c10
+00515ce8 : POP ESI
+00515ce9 : POP EBP
+00515cea : POP EBX
+00515ceb : RET 0x8

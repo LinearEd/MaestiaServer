@@ -1,0 +1,91 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005c1440
+ENTRY    : 005c1440
+BODY     : [[005c1440, 005c14c0]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+int FUN_005c1440(int param_1)
+
+{
+  byte *pbVar1;
+  char cVar2;
+  int iVar3;
+  int iVar4;
+  
+  cVar2 = FUN_00526030(0x23);
+  if (cVar2 == '\0') {
+    iVar3 = FUN_00526050(&DAT_00b8fdec,0,0);
+    return iVar3;
+  }
+  if (*(int *)(param_1 + 8) == 0) {
+    iVar3 = 0;
+  }
+  else {
+    iVar3 = *(int *)(param_1 + 8) + -0x10;
+  }
+  iVar3 = __alldiv(*(undefined4 *)(iVar3 + 0x48),*(undefined4 *)(iVar3 + 0x4c),86400000,0);
+  iVar4 = (iVar3 + 4) / 7;
+  pbVar1 = *(byte **)(param_1 + 4);
+  if (4 < *pbVar1) {
+    iVar4 = FUN_00526400();
+  }
+  *pbVar1 = 3;
+  *(double *)(pbVar1 + 4) = (double)((iVar3 + 4) % 7);
+  return iVar4;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005c1440 : SUB ESP,0x8
+005c1443 : PUSH ESI
+005c1444 : MOV ESI,dword ptr [ESP + 0x10]
+005c1448 : PUSH 0x23
+005c144a : MOV ECX,ESI
+005c144c : CALL 0x00526030
+005c1451 : TEST AL,AL
+005c1453 : JNZ 0x005c146a
+005c1455 : PUSH 0x0
+005c1457 : PUSH 0x0
+005c1459 : PUSH 0xb8fdec
+005c145e : MOV ECX,ESI
+005c1460 : CALL 0x00526050
+005c1465 : POP ESI
+005c1466 : ADD ESP,0x8
+005c1469 : RET
+005c146a : MOV EAX,dword ptr [ESI + 0x8]
+005c146d : TEST EAX,EAX
+005c146f : JZ 0x005c1476
+005c1471 : ADD EAX,-0x10
+005c1474 : JMP 0x005c1478
+005c1476 : XOR EAX,EAX
+005c1478 : MOV ECX,dword ptr [EAX + 0x4c]
+005c147b : MOV EDX,dword ptr [EAX + 0x48]
+005c147e : PUSH 0x0
+005c1480 : PUSH 0x5265c00
+005c1485 : PUSH ECX
+005c1486 : PUSH EDX
+005c1487 : CALL 0x0063c760
+005c148c : ADD EAX,0x4
+005c148f : CDQ
+005c1490 : MOV ECX,0x7
+005c1495 : IDIV ECX
+005c1497 : MOV ESI,dword ptr [ESI + 0x4]
+005c149a : CMP byte ptr [ESI],0x5
+005c149d : MOV dword ptr [ESP + 0x4],EDX
+005c14a1 : FILD dword ptr [ESP + 0x4]
+005c14a5 : FSTP double ptr [ESP + 0x4]
+005c14a9 : JC 0x005c14b2
+005c14ab : MOV ECX,ESI
+005c14ad : CALL 0x00526400
+005c14b2 : FLD double ptr [ESP + 0x4]
+005c14b6 : MOV byte ptr [ESI],0x3
+005c14b9 : FSTP double ptr [ESI + 0x4]
+005c14bc : POP ESI
+005c14bd : ADD ESP,0x8
+005c14c0 : RET

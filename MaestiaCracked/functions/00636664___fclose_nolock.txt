@@ -1,0 +1,104 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __fclose_nolock
+ENTRY    : 00636664
+BODY     : [[00636664, 006366da]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __fclose_nolock
+   
+   Library: Visual Studio 2008 Release */
+
+int __cdecl __fclose_nolock(FILE *_File)
+
+{
+  int *piVar1;
+  int iVar2;
+  int iVar3;
+  
+  iVar3 = -1;
+  if (_File == (FILE *)0x0) {
+    piVar1 = __errno();
+    *piVar1 = 0x16;
+    __invalid_parameter(0,0,0,0,0);
+    iVar3 = -1;
+  }
+  else {
+    if ((_File->_flag & 0x83) != 0) {
+      iVar3 = __flush(_File);
+      __freebuf(_File);
+      iVar2 = __fileno(_File);
+      iVar2 = __close(iVar2);
+      if (iVar2 < 0) {
+        iVar3 = -1;
+      }
+      else if (_File->_tmpfname != (char *)0x0) {
+        _free(_File->_tmpfname);
+        _File->_tmpfname = (char *)0x0;
+      }
+    }
+    _File->_flag = 0;
+  }
+  return iVar3;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00636664 : MOV EDI,EDI
+00636666 : PUSH EBP
+00636667 : MOV EBP,ESP
+00636669 : PUSH EBX
+0063666a : PUSH ESI
+0063666b : MOV ESI,dword ptr [EBP + 0x8]
+0063666e : PUSH EDI
+0063666f : XOR EDI,EDI
+00636671 : OR EBX,0xffffffff
+00636674 : CMP ESI,EDI
+00636676 : JNZ 0x00636694
+00636678 : CALL 0x0063ab82
+0063667d : PUSH EDI
+0063667e : PUSH EDI
+0063667f : PUSH EDI
+00636680 : PUSH EDI
+00636681 : PUSH EDI
+00636682 : MOV dword ptr [EAX],0x16
+00636688 : CALL 0x006372b8
+0063668d : ADD ESP,0x14
+00636690 : OR EAX,EBX
+00636692 : JMP 0x006366d6
+00636694 : TEST byte ptr [ESI + 0xc],0x83
+00636698 : JZ 0x006366d1
+0063669a : PUSH ESI
+0063669b : CALL 0x0063946d
+006366a0 : PUSH ESI
+006366a1 : MOV EBX,EAX
+006366a3 : CALL 0x006501a3
+006366a8 : PUSH ESI
+006366a9 : CALL 0x0064dfc6
+006366ae : PUSH EAX
+006366af : CALL 0x00648e03
+006366b4 : ADD ESP,0x10
+006366b7 : TEST EAX,EAX
+006366b9 : JGE 0x006366c0
+006366bb : OR EBX,0xffffffff
+006366be : JMP 0x006366d1
+006366c0 : MOV EAX,dword ptr [ESI + 0x1c]
+006366c3 : CMP EAX,EDI
+006366c5 : JZ 0x006366d1
+006366c7 : PUSH EAX
+006366c8 : CALL 0x0063610d
+006366cd : POP ECX
+006366ce : MOV dword ptr [ESI + 0x1c],EDI
+006366d1 : MOV dword ptr [ESI + 0xc],EDI
+006366d4 : MOV EAX,EBX
+006366d6 : POP EDI
+006366d7 : POP ESI
+006366d8 : POP EBX
+006366d9 : POP EBP
+006366da : RET

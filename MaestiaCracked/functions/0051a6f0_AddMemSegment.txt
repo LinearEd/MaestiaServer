@@ -1,0 +1,69 @@
+PROGRAM  : Maestia.exe
+FUNCTION : AddMemSegment
+ENTRY    : 0051a6f0
+BODY     : [[0051a6f0, 0051a742]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* public: void __thiscall GSysAllocStatic::AddMemSegment(void *,unsigned int) */
+
+void __thiscall GSysAllocStatic::AddMemSegment(GSysAllocStatic *this,void *param_1,uint param_2)
+
+{
+  GSysAllocStatic *pGVar1;
+  uint uVar2;
+  uint uVar3;
+  int iVar4;
+  
+                    /* 0x11a6f0  51  ?AddMemSegment@GSysAllocStatic@@QAEXPAXI@Z */
+  uVar3 = ~(*(int *)(this + 4) - 1U);
+  uVar2 = *(int *)(this + 4) + -1 + (int)param_1 & uVar3;
+  if (*(uint *)(this + 8) < 4) {
+    pGVar1 = this + *(uint *)(this + 8) * 0x20 + 0x30;
+    iVar4 = ((int)param_1 + param_2 & uVar3) - uVar2;
+    *(uint *)(pGVar1 + 0x10) = uVar2;
+    *(int *)(pGVar1 + 0x14) = iVar4;
+    *(undefined4 *)(pGVar1 + 0x18) = 0;
+    *(int *)(this + 0xb0) = *(int *)(this + 0xb0) + iVar4;
+    FUN_005aba30(pGVar1);
+    *(int *)(this + 8) = *(int *)(this + 8) + 1;
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0051a6f0 : MOV EDX,dword ptr [ESP + 0x4]
+0051a6f4 : PUSH ESI
+0051a6f5 : MOV ESI,ECX
+0051a6f7 : MOV EAX,dword ptr [ESI + 0x4]
+0051a6fa : LEA ECX,[EAX + -0x1]
+0051a6fd : PUSH EDI
+0051a6fe : MOV EDI,dword ptr [ESP + 0x10]
+0051a702 : LEA EAX,[EAX + EDX*0x1 + -0x1]
+0051a706 : NOT ECX
+0051a708 : ADD EDX,EDI
+0051a70a : AND EAX,ECX
+0051a70c : AND EDX,ECX
+0051a70e : MOV ECX,dword ptr [ESI + 0x8]
+0051a711 : CMP ECX,0x4
+0051a714 : JNC 0x0051a73e
+0051a716 : SHL ECX,0x5
+0051a719 : LEA ECX,[ECX + ESI*0x1 + 0x30]
+0051a71d : SUB EDX,EAX
+0051a71f : MOV dword ptr [ECX + 0x10],EAX
+0051a722 : MOV dword ptr [ECX + 0x14],EDX
+0051a725 : MOV dword ptr [ECX + 0x18],0x0
+0051a72c : ADD dword ptr [ESI + 0xb0],EDX
+0051a732 : PUSH ECX
+0051a733 : MOV ECX,dword ptr [ESI + 0xc]
+0051a736 : CALL 0x005aba30
+0051a73b : INC dword ptr [ESI + 0x8]
+0051a73e : POP EDI
+0051a73f : POP ESI
+0051a740 : RET 0x8

@@ -1,0 +1,120 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00684150
+ENTRY    : 00684150
+BODY     : [[00684150, 006841cb]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+int FUN_00684150(undefined4 *param_1,int param_2)
+
+{
+  byte bVar1;
+  int iVar2;
+  int iVar3;
+  int *in_ECX;
+  byte *pbVar4;
+  int iVar5;
+  byte *pbVar6;
+  int *piVar7;
+  bool bVar8;
+  
+  iVar2 = *in_ECX;
+  piVar7 = (int *)(iVar2 + 8 + param_2 * 0x14);
+  if ((*(int *)(iVar2 + 8 + param_2 * 0x14) == -2) || (iVar3 = param_2, piVar7[1] != param_2)) {
+    return -1;
+  }
+  do {
+    if (piVar7[1] == param_2) {
+      pbVar6 = (byte *)*param_1;
+      pbVar4 = (byte *)piVar7[2];
+      do {
+        bVar1 = *pbVar4;
+        bVar8 = bVar1 < *pbVar6;
+        if (bVar1 != *pbVar6) {
+LAB_006841a0:
+          iVar5 = (1 - (uint)bVar8) - (uint)(bVar8 != 0);
+          goto LAB_006841a5;
+        }
+        if (bVar1 == 0) break;
+        bVar1 = pbVar4[1];
+        bVar8 = bVar1 < pbVar6[1];
+        if (bVar1 != pbVar6[1]) goto LAB_006841a0;
+        pbVar4 = pbVar4 + 2;
+        pbVar6 = pbVar6 + 2;
+      } while (bVar1 != 0);
+      iVar5 = 0;
+LAB_006841a5:
+      if (iVar5 == 0) {
+        return iVar3;
+      }
+    }
+    iVar3 = *piVar7;
+    if (iVar3 == -1) {
+      return -1;
+    }
+    piVar7 = (int *)(iVar2 + 8 + iVar3 * 0x14);
+  } while( true );
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00684150 : PUSH EBP
+00684151 : MOV EBP,dword ptr [ECX]
+00684153 : PUSH ESI
+00684154 : PUSH EDI
+00684155 : MOV EDI,dword ptr [ESP + 0x14]
+00684159 : LEA ECX,[EDI + EDI*0x4]
+0068415c : CMP dword ptr [EBP + ECX*0x4 + 0x8],-0x2
+00684161 : LEA ESI,[EBP + ECX*0x4 + 0x8]
+00684165 : MOV EAX,EDI
+00684167 : JZ 0x006841c3
+00684169 : CMP dword ptr [ESI + 0x4],EDI
+0068416c : JNZ 0x006841c3
+0068416e : PUSH EBX
+0068416f : NOP
+00684170 : CMP dword ptr [ESI + 0x4],EDI
+00684173 : JNZ 0x006841a9
+00684175 : MOV EDX,dword ptr [ESP + 0x14]
+00684179 : MOV EDX,dword ptr [EDX]
+0068417b : MOV ECX,dword ptr [ESI + 0x8]
+0068417e : MOV EDI,EDI
+00684180 : MOV BL,byte ptr [ECX]
+00684182 : CMP BL,byte ptr [EDX]
+00684184 : JNZ 0x006841a0
+00684186 : TEST BL,BL
+00684188 : JZ 0x0068419c
+0068418a : MOV BL,byte ptr [ECX + 0x1]
+0068418d : CMP BL,byte ptr [EDX + 0x1]
+00684190 : JNZ 0x006841a0
+00684192 : ADD ECX,0x2
+00684195 : ADD EDX,0x2
+00684198 : TEST BL,BL
+0068419a : JNZ 0x00684180
+0068419c : XOR ECX,ECX
+0068419e : JMP 0x006841a5
+006841a0 : SBB ECX,ECX
+006841a2 : SBB ECX,-0x1
+006841a5 : TEST ECX,ECX
+006841a7 : JZ 0x006841bc
+006841a9 : MOV EAX,dword ptr [ESI]
+006841ab : CMP EAX,-0x1
+006841ae : JZ 0x006841b9
+006841b0 : LEA ECX,[EAX + EAX*0x4]
+006841b3 : LEA ESI,[EBP + ECX*0x4 + 0x8]
+006841b7 : JMP 0x00684170
+006841b9 : OR EAX,0xffffffff
+006841bc : POP EBX
+006841bd : POP EDI
+006841be : POP ESI
+006841bf : POP EBP
+006841c0 : RET 0x8
+006841c3 : POP EDI
+006841c4 : POP ESI
+006841c5 : OR EAX,0xffffffff
+006841c8 : POP EBP
+006841c9 : RET 0x8

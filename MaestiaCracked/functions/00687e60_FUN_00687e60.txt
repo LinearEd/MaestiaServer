@@ -1,0 +1,100 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00687e60
+ENTRY    : 00687e60
+BODY     : [[00687e60, 00687ed9]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+int FUN_00687e60(int *param_1)
+
+{
+  int iVar1;
+  byte bVar2;
+  int local_8;
+  int local_4;
+  
+  local_8 = *param_1;
+  local_4 = param_1[1];
+  if (local_8 == 0) {
+    if (local_4 < 0) {
+      local_4 = -local_4;
+    }
+    return local_4;
+  }
+  if (local_4 == 0) {
+    if (local_8 < 0) {
+      return -local_8;
+    }
+  }
+  else {
+    iVar1 = FUN_00687d30();
+    FUN_00687db0(&local_8);
+    local_8 = FUN_00687cd0();
+    bVar2 = (byte)iVar1;
+    if (0 < iVar1) {
+      return (1 << (bVar2 - 1 & 0x1f)) + local_8 >> (bVar2 & 0x1f);
+    }
+    local_8 = local_8 << (-bVar2 & 0x1f);
+  }
+  return local_8;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00687e60 : SUB ESP,0x8
+00687e63 : MOV ECX,dword ptr [ESP + 0xc]
+00687e67 : MOV EAX,dword ptr [ECX]
+00687e69 : MOV ECX,dword ptr [ECX + 0x4]
+00687e6c : MOV dword ptr [ESP],EAX
+00687e6f : MOV dword ptr [ESP + 0x4],ECX
+00687e73 : TEST EAX,EAX
+00687e75 : JNZ 0x00687e83
+00687e77 : TEST ECX,ECX
+00687e79 : JGE 0x00687e7d
+00687e7b : NEG ECX
+00687e7d : MOV EAX,ECX
+00687e7f : ADD ESP,0x8
+00687e82 : RET
+00687e83 : TEST ECX,ECX
+00687e85 : JNZ 0x00687e91
+00687e87 : TEST EAX,EAX
+00687e89 : JGE 0x00687ed6
+00687e8b : NEG EAX
+00687e8d : ADD ESP,0x8
+00687e90 : RET
+00687e91 : PUSH ESI
+00687e92 : PUSH EDI
+00687e93 : LEA EDI,[ESP + 0x8]
+00687e97 : CALL 0x00687d30
+00687e9c : MOV ESI,EAX
+00687e9e : MOV EAX,EDI
+00687ea0 : PUSH EAX
+00687ea1 : CALL 0x00687db0
+00687ea6 : MOV EAX,dword ptr [ESP + 0xc]
+00687eaa : ADD ESP,0x4
+00687ead : CALL 0x00687cd0
+00687eb2 : MOV EDX,EAX
+00687eb4 : TEST ESI,ESI
+00687eb6 : JLE 0x00687ece
+00687eb8 : LEA ECX,[ESI + -0x1]
+00687ebb : MOV EAX,0x1
+00687ec0 : SHL EAX,CL
+00687ec2 : MOV ECX,ESI
+00687ec4 : POP EDI
+00687ec5 : POP ESI
+00687ec6 : ADD EAX,EDX
+00687ec8 : SAR EAX,CL
+00687eca : ADD ESP,0x8
+00687ecd : RET
+00687ece : MOV ECX,ESI
+00687ed0 : NEG ECX
+00687ed2 : POP EDI
+00687ed3 : SHL EAX,CL
+00687ed5 : POP ESI
+00687ed6 : ADD ESP,0x8
+00687ed9 : RET

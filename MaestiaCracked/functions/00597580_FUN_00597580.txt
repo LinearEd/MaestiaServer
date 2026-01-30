@@ -1,0 +1,64 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00597580
+ENTRY    : 00597580
+BODY     : [[00597580, 005975c9]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00597580(undefined4 param_1,int param_2)
+
+{
+  int iVar1;
+  GRefCountNTSImpl *this;
+  char cVar2;
+  int *in_ECX;
+  
+  cVar2 = (**(code **)(*in_ECX + 0x48))(param_1);
+  if (((cVar2 != '\0') && (*(int *)(in_ECX[3] + 4) != 0)) && (param_2 == *(int *)(in_ECX[3] + 4))) {
+    (**(code **)(*in_ECX + 0x68))();
+    iVar1 = in_ECX[3];
+    this = *(GRefCountNTSImpl **)(iVar1 + 4);
+    if (this != (GRefCountNTSImpl *)0x0) {
+      GRefCountNTSImpl::Release(this);
+    }
+    *(undefined4 *)(iVar1 + 4) = 0;
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00597580 : PUSH ESI
+00597581 : MOV ESI,ECX
+00597583 : MOV ECX,dword ptr [ESP + 0x8]
+00597587 : MOV EAX,dword ptr [ESI]
+00597589 : MOV EDX,dword ptr [EAX + 0x48]
+0059758c : PUSH ECX
+0059758d : MOV ECX,ESI
+0059758f : CALL EDX
+00597591 : TEST AL,AL
+00597593 : JZ 0x005975c6
+00597595 : MOV EAX,dword ptr [ESI + 0xc]
+00597598 : MOV EAX,dword ptr [EAX + 0x4]
+0059759b : TEST EAX,EAX
+0059759d : JZ 0x005975c6
+0059759f : CMP dword ptr [ESP + 0x10],EAX
+005975a3 : JNZ 0x005975c6
+005975a5 : MOV EDX,dword ptr [ESI]
+005975a7 : MOV EAX,dword ptr [EDX + 0x68]
+005975aa : MOV ECX,ESI
+005975ac : CALL EAX
+005975ae : MOV ESI,dword ptr [ESI + 0xc]
+005975b1 : MOV ECX,dword ptr [ESI + 0x4]
+005975b4 : ADD ESI,0x4
+005975b7 : TEST ECX,ECX
+005975b9 : JZ 0x005975c0
+005975bb : CALL 0x004ff7c0
+005975c0 : MOV dword ptr [ESI],0x0
+005975c6 : POP ESI
+005975c7 : RET 0xc

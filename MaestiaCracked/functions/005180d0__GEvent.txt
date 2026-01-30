@@ -1,0 +1,74 @@
+PROGRAM  : Maestia.exe
+FUNCTION : ~GEvent
+ENTRY    : 005180d0
+BODY     : [[005180d0, 00518136]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* public: virtual __thiscall GEvent::~GEvent(void) */
+
+void __thiscall GEvent::~GEvent(GEvent *this)
+
+{
+  LONG *Addend;
+  LONG LVar1;
+  
+                    /* 0x1180d0  26  ??1GEvent@@UAE@XZ */
+  *(undefined ***)this = &PTR_FUN_00b87190;
+  *(undefined ***)(this + 0xc) = &PTR_LAB_00b8717c;
+  GWaitCondition::~GWaitCondition((GWaitCondition *)(this + 0x28));
+  GMutex::~GMutex((GMutex *)(this + 0x14));
+  Addend = *(LONG **)(this + 8);
+  *(undefined ***)(this + 0xc) = &PTR_FUN_00cd40d4;
+  *(undefined ***)this = &PTR_FUN_00b87170;
+  if (Addend != (LONG *)0x0) {
+    LVar1 = InterlockedExchangeAdd(Addend,-1);
+    if ((LVar1 == 1) && (Addend != (LONG *)0x0)) {
+      FUN_005a20f0();
+      FUN_00515cf0(Addend[1]);
+      FUN_00515cf0(Addend);
+    }
+  }
+  GRefCountImplCore::~GRefCountImplCore((GRefCountImplCore *)this);
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005180d0 : PUSH ESI
+005180d1 : MOV ESI,ECX
+005180d3 : PUSH EDI
+005180d4 : LEA ECX,[ESI + 0x28]
+005180d7 : MOV dword ptr [ESI],0xb87190
+005180dd : MOV dword ptr [ESI + 0xc],0xb8717c
+005180e4 : CALL 0x00516ba0
+005180e9 : LEA ECX,[ESI + 0x14]
+005180ec : CALL 0x00516b60
+005180f1 : MOV EDI,dword ptr [ESI + 0x8]
+005180f4 : MOV dword ptr [ESI + 0xc],0xcd40d4
+005180fb : MOV dword ptr [ESI],0xb87170
+00518101 : TEST EDI,EDI
+00518103 : JZ 0x0051812e
+00518105 : PUSH -0x1
+00518107 : PUSH EDI
+00518108 : CALL dword ptr [0x00b851cc]
+0051810e : SUB EAX,0x1
+00518111 : JNZ 0x0051812e
+00518113 : TEST EDI,EDI
+00518115 : JZ 0x0051812e
+00518117 : LEA ECX,[EDI + 0x10]
+0051811a : CALL 0x005a20f0
+0051811f : MOV EAX,dword ptr [EDI + 0x4]
+00518122 : PUSH EAX
+00518123 : CALL 0x00515cf0
+00518128 : PUSH EDI
+00518129 : CALL 0x00515cf0
+0051812e : POP EDI
+0051812f : MOV ECX,ESI
+00518131 : POP ESI
+00518132 : JMP 0x004ff7b0

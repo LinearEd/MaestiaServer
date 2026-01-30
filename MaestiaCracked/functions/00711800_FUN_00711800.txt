@@ -1,0 +1,75 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00711800
+ENTRY    : 00711800
+BODY     : [[00711800, 0071184d]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00711800(void)
+
+{
+  int *piVar1;
+  int iVar2;
+  int in_EAX;
+  uint _Size;
+  
+  _Size = *(uint *)(*(int *)(in_EAX + 0x1c) + 0x14);
+  if (*(uint *)(in_EAX + 0x10) < _Size) {
+    _Size = *(uint *)(in_EAX + 0x10);
+  }
+  if (_Size != 0) {
+    _memcpy(*(void **)(in_EAX + 0xc),*(void **)(*(int *)(in_EAX + 0x1c) + 0x10),_Size);
+    *(int *)(in_EAX + 0xc) = *(int *)(in_EAX + 0xc) + _Size;
+    piVar1 = (int *)(*(int *)(in_EAX + 0x1c) + 0x10);
+    *piVar1 = *piVar1 + _Size;
+    *(int *)(in_EAX + 0x14) = *(int *)(in_EAX + 0x14) + _Size;
+    *(int *)(in_EAX + 0x10) = *(int *)(in_EAX + 0x10) - _Size;
+    piVar1 = (int *)(*(int *)(in_EAX + 0x1c) + 0x14);
+    *piVar1 = *piVar1 - _Size;
+    iVar2 = *(int *)(in_EAX + 0x1c);
+    if (*(int *)(iVar2 + 0x14) == 0) {
+      *(undefined4 *)(iVar2 + 0x10) = *(undefined4 *)(iVar2 + 8);
+    }
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00711800 : PUSH ESI
+00711801 : MOV ESI,EAX
+00711803 : MOV EAX,dword ptr [ESI + 0x1c]
+00711806 : MOV ECX,dword ptr [ESI + 0x10]
+00711809 : PUSH EDI
+0071180a : MOV EDI,dword ptr [EAX + 0x14]
+0071180d : CMP EDI,ECX
+0071180f : CMOVA EDI,ECX
+00711812 : TEST EDI,EDI
+00711814 : JZ 0x0071184b
+00711816 : MOV EAX,dword ptr [EAX + 0x10]
+00711819 : MOV ECX,dword ptr [ESI + 0xc]
+0071181c : PUSH EDI
+0071181d : PUSH EAX
+0071181e : PUSH ECX
+0071181f : CALL 0x0063ae40
+00711824 : MOV EAX,dword ptr [ESI + 0x1c]
+00711827 : ADD dword ptr [ESI + 0xc],EDI
+0071182a : ADD dword ptr [EAX + 0x10],EDI
+0071182d : ADD dword ptr [ESI + 0x14],EDI
+00711830 : SUB dword ptr [ESI + 0x10],EDI
+00711833 : MOV EAX,dword ptr [ESI + 0x1c]
+00711836 : SUB dword ptr [EAX + 0x14],EDI
+00711839 : MOV ESI,dword ptr [ESI + 0x1c]
+0071183c : ADD ESP,0xc
+0071183f : CMP dword ptr [ESI + 0x14],0x0
+00711843 : JNZ 0x0071184b
+00711845 : MOV EDX,dword ptr [ESI + 0x8]
+00711848 : MOV dword ptr [ESI + 0x10],EDX
+0071184b : POP EDI
+0071184c : POP ESI
+0071184d : RET

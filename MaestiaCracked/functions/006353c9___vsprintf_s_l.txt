@@ -1,0 +1,106 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __vsprintf_s_l
+ENTRY    : 006353c9
+BODY     : [[006353c9, 00635450]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __vsprintf_s_l
+   
+   Library: Visual Studio 2008 Release */
+
+int __cdecl
+__vsprintf_s_l(char *_DstBuf,size_t _DstSize,char *_Format,_locale_t _Locale,va_list _ArgList)
+
+{
+  int *piVar1;
+  int iVar2;
+  
+  if (_Format == (char *)0x0) {
+    piVar1 = __errno();
+    *piVar1 = 0x16;
+    __invalid_parameter(0,0,0,0,0);
+  }
+  else {
+    if ((_DstBuf == (char *)0x0) || (_DstSize == 0)) {
+      piVar1 = __errno();
+      *piVar1 = 0x16;
+    }
+    else {
+      iVar2 = __vsnprintf_helper(__output_s_l,_DstBuf,_DstSize,_Format,_Locale,_ArgList);
+      if (iVar2 < 0) {
+        *_DstBuf = '\0';
+      }
+      if (iVar2 != -2) {
+        return iVar2;
+      }
+      piVar1 = __errno();
+      *piVar1 = 0x22;
+    }
+    __invalid_parameter(0,0,0,0,0);
+  }
+  return -1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006353c9 : MOV EDI,EDI
+006353cb : PUSH EBP
+006353cc : MOV EBP,ESP
+006353ce : PUSH EBX
+006353cf : XOR EBX,EBX
+006353d1 : CMP dword ptr [EBP + 0x10],EBX
+006353d4 : JNZ 0x006353f3
+006353d6 : CALL 0x0063ab82
+006353db : PUSH EBX
+006353dc : PUSH EBX
+006353dd : PUSH EBX
+006353de : PUSH EBX
+006353df : PUSH EBX
+006353e0 : MOV dword ptr [EAX],0x16
+006353e6 : CALL 0x006372b8
+006353eb : ADD ESP,0x14
+006353ee : OR EAX,0xffffffff
+006353f1 : JMP 0x0063544e
+006353f3 : PUSH ESI
+006353f4 : MOV ESI,dword ptr [EBP + 0x8]
+006353f7 : CMP ESI,EBX
+006353f9 : JZ 0x00635400
+006353fb : CMP dword ptr [EBP + 0xc],EBX
+006353fe : JA 0x0063540d
+00635400 : CALL 0x0063ab82
+00635405 : MOV dword ptr [EAX],0x16
+0063540b : JMP 0x0063543d
+0063540d : PUSH dword ptr [EBP + 0x18]
+00635410 : PUSH dword ptr [EBP + 0x14]
+00635413 : PUSH dword ptr [EBP + 0x10]
+00635416 : PUSH dword ptr [EBP + 0xc]
+00635419 : PUSH ESI
+0063541a : PUSH 0x64b59e
+0063541f : CALL 0x006352fd
+00635424 : ADD ESP,0x18
+00635427 : CMP EAX,EBX
+00635429 : JGE 0x0063542d
+0063542b : MOV byte ptr [ESI],BL
+0063542d : CMP EAX,-0x2
+00635430 : JNZ 0x0063544d
+00635432 : CALL 0x0063ab82
+00635437 : MOV dword ptr [EAX],0x22
+0063543d : PUSH EBX
+0063543e : PUSH EBX
+0063543f : PUSH EBX
+00635440 : PUSH EBX
+00635441 : PUSH EBX
+00635442 : CALL 0x006372b8
+00635447 : ADD ESP,0x14
+0063544a : OR EAX,0xffffffff
+0063544d : POP ESI
+0063544e : POP EBX
+0063544f : POP EBP
+00635450 : RET

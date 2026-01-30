@@ -1,0 +1,143 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00571b60
+ENTRY    : 00571b60
+BODY     : [[00571b60, 00571c38]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00571b60(undefined4 param_1,GRefCountImpl *param_2,undefined4 param_3,undefined4 param_4)
+
+{
+  int iVar1;
+  LONG LVar2;
+  GRefCountImpl *this;
+  int in_ECX;
+  uint uVar3;
+  uint local_4;
+  
+  local_4 = 0;
+  iVar1 = FUN_00515840(0x68,0);
+  if (iVar1 == 0) {
+    iVar1 = 0;
+  }
+  else {
+    FUN_0051c480(param_3);
+    iVar1 = FUN_0056eb10(&local_4,param_4,0,0);
+    uVar3 = local_4 & 0xfffffffc;
+    LVar2 = InterlockedExchangeAdd((LONG *)(uVar3 + 4),-1);
+    if (LVar2 == 1) {
+      FUN_00515cf0(uVar3);
+    }
+  }
+  if (iVar1 != 0) {
+    *(undefined4 *)(iVar1 + 4) = 0x10;
+    FUN_005271c0(param_1);
+    if (param_2 != (GRefCountImpl *)0x0) {
+      GRefCountImpl::AddRef(param_2);
+    }
+    if (*(GRefCountImpl **)(iVar1 + 0x60) != (GRefCountImpl *)0x0) {
+      GRefCountImpl::Release(*(GRefCountImpl **)(iVar1 + 0x60));
+    }
+    *(GRefCountImpl **)(iVar1 + 0x60) = param_2;
+    this = (GRefCountImpl *)(**(code **)(*(int *)(in_ECX + 8) + 0xc))(0x17);
+    if (this != (GRefCountImpl *)0x0) {
+      GRefCountImpl::Release(this);
+      FUN_00571350(iVar1);
+      return;
+    }
+    FUN_0056a440(iVar1);
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00571b60 : PUSH ECX
+00571b61 : PUSH EBX
+00571b62 : PUSH ESI
+00571b63 : PUSH EDI
+00571b64 : XOR EBX,EBX
+00571b66 : MOV EDI,ECX
+00571b68 : PUSH EBX
+00571b69 : MOV dword ptr [ESP + 0x10],EBX
+00571b6d : MOV ECX,dword ptr [EDI + 0x14]
+00571b70 : PUSH 0x68
+00571b72 : CALL 0x00515840
+00571b77 : MOV ESI,EAX
+00571b79 : TEST ESI,ESI
+00571b7b : JZ 0x00571ba9
+00571b7d : MOV EAX,dword ptr [ESP + 0x1c]
+00571b81 : PUSH EAX
+00571b82 : LEA ECX,[ESP + 0x10]
+00571b86 : CALL 0x0051c480
+00571b8b : MOV ECX,dword ptr [ESP + 0x20]
+00571b8f : PUSH 0x0
+00571b91 : PUSH 0x0
+00571b93 : PUSH ECX
+00571b94 : LEA EDX,[ESP + 0x18]
+00571b98 : PUSH EDX
+00571b99 : MOV ECX,ESI
+00571b9b : MOV EBX,0x1
+00571ba0 : CALL 0x0056eb10
+00571ba5 : MOV ESI,EAX
+00571ba7 : JMP 0x00571bab
+00571ba9 : XOR ESI,ESI
+00571bab : TEST BL,0x1
+00571bae : JZ 0x00571bce
+00571bb0 : MOV EBX,dword ptr [ESP + 0xc]
+00571bb4 : AND EBX,0xfffffffc
+00571bb7 : PUSH -0x1
+00571bb9 : LEA EAX,[EBX + 0x4]
+00571bbc : PUSH EAX
+00571bbd : CALL dword ptr [0x00b851cc]
+00571bc3 : SUB EAX,0x1
+00571bc6 : JNZ 0x00571bce
+00571bc8 : PUSH EBX
+00571bc9 : CALL 0x00515cf0
+00571bce : TEST ESI,ESI
+00571bd0 : JZ 0x00571c32
+00571bd2 : MOV ECX,dword ptr [ESP + 0x14]
+00571bd6 : PUSH ECX
+00571bd7 : LEA ECX,[ESI + 0x50]
+00571bda : MOV dword ptr [ESI + 0x4],0x10
+00571be1 : CALL 0x005271c0
+00571be6 : MOV EBX,dword ptr [ESP + 0x18]
+00571bea : TEST EBX,EBX
+00571bec : JZ 0x00571bf5
+00571bee : MOV ECX,EBX
+00571bf0 : CALL 0x00523dd0
+00571bf5 : MOV ECX,dword ptr [ESI + 0x60]
+00571bf8 : TEST ECX,ECX
+00571bfa : JZ 0x00571c01
+00571bfc : CALL 0x004ff7e0
+00571c01 : LEA ECX,[EDI + 0x8]
+00571c04 : MOV dword ptr [ESI + 0x60],EBX
+00571c07 : MOV EDX,dword ptr [ECX]
+00571c09 : MOV EAX,dword ptr [EDX + 0xc]
+00571c0c : PUSH 0x17
+00571c0e : CALL EAX
+00571c10 : TEST EAX,EAX
+00571c12 : JZ 0x00571c2a
+00571c14 : MOV ECX,EAX
+00571c16 : CALL 0x004ff7e0
+00571c1b : PUSH ESI
+00571c1c : MOV ECX,EDI
+00571c1e : CALL 0x00571350
+00571c23 : POP EDI
+00571c24 : POP ESI
+00571c25 : POP EBX
+00571c26 : POP ECX
+00571c27 : RET 0x10
+00571c2a : PUSH ESI
+00571c2b : MOV ECX,EDI
+00571c2d : CALL 0x0056a440
+00571c32 : POP EDI
+00571c33 : POP ESI
+00571c34 : POP EBX
+00571c35 : POP ECX
+00571c36 : RET 0x10

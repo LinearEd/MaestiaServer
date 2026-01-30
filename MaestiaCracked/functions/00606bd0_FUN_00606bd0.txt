@@ -1,0 +1,94 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00606bd0
+ENTRY    : 00606bd0
+BODY     : [[00606bd0, 00606c4c]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+int FUN_00606bd0(uint param_1,float param_2,float param_3)
+
+{
+  float *pfVar1;
+  uint *in_ECX;
+  uint uVar2;
+  uint uVar3;
+  
+  uVar3 = *in_ECX;
+  if (in_ECX[0x1e] < uVar3) {
+    uVar2 = uVar3;
+    do {
+      uVar2 = uVar2 - 1;
+      pfVar1 = (float *)(*(int *)(in_ECX[3] + (uVar2 >> 8) * 4) + (uVar2 & 0xff) * 0xc);
+      if (((((uint)pfVar1[2] & 0xffffff) == param_1) && (param_2 == *pfVar1)) &&
+         (param_3 == pfVar1[1])) {
+        return uVar3 - 1;
+      }
+      uVar3 = uVar3 - 1;
+    } while (in_ECX[0x1e] < uVar3);
+  }
+  return -1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00606bd0 : PUSH EBX
+00606bd1 : PUSH EBP
+00606bd2 : MOV EBP,dword ptr [ECX + 0x78]
+00606bd5 : PUSH ESI
+00606bd6 : MOV ESI,dword ptr [ECX]
+00606bd8 : PUSH EDI
+00606bd9 : CMP ESI,EBP
+00606bdb : JBE 0x00606c35
+00606bdd : MOV EDI,dword ptr [ECX + 0xc]
+00606be0 : FLD float ptr [ESP + 0x1c]
+00606be4 : FLD float ptr [ESP + 0x18]
+00606be8 : MOV EBX,dword ptr [ESP + 0x14]
+00606bec : LEA ECX,[ESI + -0x1]
+00606bef : MOV EDX,ECX
+00606bf1 : SHR EDX,0x8
+00606bf4 : MOV EDX,dword ptr [EDI + EDX*0x4]
+00606bf7 : MOV EAX,ECX
+00606bf9 : AND EAX,0xff
+00606bfe : LEA EAX,[EAX + EAX*0x2]
+00606c01 : LEA EDX,[EDX + EAX*0x4]
+00606c04 : MOV EAX,dword ptr [EDX + 0x8]
+00606c07 : AND EAX,0xffffff
+00606c0c : CMP EAX,EBX
+00606c0e : JNZ 0x00606c2b
+00606c10 : FLD float ptr [EDX]
+00606c12 : FLD ST1
+00606c14 : FUCOMPP
+00606c16 : FNSTSW AX
+00606c18 : TEST AH,0x44
+00606c1b : JP 0x00606c2b
+00606c1d : FLD float ptr [EDX + 0x4]
+00606c20 : FLD ST2
+00606c22 : FUCOMPP
+00606c24 : FNSTSW AX
+00606c26 : TEST AH,0x44
+00606c29 : JNP 0x00606c3f
+00606c2b : DEC ESI
+00606c2c : DEC ECX
+00606c2d : CMP ESI,EBP
+00606c2f : JA 0x00606bef
+00606c31 : FSTP ST1
+00606c33 : FSTP ST0
+00606c35 : POP EDI
+00606c36 : POP ESI
+00606c37 : POP EBP
+00606c38 : OR EAX,0xffffffff
+00606c3b : POP EBX
+00606c3c : RET 0xc
+00606c3f : POP EDI
+00606c40 : FSTP ST1
+00606c42 : LEA EAX,[ESI + -0x1]
+00606c45 : FSTP ST0
+00606c47 : POP ESI
+00606c48 : POP EBP
+00606c49 : POP EBX
+00606c4a : RET 0xc

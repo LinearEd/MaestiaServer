@@ -1,0 +1,84 @@
+PROGRAM  : Maestia.exe
+FUNCTION : _fclose
+ENTRY    : 006366db
+BODY     : [[006366db, 0063674b]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* WARNING: Function: __SEH_prolog4 replaced with injection: SEH_prolog4 */
+/* WARNING: Function: __SEH_epilog4 replaced with injection: EH_epilog3 */
+/* Library Function - Single Match
+    _fclose
+   
+   Library: Visual Studio 2008 Release */
+
+int __cdecl _fclose(FILE *_File)
+
+{
+  int *piVar1;
+  int local_20;
+  
+  local_20 = -1;
+  if (_File == (FILE *)0x0) {
+    piVar1 = __errno();
+    *piVar1 = 0x16;
+    __invalid_parameter(0,0,0,0,0);
+    local_20 = -1;
+  }
+  else if ((_File->_flag & 0x40) == 0) {
+    __lock_file(_File);
+    local_20 = __fclose_nolock(_File);
+    FUN_0063674f();
+  }
+  else {
+    _File->_flag = 0;
+  }
+  return local_20;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006366db : PUSH 0xc
+006366dd : PUSH 0xcecb78
+006366e2 : CALL 0x0064c228
+006366e7 : OR dword ptr [EBP + -0x1c],0xffffffff
+006366eb : XOR EAX,EAX
+006366ed : MOV ESI,dword ptr [EBP + 0x8]
+006366f0 : XOR EDI,EDI
+006366f2 : CMP ESI,EDI
+006366f4 : SETNZ AL
+006366f7 : CMP EAX,EDI
+006366f9 : JNZ 0x00636718
+006366fb : CALL 0x0063ab82
+00636700 : MOV dword ptr [EAX],0x16
+00636706 : PUSH EDI
+00636707 : PUSH EDI
+00636708 : PUSH EDI
+00636709 : PUSH EDI
+0063670a : PUSH EDI
+0063670b : CALL 0x006372b8
+00636710 : ADD ESP,0x14
+00636713 : OR EAX,0xffffffff
+00636716 : JMP 0x00636724
+00636718 : TEST byte ptr [ESI + 0xc],0x40
+0063671c : JZ 0x0063672a
+0063671e : MOV dword ptr [ESI + 0xc],EDI
+00636721 : MOV EAX,dword ptr [EBP + -0x1c]
+00636724 : CALL 0x0064c26d
+00636729 : RET
+0063672a : PUSH ESI
+0063672b : CALL 0x0063d990
+00636730 : POP ECX
+00636731 : MOV dword ptr [EBP + -0x4],EDI
+00636734 : PUSH ESI
+00636735 : CALL 0x00636664
+0063673a : POP ECX
+0063673b : MOV dword ptr [EBP + -0x1c],EAX
+0063673e : MOV dword ptr [EBP + -0x4],0xfffffffe
+00636745 : CALL 0x0063674f
+0063674a : JMP 0x00636721

@@ -1,0 +1,76 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00900050
+ENTRY    : 00900050
+BODY     : [[00900050, 009000bd]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00900050(int param_1,int param_2)
+
+{
+  int *piVar1;
+  float fVar2;
+  float fVar3;
+  int in_EAX;
+  
+  if (((*(char *)(in_EAX + 0x32) != '\0') && (*DAT_00da9894 != 0)) &&
+     (piVar1 = *(int **)(*DAT_00da9894 + 0x114), piVar1 != (int *)0x0)) {
+    fVar2 = (float)param_1;
+    if (param_1 < 0) {
+      fVar2 = fVar2 + 4.2949673e+09;
+    }
+    fVar3 = (float)param_2;
+    if (param_2 < 0) {
+      fVar3 = fVar3 + 4.2949673e+09;
+    }
+    (**(code **)(*piVar1 + 4))
+              (piVar1,"mc_targetPC.SetFocusedCharTargetMP",&DAT_00c63630,
+               (double)((fVar2 / fVar3) * 100.0));
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00900050 : PUSH EBP
+00900051 : MOV EBP,ESP
+00900053 : AND ESP,0xffffffc0
+00900056 : SUB ESP,0x40
+00900059 : CMP byte ptr [EAX + 0x32],0x0
+0090005d : JZ 0x009000b8
+0090005f : MOV ECX,dword ptr [0x00da9894]
+00900065 : MOV EAX,dword ptr [ECX]
+00900067 : TEST EAX,EAX
+00900069 : JZ 0x009000b8
+0090006b : MOV EAX,dword ptr [EAX + 0x114]
+00900071 : TEST EAX,EAX
+00900073 : JZ 0x009000b8
+00900075 : MOV ECX,dword ptr [EBP + 0x8]
+00900078 : FILD dword ptr [EBP + 0x8]
+0090007b : MOV EDX,dword ptr [EAX]
+0090007d : TEST ECX,ECX
+0090007f : JGE 0x00900087
+00900081 : FADD float ptr [0x00cdf0e0]
+00900087 : MOV ECX,dword ptr [EBP + 0xc]
+0090008a : FILD dword ptr [EBP + 0xc]
+0090008d : TEST ECX,ECX
+0090008f : JGE 0x00900097
+00900091 : FADD float ptr [0x00cdf0e0]
+00900097 : FDIVP
+00900099 : MOV EDX,dword ptr [EDX + 0x4]
+0090009c : SUB ESP,0x8
+0090009f : FMUL float ptr [0x00cdf230]
+009000a5 : FSTP double ptr [ESP]
+009000a8 : PUSH 0xc63630
+009000ad : PUSH 0xc63634
+009000b2 : PUSH EAX
+009000b3 : CALL EDX
+009000b5 : ADD ESP,0x14
+009000b8 : MOV ESP,EBP
+009000ba : POP EBP
+009000bb : RET 0x8

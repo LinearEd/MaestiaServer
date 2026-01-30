@@ -1,0 +1,89 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00517b00
+ENTRY    : 00517b00
+BODY     : [[00517b00, 00517b7e]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00517b00(undefined4 param_1,uint param_2)
+
+{
+  int iVar1;
+  int *in_ECX;
+  uint uVar2;
+  
+  if ((uint)in_ECX[2] <= param_2) {
+    if (param_2 == 0) {
+      if (*in_ECX != 0) {
+        FUN_00515cf0(*in_ECX);
+        *in_ECX = 0;
+      }
+      in_ECX[2] = 0;
+      return;
+    }
+    uVar2 = param_2 + 0xf >> 4;
+    if (*in_ECX != 0) {
+      iVar1 = FUN_00515c80(*in_ECX,uVar2 * 0x80);
+      in_ECX[2] = uVar2 << 4;
+      *in_ECX = iVar1;
+      return;
+    }
+    param_2 = 2;
+    iVar1 = FUN_00515840(uVar2 * 0x80,&param_2);
+    in_ECX[2] = uVar2 << 4;
+    *in_ECX = iVar1;
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00517b00 : MOV EAX,dword ptr [ESP + 0x8]
+00517b04 : PUSH EDI
+00517b05 : MOV EDI,ECX
+00517b07 : CMP EAX,dword ptr [EDI + 0x8]
+00517b0a : JC 0x00517b7b
+00517b0c : TEST EAX,EAX
+00517b0e : JNZ 0x00517b2d
+00517b10 : MOV EAX,dword ptr [EDI]
+00517b12 : TEST EAX,EAX
+00517b14 : JZ 0x00517b22
+00517b16 : PUSH EAX
+00517b17 : CALL 0x00515cf0
+00517b1c : MOV dword ptr [EDI],0x0
+00517b22 : MOV dword ptr [EDI + 0x8],0x0
+00517b29 : POP EDI
+00517b2a : RET 0x8
+00517b2d : PUSH ESI
+00517b2e : LEA ESI,[EAX + 0xf]
+00517b31 : MOV EAX,dword ptr [EDI]
+00517b33 : SHR ESI,0x4
+00517b36 : SHL ESI,0x4
+00517b39 : TEST EAX,EAX
+00517b3b : JZ 0x00517b55
+00517b3d : LEA ECX,[ESI*0x8 + 0x0]
+00517b44 : PUSH ECX
+00517b45 : PUSH EAX
+00517b46 : CALL 0x00515c80
+00517b4b : MOV dword ptr [EDI + 0x8],ESI
+00517b4e : POP ESI
+00517b4f : MOV dword ptr [EDI],EAX
+00517b51 : POP EDI
+00517b52 : RET 0x8
+00517b55 : MOV ECX,dword ptr [0x00d73250]
+00517b5b : LEA EDX,[ESP + 0x10]
+00517b5f : PUSH EDX
+00517b60 : LEA EAX,[ESI*0x8 + 0x0]
+00517b67 : PUSH EAX
+00517b68 : MOV dword ptr [ESP + 0x18],0x2
+00517b70 : CALL 0x00515840
+00517b75 : MOV dword ptr [EDI + 0x8],ESI
+00517b78 : MOV dword ptr [EDI],EAX
+00517b7a : POP ESI
+00517b7b : POP EDI
+00517b7c : RET 0x8

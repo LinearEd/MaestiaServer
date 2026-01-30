@@ -1,0 +1,92 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005f95a0
+ENTRY    : 005f95a0
+BODY     : [[005f95a0, 005f963d]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined4 FUN_005f95a0(uint param_1,int param_2)
+
+{
+  uint uVar1;
+  float fVar2;
+  int iVar3;
+  int in_ECX;
+  
+  iVar3 = *(int *)(in_ECX + 0x3c);
+  fVar2 = *(float *)(*(int *)(iVar3 + (param_1 >> 10) * 4) + 4 + (param_1 & 0x3ff) * 8);
+  uVar1 = param_1 - 1;
+  if ((int)param_1 < param_2) {
+    if ((fVar2 < *(float *)(*(int *)(iVar3 + (uVar1 >> 10) * 4) + 4 + (uVar1 & 0x3ff) * 8)) &&
+       (fVar2 <= *(float *)(*(int *)(iVar3 + (param_1 + 1 >> 10) * 4) + 4 +
+                           (param_1 + 1 & 0x3ff) * 8))) {
+      return 1;
+    }
+  }
+  else if (fVar2 < *(float *)(*(int *)(iVar3 + (uVar1 >> 10) * 4) + 4 + (uVar1 & 0x3ff) * 8)) {
+    return 1;
+  }
+  return 0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005f95a0 : MOV EDX,dword ptr [ECX + 0x3c]
+005f95a3 : MOV ECX,dword ptr [ESP + 0x4]
+005f95a7 : PUSH ESI
+005f95a8 : MOV EAX,ECX
+005f95aa : SHR EAX,0xa
+005f95ad : MOV EAX,dword ptr [EDX + EAX*0x4]
+005f95b0 : MOV ESI,ECX
+005f95b2 : AND ESI,0x3ff
+005f95b8 : CMP ECX,dword ptr [ESP + 0xc]
+005f95bc : FLD float ptr [EAX + ESI*0x8 + 0x4]
+005f95c0 : FSTP float ptr [ESP + 0x8]
+005f95c4 : LEA EAX,[ECX + -0x1]
+005f95c7 : JL 0x005f95f0
+005f95c9 : MOV ECX,EAX
+005f95cb : SHR ECX,0xa
+005f95ce : MOV EDX,dword ptr [EDX + ECX*0x4]
+005f95d1 : AND EAX,0x3ff
+005f95d6 : FLD float ptr [EDX + EAX*0x8 + 0x4]
+005f95da : FLD float ptr [ESP + 0x8]
+005f95de : FCOMPP
+005f95e0 : FNSTSW AX
+005f95e2 : TEST AH,0x5
+005f95e5 : JP 0x005f9638
+005f95e7 : MOV EAX,0x1
+005f95ec : POP ESI
+005f95ed : RET 0x8
+005f95f0 : MOV ESI,EAX
+005f95f2 : SHR ESI,0xa
+005f95f5 : MOV ESI,dword ptr [EDX + ESI*0x4]
+005f95f8 : AND EAX,0x3ff
+005f95fd : FLD float ptr [ESI + EAX*0x8 + 0x4]
+005f9601 : FLD float ptr [ESP + 0x8]
+005f9605 : FCOM
+005f9607 : FNSTSW AX
+005f9609 : FSTP ST1
+005f960b : TEST AH,0x5
+005f960e : JP 0x005f9636
+005f9610 : LEA EAX,[ECX + 0x1]
+005f9613 : MOV ECX,EAX
+005f9615 : SHR ECX,0xa
+005f9618 : MOV EDX,dword ptr [EDX + ECX*0x4]
+005f961b : AND EAX,0x3ff
+005f9620 : FLD float ptr [EDX + EAX*0x8 + 0x4]
+005f9624 : FCOMPP
+005f9626 : FNSTSW AX
+005f9628 : TEST AH,0x1
+005f962b : JNZ 0x005f9638
+005f962d : MOV EAX,0x1
+005f9632 : POP ESI
+005f9633 : RET 0x8
+005f9636 : FSTP ST0
+005f9638 : XOR EAX,EAX
+005f963a : POP ESI
+005f963b : RET 0x8

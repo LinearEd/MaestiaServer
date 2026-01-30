@@ -1,0 +1,72 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_007f79f0
+ENTRY    : 007f79f0
+BODY     : [[007f79f0, 007f7a45]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_007f79f0(undefined4 param_1)
+
+{
+  HWND hWndNewOwner;
+  BOOL BVar1;
+  HANDLE hMem;
+  LPVOID pvVar2;
+  
+  hWndNewOwner = DAT_00da98f0;
+  BVar1 = IsClipboardFormatAvailable(0xd);
+  if (BVar1 != 0) {
+    BVar1 = OpenClipboard(hWndNewOwner);
+    if (BVar1 != 0) {
+      hMem = GetClipboardData(0xd);
+      if (hMem != (HANDLE)0x0) {
+        pvVar2 = GlobalLock(hMem);
+        if (pvVar2 != (LPVOID)0x0) {
+          FUN_007f7620(param_1,pvVar2);
+          GlobalUnlock(hMem);
+        }
+      }
+      CloseClipboard();
+    }
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+007f79f0 : PUSH EBP
+007f79f1 : MOV EBP,ESP
+007f79f3 : PUSH ESI
+007f79f4 : MOV ESI,dword ptr [0x00da98f0]
+007f79fa : PUSH 0xd
+007f79fc : CALL dword ptr [0x00b85408]
+007f7a02 : TEST EAX,EAX
+007f7a04 : JZ 0x007f7a41
+007f7a06 : PUSH ESI
+007f7a07 : CALL dword ptr [0x00b85420]
+007f7a0d : TEST EAX,EAX
+007f7a0f : JZ 0x007f7a41
+007f7a11 : PUSH 0xd
+007f7a13 : CALL dword ptr [0x00b85404]
+007f7a19 : MOV ESI,EAX
+007f7a1b : TEST ESI,ESI
+007f7a1d : JZ 0x007f7a3b
+007f7a1f : PUSH ESI
+007f7a20 : CALL dword ptr [0x00b85374]
+007f7a26 : TEST EAX,EAX
+007f7a28 : JZ 0x007f7a3b
+007f7a2a : PUSH EAX
+007f7a2b : MOV EAX,dword ptr [EBP + 0x8]
+007f7a2e : PUSH EAX
+007f7a2f : CALL 0x007f7620
+007f7a34 : PUSH ESI
+007f7a35 : CALL dword ptr [0x00b8534c]
+007f7a3b : CALL dword ptr [0x00b85414]
+007f7a41 : POP ESI
+007f7a42 : POP EBP
+007f7a43 : RET 0x4

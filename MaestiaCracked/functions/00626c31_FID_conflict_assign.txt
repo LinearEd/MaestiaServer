@@ -1,0 +1,108 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FID_conflict:assign
+ENTRY    : 00626c31
+BODY     : [[00626c31, 00626ca6]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Multiple Matches With Different Base Names
+    public: class std::basic_string<unsigned short,struct std::char_traits<unsigned short>,class
+   std::allocator<unsigned short> > & __thiscall std::basic_string<unsigned short,struct
+   std::char_traits<unsigned short>,class std::allocator<unsigned short> >::assign(unsigned short
+   const *,unsigned int)
+    public: class std::basic_string<wchar_t,struct std::char_traits<wchar_t>,class
+   std::allocator<wchar_t> > & __thiscall std::basic_string<wchar_t,struct
+   std::char_traits<wchar_t>,class std::allocator<wchar_t> >::assign(wchar_t const *,unsigned int)
+   
+   Library: Visual Studio 2008 Release */
+
+void FID_conflict_assign(int param_1,undefined4 param_2)
+
+{
+  char cVar1;
+  int iVar2;
+  int in_ECX;
+  
+  cVar1 = FID_conflict__Inside(param_1);
+  if (cVar1 == '\0') {
+    cVar1 = FID_conflict__Grow(param_2,0);
+    if (cVar1 != '\0') {
+      if (*(uint *)(in_ECX + 0x18) < 8) {
+        iVar2 = in_ECX + 4;
+      }
+      else {
+        iVar2 = *(int *)(in_ECX + 4);
+      }
+      copy_s<>(iVar2,*(uint *)(in_ECX + 0x18),param_1,param_2);
+      FID_conflict__Eos(param_2);
+    }
+  }
+  else {
+    if (*(uint *)(in_ECX + 0x18) < 8) {
+      iVar2 = in_ECX + 4;
+    }
+    else {
+      iVar2 = *(int *)(in_ECX + 4);
+    }
+    FID_conflict_assign(in_ECX,param_1 - iVar2 >> 1,param_2);
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00626c31 : MOV EDI,EDI
+00626c33 : PUSH EBP
+00626c34 : MOV EBP,ESP
+00626c36 : PUSH ESI
+00626c37 : PUSH EDI
+00626c38 : MOV EDI,dword ptr [EBP + 0x8]
+00626c3b : PUSH EDI
+00626c3c : MOV ESI,ECX
+00626c3e : CALL 0x00625c7b
+00626c43 : TEST AL,AL
+00626c45 : JZ 0x00626c67
+00626c47 : CMP dword ptr [ESI + 0x18],0x8
+00626c4b : JC 0x00626c52
+00626c4d : MOV EAX,dword ptr [ESI + 0x4]
+00626c50 : JMP 0x00626c55
+00626c52 : LEA EAX,[ESI + 0x4]
+00626c55 : PUSH dword ptr [EBP + 0xc]
+00626c58 : SUB EDI,EAX
+00626c5a : SAR EDI,0x1
+00626c5c : PUSH EDI
+00626c5d : PUSH ESI
+00626c5e : MOV ECX,ESI
+00626c60 : CALL 0x00626b9c
+00626c65 : JMP 0x00626ca1
+00626c67 : PUSH 0x0
+00626c69 : PUSH dword ptr [EBP + 0xc]
+00626c6c : MOV ECX,ESI
+00626c6e : CALL 0x006269f9
+00626c73 : TEST AL,AL
+00626c75 : JZ 0x00626c9f
+00626c77 : MOV ECX,dword ptr [ESI + 0x18]
+00626c7a : CMP ECX,0x8
+00626c7d : JC 0x00626c84
+00626c7f : MOV EAX,dword ptr [ESI + 0x4]
+00626c82 : JMP 0x00626c87
+00626c84 : LEA EAX,[ESI + 0x4]
+00626c87 : PUSH dword ptr [EBP + 0xc]
+00626c8a : PUSH EDI
+00626c8b : PUSH ECX
+00626c8c : PUSH EAX
+00626c8d : CALL 0x0062634c
+00626c92 : ADD ESP,0x10
+00626c95 : PUSH dword ptr [EBP + 0xc]
+00626c98 : MOV ECX,ESI
+00626c9a : CALL 0x006262b6
+00626c9f : MOV EAX,ESI
+00626ca1 : POP EDI
+00626ca2 : POP ESI
+00626ca3 : POP EBP
+00626ca4 : RET 0x8

@@ -1,0 +1,75 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00512d00
+ENTRY    : 00512d00
+BODY     : [[00512d00, 00512d58]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00512d00(int param_1)
+
+{
+  LPCRITICAL_SECTION lpCriticalSection;
+  int *piVar1;
+  int in_ECX;
+  
+  lpCriticalSection = (LPCRITICAL_SECTION)(in_ECX + 0x24);
+  EnterCriticalSection(lpCriticalSection);
+  piVar1 = *(int **)(in_ECX + 0x20);
+  if (piVar1 != (int *)(in_ECX + 0x1c)) {
+    while (piVar1[2] != param_1) {
+      piVar1 = (int *)piVar1[1];
+      if (piVar1 == (int *)(in_ECX + 0x1c)) {
+        LeaveCriticalSection(lpCriticalSection);
+        return;
+      }
+    }
+    *(int *)(*piVar1 + 4) = piVar1[1];
+    *(int *)piVar1[1] = *piVar1;
+    FUN_00515cf0(piVar1);
+  }
+  LeaveCriticalSection(lpCriticalSection);
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00512d00 : PUSH ESI
+00512d01 : PUSH EDI
+00512d02 : MOV ESI,ECX
+00512d04 : LEA EDI,[ESI + 0x24]
+00512d07 : PUSH EDI
+00512d08 : CALL dword ptr [0x00b85118]
+00512d0e : MOV EAX,dword ptr [ESI + 0x20]
+00512d11 : LEA ECX,[ESI + 0x1c]
+00512d14 : CMP EAX,ECX
+00512d16 : JZ 0x00512d4d
+00512d18 : MOV EDX,dword ptr [ESP + 0xc]
+00512d1c : LEA ESP,[ESP]
+00512d20 : CMP dword ptr [EAX + 0x8],EDX
+00512d23 : JZ 0x00512d38
+00512d25 : MOV EAX,dword ptr [EAX + 0x4]
+00512d28 : CMP EAX,ECX
+00512d2a : JNZ 0x00512d20
+00512d2c : PUSH EDI
+00512d2d : CALL dword ptr [0x00b8511c]
+00512d33 : POP EDI
+00512d34 : POP ESI
+00512d35 : RET 0x4
+00512d38 : MOV ECX,dword ptr [EAX]
+00512d3a : MOV EDX,dword ptr [EAX + 0x4]
+00512d3d : MOV dword ptr [ECX + 0x4],EDX
+00512d40 : MOV ECX,dword ptr [EAX + 0x4]
+00512d43 : MOV EDX,dword ptr [EAX]
+00512d45 : PUSH EAX
+00512d46 : MOV dword ptr [ECX],EDX
+00512d48 : CALL 0x00515cf0
+00512d4d : PUSH EDI
+00512d4e : CALL dword ptr [0x00b8511c]
+00512d54 : POP EDI
+00512d55 : POP ESI
+00512d56 : RET 0x4

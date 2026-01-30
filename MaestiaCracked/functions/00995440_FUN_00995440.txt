@@ -1,0 +1,164 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00995440
+ENTRY    : 00995440
+BODY     : [[00995440, 0099552b]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined4 FUN_00995440(int param_1)
+
+{
+  short sVar1;
+  ushort uVar2;
+  int *piVar3;
+  short sVar4;
+  int iVar5;
+  int iVar6;
+  int iVar7;
+  int iVar8;
+  uint local_14;
+  uint local_10;
+  uint local_c;
+  
+  iVar5 = *DAT_00da9894;
+  sVar1 = 0;
+  local_14 = 0;
+  if (*(int *)(iVar5 + 0x40) != 0) {
+    do {
+      iVar5 = FUN_008eb810();
+      if ((iVar5 != 0) && (*(char *)(iVar5 + 100) != '\0')) {
+        iVar5 = *(int *)(iVar5 + 0x3c);
+        if (iVar5 == 0) {
+          return 0;
+        }
+        uVar2 = *(ushort *)(iVar5 + 0xc);
+        if (*(ushort *)(iVar5 + 8) != 0) {
+          local_10 = (uint)*(ushort *)(iVar5 + 8);
+          iVar7 = 0;
+          do {
+            if (uVar2 != 0) {
+              iVar8 = 0;
+              local_c = (uint)uVar2;
+              do {
+                iVar6 = iVar7 * *(int *)(iVar5 + 0xc) + iVar8;
+                if ((((iVar6 < *(int *)(iVar5 + 8) * *(int *)(iVar5 + 0xc)) && (-1 < iVar6)) &&
+                    (iVar6 = *(int *)(*(int *)(iVar5 + 0x10) + iVar6 * 4), iVar6 != 0)) &&
+                   ((piVar3 = *(int **)(iVar6 + 8), piVar3 != (int *)0x0 && (piVar3[4] == param_1)))
+                   ) {
+                  sVar4 = (**(code **)(*piVar3 + 0x40))();
+                  sVar1 = sVar1 + sVar4;
+                }
+                iVar8 = iVar8 + 1;
+                local_c = local_c - 1;
+              } while (local_c != 0);
+            }
+            iVar7 = iVar7 + 1;
+            local_10 = local_10 - 1;
+          } while (local_10 != 0);
+        }
+      }
+      iVar5 = *DAT_00da9894;
+      local_14 = local_14 + 1;
+    } while (local_14 < *(uint *)(iVar5 + 0x40));
+  }
+  return CONCAT22((short)((uint)iVar5 >> 0x10),sVar1);
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00995440 : PUSH EBP
+00995441 : MOV EBP,ESP
+00995443 : SUB ESP,0x14
+00995446 : MOV EAX,[0x00da9894]
+0099544b : MOV EAX,dword ptr [EAX]
+0099544d : PUSH EBX
+0099544e : PUSH ESI
+0099544f : PUSH EDI
+00995450 : XOR EDI,EDI
+00995452 : MOV dword ptr [EBP + -0x4],EDI
+00995455 : MOV dword ptr [EBP + -0x10],EDI
+00995458 : CMP dword ptr [EAX + 0x40],EDI
+0099545b : JBE 0x00995514
+00995461 : MOV ECX,EDI
+00995463 : CALL 0x008eb810
+00995468 : TEST EAX,EAX
+0099546a : JZ 0x00995500
+00995470 : CMP byte ptr [EAX + 0x64],0x0
+00995474 : JZ 0x00995500
+0099547a : MOV ESI,dword ptr [EAX + 0x3c]
+0099547d : TEST ESI,ESI
+0099547f : JZ 0x00995521
+00995485 : MOVZX EAX,word ptr [ESI + 0x8]
+00995489 : MOVZX ECX,word ptr [ESI + 0xc]
+0099548d : XOR EDX,EDX
+0099548f : MOV dword ptr [EBP + -0x14],ECX
+00995492 : CMP DX,AX
+00995495 : JNC 0x00995500
+00995497 : MOVZX EAX,AX
+0099549a : XOR EBX,EBX
+0099549c : MOV dword ptr [EBP + -0xc],EAX
+0099549f : NOP
+009954a0 : XOR EDX,EDX
+009954a2 : CMP DX,CX
+009954a5 : JNC 0x009954f6
+009954a7 : MOVZX EAX,CX
+009954aa : XOR EDI,EDI
+009954ac : MOV dword ptr [EBP + -0x8],EAX
+009954af : NOP
+009954b0 : MOV ECX,dword ptr [ESI + 0xc]
+009954b3 : MOV EDX,dword ptr [ESI + 0x8]
+009954b6 : MOV EAX,EBX
+009954b8 : IMUL EDX,ECX
+009954bb : IMUL EAX,ECX
+009954be : ADD EAX,EDI
+009954c0 : CMP EAX,EDX
+009954c2 : JGE 0x009954ec
+009954c4 : TEST EAX,EAX
+009954c6 : JL 0x009954ec
+009954c8 : MOV ECX,dword ptr [ESI + 0x10]
+009954cb : MOV EAX,dword ptr [ECX + EAX*0x4]
+009954ce : TEST EAX,EAX
+009954d0 : JZ 0x009954ec
+009954d2 : MOV ECX,dword ptr [EAX + 0x8]
+009954d5 : TEST ECX,ECX
+009954d7 : JZ 0x009954ec
+009954d9 : MOV EDX,dword ptr [EBP + 0x8]
+009954dc : CMP dword ptr [ECX + 0x10],EDX
+009954df : JNZ 0x009954ec
+009954e1 : MOV EAX,dword ptr [ECX]
+009954e3 : MOV EDX,dword ptr [EAX + 0x40]
+009954e6 : CALL EDX
+009954e8 : ADD word ptr [EBP + -0x4],AX
+009954ec : INC EDI
+009954ed : SUB dword ptr [EBP + -0x8],0x1
+009954f1 : JNZ 0x009954b0
+009954f3 : MOV ECX,dword ptr [EBP + -0x14]
+009954f6 : INC EBX
+009954f7 : SUB dword ptr [EBP + -0xc],0x1
+009954fb : JNZ 0x009954a0
+009954fd : MOV EDI,dword ptr [EBP + -0x10]
+00995500 : MOV EAX,[0x00da9894]
+00995505 : MOV EAX,dword ptr [EAX]
+00995507 : INC EDI
+00995508 : MOV dword ptr [EBP + -0x10],EDI
+0099550b : CMP EDI,dword ptr [EAX + 0x40]
+0099550e : JC 0x00995461
+00995514 : MOV AX,word ptr [EBP + -0x4]
+00995518 : POP EDI
+00995519 : POP ESI
+0099551a : POP EBX
+0099551b : MOV ESP,EBP
+0099551d : POP EBP
+0099551e : RET 0x4
+00995521 : POP EDI
+00995522 : POP ESI
+00995523 : XOR EAX,EAX
+00995525 : POP EBX
+00995526 : MOV ESP,EBP
+00995528 : POP EBP
+00995529 : RET 0x4

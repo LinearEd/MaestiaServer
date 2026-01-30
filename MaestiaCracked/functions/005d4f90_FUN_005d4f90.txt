@@ -1,0 +1,52 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005d4f90
+ENTRY    : 005d4f90
+BODY     : [[005d4f90, 005d4fc1]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_005d4f90(byte param_1)
+
+{
+  byte *in_ECX;
+  
+  if ((*in_ECX & 0x10) == 0) {
+    *in_ECX = param_1;
+    return;
+  }
+  if (*(GRefCountImpl **)(in_ECX + 4) != (GRefCountImpl *)0x0) {
+    GRefCountImpl::Release(*(GRefCountImpl **)(in_ECX + 4));
+    *in_ECX = param_1;
+    return;
+  }
+  *in_ECX = param_1;
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005d4f90 : PUSH ESI
+005d4f91 : MOV ESI,ECX
+005d4f93 : TEST byte ptr [ESI],0x10
+005d4f96 : JZ 0x005d4fae
+005d4f98 : MOV ECX,dword ptr [ESI + 0x4]
+005d4f9b : TEST ECX,ECX
+005d4f9d : JZ 0x005d4fb8
+005d4f9f : CALL 0x004ff7e0
+005d4fa4 : MOV AL,byte ptr [ESP + 0x8]
+005d4fa8 : MOV byte ptr [ESI],AL
+005d4faa : POP ESI
+005d4fab : RET 0x4
+005d4fae : MOV CL,byte ptr [ESP + 0x8]
+005d4fb2 : MOV byte ptr [ESI],CL
+005d4fb4 : POP ESI
+005d4fb5 : RET 0x4
+005d4fb8 : MOV DL,byte ptr [ESP + 0x8]
+005d4fbc : MOV byte ptr [ESI],DL
+005d4fbe : POP ESI
+005d4fbf : RET 0x4

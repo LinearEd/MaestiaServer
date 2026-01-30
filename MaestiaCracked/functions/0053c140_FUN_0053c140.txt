@@ -1,0 +1,79 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0053c140
+ENTRY    : 0053c140
+BODY     : [[0053c140, 0053c19e]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_0053c140(void)
+
+{
+  uint uVar1;
+  LONG LVar2;
+  GRefCountImplCore *in_ECX;
+  
+  uVar1 = *(uint *)(in_ECX + 0x3c);
+  LVar2 = InterlockedExchangeAdd((LONG *)((uVar1 & 0xfffffffc) + 4),-1);
+  if (LVar2 == 1) {
+    FUN_00515cf0(uVar1 & 0xfffffffc);
+  }
+  uVar1 = *(uint *)(in_ECX + 0x38);
+  LVar2 = InterlockedExchangeAdd((LONG *)((uVar1 & 0xfffffffc) + 4),-1);
+  if (LVar2 == 1) {
+    FUN_00515cf0(uVar1 & 0xfffffffc);
+  }
+  if (*(GRefCountNTSImpl **)(in_ECX + 0xc) != (GRefCountNTSImpl *)0x0) {
+    GRefCountNTSImpl::Release(*(GRefCountNTSImpl **)(in_ECX + 0xc));
+  }
+  if (*(int *)(in_ECX + 8) != 0) {
+    FUN_00557b30();
+  }
+  GRefCountImplCore::~GRefCountImplCore(in_ECX);
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0053c140 : PUSH EBX
+0053c141 : MOV EBX,dword ptr [0x00b851cc]
+0053c147 : PUSH ESI
+0053c148 : PUSH EDI
+0053c149 : MOV EDI,ECX
+0053c14b : MOV ESI,dword ptr [EDI + 0x3c]
+0053c14e : AND ESI,0xfffffffc
+0053c151 : PUSH -0x1
+0053c153 : LEA EAX,[ESI + 0x4]
+0053c156 : PUSH EAX
+0053c157 : CALL EBX
+0053c159 : SUB EAX,0x1
+0053c15c : JNZ 0x0053c164
+0053c15e : PUSH ESI
+0053c15f : CALL 0x00515cf0
+0053c164 : MOV ESI,dword ptr [EDI + 0x38]
+0053c167 : AND ESI,0xfffffffc
+0053c16a : PUSH -0x1
+0053c16c : LEA ECX,[ESI + 0x4]
+0053c16f : PUSH ECX
+0053c170 : CALL EBX
+0053c172 : SUB EAX,0x1
+0053c175 : JNZ 0x0053c17d
+0053c177 : PUSH ESI
+0053c178 : CALL 0x00515cf0
+0053c17d : MOV ECX,dword ptr [EDI + 0xc]
+0053c180 : TEST ECX,ECX
+0053c182 : JZ 0x0053c189
+0053c184 : CALL 0x004ff7c0
+0053c189 : MOV ECX,dword ptr [EDI + 0x8]
+0053c18c : TEST ECX,ECX
+0053c18e : JZ 0x0053c195
+0053c190 : CALL 0x00557b30
+0053c195 : MOV ECX,EDI
+0053c197 : POP EDI
+0053c198 : POP ESI
+0053c199 : POP EBX
+0053c19a : JMP 0x004ff7b0

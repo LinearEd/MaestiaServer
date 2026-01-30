@@ -1,0 +1,142 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_006923a0
+ENTRY    : 006923a0
+BODY     : [[006923a0, 006923dc] [006923e0, 00692453]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_006923a0(void)
+
+{
+  undefined1 *puVar1;
+  undefined1 *puVar2;
+  uint uVar3;
+  uint uVar4;
+  int iVar5;
+  uint uVar6;
+  int unaff_EDI;
+  
+  if (*(uint *)(unaff_EDI + 0x18) < 0xffff) {
+    uVar6 = *(uint *)(unaff_EDI + 0x18) + 1;
+    do {
+      uVar4 = *(uint *)(unaff_EDI + 0x28);
+      if (uVar6 < uVar4) {
+        uVar6 = uVar4;
+      }
+      uVar3 = *(uint *)(unaff_EDI + 0x2c);
+      if (uVar6 <= uVar3) {
+        if (*(int *)(unaff_EDI + 0x34) == 0) {
+          uVar4 = *(int *)(unaff_EDI + 0x30) + uVar6;
+          do {
+            if ((uVar4 & 0xffff) != 0) {
+              *(uint *)(unaff_EDI + 0x18) = uVar6;
+              *(uint *)(unaff_EDI + 0x1c) = uVar4 & 0xffff;
+              return;
+            }
+            uVar6 = uVar6 + 1;
+            uVar4 = uVar4 + 1;
+          } while (uVar6 <= uVar3);
+        }
+        else {
+          iVar5 = *(int *)(unaff_EDI + 0x34) + (uVar6 - uVar4) * 2 + -1;
+          do {
+            puVar1 = (undefined1 *)(iVar5 + 1);
+            puVar2 = (undefined1 *)(iVar5 + 2);
+            iVar5 = iVar5 + 2;
+            uVar4 = (uint)CONCAT11(*puVar1,*puVar2);
+            if ((uVar4 != 0) && (uVar4 = uVar4 + *(int *)(unaff_EDI + 0x30) & 0xffff, uVar4 != 0)) {
+              *(uint *)(unaff_EDI + 0x18) = uVar6;
+              *(uint *)(unaff_EDI + 0x1c) = uVar4;
+              return;
+            }
+            uVar6 = uVar6 + 1;
+          } while (uVar6 <= uVar3);
+        }
+      }
+      iVar5 = FUN_00692280();
+    } while (-1 < iVar5);
+  }
+  *(undefined4 *)(unaff_EDI + 0x18) = 0xffffffff;
+  *(undefined4 *)(unaff_EDI + 0x1c) = 0;
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006923a0 : PUSH EBX
+006923a1 : PUSH EBP
+006923a2 : PUSH ESI
+006923a3 : MOV ESI,dword ptr [EDI + 0x18]
+006923a6 : CMP ESI,0xffff
+006923ac : JNC 0x0069242e
+006923b2 : INC ESI
+006923b3 : MOV EAX,dword ptr [EDI + 0x28]
+006923b6 : CMP ESI,EAX
+006923b8 : JNC 0x006923c0
+006923ba : MOV ESI,EAX
+006923bc : LEA ESP,[ESP]
+006923c0 : MOV EDX,dword ptr [EDI + 0x2c]
+006923c3 : MOV ECX,dword ptr [EDI + 0x34]
+006923c6 : MOV EBX,dword ptr [EDI + 0x30]
+006923c9 : CMP ESI,EDX
+006923cb : JA 0x0069241d
+006923cd : TEST ECX,ECX
+006923cf : JZ 0x00692407
+006923d1 : MOV EBP,ESI
+006923d3 : SUB EBP,EAX
+006923d5 : LEA EAX,[ECX + EBP*0x2]
+006923d8 : LEA ECX,[EAX + -0x1]
+006923db : JMP 0x006923e0
+006923e0 : MOVZX AX,byte ptr [ECX + 0x1]
+006923e5 : MOVZX EBP,byte ptr [ECX + 0x2]
+006923e9 : ADD ECX,0x2
+006923ec : SHL AX,0x8
+006923f0 : MOVZX EAX,AX
+006923f3 : OR EAX,EBP
+006923f5 : JZ 0x00692400
+006923f7 : ADD EAX,EBX
+006923f9 : AND EAX,0xffff
+006923fe : JNZ 0x00692440
+00692400 : INC ESI
+00692401 : CMP ESI,EDX
+00692403 : JBE 0x006923e0
+00692405 : JMP 0x0069241d
+00692407 : LEA EAX,[EBX + ESI*0x1]
+0069240a : LEA EBX,[EBX]
+00692410 : MOVZX ECX,AX
+00692413 : TEST ECX,ECX
+00692415 : JNZ 0x0069244a
+00692417 : INC ESI
+00692418 : INC EAX
+00692419 : CMP ESI,EDX
+0069241b : JBE 0x00692410
+0069241d : MOV EAX,dword ptr [EDI + 0x24]
+00692420 : INC EAX
+00692421 : PUSH EDI
+00692422 : CALL 0x00692280
+00692427 : ADD ESP,0x4
+0069242a : TEST EAX,EAX
+0069242c : JGE 0x006923b3
+0069242e : POP ESI
+0069242f : POP EBP
+00692430 : MOV dword ptr [EDI + 0x18],0xffffffff
+00692437 : MOV dword ptr [EDI + 0x1c],0x0
+0069243e : POP EBX
+0069243f : RET
+00692440 : MOV dword ptr [EDI + 0x18],ESI
+00692443 : POP ESI
+00692444 : POP EBP
+00692445 : MOV dword ptr [EDI + 0x1c],EAX
+00692448 : POP EBX
+00692449 : RET
+0069244a : MOV dword ptr [EDI + 0x18],ESI
+0069244d : POP ESI
+0069244e : POP EBP
+0069244f : MOV dword ptr [EDI + 0x1c],ECX
+00692452 : POP EBX
+00692453 : RET

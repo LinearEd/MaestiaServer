@@ -1,0 +1,130 @@
+PROGRAM  : Maestia.exe
+FUNCTION : Write
+ENTRY    : 005ea230
+BODY     : [[005ea230, 005ea2e3]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* public: virtual int __thiscall GBufferedFile::Write(unsigned char const *,int) */
+
+int __thiscall GBufferedFile::Write(GBufferedFile *this,uchar *param_1,int param_2)
+
+{
+  GBufferedFile *pGVar1;
+  uint uVar2;
+  char cVar3;
+  uint uVar4;
+  
+                    /* 0x1ea230  175  ?Write@GBufferedFile@@UAEHPBEH@Z */
+  if (*(int *)(this + 0x10) != 2) {
+    if (*(int *)(this + 0xc) != 0) {
+      FlushBuffer(this);
+      if (*(int **)(this + 8) != (int *)0x0) {
+        cVar3 = (**(code **)(**(int **)(this + 8) + 0xc))();
+        if (cVar3 != '\0') {
+          *(undefined4 *)(this + 0x10) = 2;
+          *(undefined4 *)(this + 0x14) = 0;
+          *(undefined4 *)(this + 0x18) = 0;
+          goto LAB_005ea26c;
+        }
+      }
+    }
+    uVar4 = (**(code **)(**(int **)(this + 8) + 0x24))(param_1,param_2);
+LAB_005ea29b:
+    if (0 < (int)uVar4) {
+      pGVar1 = this + 0x20;
+      uVar2 = *(uint *)pGVar1;
+      *(uint *)pGVar1 = *(uint *)pGVar1 + uVar4;
+      *(uint *)(this + 0x24) =
+           *(int *)(this + 0x24) + ((int)uVar4 >> 0x1f) + (uint)CARRY4(uVar2,uVar4);
+    }
+    return uVar4;
+  }
+LAB_005ea26c:
+  if (0x1ff8 - *(int *)(this + 0x14) < param_2) {
+    FlushBuffer(this);
+    if (0x1000 < param_2) {
+      uVar4 = (**(code **)(**(int **)(this + 8) + 0x24))(param_1,param_2);
+      goto LAB_005ea29b;
+    }
+  }
+  _memcpy((void *)(*(int *)(this + 0xc) + *(int *)(this + 0x14)),param_1,param_2);
+  *(int *)(this + 0x14) = *(int *)(this + 0x14) + param_2;
+  return param_2;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005ea230 : PUSH ESI
+005ea231 : PUSH EDI
+005ea232 : MOV ESI,ECX
+005ea234 : MOV EDI,0x2
+005ea239 : CMP dword ptr [ESI + 0x10],EDI
+005ea23c : JZ 0x005ea26c
+005ea23e : CMP dword ptr [ESI + 0xc],0x0
+005ea242 : JZ 0x005ea2af
+005ea244 : CALL 0x005e9d20
+005ea249 : MOV ECX,dword ptr [ESI + 0x8]
+005ea24c : TEST ECX,ECX
+005ea24e : JZ 0x005ea2af
+005ea250 : MOV EAX,dword ptr [ECX]
+005ea252 : MOV EDX,dword ptr [EAX + 0xc]
+005ea255 : CALL EDX
+005ea257 : TEST AL,AL
+005ea259 : JZ 0x005ea2af
+005ea25b : MOV dword ptr [ESI + 0x10],EDI
+005ea25e : MOV dword ptr [ESI + 0x14],0x0
+005ea265 : MOV dword ptr [ESI + 0x18],0x0
+005ea26c : MOV EDI,dword ptr [ESP + 0x10]
+005ea270 : MOV ECX,0x1ff8
+005ea275 : SUB ECX,dword ptr [ESI + 0x14]
+005ea278 : CMP ECX,EDI
+005ea27a : JGE 0x005ea2c5
+005ea27c : MOV ECX,ESI
+005ea27e : CALL 0x005e9d20
+005ea283 : CMP EDI,0x1000
+005ea289 : JLE 0x005ea2c5
+005ea28b : MOV ECX,dword ptr [ESI + 0x8]
+005ea28e : MOV EDX,dword ptr [ECX]
+005ea290 : MOV EAX,dword ptr [ESP + 0xc]
+005ea294 : MOV EDX,dword ptr [EDX + 0x24]
+005ea297 : PUSH EDI
+005ea298 : PUSH EAX
+005ea299 : CALL EDX
+005ea29b : MOV ECX,EAX
+005ea29d : TEST ECX,ECX
+005ea29f : JLE 0x005ea2a8
+005ea2a1 : CDQ
+005ea2a2 : ADD dword ptr [ESI + 0x20],EAX
+005ea2a5 : ADC dword ptr [ESI + 0x24],EDX
+005ea2a8 : POP EDI
+005ea2a9 : MOV EAX,ECX
+005ea2ab : POP ESI
+005ea2ac : RET 0x8
+005ea2af : MOV EDX,dword ptr [ESP + 0x10]
+005ea2b3 : MOV ECX,dword ptr [ESI + 0x8]
+005ea2b6 : MOV EAX,dword ptr [ECX]
+005ea2b8 : MOV EAX,dword ptr [EAX + 0x24]
+005ea2bb : PUSH EDX
+005ea2bc : MOV EDX,dword ptr [ESP + 0x10]
+005ea2c0 : PUSH EDX
+005ea2c1 : CALL EAX
+005ea2c3 : JMP 0x005ea29b
+005ea2c5 : MOV ECX,dword ptr [ESI + 0xc]
+005ea2c8 : MOV EAX,dword ptr [ESP + 0xc]
+005ea2cc : ADD ECX,dword ptr [ESI + 0x14]
+005ea2cf : PUSH EDI
+005ea2d0 : PUSH EAX
+005ea2d1 : PUSH ECX
+005ea2d2 : CALL 0x0063ae40
+005ea2d7 : ADD dword ptr [ESI + 0x14],EDI
+005ea2da : ADD ESP,0xc
+005ea2dd : MOV EAX,EDI
+005ea2df : POP EDI
+005ea2e0 : POP ESI
+005ea2e1 : RET 0x8

@@ -1,0 +1,97 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005700a0
+ENTRY    : 005700a0
+BODY     : [[005700a0, 00570114]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_005700a0(undefined4 param_1,uint param_2)
+
+{
+  int iVar1;
+  int *in_ECX;
+  undefined4 *puVar2;
+  
+  if (param_2 < (uint)in_ECX[1]) {
+    iVar1 = in_ECX[1] - param_2;
+    if (iVar1 != 0) {
+      puVar2 = (undefined4 *)(*in_ECX + (iVar1 + param_2) * 8 + -4);
+      do {
+        if ((GRefCountNTSImpl *)*puVar2 != (GRefCountNTSImpl *)0x0) {
+          GRefCountNTSImpl::Release((GRefCountNTSImpl *)*puVar2);
+        }
+        puVar2 = puVar2 + -2;
+        iVar1 = iVar1 + -1;
+      } while (iVar1 != 0);
+    }
+    if (param_2 < (uint)in_ECX[2] >> 1) {
+      FUN_0056ded0(param_1,param_2);
+      in_ECX[1] = param_2;
+      return;
+    }
+  }
+  else if ((uint)in_ECX[2] <= param_2) {
+    FUN_0056ded0(param_1,(param_2 >> 2) + param_2);
+  }
+  in_ECX[1] = param_2;
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005700a0 : PUSH EBX
+005700a1 : MOV EBX,ECX
+005700a3 : MOV EAX,dword ptr [EBX + 0x4]
+005700a6 : PUSH ESI
+005700a7 : MOV ESI,dword ptr [ESP + 0x10]
+005700ab : CMP ESI,EAX
+005700ad : JNC 0x005700f6
+005700af : MOV EDX,dword ptr [EBX]
+005700b1 : SUB EAX,ESI
+005700b3 : LEA ECX,[EAX + ESI*0x1]
+005700b6 : LEA ECX,[EDX + ECX*0x8 + -0x8]
+005700ba : JZ 0x005700d8
+005700bc : PUSH EBP
+005700bd : PUSH EDI
+005700be : LEA EDI,[ECX + 0x4]
+005700c1 : MOV EBP,EAX
+005700c3 : MOV ECX,dword ptr [EDI]
+005700c5 : TEST ECX,ECX
+005700c7 : JZ 0x005700ce
+005700c9 : CALL 0x004ff7c0
+005700ce : SUB EDI,0x8
+005700d1 : SUB EBP,0x1
+005700d4 : JNZ 0x005700c3
+005700d6 : POP EDI
+005700d7 : POP EBP
+005700d8 : MOV EAX,dword ptr [EBX + 0x8]
+005700db : SHR EAX,0x1
+005700dd : CMP ESI,EAX
+005700df : JNC 0x0057010d
+005700e1 : MOV ECX,dword ptr [ESP + 0xc]
+005700e5 : PUSH ESI
+005700e6 : PUSH ECX
+005700e7 : MOV ECX,EBX
+005700e9 : CALL 0x0056ded0
+005700ee : MOV dword ptr [EBX + 0x4],ESI
+005700f1 : POP ESI
+005700f2 : POP EBX
+005700f3 : RET 0x8
+005700f6 : CMP ESI,dword ptr [EBX + 0x8]
+005700f9 : JC 0x0057010d
+005700fb : MOV EAX,dword ptr [ESP + 0xc]
+005700ff : MOV EDX,ESI
+00570101 : SHR EDX,0x2
+00570104 : ADD EDX,ESI
+00570106 : PUSH EDX
+00570107 : PUSH EAX
+00570108 : CALL 0x0056ded0
+0057010d : MOV dword ptr [EBX + 0x4],ESI
+00570110 : POP ESI
+00570111 : POP EBX
+00570112 : RET 0x8

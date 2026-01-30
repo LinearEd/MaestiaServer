@@ -1,0 +1,78 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __recalloc_crt
+ENTRY    : 0064263e
+BODY     : [[0064263e, 0064268f]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __recalloc_crt
+   
+   Library: Visual Studio 2008 Release */
+
+void * __cdecl __recalloc_crt(void *_Ptr,size_t _Count,size_t _Size)
+
+{
+  void *pvVar1;
+  uint dwMilliseconds;
+  
+  dwMilliseconds = 0;
+  do {
+    pvVar1 = __recalloc(_Ptr,_Count,_Size);
+    if (pvVar1 != (void *)0x0) {
+      return pvVar1;
+    }
+    if (_Size == 0) {
+      return (void *)0x0;
+    }
+    if (DAT_00d7b804 == 0) {
+      return (void *)0x0;
+    }
+    Sleep(dwMilliseconds);
+    dwMilliseconds = dwMilliseconds + 1000;
+    if (DAT_00d7b804 < dwMilliseconds) {
+      dwMilliseconds = 0xffffffff;
+    }
+  } while (dwMilliseconds != 0xffffffff);
+  return (void *)0x0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0064263e : MOV EDI,EDI
+00642640 : PUSH EBP
+00642641 : MOV EBP,ESP
+00642643 : PUSH ESI
+00642644 : PUSH EDI
+00642645 : XOR ESI,ESI
+00642647 : PUSH dword ptr [EBP + 0x10]
+0064264a : PUSH dword ptr [EBP + 0xc]
+0064264d : PUSH dword ptr [EBP + 0x8]
+00642650 : CALL 0x0065c18a
+00642655 : MOV EDI,EAX
+00642657 : ADD ESP,0xc
+0064265a : TEST EDI,EDI
+0064265c : JNZ 0x0064268a
+0064265e : CMP dword ptr [EBP + 0x10],EAX
+00642661 : JZ 0x0064268a
+00642663 : CMP dword ptr [0x00d7b804],EAX
+00642669 : JBE 0x0064268a
+0064266b : PUSH ESI
+0064266c : CALL dword ptr [0x00b8510c]
+00642672 : LEA EAX,[ESI + 0x3e8]
+00642678 : CMP EAX,dword ptr [0x00d7b804]
+0064267e : JBE 0x00642683
+00642680 : OR EAX,0xffffffff
+00642683 : MOV ESI,EAX
+00642685 : CMP EAX,-0x1
+00642688 : JNZ 0x00642647
+0064268a : MOV EAX,EDI
+0064268c : POP EDI
+0064268d : POP ESI
+0064268e : POP EBP
+0064268f : RET

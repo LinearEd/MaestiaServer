@@ -1,0 +1,324 @@
+MAESTIA NETWORK PROTOCOL SPECIFICATION v1.0
+
+(Server Reconstruction Document)
+
+Ich schreibe das so, dass du es direkt als .md oder .txt speichern kannst.
+
+1) Packet Frame Format (GLOBAL)
+1.1 Binary Header
+Offset  Size  Name        Description
+0x00    2     length      Packet length (13-bit masked)
+0x02    1     mainId      Main opcode group
+0x03    1     subId       Sub opcode
+0x04    n     payload     Packet body
+
+1.2 Length Encoding
+length = *(uint16*)packet & 0x1FFF;
+
+1.3 Encryption / Obfuscation
+
+XOR stream cipher
+
+Shared key array (client & server)
+
+rolling offset
+
+byte ^= xorArray[offset++];
+
+2) Opcode Naming Convention
+
+We define:
+
+Opcode = (mainId << 8) | subId
+
+
+Example:
+
+Main = 0x03
+Sub  = 0xE8
+Opcode = 0x03E8
+Name = NPC_SPAWN
+
+3) CONNECTION & LOGIN FLOW
+3.1 HELLO / VERSION CHECK
+C → S
+
+Opcode: 0x0100
+
+struct HELO_RQ {
+    uint32 engineVersion;
+    uint32 clientVersion;
+}
+
+S → C
+
+Opcode: 0x0101
+
+struct HELO_RS {
+    uint32 serverType;
+    uint32 engineVersion;
+    uint32 clientVersion;
+    uint32 serverVersion;
+}
+
+3.2 RSA KEY EXCHANGE
+S → C
+
+Opcode: 0x0102
+
+struct RSA_PUBLIC_KEY {
+    byte rsaKey[];
+}
+
+3.3 LOGIN REQUEST
+C → S
+
+Opcode: 0x0200
+
+struct LOGIN_RQ {
+    char username[32];
+    byte passwordEncrypted[];
+}
+
+S → C
+
+Opcode: 0x0201
+
+struct LOGIN_RS {
+    uint8 result; // 0 = success
+}
+
+4) CHARACTER SYSTEM
+4.1 Character List Request
+
+Opcode: 0x0210
+
+C → S
+struct CHARLIST_RQ {}
+
+S → C (sequence)
+0x0211 CHARLIST_BEGIN
+0x0212 CHARLIST_ENTRY (repeat)
+0x0213 CHARLIST_END
+
+CHARLIST_ENTRY
+struct CHAR_ENTRY {
+    uint32 characterId;
+    uint16 genderJob;
+    uint16 faction;
+    char name[16];
+    uint32 modelTorso;
+    uint32 modelHand;
+    uint32 modelLeg;
+    uint32 modelShoe;
+    uint8 level;
+}
+
+4.2 Character Select
+C → S
+
+Opcode: 0x0218
+
+struct CHAR_SELECT_RQ {
+    uint32 characterId;
+    byte passwordEncrypted[];
+}
+
+S → C
+
+Opcode: 0x0219
+
+struct CHAR_SELECT_RS {
+    uint8 allow;
+    uint32 characterId;
+    uint32 ip;
+}
+
+5) PLAYER DATA LOAD (PCINFO)
+
+Opcode group: 0x0220 – 0x0230
+
+Sequence
+0x0220 BEGIN_PCINFO
+0x0221 CHAR_BASE_DATA
+0x0222 ITEM_LIST_BEGIN
+0x0223 ITEM_ENTRY (repeat)
+0x0224 ITEM_LIST_END
+0x0225 SKILL_LIST_BEGIN
+0x0226 SKILL_ENTRY
+0x0227 SKILL_LIST_END
+0x0228 END_PCINFO
+
+6) WORLD SPAWN SYSTEM
+6.1 NPC SPAWN
+
+Opcode: 0x03E8
+
+struct NPC_SPAWN {
+    uint32 npcUniqueId;
+    uint32 npcTemplateId;
+    float x;
+    float y;
+    float z;
+    uint16 rotation;
+    uint8 npcType;
+    uint8 flags;
+}
+
+
+npcType:
+
+0 = normal NPC
+1 = quest NPC
+2 = merchant
+3 = monster
+
+6.2 PLAYER SPAWN
+
+Opcode: 0x03E9
+
+struct PLAYER_SPAWN {
+    uint32 characterId;
+    char name[16];
+    float x, y, z;
+    uint16 rotation;
+    uint32 modelTorso;
+    uint32 modelHand;
+    uint32 modelLeg;
+    uint32 modelShoe;
+    uint8 level;
+    uint8 faction;
+}
+
+7) MOVEMENT
+Client → Server
+
+Opcode: 0x024C
+
+struct MOVE_CS {
+    uint32 charId;
+    float x;
+    float y;
+    float z;
+    uint16 rotation;
+}
+
+Server → Client
+
+Opcode: 0x0280
+
+struct MOVE_SC {
+    uint32 charId;
+    float x;
+    float y;
+    float z;
+    uint16 rotation;
+}
+
+8) CHAT SYSTEM
+C → S
+
+Opcode: 0x0288
+
+struct CHAT_CS {
+    uint8 channel;
+    char message[];
+}
+
+
+channel:
+
+0 = normal
+1 = shout
+2 = party
+3 = guild
+4 = system
+
+S → C
+
+Opcode: 0x0290
+
+struct CHAT_SC {
+    uint32 senderId;
+    char name[16];
+    uint8 channel;
+    char message[];
+}
+
+9) INVENTORY
+ITEM ENTRY
+
+Opcode: 0x0260
+
+struct ITEM_ENTRY {
+    uint32 itemInstanceId;
+    uint32 itemProtoId;
+    uint16 slot;
+    uint16 count;
+    uint8 flags;
+}
+
+10) COMBAT / SKILLS
+Skill Cast
+
+Opcode: 0x03AD
+
+struct SKILL_CAST {
+    uint32 casterId;
+    uint32 skillId;
+    uint32 targetId;
+}
+
+Damage
+
+Opcode: 0x0498
+
+struct DAMAGE {
+    uint32 attackerId;
+    uint32 targetId;
+    uint32 damage;
+    uint8 damageType;
+}
+
+
+damageType:
+
+0 = physical
+1 = magic
+2 = heal
+
+11) QUEST SYSTEM
+
+Opcode group: 0x0340 – 0x0360
+
+Examples:
+
+0x0340 QUEST_BEGIN
+0x0341 QUEST_UPDATE
+0x0342 QUEST_COMPLETE
+
+12) THE MOST IMPORTANT PART (for you)
+
+From your map, these are CORE HANDLER FUNCTIONS:
+
+Packet Dispatcher Core
+FUN_00a3cfc0  // global packet router
+FUN_00a422f0  // session state handler
+FUN_00a44630  // world state handler
+FUN_00ace070  // network send wrapper
+FUN_006f3840  // SendNormal (packet send)
+FUN_00a0dd40  // SendToServer logic
+
+World / Gameplay
+FUN_008f3b70  // world object manager
+FUN_00829bd0  // NPC logic
+FUN_00828d70  // entity spawn
+FUN_0091ea10  // combat core
+FUN_009b6690  // skill system
+
+Inventory
+FUN_00985be0  // inventory update
+FUN_00927800  // item load
+
+Movement
+FUN_00a3afd0  // movement handler

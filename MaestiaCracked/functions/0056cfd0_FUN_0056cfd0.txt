@@ -1,0 +1,112 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0056cfd0
+ENTRY    : 0056cfd0
+BODY     : [[0056cfd0, 0056cfe7] [0056cff0, 0056d07d]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+int FUN_0056cfd0(GPoint<float> *param_1,undefined4 param_2,undefined4 param_3)
+
+{
+  int *piVar1;
+  int iVar2;
+  int in_ECX;
+  int iVar3;
+  GPoint<float> local_20 [8];
+  GMatrix2D local_18 [24];
+  
+  iVar3 = *(int *)(in_ECX + 0xa90);
+  do {
+    iVar2 = 0;
+    iVar3 = iVar3 + -1;
+    if (iVar3 < 0) {
+      iVar3 = *(int *)(in_ECX + 0x60);
+      while ((0 < iVar3 &&
+             (iVar2 = (**(code **)(**(int **)(*(int *)(in_ECX + 0x5c) + -4 + iVar3 * 8) + 0x34))
+                                (param_1,param_2,param_3), iVar2 == 0))) {
+        iVar3 = iVar3 + -1;
+      }
+      return iVar2;
+    }
+    piVar1 = *(int **)(*(int *)(in_ECX + 0xa8c) + iVar3 * 4);
+    GMatrix2D::SetIdentity(local_18);
+    FUN_0051cdf0(local_18);
+    GMatrix2D::TransformByInverse(local_18,local_20,param_1);
+    iVar2 = (**(code **)(*piVar1 + 0x34))(local_20,param_2,param_3);
+  } while (iVar2 == 0);
+  return iVar2;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0056cfd0 : SUB ESP,0x20
+0056cfd3 : PUSH EBX
+0056cfd4 : PUSH EBP
+0056cfd5 : PUSH ESI
+0056cfd6 : PUSH EDI
+0056cfd7 : MOV EDI,ECX
+0056cfd9 : MOV EBX,dword ptr [EDI + 0xa90]
+0056cfdf : XOR EAX,EAX
+0056cfe1 : SUB EBX,0x1
+0056cfe4 : JS 0x0056d047
+0056cfe6 : JMP 0x0056cff0
+0056cff0 : MOV EAX,dword ptr [EDI + 0xa8c]
+0056cff6 : MOV ESI,dword ptr [EAX + EBX*0x4]
+0056cff9 : MOV EBP,dword ptr [ESI + 0x20]
+0056cffc : LEA ECX,[ESP + 0x18]
+0056d000 : CALL 0x00522b80
+0056d005 : LEA ECX,[ESP + 0x18]
+0056d009 : PUSH ECX
+0056d00a : MOV ECX,EBP
+0056d00c : CALL 0x0051cdf0
+0056d011 : MOV EDX,dword ptr [ESP + 0x34]
+0056d015 : PUSH EDX
+0056d016 : LEA EAX,[ESP + 0x14]
+0056d01a : PUSH EAX
+0056d01b : LEA ECX,[ESP + 0x20]
+0056d01f : CALL 0x00522fa0
+0056d024 : MOV EBP,dword ptr [ESP + 0x3c]
+0056d028 : MOV EAX,dword ptr [ESP + 0x38]
+0056d02c : MOV EDX,dword ptr [ESI]
+0056d02e : MOV EDX,dword ptr [EDX + 0x34]
+0056d031 : PUSH EBP
+0056d032 : PUSH EAX
+0056d033 : LEA ECX,[ESP + 0x18]
+0056d037 : PUSH ECX
+0056d038 : MOV ECX,ESI
+0056d03a : CALL EDX
+0056d03c : TEST EAX,EAX
+0056d03e : JNZ 0x0056d074
+0056d040 : SUB EBX,0x1
+0056d043 : JNS 0x0056cff0
+0056d045 : JMP 0x0056d04b
+0056d047 : MOV EBP,dword ptr [ESP + 0x3c]
+0056d04b : MOV ESI,dword ptr [EDI + 0x60]
+0056d04e : TEST ESI,ESI
+0056d050 : JLE 0x0056d074
+0056d052 : MOV EAX,dword ptr [EDI + 0x5c]
+0056d055 : MOV ECX,dword ptr [EAX + ESI*0x8 + -0x4]
+0056d059 : MOV EAX,dword ptr [ESP + 0x38]
+0056d05d : MOV EDX,dword ptr [ECX]
+0056d05f : MOV EDX,dword ptr [EDX + 0x34]
+0056d062 : PUSH EBP
+0056d063 : PUSH EAX
+0056d064 : MOV EAX,dword ptr [ESP + 0x3c]
+0056d068 : PUSH EAX
+0056d069 : CALL EDX
+0056d06b : TEST EAX,EAX
+0056d06d : JNZ 0x0056d074
+0056d06f : DEC ESI
+0056d070 : TEST ESI,ESI
+0056d072 : JG 0x0056d052
+0056d074 : POP EDI
+0056d075 : POP ESI
+0056d076 : POP EBP
+0056d077 : POP EBX
+0056d078 : ADD ESP,0x20
+0056d07b : RET 0xc

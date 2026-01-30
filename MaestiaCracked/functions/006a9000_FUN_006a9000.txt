@@ -1,0 +1,107 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_006a9000
+ENTRY    : 006a9000
+BODY     : [[006a9000, 006a9098]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+uint FUN_006a9000(void)
+
+{
+  uint uVar1;
+  byte *in_ECX;
+  byte *in_EDX;
+  
+  uVar1 = (uint)*in_ECX;
+  if (uVar1 == 0x1c) {
+    if (in_ECX + 3 <= in_EDX) {
+      return (int)(short)((ushort)in_ECX[1] << 8) | (uint)in_ECX[2];
+    }
+  }
+  else if (uVar1 == 0x1d) {
+    if (in_ECX + 5 <= in_EDX) {
+      return CONCAT31(CONCAT21(CONCAT11(in_ECX[1],in_ECX[2]),in_ECX[3]),in_ECX[4]);
+    }
+  }
+  else {
+    if (uVar1 < 0xf7) {
+      return uVar1 - 0x8b;
+    }
+    if (uVar1 < 0xfb) {
+      if (in_ECX + 2 <= in_EDX) {
+        return uVar1 * 0x100 + -0xf694 + (uint)in_ECX[1];
+      }
+    }
+    else if (in_ECX + 2 <= in_EDX) {
+      return (uVar1 * -0x100 + 0xfa94) - (uint)in_ECX[1];
+    }
+  }
+  return 0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006a9000 : MOVZX EAX,byte ptr [ECX]
+006a9003 : PUSH ESI
+006a9004 : CMP EAX,0x1c
+006a9007 : JNZ 0x006a9024
+006a9009 : LEA EAX,[ECX + 0x3]
+006a900c : CMP EAX,EDX
+006a900e : JA 0x006a9081
+006a9010 : MOVZX DX,byte ptr [ECX + 0x1]
+006a9015 : MOVZX ECX,byte ptr [ECX + 0x2]
+006a9019 : SHL DX,0x8
+006a901d : MOVSX EAX,DX
+006a9020 : OR EAX,ECX
+006a9022 : POP ESI
+006a9023 : RET
+006a9024 : CMP EAX,0x1d
+006a9027 : JNZ 0x006a9051
+006a9029 : LEA EAX,[ECX + 0x5]
+006a902c : CMP EAX,EDX
+006a902e : JA 0x006a9081
+006a9030 : MOVZX EAX,byte ptr [ECX + 0x1]
+006a9034 : MOVZX EDX,byte ptr [ECX + 0x2]
+006a9038 : SHL EAX,0x8
+006a903b : OR EAX,EDX
+006a903d : MOVZX EDX,byte ptr [ECX + 0x3]
+006a9041 : MOVZX ECX,byte ptr [ECX + 0x4]
+006a9045 : SHL EAX,0x8
+006a9048 : OR EAX,EDX
+006a904a : SHL EAX,0x8
+006a904d : OR EAX,ECX
+006a904f : POP ESI
+006a9050 : RET
+006a9051 : CMP EAX,0xf7
+006a9056 : JGE 0x006a905f
+006a9058 : ADD EAX,0xffffff75
+006a905d : POP ESI
+006a905e : RET
+006a905f : CMP EAX,0xfb
+006a9064 : LEA ESI,[ECX + 0x2]
+006a9067 : JGE 0x006a907d
+006a9069 : CMP ESI,EDX
+006a906b : JA 0x006a9081
+006a906d : MOVZX EDX,byte ptr [ECX + 0x1]
+006a9071 : SHL EAX,0x8
+006a9074 : LEA EAX,[EAX + EDX*0x1 + 0xffff096c]
+006a907b : POP ESI
+006a907c : RET
+006a907d : CMP ESI,EDX
+006a907f : JBE 0x006a9085
+006a9081 : XOR EAX,EAX
+006a9083 : POP ESI
+006a9084 : RET
+006a9085 : MOVZX ECX,byte ptr [ECX + 0x1]
+006a9089 : SHL EAX,0x8
+006a908c : MOV EDX,EAX
+006a908e : MOV EAX,0xfa94
+006a9093 : SUB EAX,EDX
+006a9095 : SUB EAX,ECX
+006a9097 : POP ESI
+006a9098 : RET

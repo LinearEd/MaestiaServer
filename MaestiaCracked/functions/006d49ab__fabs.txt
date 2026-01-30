@@ -1,0 +1,132 @@
+PROGRAM  : Maestia.exe
+FUNCTION : _fabs
+ENTRY    : 006d49ab
+BODY     : [[006d49ab, 006d4a64]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    _fabs
+   
+   Library: Visual Studio 2008 Release */
+
+double __cdecl _fabs(double _X)
+
+{
+  undefined4 uVar1;
+  int iVar2;
+  float10 fVar3;
+  undefined8 local_c;
+  
+  uVar1 = __ctrlfp(0x133f,0xffff);
+  if ((_X._6_2_ & 0x7ff0) == 0x7ff0) {
+    iVar2 = __sptype(_X);
+    if (iVar2 == 1) {
+      __ctrlfp(uVar1,0xffff);
+      fVar3 = (float10)_X;
+    }
+    else if (iVar2 == 2) {
+      __ctrlfp(uVar1,0xffff);
+      fVar3 = -(float10)_X;
+    }
+    else if (iVar2 == 3) {
+      fVar3 = (float10)__handle_qnan1();
+    }
+    else {
+      fVar3 = (float10)__except1(8,0x15,_X,_X + 1.0,uVar1);
+    }
+  }
+  else {
+    local_c = ABS(_X);
+    __ctrlfp(uVar1,0xffff);
+    fVar3 = (float10)local_c;
+  }
+  return (double)fVar3;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006d49ab : MOV EDI,EDI
+006d49ad : PUSH EBP
+006d49ae : MOV EBP,ESP
+006d49b0 : PUSH ECX
+006d49b1 : PUSH ECX
+006d49b2 : FLDZ
+006d49b4 : PUSH ESI
+006d49b5 : PUSH EDI
+006d49b6 : FSTP double ptr [EBP + -0x8]
+006d49b9 : MOV ESI,0xffff
+006d49be : PUSH ESI
+006d49bf : PUSH 0x133f
+006d49c4 : CALL 0x0065e064
+006d49c9 : POP ECX
+006d49ca : POP ECX
+006d49cb : MOV ECX,dword ptr [EBP + 0xe]
+006d49ce : MOV EDI,EAX
+006d49d0 : MOV EAX,0x7ff0
+006d49d5 : AND ECX,EAX
+006d49d7 : CMP CX,AX
+006d49da : JNZ 0x006d4a44
+006d49dc : FLD double ptr [EBP + 0x8]
+006d49df : PUSH ECX
+006d49e0 : PUSH ECX
+006d49e1 : FSTP double ptr [ESP]
+006d49e4 : CALL 0x0065df2a
+006d49e9 : DEC EAX
+006d49ea : POP ECX
+006d49eb : POP ECX
+006d49ec : JZ 0x006d4a38
+006d49ee : DEC EAX
+006d49ef : JZ 0x006d4a2a
+006d49f1 : DEC EAX
+006d49f2 : FLD double ptr [EBP + 0x8]
+006d49f5 : PUSH EDI
+006d49f6 : JZ 0x006d4a19
+006d49f8 : FADD double ptr [0x00cdf108]
+006d49fe : SUB ESP,0x10
+006d4a01 : FSTP double ptr [ESP + 0x8]
+006d4a05 : FLD double ptr [EBP + 0x8]
+006d4a08 : FSTP double ptr [ESP]
+006d4a0b : PUSH 0x15
+006d4a0d : PUSH 0x8
+006d4a0f : CALL 0x0065de21
+006d4a14 : ADD ESP,0x1c
+006d4a17 : JMP 0x006d4a61
+006d4a19 : PUSH ECX
+006d4a1a : PUSH ECX
+006d4a1b : FSTP double ptr [ESP]
+006d4a1e : PUSH 0x15
+006d4a20 : CALL 0x0065ddcc
+006d4a25 : ADD ESP,0x10
+006d4a28 : JMP 0x006d4a61
+006d4a2a : PUSH ESI
+006d4a2b : PUSH EDI
+006d4a2c : CALL 0x0065e064
+006d4a31 : FLD double ptr [EBP + 0x8]
+006d4a34 : FCHS
+006d4a36 : JMP 0x006d4a5f
+006d4a38 : PUSH ESI
+006d4a39 : PUSH EDI
+006d4a3a : CALL 0x0065e064
+006d4a3f : FLD double ptr [EBP + 0x8]
+006d4a42 : JMP 0x006d4a5f
+006d4a44 : MOV EAX,dword ptr [EBP + 0xc]
+006d4a47 : AND EAX,0x7fffffff
+006d4a4c : MOV dword ptr [EBP + -0x4],EAX
+006d4a4f : MOV EAX,dword ptr [EBP + 0x8]
+006d4a52 : PUSH ESI
+006d4a53 : PUSH EDI
+006d4a54 : MOV dword ptr [EBP + -0x8],EAX
+006d4a57 : CALL 0x0065e064
+006d4a5c : FLD double ptr [EBP + -0x8]
+006d4a5f : POP ECX
+006d4a60 : POP ECX
+006d4a61 : POP EDI
+006d4a62 : POP ESI
+006d4a63 : LEAVE
+006d4a64 : RET

@@ -1,0 +1,63 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00544730
+ENTRY    : 00544730
+BODY     : [[00544730, 00544791]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+float10 FUN_00544730(void)
+
+{
+  int *in_ECX;
+  uint uVar1;
+  
+  if (*in_ECX < 0) {
+    uVar1 = (uint)*(ushort *)((int)in_ECX + 0x16);
+  }
+  else {
+    uVar1 = in_ECX[6];
+  }
+  if (*in_ECX < 0) {
+    return (float10)((float)(int)uVar1 - (float)*(ushort *)((int)in_ECX + 0x1a));
+  }
+  return (float10)((float)(int)uVar1 - (float)*(ushort *)((int)in_ECX + 0x26));
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00544730 : MOV EAX,dword ptr [ECX]
+00544732 : SHR EAX,0x1f
+00544735 : SUB ESP,0x8
+00544738 : AND AL,0x1
+0054473a : JZ 0x00544742
+0054473c : MOVZX EDX,word ptr [ECX + 0x16]
+00544740 : JMP 0x00544745
+00544742 : MOV EDX,dword ptr [ECX + 0x18]
+00544745 : MOV dword ptr [ESP],EDX
+00544748 : TEST AL,AL
+0054474a : JZ 0x0054476f
+0054474c : MOVZX EAX,word ptr [ECX + 0x1a]
+00544750 : MOV dword ptr [ESP + 0x4],EAX
+00544754 : FILD dword ptr [ESP + 0x4]
+00544758 : FSTP float ptr [ESP + 0x4]
+0054475c : FILD dword ptr [ESP]
+0054475f : FSUB float ptr [ESP + 0x4]
+00544763 : FSTP float ptr [ESP + 0x4]
+00544767 : FLD float ptr [ESP + 0x4]
+0054476b : ADD ESP,0x8
+0054476e : RET
+0054476f : MOVZX ECX,word ptr [ECX + 0x26]
+00544773 : MOV dword ptr [ESP + 0x4],ECX
+00544777 : FILD dword ptr [ESP + 0x4]
+0054477b : FSTP float ptr [ESP + 0x4]
+0054477f : FILD dword ptr [ESP]
+00544782 : FSUB float ptr [ESP + 0x4]
+00544786 : FSTP float ptr [ESP + 0x4]
+0054478a : FLD float ptr [ESP + 0x4]
+0054478e : ADD ESP,0x8
+00544791 : RET

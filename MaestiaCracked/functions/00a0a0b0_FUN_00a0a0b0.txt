@@ -1,0 +1,104 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00a0a0b0
+ENTRY    : 00a0a0b0
+BODY     : [[00a0a0b0, 00a0a151]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00a0a0b0(void)
+
+{
+  int iVar1;
+  float fVar2;
+  DWORD DVar3;
+  int unaff_ESI;
+  float fVar4;
+  
+  if (*(int *)(unaff_ESI + 0x10) != 0) {
+    iVar1 = *(int *)(unaff_ESI + 0xc);
+    DVar3 = timeGetTime();
+    *(DWORD *)(unaff_ESI + 0xc) = DVar3;
+    *(int *)(unaff_ESI + 0x14) = *(int *)(unaff_ESI + 0x14) + (DVar3 - iVar1);
+    fVar4 = (float)*(int *)(unaff_ESI + 0x14);
+    if (*(int *)(unaff_ESI + 0x14) < 0) {
+      fVar4 = fVar4 + 4.2949673e+09;
+    }
+    fVar2 = (float)*(int *)(unaff_ESI + 0x10);
+    if (*(int *)(unaff_ESI + 0x10) < 0) {
+      fVar2 = fVar2 + 4.2949673e+09;
+    }
+    fVar4 = fVar4 / fVar2;
+    if (1.0 <= fVar4) {
+      fVar4 = 1.0;
+    }
+    *(float *)(DAT_017251ac + 0x49c) = fVar4 * fVar4;
+    if (*(uint *)(unaff_ESI + 0x10) <= *(uint *)(unaff_ESI + 0x14)) {
+      *(undefined4 *)(unaff_ESI + 4) = 0;
+      *(undefined4 *)(unaff_ESI + 0x10) = 0;
+      *(undefined4 *)(unaff_ESI + 0x14) = 0;
+      if (*(undefined4 **)(unaff_ESI + 8) != (undefined4 *)0x0) {
+        (**(code **)**(undefined4 **)(unaff_ESI + 8))();
+      }
+    }
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00a0a0b0 : PUSH EBP
+00a0a0b1 : MOV EBP,ESP
+00a0a0b3 : PUSH ECX
+00a0a0b4 : CMP dword ptr [ESI + 0x10],0x0
+00a0a0b8 : JZ 0x00a0a14e
+00a0a0be : PUSH EDI
+00a0a0bf : MOV EDI,dword ptr [ESI + 0xc]
+00a0a0c2 : CALL dword ptr [0x00b85598]
+00a0a0c8 : MOV dword ptr [ESI + 0xc],EAX
+00a0a0cb : SUB EAX,EDI
+00a0a0cd : ADD dword ptr [ESI + 0x14],EAX
+00a0a0d0 : FILD dword ptr [ESI + 0x14]
+00a0a0d3 : MOV EAX,dword ptr [ESI + 0x14]
+00a0a0d6 : TEST EAX,EAX
+00a0a0d8 : JGE 0x00a0a0e0
+00a0a0da : FADD float ptr [0x00cdf0e0]
+00a0a0e0 : MOV ECX,dword ptr [ESI + 0x10]
+00a0a0e3 : FILD dword ptr [ESI + 0x10]
+00a0a0e6 : TEST ECX,ECX
+00a0a0e8 : JGE 0x00a0a0f0
+00a0a0ea : FADD float ptr [0x00cdf0e0]
+00a0a0f0 : FDIVP
+00a0a0f2 : POP EDI
+00a0a0f3 : FST float ptr [EBP + -0x4]
+00a0a0f6 : FLD1
+00a0a0f8 : FXCH
+00a0a0fa : FCOMIP ST0,ST1
+00a0a0fc : FSTP ST0
+00a0a0fe : JC 0x00a0a10a
+00a0a100 : MOVSS XMM0,dword ptr [0x00c10fc4]
+00a0a108 : JMP 0x00a0a10f
+00a0a10a : MOVSS XMM0,dword ptr [EBP + -0x4]
+00a0a10f : MOV EDX,dword ptr [0x017251ac]
+00a0a115 : MOVAPS XMM1,XMM0
+00a0a118 : MULSS XMM1,XMM0
+00a0a11c : MOVSS dword ptr [EDX + 0x49c],XMM1
+00a0a124 : MOV EAX,dword ptr [ESI + 0x14]
+00a0a127 : CMP EAX,dword ptr [ESI + 0x10]
+00a0a12a : JC 0x00a0a14e
+00a0a12c : MOV ECX,dword ptr [ESI + 0x8]
+00a0a12f : MOV dword ptr [ESI + 0x4],0x0
+00a0a136 : MOV dword ptr [ESI + 0x10],0x0
+00a0a13d : MOV dword ptr [ESI + 0x14],0x0
+00a0a144 : TEST ECX,ECX
+00a0a146 : JZ 0x00a0a14e
+00a0a148 : MOV EDX,dword ptr [ECX]
+00a0a14a : MOV EAX,dword ptr [EDX]
+00a0a14c : CALL EAX
+00a0a14e : MOV ESP,EBP
+00a0a150 : POP EBP
+00a0a151 : RET

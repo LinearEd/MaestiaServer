@@ -1,0 +1,85 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00a19490
+ENTRY    : 00a19490
+BODY     : [[00a19490, 00a19549]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00a19490(float param_1)
+
+{
+  int iVar1;
+  int in_ECX;
+  float fVar2;
+  
+  if (*(char *)(in_ECX + 0x418) == '\0') {
+    if (*(float *)(in_ECX + 0x50c) != 0.0) {
+      *(undefined4 *)(in_ECX + 0x50c) = 0;
+    }
+    fVar2 = *(float *)(DAT_017248cc + 4) * param_1 * 0.0005 + *(float *)(in_ECX + 0x50c);
+    *(float *)(in_ECX + 0x50c) = fVar2;
+    FUN_007f2a90(fVar2);
+  }
+  else {
+    fVar2 = *(float *)(DAT_017248cc + 4) * param_1 * 0.0005 + *(float *)(in_ECX + 0x50c);
+    *(float *)(in_ECX + 0x50c) = fVar2;
+    iVar1 = *(int *)(in_ECX + 0x74);
+    if ((*(char *)(iVar1 + 0x1e8) == '\0') && (*(char *)(iVar1 + 0x210) == '\0')) {
+      *(float *)(iVar1 + 0x1ec) = fVar2;
+      *(undefined1 *)(iVar1 + 0x154) = 1;
+      return;
+    }
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00a19490 : PUSH EBP
+00a19491 : MOV EBP,ESP
+00a19493 : CMP byte ptr [ECX + 0x418],0x0
+00a1949a : PUSH EDI
+00a1949b : JZ 0x00a194ed
+00a1949d : MOV EAX,[0x017248cc]
+00a194a2 : MOVSS XMM0,dword ptr [EAX + 0x4]
+00a194a7 : MULSS XMM0,dword ptr [EBP + 0x8]
+00a194ac : MULSS XMM0,dword ptr [0x00cdf360]
+00a194b4 : ADDSS XMM0,dword ptr [ECX + 0x50c]
+00a194bc : MOVSS dword ptr [ECX + 0x50c],XMM0
+00a194c4 : MOV ECX,dword ptr [ECX + 0x74]
+00a194c7 : CMP byte ptr [ECX + 0x1e8],0x0
+00a194ce : JNZ 0x00a19545
+00a194d0 : CMP byte ptr [ECX + 0x210],0x0
+00a194d7 : JNZ 0x00a19545
+00a194d9 : MOVSS dword ptr [ECX + 0x1ec],XMM0
+00a194e1 : MOV byte ptr [ECX + 0x154],0x1
+00a194e8 : POP EDI
+00a194e9 : POP EBP
+00a194ea : RET 0x4
+00a194ed : MOVSS XMM1,dword ptr [ECX + 0x50c]
+00a194f5 : XORPS XMM0,XMM0
+00a194f8 : UCOMISS XMM1,XMM0
+00a194fb : LAHF
+00a194fc : TEST AH,0x44
+00a194ff : JNP 0x00a19509
+00a19501 : MOVSS dword ptr [ECX + 0x50c],XMM0
+00a19509 : MOV EDX,dword ptr [0x017248cc]
+00a1950f : MOVSS XMM0,dword ptr [EDX + 0x4]
+00a19514 : MULSS XMM0,dword ptr [EBP + 0x8]
+00a19519 : MULSS XMM0,dword ptr [0x00cdf360]
+00a19521 : ADDSS XMM0,dword ptr [ECX + 0x50c]
+00a19529 : MOV EDI,dword ptr [ECX + 0x78]
+00a1952c : MOVSS dword ptr [EBP + 0x8],XMM0
+00a19531 : FLD float ptr [EBP + 0x8]
+00a19534 : PUSH ECX
+00a19535 : FSTP float ptr [ESP]
+00a19538 : MOVSS dword ptr [ECX + 0x50c],XMM0
+00a19540 : CALL 0x007f2a90
+00a19545 : POP EDI
+00a19546 : POP EBP
+00a19547 : RET 0x4

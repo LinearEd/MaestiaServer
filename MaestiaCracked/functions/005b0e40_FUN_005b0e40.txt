@@ -1,0 +1,184 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005b0e40
+ENTRY    : 005b0e40
+BODY     : [[005b0e40, 005b0f6e] [005b0faa, 005b0fc2]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+char * FUN_005b0e40(ulonglong param_1,char *param_2,rsize_t param_3,int param_4)
+
+{
+  int iVar1;
+  undefined4 uVar2;
+  char *pcVar3;
+  float10 extraout_ST0;
+  undefined8 uVar4;
+  
+  pcVar3 = "%.14g";
+  if (param_4 < 1) {
+    if (param_4 < -0xe) {
+      param_4 = 0xe;
+    }
+    else {
+      param_4 = -param_4;
+    }
+    pcVar3 = *(char **)(&DAT_00b8f6f4 + param_4 * 4);
+    param_4 = 10;
+  }
+  if ((param_1._4_4_ & 0x7ff00000) == 0x7ff00000) {
+    if (((param_1._4_4_ & 0x7ff00000) == 0x7ff00000) &&
+       ((int)param_1 != 0 || (param_1 & 0xfffff00000000) != 0)) {
+      _strcpy_s(param_2,param_3,"NaN");
+      return param_2;
+    }
+    if (((int)param_1 == 0) && (param_1._4_4_ == 0x7ff00000)) {
+      _strcpy_s(param_2,param_3,"Infinity");
+      return param_2;
+    }
+    if (((int)param_1 == 0) && (param_1._4_4_ == 0xfff00000)) {
+      _strcpy_s(param_2,param_3,"-Infinity");
+      return param_2;
+    }
+  }
+  else {
+    if (param_4 != 10) {
+      uVar4 = CONCAT44(param_4,param_3);
+      uVar2 = FUN_0063b380(param_2,param_3,param_4);
+      pcVar3 = (char *)FUN_005b0d50(uVar2,param_2,uVar4);
+      return pcVar3;
+    }
+    iVar1 = FUN_0063b380();
+    if ((float10)iVar1 == extraout_ST0) {
+      pcVar3 = (char *)FUN_005b0ce0(iVar1,param_2,param_3);
+      return pcVar3;
+    }
+    FUN_005ad8a0(param_2,param_3,pcVar3,(double)extraout_ST0);
+    pcVar3 = param_2;
+    if (*param_2 != '\0') {
+      while ((*pcVar3 != ',' && (*pcVar3 != '.'))) {
+        pcVar3 = pcVar3 + 1;
+        if (*pcVar3 == '\0') {
+          return param_2;
+        }
+      }
+      *pcVar3 = '.';
+    }
+  }
+  return param_2;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005b0e40 : MOV ECX,dword ptr [ESP + 0x14]
+005b0e44 : PUSH ESI
+005b0e45 : PUSH EDI
+005b0e46 : MOV ESI,0xb8f730
+005b0e4b : TEST ECX,ECX
+005b0e4d : JG 0x005b0e69
+005b0e4f : CMP ECX,-0xe
+005b0e52 : JL 0x005b0e58
+005b0e54 : NEG ECX
+005b0e56 : JMP 0x005b0e5d
+005b0e58 : MOV ECX,0xe
+005b0e5d : MOV ESI,dword ptr [ECX*0x4 + 0xb8f6f4]
+005b0e64 : MOV ECX,0xa
+005b0e69 : FLD double ptr [ESP + 0xc]
+005b0e6d : MOV EDI,dword ptr [ESP + 0x14]
+005b0e71 : FST double ptr [ESP + 0xc]
+005b0e75 : MOV EAX,dword ptr [ESP + 0x10]
+005b0e79 : AND EAX,0x7ff00000
+005b0e7e : XOR EDX,EDX
+005b0e80 : JNZ 0x005b0f3b
+005b0e86 : CMP EAX,0x7ff00000
+005b0e8b : JNZ 0x005b0f3b
+005b0e91 : FST double ptr [ESP + 0xc]
+005b0e95 : MOV ECX,dword ptr [ESP + 0x10]
+005b0e99 : MOV EAX,ECX
+005b0e9b : AND EAX,0x7ff00000
+005b0ea0 : XOR EDX,EDX
+005b0ea2 : JNZ 0x005b0ed5
+005b0ea4 : CMP EAX,0x7ff00000
+005b0ea9 : JNZ 0x005b0ed5
+005b0eab : MOV EAX,dword ptr [ESP + 0xc]
+005b0eaf : AND ECX,0xfffff
+005b0eb5 : OR EAX,ECX
+005b0eb7 : JZ 0x005b0ed5
+005b0eb9 : MOV EAX,dword ptr [ESP + 0x18]
+005b0ebd : FSTP ST0
+005b0ebf : PUSH 0xb8f6f4
+005b0ec4 : PUSH EAX
+005b0ec5 : PUSH EDI
+005b0ec6 : CALL 0x00638300
+005b0ecb : ADD ESP,0xc
+005b0ece : MOV EAX,EDI
+005b0ed0 : POP EDI
+005b0ed1 : POP ESI
+005b0ed2 : RET 0x14
+005b0ed5 : FST double ptr [ESP + 0xc]
+005b0ed9 : CMP dword ptr [ESP + 0xc],EDX
+005b0edd : JNZ 0x005b0f05
+005b0edf : CMP dword ptr [ESP + 0x10],0x7ff00000
+005b0ee7 : JNZ 0x005b0f05
+005b0ee9 : MOV ECX,dword ptr [ESP + 0x18]
+005b0eed : FSTP ST0
+005b0eef : PUSH 0xb8f6e8
+005b0ef4 : PUSH ECX
+005b0ef5 : PUSH EDI
+005b0ef6 : CALL 0x00638300
+005b0efb : ADD ESP,0xc
+005b0efe : MOV EAX,EDI
+005b0f00 : POP EDI
+005b0f01 : POP ESI
+005b0f02 : RET 0x14
+005b0f05 : FSTP double ptr [ESP + 0xc]
+005b0f09 : CMP dword ptr [ESP + 0xc],EDX
+005b0f0d : JNZ 0x005b0fa3
+005b0f13 : CMP dword ptr [ESP + 0x10],0xfff00000
+005b0f1b : JNZ 0x005b0fa3
+005b0f21 : MOV EDX,dword ptr [ESP + 0x18]
+005b0f25 : PUSH 0xb8f6dc
+005b0f2a : PUSH EDX
+005b0f2b : PUSH EDI
+005b0f2c : CALL 0x00638300
+005b0f31 : ADD ESP,0xc
+005b0f34 : MOV EAX,EDI
+005b0f36 : POP EDI
+005b0f37 : POP ESI
+005b0f38 : RET 0x14
+005b0f3b : CMP ECX,0xa
+005b0f3e : JNZ 0x005b0faa
+005b0f40 : FLD ST0
+005b0f42 : CALL 0x0063b380
+005b0f47 : MOV ECX,EAX
+005b0f49 : MOV dword ptr [ESP + 0x1c],ECX
+005b0f4d : FILD dword ptr [ESP + 0x1c]
+005b0f51 : FUCOMP
+005b0f53 : FNSTSW AX
+005b0f55 : TEST AH,0x44
+005b0f58 : MOV EAX,dword ptr [ESP + 0x18]
+005b0f5c : JP 0x005b0f6f
+005b0f5e : PUSH EAX
+005b0f5f : FSTP ST0
+005b0f61 : MOV EDX,EDI
+005b0f63 : PUSH EDX
+005b0f64 : PUSH ECX
+005b0f65 : CALL 0x005b0ce0
+005b0f6a : POP EDI
+005b0f6b : POP ESI
+005b0f6c : RET 0x14
+005b0faa : PUSH ECX
+005b0fab : MOV ECX,dword ptr [ESP + 0x1c]
+005b0faf : PUSH ECX
+005b0fb0 : MOV EDX,EDI
+005b0fb2 : PUSH EDX
+005b0fb3 : CALL 0x0063b380
+005b0fb8 : PUSH EAX
+005b0fb9 : CALL 0x005b0d50
+005b0fbe : POP EDI
+005b0fbf : POP ESI
+005b0fc0 : RET 0x14

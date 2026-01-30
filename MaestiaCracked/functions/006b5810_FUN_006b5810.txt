@@ -1,0 +1,95 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_006b5810
+ENTRY    : 006b5810
+BODY     : [[006b5810, 006b58c6]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_006b5810(void)
+
+{
+  int in_EAX;
+  uint uVar1;
+  uint *unaff_ESI;
+  
+  uVar1 = *unaff_ESI & 0xff;
+  if (uVar1 == 0xff) {
+    *(undefined1 *)(in_EAX + 0x151) = 1;
+    return;
+  }
+  if (uVar1 != 0) {
+    if (((*unaff_ESI & 0x100) != 0) && (*(ushort *)(in_EAX + 0xfc) < uVar1)) {
+      *(undefined1 *)(in_EAX + 0x151) = 1;
+    }
+    if (((*unaff_ESI & 0x200) != 0) && (*(char *)(in_EAX + 0x119) != '\0')) {
+      *(undefined1 *)(in_EAX + 0x151) = 1;
+    }
+    if (((*unaff_ESI & 0x400) != 0) && (*(char *)(in_EAX + 0x11a) != '\0')) {
+      *(undefined1 *)(in_EAX + 0x151) = 1;
+    }
+    if (((*unaff_ESI & 0x800) != 0) && (uVar1 <= *(ushort *)(in_EAX + 0xfc))) {
+      *(undefined1 *)(in_EAX + 0x151) = 0;
+    }
+    if (((*unaff_ESI & 0x1000) != 0) && (*(char *)(in_EAX + 0x119) != '\0')) {
+      *(undefined1 *)(in_EAX + 0x151) = 0;
+    }
+    if ((*unaff_ESI & 0x2000) == 0) {
+      return;
+    }
+    if (*(char *)(in_EAX + 0x11a) == '\0') {
+      return;
+    }
+  }
+  *(undefined1 *)(in_EAX + 0x151) = 0;
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006b5810 : MOV EDX,dword ptr [ESI]
+006b5812 : MOV ECX,EDX
+006b5814 : AND ECX,0xff
+006b581a : CMP ECX,0xff
+006b5820 : JNZ 0x006b582a
+006b5822 : MOV byte ptr [EAX + 0x151],0x1
+006b5829 : RET
+006b582a : TEST ECX,ECX
+006b582c : JZ 0x006b58bf
+006b5832 : TEST EDX,0x100
+006b5838 : JZ 0x006b584c
+006b583a : MOVZX EDX,word ptr [EAX + 0xfc]
+006b5841 : CMP EDX,ECX
+006b5843 : JGE 0x006b584c
+006b5845 : MOV byte ptr [EAX + 0x151],0x1
+006b584c : TEST dword ptr [ESI],0x200
+006b5852 : JZ 0x006b5864
+006b5854 : CMP byte ptr [EAX + 0x119],0x0
+006b585b : JZ 0x006b5864
+006b585d : MOV byte ptr [EAX + 0x151],0x1
+006b5864 : TEST dword ptr [ESI],0x400
+006b586a : JZ 0x006b587c
+006b586c : CMP byte ptr [EAX + 0x11a],0x0
+006b5873 : JZ 0x006b587c
+006b5875 : MOV byte ptr [EAX + 0x151],0x1
+006b587c : TEST dword ptr [ESI],0x800
+006b5882 : JZ 0x006b5896
+006b5884 : MOVZX EDX,word ptr [EAX + 0xfc]
+006b588b : CMP EDX,ECX
+006b588d : JL 0x006b5896
+006b588f : MOV byte ptr [EAX + 0x151],0x0
+006b5896 : TEST dword ptr [ESI],0x1000
+006b589c : JZ 0x006b58ae
+006b589e : CMP byte ptr [EAX + 0x119],0x0
+006b58a5 : JZ 0x006b58ae
+006b58a7 : MOV byte ptr [EAX + 0x151],0x0
+006b58ae : TEST dword ptr [ESI],0x2000
+006b58b4 : JZ 0x006b58c6
+006b58b6 : CMP byte ptr [EAX + 0x11a],0x0
+006b58bd : JZ 0x006b58c6
+006b58bf : MOV byte ptr [EAX + 0x151],0x0
+006b58c6 : RET

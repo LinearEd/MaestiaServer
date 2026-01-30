@@ -1,0 +1,109 @@
+PROGRAM  : Maestia.exe
+FUNCTION : _fputws
+ENTRY    : 0063e64e
+BODY     : [[0063e64e, 0063e6ef]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* WARNING: Function: __SEH_prolog4 replaced with injection: SEH_prolog4 */
+/* WARNING: Function: __SEH_epilog4 replaced with injection: EH_epilog3 */
+/* Library Function - Single Match
+    _fputws
+   
+   Library: Visual Studio 2008 Release */
+
+int __cdecl _fputws(wchar_t *_Str,FILE *_File)
+
+{
+  wchar_t _Ch;
+  wint_t wVar1;
+  int *piVar2;
+  int local_24;
+  int local_20;
+  
+  local_24 = 0;
+  if ((_Str == (wchar_t *)0x0) || (_File == (FILE *)0x0)) {
+    piVar2 = __errno();
+    *piVar2 = 0x16;
+    __invalid_parameter(0,0,0,0,0);
+    local_24 = 0xffff;
+  }
+  else {
+    local_20 = FUN_00644bcf(_Str);
+    __lock_file(_File);
+    do {
+      if (local_20 == 0) goto LAB_0063e6db;
+      _Ch = *_Str;
+      _Str = _Str + 1;
+      wVar1 = __fputwc_nolock(_Ch,_File);
+      local_20 = local_20 + -1;
+    } while (wVar1 != 0xffff);
+    local_24 = -1;
+LAB_0063e6db:
+    FUN_0063e6f0();
+  }
+  return local_24;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0063e64e : PUSH 0x10
+0063e650 : PUSH 0xcece28
+0063e655 : CALL 0x0064c228
+0063e65a : XOR ESI,ESI
+0063e65c : MOV dword ptr [EBP + -0x20],ESI
+0063e65f : XOR EAX,EAX
+0063e661 : CMP dword ptr [EBP + 0x8],ESI
+0063e664 : SETNZ AL
+0063e667 : CMP EAX,ESI
+0063e669 : JNZ 0x0063e68a
+0063e66b : CALL 0x0063ab82
+0063e670 : MOV dword ptr [EAX],0x16
+0063e676 : PUSH ESI
+0063e677 : PUSH ESI
+0063e678 : PUSH ESI
+0063e679 : PUSH ESI
+0063e67a : PUSH ESI
+0063e67b : CALL 0x006372b8
+0063e680 : ADD ESP,0x14
+0063e683 : MOV EAX,0xffff
+0063e688 : JMP 0x0063e6ea
+0063e68a : XOR EAX,EAX
+0063e68c : CMP dword ptr [EBP + 0xc],ESI
+0063e68f : SETNZ AL
+0063e692 : CMP EAX,ESI
+0063e694 : JZ 0x0063e66b
+0063e696 : PUSH dword ptr [EBP + 0x8]
+0063e699 : CALL 0x00644bcf
+0063e69e : MOV dword ptr [EBP + -0x1c],EAX
+0063e6a1 : PUSH dword ptr [EBP + 0xc]
+0063e6a4 : CALL 0x0063d990
+0063e6a9 : POP ECX
+0063e6aa : POP ECX
+0063e6ab : MOV dword ptr [EBP + -0x4],ESI
+0063e6ae : MOV EAX,dword ptr [EBP + -0x1c]
+0063e6b1 : DEC dword ptr [EBP + -0x1c]
+0063e6b4 : TEST EAX,EAX
+0063e6b6 : JZ 0x0063e6db
+0063e6b8 : MOV EAX,dword ptr [EBP + 0x8]
+0063e6bb : MOVZX EAX,word ptr [EAX]
+0063e6be : ADD dword ptr [EBP + 0x8],0x2
+0063e6c2 : PUSH dword ptr [EBP + 0xc]
+0063e6c5 : PUSH EAX
+0063e6c6 : CALL 0x0063e44e
+0063e6cb : POP ECX
+0063e6cc : POP ECX
+0063e6cd : MOV ECX,0xffff
+0063e6d2 : CMP AX,CX
+0063e6d5 : JNZ 0x0063e6ae
+0063e6d7 : OR dword ptr [EBP + -0x20],0xffffffff
+0063e6db : MOV dword ptr [EBP + -0x4],0xfffffffe
+0063e6e2 : CALL 0x0063e6f0
+0063e6e7 : MOV EAX,dword ptr [EBP + -0x20]
+0063e6ea : CALL 0x0064c26d
+0063e6ef : RET

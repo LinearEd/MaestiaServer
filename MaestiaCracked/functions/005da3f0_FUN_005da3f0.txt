@@ -1,0 +1,89 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005da3f0
+ENTRY    : 005da3f0
+BODY     : [[005da3f0, 005da44c]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_005da3f0(uint param_1)
+
+{
+  uint uVar1;
+  int *in_ECX;
+  int iVar2;
+  GMatrix2D *this;
+  uint uVar3;
+  
+  uVar1 = in_ECX[1];
+  if (param_1 < uVar1) {
+    uVar3 = param_1;
+    if ((uint)in_ECX[2] >> 1 <= param_1) goto LAB_005da421;
+  }
+  else {
+    if (param_1 < (uint)in_ECX[2]) goto LAB_005da421;
+    uVar3 = (param_1 >> 2) + param_1;
+  }
+  FUN_00677270(in_ECX,uVar3);
+LAB_005da421:
+  in_ECX[1] = param_1;
+  if (uVar1 < param_1) {
+    this = (GMatrix2D *)(*in_ECX + uVar1 * 0x18);
+    for (iVar2 = param_1 - uVar1; iVar2 != 0; iVar2 = iVar2 + -1) {
+      if (this != (GMatrix2D *)0x0) {
+        GMatrix2D::SetIdentity(this);
+      }
+      this = this + 0x18;
+    }
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005da3f0 : PUSH EBX
+005da3f1 : PUSH ESI
+005da3f2 : MOV ESI,dword ptr [ESP + 0xc]
+005da3f6 : PUSH EDI
+005da3f7 : MOV EDI,ECX
+005da3f9 : MOV EBX,dword ptr [EDI + 0x4]
+005da3fc : CMP ESI,EBX
+005da3fe : JNC 0x005da40c
+005da400 : MOV EAX,dword ptr [EDI + 0x8]
+005da403 : SHR EAX,0x1
+005da405 : CMP ESI,EAX
+005da407 : JNC 0x005da421
+005da409 : PUSH ESI
+005da40a : JMP 0x005da41b
+005da40c : CMP ESI,dword ptr [EDI + 0x8]
+005da40f : JC 0x005da421
+005da411 : MOV ECX,ESI
+005da413 : SHR ECX,0x2
+005da416 : ADD ECX,ESI
+005da418 : PUSH ECX
+005da419 : MOV ECX,EDI
+005da41b : PUSH EDI
+005da41c : CALL 0x00677270
+005da421 : MOV dword ptr [EDI + 0x4],ESI
+005da424 : CMP ESI,EBX
+005da426 : JBE 0x005da447
+005da428 : SUB ESI,EBX
+005da42a : MOV EAX,dword ptr [EDI]
+005da42c : LEA EDX,[EBX + EBX*0x2]
+005da42f : LEA EDI,[EAX + EDX*0x8]
+005da432 : JZ 0x005da447
+005da434 : TEST EDI,EDI
+005da436 : JZ 0x005da43f
+005da438 : MOV ECX,EDI
+005da43a : CALL 0x00522b80
+005da43f : ADD EDI,0x18
+005da442 : SUB ESI,0x1
+005da445 : JNZ 0x005da434
+005da447 : POP EDI
+005da448 : POP ESI
+005da449 : POP EBX
+005da44a : RET 0x4

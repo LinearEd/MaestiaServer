@@ -1,0 +1,76 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00524560
+ENTRY    : 00524560
+BODY     : [[00524560, 005245c2]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00524560(undefined4 *param_1)
+
+{
+  undefined4 *puVar1;
+  LONG LVar2;
+  int in_ECX;
+  
+  EnterCriticalSection((LPCRITICAL_SECTION)(in_ECX + 0xc));
+  if (*(int *)(in_ECX + 8) != 0) {
+    FUN_00523ac0(&param_1);
+    puVar1 = param_1;
+    LVar2 = InterlockedExchangeAdd(param_1 + 1,-1);
+    if (LVar2 == 1) {
+      if ((int *)puVar1[2] != (int *)0x0) {
+        (**(code **)(*(int *)puVar1[2] + 4))(puVar1);
+        puVar1[2] = 0;
+      }
+      (**(code **)*puVar1)(1);
+    }
+  }
+  LeaveCriticalSection((LPCRITICAL_SECTION)(in_ECX + 0xc));
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00524560 : PUSH ESI
+00524561 : PUSH EDI
+00524562 : MOV ESI,ECX
+00524564 : LEA EDI,[ESI + 0xc]
+00524567 : PUSH EDI
+00524568 : CALL dword ptr [0x00b85118]
+0052456e : MOV ESI,dword ptr [ESI + 0x8]
+00524571 : TEST ESI,ESI
+00524573 : JZ 0x005245b7
+00524575 : LEA EAX,[ESP + 0xc]
+00524579 : PUSH EAX
+0052457a : LEA ECX,[ESI + 0xc]
+0052457d : CALL 0x00523ac0
+00524582 : MOV ESI,dword ptr [ESP + 0xc]
+00524586 : PUSH -0x1
+00524588 : LEA ECX,[ESI + 0x4]
+0052458b : PUSH ECX
+0052458c : CALL dword ptr [0x00b851cc]
+00524592 : SUB EAX,0x1
+00524595 : JNZ 0x005245b7
+00524597 : MOV ECX,dword ptr [ESI + 0x8]
+0052459a : TEST ECX,ECX
+0052459c : JZ 0x005245ad
+0052459e : MOV EDX,dword ptr [ECX]
+005245a0 : MOV EAX,dword ptr [EDX + 0x4]
+005245a3 : PUSH ESI
+005245a4 : CALL EAX
+005245a6 : MOV dword ptr [ESI + 0x8],0x0
+005245ad : MOV EDX,dword ptr [ESI]
+005245af : MOV EAX,dword ptr [EDX]
+005245b1 : PUSH 0x1
+005245b3 : MOV ECX,ESI
+005245b5 : CALL EAX
+005245b7 : PUSH EDI
+005245b8 : CALL dword ptr [0x00b8511c]
+005245be : POP EDI
+005245bf : POP ESI
+005245c0 : RET 0x4

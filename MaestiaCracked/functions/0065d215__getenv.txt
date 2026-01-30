@@ -1,0 +1,83 @@
+PROGRAM  : Maestia.exe
+FUNCTION : _getenv
+ENTRY    : 0065d215
+BODY     : [[0065d215, 0065d28e]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* WARNING: Function: __SEH_prolog4 replaced with injection: SEH_prolog4 */
+/* WARNING: Function: __SEH_epilog4 replaced with injection: EH_epilog3 */
+/* Library Function - Single Match
+    _getenv
+   
+   Library: Visual Studio 2008 Release */
+
+char * __cdecl _getenv(char *_VarName)
+
+{
+  int *piVar1;
+  size_t sVar2;
+  char *pcVar3;
+  
+  if ((_VarName != (char *)0x0) && (sVar2 = _strnlen(_VarName,0x7fff), sVar2 < 0x7fff)) {
+    __lock(7);
+    pcVar3 = __getenv_helper_nolock(_VarName);
+    FUN_0065d28f();
+    return pcVar3;
+  }
+  piVar1 = __errno();
+  *piVar1 = 0x16;
+  __invalid_parameter(0,0,0,0,0);
+  return (char *)0x0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0065d215 : PUSH 0x10
+0065d217 : PUSH 0xced400
+0065d21c : CALL 0x0064c228
+0065d221 : XOR EAX,EAX
+0065d223 : XOR ESI,ESI
+0065d225 : CMP dword ptr [EBP + 0x8],ESI
+0065d228 : SETNZ AL
+0065d22b : CMP EAX,ESI
+0065d22d : JNZ 0x0065d24b
+0065d22f : CALL 0x0063ab82
+0065d234 : MOV dword ptr [EAX],0x16
+0065d23a : PUSH ESI
+0065d23b : PUSH ESI
+0065d23c : PUSH ESI
+0065d23d : PUSH ESI
+0065d23e : PUSH ESI
+0065d23f : CALL 0x006372b8
+0065d244 : ADD ESP,0x14
+0065d247 : XOR EAX,EAX
+0065d249 : JMP 0x0065d289
+0065d24b : MOV EDI,0x7fff
+0065d250 : PUSH EDI
+0065d251 : PUSH dword ptr [EBP + 0x8]
+0065d254 : CALL 0x0065bdac
+0065d259 : POP ECX
+0065d25a : POP ECX
+0065d25b : CMP EAX,EDI
+0065d25d : SBB EAX,EAX
+0065d25f : NEG EAX
+0065d261 : JZ 0x0065d22f
+0065d263 : PUSH 0x7
+0065d265 : CALL 0x0064c598
+0065d26a : POP ECX
+0065d26b : MOV dword ptr [EBP + -0x4],ESI
+0065d26e : PUSH dword ptr [EBP + 0x8]
+0065d271 : CALL 0x0065d18e
+0065d276 : POP ECX
+0065d277 : MOV dword ptr [EBP + -0x1c],EAX
+0065d27a : MOV dword ptr [EBP + -0x4],0xfffffffe
+0065d281 : CALL 0x0065d28f
+0065d286 : MOV EAX,dword ptr [EBP + -0x1c]
+0065d289 : CALL 0x0064c26d
+0065d28e : RET

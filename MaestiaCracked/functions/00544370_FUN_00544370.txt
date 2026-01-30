@@ -1,0 +1,56 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00544370
+ENTRY    : 00544370
+BODY     : [[00544370, 005443af]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* WARNING: Removing unreachable block (ram,0x0054438a) */
+/* WARNING: Removing unreachable block (ram,0x0054439c) */
+
+float10 FUN_00544370(void)
+
+{
+  ushort uVar1;
+  int in_ECX;
+  float10 fVar2;
+  
+  uVar1 = *(ushort *)(in_ECX + 4) & 0xfff;
+  if ((*(byte *)(in_ECX + 6) & 0x10) == 0) {
+    fVar2 = (float10)uVar1;
+  }
+  else {
+    fVar2 = (float10)((float)uVar1 * 0.0625);
+  }
+  return fVar2;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00544370 : PUSH ECX
+00544371 : MOVZX EAX,word ptr [ECX + 0x4]
+00544375 : AND EAX,0xfff
+0054437a : TEST byte ptr [ECX + 0x6],0x10
+0054437e : JNZ 0x00544392
+00544380 : MOV dword ptr [ESP],EAX
+00544383 : FILD dword ptr [ESP]
+00544386 : TEST EAX,EAX
+00544388 : JGE 0x005443ae
+0054438a : FADD float ptr [0x00cdf0e0]
+00544390 : POP ECX
+00544391 : RET
+00544392 : MOV dword ptr [ESP],EAX
+00544395 : FILD dword ptr [ESP]
+00544398 : TEST EAX,EAX
+0054439a : JGE 0x005443a2
+0054439c : FADD float ptr [0x00cdf0e0]
+005443a2 : FMUL double ptr [0x00b86b28]
+005443a8 : FSTP float ptr [ESP]
+005443ab : FLD float ptr [ESP]
+005443ae : POP ECX
+005443af : RET

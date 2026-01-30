@@ -1,0 +1,56 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00562c00
+ENTRY    : 00562c00
+BODY     : [[00562c00, 00562c49]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00562c00(undefined4 param_1)
+
+{
+  undefined4 uVar1;
+  int in_ECX;
+  GMutex *this;
+  
+  FUN_005623a0(param_1);
+  uVar1 = *(undefined4 *)(in_ECX + 0x78);
+  this = (GMutex *)(*(int *)(in_ECX + 0x84) + 8);
+  GMutex::Lock(this);
+  *(undefined4 *)(in_ECX + 0x78) = uVar1;
+  *(undefined4 *)(in_ECX + 0x74) = 1;
+  GWaitCondition::NotifyAll((GWaitCondition *)(*(int *)(in_ECX + 0x84) + 0x1c));
+  GMutex::Unlock(this);
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00562c00 : MOV EAX,dword ptr [ESP + 0x4]
+00562c04 : PUSH EBX
+00562c05 : PUSH ESI
+00562c06 : PUSH EDI
+00562c07 : MOV ESI,ECX
+00562c09 : PUSH EAX
+00562c0a : LEA ECX,[ESI + 0x28]
+00562c0d : CALL 0x005623a0
+00562c12 : MOV EDI,dword ptr [ESI + 0x84]
+00562c18 : MOV EBX,dword ptr [ESI + 0x78]
+00562c1b : ADD EDI,0x8
+00562c1e : MOV ECX,EDI
+00562c20 : CALL 0x005162b0
+00562c25 : MOV ECX,dword ptr [ESI + 0x84]
+00562c2b : ADD ECX,0x1c
+00562c2e : MOV dword ptr [ESI + 0x78],EBX
+00562c31 : MOV dword ptr [ESI + 0x74],0x1
+00562c38 : CALL 0x00516460
+00562c3d : MOV ECX,EDI
+00562c3f : CALL 0x005170a0
+00562c44 : POP EDI
+00562c45 : POP ESI
+00562c46 : POP EBX
+00562c47 : RET 0x4

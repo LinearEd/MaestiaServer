@@ -1,0 +1,68 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_006c4860
+ENTRY    : 006c4860
+BODY     : [[006c4860, 006c48db]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_006c4860(int param_1,double param_2,double param_3)
+
+{
+  double dVar1;
+  
+  if (param_1 != 0) {
+    dVar1 = _fabs(param_2 * param_3 - 1.0);
+    if (((0.05 < dVar1) || ((*(byte *)(param_1 + 0x126) & 4) != 0)) ||
+       (*(char *)(param_1 + 0x126) == '\x03')) {
+      *(uint *)(param_1 + 0x70) = *(uint *)(param_1 + 0x70) | 0x2000;
+    }
+    *(float *)(param_1 + 0x15c) = (float)param_3;
+    *(float *)(param_1 + 0x160) = (float)param_2;
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006c4860 : PUSH EBP
+006c4861 : MOV EBP,ESP
+006c4863 : CMP dword ptr [EBP + 0x8],0x0
+006c4867 : JNZ 0x006c486b
+006c4869 : JMP 0x006c48da
+006c486b : FLD double ptr [EBP + 0xc]
+006c486e : FMUL double ptr [EBP + 0x14]
+006c4871 : FSUB double ptr [0x00cdf108]
+006c4877 : SUB ESP,0x8
+006c487a : FSTP double ptr [ESP]
+006c487d : CALL 0x006d49ab
+006c4882 : ADD ESP,0x8
+006c4885 : FCOMP double ptr [0x00bed7e8]
+006c488b : FNSTSW AX
+006c488d : TEST AH,0x41
+006c4890 : JZ 0x006c48b0
+006c4892 : MOV EAX,dword ptr [EBP + 0x8]
+006c4895 : MOVZX ECX,byte ptr [EAX + 0x126]
+006c489c : AND ECX,0x4
+006c489f : JNZ 0x006c48b0
+006c48a1 : MOV EDX,dword ptr [EBP + 0x8]
+006c48a4 : MOVZX EAX,byte ptr [EDX + 0x126]
+006c48ab : CMP EAX,0x3
+006c48ae : JNZ 0x006c48c2
+006c48b0 : MOV ECX,dword ptr [EBP + 0x8]
+006c48b3 : MOV EDX,dword ptr [ECX + 0x70]
+006c48b6 : OR EDX,0x2000
+006c48bc : MOV EAX,dword ptr [EBP + 0x8]
+006c48bf : MOV dword ptr [EAX + 0x70],EDX
+006c48c2 : FLD double ptr [EBP + 0x14]
+006c48c5 : MOV ECX,dword ptr [EBP + 0x8]
+006c48c8 : FSTP float ptr [ECX + 0x15c]
+006c48ce : FLD double ptr [EBP + 0xc]
+006c48d1 : MOV EDX,dword ptr [EBP + 0x8]
+006c48d4 : FSTP float ptr [EDX + 0x160]
+006c48da : POP EBP
+006c48db : RET

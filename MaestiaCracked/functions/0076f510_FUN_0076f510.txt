@@ -1,0 +1,137 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0076f510
+ENTRY    : 0076f510
+BODY     : [[0076f510, 0076f5ea]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_0076f510(void)
+
+{
+  int iVar1;
+  uint uVar2;
+  float fVar3;
+  DWORD DVar4;
+  int in_ECX;
+  float fVar5;
+  
+  if (*(char *)(in_ECX + 4) != '\0') {
+    DVar4 = GetTickCount();
+    iVar1 = *(int *)(in_ECX + 0x18);
+    *(DWORD *)(in_ECX + 0x18) = DVar4;
+    *(int *)(in_ECX + 0x1c) = *(int *)(in_ECX + 0x1c) + (DVar4 - iVar1);
+    uVar2 = *(uint *)(in_ECX + 0x20);
+    if (uVar2 < *(uint *)(in_ECX + 0x1c)) {
+      if (*(char *)(in_ECX + 0x24) == '\0') {
+        *(uint *)(in_ECX + 0x1c) = uVar2;
+        *(undefined1 *)(in_ECX + 4) = 0;
+        *(undefined1 *)(in_ECX + 0x25) = 1;
+      }
+      else {
+        *(undefined4 *)(in_ECX + 0x1c) = 0;
+      }
+    }
+    fVar5 = (float)*(int *)(in_ECX + 0x1c);
+    if (*(int *)(in_ECX + 0x1c) < 0) {
+      fVar5 = fVar5 + 4.2949673e+09;
+    }
+    fVar3 = (float)(int)uVar2;
+    if ((int)uVar2 < 0) {
+      fVar3 = fVar3 + 4.2949673e+09;
+    }
+    fVar5 = fVar5 / fVar3;
+    if (1.0 <= fVar5) {
+      fVar5 = 1.0;
+    }
+    fVar5 = (*(float *)(in_ECX + 0x10) - *(float *)(in_ECX + 0xc)) * fVar5 +
+            *(float *)(in_ECX + 0xc);
+    *(float *)(in_ECX + 0x14) = fVar5;
+    iVar1 = *(int *)(in_ECX + 8);
+    *(float *)(iVar1 + 0x84) = fVar5;
+    *(float *)(iVar1 + 0x88) = fVar5;
+    *(float *)(iVar1 + 0x8c) = fVar5;
+    *(undefined1 *)(iVar1 + 0x5d) = 1;
+    *(undefined1 *)(iVar1 + 0x134) = 1;
+    *(undefined1 *)(iVar1 + 0x5c) = 1;
+    if (*(int **)(iVar1 + 0x2c) != (int *)0x0) {
+      (**(code **)(**(int **)(iVar1 + 0x2c) + 0x60))(iVar1);
+    }
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0076f510 : PUSH EBP
+0076f511 : MOV EBP,ESP
+0076f513 : PUSH ECX
+0076f514 : PUSH ESI
+0076f515 : MOV ESI,ECX
+0076f517 : CMP byte ptr [ESI + 0x4],0x0
+0076f51b : JZ 0x0076f5e6
+0076f521 : CALL dword ptr [0x00b850d8]
+0076f527 : MOV ECX,EAX
+0076f529 : SUB ECX,dword ptr [ESI + 0x18]
+0076f52c : MOV dword ptr [ESI + 0x18],EAX
+0076f52f : ADD dword ptr [ESI + 0x1c],ECX
+0076f532 : MOV ECX,dword ptr [ESI + 0x1c]
+0076f535 : MOV EAX,dword ptr [ESI + 0x20]
+0076f538 : MOV DL,0x1
+0076f53a : CMP ECX,EAX
+0076f53c : JBE 0x0076f557
+0076f53e : CMP byte ptr [ESI + 0x24],0x0
+0076f542 : JZ 0x0076f54d
+0076f544 : MOV dword ptr [ESI + 0x1c],0x0
+0076f54b : JMP 0x0076f557
+0076f54d : MOV dword ptr [ESI + 0x1c],EAX
+0076f550 : MOV byte ptr [ESI + 0x4],0x0
+0076f554 : MOV byte ptr [ESI + 0x25],DL
+0076f557 : MOV ECX,dword ptr [ESI + 0x1c]
+0076f55a : FILD dword ptr [ESI + 0x1c]
+0076f55d : TEST ECX,ECX
+0076f55f : JGE 0x0076f567
+0076f561 : FADD float ptr [0x00cdf0e0]
+0076f567 : MOV dword ptr [EBP + -0x4],EAX
+0076f56a : FILD dword ptr [EBP + -0x4]
+0076f56d : TEST EAX,EAX
+0076f56f : JGE 0x0076f577
+0076f571 : FADD float ptr [0x00cdf0e0]
+0076f577 : FDIVP
+0076f579 : FST float ptr [EBP + -0x4]
+0076f57c : FLD1
+0076f57e : FXCH
+0076f580 : FCOMIP ST0,ST1
+0076f582 : FSTP ST0
+0076f584 : JC 0x0076f590
+0076f586 : MOVSS XMM2,dword ptr [0x00c10fc4]
+0076f58e : JMP 0x0076f595
+0076f590 : MOVSS XMM2,dword ptr [EBP + -0x4]
+0076f595 : MOVSS XMM1,dword ptr [ESI + 0xc]
+0076f59a : MOVSS XMM0,dword ptr [ESI + 0x10]
+0076f59f : SUBSS XMM0,XMM1
+0076f5a3 : MULSS XMM0,XMM2
+0076f5a7 : ADDSS XMM0,XMM1
+0076f5ab : MOVSS dword ptr [ESI + 0x14],XMM0
+0076f5b0 : MOV ESI,dword ptr [ESI + 0x8]
+0076f5b3 : MOV ECX,dword ptr [ESI + 0x2c]
+0076f5b6 : MOVSS dword ptr [ESI + 0x84],XMM0
+0076f5be : MOVSS dword ptr [ESI + 0x88],XMM0
+0076f5c6 : MOVSS dword ptr [ESI + 0x8c],XMM0
+0076f5ce : MOV byte ptr [ESI + 0x5d],DL
+0076f5d1 : MOV byte ptr [ESI + 0x134],DL
+0076f5d7 : MOV byte ptr [ESI + 0x5c],DL
+0076f5da : TEST ECX,ECX
+0076f5dc : JZ 0x0076f5e6
+0076f5de : MOV EDX,dword ptr [ECX]
+0076f5e0 : MOV EAX,dword ptr [EDX + 0x60]
+0076f5e3 : PUSH ESI
+0076f5e4 : CALL EAX
+0076f5e6 : POP ESI
+0076f5e7 : MOV ESP,EBP
+0076f5e9 : POP EBP
+0076f5ea : RET

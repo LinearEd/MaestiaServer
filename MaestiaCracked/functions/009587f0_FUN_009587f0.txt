@@ -1,0 +1,295 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_009587f0
+ENTRY    : 009587f0
+BODY     : [[009587f0, 00958a1c]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_009587f0(int param_1)
+
+{
+  uint uVar1;
+  int iVar2;
+  int *piVar3;
+  int *piVar4;
+  int unaff_EDI;
+  undefined1 local_2c [28];
+  void *local_10;
+  undefined1 *puStack_c;
+  int *local_8;
+  
+  local_8 = (int *)0xffffffff;
+  puStack_c = &LAB_00b4cbb4;
+  local_10 = ExceptionList;
+  uVar1 = DAT_00d66fa0 ^ (uint)&stack0xfffffffc;
+  ExceptionList = &local_10;
+  if (*(int *)(param_1 + 0x4c) != *(int *)(unaff_EDI + 0x7f)) {
+    FUN_008018d0(L"[ERROR] miss match partnerhkey !!",uVar1);
+    ExceptionList = local_10;
+    return;
+  }
+  iVar2 = FUN_00a1a840(*(int *)(param_1 + 0x4c));
+  if (iVar2 == 0) {
+    FUN_008018d0(L"[ERROR] invalid partnerkey !!",uVar1);
+    ExceptionList = local_10;
+    return;
+  }
+  piVar3 = (int *)FUN_00b04230(*(undefined4 *)(unaff_EDI + 4));
+  if (piVar3 == (int *)0x0) {
+    FUN_00406460(L"Alloc failed !!");
+    if ((int *)*DAT_00da98e8 != (int *)0x0) {
+      local_8 = piVar3;
+      (**(code **)(*(int *)*DAT_00da98e8 + 0x14))
+                (L"AvaGuiPcTrade::OnMsgAddPartnerEquipItem",0x58c,local_2c);
+    }
+    local_8 = (int *)0xffffffff;
+    FUN_00406560();
+    ExceptionList = local_10;
+    return;
+  }
+  piVar4 = (int *)FUN_004049b0(piVar3[4]);
+  if (piVar4 != (int *)0x0) {
+    iVar2 = (**(code **)(*piVar4 + 0x44))();
+    if (iVar2 != 0) {
+      (**(code **)(*piVar3 + 0x3c))(*(undefined2 *)(unaff_EDI + 0x12));
+    }
+  }
+  FUN_00a07b80();
+  FUN_00a07be0(1);
+  piVar3[0x48] = *(int *)(unaff_EDI + 0x18);
+  *(undefined2 *)(piVar3 + 0x49) = *(undefined2 *)(unaff_EDI + 0x21);
+  iVar2 = (**(code **)(*piVar3 + 0x20))();
+  if (iVar2 != 0) {
+    FUN_00406460(L"casting error");
+    local_8 = (int *)0x1;
+    if ((int *)*DAT_00da98e8 != (int *)0x0) {
+      (**(code **)(*(int *)*DAT_00da98e8 + 0x14))
+                (L"AvaGuiPcTrade::OnMsgAddPartnerEquipItem",0x59f,local_2c);
+    }
+    local_8 = (int *)0xffffffff;
+    FUN_00406560();
+    ExceptionList = local_10;
+    return;
+  }
+  if ((*(byte *)(unaff_EDI + 0x18) & 2) == 0) {
+    (**(code **)(*piVar3 + 0x2c))(0,1);
+    (**(code **)(*piVar3 + 0x58))(0);
+  }
+  else {
+    (**(code **)(*piVar3 + 0x2c))(1,1);
+  }
+  if (piVar4 != (int *)0x0) {
+    iVar2 = (**(code **)(*piVar4 + 0x38))();
+    if (iVar2 == 0) {
+      (**(code **)(*piVar3 + 0x3c))(1);
+    }
+  }
+  FUN_009f3690(DAT_017247f0);
+  (**(code **)(**(int **)(param_1 + 0x3c) + 0x70))
+            (piVar3,*(undefined1 *)(unaff_EDI + 0x10),*(undefined1 *)(unaff_EDI + 0x11));
+  ExceptionList = local_10;
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+009587f0 : PUSH EBP
+009587f1 : MOV EBP,ESP
+009587f3 : PUSH -0x1
+009587f5 : PUSH 0xb4cbb4
+009587fa : MOV EAX,FS:[0x0]
+00958800 : PUSH EAX
+00958801 : SUB ESP,0x1c
+00958804 : PUSH EBX
+00958805 : PUSH ESI
+00958806 : MOV EAX,[0x00d66fa0]
+0095880b : XOR EAX,EBP
+0095880d : PUSH EAX
+0095880e : LEA EAX,[EBP + -0xc]
+00958811 : MOV FS:[0x0],EAX
+00958817 : MOV EAX,dword ptr [EBP + 0x8]
+0095881a : MOV EAX,dword ptr [EAX + 0x4c]
+0095881d : CMP EAX,dword ptr [EDI + 0x7f]
+00958820 : JZ 0x00958848
+00958822 : MOV ESI,dword ptr [0x00da98e8]
+00958828 : PUSH 0xc76698
+0095882d : CALL 0x008018d0
+00958832 : ADD ESP,0x4
+00958835 : MOV ECX,dword ptr [EBP + -0xc]
+00958838 : MOV dword ptr FS:[0x0],ECX
+0095883f : POP ECX
+00958840 : POP ESI
+00958841 : POP EBX
+00958842 : MOV ESP,EBP
+00958844 : POP EBP
+00958845 : RET 0x4
+00958848 : MOV ECX,dword ptr [0x00da93ec]
+0095884e : PUSH EAX
+0095884f : CALL 0x00a1a840
+00958854 : TEST EAX,EAX
+00958856 : JNZ 0x0095887e
+00958858 : MOV ESI,dword ptr [0x00da98e8]
+0095885e : PUSH 0xc7665c
+00958863 : CALL 0x008018d0
+00958868 : ADD ESP,0x4
+0095886b : MOV ECX,dword ptr [EBP + -0xc]
+0095886e : MOV dword ptr FS:[0x0],ECX
+00958875 : POP ECX
+00958876 : POP ESI
+00958877 : POP EBX
+00958878 : MOV ESP,EBP
+0095887a : POP EBP
+0095887b : RET 0x4
+0095887e : MOV ECX,dword ptr [EDI + 0x4]
+00958881 : PUSH ECX
+00958882 : MOV ECX,dword ptr [EDI + 0x8]
+00958885 : CALL 0x00b04230
+0095888a : MOV ESI,EAX
+0095888c : ADD ESP,0x4
+0095888f : TEST ESI,ESI
+00958891 : JNZ 0x009588e6
+00958893 : PUSH 0xc766dc
+00958898 : LEA ECX,[EBP + -0x28]
+0095889b : CALL 0x00406460
+009588a0 : MOV dword ptr [EBP + -0x4],ESI
+009588a3 : MOV EDX,dword ptr [0x00da98e8]
+009588a9 : MOV ECX,dword ptr [EDX]
+009588ab : TEST ECX,ECX
+009588ad : JZ 0x009588c4
+009588af : MOV EAX,dword ptr [ECX]
+009588b1 : MOV EAX,dword ptr [EAX + 0x14]
+009588b4 : LEA EDX,[EBP + -0x28]
+009588b7 : PUSH EDX
+009588b8 : PUSH 0x58c
+009588bd : PUSH 0xc76718
+009588c2 : CALL EAX
+009588c4 : MOV dword ptr [EBP + -0x4],0xffffffff
+009588cb : LEA ECX,[EBP + -0x28]
+009588ce : CALL 0x00406560
+009588d3 : MOV ECX,dword ptr [EBP + -0xc]
+009588d6 : MOV dword ptr FS:[0x0],ECX
+009588dd : POP ECX
+009588de : POP ESI
+009588df : POP EBX
+009588e0 : MOV ESP,EBP
+009588e2 : POP EBP
+009588e3 : RET 0x4
+009588e6 : MOV EAX,dword ptr [ESI + 0x10]
+009588e9 : PUSH EAX
+009588ea : CALL 0x004049b0
+009588ef : MOV EBX,EAX
+009588f1 : ADD ESP,0x4
+009588f4 : TEST EBX,EBX
+009588f6 : JZ 0x00958913
+009588f8 : MOV EDX,dword ptr [EBX]
+009588fa : MOV EAX,dword ptr [EDX + 0x44]
+009588fd : MOV ECX,EBX
+009588ff : CALL EAX
+00958901 : TEST EAX,EAX
+00958903 : JZ 0x00958913
+00958905 : MOVZX EAX,word ptr [EDI + 0x12]
+00958909 : MOV EDX,dword ptr [ESI]
+0095890b : MOV EDX,dword ptr [EDX + 0x3c]
+0095890e : PUSH EAX
+0095890f : MOV ECX,ESI
+00958911 : CALL EDX
+00958913 : MOV AX,word ptr [EDI + 0x16]
+00958917 : CALL 0x00a07b80
+0095891c : MOV EAX,dword ptr [EDI + 0x7b]
+0095891f : ADD EAX,dword ptr [EDI + 0x12]
+00958922 : PUSH 0x1
+00958924 : MOV ECX,ESI
+00958926 : CALL 0x00a07be0
+0095892b : MOV EAX,dword ptr [EDI + 0x18]
+0095892e : MOV dword ptr [ESI + 0x120],EAX
+00958934 : MOVZX EAX,word ptr [EDI + 0x21]
+00958938 : MOV word ptr [ESI + 0x124],AX
+0095893f : MOV EAX,dword ptr [ESI]
+00958941 : MOV EDX,dword ptr [EAX + 0x20]
+00958944 : MOV ECX,ESI
+00958946 : CALL EDX
+00958948 : TEST EAX,EAX
+0095894a : JZ 0x009589a2
+0095894c : PUSH 0xc766fc
+00958951 : LEA ECX,[EBP + -0x28]
+00958954 : CALL 0x00406460
+00958959 : MOV dword ptr [EBP + -0x4],0x1
+00958960 : MOV EAX,[0x00da98e8]
+00958965 : MOV ECX,dword ptr [EAX]
+00958967 : TEST ECX,ECX
+00958969 : JZ 0x00958980
+0095896b : MOV EDX,dword ptr [ECX]
+0095896d : MOV EDX,dword ptr [EDX + 0x14]
+00958970 : LEA EAX,[EBP + -0x28]
+00958973 : PUSH EAX
+00958974 : PUSH 0x59f
+00958979 : PUSH 0xc76768
+0095897e : CALL EDX
+00958980 : MOV dword ptr [EBP + -0x4],0xffffffff
+00958987 : LEA ECX,[EBP + -0x28]
+0095898a : CALL 0x00406560
+0095898f : MOV ECX,dword ptr [EBP + -0xc]
+00958992 : MOV dword ptr FS:[0x0],ECX
+00958999 : POP ECX
+0095899a : POP ESI
+0095899b : POP EBX
+0095899c : MOV ESP,EBP
+0095899e : POP EBP
+0095899f : RET 0x4
+009589a2 : TEST byte ptr [EDI + 0x18],0x2
+009589a6 : MOV EAX,dword ptr [ESI]
+009589a8 : MOV EDX,dword ptr [EAX + 0x2c]
+009589ab : PUSH 0x1
+009589ad : MOV ECX,ESI
+009589af : JZ 0x009589b7
+009589b1 : PUSH 0x1
+009589b3 : CALL EDX
+009589b5 : JMP 0x009589c6
+009589b7 : PUSH 0x0
+009589b9 : CALL EDX
+009589bb : MOV EAX,dword ptr [ESI]
+009589bd : MOV EDX,dword ptr [EAX + 0x58]
+009589c0 : PUSH 0x0
+009589c2 : MOV ECX,ESI
+009589c4 : CALL EDX
+009589c6 : TEST EBX,EBX
+009589c8 : JZ 0x009589e2
+009589ca : MOV EAX,dword ptr [EBX]
+009589cc : MOV EDX,dword ptr [EAX + 0x38]
+009589cf : MOV ECX,EBX
+009589d1 : CALL EDX
+009589d3 : TEST EAX,EAX
+009589d5 : JNZ 0x009589e2
+009589d7 : MOV EAX,dword ptr [ESI]
+009589d9 : MOV EDX,dword ptr [EAX + 0x3c]
+009589dc : PUSH 0x1
+009589de : MOV ECX,ESI
+009589e0 : CALL EDX
+009589e2 : MOV EAX,[0x017247f0]
+009589e7 : MOV ECX,dword ptr [EDI + 0x8]
+009589ea : PUSH EAX
+009589eb : MOV EAX,ESI
+009589ed : CALL 0x009f3690
+009589f2 : MOVZX EAX,byte ptr [EDI + 0x11]
+009589f6 : MOV ECX,dword ptr [EBP + 0x8]
+009589f9 : MOV ECX,dword ptr [ECX + 0x3c]
+009589fc : MOV EDX,dword ptr [ECX]
+009589fe : MOV EDX,dword ptr [EDX + 0x70]
+00958a01 : PUSH EAX
+00958a02 : MOVZX EAX,byte ptr [EDI + 0x10]
+00958a06 : PUSH EAX
+00958a07 : PUSH ESI
+00958a08 : CALL EDX
+00958a0a : MOV ECX,dword ptr [EBP + -0xc]
+00958a0d : MOV dword ptr FS:[0x0],ECX
+00958a14 : POP ECX
+00958a15 : POP ESI
+00958a16 : POP EBX
+00958a17 : MOV ESP,EBP
+00958a19 : POP EBP
+00958a1a : RET 0x4

@@ -1,0 +1,90 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00517bd0
+ENTRY    : 00517bd0
+BODY     : [[00517bd0, 00517c29]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00517bd0(uint param_1)
+
+{
+  uint uVar1;
+  undefined4 *puVar2;
+  int *in_ECX;
+  int iVar3;
+  uint uVar4;
+  
+  uVar1 = in_ECX[1];
+  if (param_1 < uVar1) {
+    uVar4 = param_1;
+    if ((uint)in_ECX[2] >> 1 <= param_1) goto LAB_00517c01;
+  }
+  else {
+    if (param_1 < (uint)in_ECX[2]) goto LAB_00517c01;
+    uVar4 = (param_1 >> 2) + param_1;
+  }
+  FUN_00517b00(in_ECX,uVar4);
+LAB_00517c01:
+  in_ECX[1] = param_1;
+  if (uVar1 < param_1) {
+    puVar2 = (undefined4 *)(*in_ECX + uVar1 * 8);
+    for (iVar3 = param_1 - uVar1; iVar3 != 0; iVar3 = iVar3 + -1) {
+      if (puVar2 != (undefined4 *)0x0) {
+        *puVar2 = 0;
+        puVar2[1] = 0;
+      }
+      puVar2 = puVar2 + 2;
+    }
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00517bd0 : PUSH EBX
+00517bd1 : PUSH ESI
+00517bd2 : MOV ESI,dword ptr [ESP + 0xc]
+00517bd6 : PUSH EDI
+00517bd7 : MOV EDI,ECX
+00517bd9 : MOV EBX,dword ptr [EDI + 0x4]
+00517bdc : CMP ESI,EBX
+00517bde : JNC 0x00517bec
+00517be0 : MOV EAX,dword ptr [EDI + 0x8]
+00517be3 : SHR EAX,0x1
+00517be5 : CMP ESI,EAX
+00517be7 : JNC 0x00517c01
+00517be9 : PUSH ESI
+00517bea : JMP 0x00517bfb
+00517bec : CMP ESI,dword ptr [EDI + 0x8]
+00517bef : JC 0x00517c01
+00517bf1 : MOV ECX,ESI
+00517bf3 : SHR ECX,0x2
+00517bf6 : ADD ECX,ESI
+00517bf8 : PUSH ECX
+00517bf9 : MOV ECX,EDI
+00517bfb : PUSH EDI
+00517bfc : CALL 0x00517b00
+00517c01 : MOV dword ptr [EDI + 0x4],ESI
+00517c04 : CMP ESI,EBX
+00517c06 : JBE 0x00517c24
+00517c08 : SUB ESI,EBX
+00517c0a : MOV EDX,dword ptr [EDI]
+00517c0c : LEA EAX,[EDX + EBX*0x8]
+00517c0f : JZ 0x00517c24
+00517c11 : XOR ECX,ECX
+00517c13 : CMP EAX,ECX
+00517c15 : JZ 0x00517c1c
+00517c17 : MOV dword ptr [EAX],ECX
+00517c19 : MOV dword ptr [EAX + 0x4],ECX
+00517c1c : ADD EAX,0x8
+00517c1f : SUB ESI,0x1
+00517c22 : JNZ 0x00517c13
+00517c24 : POP EDI
+00517c25 : POP ESI
+00517c26 : POP EBX
+00517c27 : RET 0x4

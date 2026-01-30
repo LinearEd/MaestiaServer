@@ -1,0 +1,182 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00a840e0
+ENTRY    : 00a840e0
+BODY     : [[00a840e0, 00a8420b]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00a840e0(void)
+
+{
+  rsize_t _DstSize;
+  int in_EAX;
+  int *piVar1;
+  ushort uVar2;
+  short sVar3;
+  int iVar4;
+  ushort in_DX;
+  
+  if ((*(int *)(in_EAX + 0x44) - *(int *)(in_EAX + 0x40) & 0xfffffffcU) == 0) {
+    FUN_008018d0(L"AvaGuiPremiumShopBasket::PopItem ItemList Empty..");
+  }
+  else {
+    if ((uint)(*(int *)(in_EAX + 0x44) - *(int *)(in_EAX + 0x40) >> 2) <= (uint)in_DX) {
+      FUN_008018d0(L"AvaGuiPremiumShopBasket::PopItem  index sizeover..");
+      return;
+    }
+    piVar1 = *(int **)(in_EAX + 0x40);
+    uVar2 = 0;
+    if (piVar1 != *(int **)(in_EAX + 0x44)) {
+      while (uVar2 != in_DX) {
+        piVar1 = piVar1 + 1;
+        uVar2 = uVar2 + 1;
+        if (piVar1 == *(int **)(in_EAX + 0x44)) {
+          return;
+        }
+      }
+      *(int *)(in_EAX + 0x4c) = *(int *)(in_EAX + 0x4c) - *(int *)(*piVar1 + 0x78);
+      iVar4 = *(int *)(in_EAX + 0x44) - (int)(piVar1 + 1) >> 2;
+      if (0 < iVar4) {
+        _DstSize = iVar4 * 4;
+        _memmove_s(piVar1,_DstSize,piVar1 + 1,_DstSize);
+      }
+      *(int *)(in_EAX + 0x44) = *(int *)(in_EAX + 0x44) + -4;
+      piVar1 = DAT_00da9894;
+      if ((uint)(*(int *)(in_EAX + 0x44) - *(int *)(in_EAX + 0x40) >> 2) < 0x15) {
+        *(undefined2 *)(in_EAX + 0x3a) = 0;
+        iVar4 = *piVar1;
+        if ((iVar4 != 0) && (piVar1 = *(int **)(iVar4 + 0x114), piVar1 != (int *)0x0)) {
+          (**(code **)(*piVar1 + 4))(piVar1,"ShoppingBasketMaxScroll",&DAT_00c55fbc,0);
+        }
+      }
+      else {
+        sVar3 = (short)(((*(int *)(in_EAX + 0x44) - *(int *)(in_EAX + 0x40) >> 2) - 0x15U) / 5) + 1;
+        *(short *)(in_EAX + 0x3a) = sVar3;
+        iVar4 = *piVar1;
+        if ((iVar4 != 0) && (piVar1 = *(int **)(iVar4 + 0x114), piVar1 != (int *)0x0)) {
+          (**(code **)(*piVar1 + 4))(piVar1,"ShoppingBasketMaxScroll",&DAT_00c55fbc,(int)sVar3);
+          FUN_00a83c50();
+          return;
+        }
+      }
+      FUN_00a83c50();
+      return;
+    }
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00a840e0 : PUSH ESI
+00a840e1 : MOV ESI,EAX
+00a840e3 : MOV EAX,dword ptr [ESI + 0x44]
+00a840e6 : SUB EAX,dword ptr [ESI + 0x40]
+00a840e9 : TEST EAX,0xfffffffc
+00a840ee : JNZ 0x00a84105
+00a840f0 : MOV ESI,dword ptr [0x00da98e8]
+00a840f6 : PUSH 0xc55fc0
+00a840fb : CALL 0x008018d0
+00a84100 : ADD ESP,0x4
+00a84103 : POP ESI
+00a84104 : RET
+00a84105 : MOV ECX,dword ptr [ESI + 0x44]
+00a84108 : SUB ECX,dword ptr [ESI + 0x40]
+00a8410b : MOVZX EAX,DX
+00a8410e : SAR ECX,0x2
+00a84111 : CMP ECX,EAX
+00a84113 : JA 0x00a8412a
+00a84115 : MOV ESI,dword ptr [0x00da98e8]
+00a8411b : PUSH 0xc56058
+00a84120 : CALL 0x008018d0
+00a84125 : ADD ESP,0x4
+00a84128 : POP ESI
+00a84129 : RET
+00a8412a : MOV EAX,dword ptr [ESI + 0x40]
+00a8412d : XOR ECX,ECX
+00a8412f : CMP EAX,dword ptr [ESI + 0x44]
+00a84132 : JZ 0x00a84103
+00a84134 : CMP CX,DX
+00a84137 : JZ 0x00a84144
+00a84139 : ADD EAX,0x4
+00a8413c : INC ECX
+00a8413d : CMP EAX,dword ptr [ESI + 0x44]
+00a84140 : JNZ 0x00a84134
+00a84142 : POP ESI
+00a84143 : RET
+00a84144 : MOV ECX,dword ptr [EAX]
+00a84146 : MOV EDX,dword ptr [ECX + 0x78]
+00a84149 : SUB dword ptr [ESI + 0x4c],EDX
+00a8414c : MOV ECX,dword ptr [ESI + 0x44]
+00a8414f : LEA EDX,[EAX + 0x4]
+00a84152 : SUB ECX,EDX
+00a84154 : SAR ECX,0x2
+00a84157 : TEST ECX,ECX
+00a84159 : JLE 0x00a8416b
+00a8415b : ADD ECX,ECX
+00a8415d : ADD ECX,ECX
+00a8415f : PUSH ECX
+00a84160 : PUSH EDX
+00a84161 : PUSH ECX
+00a84162 : PUSH EAX
+00a84163 : CALL 0x00634101
+00a84168 : ADD ESP,0x10
+00a8416b : ADD dword ptr [ESI + 0x44],-0x4
+00a8416f : MOV EAX,dword ptr [ESI + 0x44]
+00a84172 : SUB EAX,dword ptr [ESI + 0x40]
+00a84175 : SAR EAX,0x2
+00a84178 : CMP EAX,0x14
+00a8417b : JBE 0x00a841d1
+00a8417d : MOV ECX,dword ptr [ESI + 0x44]
+00a84180 : SUB ECX,dword ptr [ESI + 0x40]
+00a84183 : MOV EAX,0xcccccccd
+00a84188 : SAR ECX,0x2
+00a8418b : SUB ECX,0x15
+00a8418e : MUL ECX
+00a84190 : SHR EDX,0x2
+00a84193 : LEA ECX,[EDX + 0x1]
+00a84196 : MOV EDX,dword ptr [0x00da9894]
+00a8419c : MOV word ptr [ESI + 0x3a],CX
+00a841a0 : MOV EAX,dword ptr [EDX]
+00a841a2 : TEST EAX,EAX
+00a841a4 : JZ 0x00a84204
+00a841a6 : MOV EAX,dword ptr [EAX + 0x114]
+00a841ac : TEST EAX,EAX
+00a841ae : JZ 0x00a84204
+00a841b0 : MOV EDX,dword ptr [EAX]
+00a841b2 : MOV EDX,dword ptr [EDX + 0x4]
+00a841b5 : MOVSX ECX,CX
+00a841b8 : PUSH ECX
+00a841b9 : PUSH 0xc55fbc
+00a841be : PUSH 0xc560c0
+00a841c3 : PUSH EAX
+00a841c4 : CALL EDX
+00a841c6 : ADD ESP,0x10
+00a841c9 : MOV ECX,ESI
+00a841cb : POP ESI
+00a841cc : JMP 0x00a83c50
+00a841d1 : MOV ECX,dword ptr [0x00da9894]
+00a841d7 : XOR EAX,EAX
+00a841d9 : MOV word ptr [ESI + 0x3a],AX
+00a841dd : MOV EAX,dword ptr [ECX]
+00a841df : TEST EAX,EAX
+00a841e1 : JZ 0x00a84204
+00a841e3 : MOV EAX,dword ptr [EAX + 0x114]
+00a841e9 : TEST EAX,EAX
+00a841eb : JZ 0x00a84204
+00a841ed : MOV EDX,dword ptr [EAX]
+00a841ef : PUSH 0x0
+00a841f1 : PUSH 0xc55fbc
+00a841f6 : PUSH 0xc560c0
+00a841fb : PUSH EAX
+00a841fc : MOV EAX,dword ptr [EDX + 0x4]
+00a841ff : CALL EAX
+00a84201 : ADD ESP,0x10
+00a84204 : MOV ECX,ESI
+00a84206 : POP ESI
+00a84207 : JMP 0x00a83c50

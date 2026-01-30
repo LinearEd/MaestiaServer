@@ -1,0 +1,70 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0051b1e0
+ENTRY    : 0051b1e0
+BODY     : [[0051b1e0, 0051b20c] [0051b210, 0051b22c]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+int FUN_0051b1e0(int *param_1)
+
+{
+  int *piVar1;
+  int iVar2;
+  int iVar3;
+  uint *in_ECX;
+  
+  piVar1 = (int *)(*in_ECX & 0xfffffffc) + 2;
+  iVar2 = (int)param_1;
+  if (*(int *)(*in_ECX & 0xfffffffc) < 0) {
+    param_1 = (int *)((int)piVar1 + (int)param_1);
+    iVar2 = FUN_0051aa70(&param_1);
+    return iVar2;
+  }
+  do {
+    param_1 = piVar1;
+    iVar3 = FUN_0051aa70(&param_1);
+    iVar2 = iVar2 + -1;
+    if (iVar3 == 0) {
+      return 0;
+    }
+    piVar1 = param_1;
+  } while (-1 < iVar2);
+  return iVar3;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0051b1e0 : MOV EAX,dword ptr [ECX]
+0051b1e2 : AND EAX,0xfffffffc
+0051b1e5 : PUSH ESI
+0051b1e6 : MOV ESI,dword ptr [ESP + 0x8]
+0051b1ea : LEA ECX,[EAX + 0x8]
+0051b1ed : MOV dword ptr [ESP + 0x8],ECX
+0051b1f1 : MOV EDX,dword ptr [EAX]
+0051b1f3 : SHR EDX,0x1f
+0051b1f6 : TEST DL,0x1
+0051b1f9 : JZ 0x0051b210
+0051b1fb : ADD dword ptr [ESP + 0x8],ESI
+0051b1ff : LEA EAX,[ESP + 0x8]
+0051b203 : PUSH EAX
+0051b204 : CALL 0x0051aa70
+0051b209 : POP ESI
+0051b20a : RET 0x4
+0051b210 : LEA ECX,[ESP + 0x8]
+0051b214 : PUSH ECX
+0051b215 : CALL 0x0051aa70
+0051b21a : DEC ESI
+0051b21b : TEST EAX,EAX
+0051b21d : JZ 0x0051b227
+0051b21f : TEST ESI,ESI
+0051b221 : JGE 0x0051b210
+0051b223 : POP ESI
+0051b224 : RET 0x4
+0051b227 : XOR EAX,EAX
+0051b229 : POP ESI
+0051b22a : RET 0x4

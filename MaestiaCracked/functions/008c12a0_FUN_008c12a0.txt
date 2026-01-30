@@ -1,0 +1,98 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_008c12a0
+ENTRY    : 008c12a0
+BODY     : [[008c12a0, 008c1304]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_008c12a0(int param_1)
+
+{
+  int *piVar1;
+  int *piVar2;
+  int *piVar3;
+  uint uVar4;
+  int in_ECX;
+  
+  piVar1 = *(int **)(in_ECX + 8);
+  piVar2 = *(int **)(in_ECX + 4);
+  if (piVar2 != piVar1) {
+    piVar3 = piVar2;
+    do {
+      if (*(int *)(*piVar3 + 4) == *(int *)(param_1 + 4)) {
+        return;
+      }
+      piVar3 = piVar3 + 1;
+    } while (piVar3 != piVar1);
+  }
+  if (piVar2 == (int *)0x0) {
+    uVar4 = 0;
+  }
+  else {
+    uVar4 = *(int *)(in_ECX + 0xc) - (int)piVar2 >> 2;
+  }
+  if (uVar4 <= (uint)((int)piVar1 - (int)piVar2 >> 2)) {
+    FUN_0042fe80(in_ECX,piVar1,&param_1);
+    return;
+  }
+  *piVar1 = param_1;
+  *(int **)(in_ECX + 8) = piVar1 + 1;
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+008c12a0 : PUSH EBP
+008c12a1 : MOV EBP,ESP
+008c12a3 : MOV EDX,dword ptr [ECX + 0x8]
+008c12a6 : PUSH EBX
+008c12a7 : PUSH ESI
+008c12a8 : MOV ESI,dword ptr [ECX + 0x4]
+008c12ab : MOV EAX,ESI
+008c12ad : PUSH EDI
+008c12ae : CMP EAX,EDX
+008c12b0 : JZ 0x008c12c6
+008c12b2 : MOV EDI,dword ptr [EBP + 0x8]
+008c12b5 : MOV EDI,dword ptr [EDI + 0x4]
+008c12b8 : MOV EBX,dword ptr [EAX]
+008c12ba : CMP dword ptr [EBX + 0x4],EDI
+008c12bd : JZ 0x008c12fe
+008c12bf : ADD EAX,0x4
+008c12c2 : CMP EAX,EDX
+008c12c4 : JNZ 0x008c12b8
+008c12c6 : TEST ESI,ESI
+008c12c8 : JNZ 0x008c12ce
+008c12ca : XOR EAX,EAX
+008c12cc : JMP 0x008c12d6
+008c12ce : MOV EAX,dword ptr [ECX + 0xc]
+008c12d1 : SUB EAX,ESI
+008c12d3 : SAR EAX,0x2
+008c12d6 : MOV EDI,EDX
+008c12d8 : SUB EDI,ESI
+008c12da : SAR EDI,0x2
+008c12dd : CMP EDI,EAX
+008c12df : JNC 0x008c12f3
+008c12e1 : MOV EAX,dword ptr [EBP + 0x8]
+008c12e4 : MOV dword ptr [EDX],EAX
+008c12e6 : ADD EDX,0x4
+008c12e9 : MOV dword ptr [ECX + 0x8],EDX
+008c12ec : POP EDI
+008c12ed : POP ESI
+008c12ee : POP EBX
+008c12ef : POP EBP
+008c12f0 : RET 0x4
+008c12f3 : LEA EAX,[EBP + 0x8]
+008c12f6 : PUSH EAX
+008c12f7 : PUSH EDX
+008c12f8 : PUSH ECX
+008c12f9 : CALL 0x0042fe80
+008c12fe : POP EDI
+008c12ff : POP ESI
+008c1300 : POP EBX
+008c1301 : POP EBP
+008c1302 : RET 0x4

@@ -1,0 +1,88 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0059ebd0
+ENTRY    : 0059ebd0
+BODY     : [[0059ebd0, 0059ec41]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_0059ebd0(void)
+
+{
+  uint uVar1;
+  undefined4 *puVar2;
+  int in_ECX;
+  uint uVar3;
+  
+  FUN_0054f630();
+  FUN_00568530();
+  FUN_00568530();
+  if (*(int *)(in_ECX + 0x5c) != 0) {
+    uVar1 = *(uint *)(*(int *)(in_ECX + 0x5c) + 4);
+    uVar3 = 0;
+    if (uVar1 != 0) {
+      do {
+        puVar2 = *(undefined4 **)(**(int **)(in_ECX + 0x5c) + uVar3 * 4);
+        if (puVar2 != (undefined4 *)0x0) {
+          puVar2[2] = puVar2[2] + -1;
+          if ((puVar2[2] & 0x70000000) != 0x10000000) {
+            puVar2[2] = puVar2[2] & 0x9fffffff | 0x10000000;
+            (**(code **)*puVar2)(1);
+          }
+        }
+        uVar3 = uVar3 + 1;
+      } while (uVar3 < uVar1);
+    }
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0059ebd0 : PUSH EDI
+0059ebd1 : MOV EDI,ECX
+0059ebd3 : CALL 0x0054f630
+0059ebd8 : LEA ECX,[EDI + 0x44]
+0059ebdb : CALL 0x00568530
+0059ebe0 : LEA ECX,[EDI + 0x50]
+0059ebe3 : CALL 0x00568530
+0059ebe8 : MOV EAX,dword ptr [EDI + 0x5c]
+0059ebeb : TEST EAX,EAX
+0059ebed : JZ 0x0059ec40
+0059ebef : PUSH EBX
+0059ebf0 : MOV EBX,dword ptr [EAX + 0x4]
+0059ebf3 : PUSH ESI
+0059ebf4 : XOR ESI,ESI
+0059ebf6 : TEST EBX,EBX
+0059ebf8 : JBE 0x0059ec3e
+0059ebfa : LEA EBX,[EBX]
+0059ec00 : MOV EAX,dword ptr [EDI + 0x5c]
+0059ec03 : MOV ECX,dword ptr [EAX]
+0059ec05 : LEA EAX,[ECX + ESI*0x4]
+0059ec08 : MOV ECX,dword ptr [EAX]
+0059ec0a : TEST ECX,ECX
+0059ec0c : JZ 0x0059ec39
+0059ec0e : DEC dword ptr [ECX + 0x8]
+0059ec11 : MOV EAX,dword ptr [ECX + 0x8]
+0059ec14 : MOV EDX,EAX
+0059ec16 : AND EDX,0x70000000
+0059ec1c : CMP EDX,0x10000000
+0059ec22 : JZ 0x0059ec39
+0059ec24 : AND EAX,0x9fffffff
+0059ec29 : OR EAX,0x10000000
+0059ec2e : MOV dword ptr [ECX + 0x8],EAX
+0059ec31 : MOV EAX,dword ptr [ECX]
+0059ec33 : MOV EDX,dword ptr [EAX]
+0059ec35 : PUSH 0x1
+0059ec37 : CALL EDX
+0059ec39 : INC ESI
+0059ec3a : CMP ESI,EBX
+0059ec3c : JC 0x0059ec00
+0059ec3e : POP ESI
+0059ec3f : POP EBX
+0059ec40 : POP EDI
+0059ec41 : RET

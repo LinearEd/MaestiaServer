@@ -1,0 +1,65 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __getbuf
+ENTRY    : 0065bd15
+BODY     : [[0065bd15, 0065bd5d]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+/* Library Function - Single Match
+    __getbuf
+   
+   Library: Visual Studio 2008 Release */
+
+void __cdecl __getbuf(FILE *_File)
+
+{
+  char *pcVar1;
+  
+  _DAT_00d7b7f0 = _DAT_00d7b7f0 + 1;
+  pcVar1 = __malloc_crt(0x1000);
+  _File->_base = pcVar1;
+  if (pcVar1 == (char *)0x0) {
+    _File->_flag = _File->_flag | 4;
+    _File->_base = (char *)&_File->_charbuf;
+    _File->_bufsiz = 2;
+  }
+  else {
+    _File->_flag = _File->_flag | 8;
+    _File->_bufsiz = 0x1000;
+  }
+  _File->_cnt = 0;
+  _File->_ptr = _File->_base;
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0065bd15 : MOV EDI,EDI
+0065bd17 : PUSH EBP
+0065bd18 : MOV EBP,ESP
+0065bd1a : INC dword ptr [0x00d7b7f0]
+0065bd20 : PUSH 0x1000
+0065bd25 : CALL 0x0064255f
+0065bd2a : POP ECX
+0065bd2b : MOV ECX,dword ptr [EBP + 0x8]
+0065bd2e : MOV dword ptr [ECX + 0x8],EAX
+0065bd31 : TEST EAX,EAX
+0065bd33 : JZ 0x0065bd42
+0065bd35 : OR dword ptr [ECX + 0xc],0x8
+0065bd39 : MOV dword ptr [ECX + 0x18],0x1000
+0065bd40 : JMP 0x0065bd53
+0065bd42 : OR dword ptr [ECX + 0xc],0x4
+0065bd46 : LEA EAX,[ECX + 0x14]
+0065bd49 : MOV dword ptr [ECX + 0x8],EAX
+0065bd4c : MOV dword ptr [ECX + 0x18],0x2
+0065bd53 : MOV EAX,dword ptr [ECX + 0x8]
+0065bd56 : AND dword ptr [ECX + 0x4],0x0
+0065bd5a : MOV dword ptr [ECX],EAX
+0065bd5c : POP EBP
+0065bd5d : RET

@@ -1,0 +1,70 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005194a0
+ENTRY    : 005194a0
+BODY     : [[005194a0, 005194dc] [005194e0, 005194e8]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+int FUN_005194a0(void)
+
+{
+  int iVar1;
+  uint in_ECX;
+  
+  iVar1 = 0;
+  if (in_ECX != 0) {
+    if ((in_ECX & 0xffffff) == 0) {
+      in_ECX = in_ECX >> 0x18;
+      iVar1 = 0x18;
+    }
+    else if ((in_ECX & 0xffff) == 0) {
+      in_ECX = in_ECX >> 0x10;
+      iVar1 = 0x10;
+    }
+    else if ((char)in_ECX == '\0') {
+      in_ECX = in_ECX >> 8;
+      iVar1 = 8;
+    }
+    for (; (in_ECX & 1) == 0; in_ECX = in_ECX >> 1) {
+      iVar1 = iVar1 + 1;
+    }
+    return iVar1;
+  }
+  return 0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005194a0 : XOR EAX,EAX
+005194a2 : TEST ECX,ECX
+005194a4 : JNZ 0x005194a9
+005194a6 : XOR AL,AL
+005194a8 : RET
+005194a9 : TEST ECX,0xffffff
+005194af : JNZ 0x005194bb
+005194b1 : SHR ECX,0x18
+005194b4 : MOV EAX,0x18
+005194b9 : JMP 0x005194d6
+005194bb : MOVZX EDX,CX
+005194be : TEST EDX,EDX
+005194c0 : JNZ 0x005194ca
+005194c2 : SHR ECX,0x10
+005194c5 : LEA EAX,[EDX + 0x10]
+005194c8 : JMP 0x005194d6
+005194ca : TEST CL,CL
+005194cc : JNZ 0x005194d6
+005194ce : SHR ECX,0x8
+005194d1 : MOV EAX,0x8
+005194d6 : TEST CL,0x1
+005194d9 : JNZ 0x005194e8
+005194db : JMP 0x005194e0
+005194e0 : SHR ECX,0x1
+005194e2 : INC EAX
+005194e3 : TEST CL,0x1
+005194e6 : JZ 0x005194e0
+005194e8 : RET

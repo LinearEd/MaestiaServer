@@ -1,0 +1,167 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_009c8c40
+ENTRY    : 009c8c40
+BODY     : [[009c8c40, 009c8da4]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_009c8c40(void)
+
+{
+  int iVar1;
+  int *piVar2;
+  int unaff_ESI;
+  float10 fVar3;
+  float fVar4;
+  float fVar5;
+  float fVar6;
+  uint local_10;
+  
+  iVar1 = *(int *)(*(int *)(DAT_0172491c + 0x17c) + 1000);
+  fVar6 = *(float *)(iVar1 + 0x70) - *(float *)(unaff_ESI + 0x78);
+  fVar5 = *(float *)(iVar1 + 0x6c) - *(float *)(unaff_ESI + 0x74);
+  fVar4 = *(float *)(iVar1 + 0x68) - *(float *)(unaff_ESI + 0x70);
+  fVar3 = (float10)FUN_0040f460(fVar6 * fVar6 + fVar5 * fVar5 + fVar4 * fVar4);
+  piVar2 = DAT_00da9894;
+  if (fVar3 < (float10)0) {
+    fVar3 = (float10)0.0;
+  }
+  local_10 = (uint)(longlong)ROUND(fVar3 * (float10)0.1);
+  if (local_10 < 0x15) {
+    if (*(char *)(unaff_ESI + 0x8d) != '\0') {
+      *(undefined1 *)(unaff_ESI + 0x8d) = 0;
+      if (*(int *)(*piVar2 + 0x1a8) != 0) {
+        FUN_009adfc0(*(int *)(*piVar2 + 0x1a8),0x17);
+        return;
+      }
+    }
+  }
+  else if (*(uint *)(unaff_ESI + 0x90) != local_10) {
+    *(uint *)(unaff_ESI + 0x90) = local_10;
+    if ((((local_10 % 0x14 & 1) != 0) && (*DAT_00da9894 != 0)) &&
+       (piVar2 = *(int **)(*DAT_00da9894 + 0x114), piVar2 != (int *)0x0)) {
+      (**(code **)(*piVar2 + 4))(piVar2,"mc_noticemessge.SetFlickerSpeed","%d,%d",2,local_10 % 0x14)
+      ;
+    }
+    piVar2 = DAT_00da9894;
+    if (*(char *)(unaff_ESI + 0x8d) == '\0') {
+      *(undefined1 *)(unaff_ESI + 0x8d) = 1;
+      if (*(int *)(*piVar2 + 0x1a8) != 0) {
+        FUN_009adfc0(*(int *)(*piVar2 + 0x1a8),0x17);
+      }
+    }
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+009c8c40 : PUSH EBP
+009c8c41 : MOV EBP,ESP
+009c8c43 : MOV EAX,[0x0172491c]
+009c8c48 : MOV ECX,dword ptr [EAX + 0x17c]
+009c8c4e : MOV EAX,dword ptr [ECX + 0x3e8]
+009c8c54 : MOVSS XMM2,dword ptr [EAX + 0x70]
+009c8c59 : SUBSS XMM2,dword ptr [ESI + 0x78]
+009c8c5e : MOVSS XMM1,dword ptr [EAX + 0x6c]
+009c8c63 : SUBSS XMM1,dword ptr [ESI + 0x74]
+009c8c68 : MOVSS XMM0,dword ptr [EAX + 0x68]
+009c8c6d : SUBSS XMM0,dword ptr [ESI + 0x70]
+009c8c72 : ADD EAX,0x68
+009c8c75 : MOVAPS XMM3,XMM2
+009c8c78 : MULSS XMM3,XMM2
+009c8c7c : MOVAPS XMM2,XMM1
+009c8c7f : MULSS XMM2,XMM1
+009c8c83 : SUB ESP,0xc
+009c8c86 : MOVAPS XMM1,XMM0
+009c8c89 : ADDSS XMM3,XMM2
+009c8c8d : MULSS XMM1,XMM0
+009c8c91 : PUSH ECX
+009c8c92 : ADDSS XMM3,XMM1
+009c8c96 : MOVSS dword ptr [ESP],XMM3
+009c8c9b : CALL 0x0040f460
+009c8ca0 : FLDZ
+009c8ca2 : ADD ESP,0x4
+009c8ca5 : FCOMIP ST0,ST1
+009c8ca7 : JBE 0x009c8cb6
+009c8ca9 : XORPS XMM0,XMM0
+009c8cac : FSTP ST0
+009c8cae : MOVSS dword ptr [EBP + -0x4],XMM0
+009c8cb3 : FLD float ptr [EBP + -0x4]
+009c8cb6 : FMUL float ptr [0x00cdf0f0]
+009c8cbc : FNSTCW word ptr [EBP + -0x2]
+009c8cbf : MOVZX EAX,word ptr [EBP + -0x2]
+009c8cc3 : OR EAX,0xc00
+009c8cc8 : MOV dword ptr [EBP + -0x8],EAX
+009c8ccb : FLDCW word ptr [EBP + -0x8]
+009c8cce : FISTP qword ptr [EBP + -0xc]
+009c8cd1 : MOV ECX,dword ptr [EBP + -0xc]
+009c8cd4 : FLDCW word ptr [EBP + -0x2]
+009c8cd7 : CMP ECX,0x14
+009c8cda : JA 0x009c8d1a
+009c8cdc : CMP byte ptr [ESI + 0x8d],0x0
+009c8ce3 : JZ 0x009c8da1
+009c8ce9 : MOV EDX,dword ptr [0x00da9894]
+009c8cef : MOV byte ptr [ESI + 0x8d],0x0
+009c8cf6 : MOV EAX,dword ptr [EDX]
+009c8cf8 : MOV EAX,dword ptr [EAX + 0x1a8]
+009c8cfe : TEST EAX,EAX
+009c8d00 : JZ 0x009c8da1
+009c8d06 : PUSH 0x17
+009c8d08 : MOV ECX,0xc9350c
+009c8d0d : PUSH EAX
+009c8d0e : CALL 0x009adfc0
+009c8d13 : ADD ESP,0x8
+009c8d16 : MOV ESP,EBP
+009c8d18 : POP EBP
+009c8d19 : RET
+009c8d1a : MOV EAX,0xcccccccd
+009c8d1f : MUL ECX
+009c8d21 : SHR EDX,0x4
+009c8d24 : LEA EDX,[EDX + EDX*0x4]
+009c8d27 : ADD EDX,EDX
+009c8d29 : ADD EDX,EDX
+009c8d2b : MOV EAX,ECX
+009c8d2d : SUB EAX,EDX
+009c8d2f : CMP dword ptr [ESI + 0x90],ECX
+009c8d35 : JZ 0x009c8da1
+009c8d37 : MOV dword ptr [ESI + 0x90],ECX
+009c8d3d : TEST AL,0x1
+009c8d3f : JZ 0x009c8d6f
+009c8d41 : MOV ECX,dword ptr [0x00da9894]
+009c8d47 : MOV ECX,dword ptr [ECX]
+009c8d49 : TEST ECX,ECX
+009c8d4b : JZ 0x009c8d6f
+009c8d4d : MOV ECX,dword ptr [ECX + 0x114]
+009c8d53 : TEST ECX,ECX
+009c8d55 : JZ 0x009c8d6f
+009c8d57 : MOV EDX,dword ptr [ECX]
+009c8d59 : PUSH EAX
+009c8d5a : MOV EAX,dword ptr [EDX + 0x4]
+009c8d5d : PUSH 0x2
+009c8d5f : PUSH 0xc93694
+009c8d64 : PUSH 0xc9369c
+009c8d69 : PUSH ECX
+009c8d6a : CALL EAX
+009c8d6c : ADD ESP,0x14
+009c8d6f : CMP byte ptr [ESI + 0x8d],0x0
+009c8d76 : JNZ 0x009c8da1
+009c8d78 : MOV ECX,dword ptr [0x00da9894]
+009c8d7e : MOV byte ptr [ESI + 0x8d],0x1
+009c8d85 : MOV EDX,dword ptr [ECX]
+009c8d87 : MOV EAX,dword ptr [EDX + 0x1a8]
+009c8d8d : TEST EAX,EAX
+009c8d8f : JZ 0x009c8da1
+009c8d91 : PUSH 0x17
+009c8d93 : MOV ECX,0xc935ac
+009c8d98 : PUSH EAX
+009c8d99 : CALL 0x009adfc0
+009c8d9e : ADD ESP,0x8
+009c8da1 : MOV ESP,EBP
+009c8da3 : POP EBP
+009c8da4 : RET

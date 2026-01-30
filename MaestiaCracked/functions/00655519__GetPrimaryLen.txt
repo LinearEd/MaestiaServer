@@ -1,0 +1,49 @@
+PROGRAM  : Maestia.exe
+FUNCTION : _GetPrimaryLen
+ENTRY    : 00655519
+BODY     : [[00655519, 00655533]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    _GetPrimaryLen
+   
+   Library: Visual Studio 2008 Release */
+
+int _GetPrimaryLen(void)
+
+{
+  char cVar1;
+  int iVar2;
+  char *in_EDX;
+  
+  iVar2 = 0;
+  while( true ) {
+    cVar1 = *in_EDX;
+    in_EDX = in_EDX + 1;
+    if (((cVar1 < 'A') || ('Z' < cVar1)) && (0x19 < (byte)(cVar1 + 0x9fU))) break;
+    iVar2 = iVar2 + 1;
+  }
+  return iVar2;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00655519 : XOR EAX,EAX
+0065551b : MOV CL,byte ptr [EDX]
+0065551d : INC EDX
+0065551e : CMP CL,0x41
+00655521 : JL 0x00655528
+00655523 : CMP CL,0x5a
+00655526 : JLE 0x00655530
+00655528 : SUB CL,0x61
+0065552b : CMP CL,0x19
+0065552e : JA 0x00655533
+00655530 : INC EAX
+00655531 : JMP 0x0065551b
+00655533 : RET

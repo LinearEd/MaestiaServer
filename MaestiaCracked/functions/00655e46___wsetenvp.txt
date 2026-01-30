@@ -1,0 +1,161 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __wsetenvp
+ENTRY    : 00655e46
+BODY     : [[00655e46, 00655ed7] [00655edb, 00655f23]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __wsetenvp
+   
+   Library: Visual Studio 2008 Release */
+
+int __cdecl __wsetenvp(void)
+
+{
+  int iVar1;
+  undefined4 *puVar2;
+  wchar_t *_Dst;
+  errno_t eVar3;
+  wchar_t *pwVar4;
+  int iVar5;
+  size_t _Count;
+  
+  iVar5 = 0;
+  pwVar4 = DAT_00d7b7d0;
+  if (DAT_00d7b7d0 == (wchar_t *)0x0) {
+    iVar5 = -1;
+  }
+  else {
+    for (; *pwVar4 != L'\0'; pwVar4 = pwVar4 + iVar1 + 1) {
+      if (*pwVar4 != L'=') {
+        iVar5 = iVar5 + 1;
+      }
+      iVar1 = FUN_00644bcf(pwVar4);
+    }
+    puVar2 = __calloc_crt(iVar5 + 1,4);
+    pwVar4 = DAT_00d7b7d0;
+    DAT_00d7b7a8 = puVar2;
+    if (puVar2 == (undefined4 *)0x0) {
+      iVar5 = -1;
+    }
+    else {
+      for (; *pwVar4 != L'\0'; pwVar4 = pwVar4 + _Count) {
+        iVar5 = FUN_00644bcf(pwVar4);
+        _Count = iVar5 + 1;
+        if (*pwVar4 != L'=') {
+          _Dst = __calloc_crt(_Count,2);
+          *puVar2 = _Dst;
+          if (_Dst == (wchar_t *)0x0) {
+            _free(DAT_00d7b7a8);
+            DAT_00d7b7a8 = (undefined4 *)0x0;
+            return -1;
+          }
+          eVar3 = _wcscpy_s(_Dst,_Count,pwVar4);
+          if (eVar3 != 0) {
+                    /* WARNING: Subroutine does not return */
+            __invoke_watson((wchar_t *)0x0,(wchar_t *)0x0,(wchar_t *)0x0,0,0);
+          }
+          puVar2 = puVar2 + 1;
+        }
+      }
+      _free(DAT_00d7b7d0);
+      DAT_00d7b7d0 = (wchar_t *)0x0;
+      *puVar2 = 0;
+      DAT_01729d68 = 1;
+      iVar5 = 0;
+    }
+  }
+  return iVar5;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00655e46 : MOV EDI,EDI
+00655e48 : PUSH ESI
+00655e49 : MOV ESI,dword ptr [0x00d7b7d0]
+00655e4f : PUSH EDI
+00655e50 : XOR EDI,EDI
+00655e52 : TEST ESI,ESI
+00655e54 : JNZ 0x00655e70
+00655e56 : OR EAX,0xffffffff
+00655e59 : JMP 0x00655f0a
+00655e5e : CMP AX,0x3d
+00655e62 : JZ 0x00655e65
+00655e64 : INC EDI
+00655e65 : PUSH ESI
+00655e66 : CALL 0x00644bcf
+00655e6b : POP ECX
+00655e6c : LEA ESI,[ESI + EAX*0x2 + 0x2]
+00655e70 : MOVZX EAX,word ptr [ESI]
+00655e73 : TEST AX,AX
+00655e76 : JNZ 0x00655e5e
+00655e78 : PUSH EBX
+00655e79 : PUSH 0x4
+00655e7b : INC EDI
+00655e7c : PUSH EDI
+00655e7d : CALL 0x006425a4
+00655e82 : MOV EBX,EAX
+00655e84 : POP ECX
+00655e85 : POP ECX
+00655e86 : MOV dword ptr [0x00d7b7a8],EBX
+00655e8c : TEST EBX,EBX
+00655e8e : JNZ 0x00655e95
+00655e90 : OR EAX,0xffffffff
+00655e93 : JMP 0x00655f09
+00655e95 : MOV ESI,dword ptr [0x00d7b7d0]
+00655e9b : JMP 0x00655ee1
+00655e9d : PUSH ESI
+00655e9e : CALL 0x00644bcf
+00655ea3 : MOV EDI,EAX
+00655ea5 : INC EDI
+00655ea6 : CMP word ptr [ESI],0x3d
+00655eaa : POP ECX
+00655eab : JZ 0x00655ede
+00655ead : PUSH 0x2
+00655eaf : PUSH EDI
+00655eb0 : CALL 0x006425a4
+00655eb5 : POP ECX
+00655eb6 : POP ECX
+00655eb7 : MOV dword ptr [EBX],EAX
+00655eb9 : TEST EAX,EAX
+00655ebb : JZ 0x00655f0d
+00655ebd : PUSH ESI
+00655ebe : PUSH EDI
+00655ebf : PUSH EAX
+00655ec0 : CALL 0x0063481b
+00655ec5 : ADD ESP,0xc
+00655ec8 : TEST EAX,EAX
+00655eca : JZ 0x00655edb
+00655ecc : XOR EAX,EAX
+00655ece : PUSH EAX
+00655ecf : PUSH EAX
+00655ed0 : PUSH EAX
+00655ed1 : PUSH EAX
+00655ed2 : PUSH EAX
+00655ed3 : CALL 0x00637169
+00655edb : ADD EBX,0x4
+00655ede : LEA ESI,[ESI + EDI*0x2]
+00655ee1 : CMP word ptr [ESI],0x0
+00655ee5 : JNZ 0x00655e9d
+00655ee7 : PUSH dword ptr [0x00d7b7d0]
+00655eed : CALL 0x0063610d
+00655ef2 : AND dword ptr [0x00d7b7d0],0x0
+00655ef9 : AND dword ptr [EBX],0x0
+00655efc : MOV dword ptr [0x01729d68],0x1
+00655f06 : XOR EAX,EAX
+00655f08 : POP ECX
+00655f09 : POP EBX
+00655f0a : POP EDI
+00655f0b : POP ESI
+00655f0c : RET
+00655f0d : PUSH dword ptr [0x00d7b7a8]
+00655f13 : CALL 0x0063610d
+00655f18 : AND dword ptr [0x00d7b7a8],0x0
+00655f1f : OR EAX,0xffffffff
+00655f22 : JMP 0x00655f08

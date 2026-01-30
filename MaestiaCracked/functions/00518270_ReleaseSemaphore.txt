@@ -1,0 +1,106 @@
+PROGRAM  : Maestia.exe
+FUNCTION : ReleaseSemaphore
+ENTRY    : 00518270
+BODY     : [[00518270, 00518308]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* public: bool __thiscall GSemaphore::ReleaseSemaphore(int) */
+
+bool __thiscall GSemaphore::ReleaseSemaphore(GSemaphore *this,int param_1)
+
+{
+  int iVar1;
+  LONG LVar2;
+  
+                    /* 0x118270  133  ?ReleaseSemaphore@GSemaphore@@QAE_NH@Z */
+  iVar1 = param_1;
+  if (param_1 != 0) {
+    GMutex::Lock((GMutex *)(this + 0x18));
+    if (*(int *)(this + 0x14) - iVar1 < 0) {
+      *(undefined4 *)(this + 0x14) = 0;
+    }
+    else {
+      *(int *)(this + 0x14) = *(int *)(this + 0x14) - iVar1;
+    }
+    if (iVar1 == 1) {
+      GWaitCondition::Notify((GWaitCondition *)(this + 0x2c));
+    }
+    else {
+      GWaitCondition::NotifyAll((GWaitCondition *)(this + 0x2c));
+    }
+    param_1 = 0;
+    FUN_00517000(&param_1);
+    GMutex::Unlock((GMutex *)(this + 0x18));
+    iVar1 = param_1;
+    if (param_1 != 0) {
+      GWaitable::HandlerArray::CallWaitHandlers((HandlerArray *)param_1);
+      LVar2 = InterlockedExchangeAdd((LONG *)iVar1,-1);
+      if (LVar2 == 1) {
+        FUN_005a20f0();
+        FUN_00515cf0(*(undefined4 *)(iVar1 + 4));
+        FUN_00515cf0(iVar1);
+      }
+    }
+  }
+  return true;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00518270 : PUSH ESI
+00518271 : PUSH EDI
+00518272 : MOV EDI,dword ptr [ESP + 0xc]
+00518276 : MOV ESI,ECX
+00518278 : TEST EDI,EDI
+0051827a : JZ 0x00518302
+00518280 : PUSH EBX
+00518281 : LEA EBX,[ESI + 0x18]
+00518284 : MOV ECX,EBX
+00518286 : CALL 0x005162b0
+0051828b : MOV EAX,dword ptr [ESI + 0x14]
+0051828e : SUB EAX,EDI
+00518290 : JS 0x00518297
+00518292 : SUB dword ptr [ESI + 0x14],EDI
+00518295 : JMP 0x0051829e
+00518297 : MOV dword ptr [ESI + 0x14],0x0
+0051829e : LEA ECX,[ESI + 0x2c]
+005182a1 : CMP EDI,0x1
+005182a4 : JNZ 0x005182ad
+005182a6 : CALL 0x00516450
+005182ab : JMP 0x005182b2
+005182ad : CALL 0x00516460
+005182b2 : LEA ECX,[ESP + 0x10]
+005182b6 : PUSH ECX
+005182b7 : MOV ECX,ESI
+005182b9 : MOV dword ptr [ESP + 0x14],0x0
+005182c1 : CALL 0x00517000
+005182c6 : MOV ECX,EBX
+005182c8 : CALL 0x005170a0
+005182cd : MOV ESI,dword ptr [ESP + 0x10]
+005182d1 : POP EBX
+005182d2 : TEST ESI,ESI
+005182d4 : JZ 0x00518302
+005182d6 : MOV ECX,ESI
+005182d8 : CALL 0x00517e90
+005182dd : PUSH -0x1
+005182df : PUSH ESI
+005182e0 : CALL dword ptr [0x00b851cc]
+005182e6 : SUB EAX,0x1
+005182e9 : JNZ 0x00518302
+005182eb : LEA ECX,[ESI + 0x10]
+005182ee : CALL 0x005a20f0
+005182f3 : MOV EDX,dword ptr [ESI + 0x4]
+005182f6 : PUSH EDX
+005182f7 : CALL 0x00515cf0
+005182fc : PUSH ESI
+005182fd : CALL 0x00515cf0
+00518302 : POP EDI
+00518303 : MOV AL,0x1
+00518305 : POP ESI
+00518306 : RET 0x4

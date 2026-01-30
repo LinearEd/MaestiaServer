@@ -1,0 +1,137 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_009dac80
+ENTRY    : 009dac80
+BODY     : [[009dac80, 009dad31]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_009dac80(void)
+
+{
+  wchar_t wVar1;
+  int iVar2;
+  wchar_t *pwVar3;
+  wchar_t *pwVar4;
+  wchar_t *unaff_ESI;
+  int unaff_EDI;
+  bool bVar5;
+  
+  iVar2 = _wcsncmp(unaff_ESI,L"Booster",7);
+  if (iVar2 != 0) {
+    iVar2 = _wcsncmp(unaff_ESI,L"Tank",4);
+    if (iVar2 != 0) {
+      return;
+    }
+    pwVar4 = L"Enabled";
+    pwVar3 = unaff_ESI + 5;
+    do {
+      wVar1 = *pwVar3;
+      bVar5 = (ushort)wVar1 < (ushort)*pwVar4;
+      if (wVar1 != *pwVar4) {
+LAB_009dad24:
+        *(bool *)(unaff_EDI + 0x41) = 1 - bVar5 == (uint)(bVar5 != 0);
+        return;
+      }
+      if (wVar1 == L'\0') break;
+      wVar1 = pwVar3[1];
+      bVar5 = (ushort)wVar1 < (ushort)pwVar4[1];
+      if (wVar1 != pwVar4[1]) goto LAB_009dad24;
+      pwVar3 = pwVar3 + 2;
+      pwVar4 = pwVar4 + 2;
+    } while (wVar1 != L'\0');
+    *(undefined1 *)(unaff_EDI + 0x41) = 1;
+    return;
+  }
+  pwVar4 = L"Enabled";
+  pwVar3 = unaff_ESI + 8;
+  do {
+    wVar1 = *pwVar3;
+    bVar5 = (ushort)wVar1 < (ushort)*pwVar4;
+    if (wVar1 != *pwVar4) {
+LAB_009daccd:
+      *(bool *)(unaff_EDI + 0x40) = 1 - bVar5 == (uint)(bVar5 != 0);
+      return;
+    }
+    if (wVar1 == L'\0') break;
+    wVar1 = pwVar3[1];
+    bVar5 = (ushort)wVar1 < (ushort)pwVar4[1];
+    if (wVar1 != pwVar4[1]) goto LAB_009daccd;
+    pwVar3 = pwVar3 + 2;
+    pwVar4 = pwVar4 + 2;
+  } while (wVar1 != L'\0');
+  *(undefined1 *)(unaff_EDI + 0x40) = 1;
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+009dac80 : PUSH 0x7
+009dac82 : PUSH 0xc98248
+009dac87 : PUSH ESI
+009dac88 : CALL 0x006380ac
+009dac8d : ADD ESP,0xc
+009dac90 : TEST EAX,EAX
+009dac92 : JNZ 0x009dacdb
+009dac94 : MOV ECX,0xc98258
+009dac99 : LEA EAX,[ESI + 0x10]
+009dac9c : LEA ESP,[ESP]
+009daca0 : MOV DX,word ptr [EAX]
+009daca3 : CMP DX,word ptr [ECX]
+009daca6 : JNZ 0x009daccd
+009daca8 : TEST DX,DX
+009dacab : JZ 0x009dacc2
+009dacad : MOV DX,word ptr [EAX + 0x2]
+009dacb1 : CMP DX,word ptr [ECX + 0x2]
+009dacb5 : JNZ 0x009daccd
+009dacb7 : ADD EAX,0x4
+009dacba : ADD ECX,0x4
+009dacbd : TEST DX,DX
+009dacc0 : JNZ 0x009daca0
+009dacc2 : XOR EAX,EAX
+009dacc4 : TEST EAX,EAX
+009dacc6 : SETZ AL
+009dacc9 : MOV byte ptr [EDI + 0x40],AL
+009daccc : RET
+009daccd : SBB EAX,EAX
+009daccf : SBB EAX,-0x1
+009dacd2 : TEST EAX,EAX
+009dacd4 : SETZ AL
+009dacd7 : MOV byte ptr [EDI + 0x40],AL
+009dacda : RET
+009dacdb : PUSH 0x4
+009dacdd : PUSH 0xc98268
+009dace2 : PUSH ESI
+009dace3 : CALL 0x006380ac
+009dace8 : ADD ESP,0xc
+009daceb : TEST EAX,EAX
+009daced : JNZ 0x009dad31
+009dacef : MOV ECX,0xc98274
+009dacf4 : LEA EAX,[ESI + 0xa]
+009dacf7 : MOV DX,word ptr [EAX]
+009dacfa : CMP DX,word ptr [ECX]
+009dacfd : JNZ 0x009dad24
+009dacff : TEST DX,DX
+009dad02 : JZ 0x009dad19
+009dad04 : MOV DX,word ptr [EAX + 0x2]
+009dad08 : CMP DX,word ptr [ECX + 0x2]
+009dad0c : JNZ 0x009dad24
+009dad0e : ADD EAX,0x4
+009dad11 : ADD ECX,0x4
+009dad14 : TEST DX,DX
+009dad17 : JNZ 0x009dacf7
+009dad19 : XOR EAX,EAX
+009dad1b : TEST EAX,EAX
+009dad1d : SETZ CL
+009dad20 : MOV byte ptr [EDI + 0x41],CL
+009dad23 : RET
+009dad24 : SBB EAX,EAX
+009dad26 : SBB EAX,-0x1
+009dad29 : TEST EAX,EAX
+009dad2b : SETZ CL
+009dad2e : MOV byte ptr [EDI + 0x41],CL
+009dad31 : RET

@@ -1,0 +1,176 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __wcsnicmp_l
+ENTRY    : 0065d2a1
+BODY     : [[0065d2a1, 0065d38a]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __wcsnicmp_l
+   
+   Library: Visual Studio 2008 Release */
+
+int __cdecl __wcsnicmp_l(wchar_t *_Str1,wchar_t *_Str2,size_t _MaxCount,_locale_t _Locale)
+
+{
+  wchar_t wVar1;
+  wchar_t wVar2;
+  wint_t wVar3;
+  wint_t wVar4;
+  int iVar5;
+  int *piVar6;
+  uint uVar7;
+  uint uVar8;
+  localeinfo_struct local_14;
+  int local_c;
+  char local_8;
+  
+  iVar5 = 0;
+  if (_MaxCount != 0) {
+    if ((_Str1 == (wchar_t *)0x0) || (_Str2 == (wchar_t *)0x0)) {
+      piVar6 = __errno();
+      *piVar6 = 0x16;
+      __invalid_parameter(0,0,0,0,0);
+      iVar5 = 0x7fffffff;
+    }
+    else {
+      _LocaleUpdate::_LocaleUpdate((_LocaleUpdate *)&local_14,_Locale);
+      if ((local_14.locinfo)->lc_category[0].wlocale == (wchar_t *)0x0) {
+        do {
+          wVar1 = *_Str1;
+          if ((0x40 < (ushort)wVar1) && ((ushort)wVar1 < 0x5b)) {
+            wVar1 = wVar1 + L' ';
+          }
+          uVar8 = (uint)(ushort)wVar1;
+          wVar2 = *_Str2;
+          if ((0x40 < (ushort)wVar2) && ((ushort)wVar2 < 0x5b)) {
+            wVar2 = wVar2 + L' ';
+          }
+          _Str1 = _Str1 + 1;
+          _Str2 = _Str2 + 1;
+          _MaxCount = _MaxCount - 1;
+          uVar7 = (uint)(ushort)wVar2;
+        } while (((_MaxCount != 0) && (wVar1 != L'\0')) && (wVar1 == wVar2));
+      }
+      else {
+        do {
+          wVar3 = __towlower_l(*_Str1,&local_14);
+          uVar8 = (uint)wVar3;
+          wVar4 = __towlower_l(*_Str2,&local_14);
+          _Str1 = _Str1 + 1;
+          _Str2 = _Str2 + 1;
+          _MaxCount = _MaxCount - 1;
+          uVar7 = (uint)wVar4;
+          if ((_MaxCount == 0) || (wVar3 == 0)) break;
+        } while (wVar3 == wVar4);
+      }
+      iVar5 = uVar8 - uVar7;
+      if (local_8 != '\0') {
+        *(uint *)(local_c + 0x70) = *(uint *)(local_c + 0x70) & 0xfffffffd;
+      }
+    }
+  }
+  return iVar5;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0065d2a1 : MOV EDI,EDI
+0065d2a3 : PUSH EBP
+0065d2a4 : MOV EBP,ESP
+0065d2a6 : SUB ESP,0x10
+0065d2a9 : PUSH EBX
+0065d2aa : PUSH ESI
+0065d2ab : XOR ESI,ESI
+0065d2ad : XOR EAX,EAX
+0065d2af : PUSH EDI
+0065d2b0 : CMP dword ptr [EBP + 0x10],ESI
+0065d2b3 : JZ 0x0065d386
+0065d2b9 : MOV EBX,dword ptr [EBP + 0x8]
+0065d2bc : CMP EBX,ESI
+0065d2be : JNZ 0x0065d2e2
+0065d2c0 : CALL 0x0063ab82
+0065d2c5 : PUSH ESI
+0065d2c6 : PUSH ESI
+0065d2c7 : PUSH ESI
+0065d2c8 : PUSH ESI
+0065d2c9 : PUSH ESI
+0065d2ca : MOV dword ptr [EAX],0x16
+0065d2d0 : CALL 0x006372b8
+0065d2d5 : ADD ESP,0x14
+0065d2d8 : MOV EAX,0x7fffffff
+0065d2dd : JMP 0x0065d386
+0065d2e2 : MOV EDI,dword ptr [EBP + 0xc]
+0065d2e5 : CMP EDI,ESI
+0065d2e7 : JZ 0x0065d2c0
+0065d2e9 : PUSH dword ptr [EBP + 0x14]
+0065d2ec : LEA ECX,[EBP + -0x10]
+0065d2ef : CALL 0x00637880
+0065d2f4 : MOV EAX,dword ptr [EBP + -0x10]
+0065d2f7 : CMP dword ptr [EAX + 0x14],ESI
+0065d2fa : JNZ 0x0065d33b
+0065d2fc : MOVZX EAX,word ptr [EBX]
+0065d2ff : CMP AX,0x41
+0065d303 : JC 0x0065d30e
+0065d305 : CMP AX,0x5a
+0065d309 : JA 0x0065d30e
+0065d30b : ADD EAX,0x20
+0065d30e : MOVZX ESI,AX
+0065d311 : MOVZX EAX,word ptr [EDI]
+0065d314 : CMP AX,0x41
+0065d318 : JC 0x0065d323
+0065d31a : CMP AX,0x5a
+0065d31e : JA 0x0065d323
+0065d320 : ADD EAX,0x20
+0065d323 : INC EBX
+0065d324 : INC EBX
+0065d325 : INC EDI
+0065d326 : INC EDI
+0065d327 : DEC dword ptr [EBP + 0x10]
+0065d32a : MOVZX EAX,AX
+0065d32d : JZ 0x0065d371
+0065d32f : TEST SI,SI
+0065d332 : JZ 0x0065d371
+0065d334 : CMP SI,AX
+0065d337 : JZ 0x0065d2fc
+0065d339 : JMP 0x0065d371
+0065d33b : LEA EAX,[EBP + -0x10]
+0065d33e : PUSH EAX
+0065d33f : MOVZX EAX,word ptr [EBX]
+0065d342 : PUSH EAX
+0065d343 : CALL 0x00649cdb
+0065d348 : MOVZX ESI,AX
+0065d34b : LEA EAX,[EBP + -0x10]
+0065d34e : PUSH EAX
+0065d34f : MOVZX EAX,word ptr [EDI]
+0065d352 : PUSH EAX
+0065d353 : CALL 0x00649cdb
+0065d358 : ADD ESP,0x10
+0065d35b : INC EBX
+0065d35c : INC EBX
+0065d35d : INC EDI
+0065d35e : INC EDI
+0065d35f : DEC dword ptr [EBP + 0x10]
+0065d362 : MOVZX EAX,AX
+0065d365 : JZ 0x0065d371
+0065d367 : TEST SI,SI
+0065d36a : JZ 0x0065d371
+0065d36c : CMP SI,AX
+0065d36f : JZ 0x0065d33b
+0065d371 : MOVZX ECX,AX
+0065d374 : MOVZX EAX,SI
+0065d377 : SUB EAX,ECX
+0065d379 : CMP byte ptr [EBP + -0x4],0x0
+0065d37d : JZ 0x0065d386
+0065d37f : MOV ECX,dword ptr [EBP + -0x8]
+0065d382 : AND dword ptr [ECX + 0x70],0xfffffffd
+0065d386 : POP EDI
+0065d387 : POP ESI
+0065d388 : POP EBX
+0065d389 : LEAVE
+0065d38a : RET

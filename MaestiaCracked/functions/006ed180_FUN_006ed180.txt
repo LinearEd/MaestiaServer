@@ -1,0 +1,139 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_006ed180
+ENTRY    : 006ed180
+BODY     : [[006ed180, 006ed249]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+char FUN_006ed180(int param_1,int param_2)
+
+{
+  int in_EAX;
+  int iVar1;
+  char cVar2;
+  int unaff_EDI;
+  
+  if (param_1 == 0) {
+    __wassert(L"pName",L".\\Source\\Shaders.cpp",0x7f);
+  }
+  cVar2 = '\0';
+  *(undefined4 *)(unaff_EDI + 4) = 0;
+  *(undefined4 *)(unaff_EDI + 8) = 0;
+  *(int *)(unaff_EDI + 0xc) = in_EAX;
+  if (*(int *)(in_EAX + 0xc) == 0) {
+    FUN_00807d70("CShaderTechniqueDirectX9::GetConstant, can\'t get constant [%s]; vertex shader was not compiled"
+                 ,param_1);
+  }
+  else if ((*(int *)(in_EAX + 4) != 0) && ((param_2 == 0 || (param_2 == 2)))) {
+    iVar1 = (**(code **)(**(int **)(in_EAX + 0xc) + 0x24))(*(int **)(in_EAX + 0xc),0,param_1);
+    if (iVar1 != 0) {
+      *(int *)(unaff_EDI + 4) = iVar1;
+      cVar2 = '\x01';
+    }
+  }
+  if (*(int *)(in_EAX + 0x10) == 0) {
+    FUN_00807d70("CShaderTechniqueDirectX9::GetConstant, can\'t get constant [%s]; shader was not compiled"
+                 ,param_1);
+  }
+  else if ((*(int *)(in_EAX + 8) != 0) && ((param_2 == 1 || (param_2 == 2)))) {
+    iVar1 = (**(code **)(**(int **)(in_EAX + 0x10) + 0x24))(*(int **)(in_EAX + 0x10),0,param_1);
+    if (iVar1 != 0) {
+      *(int *)(unaff_EDI + 8) = iVar1;
+      return '\x01';
+    }
+  }
+  if (cVar2 == '\0') {
+    FUN_00807d70("CShaderTechniqueDirectX9::GetConstant, failed to find HLSL constant [%s]\n",
+                 param_1);
+  }
+  return cVar2;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006ed180 : PUSH EBX
+006ed181 : PUSH EBP
+006ed182 : MOV EBP,dword ptr [ESP + 0xc]
+006ed186 : PUSH ESI
+006ed187 : MOV ESI,EAX
+006ed189 : TEST EBP,EBP
+006ed18b : JNZ 0x006ed1a1
+006ed18d : PUSH 0x7f
+006ed18f : PUSH 0xbf2084
+006ed194 : PUSH 0xbf20b0
+006ed199 : CALL 0x00640200
+006ed19e : ADD ESP,0xc
+006ed1a1 : XOR ECX,ECX
+006ed1a3 : XOR BL,BL
+006ed1a5 : MOV dword ptr [EDI + 0x4],ECX
+006ed1a8 : MOV dword ptr [EDI + 0x8],ECX
+006ed1ab : MOV dword ptr [EDI + 0xc],ESI
+006ed1ae : CMP dword ptr [ESI + 0xc],ECX
+006ed1b1 : JZ 0x006ed1dd
+006ed1b3 : CMP dword ptr [ESI + 0x4],ECX
+006ed1b6 : JZ 0x006ed1eb
+006ed1b8 : MOV EAX,dword ptr [ESP + 0x14]
+006ed1bc : CMP EAX,ECX
+006ed1be : JZ 0x006ed1c5
+006ed1c0 : CMP EAX,0x2
+006ed1c3 : JNZ 0x006ed1eb
+006ed1c5 : MOV EAX,dword ptr [ESI + 0xc]
+006ed1c8 : MOV EDX,dword ptr [EAX]
+006ed1ca : PUSH EBP
+006ed1cb : PUSH ECX
+006ed1cc : PUSH EAX
+006ed1cd : MOV EAX,dword ptr [EDX + 0x24]
+006ed1d0 : CALL EAX
+006ed1d2 : TEST EAX,EAX
+006ed1d4 : JZ 0x006ed1eb
+006ed1d6 : MOV dword ptr [EDI + 0x4],EAX
+006ed1d9 : MOV BL,0x1
+006ed1db : JMP 0x006ed1eb
+006ed1dd : PUSH EBP
+006ed1de : PUSH 0xbf20e8
+006ed1e3 : CALL 0x00807d70
+006ed1e8 : ADD ESP,0x8
+006ed1eb : CMP dword ptr [ESI + 0x10],0x0
+006ed1ef : JZ 0x006ed222
+006ed1f1 : CMP dword ptr [ESI + 0x8],0x0
+006ed1f5 : JZ 0x006ed230
+006ed1f7 : MOV EAX,dword ptr [ESP + 0x14]
+006ed1fb : CMP EAX,0x1
+006ed1fe : JZ 0x006ed205
+006ed200 : CMP EAX,0x2
+006ed203 : JNZ 0x006ed230
+006ed205 : MOV ESI,dword ptr [ESI + 0x10]
+006ed208 : MOV ECX,dword ptr [ESI]
+006ed20a : MOV EDX,dword ptr [ECX + 0x24]
+006ed20d : PUSH EBP
+006ed20e : PUSH 0x0
+006ed210 : PUSH ESI
+006ed211 : CALL EDX
+006ed213 : TEST EAX,EAX
+006ed215 : JZ 0x006ed230
+006ed217 : POP ESI
+006ed218 : POP EBP
+006ed219 : MOV dword ptr [EDI + 0x8],EAX
+006ed21c : MOV AL,0x1
+006ed21e : POP EBX
+006ed21f : RET 0x8
+006ed222 : PUSH EBP
+006ed223 : PUSH 0xbf2148
+006ed228 : CALL 0x00807d70
+006ed22d : ADD ESP,0x8
+006ed230 : TEST BL,BL
+006ed232 : JNZ 0x006ed242
+006ed234 : PUSH EBP
+006ed235 : PUSH 0xbf21a0
+006ed23a : CALL 0x00807d70
+006ed23f : ADD ESP,0x8
+006ed242 : POP ESI
+006ed243 : POP EBP
+006ed244 : MOV AL,BL
+006ed246 : POP EBX
+006ed247 : RET 0x8

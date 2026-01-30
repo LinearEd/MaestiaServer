@@ -1,0 +1,150 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0055ebd0
+ENTRY    : 0055ebd0
+BODY     : [[0055ebd0, 0055ec68] [0055ec70, 0055ecfb]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+uint FUN_0055ebd0(int param_1)
+
+{
+  byte *pbVar1;
+  int iVar2;
+  uint uVar3;
+  uint uVar4;
+  byte local_10 [16];
+  
+  if (((*(ushort *)(param_1 + 0x2a) >> 9 & 1) != 0) && (*(int *)(param_1 + 0x18) != 0)) {
+    FUN_0055eaa0();
+  }
+  iVar2 = 0x10;
+  uVar4 = 0x1505;
+  do {
+    pbVar1 = &stack0xffffffef + iVar2;
+    iVar2 = iVar2 + -1;
+    uVar4 = uVar4 * 0x1003f + (uint)*pbVar1;
+  } while (iVar2 != 0);
+  if ((*(byte *)(param_1 + 0x2a) >> 2 & 1) != 0) {
+    uVar3 = FUN_0051b370((*(uint *)(param_1 + 8) & 0xfffffffc) + 8,
+                         *(uint *)(*(uint *)(param_1 + 8) & 0xfffffffc) & 0x7fffffff,0x1505);
+    uVar4 = uVar3 ^ uVar4;
+  }
+  if ((*(ushort *)(param_1 + 0x2a) & 0x100) != 0) {
+    iVar2 = FUN_0051b1a0();
+    if (iVar2 != 0) {
+      uVar3 = FUN_0051b370((*(uint *)(param_1 + 0x10) & 0xfffffffc) + 8,
+                           *(uint *)(*(uint *)(param_1 + 0x10) & 0xfffffffc) & 0x7fffffff,0x1505);
+      uVar4 = uVar4 ^ uVar3;
+    }
+  }
+  return uVar4;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0055ebd0 : SUB ESP,0x10
+0055ebd3 : PUSH ESI
+0055ebd4 : PUSH EDI
+0055ebd5 : MOV EDI,dword ptr [ESP + 0x1c]
+0055ebd9 : XOR ECX,ECX
+0055ebdb : XOR ESI,ESI
+0055ebdd : TEST byte ptr [EDI + 0x2a],0x1
+0055ebe1 : MOV dword ptr [ESP + 0x10],ECX
+0055ebe5 : MOV dword ptr [ESP + 0x14],ECX
+0055ebe9 : JNZ 0x0055ebf7
+0055ebeb : MOV AX,word ptr [EDI + 0x2a]
+0055ebef : SHR AX,0xa
+0055ebf3 : TEST AL,0x1
+0055ebf5 : JZ 0x0055ebfa
+0055ebf7 : MOV ESI,dword ptr [EDI + 0x20]
+0055ebfa : MOVZX EAX,word ptr [EDI + 0x2a]
+0055ebfe : MOV DL,AL
+0055ec00 : SHR DL,0x1
+0055ec02 : TEST DL,0x1
+0055ec05 : JZ 0x0055ec0b
+0055ec07 : MOVSX ECX,word ptr [EDI + 0x24]
+0055ec0b : MOV DL,AL
+0055ec0d : SHR DL,0x3
+0055ec10 : TEST DL,0x1
+0055ec13 : JZ 0x0055ec1e
+0055ec15 : MOVZX EDX,word ptr [EDI + 0x26]
+0055ec19 : SHL EDX,0x10
+0055ec1c : OR ECX,EDX
+0055ec1e : MOVZX EDX,byte ptr [EDI + 0x28]
+0055ec22 : SHL EDX,0x18
+0055ec25 : OR ESI,EDX
+0055ec27 : MOVZX EDX,AX
+0055ec2a : SHL EDX,0x18
+0055ec2d : OR ECX,EDX
+0055ec2f : CMP dword ptr [EDI + 0x1c],0x0
+0055ec33 : MOV dword ptr [ESP + 0x8],ESI
+0055ec37 : MOV dword ptr [ESP + 0xc],ECX
+0055ec3b : JZ 0x0055ec45
+0055ec3d : MOV dword ptr [ESP + 0x10],0x1
+0055ec45 : SHR EAX,0x9
+0055ec48 : TEST AL,0x1
+0055ec4a : JZ 0x0055ec5c
+0055ec4c : MOV ECX,dword ptr [EDI + 0x18]
+0055ec4f : TEST ECX,ECX
+0055ec51 : JZ 0x0055ec5c
+0055ec53 : CALL 0x0055eaa0
+0055ec58 : MOV dword ptr [ESP + 0x14],EAX
+0055ec5c : PUSH EBP
+0055ec5d : MOV EAX,0x10
+0055ec62 : MOV EBP,0x1505
+0055ec67 : JMP 0x0055ec70
+0055ec70 : MOVZX ECX,byte ptr [ESP + EAX*0x1 + 0xb]
+0055ec75 : IMUL EBP,EBP,0x1003f
+0055ec7b : DEC EAX
+0055ec7c : ADD EBP,ECX
+0055ec7e : TEST EAX,EAX
+0055ec80 : JA 0x0055ec70
+0055ec82 : MOV DL,byte ptr [EDI + 0x2a]
+0055ec85 : SHR DL,0x2
+0055ec88 : MOV ESI,EBP
+0055ec8a : TEST DL,0x1
+0055ec8d : JZ 0x0055ecb5
+0055ec8f : MOV EAX,dword ptr [EDI + 0x8]
+0055ec92 : MOV ECX,EAX
+0055ec94 : AND ECX,0xfffffffc
+0055ec97 : MOV ECX,dword ptr [ECX]
+0055ec99 : PUSH 0x1505
+0055ec9e : AND ECX,0x7fffffff
+0055eca4 : AND EAX,0xfffffffc
+0055eca7 : PUSH ECX
+0055eca8 : ADD EAX,0x8
+0055ecab : PUSH EAX
+0055ecac : CALL 0x0051b370
+0055ecb1 : MOV ESI,EAX
+0055ecb3 : XOR ESI,EBP
+0055ecb5 : MOV EDX,0x100
+0055ecba : POP EBP
+0055ecbb : TEST word ptr [EDI + 0x2a],DX
+0055ecbf : JZ 0x0055ecf2
+0055ecc1 : ADD EDI,0x10
+0055ecc4 : MOV ECX,EDI
+0055ecc6 : CALL 0x0051b1a0
+0055eccb : TEST EAX,EAX
+0055eccd : JZ 0x0055ecf2
+0055eccf : MOV EAX,dword ptr [EDI]
+0055ecd1 : MOV ECX,EAX
+0055ecd3 : AND ECX,0xfffffffc
+0055ecd6 : MOV ECX,dword ptr [ECX]
+0055ecd8 : PUSH 0x1505
+0055ecdd : AND ECX,0x7fffffff
+0055ece3 : AND EAX,0xfffffffc
+0055ece6 : PUSH ECX
+0055ece7 : ADD EAX,0x8
+0055ecea : PUSH EAX
+0055eceb : CALL 0x0051b370
+0055ecf0 : XOR ESI,EAX
+0055ecf2 : POP EDI
+0055ecf3 : MOV EAX,ESI
+0055ecf5 : POP ESI
+0055ecf6 : ADD ESP,0x10
+0055ecf9 : RET 0x4

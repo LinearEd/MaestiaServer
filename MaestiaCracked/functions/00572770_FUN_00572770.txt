@@ -1,0 +1,167 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00572770
+ENTRY    : 00572770
+BODY     : [[00572770, 00572873]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00572770(int *param_1,undefined4 param_2)
+
+{
+  int iVar1;
+  int iVar2;
+  int iVar3;
+  uint uVar4;
+  int in_ECX;
+  GRefCountNTSImpl *this;
+  int *piVar5;
+  
+  if ((char)param_1[7] == '\0') {
+    *(undefined2 *)(param_1 + 6) = *(undefined2 *)(in_ECX + 0xae0);
+    iVar1 = *(int *)(in_ECX + 0xae8);
+    iVar2 = *(int *)(in_ECX + 0xaec);
+    iVar3 = *(int *)(in_ECX + 0xaf0);
+    param_1[2] = *(int *)(in_ECX + 0xae4);
+    param_1[3] = iVar1;
+    param_1[4] = iVar2;
+    param_1[5] = iVar3;
+    *(char *)((int)param_1 + 0x1b) = (char)param_2;
+    *(undefined1 *)((int)param_1 + 0x1a) = 0;
+    FUN_00572660(param_2);
+    param_1[1] = -1;
+    piVar5 = *(int **)(in_ECX + 0xad8);
+    this = (GRefCountNTSImpl *)0x0;
+    if (piVar5 != (int *)0x0) {
+      if (piVar5[1] == 0) {
+        *piVar5 = *piVar5 + -1;
+        if (*piVar5 == 0) {
+          FUN_00515cf0(piVar5);
+        }
+        *(undefined4 *)(in_ECX + 0xad8) = 0;
+      }
+      else {
+        this = (GRefCountNTSImpl *)piVar5[1];
+        if (this != (GRefCountNTSImpl *)0x0) {
+          *(int *)(this + 4) = *(int *)(this + 4) + 1;
+          *(int *)(this + 4) = *(int *)(this + 4) + 1;
+        }
+      }
+    }
+    if ((GRefCountNTSImpl *)*param_1 != (GRefCountNTSImpl *)0x0) {
+      GRefCountNTSImpl::Release((GRefCountNTSImpl *)*param_1);
+    }
+    *param_1 = (int)this;
+    if (this != (GRefCountNTSImpl *)0x0) {
+      GRefCountNTSImpl::Release(this);
+      if (*param_1 != 0) {
+        uVar4 = 0;
+        if (*(uint *)(in_ECX + 0xad0) != 0) {
+          piVar5 = *(int **)(in_ECX + 0xacc);
+          while (*piVar5 != *param_1) {
+            uVar4 = uVar4 + 1;
+            piVar5 = piVar5 + 1;
+            if (*(uint *)(in_ECX + 0xad0) <= uVar4) {
+              *(undefined1 *)(param_1 + 7) = 1;
+              return;
+            }
+          }
+          param_1[1] = uVar4;
+        }
+      }
+    }
+    *(undefined1 *)(param_1 + 7) = 1;
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00572770 : SUB ESP,0x8
+00572773 : PUSH ESI
+00572774 : MOV ESI,dword ptr [ESP + 0x10]
+00572778 : CMP byte ptr [ESI + 0x1c],0x0
+0057277c : PUSH EDI
+0057277d : MOV EDI,ECX
+0057277f : JNZ 0x0057286c
+00572785 : MOV AX,word ptr [EDI + 0xae0]
+0057278c : MOV word ptr [ESI + 0x18],AX
+00572790 : FLD float ptr [EDI + 0xae8]
+00572796 : MOV EAX,dword ptr [ESP + 0x18]
+0057279a : FSTP float ptr [ESP + 0x14]
+0057279e : FLD float ptr [EDI + 0xaec]
+005727a4 : PUSH EBP
+005727a5 : FSTP float ptr [ESP + 0xc]
+005727a9 : PUSH EAX
+005727aa : FLD float ptr [EDI + 0xaf0]
+005727b0 : FSTP float ptr [ESP + 0x14]
+005727b4 : FLD float ptr [EDI + 0xae4]
+005727ba : FSTP float ptr [ESI + 0x8]
+005727bd : FLD float ptr [ESP + 0x1c]
+005727c1 : FSTP float ptr [ESI + 0xc]
+005727c4 : FLD float ptr [ESP + 0x10]
+005727c8 : FSTP float ptr [ESI + 0x10]
+005727cb : FLD float ptr [ESP + 0x14]
+005727cf : FSTP float ptr [ESI + 0x14]
+005727d2 : MOV byte ptr [ESI + 0x1b],AL
+005727d5 : MOV byte ptr [ESI + 0x1a],0x0
+005727d9 : CALL 0x00572660
+005727de : MOV dword ptr [ESI + 0x4],0xffffffff
+005727e5 : MOV EAX,dword ptr [EDI + 0xad8]
+005727eb : XOR EBP,EBP
+005727ed : TEST EAX,EAX
+005727ef : JZ 0x00572808
+005727f1 : CMP dword ptr [EAX + 0x4],EBP
+005727f4 : JZ 0x00572851
+005727f6 : MOV EBP,dword ptr [EAX + 0x4]
+005727f9 : TEST EBP,EBP
+005727fb : JZ 0x00572808
+005727fd : MOV EAX,0x1
+00572802 : ADD dword ptr [EBP + 0x4],EAX
+00572805 : ADD dword ptr [EBP + 0x4],EAX
+00572808 : MOV ECX,dword ptr [ESI]
+0057280a : TEST ECX,ECX
+0057280c : JZ 0x00572813
+0057280e : CALL 0x004ff7c0
+00572813 : MOV dword ptr [ESI],EBP
+00572815 : TEST EBP,EBP
+00572817 : JZ 0x00572867
+00572819 : MOV ECX,EBP
+0057281b : CALL 0x004ff7c0
+00572820 : MOV EDX,dword ptr [ESI]
+00572822 : TEST EDX,EDX
+00572824 : JZ 0x00572867
+00572826 : MOV ECX,dword ptr [EDI + 0xad0]
+0057282c : XOR EAX,EAX
+0057282e : TEST ECX,ECX
+00572830 : JBE 0x00572867
+00572832 : MOV EDI,dword ptr [EDI + 0xacc]
+00572838 : CMP dword ptr [EDI],EDX
+0057283a : JZ 0x00572864
+0057283c : INC EAX
+0057283d : ADD EDI,0x4
+00572840 : CMP EAX,ECX
+00572842 : JC 0x00572838
+00572844 : POP EBP
+00572845 : POP EDI
+00572846 : MOV byte ptr [ESI + 0x1c],0x1
+0057284a : POP ESI
+0057284b : ADD ESP,0x8
+0057284e : RET 0x8
+00572851 : ADD dword ptr [EAX],-0x1
+00572854 : JNZ 0x0057285c
+00572856 : PUSH EAX
+00572857 : CALL 0x00515cf0
+0057285c : MOV dword ptr [EDI + 0xad8],EBP
+00572862 : JMP 0x00572808
+00572864 : MOV dword ptr [ESI + 0x4],EAX
+00572867 : MOV byte ptr [ESI + 0x1c],0x1
+0057286b : POP EBP
+0057286c : POP EDI
+0057286d : POP ESI
+0057286e : ADD ESP,0x8
+00572871 : RET 0x8

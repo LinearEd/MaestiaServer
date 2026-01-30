@@ -1,0 +1,84 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00686e00
+ENTRY    : 00686e00
+BODY     : [[00686e00, 00686e5b]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+int FUN_00686e00(int *param_1,undefined4 param_2)
+
+{
+  undefined4 *puVar1;
+  int *piVar2;
+  int iVar3;
+  undefined4 *puVar4;
+  
+  iVar3 = 0;
+  if ((param_1 != (int *)0x0) &&
+     ((*(code **)(*param_1 + 0x20) == (code *)0x0 ||
+      (iVar3 = (**(code **)(*param_1 + 0x20))(param_1,param_2), iVar3 == 0)))) {
+    puVar4 = (undefined4 *)(param_1[1] + 0x1c);
+    puVar1 = puVar4 + *(int *)(param_1[1] + 0x18);
+    while ((puVar4 < puVar1 &&
+           (((piVar2 = (int *)*puVar4, piVar2 == param_1 ||
+             (*(code **)(*piVar2 + 0x20) == (code *)0x0)) ||
+            (iVar3 = (**(code **)(*piVar2 + 0x20))(piVar2,param_2), iVar3 == 0))))) {
+      puVar4 = puVar4 + 1;
+    }
+  }
+  return iVar3;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00686e00 : PUSH EDI
+00686e01 : MOV EDI,dword ptr [ESP + 0x8]
+00686e05 : XOR EAX,EAX
+00686e07 : TEST EDI,EDI
+00686e09 : JZ 0x00686e5a
+00686e0b : MOV ECX,dword ptr [EDI]
+00686e0d : MOV ECX,dword ptr [ECX + 0x20]
+00686e10 : PUSH EBX
+00686e11 : MOV EBX,dword ptr [ESP + 0x10]
+00686e15 : TEST ECX,ECX
+00686e17 : JZ 0x00686e24
+00686e19 : PUSH EBX
+00686e1a : PUSH EDI
+00686e1b : CALL ECX
+00686e1d : ADD ESP,0x8
+00686e20 : TEST EAX,EAX
+00686e22 : JNZ 0x00686e59
+00686e24 : MOV ECX,dword ptr [EDI + 0x4]
+00686e27 : MOV EDX,dword ptr [ECX + 0x18]
+00686e2a : PUSH EBP
+00686e2b : PUSH ESI
+00686e2c : LEA ESI,[ECX + 0x1c]
+00686e2f : LEA EBP,[ESI + EDX*0x4]
+00686e32 : CMP ESI,EBP
+00686e34 : JNC 0x00686e57
+00686e36 : MOV ECX,dword ptr [ESI]
+00686e38 : CMP ECX,EDI
+00686e3a : JZ 0x00686e50
+00686e3c : MOV EDX,dword ptr [ECX]
+00686e3e : MOV EDX,dword ptr [EDX + 0x20]
+00686e41 : TEST EDX,EDX
+00686e43 : JZ 0x00686e50
+00686e45 : PUSH EBX
+00686e46 : PUSH ECX
+00686e47 : CALL EDX
+00686e49 : ADD ESP,0x8
+00686e4c : TEST EAX,EAX
+00686e4e : JNZ 0x00686e57
+00686e50 : ADD ESI,0x4
+00686e53 : CMP ESI,EBP
+00686e55 : JC 0x00686e36
+00686e57 : POP ESI
+00686e58 : POP EBP
+00686e59 : POP EBX
+00686e5a : POP EDI
+00686e5b : RET

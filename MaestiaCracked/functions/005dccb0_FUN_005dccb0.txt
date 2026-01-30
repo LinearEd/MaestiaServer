@@ -1,0 +1,75 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005dccb0
+ENTRY    : 005dccb0
+BODY     : [[005dccb0, 005dcd14]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_005dccb0(float param_1,float param_2,float param_3,float param_4)
+
+{
+  float *pfVar1;
+  int iVar2;
+  int in_ECX;
+  uint uVar3;
+  uint uVar4;
+  
+  uVar3 = 0;
+  if (*(int *)(in_ECX + 8) != 0) {
+    do {
+      iVar2 = *(int *)(*(int *)(in_ECX + 0x14) + (uVar3 >> 8) * 4);
+      uVar4 = uVar3 & 0xff;
+      pfVar1 = (float *)(iVar2 + uVar4 * 8);
+      uVar3 = uVar3 + 1;
+      *pfVar1 = *(float *)(iVar2 + uVar4 * 8) * param_1 + param_3;
+      pfVar1[1] = pfVar1[1] * param_2 + param_4;
+    } while (uVar3 < *(uint *)(in_ECX + 8));
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005dccb0 : XOR EDX,EDX
+005dccb2 : CMP dword ptr [ECX + 0x8],EDX
+005dccb5 : JBE 0x005dcd12
+005dccb7 : FLD float ptr [ESP + 0x10]
+005dccbb : PUSH ESI
+005dccbc : FLD float ptr [ESP + 0x10]
+005dccc0 : PUSH EDI
+005dccc1 : FLD float ptr [ESP + 0x10]
+005dccc5 : FLD float ptr [ESP + 0xc]
+005dccc9 : MOV ESI,dword ptr [ECX + 0x14]
+005dcccc : MOV EAX,EDX
+005dccce : SHR EAX,0x8
+005dccd1 : MOV EAX,dword ptr [ESI + EAX*0x4]
+005dccd4 : MOV EDI,EDX
+005dccd6 : AND EDI,0xff
+005dccdc : FLD float ptr [EAX + EDI*0x8]
+005dccdf : LEA EAX,[EAX + EDI*0x8]
+005dcce2 : FMUL ST1
+005dcce4 : INC EDX
+005dcce5 : FSTP float ptr [ESP + 0x18]
+005dcce9 : FLD float ptr [ESP + 0x18]
+005dcced : FADD ST0,ST3
+005dccef : FSTP float ptr [EAX]
+005dccf1 : FLD float ptr [EAX + 0x4]
+005dccf4 : FMUL ST2
+005dccf6 : FSTP float ptr [ESP + 0x18]
+005dccfa : FLD float ptr [ESP + 0x18]
+005dccfe : FADD ST0,ST4
+005dcd00 : FSTP float ptr [EAX + 0x4]
+005dcd03 : CMP EDX,dword ptr [ECX + 0x8]
+005dcd06 : JC 0x005dccc9
+005dcd08 : FSTP ST3
+005dcd0a : POP EDI
+005dcd0b : FSTP ST1
+005dcd0d : POP ESI
+005dcd0e : FSTP ST0
+005dcd10 : FSTP ST0
+005dcd12 : RET 0x10

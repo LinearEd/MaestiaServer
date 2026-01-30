@@ -1,0 +1,139 @@
+PROGRAM  : Maestia.exe
+FUNCTION : Seek
+ENTRY    : 005e9fa0
+BODY     : [[005e9fa0, 005ea057]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* public: virtual int __thiscall GBufferedFile::Seek(int,int) */
+
+int __thiscall GBufferedFile::Seek(GBufferedFile *this,int param_1,int param_2)
+
+{
+  uint uVar1;
+  int iVar2;
+  uint uVar3;
+  
+                    /* 0x1e9fa0  138  ?Seek@GBufferedFile@@UAEHHH@Z */
+  if (*(int *)(this + 0x10) == 1) {
+    if (param_2 == 1) {
+      uVar3 = *(uint *)(this + 0x18);
+      uVar1 = *(int *)(this + 0x14) + param_1;
+      if (uVar1 <= uVar3) {
+        *(uint *)(this + 0x14) = uVar1;
+        return (*(int *)(this + 0x20) - uVar3) + uVar1;
+      }
+      param_2 = 0;
+      param_1 = param_1 + (*(int *)(this + 0x20) - uVar3) + *(int *)(this + 0x14);
+      *(undefined4 *)(this + 0x18) = 0;
+      *(undefined4 *)(this + 0x14) = 0;
+    }
+    else if (param_2 == 0) {
+      uVar1 = *(uint *)(this + 0x18);
+      uVar3 = param_1 - *(uint *)(this + 0x20);
+      if (((-(uint)((uint)param_1 < *(uint *)(this + 0x20)) - *(int *)(this + 0x24)) +
+           (uint)CARRY4(uVar3,uVar1) == 0) && (uVar3 + uVar1 <= uVar1)) {
+        *(uint *)(this + 0x14) = (uVar1 - *(int *)(this + 0x20)) + param_1;
+        return param_1;
+      }
+      *(undefined4 *)(this + 0x18) = 0;
+      *(undefined4 *)(this + 0x14) = 0;
+    }
+    else {
+      FlushBuffer(this);
+    }
+  }
+  else {
+    FlushBuffer(this);
+  }
+  iVar2 = (**(code **)(**(int **)(this + 8) + 0x38))(param_1,param_2);
+  *(int *)(this + 0x20) = iVar2;
+  *(int *)(this + 0x24) = iVar2 >> 0x1f;
+  return iVar2;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005e9fa0 : PUSH EBP
+005e9fa1 : PUSH ESI
+005e9fa2 : MOV ESI,ECX
+005e9fa4 : CMP dword ptr [ESI + 0x10],0x1
+005e9fa8 : PUSH EDI
+005e9fa9 : JNZ 0x005ea032
+005e9faf : MOV EBP,dword ptr [ESP + 0x14]
+005e9fb3 : CMP EBP,0x1
+005e9fb6 : JNZ 0x005e9fec
+005e9fb8 : MOV EDX,dword ptr [ESI + 0x14]
+005e9fbb : MOV EAX,dword ptr [ESP + 0x10]
+005e9fbf : MOV ECX,dword ptr [ESI + 0x18]
+005e9fc2 : LEA EDI,[EDX + EAX*0x1]
+005e9fc5 : CMP EDI,ECX
+005e9fc7 : JA 0x005e9fd9
+005e9fc9 : MOV EAX,dword ptr [ESI + 0x20]
+005e9fcc : SUB EAX,ECX
+005e9fce : MOV dword ptr [ESI + 0x14],EDI
+005e9fd1 : ADD EAX,EDI
+005e9fd3 : POP EDI
+005e9fd4 : POP ESI
+005e9fd5 : POP EBP
+005e9fd6 : RET 0x8
+005e9fd9 : MOV EDI,dword ptr [ESI + 0x20]
+005e9fdc : SUB EDI,ECX
+005e9fde : XOR EBP,EBP
+005e9fe0 : ADD EDI,EDX
+005e9fe2 : ADD EAX,EDI
+005e9fe4 : MOV dword ptr [ESI + 0x18],EBP
+005e9fe7 : MOV dword ptr [ESI + 0x14],EBP
+005e9fea : JMP 0x005ea03f
+005e9fec : TEST EBP,EBP
+005e9fee : JNZ 0x005ea02b
+005e9ff0 : MOV EAX,dword ptr [ESP + 0x10]
+005e9ff4 : MOV EDI,dword ptr [ESI + 0x18]
+005e9ff7 : XOR ECX,ECX
+005e9ff9 : PUSH EBX
+005e9ffa : XOR EBX,EBX
+005e9ffc : MOV EDX,EAX
+005e9ffe : SUB EDX,dword ptr [ESI + 0x20]
+005ea001 : SBB ECX,dword ptr [ESI + 0x24]
+005ea004 : ADD EDX,EDI
+005ea006 : ADC ECX,EBX
+005ea008 : CMP ECX,EBX
+005ea00a : POP EBX
+005ea00b : JA 0x005ea021
+005ea00d : JC 0x005ea013
+005ea00f : CMP EDX,EDI
+005ea011 : JA 0x005ea021
+005ea013 : SUB EDI,dword ptr [ESI + 0x20]
+005ea016 : ADD EDI,EAX
+005ea018 : MOV dword ptr [ESI + 0x14],EDI
+005ea01b : POP EDI
+005ea01c : POP ESI
+005ea01d : POP EBP
+005ea01e : RET 0x8
+005ea021 : XOR ECX,ECX
+005ea023 : MOV dword ptr [ESI + 0x18],ECX
+005ea026 : MOV dword ptr [ESI + 0x14],ECX
+005ea029 : JMP 0x005ea03f
+005ea02b : CALL 0x005e9d20
+005ea030 : JMP 0x005ea03b
+005ea032 : CALL 0x005e9d20
+005ea037 : MOV EBP,dword ptr [ESP + 0x14]
+005ea03b : MOV EAX,dword ptr [ESP + 0x10]
+005ea03f : MOV ECX,dword ptr [ESI + 0x8]
+005ea042 : MOV EDX,dword ptr [ECX]
+005ea044 : PUSH EBP
+005ea045 : PUSH EAX
+005ea046 : MOV EAX,dword ptr [EDX + 0x38]
+005ea049 : CALL EAX
+005ea04b : CDQ
+005ea04c : POP EDI
+005ea04d : MOV dword ptr [ESI + 0x20],EAX
+005ea050 : MOV dword ptr [ESI + 0x24],EDX
+005ea053 : POP ESI
+005ea054 : POP EBP
+005ea055 : RET 0x8

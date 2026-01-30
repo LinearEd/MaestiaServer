@@ -1,0 +1,100 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0067b8a0
+ENTRY    : 0067b8a0
+BODY     : [[0067b8a0, 0067b949]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+void FUN_0067b8a0(void)
+
+{
+  HKL pHVar1;
+  UINT UVar2;
+  HMODULE hModule;
+  HIMC pHVar3;
+  int in_ECX;
+  CHAR local_10c [264];
+  uint local_4;
+  
+  local_4 = DAT_00d66fa0 ^ (uint)local_10c;
+  pHVar1 = GetKeyboardLayout(0);
+  UVar2 = ImmGetIMEFileNameA(pHVar1,local_10c,0x104);
+  if ((UVar2 != 0) && (hModule = LoadLibraryA(local_10c), hModule != (HMODULE)0x0)) {
+    _DAT_00d7c37c = GetProcAddress(hModule,"GetReadingString");
+    DAT_00d7c378 = GetProcAddress(hModule,"ShowReadingWindow");
+    if ((DAT_00d7c378 != (FARPROC)0x0) &&
+       (pHVar3 = ImmGetContext(*(HWND *)(*(int *)(in_ECX + 0x3c) + 0x18)), pHVar3 != (HIMC)0x0)) {
+      (*DAT_00d7c378)(pHVar3,0);
+      ImmReleaseContext(*(HWND *)(*(int *)(in_ECX + 0x3c) + 0x18),pHVar3);
+    }
+  }
+  __security_check_cookie(local_4 ^ (uint)local_10c);
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0067b8a0 : SUB ESP,0x10c
+0067b8a6 : MOV EAX,[0x00d66fa0]
+0067b8ab : XOR EAX,ESP
+0067b8ad : MOV dword ptr [ESP + 0x108],EAX
+0067b8b4 : PUSH EBX
+0067b8b5 : PUSH 0x0
+0067b8b7 : MOV EBX,ECX
+0067b8b9 : CALL dword ptr [0x00b8551c]
+0067b8bf : PUSH 0x104
+0067b8c4 : LEA ECX,[ESP + 0x8]
+0067b8c8 : PUSH ECX
+0067b8c9 : PUSH EAX
+0067b8ca : CALL 0x00685b66
+0067b8cf : TEST EAX,EAX
+0067b8d1 : JBE 0x0067b934
+0067b8d3 : PUSH ESI
+0067b8d4 : LEA EDX,[ESP + 0x8]
+0067b8d8 : PUSH EDX
+0067b8d9 : CALL dword ptr [0x00b85250]
+0067b8df : MOV ESI,EAX
+0067b8e1 : TEST ESI,ESI
+0067b8e3 : JZ 0x0067b933
+0067b8e5 : PUSH EDI
+0067b8e6 : MOV EDI,dword ptr [0x00b85160]
+0067b8ec : PUSH 0xbd78b0
+0067b8f1 : PUSH ESI
+0067b8f2 : CALL EDI
+0067b8f4 : PUSH 0xbd789c
+0067b8f9 : PUSH ESI
+0067b8fa : MOV [0x00d7c37c],EAX
+0067b8ff : CALL EDI
+0067b901 : MOV [0x00d7c378],EAX
+0067b906 : POP EDI
+0067b907 : TEST EAX,EAX
+0067b909 : JZ 0x0067b933
+0067b90b : MOV EAX,dword ptr [EBX + 0x3c]
+0067b90e : MOV ECX,dword ptr [EAX + 0x18]
+0067b911 : PUSH ECX
+0067b912 : CALL 0x00611450
+0067b917 : MOV ESI,EAX
+0067b919 : TEST ESI,ESI
+0067b91b : JZ 0x0067b933
+0067b91d : PUSH 0x0
+0067b91f : PUSH ESI
+0067b920 : CALL dword ptr [0x00d7c378]
+0067b926 : MOV EDX,dword ptr [EBX + 0x3c]
+0067b929 : MOV EAX,dword ptr [EDX + 0x18]
+0067b92c : PUSH ESI
+0067b92d : PUSH EAX
+0067b92e : CALL 0x00611462
+0067b933 : POP ESI
+0067b934 : MOV ECX,dword ptr [ESP + 0x10c]
+0067b93b : POP EBX
+0067b93c : XOR ECX,ESP
+0067b93e : CALL 0x00633e6b
+0067b943 : ADD ESP,0x10c
+0067b949 : RET

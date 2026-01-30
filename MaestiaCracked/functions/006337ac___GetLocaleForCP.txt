@@ -1,0 +1,133 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __GetLocaleForCP
+ENTRY    : 006337ac
+BODY     : [[006337ac, 00633846]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __GetLocaleForCP
+   
+   Library: Visual Studio 2008 Release */
+
+_locale_t __cdecl __GetLocaleForCP(uint param_1)
+
+{
+  undefined4 *Comperand;
+  int iVar1;
+  undefined4 *puVar2;
+  int *_Memory;
+  
+  _Memory = (int *)0x0;
+  do {
+    Comperand = *(undefined4 **)(&DAT_00d7b698 + (param_1 % 0x3e) * 4);
+    for (puVar2 = Comperand; puVar2 != (undefined4 *)0x0; puVar2 = (undefined4 *)*puVar2) {
+      if (puVar2[1] == param_1) {
+        if (_Memory != (int *)0x0) {
+          __free_locale((_locale_t)_Memory[2]);
+          _free(_Memory);
+        }
+        return (_locale_t)puVar2[2];
+      }
+    }
+    if (_Memory == (int *)0x0) {
+      _Memory = __malloc_crt(0xc);
+      if (_Memory == (int *)0x0) {
+        return (_locale_t)0x0;
+      }
+      iVar1 = __CreateLocForCP(param_1);
+      _Memory[2] = iVar1;
+      if (iVar1 == 0) {
+        _free(_Memory);
+        return (_locale_t)0x0;
+      }
+      _Memory[1] = param_1;
+    }
+    *_Memory = (int)Comperand;
+    puVar2 = (undefined4 *)
+             InterlockedCompareExchange
+                       ((LONG *)(&DAT_00d7b698 + (param_1 % 0x3e) * 4),(LONG)_Memory,(LONG)Comperand
+                       );
+    if (puVar2 == Comperand) {
+      return (_locale_t)_Memory[2];
+    }
+  } while( true );
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006337ac : MOV EDI,EDI
+006337ae : PUSH EBP
+006337af : MOV EBP,ESP
+006337b1 : PUSH ECX
+006337b2 : MOV EAX,dword ptr [EBP + 0x8]
+006337b5 : PUSH EBX
+006337b6 : PUSH ESI
+006337b7 : PUSH EDI
+006337b8 : PUSH 0x3e
+006337ba : XOR EDX,EDX
+006337bc : POP ECX
+006337bd : DIV ECX
+006337bf : XOR ESI,ESI
+006337c1 : LEA EAX,[EDX*0x4 + 0xd7b698]
+006337c8 : MOV dword ptr [EBP + -0x4],EAX
+006337cb : MOV EAX,dword ptr [EBP + -0x4]
+006337ce : MOV EDI,dword ptr [EAX]
+006337d0 : MOV EBX,EDI
+006337d2 : TEST EDI,EDI
+006337d4 : JZ 0x006337e4
+006337d6 : MOV EAX,dword ptr [EBX + 0x4]
+006337d9 : CMP EAX,dword ptr [EBP + 0x8]
+006337dc : JZ 0x00633823
+006337de : MOV EBX,dword ptr [EBX]
+006337e0 : TEST EBX,EBX
+006337e2 : JNZ 0x006337d6
+006337e4 : TEST ESI,ESI
+006337e6 : JNZ 0x0063380a
+006337e8 : PUSH 0xc
+006337ea : CALL 0x0064255f
+006337ef : MOV ESI,EAX
+006337f1 : POP ECX
+006337f2 : TEST ESI,ESI
+006337f4 : JZ 0x00633843
+006337f6 : MOV EBX,dword ptr [EBP + 0x8]
+006337f9 : PUSH EBX
+006337fa : CALL 0x0063376a
+006337ff : POP ECX
+00633800 : MOV dword ptr [ESI + 0x8],EAX
+00633803 : TEST EAX,EAX
+00633805 : JZ 0x0063383c
+00633807 : MOV dword ptr [ESI + 0x4],EBX
+0063380a : PUSH EDI
+0063380b : PUSH ESI
+0063380c : PUSH dword ptr [EBP + -0x4]
+0063380f : MOV dword ptr [ESI],EDI
+00633811 : CALL dword ptr [0x00b85228]
+00633817 : CMP EAX,EDI
+00633819 : JNZ 0x006337cb
+0063381b : MOV EAX,dword ptr [ESI + 0x8]
+0063381e : POP EDI
+0063381f : POP ESI
+00633820 : POP EBX
+00633821 : LEAVE
+00633822 : RET
+00633823 : TEST ESI,ESI
+00633825 : JZ 0x00633837
+00633827 : PUSH dword ptr [ESI + 0x8]
+0063382a : CALL 0x00639d78
+0063382f : PUSH ESI
+00633830 : CALL 0x0063610d
+00633835 : POP ECX
+00633836 : POP ECX
+00633837 : MOV EAX,dword ptr [EBX + 0x8]
+0063383a : JMP 0x0063381e
+0063383c : PUSH ESI
+0063383d : CALL 0x0063610d
+00633842 : POP ECX
+00633843 : XOR EAX,EAX
+00633845 : JMP 0x0063381e

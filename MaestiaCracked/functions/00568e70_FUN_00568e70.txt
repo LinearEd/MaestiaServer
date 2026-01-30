@@ -1,0 +1,90 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00568e70
+ENTRY    : 00568e70
+BODY     : [[00568e70, 00568eac] [00568eb0, 00568ecf]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00568e70(int *param_1)
+
+{
+  uint uVar1;
+  int iVar2;
+  int iVar3;
+  uint uVar4;
+  int *in_ECX;
+  
+  uVar1 = param_1[1];
+  if (uVar1 < (uint)in_ECX[1]) {
+    uVar4 = uVar1;
+    if ((uint)in_ECX[2] >> 1 <= uVar1) goto LAB_00568ea2;
+  }
+  else {
+    if (uVar1 < (uint)in_ECX[2]) goto LAB_00568ea2;
+    uVar4 = (uVar1 >> 2) + uVar1;
+  }
+  FUN_0052a990(in_ECX,uVar4);
+LAB_00568ea2:
+  uVar4 = 0;
+  in_ECX[1] = uVar1;
+  if (uVar1 != 0) {
+    do {
+      iVar2 = *param_1;
+      iVar3 = *in_ECX;
+      *(undefined4 *)(iVar3 + uVar4 * 8) = *(undefined4 *)(iVar2 + uVar4 * 8);
+      *(undefined4 *)(iVar3 + 4 + uVar4 * 8) = *(undefined4 *)(iVar2 + 4 + uVar4 * 8);
+      uVar4 = uVar4 + 1;
+    } while (uVar4 < (uint)in_ECX[1]);
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00568e70 : PUSH EBX
+00568e71 : MOV EBX,dword ptr [ESP + 0x8]
+00568e75 : PUSH ESI
+00568e76 : PUSH EDI
+00568e77 : MOV EDI,dword ptr [EBX + 0x4]
+00568e7a : MOV ESI,ECX
+00568e7c : CMP EDI,dword ptr [ESI + 0x4]
+00568e7f : JNC 0x00568e8d
+00568e81 : MOV EAX,dword ptr [ESI + 0x8]
+00568e84 : SHR EAX,0x1
+00568e86 : CMP EDI,EAX
+00568e88 : JNC 0x00568ea2
+00568e8a : PUSH EDI
+00568e8b : JMP 0x00568e9c
+00568e8d : CMP EDI,dword ptr [ESI + 0x8]
+00568e90 : JC 0x00568ea2
+00568e92 : MOV ECX,EDI
+00568e94 : SHR ECX,0x2
+00568e97 : ADD ECX,EDI
+00568e99 : PUSH ECX
+00568e9a : MOV ECX,ESI
+00568e9c : PUSH ESI
+00568e9d : CALL 0x0052a990
+00568ea2 : XOR EAX,EAX
+00568ea4 : MOV dword ptr [ESI + 0x4],EDI
+00568ea7 : TEST EDI,EDI
+00568ea9 : JBE 0x00568ec8
+00568eab : JMP 0x00568eb0
+00568eb0 : MOV ECX,dword ptr [EBX]
+00568eb2 : MOV EDI,dword ptr [ECX + EAX*0x8]
+00568eb5 : MOV EDX,dword ptr [ESI]
+00568eb7 : MOV dword ptr [EDX + EAX*0x8],EDI
+00568eba : MOV ECX,dword ptr [ECX + EAX*0x8 + 0x4]
+00568ebe : MOV dword ptr [EDX + EAX*0x8 + 0x4],ECX
+00568ec2 : INC EAX
+00568ec3 : CMP EAX,dword ptr [ESI + 0x4]
+00568ec6 : JC 0x00568eb0
+00568ec8 : POP EDI
+00568ec9 : MOV EAX,ESI
+00568ecb : POP ESI
+00568ecc : POP EBX
+00568ecd : RET 0x4

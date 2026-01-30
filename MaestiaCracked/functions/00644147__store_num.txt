@@ -1,0 +1,143 @@
+PROGRAM  : Maestia.exe
+FUNCTION : _store_num
+ENTRY    : 00644147
+BODY     : [[00644147, 006441c1]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    void __cdecl _store_num(int,int,char * *,unsigned int *,unsigned int)
+   
+   Library: Visual Studio 2008 Release */
+
+void __cdecl _store_num(int param_1,int param_2,char **param_3,uint *param_4,uint param_5)
+
+{
+  char cVar1;
+  uint uVar2;
+  int in_EAX;
+  int iVar3;
+  char *pcVar4;
+  uint *in_ECX;
+  uint in_EDX;
+  char *pcVar5;
+  int *unaff_EDI;
+  int local_8;
+  
+  local_8 = 0;
+  if (param_1 == 0) {
+    if (in_EDX < *in_ECX) {
+      iVar3 = in_EDX - 1;
+      if (in_EDX != 0) {
+        do {
+          local_8 = local_8 + 1;
+          *(char *)(iVar3 + *unaff_EDI) = (char)(in_EAX % 10) + '0';
+          iVar3 = iVar3 + -1;
+          in_EAX = in_EAX / 10;
+        } while (iVar3 != -1);
+      }
+      *unaff_EDI = *unaff_EDI + local_8;
+      *in_ECX = *in_ECX - local_8;
+    }
+    else {
+      *in_ECX = 0;
+    }
+  }
+  else {
+    uVar2 = *in_ECX;
+    pcVar5 = (char *)*unaff_EDI;
+    do {
+      if (uVar2 < 2) break;
+      iVar3 = in_EAX / 10;
+      *pcVar5 = (char)(in_EAX % 10) + '0';
+      pcVar5 = pcVar5 + 1;
+      *in_ECX = *in_ECX - 1;
+      uVar2 = *in_ECX;
+      in_EAX = iVar3;
+    } while (0 < iVar3);
+    pcVar4 = (char *)*unaff_EDI;
+    *unaff_EDI = (int)pcVar5;
+    pcVar5 = pcVar5 + -1;
+    do {
+      cVar1 = *pcVar5;
+      *pcVar5 = *pcVar4;
+      pcVar5 = pcVar5 + -1;
+      *pcVar4 = cVar1;
+      pcVar4 = pcVar4 + 1;
+    } while (pcVar4 < pcVar5);
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00644147 : MOV EDI,EDI
+00644149 : PUSH EBP
+0064414a : MOV EBP,ESP
+0064414c : PUSH ECX
+0064414d : PUSH EBX
+0064414e : PUSH ESI
+0064414f : MOV ESI,EDX
+00644151 : XOR EDX,EDX
+00644153 : MOV dword ptr [EBP + -0x4],EDX
+00644156 : CMP dword ptr [EBP + 0x8],EDX
+00644159 : JZ 0x00644190
+0064415b : CMP dword ptr [ECX],0x1
+0064415e : MOV ESI,dword ptr [EDI]
+00644160 : JBE 0x0064417b
+00644162 : PUSH 0xa
+00644164 : CDQ
+00644165 : POP EBX
+00644166 : IDIV EBX
+00644168 : ADD DL,0x30
+0064416b : MOV byte ptr [ESI],DL
+0064416d : INC ESI
+0064416e : DEC dword ptr [ECX]
+00644170 : MOV EDX,dword ptr [ECX]
+00644172 : TEST EAX,EAX
+00644174 : JLE 0x0064417b
+00644176 : CMP EDX,0x1
+00644179 : JA 0x00644162
+0064417b : MOV EAX,dword ptr [EDI]
+0064417d : MOV dword ptr [EDI],ESI
+0064417f : DEC ESI
+00644180 : MOV DL,byte ptr [EAX]
+00644182 : MOV CL,byte ptr [ESI]
+00644184 : MOV byte ptr [ESI],DL
+00644186 : DEC ESI
+00644187 : MOV byte ptr [EAX],CL
+00644189 : INC EAX
+0064418a : CMP EAX,ESI
+0064418c : JC 0x00644180
+0064418e : JMP 0x006441be
+00644190 : CMP ESI,dword ptr [ECX]
+00644192 : JNC 0x006441bc
+00644194 : DEC ESI
+00644195 : LEA EDX,[ESI + 0x1]
+00644198 : TEST EDX,EDX
+0064419a : JZ 0x006441b3
+0064419c : PUSH 0xa
+0064419e : CDQ
+0064419f : POP EBX
+006441a0 : IDIV EBX
+006441a2 : MOV EBX,dword ptr [EDI]
+006441a4 : ADD DL,0x30
+006441a7 : INC dword ptr [EBP + -0x4]
+006441aa : MOV byte ptr [ESI + EBX*0x1],DL
+006441ad : DEC ESI
+006441ae : CMP ESI,-0x1
+006441b1 : JNZ 0x0064419c
+006441b3 : MOV EAX,dword ptr [EBP + -0x4]
+006441b6 : ADD dword ptr [EDI],EAX
+006441b8 : SUB dword ptr [ECX],EAX
+006441ba : JMP 0x006441be
+006441bc : MOV dword ptr [ECX],EDX
+006441be : POP ESI
+006441bf : POP EBX
+006441c0 : LEAVE
+006441c1 : RET

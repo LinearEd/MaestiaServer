@@ -1,0 +1,397 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00a0a250
+ENTRY    : 00a0a250
+BODY     : [[00a0a250, 00a0a5a9]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00a0a250(LPWSTR param_1)
+
+{
+  BOOL BVar1;
+  uint uVar2;
+  LPWSTR unaff_ESI;
+  undefined4 *unaff_EDI;
+  _OSVERSIONINFOW local_11c;
+  uint local_8;
+  
+  local_8 = DAT_00d66fa0 ^ (uint)&stack0xfffffffc;
+  if (((unaff_ESI == (LPWSTR)0x0) || (unaff_EDI == (undefined4 *)0x0)) || (param_1 == (LPWSTR)0x0))
+  {
+    __security_check_cookie(local_8 ^ (uint)&stack0xfffffffc);
+    return;
+  }
+  lstrcpyW(unaff_ESI,L"unknown Windows version");
+  *unaff_EDI = 0;
+  local_11c.dwOSVersionInfoSize = 0x114;
+  BVar1 = GetVersionExW(&local_11c);
+  if (BVar1 == 0) {
+    __security_check_cookie(local_8 ^ (uint)&stack0xfffffffc);
+    return;
+  }
+  uVar2 = (uint)(ushort)local_11c.dwBuildNumber;
+  wsprintfW(param_1,L"%u.%u.%u",local_11c.dwMajorVersion,local_11c.dwMinorVersion,uVar2);
+  if (local_11c.dwPlatformId == 1) {
+    if (local_11c.dwMajorVersion == 4) {
+      if (local_11c.dwMinorVersion < 10) {
+        if (uVar2 == 0x3b6) {
+          lstrcpyW(unaff_ESI,L"Windows 95");
+          *unaff_EDI = 1;
+          __security_check_cookie(local_8 ^ (uint)&stack0xfffffffc);
+          return;
+        }
+        if (uVar2 - 0x3b7 < 0x82) {
+          lstrcpyW(unaff_ESI,L"Windows 95 SP1");
+          *unaff_EDI = 2;
+          __security_check_cookie(local_8 ^ (uint)&stack0xfffffffc);
+          return;
+        }
+        if (0x438 < uVar2) {
+          lstrcpyW(unaff_ESI,L"Windows 95 OSR2");
+          *unaff_EDI = 3;
+          __security_check_cookie(local_8 ^ (uint)&stack0xfffffffc);
+          return;
+        }
+      }
+      if (local_11c.dwMinorVersion == 10) {
+        if (uVar2 == 0x7ce) {
+          lstrcpyW(unaff_ESI,L"Windows 98");
+          *unaff_EDI = 4;
+          __security_check_cookie(local_8 ^ (uint)&stack0xfffffffc);
+          return;
+        }
+        if (uVar2 - 1999 < 0xb8) {
+          lstrcpyW(unaff_ESI,L"Windows 98 SP1");
+          *unaff_EDI = 5;
+          __security_check_cookie(local_8 ^ (uint)&stack0xfffffffc);
+          return;
+        }
+        if (0x886 < uVar2) {
+          lstrcpyW(unaff_ESI,L"Windows 98 SE");
+          *unaff_EDI = 6;
+          __security_check_cookie(local_8 ^ (uint)&stack0xfffffffc);
+          return;
+        }
+      }
+      else if (local_11c.dwMinorVersion == 0x5a) {
+        lstrcpyW(unaff_ESI,L"Windows ME");
+        *unaff_EDI = 7;
+        __security_check_cookie(local_8 ^ (uint)&stack0xfffffffc);
+        return;
+      }
+    }
+  }
+  else if (local_11c.dwPlatformId == 2) {
+    if (local_11c.dwMajorVersion == 3) {
+      if (local_11c.dwMinorVersion == 0x33) {
+        lstrcpyW(unaff_ESI,L"Windows NT 3.51");
+        *unaff_EDI = 0x65;
+        __security_check_cookie(local_8 ^ (uint)&stack0xfffffffc);
+        return;
+      }
+    }
+    else if (local_11c.dwMajorVersion == 4) {
+      if (local_11c.dwMinorVersion == 0) {
+        lstrcpyW(unaff_ESI,L"Windows NT 4");
+        *unaff_EDI = 0x66;
+        __security_check_cookie(local_8 ^ (uint)&stack0xfffffffc);
+        return;
+      }
+    }
+    else if (local_11c.dwMajorVersion == 5) {
+      if (local_11c.dwMinorVersion == 0) {
+        lstrcpyW(unaff_ESI,L"Windows 2000");
+        *unaff_EDI = 0x67;
+        __security_check_cookie(local_8 ^ (uint)&stack0xfffffffc);
+        return;
+      }
+      if (local_11c.dwMinorVersion == 1) {
+        lstrcpyW(unaff_ESI,L"Windows XP");
+        *unaff_EDI = 0x68;
+        __security_check_cookie(local_8 ^ (uint)&stack0xfffffffc);
+        return;
+      }
+      if (local_11c.dwMinorVersion == 2) {
+        lstrcpyW(unaff_ESI,L"Windows 2003 Server");
+        *unaff_EDI = 0x69;
+        __security_check_cookie(local_8 ^ (uint)&stack0xfffffffc);
+        return;
+      }
+    }
+  }
+  else if (local_11c.dwPlatformId == 3) {
+    lstrcpyW(unaff_ESI,L"Windows CE");
+    *unaff_EDI = 0xc9;
+  }
+  __security_check_cookie(local_8 ^ (uint)&stack0xfffffffc);
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00a0a250 : PUSH EBP
+00a0a251 : MOV EBP,ESP
+00a0a253 : SUB ESP,0x12c
+00a0a259 : MOV EAX,[0x00d66fa0]
+00a0a25e : XOR EAX,EBP
+00a0a260 : MOV dword ptr [EBP + -0x4],EAX
+00a0a263 : MOV EAX,dword ptr [EBP + 0x8]
+00a0a266 : MOV dword ptr [EBP + 0xfffffed4],EAX
+00a0a26c : TEST ESI,ESI
+00a0a26e : JZ 0x00a0a59a
+00a0a274 : TEST EDI,EDI
+00a0a276 : JZ 0x00a0a59a
+00a0a27c : TEST EAX,EAX
+00a0a27e : JZ 0x00a0a59a
+00a0a284 : PUSH EBX
+00a0a285 : MOV EBX,dword ptr [0x00b85174]
+00a0a28b : PUSH 0xcaae88
+00a0a290 : PUSH ESI
+00a0a291 : CALL EBX
+00a0a293 : LEA EAX,[EBP + 0xfffffee8]
+00a0a299 : PUSH EAX
+00a0a29a : MOV dword ptr [EDI],0x0
+00a0a2a0 : MOV dword ptr [EBP + 0xfffffee8],0x114
+00a0a2aa : CALL dword ptr [0x00b8519c]
+00a0a2b0 : TEST EAX,EAX
+00a0a2b2 : JNZ 0x00a0a2c3
+00a0a2b4 : POP EBX
+00a0a2b5 : MOV ECX,dword ptr [EBP + -0x4]
+00a0a2b8 : XOR ECX,EBP
+00a0a2ba : CALL 0x00633e6b
+00a0a2bf : MOV ESP,EBP
+00a0a2c1 : POP EBP
+00a0a2c2 : RET
+00a0a2c3 : MOVZX EDX,word ptr [EBP + 0xfffffef4]
+00a0a2ca : MOV ECX,dword ptr [EBP + 0xfffffef8]
+00a0a2d0 : MOV EAX,dword ptr [EBP + 0xfffffef0]
+00a0a2d6 : PUSH EDX
+00a0a2d7 : PUSH EAX
+00a0a2d8 : MOV dword ptr [EBP + 0xfffffed8],ECX
+00a0a2de : MOV ECX,dword ptr [EBP + 0xfffffeec]
+00a0a2e4 : PUSH ECX
+00a0a2e5 : MOV dword ptr [EBP + 0xfffffedc],EDX
+00a0a2eb : MOV EDX,dword ptr [EBP + 0xfffffed4]
+00a0a2f1 : PUSH 0xcaacc4
+00a0a2f6 : PUSH EDX
+00a0a2f7 : MOV dword ptr [EBP + 0xfffffee4],EAX
+00a0a2fd : MOV dword ptr [EBP + 0xfffffee0],ECX
+00a0a303 : CALL dword ptr [0x00b85434]
+00a0a309 : MOV EAX,dword ptr [EBP + 0xfffffed8]
+00a0a30f : ADD ESP,0x14
+00a0a312 : CMP EAX,0x1
+00a0a315 : JNZ 0x00a0a479
+00a0a31b : CMP dword ptr [EBP + 0xfffffee0],0x4
+00a0a322 : JNZ 0x00a0a586
+00a0a328 : MOV ECX,dword ptr [EBP + 0xfffffee4]
+00a0a32e : MOV EAX,dword ptr [EBP + 0xfffffedc]
+00a0a334 : CMP ECX,0xa
+00a0a337 : JNC 0x00a0a3c2
+00a0a33d : CMP EAX,0x3b6
+00a0a342 : JNZ 0x00a0a366
+00a0a344 : PUSH 0xcaaeb8
+00a0a349 : PUSH ESI
+00a0a34a : CALL EBX
+00a0a34c : MOV dword ptr [EDI],0x1
+00a0a352 : MOV EAX,0x1
+00a0a357 : POP EBX
+00a0a358 : MOV ECX,dword ptr [EBP + -0x4]
+00a0a35b : XOR ECX,EBP
+00a0a35d : CALL 0x00633e6b
+00a0a362 : MOV ESP,EBP
+00a0a364 : POP EBP
+00a0a365 : RET
+00a0a366 : LEA EDX,[EAX + 0xfffffc49]
+00a0a36c : CMP EDX,0x81
+00a0a372 : JA 0x00a0a396
+00a0a374 : PUSH 0xcaaed0
+00a0a379 : PUSH ESI
+00a0a37a : CALL EBX
+00a0a37c : MOV dword ptr [EDI],0x2
+00a0a382 : MOV EAX,0x1
+00a0a387 : POP EBX
+00a0a388 : MOV ECX,dword ptr [EBP + -0x4]
+00a0a38b : XOR ECX,EBP
+00a0a38d : CALL 0x00633e6b
+00a0a392 : MOV ESP,EBP
+00a0a394 : POP EBP
+00a0a395 : RET
+00a0a396 : CMP EAX,0x438
+00a0a39b : JBE 0x00a0a3bf
+00a0a39d : PUSH 0xcaaef0
+00a0a3a2 : PUSH ESI
+00a0a3a3 : CALL EBX
+00a0a3a5 : MOV dword ptr [EDI],0x3
+00a0a3ab : MOV EAX,0x1
+00a0a3b0 : POP EBX
+00a0a3b1 : MOV ECX,dword ptr [EBP + -0x4]
+00a0a3b4 : XOR ECX,EBP
+00a0a3b6 : CALL 0x00633e6b
+00a0a3bb : MOV ESP,EBP
+00a0a3bd : POP EBP
+00a0a3be : RET
+00a0a3bf : CMP ECX,0xa
+00a0a3c2 : JNZ 0x00a0a44e
+00a0a3c8 : CMP EAX,0x7ce
+00a0a3cd : JNZ 0x00a0a3f1
+00a0a3cf : PUSH 0xcaaf10
+00a0a3d4 : PUSH ESI
+00a0a3d5 : CALL EBX
+00a0a3d7 : MOV dword ptr [EDI],0x4
+00a0a3dd : MOV EAX,0x1
+00a0a3e2 : POP EBX
+00a0a3e3 : MOV ECX,dword ptr [EBP + -0x4]
+00a0a3e6 : XOR ECX,EBP
+00a0a3e8 : CALL 0x00633e6b
+00a0a3ed : MOV ESP,EBP
+00a0a3ef : POP EBP
+00a0a3f0 : RET
+00a0a3f1 : LEA ECX,[EAX + 0xfffff831]
+00a0a3f7 : CMP ECX,0xb7
+00a0a3fd : JA 0x00a0a421
+00a0a3ff : PUSH 0xcaaf28
+00a0a404 : PUSH ESI
+00a0a405 : CALL EBX
+00a0a407 : MOV dword ptr [EDI],0x5
+00a0a40d : MOV EAX,0x1
+00a0a412 : POP EBX
+00a0a413 : MOV ECX,dword ptr [EBP + -0x4]
+00a0a416 : XOR ECX,EBP
+00a0a418 : CALL 0x00633e6b
+00a0a41d : MOV ESP,EBP
+00a0a41f : POP EBP
+00a0a420 : RET
+00a0a421 : CMP EAX,0x887
+00a0a426 : JC 0x00a0a586
+00a0a42c : PUSH 0xcaaf48
+00a0a431 : PUSH ESI
+00a0a432 : CALL EBX
+00a0a434 : MOV dword ptr [EDI],0x6
+00a0a43a : MOV EAX,0x1
+00a0a43f : POP EBX
+00a0a440 : MOV ECX,dword ptr [EBP + -0x4]
+00a0a443 : XOR ECX,EBP
+00a0a445 : CALL 0x00633e6b
+00a0a44a : MOV ESP,EBP
+00a0a44c : POP EBP
+00a0a44d : RET
+00a0a44e : CMP ECX,0x5a
+00a0a451 : JNZ 0x00a0a586
+00a0a457 : PUSH 0xcaaf64
+00a0a45c : PUSH ESI
+00a0a45d : CALL EBX
+00a0a45f : MOV dword ptr [EDI],0x7
+00a0a465 : MOV EAX,0x1
+00a0a46a : POP EBX
+00a0a46b : MOV ECX,dword ptr [EBP + -0x4]
+00a0a46e : XOR ECX,EBP
+00a0a470 : CALL 0x00633e6b
+00a0a475 : MOV ESP,EBP
+00a0a477 : POP EBP
+00a0a478 : RET
+00a0a479 : CMP EAX,0x2
+00a0a47c : JNZ 0x00a0a573
+00a0a482 : MOV EAX,dword ptr [EBP + 0xfffffee0]
+00a0a488 : CMP EAX,0x3
+00a0a48b : JNZ 0x00a0a4bc
+00a0a48d : CMP dword ptr [EBP + 0xfffffee4],0x33
+00a0a494 : JNZ 0x00a0a586
+00a0a49a : PUSH 0xcaaf7c
+00a0a49f : PUSH ESI
+00a0a4a0 : CALL EBX
+00a0a4a2 : MOV dword ptr [EDI],0x65
+00a0a4a8 : MOV EAX,0x1
+00a0a4ad : POP EBX
+00a0a4ae : MOV ECX,dword ptr [EBP + -0x4]
+00a0a4b1 : XOR ECX,EBP
+00a0a4b3 : CALL 0x00633e6b
+00a0a4b8 : MOV ESP,EBP
+00a0a4ba : POP EBP
+00a0a4bb : RET
+00a0a4bc : CMP EAX,0x4
+00a0a4bf : JNZ 0x00a0a4f0
+00a0a4c1 : CMP dword ptr [EBP + 0xfffffee4],0x0
+00a0a4c8 : JNZ 0x00a0a586
+00a0a4ce : PUSH 0xcaaf9c
+00a0a4d3 : PUSH ESI
+00a0a4d4 : CALL EBX
+00a0a4d6 : MOV dword ptr [EDI],0x66
+00a0a4dc : MOV EAX,0x1
+00a0a4e1 : POP EBX
+00a0a4e2 : MOV ECX,dword ptr [EBP + -0x4]
+00a0a4e5 : XOR ECX,EBP
+00a0a4e7 : CALL 0x00633e6b
+00a0a4ec : MOV ESP,EBP
+00a0a4ee : POP EBP
+00a0a4ef : RET
+00a0a4f0 : CMP EAX,0x5
+00a0a4f3 : JNZ 0x00a0a586
+00a0a4f9 : MOV EAX,dword ptr [EBP + 0xfffffee4]
+00a0a4ff : TEST EAX,EAX
+00a0a501 : JNZ 0x00a0a525
+00a0a503 : PUSH 0xcaafb8
+00a0a508 : PUSH ESI
+00a0a509 : CALL EBX
+00a0a50b : MOV dword ptr [EDI],0x67
+00a0a511 : MOV EAX,0x1
+00a0a516 : POP EBX
+00a0a517 : MOV ECX,dword ptr [EBP + -0x4]
+00a0a51a : XOR ECX,EBP
+00a0a51c : CALL 0x00633e6b
+00a0a521 : MOV ESP,EBP
+00a0a523 : POP EBP
+00a0a524 : RET
+00a0a525 : CMP EAX,0x1
+00a0a528 : JNZ 0x00a0a54c
+00a0a52a : PUSH 0xcaafd4
+00a0a52f : PUSH ESI
+00a0a530 : CALL EBX
+00a0a532 : MOV dword ptr [EDI],0x68
+00a0a538 : MOV EAX,0x1
+00a0a53d : POP EBX
+00a0a53e : MOV ECX,dword ptr [EBP + -0x4]
+00a0a541 : XOR ECX,EBP
+00a0a543 : CALL 0x00633e6b
+00a0a548 : MOV ESP,EBP
+00a0a54a : POP EBP
+00a0a54b : RET
+00a0a54c : CMP EAX,0x2
+00a0a54f : JNZ 0x00a0a586
+00a0a551 : PUSH 0xcaafec
+00a0a556 : PUSH ESI
+00a0a557 : CALL EBX
+00a0a559 : MOV dword ptr [EDI],0x69
+00a0a55f : MOV EAX,0x1
+00a0a564 : POP EBX
+00a0a565 : MOV ECX,dword ptr [EBP + -0x4]
+00a0a568 : XOR ECX,EBP
+00a0a56a : CALL 0x00633e6b
+00a0a56f : MOV ESP,EBP
+00a0a571 : POP EBP
+00a0a572 : RET
+00a0a573 : CMP EAX,0x3
+00a0a576 : JNZ 0x00a0a586
+00a0a578 : PUSH 0xcab014
+00a0a57d : PUSH ESI
+00a0a57e : CALL EBX
+00a0a580 : MOV dword ptr [EDI],0xc9
+00a0a586 : MOV EAX,0x1
+00a0a58b : POP EBX
+00a0a58c : MOV ECX,dword ptr [EBP + -0x4]
+00a0a58f : XOR ECX,EBP
+00a0a591 : CALL 0x00633e6b
+00a0a596 : MOV ESP,EBP
+00a0a598 : POP EBP
+00a0a599 : RET
+00a0a59a : MOV ECX,dword ptr [EBP + -0x4]
+00a0a59d : XOR ECX,EBP
+00a0a59f : XOR EAX,EAX
+00a0a5a1 : CALL 0x00633e6b
+00a0a5a6 : MOV ESP,EBP
+00a0a5a8 : POP EBP
+00a0a5a9 : RET

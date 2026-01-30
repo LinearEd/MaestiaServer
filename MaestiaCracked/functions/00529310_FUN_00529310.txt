@@ -1,0 +1,157 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00529310
+ENTRY    : 00529310
+BODY     : [[00529310, 0052942c]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* WARNING: Removing unreachable block (ram,0x00529382) */
+/* WARNING: Removing unreachable block (ram,0x005293dd) */
+
+void FUN_00529310(int param_1,uint param_2,undefined4 param_3,int param_4)
+
+{
+  byte bVar1;
+  uint uVar2;
+  byte *pbVar3;
+  uint uVar4;
+  uint local_108;
+  byte local_104 [255];
+  byte local_5;
+  uint local_4;
+  
+  local_4 = DAT_00d66fa0 ^ (uint)&local_108;
+  uVar4 = 0;
+  pbVar3 = local_104;
+  if (param_2 != 0) {
+    do {
+      bVar1 = *(byte *)(uVar4 + param_1);
+      uVar2 = (uint)bVar1;
+      if (&local_5 <= pbVar3 + 4) {
+        *pbVar3 = 0;
+        FUN_0051b950(local_104,0xffffffff);
+        pbVar3 = local_104;
+      }
+      if ((uVar2 < 0x80) &&
+         (local_108 = 1 << (bVar1 & 0x1f),
+         (*(uint *)(param_4 + ((int)uVar2 >> 5) * 4) & local_108) != 0)) {
+        *pbVar3 = bVar1;
+      }
+      else {
+        *pbVar3 = 0x25;
+        pbVar3[1] = ((9U < (uint)((int)uVar2 >> 4)) - 1U & 0xf9) + 0x37 + (char)((int)uVar2 >> 4);
+        pbVar3 = pbVar3 + 2;
+        *pbVar3 = ((9 < (uVar2 & 0x8000000f)) - 1U & 0xf9) + 0x37 + (char)(uVar2 & 0x8000000f);
+      }
+      uVar4 = uVar4 + 1;
+      pbVar3 = pbVar3 + 1;
+    } while (uVar4 < param_2);
+  }
+  *pbVar3 = 0;
+  FUN_0051b950(local_104,0xffffffff);
+  __security_check_cookie(local_4 ^ (uint)&local_108);
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00529310 : SUB ESP,0x108
+00529316 : MOV EAX,[0x00d66fa0]
+0052931b : XOR EAX,ESP
+0052931d : MOV dword ptr [ESP + 0x104],EAX
+00529324 : PUSH EBP
+00529325 : MOV EBP,dword ptr [ESP + 0x118]
+0052932c : PUSH ESI
+0052932d : PUSH EDI
+0052932e : XOR EDI,EDI
+00529330 : LEA ESI,[ESP + 0x10]
+00529334 : CMP dword ptr [ESP + 0x11c],EDI
+0052933b : JBE 0x00529404
+00529341 : PUSH EBX
+00529342 : MOV EAX,dword ptr [ESP + 0x11c]
+00529349 : MOVZX EBX,byte ptr [EDI + EAX*0x1]
+0052934d : LEA ECX,[ESI + 0x4]
+00529350 : LEA EDX,[ESP + 0x113]
+00529357 : CMP ECX,EDX
+00529359 : JC 0x00529370
+0052935b : PUSH -0x1
+0052935d : LEA EAX,[ESP + 0x18]
+00529361 : PUSH EAX
+00529362 : MOV ECX,EBP
+00529364 : MOV byte ptr [ESI],0x0
+00529367 : CALL 0x0051b950
+0052936c : LEA ESI,[ESP + 0x14]
+00529370 : CMP EBX,0x80
+00529376 : JGE 0x005293b1
+00529378 : MOV ECX,EBX
+0052937a : AND ECX,0x8000001f
+00529380 : JNS 0x00529387
+00529382 : DEC ECX
+00529383 : OR ECX,0xffffffe0
+00529386 : INC ECX
+00529387 : MOV EAX,0x1
+0052938c : SHL EAX,CL
+0052938e : MOV ECX,dword ptr [ESP + 0x128]
+00529395 : MOV dword ptr [ESP + 0x10],EAX
+00529399 : MOV EAX,EBX
+0052939b : CDQ
+0052939c : AND EDX,0x1f
+0052939f : ADD EAX,EDX
+005293a1 : MOV EDX,dword ptr [ESP + 0x10]
+005293a5 : SAR EAX,0x5
+005293a8 : TEST dword ptr [ECX + EAX*0x4],EDX
+005293ab : JZ 0x005293b1
+005293ad : MOV byte ptr [ESI],BL
+005293af : JMP 0x005293f4
+005293b1 : MOV EAX,EBX
+005293b3 : CDQ
+005293b4 : AND EDX,0xf
+005293b7 : ADD EAX,EDX
+005293b9 : SAR EAX,0x4
+005293bc : INC ESI
+005293bd : MOV byte ptr [ESI + -0x1],0x25
+005293c1 : CMP EAX,0x9
+005293c4 : SETG DL
+005293c7 : DEC DL
+005293c9 : AND DL,0xf9
+005293cc : ADD DL,0x37
+005293cf : ADD DL,AL
+005293d1 : MOV byte ptr [ESI],DL
+005293d3 : MOV EAX,EBX
+005293d5 : INC ESI
+005293d6 : AND EAX,0x8000000f
+005293db : JNS 0x005293e2
+005293dd : DEC EAX
+005293de : OR EAX,0xfffffff0
+005293e1 : INC EAX
+005293e2 : CMP EAX,0x9
+005293e5 : SETG CL
+005293e8 : DEC CL
+005293ea : AND CL,0xf9
+005293ed : ADD CL,0x37
+005293f0 : ADD CL,AL
+005293f2 : MOV byte ptr [ESI],CL
+005293f4 : INC EDI
+005293f5 : INC ESI
+005293f6 : CMP EDI,dword ptr [ESP + 0x120]
+005293fd : JC 0x00529342
+00529403 : POP EBX
+00529404 : PUSH -0x1
+00529406 : LEA EDX,[ESP + 0x14]
+0052940a : PUSH EDX
+0052940b : MOV ECX,EBP
+0052940d : MOV byte ptr [ESI],0x0
+00529410 : CALL 0x0051b950
+00529415 : MOV ECX,dword ptr [ESP + 0x110]
+0052941c : POP EDI
+0052941d : POP ESI
+0052941e : POP EBP
+0052941f : XOR ECX,ESP
+00529421 : CALL 0x00633e6b
+00529426 : ADD ESP,0x108
+0052942c : RET

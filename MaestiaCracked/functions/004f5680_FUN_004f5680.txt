@@ -1,0 +1,85 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_004f5680
+ENTRY    : 004f5680
+BODY     : [[004f5680, 004f56f0]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined4 FUN_004f5680(void)
+
+{
+  uint uVar1;
+  int in_EAX;
+  uint *in_EDX;
+  
+  uVar1 = *in_EDX;
+  if ((uVar1 != 0) && ((*(int *)(in_EAX + 0x2c) - *(int *)(in_EAX + 0x28) & 0xfffffff8U) != 0)) {
+    if (uVar1 == 0xffffffff) {
+      *in_EDX = (uint)((*(int *)(in_EAX + 0x2c) - *(int *)(in_EAX + 0x28) & 0xfffffff8U) != 8);
+      return *(undefined4 *)(*(int *)(in_EAX + 0x28) + 4);
+    }
+    if (uVar1 < (uint)(*(int *)(in_EAX + 0x2c) - *(int *)(in_EAX + 0x28) >> 3)) {
+      *in_EDX = uVar1 + 1;
+      if (*(int *)(in_EAX + 0x2c) - *(int *)(in_EAX + 0x28) >> 3 == uVar1 + 1) {
+        *in_EDX = 0;
+      }
+      return *(undefined4 *)(*(int *)(in_EAX + 0x28) + 4 + uVar1 * 8);
+    }
+    *in_EDX = 0;
+  }
+  return 0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+004f5680 : MOV ECX,dword ptr [EDX]
+004f5682 : PUSH ESI
+004f5683 : TEST ECX,ECX
+004f5685 : JZ 0x004f56ca
+004f5687 : MOV ESI,dword ptr [EAX + 0x2c]
+004f568a : SUB ESI,dword ptr [EAX + 0x28]
+004f568d : TEST ESI,0xfffffff8
+004f5693 : JZ 0x004f56ca
+004f5695 : CMP ECX,-0x1
+004f5698 : JNZ 0x004f56b7
+004f569a : MOV ECX,dword ptr [EAX + 0x2c]
+004f569d : SUB ECX,dword ptr [EAX + 0x28]
+004f56a0 : PUSH EBX
+004f56a1 : XOR EBX,EBX
+004f56a3 : AND ECX,0xfffffff8
+004f56a6 : CMP ECX,0x8
+004f56a9 : SETNZ BL
+004f56ac : MOV dword ptr [EDX],EBX
+004f56ae : MOV EDX,dword ptr [EAX + 0x28]
+004f56b1 : MOV EAX,dword ptr [EDX + 0x4]
+004f56b4 : POP EBX
+004f56b5 : POP ESI
+004f56b6 : RET
+004f56b7 : MOV ESI,dword ptr [EAX + 0x2c]
+004f56ba : SUB ESI,dword ptr [EAX + 0x28]
+004f56bd : SAR ESI,0x3
+004f56c0 : CMP ESI,ECX
+004f56c2 : JA 0x004f56ce
+004f56c4 : MOV dword ptr [EDX],0x0
+004f56ca : XOR EAX,EAX
+004f56cc : POP ESI
+004f56cd : RET
+004f56ce : PUSH EDI
+004f56cf : LEA ESI,[ECX + 0x1]
+004f56d2 : MOV dword ptr [EDX],ESI
+004f56d4 : MOV EDI,dword ptr [EAX + 0x2c]
+004f56d7 : SUB EDI,dword ptr [EAX + 0x28]
+004f56da : SAR EDI,0x3
+004f56dd : CMP EDI,ESI
+004f56df : POP EDI
+004f56e0 : JNZ 0x004f56e8
+004f56e2 : MOV dword ptr [EDX],0x0
+004f56e8 : MOV EAX,dword ptr [EAX + 0x28]
+004f56eb : MOV EAX,dword ptr [EAX + ECX*0x8 + 0x4]
+004f56ef : POP ESI
+004f56f0 : RET

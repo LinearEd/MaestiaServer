@@ -1,0 +1,100 @@
+PROGRAM  : Maestia.exe
+FUNCTION : _strlen
+ENTRY    : 00640960
+BODY     : [[00640960, 006409ea]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    _strlen
+   
+   Library: Visual Studio */
+
+size_t __cdecl _strlen(char *_Str)
+
+{
+  uint uVar1;
+  uint *puVar2;
+  uint *puVar3;
+  
+  puVar2 = (uint *)_Str;
+  do {
+    if (((uint)puVar2 & 3) == 0) goto LAB_00640990;
+    uVar1 = *puVar2;
+    puVar2 = (uint *)((int)puVar2 + 1);
+  } while ((char)uVar1 != '\0');
+LAB_006409c3:
+  return (size_t)((int)puVar2 + (-1 - (int)_Str));
+LAB_00640990:
+  do {
+    do {
+      puVar3 = puVar2;
+      puVar2 = puVar3 + 1;
+    } while (((*puVar3 ^ 0xffffffff ^ *puVar3 + 0x7efefeff) & 0x81010100) == 0);
+    uVar1 = *puVar3;
+    if ((char)uVar1 == '\0') {
+      return (int)puVar3 - (int)_Str;
+    }
+    if ((char)(uVar1 >> 8) == '\0') {
+      return (size_t)((int)puVar3 + (1 - (int)_Str));
+    }
+    if ((uVar1 & 0xff0000) == 0) {
+      return (size_t)((int)puVar3 + (2 - (int)_Str));
+    }
+  } while ((uVar1 & 0xff000000) != 0);
+  goto LAB_006409c3;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00640960 : MOV ECX,dword ptr [ESP + 0x4]
+00640964 : TEST ECX,0x3
+0064096a : JZ 0x00640990
+0064096c : MOV AL,byte ptr [ECX]
+0064096e : ADD ECX,0x1
+00640971 : TEST AL,AL
+00640973 : JZ 0x006409c3
+00640975 : TEST ECX,0x3
+0064097b : JNZ 0x0064096c
+0064097d : ADD EAX,0x0
+00640982 : LEA ESP,[ESP]
+00640989 : LEA ESP,[ESP]
+00640990 : MOV EAX,dword ptr [ECX]
+00640992 : MOV EDX,0x7efefeff
+00640997 : ADD EDX,EAX
+00640999 : XOR EAX,0xffffffff
+0064099c : XOR EAX,EDX
+0064099e : ADD ECX,0x4
+006409a1 : TEST EAX,0x81010100
+006409a6 : JZ 0x00640990
+006409a8 : MOV EAX,dword ptr [ECX + -0x4]
+006409ab : TEST AL,AL
+006409ad : JZ 0x006409e1
+006409af : TEST AH,AH
+006409b1 : JZ 0x006409d7
+006409b3 : TEST EAX,0xff0000
+006409b8 : JZ 0x006409cd
+006409ba : TEST EAX,0xff000000
+006409bf : JZ 0x006409c3
+006409c1 : JMP 0x00640990
+006409c3 : LEA EAX,[ECX + -0x1]
+006409c6 : MOV ECX,dword ptr [ESP + 0x4]
+006409ca : SUB EAX,ECX
+006409cc : RET
+006409cd : LEA EAX,[ECX + -0x2]
+006409d0 : MOV ECX,dword ptr [ESP + 0x4]
+006409d4 : SUB EAX,ECX
+006409d6 : RET
+006409d7 : LEA EAX,[ECX + -0x3]
+006409da : MOV ECX,dword ptr [ESP + 0x4]
+006409de : SUB EAX,ECX
+006409e0 : RET
+006409e1 : LEA EAX,[ECX + -0x4]
+006409e4 : MOV ECX,dword ptr [ESP + 0x4]
+006409e8 : SUB EAX,ECX
+006409ea : RET

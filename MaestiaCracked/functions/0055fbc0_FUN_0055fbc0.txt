@@ -1,0 +1,78 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0055fbc0
+ENTRY    : 0055fbc0
+BODY     : [[0055fbc0, 0055fc28]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_0055fbc0(byte param_1)
+
+{
+  int *piVar1;
+  int in_ECX;
+  
+  if (((*(ushort *)(in_ECX + 0x2a) >> 0xb & 1) != 0) && ((*(byte *)(in_ECX + 0x28) & 1) != param_1))
+  {
+    piVar1 = *(int **)(in_ECX + 0x1c);
+    if ((piVar1 != (int *)0x0) && (*piVar1 = *piVar1 + -1, *piVar1 == 0)) {
+      FUN_00500860();
+      FUN_00515cf0(piVar1);
+    }
+    *(undefined4 *)(in_ECX + 0x1c) = 0;
+    *(ushort *)(in_ECX + 0x2a) = *(ushort *)(in_ECX + 0x2a) & 0xf7ff;
+  }
+  if (param_1 != 0) {
+    *(byte *)(in_ECX + 0x28) = *(byte *)(in_ECX + 0x28) | 1;
+    *(ushort *)(in_ECX + 0x2a) = *(ushort *)(in_ECX + 0x2a) | 0x10;
+    return;
+  }
+  *(byte *)(in_ECX + 0x28) = *(byte *)(in_ECX + 0x28) & 0xfe;
+  *(ushort *)(in_ECX + 0x2a) = *(ushort *)(in_ECX + 0x2a) | 0x10;
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0055fbc0 : PUSH EBX
+0055fbc1 : MOV BL,byte ptr [ESP + 0x8]
+0055fbc5 : PUSH ESI
+0055fbc6 : MOV ESI,ECX
+0055fbc8 : MOV AX,word ptr [ESI + 0x2a]
+0055fbcc : SHR AX,0xb
+0055fbd0 : TEST AL,0x1
+0055fbd2 : JZ 0x0055fc09
+0055fbd4 : MOV CL,byte ptr [ESI + 0x28]
+0055fbd7 : AND CL,0x1
+0055fbda : CMP CL,BL
+0055fbdc : JZ 0x0055fc09
+0055fbde : PUSH EDI
+0055fbdf : MOV EDI,dword ptr [ESI + 0x1c]
+0055fbe2 : TEST EDI,EDI
+0055fbe4 : JZ 0x0055fbf8
+0055fbe6 : ADD dword ptr [EDI],-0x1
+0055fbe9 : JNZ 0x0055fbf8
+0055fbeb : MOV ECX,EDI
+0055fbed : CALL 0x00500860
+0055fbf2 : PUSH EDI
+0055fbf3 : CALL 0x00515cf0
+0055fbf8 : MOV EDX,0xf7ff
+0055fbfd : MOV dword ptr [ESI + 0x1c],0x0
+0055fc04 : AND word ptr [ESI + 0x2a],DX
+0055fc08 : POP EDI
+0055fc09 : TEST BL,BL
+0055fc0b : JZ 0x0055fc1b
+0055fc0d : OR byte ptr [ESI + 0x28],0x1
+0055fc11 : OR word ptr [ESI + 0x2a],0x10
+0055fc16 : POP ESI
+0055fc17 : POP EBX
+0055fc18 : RET 0x4
+0055fc1b : AND byte ptr [ESI + 0x28],0xfe
+0055fc1f : OR word ptr [ESI + 0x2a],0x10
+0055fc24 : POP ESI
+0055fc25 : POP EBX
+0055fc26 : RET 0x4

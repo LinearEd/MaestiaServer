@@ -1,0 +1,53 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __freebuf
+ENTRY    : 006501a3
+BODY     : [[006501a3, 006501d3]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __freebuf
+   
+   Library: Visual Studio 2008 Release */
+
+void __cdecl __freebuf(FILE *_File)
+
+{
+  if (((_File->_flag & 0x83U) != 0) && ((_File->_flag & 8U) != 0)) {
+    _free(_File->_base);
+    _File->_flag = _File->_flag & 0xfffffbf7;
+    _File->_ptr = (char *)0x0;
+    _File->_base = (char *)0x0;
+    _File->_cnt = 0;
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006501a3 : MOV EDI,EDI
+006501a5 : PUSH EBP
+006501a6 : MOV EBP,ESP
+006501a8 : PUSH ESI
+006501a9 : MOV ESI,dword ptr [EBP + 0x8]
+006501ac : MOV EAX,dword ptr [ESI + 0xc]
+006501af : TEST AL,0x83
+006501b1 : JZ 0x006501d1
+006501b3 : TEST AL,0x8
+006501b5 : JZ 0x006501d1
+006501b7 : PUSH dword ptr [ESI + 0x8]
+006501ba : CALL 0x0063610d
+006501bf : AND dword ptr [ESI + 0xc],0xfffffbf7
+006501c6 : XOR EAX,EAX
+006501c8 : POP ECX
+006501c9 : MOV dword ptr [ESI],EAX
+006501cb : MOV dword ptr [ESI + 0x8],EAX
+006501ce : MOV dword ptr [ESI + 0x4],EAX
+006501d1 : POP ESI
+006501d2 : POP EBP
+006501d3 : RET

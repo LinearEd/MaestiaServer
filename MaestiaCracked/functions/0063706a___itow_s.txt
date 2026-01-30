@@ -1,0 +1,54 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __itow_s
+ENTRY    : 0063706a
+BODY     : [[0063706a, 00637095]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __itow_s
+   
+   Library: Visual Studio 2008 Release */
+
+errno_t __cdecl __itow_s(int _Val,wchar_t *_DstBuf,size_t _SizeInWords,int _Radix)
+
+{
+  errno_t eVar1;
+  undefined4 uVar2;
+  
+  if ((_Radix == 10) && (_Val < 0)) {
+    uVar2 = 1;
+    _Radix = 10;
+  }
+  else {
+    uVar2 = 0;
+  }
+  eVar1 = xtow_s(_Val,_SizeInWords,_Radix,uVar2);
+  return eVar1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0063706a : MOV EDI,EDI
+0063706c : PUSH EBP
+0063706d : MOV EBP,ESP
+0063706f : CMP dword ptr [EBP + 0x14],0xa
+00637073 : JNZ 0x00637081
+00637075 : CMP dword ptr [EBP + 0x8],0x0
+00637079 : JGE 0x00637081
+0063707b : PUSH 0x1
+0063707d : PUSH 0xa
+0063707f : JMP 0x00637086
+00637081 : PUSH 0x0
+00637083 : PUSH dword ptr [EBP + 0x14]
+00637086 : PUSH dword ptr [EBP + 0x10]
+00637089 : MOV EAX,dword ptr [EBP + 0xc]
+0063708c : PUSH dword ptr [EBP + 0x8]
+0063708f : CALL 0x00636f74
+00637094 : POP EBP
+00637095 : RET

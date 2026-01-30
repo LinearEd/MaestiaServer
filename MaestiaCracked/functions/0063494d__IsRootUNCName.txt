@@ -1,0 +1,119 @@
+PROGRAM  : Maestia.exe
+FUNCTION : _IsRootUNCName
+ENTRY    : 0063494d
+BODY     : [[0063494d, 006349ed]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    _IsRootUNCName
+   
+   Library: Visual Studio 2008 Release */
+
+undefined4 _IsRootUNCName(void)
+
+{
+  uint uVar1;
+  short *psVar2;
+  short sVar3;
+  short *unaff_ESI;
+  
+  uVar1 = FUN_00644bcf();
+  if ((((4 < uVar1) && ((*unaff_ESI == 0x5c || (*unaff_ESI == 0x2f)))) &&
+      ((unaff_ESI[1] == 0x5c || (unaff_ESI[1] == 0x2f)))) &&
+     ((unaff_ESI[2] != 0x5c && (unaff_ESI[2] != 0x2f)))) {
+    psVar2 = unaff_ESI + 3;
+    sVar3 = *psVar2;
+    if (sVar3 != 0) {
+      do {
+        if ((sVar3 == 0x5c) || (sVar3 == 0x2f)) break;
+        psVar2 = psVar2 + 1;
+        sVar3 = *psVar2;
+      } while (sVar3 != 0);
+      if ((*psVar2 != 0) && (psVar2 = psVar2 + 1, *psVar2 != 0)) {
+        sVar3 = *psVar2;
+        if (sVar3 != 0) {
+          do {
+            if ((sVar3 == 0x5c) || (sVar3 == 0x2f)) break;
+            psVar2 = psVar2 + 1;
+            sVar3 = *psVar2;
+          } while (sVar3 != 0);
+          if ((*psVar2 != 0) && (psVar2[1] != 0)) {
+            return 0;
+          }
+        }
+        return 1;
+      }
+    }
+  }
+  return 0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0063494d : MOV EDI,EDI
+0063494f : PUSH ESI
+00634950 : CALL 0x00644bcf
+00634955 : POP ECX
+00634956 : CMP EAX,0x5
+00634959 : JC 0x006349eb
+0063495f : MOVZX EAX,word ptr [ESI]
+00634962 : CMP AX,0x5c
+00634966 : JZ 0x0063496e
+00634968 : CMP AX,0x2f
+0063496c : JNZ 0x006349eb
+0063496e : MOVZX EAX,word ptr [ESI + 0x2]
+00634972 : CMP AX,0x5c
+00634976 : JZ 0x0063497e
+00634978 : CMP AX,0x2f
+0063497c : JNZ 0x006349eb
+0063497e : MOVZX EAX,word ptr [ESI + 0x4]
+00634982 : CMP AX,0x5c
+00634986 : JZ 0x006349eb
+00634988 : CMP AX,0x2f
+0063498c : JZ 0x006349eb
+0063498e : LEA EAX,[ESI + 0x6]
+00634991 : MOVZX ECX,word ptr [EAX]
+00634994 : XOR EDX,EDX
+00634996 : CMP CX,DX
+00634999 : JZ 0x006349eb
+0063499b : CMP CX,0x5c
+0063499f : JZ 0x006349b1
+006349a1 : CMP CX,0x2f
+006349a5 : JZ 0x006349b1
+006349a7 : INC EAX
+006349a8 : INC EAX
+006349a9 : MOVZX ECX,word ptr [EAX]
+006349ac : CMP CX,DX
+006349af : JNZ 0x0063499b
+006349b1 : CMP word ptr [EAX],DX
+006349b4 : JZ 0x006349eb
+006349b6 : ADD EAX,0x2
+006349b9 : CMP word ptr [EAX],DX
+006349bc : JZ 0x006349eb
+006349be : MOVZX ECX,word ptr [EAX]
+006349c1 : CMP CX,DX
+006349c4 : JZ 0x006349e7
+006349c6 : CMP CX,0x5c
+006349ca : JZ 0x006349dc
+006349cc : CMP CX,0x2f
+006349d0 : JZ 0x006349dc
+006349d2 : INC EAX
+006349d3 : INC EAX
+006349d4 : MOVZX ECX,word ptr [EAX]
+006349d7 : CMP CX,DX
+006349da : JNZ 0x006349c6
+006349dc : CMP word ptr [EAX],DX
+006349df : JZ 0x006349e7
+006349e1 : CMP word ptr [EAX + 0x2],DX
+006349e5 : JNZ 0x006349eb
+006349e7 : XOR EAX,EAX
+006349e9 : INC EAX
+006349ea : RET
+006349eb : XOR EAX,EAX
+006349ed : RET

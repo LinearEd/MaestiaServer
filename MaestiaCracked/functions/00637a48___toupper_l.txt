@@ -1,0 +1,180 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __toupper_l
+ENTRY    : 00637a48
+BODY     : [[00637a48, 00637b5d]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __toupper_l
+   
+   Library: Visual Studio 2008 Release */
+
+int __cdecl __toupper_l(int _C,_locale_t _Locale)
+
+{
+  int iVar1;
+  uint uVar2;
+  int iVar3;
+  int *piVar4;
+  CHAR CVar5;
+  localeinfo_struct local_1c;
+  int local_14;
+  char local_10;
+  byte local_c;
+  undefined1 local_b;
+  CHAR local_8;
+  CHAR local_7;
+  undefined1 local_6;
+  
+  iVar1 = _C;
+  _LocaleUpdate::_LocaleUpdate((_LocaleUpdate *)&local_1c,_Locale);
+  if ((uint)_C < 0x100) {
+    if ((int)(local_1c.locinfo)->locale_name[3] < 2) {
+      uVar2 = *(ushort *)(local_1c.locinfo[1].lc_category[0].locale + _C * 2) & 2;
+    }
+    else {
+      uVar2 = __isctype_l(_C,2,&local_1c);
+    }
+    if (uVar2 == 0) {
+LAB_00637aa7:
+      if (local_10 == '\0') {
+        return iVar1;
+      }
+      *(uint *)(local_14 + 0x70) = *(uint *)(local_14 + 0x70) & 0xfffffffd;
+      return iVar1;
+    }
+    uVar2 = (uint)*(byte *)((int)local_1c.locinfo[1].lc_category[0].refcount + _C);
+  }
+  else {
+    CVar5 = (CHAR)_C;
+    if (((int)(local_1c.locinfo)->locale_name[3] < 2) ||
+       (iVar3 = __isleadbyte_l(_C >> 8 & 0xff,&local_1c), iVar3 == 0)) {
+      piVar4 = __errno();
+      *piVar4 = 0x2a;
+      local_7 = '\0';
+      iVar3 = 1;
+      local_8 = CVar5;
+    }
+    else {
+      _C._0_1_ = (CHAR)((uint)_C >> 8);
+      local_8 = (CHAR)_C;
+      local_6 = 0;
+      iVar3 = 2;
+      local_7 = CVar5;
+    }
+    iVar3 = ___crtLCMapStringA(&local_1c,(local_1c.locinfo)->lc_category[0].wlocale,0x200,&local_8,
+                               iVar3,(LPSTR)&local_c,3,(local_1c.locinfo)->lc_codepage,1);
+    if (iVar3 == 0) goto LAB_00637aa7;
+    uVar2 = (uint)local_c;
+    if (iVar3 != 1) {
+      uVar2 = (uint)CONCAT11(local_c,local_b);
+    }
+  }
+  if (local_10 != '\0') {
+    *(uint *)(local_14 + 0x70) = *(uint *)(local_14 + 0x70) & 0xfffffffd;
+  }
+  return uVar2;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00637a48 : MOV EDI,EDI
+00637a4a : PUSH EBP
+00637a4b : MOV EBP,ESP
+00637a4d : SUB ESP,0x18
+00637a50 : PUSH EBX
+00637a51 : PUSH dword ptr [EBP + 0xc]
+00637a54 : LEA ECX,[EBP + -0x18]
+00637a57 : CALL 0x00637880
+00637a5c : MOV EBX,dword ptr [EBP + 0x8]
+00637a5f : CMP EBX,0x100
+00637a65 : JNC 0x00637abb
+00637a67 : MOV ECX,dword ptr [EBP + -0x18]
+00637a6a : CMP dword ptr [ECX + 0xac],0x1
+00637a71 : JLE 0x00637a87
+00637a73 : LEA EAX,[EBP + -0x18]
+00637a76 : PUSH EAX
+00637a77 : PUSH 0x2
+00637a79 : PUSH EBX
+00637a7a : CALL 0x00651518
+00637a7f : MOV ECX,dword ptr [EBP + -0x18]
+00637a82 : ADD ESP,0xc
+00637a85 : JMP 0x00637a94
+00637a87 : MOV EAX,dword ptr [ECX + 0xc8]
+00637a8d : MOVZX EAX,word ptr [EAX + EBX*0x2]
+00637a91 : AND EAX,0x2
+00637a94 : TEST EAX,EAX
+00637a96 : JZ 0x00637aa7
+00637a98 : MOV EAX,dword ptr [ECX + 0xd0]
+00637a9e : MOVZX EAX,byte ptr [EAX + EBX*0x1]
+00637aa2 : JMP 0x00637b4e
+00637aa7 : CMP byte ptr [EBP + -0xc],0x0
+00637aab : JZ 0x00637ab4
+00637aad : MOV EAX,dword ptr [EBP + -0x10]
+00637ab0 : AND dword ptr [EAX + 0x70],0xfffffffd
+00637ab4 : MOV EAX,EBX
+00637ab6 : JMP 0x00637b5b
+00637abb : MOV EAX,dword ptr [EBP + -0x18]
+00637abe : CMP dword ptr [EAX + 0xac],0x1
+00637ac5 : JLE 0x00637af8
+00637ac7 : MOV dword ptr [EBP + 0x8],EBX
+00637aca : SAR dword ptr [EBP + 0x8],0x8
+00637ace : LEA EAX,[EBP + -0x18]
+00637ad1 : PUSH EAX
+00637ad2 : MOV EAX,dword ptr [EBP + 0x8]
+00637ad5 : AND EAX,0xff
+00637ada : PUSH EAX
+00637adb : CALL 0x006390f8
+00637ae0 : POP ECX
+00637ae1 : POP ECX
+00637ae2 : TEST EAX,EAX
+00637ae4 : JZ 0x00637af8
+00637ae6 : MOV AL,byte ptr [EBP + 0x8]
+00637ae9 : PUSH 0x2
+00637aeb : MOV byte ptr [EBP + -0x4],AL
+00637aee : MOV byte ptr [EBP + -0x3],BL
+00637af1 : MOV byte ptr [EBP + -0x2],0x0
+00637af5 : POP ECX
+00637af6 : JMP 0x00637b0d
+00637af8 : CALL 0x0063ab82
+00637afd : MOV dword ptr [EAX],0x2a
+00637b03 : XOR ECX,ECX
+00637b05 : MOV byte ptr [EBP + -0x4],BL
+00637b08 : MOV byte ptr [EBP + -0x3],0x0
+00637b0c : INC ECX
+00637b0d : MOV EAX,dword ptr [EBP + -0x18]
+00637b10 : PUSH 0x1
+00637b12 : PUSH dword ptr [EAX + 0x4]
+00637b15 : LEA EDX,[EBP + -0x8]
+00637b18 : PUSH 0x3
+00637b1a : PUSH EDX
+00637b1b : PUSH ECX
+00637b1c : LEA ECX,[EBP + -0x4]
+00637b1f : PUSH ECX
+00637b20 : PUSH 0x200
+00637b25 : PUSH dword ptr [EAX + 0x14]
+00637b28 : LEA EAX,[EBP + -0x18]
+00637b2b : PUSH EAX
+00637b2c : CALL 0x00643b47
+00637b31 : ADD ESP,0x24
+00637b34 : TEST EAX,EAX
+00637b36 : JZ 0x00637aa7
+00637b3c : CMP EAX,0x1
+00637b3f : MOVZX EAX,byte ptr [EBP + -0x8]
+00637b43 : JZ 0x00637b4e
+00637b45 : MOVZX ECX,byte ptr [EBP + -0x7]
+00637b49 : SHL EAX,0x8
+00637b4c : OR EAX,ECX
+00637b4e : CMP byte ptr [EBP + -0xc],0x0
+00637b52 : JZ 0x00637b5b
+00637b54 : MOV ECX,dword ptr [EBP + -0x10]
+00637b57 : AND dword ptr [ECX + 0x70],0xfffffffd
+00637b5b : POP EBX
+00637b5c : LEAVE
+00637b5d : RET

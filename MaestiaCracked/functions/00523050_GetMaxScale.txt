@@ -1,0 +1,65 @@
+PROGRAM  : Maestia.exe
+FUNCTION : GetMaxScale
+ENTRY    : 00523050
+BODY     : [[00523050, 005230a1]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* public: float __thiscall GMatrix2D::GetMaxScale(void)const  */
+
+float __thiscall GMatrix2D::GetMaxScale(GMatrix2D *this)
+
+{
+  float fVar1;
+  float fVar2;
+  float10 fVar3;
+  
+                    /* 0x123050  97  ?GetMaxScale@GMatrix2D@@QBEMXZ */
+  fVar1 = *(float *)this * *(float *)this + *(float *)(this + 0xc) * *(float *)(this + 0xc);
+  fVar2 = *(float *)(this + 4) * *(float *)(this + 4) +
+          *(float *)(this + 0x10) * *(float *)(this + 0x10);
+  if (fVar2 < fVar1) {
+    fVar2 = fVar1;
+  }
+  fVar3 = (float10)FUN_0063bdc0(fVar2);
+  return (float)fVar3;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00523050 : SUB ESP,0x8
+00523053 : FLD float ptr [ECX + 0xc]
+00523056 : FLD float ptr [ECX]
+00523058 : FMUL ST0
+0052305a : FLD ST1
+0052305c : FMULP ST2
+0052305e : FADDP
+00523060 : FSTP float ptr [ESP + 0x4]
+00523064 : FLD float ptr [ECX + 0x10]
+00523067 : FLD float ptr [ECX + 0x4]
+0052306a : FMUL ST0
+0052306c : FLD ST1
+0052306e : FMULP ST2
+00523070 : FADDP
+00523072 : FSTP float ptr [ESP]
+00523075 : FLD float ptr [ESP]
+00523078 : FLD float ptr [ESP + 0x4]
+0052307c : FCOM
+0052307e : FNSTSW AX
+00523080 : TEST AH,0x41
+00523083 : JNZ 0x00523089
+00523085 : FSTP ST1
+00523087 : JMP 0x0052308b
+00523089 : FSTP ST0
+0052308b : FSTP float ptr [ESP]
+0052308e : FLD float ptr [ESP]
+00523091 : CALL 0x0063bdc0
+00523096 : FSTP float ptr [ESP + 0x4]
+0052309a : FLD float ptr [ESP + 0x4]
+0052309e : ADD ESP,0x8
+005230a1 : RET

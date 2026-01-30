@@ -1,0 +1,97 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00568a50
+ENTRY    : 00568a50
+BODY     : [[00568a50, 00568ad3]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00568a50(int *param_1)
+
+{
+  int iVar1;
+  int iVar2;
+  int *in_ECX;
+  
+  if (in_ECX != param_1) {
+    iVar1 = *in_ECX;
+    if ((((*(byte *)(in_ECX + 2) & 2) == 0) && (iVar1 != 0)) && (iVar1 != *param_1)) {
+      FUN_00503db0();
+    }
+    iVar2 = *param_1;
+    *in_ECX = iVar2;
+    if ((((*(byte *)(in_ECX + 2) & 2) == 0) && (iVar2 != 0)) && (iVar1 != *param_1)) {
+      *(uint *)(iVar2 + 8) = *(int *)(iVar2 + 8) + 1U & 0x8fffffff;
+    }
+    if (param_1[1] != 0) {
+      FUN_005686c0(param_1[1],*(byte *)(param_1 + 2) & 1);
+      return;
+    }
+    if ((in_ECX[1] != 0) && ((*(byte *)(in_ECX + 2) & 1) == 0)) {
+      FUN_00503db0();
+    }
+    *(byte *)(in_ECX + 2) = *(byte *)(in_ECX + 2) & 0xfe;
+    in_ECX[1] = 0;
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00568a50 : PUSH ESI
+00568a51 : PUSH EDI
+00568a52 : MOV EDI,dword ptr [ESP + 0xc]
+00568a56 : MOV ESI,ECX
+00568a58 : CMP ESI,EDI
+00568a5a : JZ 0x00568acf
+00568a5c : TEST byte ptr [ESI + 0x8],0x2
+00568a60 : PUSH EBP
+00568a61 : MOV EBP,dword ptr [ESI]
+00568a63 : JNZ 0x00568a74
+00568a65 : TEST EBP,EBP
+00568a67 : JZ 0x00568a74
+00568a69 : CMP EBP,dword ptr [EDI]
+00568a6b : JZ 0x00568a74
+00568a6d : MOV ECX,EBP
+00568a6f : CALL 0x00503db0
+00568a74 : TEST byte ptr [ESI + 0x8],0x2
+00568a78 : MOV EAX,dword ptr [EDI]
+00568a7a : MOV dword ptr [ESI],EAX
+00568a7c : JNZ 0x00568a93
+00568a7e : TEST EAX,EAX
+00568a80 : JZ 0x00568a93
+00568a82 : CMP EBP,dword ptr [EDI]
+00568a84 : JZ 0x00568a93
+00568a86 : MOV ECX,dword ptr [EAX + 0x8]
+00568a89 : INC ECX
+00568a8a : AND ECX,0x8fffffff
+00568a90 : MOV dword ptr [EAX + 0x8],ECX
+00568a93 : MOV EAX,dword ptr [EDI + 0x4]
+00568a96 : POP EBP
+00568a97 : TEST EAX,EAX
+00568a99 : JZ 0x00568ab2
+00568a9b : MOV DL,byte ptr [EDI + 0x8]
+00568a9e : AND DL,0x1
+00568aa1 : MOVZX ECX,DL
+00568aa4 : PUSH ECX
+00568aa5 : PUSH EAX
+00568aa6 : MOV ECX,ESI
+00568aa8 : CALL 0x005686c0
+00568aad : POP EDI
+00568aae : POP ESI
+00568aaf : RET 0x4
+00568ab2 : MOV ECX,dword ptr [ESI + 0x4]
+00568ab5 : TEST ECX,ECX
+00568ab7 : JZ 0x00568ac4
+00568ab9 : TEST byte ptr [ESI + 0x8],0x1
+00568abd : JNZ 0x00568ac4
+00568abf : CALL 0x00503db0
+00568ac4 : AND byte ptr [ESI + 0x8],0xfe
+00568ac8 : MOV dword ptr [ESI + 0x4],0x0
+00568acf : POP EDI
+00568ad0 : POP ESI
+00568ad1 : RET 0x4

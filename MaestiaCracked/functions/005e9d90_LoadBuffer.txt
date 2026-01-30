@@ -1,0 +1,60 @@
+PROGRAM  : Maestia.exe
+FUNCTION : LoadBuffer
+ENTRY    : 005e9d90
+BODY     : [[005e9d90, 005e9dc5]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* protected: void __thiscall GBufferedFile::LoadBuffer(void) */
+
+void __thiscall GBufferedFile::LoadBuffer(GBufferedFile *this)
+
+{
+  GBufferedFile *pGVar1;
+  uint uVar2;
+  uint uVar3;
+  
+                    /* 0x1e9d90  119  ?LoadBuffer@GBufferedFile@@IAEXXZ */
+  if (*(int *)(this + 0x10) == 1) {
+    uVar3 = (**(code **)(**(int **)(this + 8) + 0x28))(*(undefined4 *)(this + 0xc),0x1ff8);
+    *(undefined4 *)(this + 0x14) = 0;
+    uVar3 = uVar3 & ((int)uVar3 < 0) - 1;
+    pGVar1 = this + 0x20;
+    uVar2 = *(uint *)pGVar1;
+    *(uint *)pGVar1 = *(uint *)pGVar1 + uVar3;
+    *(uint *)(this + 0x18) = uVar3;
+    *(uint *)(this + 0x24) = *(int *)(this + 0x24) + (uint)CARRY4(uVar2,uVar3);
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005e9d90 : PUSH ESI
+005e9d91 : MOV ESI,ECX
+005e9d93 : CMP dword ptr [ESI + 0x10],0x1
+005e9d97 : JNZ 0x005e9dc4
+005e9d99 : MOV ECX,dword ptr [ESI + 0x8]
+005e9d9c : MOV EAX,dword ptr [ECX]
+005e9d9e : MOV EDX,dword ptr [ESI + 0xc]
+005e9da1 : MOV EAX,dword ptr [EAX + 0x28]
+005e9da4 : PUSH 0x1ff8
+005e9da9 : PUSH EDX
+005e9daa : CALL EAX
+005e9dac : XOR ECX,ECX
+005e9dae : XOR EDX,EDX
+005e9db0 : CMP EAX,ECX
+005e9db2 : SETL DL
+005e9db5 : MOV dword ptr [ESI + 0x14],ECX
+005e9db8 : DEC EDX
+005e9db9 : AND EAX,EDX
+005e9dbb : ADD dword ptr [ESI + 0x20],EAX
+005e9dbe : MOV dword ptr [ESI + 0x18],EAX
+005e9dc1 : ADC dword ptr [ESI + 0x24],ECX
+005e9dc4 : POP ESI
+005e9dc5 : RET

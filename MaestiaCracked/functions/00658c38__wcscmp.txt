@@ -1,0 +1,70 @@
+PROGRAM  : Maestia.exe
+FUNCTION : _wcscmp
+ENTRY    : 00658c38
+BODY     : [[00658c38, 00658c6e]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    _wcscmp
+   
+   Library: Visual Studio 2008 Release */
+
+int __cdecl _wcscmp(wchar_t *_Str1,wchar_t *_Str2)
+
+{
+  int iVar1;
+  
+  while( true ) {
+    iVar1 = (uint)(ushort)*_Str1 - (uint)(ushort)*_Str2;
+    if ((iVar1 != 0) || (*_Str2 == L'\0')) break;
+    _Str1 = _Str1 + 1;
+    _Str2 = _Str2 + 1;
+  }
+  if (iVar1 < 0) {
+    return -1;
+  }
+  if (0 < iVar1) {
+    iVar1 = 1;
+  }
+  return iVar1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00658c38 : MOV EDI,EDI
+00658c3a : PUSH EBP
+00658c3b : MOV EBP,ESP
+00658c3d : MOV EDX,dword ptr [EBP + 0x8]
+00658c40 : PUSH ESI
+00658c41 : MOV ESI,dword ptr [EBP + 0xc]
+00658c44 : PUSH EDI
+00658c45 : JMP 0x00658c50
+00658c47 : TEST CX,CX
+00658c4a : JZ 0x00658c5d
+00658c4c : INC EDX
+00658c4d : INC EDX
+00658c4e : INC ESI
+00658c4f : INC ESI
+00658c50 : MOVZX ECX,word ptr [ESI]
+00658c53 : MOVZX EAX,word ptr [EDX]
+00658c56 : MOVZX EDI,CX
+00658c59 : SUB EAX,EDI
+00658c5b : JZ 0x00658c47
+00658c5d : POP EDI
+00658c5e : POP ESI
+00658c5f : TEST EAX,EAX
+00658c61 : JGE 0x00658c68
+00658c63 : OR EAX,0xffffffff
+00658c66 : POP EBP
+00658c67 : RET
+00658c68 : JLE 0x00658c6d
+00658c6a : XOR EAX,EAX
+00658c6c : INC EAX
+00658c6d : POP EBP
+00658c6e : RET

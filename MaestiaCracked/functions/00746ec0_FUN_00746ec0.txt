@@ -1,0 +1,149 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00746ec0
+ENTRY    : 00746ec0
+BODY     : [[00746ec0, 00746fd2]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+int FUN_00746ec0(void)
+
+{
+  int iVar1;
+  char cVar2;
+  uint uVar3;
+  int *piVar4;
+  LPCRITICAL_SECTION in_ECX;
+  void *local_10;
+  undefined1 *puStack_c;
+  undefined4 local_8;
+  
+  local_8 = 0xffffffff;
+  puStack_c = &LAB_00b16042;
+  local_10 = ExceptionList;
+  uVar3 = DAT_00d66fa0 ^ (uint)&stack0xfffffffc;
+  ExceptionList = &local_10;
+  EnterCriticalSection(in_ECX);
+  local_8 = 0;
+  if (in_ECX[2].LockCount != 0) {
+    piVar4 = (int *)FUN_004c1520(uVar3);
+    iVar1 = *piVar4;
+    if ((iVar1 != 0) && (*(int *)(iVar1 + 8) == 1)) {
+      FUN_00405eb0(iVar1 + 0xc,0,0xffffffff);
+      FUN_00410290();
+      FUN_00746e40(in_ECX);
+      if (in_ECX[2].LockCount == 0) {
+        in_ECX[0xd].RecursionCount = 0;
+      }
+      if (((char)in_ECX[0xf].LockCount != '\0') &&
+         (*(char *)((int)&in_ECX[0xf].LockCount + 1) != '\0')) {
+        cVar2 = FUN_00746a40(&in_ECX[0xd].OwningThread);
+        if (cVar2 != '\0') {
+          FUN_00746610();
+        }
+      }
+      *(undefined1 *)((int)&in_ECX[0xf].LockCount + 3) = 1;
+      local_8 = 0xffffffff;
+      LeaveCriticalSection(in_ECX);
+      ExceptionList = local_10;
+      return iVar1;
+    }
+  }
+  local_8 = 0xffffffff;
+  LeaveCriticalSection(in_ECX);
+  ExceptionList = local_10;
+  return 0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00746ec0 : PUSH EBP
+00746ec1 : MOV EBP,ESP
+00746ec3 : PUSH -0x1
+00746ec5 : PUSH 0xb16042
+00746eca : MOV EAX,FS:[0x0]
+00746ed0 : PUSH EAX
+00746ed1 : SUB ESP,0xc
+00746ed4 : PUSH EBX
+00746ed5 : PUSH ESI
+00746ed6 : PUSH EDI
+00746ed7 : MOV EAX,[0x00d66fa0]
+00746edc : XOR EAX,EBP
+00746ede : PUSH EAX
+00746edf : LEA EAX,[EBP + -0xc]
+00746ee2 : MOV FS:[0x0],EAX
+00746ee8 : MOV ESI,ECX
+00746eea : PUSH ESI
+00746eeb : MOV dword ptr [EBP + -0x10],ESI
+00746eee : CALL dword ptr [0x00b85118]
+00746ef4 : MOV dword ptr [EBP + -0x4],0x0
+00746efb : CMP dword ptr [ESI + 0x34],0x0
+00746eff : JZ 0x00746fb1
+00746f05 : MOV EAX,dword ptr [ESI + 0x30]
+00746f08 : MOV ECX,dword ptr [ESI + 0x18]
+00746f0b : LEA EDX,[EBP + -0x18]
+00746f0e : MOV dword ptr [EBP + -0x18],ECX
+00746f11 : MOV dword ptr [EBP + -0x14],EAX
+00746f14 : CALL 0x004c1520
+00746f19 : MOV EDI,dword ptr [EAX]
+00746f1b : TEST EDI,EDI
+00746f1d : JZ 0x00746fb1
+00746f23 : MOV EAX,dword ptr [EDI + 0x8]
+00746f26 : CMP EAX,0x1
+00746f29 : JNZ 0x00746fb1
+00746f2f : PUSH -0x1
+00746f31 : PUSH 0x0
+00746f33 : LEA EDX,[EDI + 0xc]
+00746f36 : LEA EBX,[ESI + 0x144]
+00746f3c : PUSH EDX
+00746f3d : MOV ECX,EBX
+00746f3f : CALL 0x00405eb0
+00746f44 : LEA EAX,[ESI + 0x18]
+00746f47 : CALL 0x00410290
+00746f4c : MOV ECX,dword ptr [EDI + 0x4]
+00746f4f : PUSH ESI
+00746f50 : MOV EAX,EBX
+00746f52 : CALL 0x00746e40
+00746f57 : CMP dword ptr [ESI + 0x34],0x0
+00746f5b : JNZ 0x00746f67
+00746f5d : MOV dword ptr [ESI + 0x140],0x0
+00746f67 : CMP byte ptr [ESI + 0x16c],0x0
+00746f6e : JZ 0x00746f88
+00746f70 : CMP byte ptr [ESI + 0x16d],0x0
+00746f77 : JZ 0x00746f88
+00746f79 : PUSH EBX
+00746f7a : CALL 0x00746a40
+00746f7f : TEST AL,AL
+00746f81 : JZ 0x00746f88
+00746f83 : CALL 0x00746610
+00746f88 : MOV byte ptr [ESI + 0x16f],0x1
+00746f8f : MOV dword ptr [EBP + -0x4],0xffffffff
+00746f96 : PUSH ESI
+00746f97 : CALL dword ptr [0x00b8511c]
+00746f9d : MOV EAX,EDI
+00746f9f : MOV ECX,dword ptr [EBP + -0xc]
+00746fa2 : MOV dword ptr FS:[0x0],ECX
+00746fa9 : POP ECX
+00746faa : POP EDI
+00746fab : POP ESI
+00746fac : POP EBX
+00746fad : MOV ESP,EBP
+00746faf : POP EBP
+00746fb0 : RET
+00746fb1 : MOV dword ptr [EBP + -0x4],0xffffffff
+00746fb8 : PUSH ESI
+00746fb9 : CALL dword ptr [0x00b8511c]
+00746fbf : XOR EAX,EAX
+00746fc1 : MOV ECX,dword ptr [EBP + -0xc]
+00746fc4 : MOV dword ptr FS:[0x0],ECX
+00746fcb : POP ECX
+00746fcc : POP EDI
+00746fcd : POP ESI
+00746fce : POP EBX
+00746fcf : MOV ESP,EBP
+00746fd1 : POP EBP
+00746fd2 : RET

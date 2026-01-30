@@ -1,0 +1,68 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_009802e0
+ENTRY    : 009802e0
+BODY     : [[009802e0, 0098034e]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_009802e0(int param_1)
+
+{
+  float fVar1;
+  undefined4 *in_ECX;
+  float *in_EDX;
+  undefined4 local_c;
+  
+  fVar1 = *(float *)(param_1 + 0x44);
+  local_c = (undefined4)(longlong)ROUND((*in_EDX / *(float *)(param_1 + 0x40)) * 512.0 + 256.0);
+  *in_ECX = local_c;
+  local_c = (undefined4)(longlong)ROUND((512.0 - (in_EDX[2] / fVar1) * 512.0) + 256.0);
+  in_ECX[1] = local_c;
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+009802e0 : PUSH EBP
+009802e1 : MOV EBP,ESP
+009802e3 : SUB ESP,0x8
+009802e6 : MOV EAX,dword ptr [EBP + 0x8]
+009802e9 : FNSTCW word ptr [EBP + 0xa]
+009802ec : FLD float ptr [EAX + 0x44]
+009802ef : FLD float ptr [EDX]
+009802f1 : FDIV float ptr [EAX + 0x40]
+009802f4 : MOVZX EAX,word ptr [EBP + 0xa]
+009802f8 : OR EAX,0xc00
+009802fd : MOV dword ptr [EBP + -0x4],EAX
+00980300 : FLD float ptr [0x00cdf2a0]
+00980306 : FMUL ST1
+00980308 : FLD float ptr [0x00cdf208]
+0098030e : FADD ST2,ST0
+00980310 : FLDCW word ptr [EBP + -0x4]
+00980313 : FXCH ST2
+00980315 : FISTP qword ptr [EBP + -0x8]
+00980318 : MOV EAX,dword ptr [EBP + -0x8]
+0098031b : MOV dword ptr [ECX],EAX
+0098031d : FLDCW word ptr [EBP + 0xa]
+00980320 : FLD float ptr [EDX + 0x8]
+00980323 : FDIVRP ST3,ST0
+00980325 : FMUL ST2
+00980327 : FNSTCW word ptr [EBP + 0xa]
+0098032a : FSUBRP ST2,ST0
+0098032c : MOVZX EAX,word ptr [EBP + 0xa]
+00980330 : OR EAX,0xc00
+00980335 : MOV dword ptr [EBP + -0x4],EAX
+00980338 : FADDP
+0098033a : FLDCW word ptr [EBP + -0x4]
+0098033d : FISTP qword ptr [EBP + -0x8]
+00980340 : MOV EDX,dword ptr [EBP + -0x8]
+00980343 : MOV dword ptr [ECX + 0x4],EDX
+00980346 : FLDCW word ptr [EBP + 0xa]
+00980349 : MOV ESP,EBP
+0098034b : POP EBP
+0098034c : RET 0x4

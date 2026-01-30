@@ -1,0 +1,107 @@
+PROGRAM  : Maestia.exe
+FUNCTION : operator-=
+ENTRY    : 00518390
+BODY     : [[00518390, 00518419]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* public: int __thiscall GSemaphore::operator-=(int) */
+
+int __thiscall GSemaphore::operator-=(GSemaphore *this,int param_1)
+
+{
+  HandlerArray *Addend;
+  int iVar1;
+  LONG LVar2;
+  HandlerArray *this_00;
+  
+                    /* 0x118390  39  ??ZGSemaphore@@QAEHH@Z */
+  GMutex::Lock((GMutex *)(this + 0x18));
+  if (*(int *)(this + 0x14) - param_1 < 0) {
+    *(undefined4 *)(this + 0x14) = 0;
+  }
+  else {
+    *(int *)(this + 0x14) = *(int *)(this + 0x14) - param_1;
+  }
+  GWaitCondition::NotifyAll((GWaitCondition *)(this + 0x2c));
+  Addend = *(HandlerArray **)(this + 8);
+  this_00 = (HandlerArray *)0x0;
+  if (Addend != (HandlerArray *)0x0) {
+    InterlockedExchangeAdd((LONG *)Addend,1);
+    this_00 = Addend;
+  }
+  GMutex::Unlock((GMutex *)(this + 0x18));
+  if (this_00 != (HandlerArray *)0x0) {
+    GWaitable::HandlerArray::CallWaitHandlers(this_00);
+  }
+  iVar1 = *(int *)(this + 0x14);
+  if (this_00 != (HandlerArray *)0x0) {
+    LVar2 = InterlockedExchangeAdd((LONG *)this_00,-1);
+    if (LVar2 == 1) {
+      FUN_005a20f0();
+      FUN_00515cf0(*(undefined4 *)(this_00 + 4));
+      FUN_00515cf0(this_00);
+    }
+  }
+  return iVar1;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00518390 : PUSH EBX
+00518391 : PUSH EBP
+00518392 : PUSH ESI
+00518393 : MOV ESI,ECX
+00518395 : LEA EBP,[ESI + 0x18]
+00518398 : PUSH EDI
+00518399 : MOV ECX,EBP
+0051839b : CALL 0x005162b0
+005183a0 : MOV ECX,dword ptr [ESI + 0x14]
+005183a3 : MOV EAX,dword ptr [ESP + 0x14]
+005183a7 : SUB ECX,EAX
+005183a9 : JS 0x005183b0
+005183ab : SUB dword ptr [ESI + 0x14],EAX
+005183ae : JMP 0x005183b7
+005183b0 : MOV dword ptr [ESI + 0x14],0x0
+005183b7 : LEA ECX,[ESI + 0x2c]
+005183ba : CALL 0x00516460
+005183bf : MOV EBX,dword ptr [ESI + 0x8]
+005183c2 : XOR EDI,EDI
+005183c4 : TEST EBX,EBX
+005183c6 : JZ 0x005183d3
+005183c8 : PUSH 0x1
+005183ca : PUSH EBX
+005183cb : CALL dword ptr [0x00b851cc]
+005183d1 : MOV EDI,EBX
+005183d3 : MOV ECX,EBP
+005183d5 : CALL 0x005170a0
+005183da : TEST EDI,EDI
+005183dc : JZ 0x005183e5
+005183de : MOV ECX,EDI
+005183e0 : CALL 0x00517e90
+005183e5 : MOV ESI,dword ptr [ESI + 0x14]
+005183e8 : TEST EDI,EDI
+005183ea : JZ 0x00518411
+005183ec : PUSH -0x1
+005183ee : PUSH EDI
+005183ef : CALL dword ptr [0x00b851cc]
+005183f5 : SUB EAX,0x1
+005183f8 : JNZ 0x00518411
+005183fa : LEA ECX,[EDI + 0x10]
+005183fd : CALL 0x005a20f0
+00518402 : MOV EDX,dword ptr [EDI + 0x4]
+00518405 : PUSH EDX
+00518406 : CALL 0x00515cf0
+0051840b : PUSH EDI
+0051840c : CALL 0x00515cf0
+00518411 : POP EDI
+00518412 : MOV EAX,ESI
+00518414 : POP ESI
+00518415 : POP EBP
+00518416 : POP EBX
+00518417 : RET 0x4

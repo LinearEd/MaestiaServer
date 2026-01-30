@@ -1,0 +1,163 @@
+PROGRAM  : Maestia.exe
+FUNCTION : LSeek
+ENTRY    : 005ea060
+BODY     : [[005ea060, 005ea133]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* public: virtual __int64 __thiscall GBufferedFile::LSeek(__int64,int) */
+
+__int64 __thiscall GBufferedFile::LSeek(GBufferedFile *this,__int64 param_1,int param_2)
+
+{
+  uint uVar1;
+  longlong lVar2;
+  longlong lVar3;
+  uint uVar4;
+  uint uVar5;
+  __int64 _Var6;
+  
+                    /* 0x1ea060  117  ?LSeek@GBufferedFile@@UAE_J_JH@Z */
+  _Var6 = param_1;
+  if (*(int *)(this + 0x10) == 1) {
+    if (param_2 == 1) {
+      uVar4 = *(uint *)(this + 0x14);
+      uVar1 = *(uint *)(this + 0x18);
+      uVar5 = uVar4 + (int)param_1;
+      if (uVar5 <= uVar1) {
+        uVar4 = *(uint *)(this + 0x20) - uVar1;
+        *(uint *)(this + 0x14) = uVar5;
+        return CONCAT44((*(int *)(this + 0x24) - (uint)(*(uint *)(this + 0x20) < uVar1)) +
+                        (uint)CARRY4(uVar4,uVar5),uVar4 + uVar5);
+      }
+      param_2 = 0;
+      uVar5 = *(uint *)(this + 0x20) - uVar1;
+      lVar2 = param_1 + CONCAT44((*(int *)(this + 0x24) - (uint)(*(uint *)(this + 0x20) < uVar1)) +
+                                 (uint)CARRY4(uVar5,uVar4),uVar5 + uVar4);
+    }
+    else {
+      if (param_2 != 0) {
+        FlushBuffer(this);
+        goto LAB_005ea116;
+      }
+      uVar5 = *(uint *)(this + 0x18);
+      lVar3 = param_1 + CONCAT44(-(uint)(uVar5 < *(uint *)(this + 0x20)) - *(int *)(this + 0x24),
+                                 uVar5 - *(uint *)(this + 0x20));
+      lVar2 = param_1;
+      if (((int)((ulonglong)lVar3 >> 0x20) == 0) && ((uint)lVar3 <= uVar5)) {
+        *(uint *)(this + 0x14) = (uVar5 - *(int *)(this + 0x20)) + (int)param_1;
+        return param_1;
+      }
+    }
+    param_1._4_4_ = (undefined4)((ulonglong)lVar2 >> 0x20);
+    _Var6 = CONCAT44(param_1._4_4_,(int)param_1);
+    *(undefined4 *)(this + 0x18) = 0;
+    *(undefined4 *)(this + 0x14) = 0;
+    param_1._0_4_ = (int)lVar2;
+  }
+  else {
+    FlushBuffer(this);
+  }
+LAB_005ea116:
+  param_1._4_4_ = (undefined4)((ulonglong)_Var6 >> 0x20);
+  _Var6 = (**(code **)(**(int **)(this + 8) + 0x3c))((int)param_1,param_1._4_4_,param_2);
+  *(__int64 *)(this + 0x20) = _Var6;
+  return _Var6;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005ea060 : PUSH EBX
+005ea061 : PUSH EBP
+005ea062 : PUSH ESI
+005ea063 : MOV ESI,ECX
+005ea065 : CMP dword ptr [ESI + 0x10],0x1
+005ea069 : PUSH EDI
+005ea06a : JNZ 0x005ea109
+005ea070 : MOV EBP,dword ptr [ESP + 0x1c]
+005ea074 : CMP EBP,0x1
+005ea077 : JNZ 0x005ea0c8
+005ea079 : MOV EDX,dword ptr [ESI + 0x14]
+005ea07c : MOV EAX,dword ptr [ESP + 0x14]
+005ea080 : MOV ECX,dword ptr [ESI + 0x18]
+005ea083 : LEA EDI,[EDX + EAX*0x1]
+005ea086 : CMP EDI,ECX
+005ea088 : JA 0x005ea0a6
+005ea08a : MOV EAX,dword ptr [ESI + 0x20]
+005ea08d : MOV EDX,dword ptr [ESI + 0x24]
+005ea090 : XOR EBX,EBX
+005ea092 : SUB EAX,ECX
+005ea094 : SBB EDX,EBX
+005ea096 : XOR ECX,ECX
+005ea098 : MOV dword ptr [ESI + 0x14],EDI
+005ea09b : ADD EAX,EDI
+005ea09d : POP EDI
+005ea09e : POP ESI
+005ea09f : POP EBP
+005ea0a0 : ADC EDX,ECX
+005ea0a2 : POP EBX
+005ea0a3 : RET 0xc
+005ea0a6 : MOV EBX,dword ptr [ESI + 0x20]
+005ea0a9 : XOR EDI,EDI
+005ea0ab : XOR EBP,EBP
+005ea0ad : SUB EBX,ECX
+005ea0af : MOV ECX,dword ptr [ESI + 0x24]
+005ea0b2 : SBB ECX,EDI
+005ea0b4 : ADD EBX,EDX
+005ea0b6 : ADC ECX,EDI
+005ea0b8 : ADD EAX,EBX
+005ea0ba : ADC dword ptr [ESP + 0x18],ECX
+005ea0be : XOR ECX,ECX
+005ea0c0 : MOV dword ptr [ESI + 0x18],ECX
+005ea0c3 : MOV dword ptr [ESI + 0x14],ECX
+005ea0c6 : JMP 0x005ea116
+005ea0c8 : TEST EBP,EBP
+005ea0ca : JNZ 0x005ea102
+005ea0cc : MOV EDI,dword ptr [ESI + 0x18]
+005ea0cf : MOV EAX,dword ptr [ESP + 0x14]
+005ea0d3 : XOR EBX,EBX
+005ea0d5 : MOV EDX,EDI
+005ea0d7 : SUB EDX,dword ptr [ESI + 0x20]
+005ea0da : MOV ECX,EBX
+005ea0dc : SBB ECX,dword ptr [ESI + 0x24]
+005ea0df : ADD EDX,EAX
+005ea0e1 : ADC ECX,dword ptr [ESP + 0x18]
+005ea0e5 : CMP ECX,EBX
+005ea0e7 : JA 0x005ea0be
+005ea0e9 : JC 0x005ea0ef
+005ea0eb : CMP EDX,EDI
+005ea0ed : JA 0x005ea0be
+005ea0ef : SUB EDI,dword ptr [ESI + 0x20]
+005ea0f2 : MOV EDX,dword ptr [ESP + 0x18]
+005ea0f6 : ADD EDI,EAX
+005ea0f8 : MOV dword ptr [ESI + 0x14],EDI
+005ea0fb : POP EDI
+005ea0fc : POP ESI
+005ea0fd : POP EBP
+005ea0fe : POP EBX
+005ea0ff : RET 0xc
+005ea102 : CALL 0x005e9d20
+005ea107 : JMP 0x005ea112
+005ea109 : CALL 0x005e9d20
+005ea10e : MOV EBP,dword ptr [ESP + 0x1c]
+005ea112 : MOV EAX,dword ptr [ESP + 0x14]
+005ea116 : MOV ECX,dword ptr [ESI + 0x8]
+005ea119 : MOV EDI,dword ptr [ESP + 0x18]
+005ea11d : MOV EDX,dword ptr [ECX]
+005ea11f : PUSH EBP
+005ea120 : PUSH EDI
+005ea121 : PUSH EAX
+005ea122 : MOV EAX,dword ptr [EDX + 0x3c]
+005ea125 : CALL EAX
+005ea127 : POP EDI
+005ea128 : MOV dword ptr [ESI + 0x20],EAX
+005ea12b : MOV dword ptr [ESI + 0x24],EDX
+005ea12e : POP ESI
+005ea12f : POP EBP
+005ea130 : POP EBX
+005ea131 : RET 0xc

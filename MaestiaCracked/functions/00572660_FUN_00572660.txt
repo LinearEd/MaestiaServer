@@ -1,0 +1,155 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00572660
+ENTRY    : 00572660
+BODY     : [[00572660, 00572765]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00572660(uint param_1)
+
+{
+  int *piVar1;
+  uint uVar2;
+  GRefCountNTSImpl *this;
+  int in_ECX;
+  uint extraout_ECX;
+  char cVar3;
+  int iVar4;
+  
+  uVar2 = param_1;
+  cVar3 = (char)param_1;
+  if (((cVar3 != '\0') && ((*(byte *)(in_ECX + 0xac8) & 1) != 0)) &&
+     ((*(byte *)(in_ECX + 0xac8) & 2) == 0)) {
+    FUN_00570ad0(0);
+    *(undefined1 *)(in_ECX + 0xac8) = 0;
+  }
+  if ((*(byte *)(in_ECX + 0xac8) & 1) == 0) {
+    param_1 = param_1 & 0xffffff00;
+    if ((*(int *)(in_ECX + 0xadc) == 0) ||
+       (this = (GRefCountNTSImpl *)FUN_0051d0a0(in_ECX), this == (GRefCountNTSImpl *)0x0)) {
+      iVar4 = *(int *)(in_ECX + 0x60);
+      if (0 < iVar4) {
+        do {
+          piVar1 = *(int **)(*(int *)(in_ECX + 0x5c) + -4 + iVar4 * 8);
+          (**(code **)(*piVar1 + 0xc4))(in_ECX + 0xacc,&param_1,uVar2,(uint)piVar1 & 0xffffff00);
+          iVar4 = iVar4 + -1;
+        } while (0 < iVar4);
+      }
+    }
+    else {
+      *(int *)(this + 4) = *(int *)(this + 4) + 1;
+      GRefCountNTSImpl::Release(this);
+      (**(code **)(*(int *)this + 0xc4))(in_ECX + 0xacc,&param_1,uVar2,extraout_ECX & 0xffffff00);
+    }
+    if ((char)param_1 == '\0') {
+      FUN_0056e460(in_ECX + 0xacc,0,*(undefined4 *)(in_ECX + 0xad0),DAT_00d73290);
+    }
+    else {
+      FUN_0056e030(in_ECX + 0xacc,0,*(undefined4 *)(in_ECX + 0xad0),DAT_00d73291);
+    }
+    *(undefined1 *)(in_ECX + 0xac8) = 1;
+    if (cVar3 != '\0') {
+      *(undefined1 *)(in_ECX + 0xac8) = 3;
+    }
+    return;
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00572660 : PUSH EBX
+00572661 : MOV EBX,dword ptr [ESP + 0x8]
+00572665 : PUSH EBP
+00572666 : PUSH ESI
+00572667 : PUSH EDI
+00572668 : MOV ESI,ECX
+0057266a : TEST BL,BL
+0057266c : JZ 0x00572690
+0057266e : MOV AL,byte ptr [ESI + 0xac8]
+00572674 : TEST AL,0x1
+00572676 : JZ 0x00572690
+00572678 : TEST AL,0x2
+0057267a : JNZ 0x00572690
+0057267c : PUSH 0x0
+0057267e : LEA ECX,[ESI + 0xacc]
+00572684 : CALL 0x00570ad0
+00572689 : MOV byte ptr [ESI + 0xac8],0x0
+00572690 : TEST byte ptr [ESI + 0xac8],0x1
+00572697 : JNZ 0x0057275f
+0057269d : MOV ECX,dword ptr [ESI + 0xadc]
+005726a3 : MOV byte ptr [ESP + 0x14],0x0
+005726a8 : TEST ECX,ECX
+005726aa : JZ 0x005726e3
+005726ac : PUSH ESI
+005726ad : CALL 0x0051d0a0
+005726b2 : MOV EDI,EAX
+005726b4 : TEST EDI,EDI
+005726b6 : JZ 0x005726e3
+005726b8 : INC dword ptr [EDI + 0x4]
+005726bb : MOV ECX,EDI
+005726bd : CALL 0x004ff7c0
+005726c2 : PUSH ECX
+005726c3 : MOV EAX,ESP
+005726c5 : PUSH EBX
+005726c6 : MOV byte ptr [EAX],0x0
+005726c9 : MOV EAX,dword ptr [EDI]
+005726cb : MOV EAX,dword ptr [EAX + 0xc4]
+005726d1 : LEA ECX,[ESP + 0x1c]
+005726d5 : PUSH ECX
+005726d6 : LEA EDX,[ESI + 0xacc]
+005726dc : PUSH EDX
+005726dd : MOV ECX,EDI
+005726df : CALL EAX
+005726e1 : JMP 0x00572713
+005726e3 : MOV EDI,dword ptr [ESI + 0x60]
+005726e6 : TEST EDI,EDI
+005726e8 : JLE 0x00572713
+005726ea : LEA EBP,[ESI + 0xacc]
+005726f0 : MOV ECX,dword ptr [ESI + 0x5c]
+005726f3 : MOV ECX,dword ptr [ECX + EDI*0x8 + -0x4]
+005726f7 : PUSH ECX
+005726f8 : MOV EAX,ESP
+005726fa : MOV byte ptr [EAX],0x0
+005726fd : MOV EDX,dword ptr [ECX]
+005726ff : MOV EDX,dword ptr [EDX + 0xc4]
+00572705 : PUSH EBX
+00572706 : LEA EAX,[ESP + 0x1c]
+0057270a : PUSH EAX
+0057270b : PUSH EBP
+0057270c : CALL EDX
+0057270e : DEC EDI
+0057270f : TEST EDI,EDI
+00572711 : JG 0x005726f0
+00572713 : CMP byte ptr [ESP + 0x14],0x0
+00572718 : MOV EDX,dword ptr [ESI + 0xad0]
+0057271e : LEA EAX,[ESI + 0xacc]
+00572724 : JZ 0x00572739
+00572726 : MOVZX ECX,byte ptr [0x00d73291]
+0057272d : PUSH ECX
+0057272e : PUSH EDX
+0057272f : PUSH 0x0
+00572731 : PUSH EAX
+00572732 : CALL 0x0056e030
+00572737 : JMP 0x0057274a
+00572739 : MOVZX ECX,byte ptr [0x00d73290]
+00572740 : PUSH ECX
+00572741 : PUSH EDX
+00572742 : PUSH 0x0
+00572744 : PUSH EAX
+00572745 : CALL 0x0056e460
+0057274a : ADD ESP,0x10
+0057274d : MOV byte ptr [ESI + 0xac8],0x1
+00572754 : TEST BL,BL
+00572756 : JZ 0x0057275f
+00572758 : MOV byte ptr [ESI + 0xac8],0x3
+0057275f : POP EDI
+00572760 : POP ESI
+00572761 : POP EBP
+00572762 : POP EBX
+00572763 : RET 0x4

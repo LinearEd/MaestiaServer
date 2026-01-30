@@ -1,0 +1,85 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00a0ae40
+ENTRY    : 00a0ae40
+BODY     : [[00a0ae40, 00a0aeba]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_00a0ae40(void)
+
+{
+  BOOL BVar1;
+  LPWSTR unaff_ESI;
+  ushort local_c [2];
+  ushort local_8 [2];
+  
+  *unaff_ESI = L'\0';
+  BVar1 = FileTimeToLocalFileTime((FILETIME *)&stack0x00000004,(FILETIME *)&stack0x00000004);
+  if (BVar1 != 0) {
+    BVar1 = FileTimeToDosDateTime((FILETIME *)&stack0x00000004,local_c,local_8);
+    if (BVar1 != 0) {
+      wsprintfW(unaff_ESI,L"%d/%d/%d %02d:%02d:%02d",local_c[0] >> 5 & 0xf,local_c[0] & 0x1f,
+                (local_c[0] >> 9) + 0x7bc,(uint)(local_8[0] >> 0xb),local_8[0] >> 5 & 0x3f,
+                (local_8[0] & 0x1f) * 2);
+    }
+  }
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00a0ae40 : PUSH EBP
+00a0ae41 : MOV EBP,ESP
+00a0ae43 : SUB ESP,0x8
+00a0ae46 : LEA ECX,[EBP + 0x8]
+00a0ae49 : PUSH ECX
+00a0ae4a : MOV EDX,ECX
+00a0ae4c : XOR EAX,EAX
+00a0ae4e : PUSH EDX
+00a0ae4f : MOV word ptr [ESI],AX
+00a0ae52 : CALL dword ptr [0x00b8513c]
+00a0ae58 : TEST EAX,EAX
+00a0ae5a : JZ 0x00a0aeb7
+00a0ae5c : LEA EAX,[EBP + -0x4]
+00a0ae5f : PUSH EAX
+00a0ae60 : LEA ECX,[EBP + -0x8]
+00a0ae63 : PUSH ECX
+00a0ae64 : LEA EDX,[EBP + 0x8]
+00a0ae67 : PUSH EDX
+00a0ae68 : CALL dword ptr [0x00b85140]
+00a0ae6e : TEST EAX,EAX
+00a0ae70 : JZ 0x00a0aeb7
+00a0ae72 : MOVZX ECX,word ptr [EBP + -0x4]
+00a0ae76 : MOVZX EAX,word ptr [EBP + -0x8]
+00a0ae7a : MOV EDX,ECX
+00a0ae7c : AND EDX,0x1f
+00a0ae7f : ADD EDX,EDX
+00a0ae81 : PUSH EDX
+00a0ae82 : MOV EDX,ECX
+00a0ae84 : SHR EDX,0x5
+00a0ae87 : AND EDX,0x3f
+00a0ae8a : PUSH EDX
+00a0ae8b : SHR ECX,0xb
+00a0ae8e : PUSH ECX
+00a0ae8f : MOV ECX,EAX
+00a0ae91 : SHR ECX,0x9
+00a0ae94 : MOV EDX,EAX
+00a0ae96 : ADD ECX,0x7bc
+00a0ae9c : PUSH ECX
+00a0ae9d : AND EDX,0x1f
+00a0aea0 : PUSH EDX
+00a0aea1 : SHR EAX,0x5
+00a0aea4 : AND EAX,0xf
+00a0aea7 : PUSH EAX
+00a0aea8 : PUSH 0xcab02c
+00a0aead : PUSH ESI
+00a0aeae : CALL dword ptr [0x00b85434]
+00a0aeb4 : ADD ESP,0x20
+00a0aeb7 : MOV ESP,EBP
+00a0aeb9 : POP EBP
+00a0aeba : RET

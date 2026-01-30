@@ -1,0 +1,58 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_006ee420
+ENTRY    : 006ee420
+BODY     : [[006ee420, 006ee46e]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+LPWSTR FUN_006ee420(LPCSTR param_1)
+
+{
+  LPWSTR lpWideCharStr;
+  int iVar1;
+  
+  iVar1 = *(int *)ThreadLocalStoragePointer;
+  *(int *)(iVar1 + 0x34) = *(int *)(iVar1 + 0x34) + 1;
+  iVar1 = (*(int *)(iVar1 + 0x34) % 100) * 0x800 + iVar1;
+  lpWideCharStr = (LPWSTR)(iVar1 + 0x141cb8);
+  MultiByteToWideChar(0x3b5,0,param_1,-1,lpWideCharStr,0x400);
+  *(undefined2 *)(iVar1 + 0x1424b6) = 0;
+  return lpWideCharStr;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006ee420 : PUSH EBP
+006ee421 : MOV EBP,ESP
+006ee423 : MOV EAX,FS:[0x2c]
+006ee429 : MOV ECX,dword ptr [EAX]
+006ee42b : INC dword ptr [ECX + 0x34]
+006ee42e : MOV EAX,dword ptr [ECX + 0x34]
+006ee431 : PUSH ESI
+006ee432 : CDQ
+006ee433 : MOV ESI,0x64
+006ee438 : IDIV ESI
+006ee43a : PUSH EDI
+006ee43b : PUSH 0x400
+006ee440 : SHL EDX,0xb
+006ee443 : LEA ESI,[EDX + ECX*0x1]
+006ee446 : MOV ECX,dword ptr [EBP + 0x8]
+006ee449 : LEA EDI,[ESI + 0x141cb8]
+006ee44f : PUSH EDI
+006ee450 : PUSH -0x1
+006ee452 : PUSH ECX
+006ee453 : PUSH 0x0
+006ee455 : PUSH 0x3b5
+006ee45a : CALL dword ptr [0x00b850e0]
+006ee460 : XOR EDX,EDX
+006ee462 : MOV EAX,EDI
+006ee464 : POP EDI
+006ee465 : MOV word ptr [ESI + 0x1424b6],DX
+006ee46c : POP ESI
+006ee46d : POP EBP
+006ee46e : RET

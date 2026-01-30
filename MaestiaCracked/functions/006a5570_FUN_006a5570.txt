@@ -1,0 +1,78 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_006a5570
+ENTRY    : 006a5570
+BODY     : [[006a5570, 006a55cd]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+int FUN_006a5570(void)
+
+{
+  int iVar1;
+  int in_EAX;
+  int iVar2;
+  undefined4 *in_ECX;
+  int iVar3;
+  
+  iVar1 = *(int *)(in_EAX + 0x1c);
+  if (*(char *)(in_EAX + 0x20) == '\0') {
+    return 8;
+  }
+  if ((*(int *)(iVar1 + 4) < *(short *)(iVar1 + 0x3a) + 1 + (int)*(short *)(iVar1 + 0x16)) &&
+     (iVar2 = FUN_0068a300(iVar1,1,0), iVar2 != 0)) {
+    return iVar2;
+  }
+  iVar3 = (int)*(short *)(iVar1 + 0x3a);
+  iVar2 = *(int *)(iVar1 + 0x3c);
+  *(undefined4 *)(iVar2 + iVar3 * 8) = *in_ECX;
+  *(undefined4 *)(iVar2 + 4 + iVar3 * 8) = in_ECX[1];
+  *(undefined1 *)(iVar3 + *(int *)(iVar1 + 0x40)) = 1;
+  *(short *)(iVar1 + 0x3a) = *(short *)(iVar1 + 0x3a) + 1;
+  return 0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006a5570 : CMP byte ptr [EAX + 0x20],0x0
+006a5574 : PUSH ESI
+006a5575 : MOV ESI,dword ptr [EAX + 0x1c]
+006a5578 : PUSH EDI
+006a5579 : MOV EDI,ECX
+006a557b : JNZ 0x006a5585
+006a557d : POP EDI
+006a557e : MOV EAX,0x8
+006a5583 : POP ESI
+006a5584 : RET
+006a5585 : MOVSX EAX,word ptr [ESI + 0x3a]
+006a5589 : MOVSX ECX,word ptr [ESI + 0x16]
+006a558d : LEA EDX,[EAX + ECX*0x1 + 0x1]
+006a5591 : CMP EDX,dword ptr [ESI + 0x4]
+006a5594 : JG 0x006a559a
+006a5596 : XOR EAX,EAX
+006a5598 : JMP 0x006a55ab
+006a559a : PUSH 0x0
+006a559c : PUSH 0x1
+006a559e : PUSH ESI
+006a559f : CALL 0x0068a300
+006a55a4 : ADD ESP,0xc
+006a55a7 : TEST EAX,EAX
+006a55a9 : JNZ 0x006a55cb
+006a55ab : MOVSX ECX,word ptr [ESI + 0x3a]
+006a55af : MOV EDX,dword ptr [ESI + 0x3c]
+006a55b2 : PUSH EBX
+006a55b3 : MOV EBX,dword ptr [EDI]
+006a55b5 : MOV dword ptr [EDX + ECX*0x8],EBX
+006a55b8 : MOV EDI,dword ptr [EDI + 0x4]
+006a55bb : MOV dword ptr [EDX + ECX*0x8 + 0x4],EDI
+006a55bf : MOV EDX,dword ptr [ESI + 0x40]
+006a55c2 : MOV byte ptr [ECX + EDX*0x1],0x1
+006a55c6 : INC word ptr [ESI + 0x3a]
+006a55ca : POP EBX
+006a55cb : POP EDI
+006a55cc : POP ESI
+006a55cd : RET

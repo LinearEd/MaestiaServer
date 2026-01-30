@@ -1,0 +1,76 @@
+PROGRAM  : Maestia.exe
+FUNCTION : __FindPESection
+ENTRY    : 0064c680
+BODY     : [[0064c680, 0064c6c3]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+/* Library Function - Single Match
+    __FindPESection
+   
+   Library: Visual Studio 2008 Release */
+
+PIMAGE_SECTION_HEADER __cdecl __FindPESection(PBYTE pImageBase,DWORD_PTR rva)
+
+{
+  int iVar1;
+  PIMAGE_SECTION_HEADER p_Var2;
+  uint uVar3;
+  
+  iVar1 = *(int *)(pImageBase + 0x3c);
+  uVar3 = 0;
+  p_Var2 = (PIMAGE_SECTION_HEADER)
+           (pImageBase + *(ushort *)(pImageBase + iVar1 + 0x14) + 0x18 + iVar1);
+  if (*(ushort *)(pImageBase + iVar1 + 6) != 0) {
+    do {
+      if ((p_Var2->VirtualAddress <= rva) &&
+         (rva < (p_Var2->Misc).PhysicalAddress + p_Var2->VirtualAddress)) {
+        return p_Var2;
+      }
+      uVar3 = uVar3 + 1;
+      p_Var2 = p_Var2 + 1;
+    } while (uVar3 < *(ushort *)(pImageBase + iVar1 + 6));
+  }
+  return (PIMAGE_SECTION_HEADER)0x0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0064c680 : MOV EDI,EDI
+0064c682 : PUSH EBP
+0064c683 : MOV EBP,ESP
+0064c685 : MOV EAX,dword ptr [EBP + 0x8]
+0064c688 : MOV ECX,dword ptr [EAX + 0x3c]
+0064c68b : ADD ECX,EAX
+0064c68d : MOVZX EAX,word ptr [ECX + 0x14]
+0064c691 : PUSH EBX
+0064c692 : PUSH ESI
+0064c693 : MOVZX ESI,word ptr [ECX + 0x6]
+0064c697 : XOR EDX,EDX
+0064c699 : PUSH EDI
+0064c69a : LEA EAX,[EAX + ECX*0x1 + 0x18]
+0064c69e : TEST ESI,ESI
+0064c6a0 : JBE 0x0064c6bd
+0064c6a2 : MOV EDI,dword ptr [EBP + 0xc]
+0064c6a5 : MOV ECX,dword ptr [EAX + 0xc]
+0064c6a8 : CMP EDI,ECX
+0064c6aa : JC 0x0064c6b5
+0064c6ac : MOV EBX,dword ptr [EAX + 0x8]
+0064c6af : ADD EBX,ECX
+0064c6b1 : CMP EDI,EBX
+0064c6b3 : JC 0x0064c6bf
+0064c6b5 : INC EDX
+0064c6b6 : ADD EAX,0x28
+0064c6b9 : CMP EDX,ESI
+0064c6bb : JC 0x0064c6a5
+0064c6bd : XOR EAX,EAX
+0064c6bf : POP EDI
+0064c6c0 : POP ESI
+0064c6c1 : POP EBX
+0064c6c2 : POP EBP
+0064c6c3 : RET

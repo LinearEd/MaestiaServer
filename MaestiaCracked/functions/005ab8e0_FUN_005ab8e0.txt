@@ -1,0 +1,81 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_005ab8e0
+ENTRY    : 005ab8e0
+BODY     : [[005ab8e0, 005ab960]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+void FUN_005ab8e0(uint param_1)
+
+{
+  byte bVar1;
+  uint *in_ECX;
+  uint uVar2;
+  
+  if ((param_1 & 0xffff0000) == 0) {
+    if ((param_1 & 0xff00) == 0) {
+      bVar1 = *(byte *)((int)&PTR_DAT_00b94fc8 + (param_1 & 0xff));
+    }
+    else {
+      bVar1 = *(char *)((int)&PTR_DAT_00b94fc8 + (param_1 >> 8 & 0xff)) + 8;
+    }
+  }
+  else if ((param_1 & 0xff000000) == 0) {
+    bVar1 = *(char *)((int)&PTR_DAT_00b94fc8 + (param_1 >> 0x10 & 0xff)) + 0x10;
+  }
+  else {
+    bVar1 = *(char *)((int)&PTR_DAT_00b94fc8 + (param_1 >> 0x18)) + 0x18;
+  }
+  uVar2 = 1 << (bVar1 & 0x1f);
+  *in_ECX = (uint)bVar1;
+  in_ECX[1] = uVar2;
+  in_ECX[2] = uVar2 - 1;
+  in_ECX[3] = 0;
+  in_ECX[4] = 0;
+  in_ECX[5] = 0;
+  return;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+005ab8e0 : MOV EAX,ECX
+005ab8e2 : MOV ECX,dword ptr [ESP + 0x4]
+005ab8e6 : TEST ECX,0xffff0000
+005ab8ec : JZ 0x005ab918
+005ab8ee : TEST ECX,0xff000000
+005ab8f4 : JZ 0x005ab904
+005ab8f6 : SHR ECX,0x18
+005ab8f9 : MOV CL,byte ptr [ECX + 0xb94fc8]
+005ab8ff : ADD CL,0x18
+005ab902 : JMP 0x005ab940
+005ab904 : SHR ECX,0x10
+005ab907 : AND ECX,0xff
+005ab90d : MOV CL,byte ptr [ECX + 0xb94fc8]
+005ab913 : ADD CL,0x10
+005ab916 : JMP 0x005ab940
+005ab918 : TEST ECX,0xff00
+005ab91e : JZ 0x005ab934
+005ab920 : SHR ECX,0x8
+005ab923 : AND ECX,0xff
+005ab929 : MOV CL,byte ptr [ECX + 0xb94fc8]
+005ab92f : ADD CL,0x8
+005ab932 : JMP 0x005ab940
+005ab934 : AND ECX,0xff
+005ab93a : MOV CL,byte ptr [ECX + 0xb94fc8]
+005ab940 : MOVZX ECX,CL
+005ab943 : MOV EDX,0x1
+005ab948 : SHL EDX,CL
+005ab94a : MOV dword ptr [EAX],ECX
+005ab94c : XOR ECX,ECX
+005ab94e : MOV dword ptr [EAX + 0x4],EDX
+005ab951 : DEC EDX
+005ab952 : MOV dword ptr [EAX + 0x8],EDX
+005ab955 : MOV dword ptr [EAX + 0xc],ECX
+005ab958 : MOV dword ptr [EAX + 0x10],ECX
+005ab95b : MOV dword ptr [EAX + 0x14],ECX
+005ab95e : RET 0x4

@@ -1,0 +1,180 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_0089e520
+ENTRY    : 0089e520
+BODY     : [[0089e520, 0089e605]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+wchar_t * FUN_0089e520(int param_1,int *param_2,int *param_3,wchar_t *param_4)
+
+{
+  wchar_t wVar1;
+  int in_EAX;
+  wchar_t *pwVar2;
+  wchar_t *pwVar3;
+  wchar_t *pwVar4;
+  int iVar5;
+  int iVar6;
+  
+  iVar6 = 0;
+  if (0 < param_1) {
+    do {
+      if (0x20 < *(ushort *)(in_EAX + iVar6 * 2)) {
+        wVar1 = *(wchar_t *)(in_EAX + iVar6 * 2);
+        pwVar4 = (wchar_t *)(in_EAX + iVar6 * 2);
+        if (wVar1 == L'\"') {
+          pwVar4 = pwVar4 + 1;
+          pwVar2 = pwVar4;
+          iVar5 = 0;
+          wVar1 = *pwVar4;
+          while( true ) {
+            if (wVar1 == L'\"') {
+              *param_2 = iVar5;
+              *param_3 = iVar5 + 1;
+              return pwVar2;
+            }
+            iVar6 = iVar6 + 1;
+            if (param_1 < iVar6) break;
+            pwVar4 = pwVar4 + 1;
+            iVar5 = iVar5 + 1;
+            wVar1 = *pwVar4;
+          }
+          return (wchar_t *)0x0;
+        }
+        pwVar2 = _wcschr(param_4,wVar1);
+        if (pwVar2 == (wchar_t *)0x0) {
+          iVar5 = 0;
+          wVar1 = *pwVar4;
+          pwVar2 = pwVar4;
+          for (; ((0x20 < (ushort)wVar1 &&
+                  (pwVar3 = _wcschr(param_4,*pwVar2), pwVar3 == (wchar_t *)0x0)) &&
+                 (iVar6 < param_1)); iVar6 = iVar6 + 1) {
+            iVar5 = iVar5 + 1;
+            pwVar2 = pwVar2 + 1;
+            wVar1 = *pwVar2;
+          }
+          *param_2 = iVar5;
+          *param_3 = iVar5;
+          return pwVar4;
+        }
+        *param_2 = 1;
+        *param_3 = 1;
+        return pwVar4;
+      }
+      iVar6 = iVar6 + 1;
+    } while (iVar6 < param_1);
+  }
+  return (wchar_t *)0x0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+0089e520 : PUSH EBP
+0089e521 : MOV EBP,ESP
+0089e523 : PUSH ECX
+0089e524 : PUSH EBX
+0089e525 : MOV EBX,dword ptr [EBP + 0x8]
+0089e528 : PUSH ESI
+0089e529 : XOR ESI,ESI
+0089e52b : PUSH EDI
+0089e52c : MOV EDI,EAX
+0089e52e : TEST EBX,EBX
+0089e530 : JLE 0x0089e53e
+0089e532 : CMP word ptr [EDI + ESI*0x2],0x20
+0089e537 : JA 0x0089e549
+0089e539 : INC ESI
+0089e53a : CMP ESI,EBX
+0089e53c : JL 0x0089e532
+0089e53e : POP EDI
+0089e53f : POP ESI
+0089e540 : XOR EAX,EAX
+0089e542 : POP EBX
+0089e543 : MOV ESP,EBP
+0089e545 : POP EBP
+0089e546 : RET 0x10
+0089e549 : MOVZX EAX,word ptr [EDI + ESI*0x2]
+0089e54d : LEA EDI,[EDI + ESI*0x2]
+0089e550 : CMP AX,0x22
+0089e554 : JNZ 0x0089e587
+0089e556 : LEA EAX,[EDI + 0x2]
+0089e559 : XOR EDX,EDX
+0089e55b : CMP word ptr [EAX],0x22
+0089e55f : JZ 0x0089e573
+0089e561 : INC ESI
+0089e562 : MOV ECX,EAX
+0089e564 : CMP ESI,EBX
+0089e566 : JG 0x0089e53e
+0089e568 : ADD ECX,0x2
+0089e56b : INC EDX
+0089e56c : INC ESI
+0089e56d : CMP word ptr [ECX],0x22
+0089e571 : JNZ 0x0089e564
+0089e573 : MOV ECX,dword ptr [EBP + 0xc]
+0089e576 : MOV dword ptr [ECX],EDX
+0089e578 : MOV ECX,dword ptr [EBP + 0x10]
+0089e57b : POP EDI
+0089e57c : INC EDX
+0089e57d : POP ESI
+0089e57e : MOV dword ptr [ECX],EDX
+0089e580 : POP EBX
+0089e581 : MOV ESP,EBP
+0089e583 : POP EBP
+0089e584 : RET 0x10
+0089e587 : MOV EDX,dword ptr [EBP + 0x14]
+0089e58a : PUSH EAX
+0089e58b : PUSH EDX
+0089e58c : CALL 0x0063852c
+0089e591 : ADD ESP,0x8
+0089e594 : TEST EAX,EAX
+0089e596 : JZ 0x0089e5b5
+0089e598 : MOV EAX,dword ptr [EBP + 0xc]
+0089e59b : MOV ECX,dword ptr [EBP + 0x10]
+0089e59e : MOV dword ptr [EAX],0x1
+0089e5a4 : MOV EAX,EDI
+0089e5a6 : POP EDI
+0089e5a7 : POP ESI
+0089e5a8 : MOV dword ptr [ECX],0x1
+0089e5ae : POP EBX
+0089e5af : MOV ESP,EBP
+0089e5b1 : POP EBP
+0089e5b2 : RET 0x10
+0089e5b5 : XOR EAX,EAX
+0089e5b7 : CMP word ptr [EDI],0x20
+0089e5bb : MOV dword ptr [EBP + -0x4],EAX
+0089e5be : JBE 0x0089e5f1
+0089e5c0 : MOV EBX,ESI
+0089e5c2 : MOV EAX,EDI
+0089e5c4 : MOV ESI,EDI
+0089e5c6 : MOVZX EDX,word ptr [EAX]
+0089e5c9 : MOV EAX,dword ptr [EBP + 0x14]
+0089e5cc : PUSH EDX
+0089e5cd : PUSH EAX
+0089e5ce : CALL 0x0063852c
+0089e5d3 : ADD ESP,0x8
+0089e5d6 : TEST EAX,EAX
+0089e5d8 : JNZ 0x0089e5ee
+0089e5da : CMP EBX,dword ptr [EBP + 0x8]
+0089e5dd : JGE 0x0089e5ee
+0089e5df : INC dword ptr [EBP + -0x4]
+0089e5e2 : ADD ESI,0x2
+0089e5e5 : INC EBX
+0089e5e6 : CMP word ptr [ESI],0x20
+0089e5ea : MOV EAX,ESI
+0089e5ec : JA 0x0089e5c6
+0089e5ee : MOV EAX,dword ptr [EBP + -0x4]
+0089e5f1 : MOV ECX,dword ptr [EBP + 0xc]
+0089e5f4 : MOV EDX,dword ptr [EBP + 0x10]
+0089e5f7 : MOV dword ptr [ECX],EAX
+0089e5f9 : MOV dword ptr [EDX],EAX
+0089e5fb : MOV EAX,EDI
+0089e5fd : POP EDI
+0089e5fe : POP ESI
+0089e5ff : POP EBX
+0089e600 : MOV ESP,EBP
+0089e602 : POP EBP
+0089e603 : RET 0x10

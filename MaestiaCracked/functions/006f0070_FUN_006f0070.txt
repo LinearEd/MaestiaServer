@@ -1,0 +1,74 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_006f0070
+ENTRY    : 006f0070
+BODY     : [[006f0070, 006f00d0]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined4 FUN_006f0070(BYTE *param_1,DWORD *param_2)
+
+{
+  BOOL BVar1;
+  DWORD DVar2;
+  HCRYPTKEY *in_ECX;
+  
+  if ((int *)in_ECX[1] == (int *)0x0) {
+    FUN_006ee470(L"[ERROR][RsaKey::GetCryptProv] m_pRsaCrypter is null.\n");
+  }
+  else if ((*(int *)in_ECX[1] != 0) && (*in_ECX != 0)) {
+    BVar1 = CryptDecrypt(*in_ECX,0,1,0,param_1,param_2);
+    if (BVar1 == 0) {
+      DVar2 = GetLastError();
+      FUN_006ee470(L"[ERROR][RsaKey::Decrypt] CryptDecrypt error code %d\n",DVar2);
+      return 0;
+    }
+    return 1;
+  }
+  return 0;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+006f0070 : PUSH EBP
+006f0071 : MOV EBP,ESP
+006f0073 : MOV EAX,dword ptr [ECX + 0x4]
+006f0076 : TEST EAX,EAX
+006f0078 : JNZ 0x006f008d
+006f007a : PUSH 0xbf38d0
+006f007f : CALL 0x006ee470
+006f0084 : ADD ESP,0x4
+006f0087 : XOR AL,AL
+006f0089 : POP EBP
+006f008a : RET 0x8
+006f008d : CMP dword ptr [EAX],0x0
+006f0090 : JZ 0x006f0087
+006f0092 : MOV EAX,dword ptr [ECX]
+006f0094 : TEST EAX,EAX
+006f0096 : JZ 0x006f0087
+006f0098 : MOV ECX,dword ptr [EBP + 0xc]
+006f009b : MOV EDX,dword ptr [EBP + 0x8]
+006f009e : PUSH ECX
+006f009f : PUSH EDX
+006f00a0 : PUSH 0x0
+006f00a2 : PUSH 0x1
+006f00a4 : PUSH 0x0
+006f00a6 : PUSH EAX
+006f00a7 : CALL dword ptr [0x00b85004]
+006f00ad : TEST EAX,EAX
+006f00af : JNZ 0x006f00cb
+006f00b1 : CALL dword ptr [0x00b85128]
+006f00b7 : PUSH EAX
+006f00b8 : PUSH 0xbf39b0
+006f00bd : CALL 0x006ee470
+006f00c2 : ADD ESP,0x8
+006f00c5 : XOR AL,AL
+006f00c7 : POP EBP
+006f00c8 : RET 0x8
+006f00cb : MOV AL,0x1
+006f00cd : POP EBP
+006f00ce : RET 0x8

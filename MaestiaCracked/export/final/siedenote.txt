@@ -1,0 +1,122 @@
+Wichtige Klarstellung (sehr wichtig für dein Projekt)
+
+Das, was du bisher gebaut hast, ist NICHT falsch – aber:
+
+Dein aktueller Packet-Mapper ist noch syntaktisch korrekt, semantisch aber unscharf.
+
+Warum?
+
+1) Dein Mapper erkennt viele False Positives
+
+Beispiel:
+
+0x0200 -> FUN_00874470, FUN_008747e0, FUN_009a1b70, FUN_00a422f0
+
+
+Das bedeutet NICHT:
+
+alle sind Packet-Handler
+
+Sondern:
+
+manche sind Router
+
+manche sind Wrapper
+
+manche sind Utility-Funktionen
+
+nur 1–2 sind echte Handler
+
+Typisches Pattern in Maestia:
+
+Router → Dispatcher → Handler → Game Logic
+
+
+Beispiel (vereinfacht):
+
+FUN_00a3cfc0  (global dispatcher)
+ └─ FUN_00a422f0 (session/router)
+     └─ FUN_00a44630 (world router)
+         └─ FUN_00829bd0 (NPC logic)
+
+
+Das ist NORMAL bei MMO-Engines.
+
+Das Ziel: "Packet Truth Map"
+
+Du willst NICHT:
+
+opcode → alle Funktionen
+
+
+Du willst:
+
+opcode → echter Handler → Bedeutung → Struct
+
+
+Ich baue dir das mit dir zusammen.
+
+Wie man echte Packet-Handler filtert (entscheidend)
+
+Ein echter Packet-Handler hat fast immer mindestens 3 Merkmale:
+
+Pattern A – Zugriff auf packet[2]/packet[3]
+
+Beispiel (du hast es schon gesehen):
+
+packet[2] == 0x02
+packet[3] == 0x34
+
+Pattern B – Struct parsing
+*(int *)(packet + 4)
+*(float *)(packet + 8)
+
+Pattern C – Game-Logic Call danach
+FUN_00829bd0(...)  // NPC
+FUN_0091ea10(...)  // Combat
+FUN_008f3b70(...)  // World
+
+Dein aktueller Mapper = Rohmaterial
+
+Das hier ist GOLD:
+
+0x03E8 -> FUN_008e51c0, FUN_008f2030, FUN_0091ea10, FUN_009b6690, ...
+
+
+Das schreit:
+
+0x03E8 = ENTITY SPAWN / WORLD EVENT
+
+Und:
+
+0x0349 -> FUN_00a0dd40
+
+
+Das kennst du:
+
+0x0349 = SendToServer / heartbeat / control packet
+
+Nächster Schritt (den ich dir jetzt baue)
+
+Ich baue dir eine echte Packet Truth Map aus deinen Daten:
+
+echte Handler
+Name
+Bedeutung
+Struct guessed
+Confidence level
+
+Beispiel:
+
+0x03E8  NPC_SPAWN
+Handler: FUN_009b6690
+Meaning: Spawn NPC in world
+Fields:
+- uint32 npcId
+- uint32 templateId
+- float x,y,z
+- uint16 rotation
+Confidence: HIGH
+
+
+Das wird dein Maestia "Rosetta Stone".

@@ -1,0 +1,92 @@
+PROGRAM  : Maestia.exe
+FUNCTION : FUN_00686b80
+ENTRY    : 00686b80
+BODY     : [[00686b80, 00686be2]]
+
+============================================================
+DECOMPILED C CODE
+============================================================
+
+undefined4 FUN_00686b80(int param_1,int param_2)
+
+{
+  int *piVar1;
+  undefined4 uVar2;
+  int *piVar3;
+  
+  if (param_1 == 0) {
+    return 0x23;
+  }
+  if (param_2 == 0) {
+    return 6;
+  }
+  if (param_2 == 0x756e6963) {
+    uVar2 = FUN_00686550();
+    return uVar2;
+  }
+  piVar3 = *(int **)(param_1 + 0x28);
+  if (piVar3 != (int *)0x0) {
+    piVar1 = piVar3 + *(int *)(param_1 + 0x24);
+    while( true ) {
+      if (piVar1 <= piVar3) {
+        return 6;
+      }
+      if (*(int *)(*piVar3 + 4) == param_2) break;
+      piVar3 = piVar3 + 1;
+    }
+    *(int *)(param_1 + 0x5c) = *piVar3;
+    return 0;
+  }
+  return 0x26;
+}
+
+
+
+============================================================
+DISASSEMBLY
+============================================================
+00686b80 : PUSH EBX
+00686b81 : MOV EBX,dword ptr [ESP + 0x8]
+00686b85 : TEST EBX,EBX
+00686b87 : JNZ 0x00686b8e
+00686b89 : LEA EAX,[EBX + 0x23]
+00686b8c : POP EBX
+00686b8d : RET
+00686b8e : MOV EDX,dword ptr [ESP + 0xc]
+00686b92 : TEST EDX,EDX
+00686b94 : JNZ 0x00686b9b
+00686b96 : LEA EAX,[EDX + 0x6]
+00686b99 : POP EBX
+00686b9a : RET
+00686b9b : CMP EDX,0x756e6963
+00686ba1 : JNZ 0x00686baa
+00686ba3 : CALL 0x00686550
+00686ba8 : POP EBX
+00686ba9 : RET
+00686baa : MOV EAX,dword ptr [EBX + 0x28]
+00686bad : TEST EAX,EAX
+00686baf : JNZ 0x00686bb8
+00686bb1 : MOV EAX,0x26
+00686bb6 : POP EBX
+00686bb7 : RET
+00686bb8 : MOV ECX,dword ptr [EBX + 0x24]
+00686bbb : LEA ECX,[EAX + ECX*0x4]
+00686bbe : PUSH ESI
+00686bbf : CMP EAX,ECX
+00686bc1 : JNC 0x00686bd1
+00686bc3 : MOV ESI,dword ptr [EAX]
+00686bc5 : CMP dword ptr [ESI + 0x4],EDX
+00686bc8 : JZ 0x00686bd9
+00686bca : ADD EAX,0x4
+00686bcd : CMP EAX,ECX
+00686bcf : JC 0x00686bc3
+00686bd1 : POP ESI
+00686bd2 : MOV EAX,0x6
+00686bd7 : POP EBX
+00686bd8 : RET
+00686bd9 : MOV EDX,ESI
+00686bdb : POP ESI
+00686bdc : MOV dword ptr [EBX + 0x5c],EDX
+00686bdf : XOR EAX,EAX
+00686be1 : POP EBX
+00686be2 : RET
