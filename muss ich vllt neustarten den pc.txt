@@ -1,0 +1,137 @@
+muss ich vllt neustarten den pc
+
+ChatGPT
+Ja, ein Neustart des PCs kann helfen, um sicherzustellen, dass alle Änderungen in der Hosts-Datei und im DNS-Cache vollständig übernommen werden. Bevor du das machst, hier noch einmal die Schritte zur Überprüfung und Anpassung:
+
+Schritte vor dem Neustart
+Überprüfe die Hosts-Datei:
+
+Stelle sicher, dass der Eintrag korrekt ist:
+plaintext
+Code kopieren
+127.0.0.1 83.220.134.118
+Leere den DNS-Cache:
+
+Öffne die Eingabeaufforderung mit Administratorrechten.
+Führe den folgenden Befehl aus:
+plaintext
+Code kopieren
+ipconfig /flushdns
+Überprüfe mit nslookup:
+
+Öffne die Eingabeaufforderung und führe den folgenden Befehl aus:
+plaintext
+Code kopieren
+nslookup 83.220.134.118
+Das Ergebnis sollte die Adresse 127.0.0.1 anzeigen.
+Überprüfe die Hosts-Datei Berechtigungen:
+
+Stelle sicher, dass du Schreibrechte auf die Datei hast und dass keine andere Software die Datei blockiert.
+Neustart des PCs
+Starte den PC neu:
+Ein Neustart stellt sicher, dass alle Änderungen übernommen werden und alle Netzwerkdienste neu gestartet werden.
+Verbindung testen
+Starte den Server und den Client:
+Nachdem der PC neu gestartet ist, starte deinen Maestia-Server und -Client und überprüfe, ob die Verbindung jetzt hergestellt werden kann.
+Weitere Überprüfung
+Falls es nach dem Neustart immer noch nicht funktioniert, hier ein paar zusätzliche Überprüfungsschritte:
+
+Firewall und Antivirus-Software:
+
+Stelle sicher, dass keine Firewall oder Antivirus-Software die Verbindung blockiert.
+Netzwerkverbindungen:
+
+Überprüfe, ob es spezielle Netzwerkrichtlinien gibt, die Verbindungen zu bestimmten Ports oder IP-Adressen blockieren.
+Server-Log-Dateien:
+
+Überprüfe die Server-Log-Dateien auf weitere Fehlermeldungen oder Hinweise, warum die Verbindung abgelehnt wird.
+Client-Konfiguration:
+
+Stelle sicher, dass die Client-Konfiguration korrekt ist und keine veralteten Daten oder falschen IP-Adressen verwendet werden.
+Durch diese Schritte solltest du das Problem weiter eingrenzen und hoffentlich beheben können.
+
+PS C:\Users\ewd-a> nslookup 83.220.134.118
+Server:  fritz.box
+Address:  192.168.178.1
+
+*** 83.220.134.118 wurde von fritz.box nicht gefunden: Non-existent domain.
+PS C:\Users\ewd-a>
+
+# Copyright (c) 1993-2009 Microsoft Corp.
+#
+# This is a sample HOSTS file used by Microsoft TCP/IP for Windows.
+#
+# This file contains the mappings of IP addresses to host names. Each
+# entry should be kept on an individual line. The IP address should
+# be placed in the first column followed by the corresponding host name.
+# The IP address and the host name should be separated by at least one
+# space.
+#
+# Additionally, comments (such as these) may be inserted on individual
+# lines or following the machine name denoted by a '#' symbol.
+#
+# For example:
+#
+#      102.54.94.97     rhino.acme.com          # source server
+#       38.25.63.10     x.acme.com              # x client host
+
+# localhost name resolution is handled within DNS itself.
+#	127.0.0.1       localhost
+#	::1             localhost
+# Added by Docker Desktop
+192.168.178.25 host.docker.internal
+192.168.178.25 gateway.docker.internal
+# To allow the same kube context to work on the host and the container:
+127.0.0.1 kubernetes.docker.internal
+# End of section
+
+# Redirect 83.220.134.118 to localhost
+127.0.0.1 83.220.134.118
+
+ChatGPT
+Es scheint, dass die Anpassung der Hosts-Datei korrekt vorgenommen wurde. Da der Neustart noch nicht durchgeführt wurde, könnte das Problem darin liegen, dass die Änderungen in der Hosts-Datei noch nicht vollständig übernommen wurden oder der DNS-Cache noch nicht geleert wurde.
+
+Hier ist eine Schritt-für-Schritt-Anleitung, um sicherzustellen, dass alles korrekt konfiguriert ist:
+
+Überprüfe die Hosts-Datei:
+
+Die Datei scheint korrekt zu sein, stelle sicher, dass der Eintrag so aussieht:
+plaintext
+Code kopieren
+127.0.0.1 83.220.134.118
+Leere den DNS-Cache:
+
+Öffne die Eingabeaufforderung mit Administratorrechten und führe den folgenden Befehl aus:
+plaintext
+Code kopieren
+ipconfig /flushdns
+Überprüfe die DNS-Auflösung:
+
+Führe erneut den nslookup-Befehl aus, um zu sehen, ob die Änderung übernommen wurde:
+plaintext
+Code kopieren
+nslookup 83.220.134.118
+Es sollte die Adresse 127.0.0.1 zurückgeben.
+Netstat-Befehl ausführen:
+
+Überprüfe, ob der Port 21001 auf localhost lauscht:
+plaintext
+Code kopieren
+netstat -an | findstr :21001
+Firewall und Antivirus-Software:
+
+Stelle sicher, dass keine Firewall oder Antivirus-Software die Verbindung blockiert.
+Neustart des PCs:
+
+Starte den PC neu, um sicherzustellen, dass alle Änderungen übernommen werden.
+Weiteres Vorgehen nach dem Neustart:
+Starte den Maestia-Server und -Client erneut:
+
+Überprüfe, ob die Verbindung jetzt hergestellt werden kann.
+Netzwerk-Log-Dateien überprüfen:
+
+Falls das Problem weiterhin besteht, überprüfe die Log-Dateien des Servers und Clients auf weitere Fehlermeldungen.
+Alternative Tests:
+
+Versuche, eine einfache Verbindung zu localhost über einen anderen Port herzustellen, um sicherzustellen, dass die Netzwerkeinstellungen korrekt sind.
+Durch diese Schritte sollte das Problem weiter eingegrenzt und hoffentlich behoben werden können. Falls das Problem weiterhin besteht, könnte es hilfreich sein, zusätzliche Netzwerkeinstellungen und Logs zu überprüfen, um das genaue Problem zu identifizieren.
